@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="names">
+        <item>京东E卡100元</item>
+        <item>Level2免费体验1个月</item>
+        <item>话费50元</item>
+        <item>上证早知道代金券20元</item>
+        <item>双倍积分券</item>
+        <item>Level2购买代金券3元</item>
+        <!--<item>sports</item>-->
+        <!--<item>words</item>-->
+
+    </string-array>
+
+    <string-array name="icons">
+        <item>jd</item>
+        <item>experience</item>
+        <item>telephone_twenty</item>
+        <item>voucher</item>
+        <item>integral</item>
+        <item>vouchers</item>
+        <!--<item>sports</item>-->
+        <!--<item>words</item>-->
+
+    </string-array>
+
+
+</resources>
