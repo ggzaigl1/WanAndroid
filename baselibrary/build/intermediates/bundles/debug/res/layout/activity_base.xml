@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <ViewStub
+        android:id="@+id/vStubTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/activity_head" />
+
+    <com.fy.baselibrary.statuslayout.RootFrameLayout
+        android:id="@+id/viewContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

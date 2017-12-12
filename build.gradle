@@ -19,9 +19,20 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext{
+    compileSdkVersion=26
+    buildToolsVersion="26.0.2"
+
+    minSdkVersion=19
+    targetSdkVersion=22
+
+    supportLibraryVersion="26.1.0"
 }

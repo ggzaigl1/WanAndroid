@@ -13,27 +13,30 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.utils.ExitDialog;
 import com.example.gab.babylove.view.LuckPanLayout;
 import com.example.gab.babylove.view.RotatePan;
+import com.fy.baselibrary.base.BaseActivity;
+
+import butterknife.BindView;
 
 /**
  * Created by Gab on 2017/12/12 0012.
  * 积分大转盘
  */
 
-public class DialActivity extends AppCompatActivity implements LuckPanLayout.AnimationEndListener {
+public class DialActivity extends BaseActivity implements LuckPanLayout.AnimationEndListener {
+
+    @BindView(R.id.luckpan_layout)
+    LuckPanLayout luckPanLayout;
 
     private RotatePan rotatePan;
-    private LuckPanLayout luckPanLayout;
-    private ImageView goBtn;
-    private ImageView yunIv;
     private String[] strs;
-    private TextView mTextMessage;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dial);
-        mTextMessage = (TextView) findViewById(R.id.message);
+    protected int getContentView() {
+        return R.layout.activity_dial;
+    }
 
+    @Override
+    protected void init(Bundle savedInstanceState) {
         new ExitDialog.Builder()
                 .setTitle("做回访 赚积分 抽好礼")
                 .setMessage(getString(R.string.context))
@@ -45,10 +48,8 @@ public class DialActivity extends AppCompatActivity implements LuckPanLayout.Ani
                 .show(this.getSupportFragmentManager(), "WarningDialog");
 
         strs = getResources().getStringArray(R.array.names);
-        luckPanLayout = (LuckPanLayout) findViewById(R.id.luckpan_layout);
         luckPanLayout.setAnimationEndListener(this);
-        goBtn = (ImageView) findViewById(R.id.go);
-        yunIv = (ImageView) findViewById(R.id.yun);
+
     }
 
     public void rotation(View view) {

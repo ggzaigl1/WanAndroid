@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:divider="@drawable/divider_bg"
+              android:showDividers="middle"
+              android:background="@drawable/selector_patient_white"
+              android:orientation="vertical">
+
+    <Button
+            android:id="@+id/tv_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="拍照"
+            android:background="@drawable/selector_btn_leftbottom_radian"
+            android:textColor="@color/myTxtColor"
+            android:textSize="@dimen/textSize_superlarges"/>
+
+    <Button
+            android:id="@+id/tv_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="从相册选"
+            android:background="@drawable/selector_btn_leftbottom_radian"
+            android:textColor="@color/myTxtColor"
+            android:textSize="@dimen/textSize_superlarges"/>
+
+    <Button
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="取消"
+            android:background="@drawable/selector_btn_leftbottom_radian"
+            android:textColor="@color/myTxtColor"
+            android:textSize="@dimen/textSize_superlarges"/>
+
+</LinearLayout>

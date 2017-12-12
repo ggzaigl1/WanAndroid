@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--   视图状态管理界面 之 正在加载   -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/loadImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#dddddd" />
+
+</FrameLayout>
