@@ -4,12 +4,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        >
+        android:orientation="vertical">
 
     <Button
             android:id="@+id/bt_star"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="On"/>
+    <Button
+            android:id="@+id/bt_phontview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="bt_phont"/>
 
 </LinearLayout>
