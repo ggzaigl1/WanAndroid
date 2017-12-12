@@ -15,7 +15,7 @@ import com.example.gab.babylove.utils.Util;
 
 
 /**
- *
+ * 抽奖转盘
  */
 public class LuckPanLayout extends RelativeLayout {
 

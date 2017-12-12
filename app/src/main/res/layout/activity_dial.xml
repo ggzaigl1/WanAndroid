@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:luckpan="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7CD8E3"
+        android:scrollbars="none"
+        >
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <!--<com.hr.nipuream.luckpan.view.EnvironmentLayout-->
+        <!--android:id="@+id/evironmentLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--/>-->
+
+
+        <!--<ImageView-->
+        <!--android:id="@+id/imageview"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/ic_launcher"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--/>-->
+
+
+        <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:src="@mipmap/background"-->
+        <!--android:scaleType="fitXY"-->
+        <!--/>-->
+
+        <ImageView
+                android:id="@+id/shan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:scaleType="fitXY"
+                android:src="@mipmap/shan"
+                />
+
+        <ImageView
+                android:id="@+id/yun"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@mipmap/yun"
+                />
+
+        <com.example.gab.babylove.view.LuckPanLayout
+                android:id="@+id/luckpan_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@android:color/transparent"
+                >
+
+            <com.example.gab.babylove.view.RotatePan
+                    android:id="@+id/rotatePan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    luckpan:icons="@array/icons"
+                    luckpan:names="@array/names"
+                    luckpan:pannum="6"/>
+
+            <ImageView
+                    android:id="@+id/go"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:onClick="rotation"
+                    android:src="@mipmap/node"
+                    android:tag="startbtn"
+                    />
+
+
+        </com.example.gab.babylove.view.LuckPanLayout>
+
+
+        <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="旋转"-->
+        <!--android:onClick="rotation"-->
+        <!--/>-->
+
+
+        <RelativeLayout
+                android:id="@+id/hit_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/luckpan_layout"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                >
+
+            <TextView
+                    android:id="@+id/hit_user_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/text_background"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:text="@string/asb"
+                    >
+
+                <requestFocus/>
+            </TextView>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/hit_user_tv"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/hit_backgroud"
+                    android:padding="3dp"
+                    android:text="中奖名单"
+                    android:textColor="#ffffff"
+                    />
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/game_rule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hit_user"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                >
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/text_background"
+                    android:orientation="vertical"
+                    >
+
+                <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/huodong_rule"
+                        android:padding="10dp"
+                        android:text="@string/bsa"
+                        />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                    android:id="@+id/huodong_rule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rule_background"
+                    android:padding="5dp"
+                    android:text="活动规则"
+                    android:textColor="#ffffff"
+                    />
+
+        </RelativeLayout>
+
+        <View
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/game_rule"
+                android:layout_marginBottom="80dp"
+                />
+
+    </RelativeLayout>
+</ScrollView>

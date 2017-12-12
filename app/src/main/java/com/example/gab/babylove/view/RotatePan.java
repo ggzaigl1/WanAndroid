@@ -30,10 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 描述：
- * 作者：Nipuream
  * 时间: 2016-08-16 10:18
- * 邮箱：nipuream@163.com
  */
 public class RotatePan extends View {
 
