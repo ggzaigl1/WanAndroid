@@ -37,4 +37,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     implementation project(':baselibrary')
+
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
 }

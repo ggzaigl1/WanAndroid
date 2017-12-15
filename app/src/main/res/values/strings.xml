@@ -4,5 +4,7 @@
     <string name="asb">2017-11-29 14:30:30 王雅纯 iPhone8s puls 2017-11-29 15:41:28 许筱 MacBook Pro 2017-11-29 16:22:45 杨二霏 iPhone X</string>
     <string name="bsa">1.点击页面Go按钮，进入抽奖流程，按提示操作即可(参与本活动无需支付任何费用)。\n2.活动期间，每个手机号，获得的“劵号”后7位数字作为本次活动的“抽奖号”。</string>
     <string name="context">尊敬的客户，这边查询到您留在我司的手机号码为：13455662231，此号码可能会涉及到一些重要信息的接收，是营业部与您取得联系的重要方式，也将作为您后续的领奖凭证，请您确认该号码是否是您本人的联系方式。
+    <string name="action_settings">Settings</string>
+
 </string>
 </resources>

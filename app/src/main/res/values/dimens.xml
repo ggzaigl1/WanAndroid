@@ -3,7 +3,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
     <!-- App 统一字体大小     超  小 号-->
     <dimen name="textSize_small_much">12sp</dimen>
     <!-- App 统一字体大小     小号-->
@@ -31,11 +33,8 @@
     <!-- App 统一间距  大 中 号-->
     <dimen name="spacing_medium_large">20dp</dimen>
 
-
-
     <!-- 加载动画图片 宽度 高度 -->
     <dimen name="load_anim">60dip</dimen>
-
     <!-- item 分割线宽度 -->
     <dimen name="itemSplit_line">1dp</dimen>
     <!-- shape 描边宽度 -->
@@ -45,7 +44,6 @@
     <dimen name="shape_radius1">8dp</dimen>
     <dimen name="shape_radius2">15dp</dimen>
     <dimen name="shape_radius3">20dp</dimen>
-
     <!-- 自定义 列表刷新控件 高度 -->
     <dimen name="refreshHeight">75dp</dimen>
     <!-- 最大偏移 -->
