@@ -70,14 +70,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             //将继承 TopBarBaseActivity 的布局解析到 FrameLayout 里面
             initSLManager(viewContent);
 
-            ViewStub vStubTitleBar = findViewById(R.id.vStubTitleBar);
-            if (getHeadView() == USE_SON_LAYOUT) {
-                vStubTitleBar.inflate();
-                initTitleBar();
-            } else if (getHeadView() > USE_SON_LAYOUT) {
-                vStubTitleBar.setLayoutResource(getHeadView());
-                vStubTitleBar.inflate();
-            }
+//            ViewStub vStubTitleBar = findViewById(R.id.vStubTitleBar);
+//            if (getHeadView() == USE_SON_LAYOUT) {
+//                vStubTitleBar.inflate();
+//                initTitleBar();
+//            } else if (getHeadView() > USE_SON_LAYOUT) {
+//                vStubTitleBar.setLayoutResource(getHeadView());
+//                vStubTitleBar.inflate();
+//            }
         }
 
         super.onCreate(savedInstanceState);
