@@ -7,7 +7,7 @@ import com.fy.baselibrary.base.BaseFragment;
  * Created by Gab on 2017/12/15 0015.
  */
 
-public class FindFragment extends BaseFragment {
+public class OtherFragment extends BaseFragment {
     @Override
     protected int getContentLayout() {
         return R.layout.fragment_home;

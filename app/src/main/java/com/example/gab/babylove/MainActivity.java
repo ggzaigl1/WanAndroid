@@ -7,34 +7,35 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.example.gab.babylove.fragment.FindFragment;
-import com.example.gab.babylove.fragment.NewsMainFragment;
-import com.example.gab.babylove.fragment.VideoHomeFragment;
-import com.example.gab.babylove.fragment.ZhihuDailyFragment;
-import com.example.gab.babylove.utils.StateBarTranslucentUtils;
-import com.example.gab.babylove.utils.StatusBarCompat;
+import com.example.gab.babylove.fragment.OtherFragment;
+import com.example.gab.babylove.fragment.WifeFragment;
+import com.example.gab.babylove.fragment.NewsFragment;
+import com.example.gab.babylove.fragment.HomeFragment;
 import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.startactivity.StartActivity;
+import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
 
 import butterknife.BindView;
 
 /**
- *  主方法
+ * 主方法
  */
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener ,
-                 NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager mFragmentManager;
-    private ZhihuDailyFragment mZhihuFragment;
-    private VideoHomeFragment mBubbleFragment;
-    private NewsMainFragment mNewsFragment;
-    private FindFragment mFindFragment;
+    private HomeFragment mHomeFragment;
+    private NewsFragment mNewsFragment;
+    private WifeFragment mWifeFragment;
+    private OtherFragment mOtherFragment;
     private Fragment mCurrentFrag; //当前的fragment
+    private long exitTime = 0; //保存点击的时间
     @BindView(R.id.fl_content)
     FrameLayout mFlContent;
     @BindView(R.id.bottom_navigation)
@@ -51,18 +52,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        StateBarTranslucentUtils.setStateBarTranslucent(this);
-        StatusBarCompat.compat(this);
         mFragmentManager = getSupportFragmentManager();
         //初始化 主要的fragment 的
-        mZhihuFragment = new ZhihuDailyFragment();
-        mBubbleFragment = new VideoHomeFragment();
-        mNewsFragment = new NewsMainFragment();
-        mFindFragment = new FindFragment();
+        mHomeFragment = new HomeFragment();
+        mNewsFragment = new NewsFragment();
+        mWifeFragment = new WifeFragment();
+        mOtherFragment = new OtherFragment();
         initBottomNavigation();
-        switchContent(mZhihuFragment);
+        switchContent(mHomeFragment);
         mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
-//        initNavigation();
     }
 
     private void initBottomNavigation() {
@@ -109,16 +107,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public void onTabSelected(int position) {
         switch (position) {
             case 0:
-                switchContent(mZhihuFragment);
+                switchContent(mHomeFragment);
                 break;
             case 1:
                 switchContent(mNewsFragment);
                 break;
             case 2:
-                switchContent(mBubbleFragment);
+                switchContent(mWifeFragment);
                 break;
             case 3:
-                switchContent(mFindFragment);
+                switchContent(mOtherFragment);
                 break;
         }
     }
@@ -158,13 +156,20 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         return true;
     }
 
+    //退出程序
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+                mDrawer.closeDrawer(GravityCompat.START);
+            } else if ((System.currentTimeMillis() - exitTime) >= 2000) {
+                T.showLong(R.string.exit_app);
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
         }
+        return super.onKeyDown(keyCode, event);
     }
 }
