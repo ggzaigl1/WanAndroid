@@ -19,6 +19,9 @@
     <color name="blue">#3ec2d9</color>
     <!-- UI设计原色之 白色 -->
     <color name="white">#ffffff</color>
+    <color name="txtSuperLight">#b3b3b3</color>
+    <color name="imgPreviewBottomBg">#bf000000</color>
+    <color name="imgPreviewHeadBg">#80000000</color>
     <!-- UI设计原色之 黑色 -->
     <color name="black">#000000</color>
     <!--界面字体色  绿色-->

@@ -17,12 +17,20 @@ import com.example.gab.babylove.fragment.OtherFragment;
 import com.example.gab.babylove.fragment.WifeFragment;
 import com.example.gab.babylove.fragment.NewsFragment;
 import com.example.gab.babylove.fragment.HomeFragment;
+import com.example.gab.babylove.login.LoginActivity;
+import com.example.gab.babylove.utils.Util;
 import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.startactivity.StartActivity;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 主方法
@@ -163,7 +171,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
             } else if ((System.currentTimeMillis() - exitTime) >= 2000) {
-                T.showLong(R.string.exit_app);
+                Util.CustomToast.INSTANCE.showToast(mContext,R.string.exit_app);
+//                T.showLong(R.string.exit_app);
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();

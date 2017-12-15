@@ -37,4 +37,5 @@ dependencies {
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     implementation project(':baselibrary')
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
+    implementation project(':imgPicker')
 }

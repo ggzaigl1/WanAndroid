@@ -43,4 +43,8 @@
     <string name="nav_01_title">新闻</string>
     <string name="nav_02_title">爱妻</string>
     <string name="find">其他</string>
+    <string name="userName">账号：</string>
+    <string name="passWord">密码：</string>
+    <string name="rememberPass">记住密码</string>
+    <string name="loginTitel">全 国 体 育 联 盟\nNational Sports Union</string>
 </resources>

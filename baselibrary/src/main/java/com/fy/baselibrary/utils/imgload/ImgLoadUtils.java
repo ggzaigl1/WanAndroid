@@ -58,7 +58,6 @@ public class ImgLoadUtils {
                 .fallback(R.mipmap.img_load_default)
                 .error(R.mipmap.img_load_error)
                 .placeholder(R.mipmap.img_loading)
-                .transform(new GlideCircleTransform(context))
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存最后一次那个image
                 .into(imageView);
     }
