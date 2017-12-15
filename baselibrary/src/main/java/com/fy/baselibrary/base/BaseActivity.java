@@ -114,7 +114,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * @return
      */
     protected void setStatusBarType(){
-        MdStatusBarCompat.setOrdinaryToolBar(this, R.color.statusBar);
+        MdStatusBarCompat.setOrdinaryToolBar(this, R.color.alphaHeadBg);
+//        MdStatusBarCompat.setImageTransparent(this);
     }
 
     /**

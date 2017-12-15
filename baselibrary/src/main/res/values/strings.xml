@@ -39,8 +39,8 @@
     <string name="login">登录</string>
     <string name="login_exit">退出登录</string>
 
-    <string name="nav_00_title">知乎日报</string>
-    <string name="nav_01_title">网易新闻</string>
-    <string name="nav_02_title">熊猫影院</string>
-    <string name="find">发现</string>
+    <string name="nav_00_title">主页</string>
+    <string name="nav_01_title">新闻</string>
+    <string name="nav_02_title">爱妻</string>
+    <string name="find">其他</string>
 </resources>
