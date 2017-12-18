@@ -1,15 +1,31 @@
 package com.example.gab.babylove.fragment;
 
+import android.annotation.SuppressLint;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.adapter.HomeAdapter;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.fy.baselibrary.base.BaseFragment;
+import com.fy.baselibrary.base.recyclerv.divider.DividerParams;
+import com.fy.baselibrary.cutom.swiperefreshlayout.SwipyRefreshLayout;
+import com.fy.baselibrary.entity.HomeBean;
+import com.fy.baselibrary.retrofit.NetCallBack;
+import com.fy.baselibrary.retrofit.NetRequest;
+import com.fy.baselibrary.retrofit.RxHelper;
+import com.fy.baselibrary.utils.ConstantUtils;
+import com.fy.baselibrary.utils.L;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -22,12 +38,14 @@ public class HomeFragment extends BaseFragment {
 
     private String[] images = {
             "http://img2.3lian.com/2014/f2/37/d/40.jpg",
-            "http://d.3987.com/sqmy_131219/001.jpg",
             "http://img2.3lian.com/2014/f2/37/d/39.jpg",
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513314151355&di=3c0d90cff5a9c95b5696720a1282adcf&imgtype=0&src=http%3A%2F%2Fi2.17173cdn.com%2Fz0og4j%2FYWxqaGBf%2Fnewgame%2F20160729%2FSNzFzpbkyAkFEwk.jpg",
             "http://www.8kmm.com/UploadFiles/2012/8/201208140920132659.jpg"};
+
     @BindView(R.id.banner)
     ConvenientBanner mConvenientBanner;
+    @BindView(R.id.rv_title)
+    RecyclerView mRecyclerView;
+    HomeAdapter mAdapter;
 
     @Override
     protected int getContentLayout() {
@@ -38,6 +56,7 @@ public class HomeFragment extends BaseFragment {
     protected void baseInit() {
         super.baseInit();
         initBanner();
+        GetData();
     }
 
     private void initBanner() {
@@ -64,10 +83,48 @@ public class HomeFragment extends BaseFragment {
                 .setcurrentitem(0);
     }
 
+    private void GetData() {
+        GridLayoutManager gManager = new GridLayoutManager(mContext, 1);
+        mRecyclerView.setLayoutManager(gManager);
+        mAdapter = new HomeAdapter(mContext, new ArrayList<>());
+        mRecyclerView.addItemDecoration(new DividerParams().setLayoutManager(1).create(mContext));
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+
+    /**
+     * 请求参数
+     */
+    private void GetGetDicts() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("type", "top");  //
+        params.put("key", "65a63052634458a9ba2859f95ce6b218");  //
+
+        new NetRequest.Builder().create().requestDate(mConnService.GetHeadline(params).compose(RxHelper.handleResult()),
+                new NetCallBack<ArrayList<HomeBean>>() {
+                    @Override
+                    public void onSuccess(ArrayList<HomeBean> data) {
+                        if (null != data) {
+                            mAdapter.setmDatas(data);
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void updataLayout(int flag) {
+                        L.e("请求失败");
+                        L.e(params.toString());
+                    }
+                });
+    }
+
+
     @Override
     public void onResume() {
         super.onResume();
         mConvenientBanner.startTurning(2000);//开始翻页
+        GetGetDicts();
     }
 
     @Override

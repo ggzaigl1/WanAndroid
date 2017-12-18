@@ -21,6 +21,7 @@ import com.example.gab.babylove.login.LoginActivity;
 import com.example.gab.babylove.utils.Util;
 import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.startactivity.StartActivity;
+import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
@@ -69,6 +70,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         initBottomNavigation();
         switchContent(mHomeFragment);
         mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
+    }
+
+    @Override
+    protected void setStatusBarType() {
+        MdStatusBarCompat.setImageTransparent(this);
     }
 
     private void initBottomNavigation() {

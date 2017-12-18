@@ -2,12 +2,12 @@
 <android.support.v4.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/BgColor">
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:background="@color/BgColor"
                   android:orientation="vertical">
 
         <com.bigkoo.convenientbanner.ConvenientBanner
@@ -17,5 +17,13 @@
                 android:background="@color/black"
                 app:canLoop="true"/>
 
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:scrollbars="none"/>
     </LinearLayout>
+
 </android.support.v4.widget.NestedScrollView>

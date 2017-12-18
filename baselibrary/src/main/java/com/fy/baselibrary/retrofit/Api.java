@@ -6,7 +6,8 @@ package com.fy.baselibrary.retrofit;
  */
 public interface Api {
 
-    String BASE_URL = "http://192.168.100.30:8099/";//服务器 的 根目录地址
+//    String BASE_URL = "http://192.168.100.30:8099/";//服务器 的 根目录地址
+    String BASE_URL = "http://v.juhe.cn/";//服务器 的 根目录地址
 
     int DEFAULT_MILLISECONDS = 60000;             //默认的超时时间
 
