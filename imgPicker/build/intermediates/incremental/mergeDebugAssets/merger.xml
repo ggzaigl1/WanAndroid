@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="E:\BabyLove\imgPicker\src\main\assets"/><source path="E:\BabyLove\imgPicker\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="E:\BabyLove\imgPicker\src\debug\assets"/></dataSet></merger>
