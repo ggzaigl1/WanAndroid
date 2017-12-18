@@ -64,11 +64,11 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         mContext = this;
 
         if (getContentView() != 0) {
-            setContentView(R.layout.activity_base);
+            setContentView(getContentView());
 
-            RootFrameLayout viewContent = findViewById(R.id.viewContent);
+//            RootFrameLayout viewContent = findViewById(R.id.viewContent);
             //将继承 TopBarBaseActivity 的布局解析到 FrameLayout 里面
-            initSLManager(viewContent);
+//            initSLManager(viewContent);
 
 //            ViewStub vStubTitleBar = findViewById(R.id.vStubTitleBar);
 //            if (getHeadView() == USE_SON_LAYOUT) {
