@@ -1,6 +1,7 @@
 package com.fy.baselibrary.retrofit;
 
 import com.fy.baselibrary.entity.HomeBean;
+import com.fy.baselibrary.entity.LoginBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,15 @@ public interface ApiService {
     @Streaming
     @Headers({"url_name:user"})
     @POST("/app/ydys/DocAndNurse")
-    Observable<BeanModule<ArrayList<HomeBean>>> DocAndNurse(@Body Map<String, Object> options);
+    Observable<BeanModule<ArrayList<LoginBean>>> DocAndNurse(@Body Map<String, Object> options);
+
+    /**
+     * 医护人员登出接口
+     */
+    @Streaming
+    @Headers({"url_name:user"})
+    @POST("/app/ydys/LogOut")
+    Observable<BeanModule<ArrayList<LoginBean>>> LogOut(@Body Map<String, Object> options);
 
     /**
      * 头条
@@ -39,6 +48,7 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("/toutiao/index")
     Observable<BeanModule<ArrayList<HomeBean>>> GetHeadline(@QueryMap Map<String, Object> options);
+
 
 
     /**

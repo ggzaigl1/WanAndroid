@@ -2,13 +2,11 @@
 <resources>
     <string-array name="names">
         <item>京东E卡100元</item>
-        <item>Level2免费体验1个月</item>
+        <item>腾讯VIP会员1个月</item>
         <item>话费50元</item>
-        <item>上证早知道代金券20元</item>
-        <item>双倍积分券</item>
-        <item>Level2购买代金券3元</item>
-        <!--<item>sports</item>-->
-        <!--<item>words</item>-->
+        <item>优酷会员代金券10元</item>
+        <item>饿了吗积分券</item>
+        <item>美团美发代金券3元</item>
 
     </string-array>
 
@@ -19,8 +17,6 @@
         <item>voucher</item>
         <item>integral</item>
         <item>vouchers</item>
-        <!--<item>sports</item>-->
-        <!--<item>words</item>-->
 
     </string-array>
 

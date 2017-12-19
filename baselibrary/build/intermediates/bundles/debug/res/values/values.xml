@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="http://schemas.android.com/tools">
+    <attr format="color" name="clockBackground"/>
+    <attr format="color" name="clockTextColor"/>
     <color name="BgColor">#f5f5f5</color>
     <color name="alphaHeadBg">#73212121</color>
     <color name="appHeadBg">#15b3fa</color>
@@ -28,6 +30,11 @@
     <color name="myTxtColor">#333333</color>
     <color name="myTxtLight">#666666</color>
     <color name="myTxtSuperLight">#999999</color>
+    <color name="night_a">#3F3F3F</color>
+    <color name="night_b">#3A3A3A</color>
+    <color name="night_c">#868686</color>
+    <color name="night_d">#3F3F3F</color>
+    <color name="night_e">#8A9599</color>
     <color name="orange">#f39b39</color>
     <color name="pink">#EF8994</color>
     <color name="red">#e84c3d</color>
@@ -115,6 +122,8 @@
     <string name="rememberPass">记住密码</string>
     <string name="save">保存</string>
     <string name="successs">成功</string>
+    <string name="system_content">您确定要退出登录吗?</string>
+    <string name="system_title">系统提示</string>
     <string name="upLoading">正在上传…</string>
     <string name="userName">账号：</string>
     <string name="user_login">正在登录…</string>
@@ -143,21 +152,21 @@
         <item name="android:windowTranslucentStatus" ns1:targetApi="kitkat">true</item>
     </style>
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        
-        <item name="colorPrimary">@color/colorPrimary</item>    
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item> 
-        <item name="colorAccent">@color/colorAccent</item>  
-        
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>    <!-- 状态栏 -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item> <!-- toolbar -->
+        <item name="colorAccent">@color/colorAccent</item>  <!-- 重点 -->
+        <!-- 不显示标题栏 -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
-        
+        <!-- 避免启动应用后，出现短暂的黑屏或白屏现象 -->
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowContentOverlay">@null</item>
 
         <item name="android:windowBackground">@null</item>
 
-        
+        <!-- 系统分割线 -->
         <item name="android:listDivider">@drawable/divider_bg</item>
     </style>
     <style name="app_layout">

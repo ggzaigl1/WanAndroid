@@ -6,6 +6,10 @@
         android:orientation="vertical"
         android:background="@color/white">
 
+    <include
+            android:id="@+id/statusView"
+            layout="@layout/status_view" />
+
     <HorizontalScrollView
             android:id="@+id/horizontal_view"
             android:scrollbars="none"

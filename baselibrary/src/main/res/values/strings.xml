@@ -47,4 +47,6 @@
     <string name="passWord">密码：</string>
     <string name="rememberPass">记住密码</string>
     <string name="loginTitel">全 国 体 育 联 盟\nNational Sports Union</string>
+    <string name="system_title" >系统提示</string>
+    <string name="system_content" >您确定要退出登录吗?</string>
 </resources>

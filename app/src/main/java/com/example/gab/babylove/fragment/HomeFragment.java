@@ -124,7 +124,7 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         mConvenientBanner.startTurning(2000);//开始翻页
-        GetGetDicts();
+//        GetGetDicts();
     }
 
     @Override

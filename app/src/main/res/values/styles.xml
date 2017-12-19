@@ -17,4 +17,22 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
+    <!--白天主题-->
+    <style name="DayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="clockBackground">@android:color/white</item>
+        <item name="clockTextColor">@android:color/black</item>
+    </style>
+
+    <!--夜间主题-->
+    <style name="NightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/night_a</item>
+        <item name="colorPrimaryDark">@color/night_b</item>
+        <item name="colorAccent">@color/night_c</item>
+        <item name="clockBackground">@color/night_d</item>
+        <item name="clockTextColor">@color/night_e</item>
+    </style>
+
 </resources>

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.DialActivity;
 import com.fy.baselibrary.base.BaseFragment;
+import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.JumpUtils;
 
 import butterknife.BindView;
@@ -24,6 +25,8 @@ public class WifeFragment extends BaseFragment {
 
     @BindView(R.id.tv_baby)
     TextView tv_baby;
+    @BindView(R.id.statusView)
+    View statusView;
 
     @BindView(R.id.horizontal_view)
     HorizontalScrollView mHorizontalScrollView;
@@ -49,6 +52,7 @@ public class WifeFragment extends BaseFragment {
                 tv_baby.startAnimation(mRigthToLeftAnim);
             }
         });
+        MdStatusBarCompat.setStatusView(mContext, statusView);
     }
 
     @OnClick({R.id.bt_Dial})

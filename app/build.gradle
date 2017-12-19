@@ -10,7 +10,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
+        vectorDrawables.useSupportLibrary = true//配置5.0 版本一下可以使用svg
+        multiDexEnabled true
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters "armeabi"
+//            "armeabi-v7a", "x86", "mips
+        }
     }
     buildTypes {
         release {
@@ -26,16 +32,24 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:support-vector-drawable:26.1.0'
+    implementation 'com.android.support:support-vector-drawable:27.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     implementation project(':baselibrary')
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
+    // 菜单栏
     implementation project(':imgPicker')
+    compile 'com.github.chrisbanes:PhotoView:1.2.6'
+    //点击图片放大
+    compile 'com.afollestad.material-dialogs:core:0.9.6.0'
+    //对话框 Material Dialogs
+    implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
+    compile 'id.arieridwan:pageloader:0.0.2'
 }

@@ -14,6 +14,8 @@ import com.example.gab.babylove.utils.ExitDialog;
 import com.example.gab.babylove.view.LuckPanLayout;
 import com.example.gab.babylove.view.RotatePan;
 import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.T;
 
 import butterknife.BindView;
 
@@ -38,12 +40,15 @@ public class DialActivity extends BaseActivity implements LuckPanLayout.Animatio
     @Override
     protected void init(Bundle savedInstanceState) {
         new ExitDialog.Builder()
-                .setTitle("做回访 赚积分 抽好礼")
+                .setTitle("跨年抽豪礼")
                 .setMessage(getString(R.string.context))
                 .setRightListener(getString(android.R.string.yes), v -> {
 
                 })
-                .setLeftListener("否,我需要更新", v -> Toast.makeText(DialActivity.this, "进入到更新页面", Toast.LENGTH_SHORT).show())
+                .setLeftListener("否,我需要更新", v -> {
+                    JumpUtils.jump(mContext,MainActivity.class,null);
+                    T.showShort("进入到主页面更新");
+                })
                 .create()
                 .show(this.getSupportFragmentManager(), "WarningDialog");
 

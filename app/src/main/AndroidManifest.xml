@@ -17,7 +17,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
-
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <uses-feature android:name="android.hardware.camera"/>
@@ -43,12 +42,20 @@
         </activity>
 
         <activity android:name=".MainActivity"/>
+        <!-- 大转盘 -->
         <activity
                 android:name=".activity.DialActivity"/>
         <activity
                 android:name=".activity.AnimationActivity"/>
+        <!-- 照片放大 -->
         <activity
                 android:name=".activity.PhotoViewActivity"/>
+        <!-- 个人中心 -->
+        <activity
+                android:name=".activity.PersonalCenterActivity"/>
+        <!-- 不同格式文件浏览 activity -->
+        <activity
+                android:name=".tbs.FileBrowsingActivity"/>
     </application>
 
 </manifest>

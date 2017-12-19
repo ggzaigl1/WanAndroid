@@ -1,7 +1,9 @@
 package com.fy.baselibrary.statusbar;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.fy.baselibrary.R;
 import com.fy.baselibrary.utils.ScreenUtils;
@@ -155,6 +158,17 @@ public class MdStatusBarCompat {
                 ScreenUtils.getStatusHeight(activity));
         mStatusBarView.setBackgroundColor(ContextCompat.getColor(activity, statusBarColor));
         contentView.addView(mStatusBarView, lp);
+    }
+
+    /**
+     * 设置状态栏 高度
+     * @param context
+     * @param statusView
+     */
+    public static void setStatusView(Context context, View statusView){
+        //动态设置状态栏高度
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.getStatusHeight(context));
+        statusView.setLayoutParams(lp);
     }
 
 }

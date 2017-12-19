@@ -9,29 +9,26 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.gab.babylove.activity.PersonalCenterActivity;
+import com.example.gab.babylove.activity.PhotoViewActivity;
+import com.example.gab.babylove.fragment.HomeFragment;
+import com.example.gab.babylove.fragment.NewsFragment;
 import com.example.gab.babylove.fragment.OtherFragment;
 import com.example.gab.babylove.fragment.WifeFragment;
-import com.example.gab.babylove.fragment.NewsFragment;
-import com.example.gab.babylove.fragment.HomeFragment;
-import com.example.gab.babylove.login.LoginActivity;
+import com.example.gab.babylove.tbs.FileBrowsingActivity;
 import com.example.gab.babylove.utils.Util;
 import com.fy.baselibrary.base.BaseActivity;
-import com.fy.baselibrary.startactivity.StartActivity;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
 
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * 主方法
@@ -70,6 +67,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         initBottomNavigation();
         switchContent(mHomeFragment);
         mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
+        View headerView = mNavigation.getHeaderView(0);
+        ImageView imageView = headerView.findViewById(R.id.headerView);
+        imageView.setOnClickListener(v -> JumpUtils.jump(mContext, PhotoViewActivity.class,null));
     }
 
     @Override
@@ -151,14 +151,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            T.showShort("nav_camera");
+            JumpUtils.jump(mContext, PersonalCenterActivity.class,null);
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            T.showShort("nav_gallery");
-        } else if (id == R.id.nav_slideshow) {
-            T.showShort("nav_slideshow");
-        } else if (id == R.id.nav_manage) {
-            T.showShort("nav_manage");
+        } else if (id == R.id.nav_personal_center) {
+            JumpUtils.jump(mContext, FileBrowsingActivity.class,null);
         } else if (id == R.id.nav_share) {
             T.showShort("nav_share");
         } else if (id == R.id.nav_send) {

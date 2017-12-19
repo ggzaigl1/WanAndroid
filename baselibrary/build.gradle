@@ -63,5 +63,6 @@ dependencies {
     compile 'com.tencent.bugly:nativecrashreport:3.3.1'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     compile 'com.werb.permissionschecker:permissionschecker:0.0.1-beta2'
+    compile 'id.arieridwan:pageloader:0.0.2'
 
 }
