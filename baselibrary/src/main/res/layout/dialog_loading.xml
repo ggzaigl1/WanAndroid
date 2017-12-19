@@ -5,12 +5,16 @@
     android:background="@drawable/shape_load_dialog_bg"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imgLoadAnim"
-        android:layout_width="@dimen/load_anim"
-        android:layout_height="@dimen/load_anim"
-        android:layout_gravity="center"
-        android:src="@mipmap/image_circular" />
+    <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    <!--<ImageView-->
+        <!--android:id="@+id/imgLoadAnim"-->
+        <!--android:layout_width="@dimen/load_anim"-->
+        <!--android:layout_height="@dimen/load_anim"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:src="@mipmap/image_circular" />-->
 
     <TextView
         android:id="@+id/txtLoadHint"

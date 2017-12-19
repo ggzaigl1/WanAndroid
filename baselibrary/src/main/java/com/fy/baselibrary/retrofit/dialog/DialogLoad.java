@@ -42,16 +42,16 @@ public class DialogLoad extends CommonDialog {
     public void onStart() {
         super.onStart();
 
-        // 加载动画
-        Animation loadAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_loading);
-        // 使用ImageView显示动画
-        ImageView imgLoadAnim = (ImageView) mRootView.findViewById(R.id.imgLoadAnim);
-        imgLoadAnim.setAnimation(loadAnim);
-
-        TextView txtLoadHint = (TextView) mRootView.findViewById(R.id.txtLoadHint);
-        if (!TextUtils.isEmpty(msg)){
-            txtLoadHint.setText(msg);
-        }
+//        // 加载动画
+//        Animation loadAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_loading);
+//        // 使用ImageView显示动画
+//        ImageView imgLoadAnim = (ImageView) mRootView.findViewById(R.id.imgLoadAnim);
+//        imgLoadAnim.setAnimation(loadAnim);
+//
+//        TextView txtLoadHint = (TextView) mRootView.findViewById(R.id.txtLoadHint);
+//        if (!TextUtils.isEmpty(msg)){
+//            txtLoadHint.setText(msg);
+//        }
     }
 
     public DialogLoad setMsg(String msg) {

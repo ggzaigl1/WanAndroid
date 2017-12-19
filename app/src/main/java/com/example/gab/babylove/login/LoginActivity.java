@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.widget.AppLoading;
 import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.entity.LoginBean;
 import com.fy.baselibrary.retrofit.NetCallBack;
@@ -121,8 +122,8 @@ public class LoginActivity extends BaseActivity {
         if (!checkInput()) {
             return;
         }
-        IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.user_login);
-
+        AppLoading.show(mContext);
+//        IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.user_login);
         String key = System.currentTimeMillis() + "";
         String passMd5 = TransfmtUtils.getMD5(PassWd);
         String sign = TransfmtUtils.getMD5(UserID + key + passMd5);
@@ -136,10 +137,11 @@ public class LoginActivity extends BaseActivity {
         new NetRequest.Builder()
                 .create()
                 .requestDate(mConnService.DocAndNurse(params).compose(RxHelper.handleResult()),
-                        new NetCallBack<ArrayList<LoginBean>>(progressDialog) {
+                        new NetCallBack<ArrayList<LoginBean>>() {
                             @Override
                             public void onSuccess(ArrayList<LoginBean> bean) {
                                 L.e("login_成功");
+                                AppLoading.close();
                                 if (bean != null && bean.size() > 0) {
                                     if (cBoxPass.isChecked()) {//是否保存账号
                                         SpfUtils.saveStrToSpf("UserID", UserID);

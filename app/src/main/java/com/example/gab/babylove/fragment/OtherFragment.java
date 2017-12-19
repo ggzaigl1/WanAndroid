@@ -10,6 +10,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.login.LoginActivity;
+import com.example.gab.babylove.widget.AppLoading;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.entity.LoginBean;
 import com.fy.baselibrary.retrofit.NetCallBack;
@@ -77,12 +78,6 @@ public class OtherFragment extends BaseFragment {
                             }
                         });
                     builder.create().show();
-//                MaterialDialog.Builder builder = new MaterialDialog.Builder(mContext).title(R.string.system_title)
-//                        .content(R.string.system_content).negativeText(android.R.string.yes)
-//                        .onNeutral((dialog, which) -> LogOut()).positiveText(android.R.string.no)
-//                        .onPositive((dialog, which) -> dialog.dismiss());
-//                MaterialDialog dialog = builder.build();
-//                dialog.show();
                 break;
         }
     }
@@ -91,16 +86,18 @@ public class OtherFragment extends BaseFragment {
      * 退出登录
      */
     private void LogOut() {
-        IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.exit_loading);
+//        IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.exit_loading);
+        AppLoading.show(mContext);
         Map<String, Object> params = new HashMap<>();
         params.put("Token", ConstantUtils.token);//身份验证Token
         params.put("UserID", ConstantUtils.userId);//当前登录ID
         new NetRequest.Builder().create().requestDate(mConnService.LogOut(params).compose(RxHelper.handleResult()),
-                new NetCallBack<ArrayList<LoginBean>>(progressDialog) {
+                new NetCallBack<ArrayList<LoginBean>>() {
                     @Override
                     public void onSuccess(ArrayList<LoginBean> bean) {
                         JumpUtils.jump(mContext, LoginActivity.class, null);
                         T.showShort("退出登录成功");
+                        getActivity().finish();
                     }
 
                     @Override

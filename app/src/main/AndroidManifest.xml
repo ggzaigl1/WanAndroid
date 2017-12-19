@@ -53,6 +53,9 @@
         <!-- 个人中心 -->
         <activity
                 android:name=".activity.PersonalCenterActivity"/>
+        <!-- 模拟快递布局 -->
+        <activity
+                android:name=".activity.TraceListActivity"/>
         <!-- 不同格式文件浏览 activity -->
         <activity
                 android:name=".tbs.FileBrowsingActivity"/>

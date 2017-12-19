@@ -14,7 +14,7 @@ android {
         multiDexEnabled true
         ndk {
             // 设置支持的SO库架构
-            abiFilters "armeabi"
+            abiFilters "armeabi","x86"
 //            "armeabi-v7a", "x86", "mips
         }
     }
@@ -50,6 +50,8 @@ dependencies {
     //点击图片放大
     compile 'com.afollestad.material-dialogs:core:0.9.6.0'
     //对话框 Material Dialogs
+    //腾讯浏览服务jar(tbs)
     implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
     compile 'id.arieridwan:pageloader:0.0.2'
+    compile 'com.github.vipulasri:timelineview:1.0.5'
 }
