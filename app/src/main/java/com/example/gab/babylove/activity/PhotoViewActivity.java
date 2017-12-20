@@ -1,6 +1,8 @@
 package com.example.gab.babylove.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -16,20 +18,17 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  * 照片放大
  */
 
-public class PhotoViewActivity extends BaseActivity{
+public class PhotoViewActivity extends AppCompatActivity {
 
-    @BindView(R.id.mPhotoView)
-    PhotoView mPhotoView;
 
     @Override
-    protected int getContentView() {
-        return R.layout.activity_photo;
-    }
-
-    @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_photo);
+        PhotoView mPhotoView = findViewById(R.id.mPhotoView);
+        mPhotoView.setImageResource(R.mipmap.wechat_image);
         //本地设置
-        Glide.with(mContext).load(R.mipmap.wechat_image).into(mPhotoView);
+//        Glide.with(this).load(R.mipmap.wechat_image).into(mPhotoView);
         //网络加载
 //        ImgLoadUtils.loadImage(mContext,"http://img2.3lian.com/2014/f2/37/d/40.jpg",mPhotoView);
 //        PhotoViewAttacher attacher = new PhotoViewAttacher(mPhotoView); //阻止点击返回

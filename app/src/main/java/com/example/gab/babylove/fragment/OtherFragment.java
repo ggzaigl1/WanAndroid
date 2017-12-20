@@ -50,7 +50,7 @@ public class OtherFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.night_switch,R.id.bt_exit})
+    @OnClick({R.id.night_switch})
     @Override
     public void onClick(View view) {
         super.onClick(view);
@@ -64,46 +64,7 @@ public class OtherFragment extends BaseFragment {
                     T.showShort("关闭");
                 }
                 break;
-            case R.id.bt_exit:
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext).setTitle(R.string.system_title).setMessage(R.string.system_content)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                LogOut();
-                            }
-                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                    builder.create().show();
-                break;
         }
     }
 
-    /**
-     * 退出登录
-     */
-    private void LogOut() {
-//        IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.exit_loading);
-        AppLoading.show(mContext);
-        Map<String, Object> params = new HashMap<>();
-        params.put("Token", ConstantUtils.token);//身份验证Token
-        params.put("UserID", ConstantUtils.userId);//当前登录ID
-        new NetRequest.Builder().create().requestDate(mConnService.LogOut(params).compose(RxHelper.handleResult()),
-                new NetCallBack<ArrayList<LoginBean>>() {
-                    @Override
-                    public void onSuccess(ArrayList<LoginBean> bean) {
-                        JumpUtils.jump(mContext, LoginActivity.class, null);
-                        T.showShort("退出登录成功");
-                        getActivity().finish();
-                    }
-
-                    @Override
-                    public void updataLayout(int flag) {
-                        L.e("login_失败");
-                    }
-                });
-    }
 }

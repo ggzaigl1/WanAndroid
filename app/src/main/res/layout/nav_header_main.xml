@@ -17,6 +17,7 @@
             android:id="@+id/headerView"
             android:layout_width="72dp"
             android:layout_height="72dp"
+            android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:src="@mipmap/wechat_image"
            />
@@ -24,8 +25,8 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:layout_gravity="center"
+            android:layout_marginTop="2dp"
             android:text="Google Hot Air Balloon"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
@@ -34,13 +35,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="https://github.com/ggzaigl1"
-            android:layout_marginTop="4dp"
             android:id="@+id/textView"/>
 
     <TextView
             android:id="@+id/tv_like"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="right"
             android:text="点赞"/>
 </LinearLayout>

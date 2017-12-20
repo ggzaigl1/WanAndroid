@@ -1,26 +1,24 @@
 package com.example.gab.babylove.fragment;
 
-import android.annotation.SuppressLint;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.adapter.HomeAdapter;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.base.recyclerv.divider.DividerParams;
-import com.fy.baselibrary.cutom.swiperefreshlayout.SwipyRefreshLayout;
 import com.fy.baselibrary.entity.HomeBean;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.NetRequest;
 import com.fy.baselibrary.retrofit.RxHelper;
-import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.T;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -80,6 +78,15 @@ public class HomeFragment extends BaseFragment {
                 .setPointViewVisible(true)
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
                 .setPageTransformer(new AccordionTransformer())
+                .setOnItemClickListener(position -> {
+                    if (position ==0){
+                        T.showShort("这个妹子在祈祷什么呢?");
+                    }else if (position ==1){
+                        T.showShort("这个妹子在地上听什么歌曲呢?");
+                    }else {
+                        T.showShort("这个妹子为什么泡浴缸不脱衣服呢?");
+                    }
+                })
                 .setcurrentitem(0);
     }
 

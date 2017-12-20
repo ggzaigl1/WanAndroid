@@ -12,6 +12,11 @@
                 android:id="@+id/nav_personal_center"
                 android:icon="@drawable/ic_personal_center"
                 android:title="Personal Center"/>
+
+        <item
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Tools"/>
     </group>
 
     <item android:title="Communicate">
@@ -24,6 +29,10 @@
                     android:id="@+id/nav_send"
                     android:icon="@drawable/ic_menu_send"
                     android:title="Send"/>
+            <item
+                    android:id="@+id/nav_exit"
+                    android:icon="@drawable/ic_menu_exit"
+                    android:title="Exit"/>
         </menu>
     </item>
 

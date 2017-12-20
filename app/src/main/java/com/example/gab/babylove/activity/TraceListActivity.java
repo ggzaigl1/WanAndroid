@@ -1,6 +1,8 @@
 package com.example.gab.babylove.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,6 +12,7 @@ import com.example.gab.babylove.adapter.TraceListAdapter;
 import com.example.gab.babylove.bean.Trace;
 import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.statusbar.StatusBarUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +26,11 @@ import butterknife.BindView;
 
 public class TraceListActivity extends BaseActivity {
 
-    @BindView(R.id.statusView)
-    View statusView;
     @BindView(R.id.rvTrace)
     RecyclerView mRecyclerView;
     private List<Trace> traceList = new ArrayList<>(10);
     private TraceListAdapter adapter;
+
 
     @Override
     protected int getContentView() {
@@ -38,7 +40,6 @@ public class TraceListActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         initData();
-        MdStatusBarCompat.setStatusView(mContext, statusView);
     }
 
     private void initData() {
@@ -52,10 +53,8 @@ public class TraceListActivity extends BaseActivity {
         traceList.add(new Trace("2016-05-23 21:06:46", "[杭州市] 快件到达 [杭州汽运部]"));
         traceList.add(new Trace("2016-05-23 18:59:41", "[杭州市] 快件离开 [杭州乔司区]已发往[沈阳]"));
         traceList.add(new Trace("2016-05-23 18:35:32", "[杭州市] [杭州乔司区]的市场部已收件 电话:18358xxxxxx"));
-        traceList.add(new Trace("2016-05-23 18:35:32", "[杭州市] [杭州乔司区]的市场部已收件 电话:18358xxxxxx"));
-        traceList.add(new Trace("2016-05-23 18:35:32", "[杭州市] [杭州乔司区]的市场部已收件 电话:18358xxxxxx"));
-        adapter = new TraceListAdapter(mContext, traceList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        adapter = new TraceListAdapter(this, traceList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(adapter);
     }
 }

@@ -1,132 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/BgColor">
+        android:background="@color/BgColor"
+        android:orientation="vertical">
 
-    <View
-            android:id="@+id/headImgBg"
-            android:layout_width="0dp"
+    <LinearLayout
+            android:id="@+id/message"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:gravity="center_vertical"
             android:background="@drawable/ic_my_head_bg"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:orientation="horizontal"
+            android:padding="12dp">
 
-    <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/imgHead"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:layout_constraintBottom_toBottomOf="@+id/headImgBg"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/headImgBg"
-            app:srcCompat="@mipmap/logo"/>
-
-    <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="@dimen/textSize_medium_small"
-            android:textColor="@color/white"
-            android:paddingTop="@dimen/spacing_medium_small"
-            android:text="Google Assistant"
-            android:drawablePadding="@dimen/spacing_medium"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgHead"/>
-
-    <LinearLayout
-            android:id="@+id/Ll_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/headImgBg"
-            >
-
-        <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_medium"
-                android:textColor="@color/myTxtColor"
-                android:drawableLeft="@drawable/vector_night_mode"
-                android:drawablePadding="4dp"
-                android:text="夜间模式"/>
-
-        <Switch
-                android:id="@+id/night_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-    <LinearLayout
-            android:id="@+id/Ll_two"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/Ll_one"
-            >
-
-        <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_medium"
-                android:textColor="@color/myTxtColor"
-                android:drawableLeft="@drawable/vector_night_mode"
-                android:drawablePadding="4dp"
-                android:text="夜间模式"/>
-
-
-    </LinearLayout>
-    <LinearLayout
-            android:id="@+id/Ll_three"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/Ll_two"
-            >
-
-        <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textSize_medium"
-                android:textColor="@color/myTxtColor"
-                android:drawableLeft="@drawable/vector_night_mode"
-                android:drawablePadding="4dp"
-                android:text="夜间模式"/>
-
-
-    </LinearLayout>
-
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/Ll_three"
-            >
-        <Button
-                android:id="@+id/bt_exit"
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="退出登录"
-                tools:ignore="MissingConstraints"/>
-
-    </RelativeLayout>
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
 
-</android.support.constraint.ConstraintLayout>
+            <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imgHead"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/headImgBg"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/headImgBg"
+                    app:srcCompat="@mipmap/logo"/>
+
+            <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/textSize_medium_small"
+                    android:textColor="@color/white"
+                    android:paddingTop="@dimen/spacing_medium_small"
+                    android:text="Google Assistant"
+                    android:drawablePadding="@dimen/spacing_medium"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                >
+            <RelativeLayout
+                    android:id="@+id/rl_hospitalRegister"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_common_white"
+                    android:gravity="center_vertical"
+                    >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSize_medium"
+                        android:textColor="@color/myTxtColor"
+                        android:drawableLeft="@drawable/vector_night_mode"
+                        android:drawablePadding="4dp"
+                        android:text="夜间模式"/>
+
+
+                <Switch
+                        android:id="@+id/night_switch"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/lineColor"
+                    />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                >
+
+            <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_common_white"
+                    android:gravity="center_vertical"
+                    >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/textSize_medium"
+                        android:textColor="@color/myTxtColor"
+                        android:drawablePadding="4dp"
+                        android:text=""/>
+
+            </RelativeLayout>
+
+            <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/lineColor"
+                    />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

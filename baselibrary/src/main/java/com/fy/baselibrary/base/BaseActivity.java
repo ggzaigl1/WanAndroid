@@ -15,6 +15,7 @@ import com.fy.baselibrary.retrofit.ApiService;
 import com.fy.baselibrary.retrofit.DaggerRequestComponent;
 import com.fy.baselibrary.retrofit.RequestComponent;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.statusbar.StatusBarUtils;
 import com.fy.baselibrary.statuslayout.OnRetryListener;
 import com.fy.baselibrary.statuslayout.OnShowHideViewListener;
 import com.fy.baselibrary.statuslayout.RootFrameLayout;
@@ -62,23 +63,24 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         component.inJect(this);
         mCache = ACache.get(this);
         mContext = this;
-
+//
         if (getContentView() != 0) {
-            setContentView(getContentView());
-
-//            RootFrameLayout viewContent = findViewById(R.id.viewContent);
+            setContentView(R.layout.activity_base);
+//
+            RootFrameLayout viewContent = findViewById(R.id.viewContent);
             //将继承 TopBarBaseActivity 的布局解析到 FrameLayout 里面
-//            initSLManager(viewContent);
+            initSLManager(viewContent);
 
-//            ViewStub vStubTitleBar = findViewById(R.id.vStubTitleBar);
-//            if (getHeadView() == USE_SON_LAYOUT) {
-//                vStubTitleBar.inflate();
-//                initTitleBar();
-//            } else if (getHeadView() > USE_SON_LAYOUT) {
-//                vStubTitleBar.setLayoutResource(getHeadView());
-//                vStubTitleBar.inflate();
-//            }
+            ViewStub vStubTitleBar = findViewById(R.id.vStubTitleBar);
+            if (getHeadView() == USE_SON_LAYOUT) {
+                vStubTitleBar.inflate();
+                initTitleBar();
+            } else if (getHeadView() > USE_SON_LAYOUT) {
+                vStubTitleBar.setLayoutResource(getHeadView());
+                vStubTitleBar.inflate();
+            }
         }
+
 
         super.onCreate(savedInstanceState);
 
@@ -114,7 +116,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * @return
      */
     protected void setStatusBarType(){
-        MdStatusBarCompat.setOrdinaryToolBar(this, R.color.alphaHeadBg);
+        StatusBarUtils.with(this).setColor(getResources().getColor(R.color.statusBar))
+                .setDrawable(getResources().getDrawable(R.drawable.shape))
+                .init();
+//        MdStatusBarCompat.setOrdinaryToolBar(this, R.color.alphaHeadBg);
 //        MdStatusBarCompat.setImageTransparent(this);
     }
 

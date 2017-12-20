@@ -59,6 +59,9 @@
         <!-- 不同格式文件浏览 activity -->
         <activity
                 android:name=".tbs.FileBrowsingActivity"/>
+        <!-- 工具 activity -->
+        <activity
+                android:name=".activity.ToolsActivity"/>
     </application>
 
 </manifest>
