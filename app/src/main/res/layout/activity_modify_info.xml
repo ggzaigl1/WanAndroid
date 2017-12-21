@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BgColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@color/white"
+        android:divider="@drawable/divider_bg"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/spacing_medium_small"
+        android:paddingRight="@dimen/spacing_medium_small"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:id="@+id/llHead"
+            style="@style/myListStyle"
+            android:paddingBottom="@dimen/spacing_medium_small"
+            android:paddingTop="@dimen/spacing_medium_small">
+
+            <TextView
+                style="@style/myListTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/imgHead" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/imgHeadModify"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llSex"
+            style="@style/myListStyle">
+
+            <TextView
+                style="@style/myListTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sex" />
+
+            <TextView
+                android:id="@+id/tvSexModify"
+                style="@style/myListContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="公主" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBirthday"
+            style="@style/myListStyle">
+
+            <TextView
+                style="@style/myListTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/birthday" />
+
+            <TextView
+                android:id="@+id/tvBirthdayModify"
+                style="@style/myListContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20111209" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llNation"
+            style="@style/myListStyle">
+
+            <TextView
+                style="@style/myListTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/nation" />
+
+            <TextView
+                android:id="@+id/tvNationModify"
+                style="@style/myListContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="双子族" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llSchool"
+            style="@style/myListStyle">
+
+            <TextView
+                style="@style/myListTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/school" />
+
+            <TextView
+                android:id="@+id/tvSchoolModify"
+                style="@style/myListContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="斯坦福利亚大学" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llAge"
+            style="@style/myListStyle">
+
+            <TextView
+                style="@style/myListTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/agemodify" />
+
+            <TextView
+                android:id="@+id/tvAgeModify"
+                style="@style/myListContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llHeight"
+            style="@style/myListStyle">
+
+            <TextView
+                style="@style/myListTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/heightModify" />
+
+            <TextView
+                android:id="@+id/tvHeightModify"
+                style="@style/myListContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="164" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llWeight"
+            style="@style/myListStyle">
+
+            <TextView
+                style="@style/myListTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/weightModify" />
+
+            <TextView
+                android:id="@+id/tvWeightModify"
+                style="@style/myListContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="***" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llParentPhone"
+            style="@style/myListStyle">
+
+            <TextView
+                style="@style/myListTitleStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/parentPhone" />
+
+            <TextView
+                android:id="@+id/tvParentPhoneModify"
+                style="@style/myListContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="187710****3" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

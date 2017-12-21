@@ -36,17 +36,32 @@
     <string name="man">男</string>
     <string name="woman">女</string>
 
+    <string name="age">%1$s\n年龄</string>
+    <string name="height">%1$s\n身高(cm)</string>
+    <string name="weight">%1$s\n体重(kg)</string>
+
     <string name="login">登录</string>
     <string name="login_exit">退出登录</string>
-
+    <string name="myData">个人资料</string>
+    <string name="imgHead">头像</string>
+    <string name="sex">性别属性</string>
+    <string name="nation">民族</string>
+    <string name="agemodify">年龄</string>
+    <string name="heightModify">身高(cm)</string>
+    <string name="weightModify">体重(kg)</string>
+    <string name="schoolNum">学籍号</string>
+    <string name="birthday">出生日期</string>
+    <string name="school">学校</string>
+    <string name="parentPhone">本人电话</string>
     <string name="nav_00_title">主页</string>
     <string name="nav_01_title">新闻</string>
-    <string name="nav_02_title">爱妻</string>
-    <string name="find">其他</string>
+    <string name="nav_02_title">玩意</string>
+    <string name="nav_03_title">她的</string>
     <string name="userName">账号：</string>
     <string name="passWord">密码：</string>
     <string name="rememberPass">记住密码</string>
-    <string name="loginTitel">全 国 体 育 联 盟\nNational Sports Union</string>
+    <string name="loginTitle">全 国 体 育 联 盟\nNational Sports Union</string>
+    <string name="navigationTitle">&#160;&#160;&#160;&#160;&#160;Google Hot Air Balloon\nhttps://github.com/ggzaigl1</string>
     <string name="system_title" >系统提示</string>
     <string name="system_content" >您确定要退出登录吗?</string>
 </resources>

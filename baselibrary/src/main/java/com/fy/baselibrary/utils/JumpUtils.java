@@ -69,6 +69,21 @@ public class JumpUtils {
     }
 
     /**
+     * 使用反射 跳转到指定 包路径的 activity; 带回调结果的跳转
+     * @param act
+     * @param bundle
+     * @param className
+     */
+    public static void jump(AppCompatActivity act, Bundle bundle, String className, int requestCode){
+        try {
+            Class cla = Class.forName(className);
+            jump(act, cla, bundle, requestCode);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 带回调结果的跳转
      *
      * @param actClass    要跳转到的Activity

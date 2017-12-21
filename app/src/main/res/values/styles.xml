@@ -50,4 +50,29 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <!-- 个人中心列表 条目样式 -->
+    <style name="myListStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/spacing_medium_small</item>
+        <item name="android:paddingRight">@dimen/spacing_medium_small</item>
+        <item name="android:paddingTop">@dimen/spacing_medium_small</item>
+        <item name="android:paddingBottom">@dimen/spacing_medium_small</item>
+        <item name="android:background">@drawable/selector</item>
+    </style>
+    <!-- 个人中心 条目 小标题字体样式 -->
+    <style name="myListTitleStyle">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/myTxtColor</item>
+        <item name="android:textSize">@dimen/textSize_medium_small</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <!-- 个人中心 条目 内容字体样式 -->
+    <style name="myListContentStyle">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/myTxtColor</item>
+        <item name="android:textSize">@dimen/textSize_small</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
 </resources>

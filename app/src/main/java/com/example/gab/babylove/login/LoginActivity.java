@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        Spannable sp = new SpannableString(getString(R.string.loginTitel)) ;
+        Spannable sp = new SpannableString(getString(R.string.loginTitle)) ;
         sp.setSpan(new AbsoluteSizeSpan(20,true),0,11,Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)),
                 0,11,Spannable.SPAN_INCLUSIVE_EXCLUSIVE);

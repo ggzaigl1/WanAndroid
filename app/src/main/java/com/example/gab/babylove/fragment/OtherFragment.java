@@ -1,30 +1,22 @@
 package com.example.gab.babylove.fragment;
 
-import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatImageView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.login.LoginActivity;
-import com.example.gab.babylove.widget.AppLoading;
+import com.example.gab.babylove.modify.ModifyInfoActivity;
 import com.fy.baselibrary.base.BaseFragment;
-import com.fy.baselibrary.entity.LoginBean;
-import com.fy.baselibrary.retrofit.NetCallBack;
-import com.fy.baselibrary.retrofit.NetRequest;
-import com.fy.baselibrary.retrofit.RxHelper;
-import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
-import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.ResourceUtils;
 import com.fy.baselibrary.utils.T;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,8 +28,20 @@ import butterknife.OnClick;
 
 public class OtherFragment extends BaseFragment {
 
+    @BindView(R.id.imgHead)
+    AppCompatImageView imgHead;
     @BindView(R.id.night_switch)
     Switch night_switch;
+    @BindView(R.id.tvAge)
+    TextView tvAge;
+    @BindView(R.id.tvHeight)
+    TextView tvHeight;
+    @BindView(R.id.tvWeight)
+    TextView tvWeight;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.tvEdit)
+    TextView tvEdit;
 
     @Override
     protected int getContentLayout() {
@@ -47,10 +51,29 @@ public class OtherFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
-
+        tvAge.setText(getSpann(R.string.age, "25"));
+        tvHeight.setText(getSpann(R.string.height, "165"));
+        tvWeight.setText(getSpann(R.string.weight, "63"));
+        ImgLoadUtils.loadCircleImg("http://img1.3lian.com/2015/w22/87/d/105.jpg", imgHead);
     }
 
-    @OnClick({R.id.night_switch})
+    /**
+     * 使用 Spannable 动态设置 textview 显示内容
+     * @param id
+     * @param replaceStr
+     * @return
+     */
+    private Spannable getSpann(int id, String replaceStr){
+        Spannable sp = new SpannableString(ResourceUtils.getText(id, replaceStr)) ;
+        sp.setSpan(new AbsoluteSizeSpan(21,true),0,replaceStr.length(),Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(mContext, R.color.login)),0,replaceStr.length(),
+                Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(14,true),replaceStr.length(), sp.length(),Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+
+        return sp;
+    }
+
+    @OnClick({R.id.night_switch,R.id.tvEdit})
     @Override
     public void onClick(View view) {
         super.onClick(view);
@@ -63,6 +86,9 @@ public class OtherFragment extends BaseFragment {
                 }else {
                     T.showShort("关闭");
                 }
+                break;
+            case R.id.tvEdit:
+                JumpUtils.jump(mContext, ModifyInfoActivity.class, null);
                 break;
         }
     }

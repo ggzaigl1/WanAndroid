@@ -35,6 +35,9 @@ import butterknife.BindView;
 public class HomeFragment extends BaseFragment {
 
     private String[] images = {
+            "http://192.168.100.30:8098/YDYS/20171219/20171220161832.png",
+            "http://img5.duitang.com/uploads/item/201606/01/20160601001315_wC3mU.jpeg",
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513314151355&di=3c0d90cff5a9c95b5696720a1282adcf&imgtype=0&src=http%3A%2F%2Fi2.17173cdn.com%2Fz0og4j%2FYWxqaGBf%2Fnewgame%2F20160729%2FSNzFzpbkyAkFEwk.jpg",
             "http://img2.3lian.com/2014/f2/37/d/40.jpg",
             "http://img2.3lian.com/2014/f2/37/d/39.jpg",
             "http://www.8kmm.com/UploadFiles/2012/8/201208140920132659.jpg"};

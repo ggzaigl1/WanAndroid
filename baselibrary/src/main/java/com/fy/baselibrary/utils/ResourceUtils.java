@@ -1,7 +1,9 @@
 package com.fy.baselibrary.utils;
 
 import android.graphics.drawable.Drawable;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.widget.TextView;
 
 import com.fy.baselibrary.application.BaseApplication;
@@ -45,16 +47,68 @@ public class ResourceUtils {
     }
 
     /**
-     * 设置TextView的drawableLeft、drawableRight、drawableTop、drawableBottom
+     * 获取string资源文件 指定 id 的资源，替换后的字符串
+     * @param id            资源ID（如：ID内容为 “病人ID：%1$s”）
+     * @param replaceStr    将要替换的内容
+     * @return 替换后的字符串
+     */
+    public static String getText(int id, String replaceStr){
+        String format = BaseApplication.getApplication().getResources().getString(id);
+
+        return String.format(format, replaceStr);
+    }
+
+    /**
+     * 获取string资源文件 指定 id 的资源，替换后的字符串
+     * @param id            资源ID（如：ID内容为 “病人ID：%1$d”）
+     * @param replaceStr    将要替换的内容
+     * @return 替换后的字符串
+     */
+    public static String getText(int id, int replaceStr){
+        String format = BaseApplication.getApplication().getResources().getString(id);
+
+        return String.format(format, replaceStr);
+    }
+
+    /**
+     * 动态设置 TextView 颜色 (getResources().getColor 过时 替代方式)
+     * @param colorId
+     * @return
+     */
+    public static void setTvColor(TextView tv, int colorId){
+        tv.setTextColor(ContextCompat.getColor(BaseApplication.getApplication(), colorId));
+    }
+
+    /**
+     * 设置TextView 四个方向某一个方向上的icon (非vector图标)
      * @param tv
      * @param id
      * @param position 设置的位置
      */
     public static void setCompoundDrawable(TextView tv, int id, int position) {
-        Drawable drawable = BaseApplication.getApplication()
-                .getResources()
-                .getDrawable(id);
+        Drawable drawable = ContextCompat.getDrawable(BaseApplication.getApplication(), id);
+        setTxtIconLocal(tv, drawable, position);
+    }
 
+    /**
+     * 设置TextView 四个方向某一个方向上的icon (vector图标)
+     * @param tv
+     * @param id
+     * @param position
+     */
+    public static void setCompoundVctDrawable(TextView tv, int id, int position){
+        VectorDrawableCompat vDrawable = VectorDrawableCompat.create(BaseApplication.getApplication().getResources(),
+                id, BaseApplication.getApplication().getTheme());
+        setTxtIconLocal(tv, vDrawable, position);
+    }
+
+    /**
+     * 设置icon 在TextView的位置
+     * @param tv
+     * @param drawable
+     * @param position
+     */
+    public static void setTxtIconLocal(TextView tv, Drawable drawable, int position){
         drawable.setBounds(0, 0,
                 drawable.getMinimumWidth(), drawable.getMinimumHeight());
 
@@ -72,14 +126,5 @@ public class ResourceUtils {
                 tv.setCompoundDrawables(null, null, null, drawable);
                 break;
         }
-    }
-
-    /**
-     * 动态设置 TextView 颜色 (getResources().getColor 过时 替代方式)
-     * @param colorId
-     * @return
-     */
-    public static void setTvColor(TextView tv, int colorId){
-        tv.setTextColor(ContextCompat.getColor(BaseApplication.getApplication(), colorId));
     }
 }

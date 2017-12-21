@@ -6,15 +6,21 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -92,10 +98,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         initBottomNavigation();
         switchContent(mHomeFragment);
         mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
-        View headerView = mNavigation.getHeaderView(0);
+
+        View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);
         ImageView imageView = headerView.findViewById(R.id.headerView);
         imageView.setOnClickListener(v -> JumpUtils.jump(mContext, PhotoViewActivity.class,null));
-
+        TextView tv_title = headerView.findViewById(R.id.tv_title);
     }
 
     @Override
@@ -118,7 +125,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .addItem(new BottomNavigationItem(R.mipmap.ic_home, getString(R.string.nav_00_title)).setActiveColorResource(R.color.colorPrimary))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_view_headline, getString(R.string.nav_01_title)).setActiveColorResource(R.color.colorPrimary))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_live_tv, getString(R.string.nav_02_title)).setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.icon_find, getString(R.string.find)).setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.icon_find, getString(R.string.nav_03_title)).setActiveColorResource(R.color.colorPrimary))
                 .setFirstSelectedPosition(0)
                 .setTabSelectedListener(this)
                 .initialise();

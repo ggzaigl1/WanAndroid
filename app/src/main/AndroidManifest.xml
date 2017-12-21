@@ -62,6 +62,9 @@
         <!-- 工具 activity -->
         <activity
                 android:name=".activity.ToolsActivity"/>
+        <!-- 修改个人信息 activity -->
+        <activity
+                android:name=".modify.ModifyInfoActivity"/>
     </application>
 
 </manifest>

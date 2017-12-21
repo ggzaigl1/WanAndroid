@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.fy.baselibrary.R;
+import com.fy.baselibrary.application.BaseApplication;
 
 /**
  * 图片加载工具类(目前使用 Glide)
@@ -78,14 +79,14 @@ public class ImgLoadUtils {
     }
 
 
+
     /**
      * 加载指定URL的图片（不做任何缓存）圆形显示
-     *  @param context
      * @param url
      * @param imageView
      */
-    public static void loadCircleImg(Context context, Uri url, ImageView imageView) {
-
+    public static void loadCircleImg(String url, ImageView imageView) {
+        Context context = BaseApplication.getApplication();
         Glide.with(context).load(url)
                 .fallback(R.mipmap.img_load_default)
                 .placeholder(R.mipmap.img_loading)
