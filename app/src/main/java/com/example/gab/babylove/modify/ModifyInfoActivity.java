@@ -1,5 +1,6 @@
 package com.example.gab.babylove.modify;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -99,9 +100,10 @@ public class ModifyInfoActivity extends BaseActivity {
                 Snackbar.make(view, "想知道我的电话吗?", Snackbar.LENGTH_SHORT)
                         .setActionTextColor(ContextCompat.getColor(mContext, R.color.button_press))
                         .setAction("点击我试试", new View.OnClickListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onClick(View v) {
-                        T.showShort("嘿嘿哈哈");
+                        tvParentPhoneModify.setText("18771002999");
                     }
                 }).show();
                 break;

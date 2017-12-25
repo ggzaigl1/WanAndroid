@@ -75,4 +75,10 @@
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 
+    <style name="MyStyle">
+                   
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:textSize">12sp</item>
+
+    </style>
 </resources>

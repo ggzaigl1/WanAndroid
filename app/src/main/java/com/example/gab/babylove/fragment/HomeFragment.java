@@ -8,6 +8,7 @@ import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.activity.homeActivity;
 import com.example.gab.babylove.adapter.HomeAdapter;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.fy.baselibrary.base.BaseFragment;
@@ -16,6 +17,7 @@ import com.fy.baselibrary.entity.HomeBean;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.NetRequest;
 import com.fy.baselibrary.retrofit.RxHelper;
+import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.T;
 
@@ -86,6 +88,7 @@ public class HomeFragment extends BaseFragment {
                         T.showShort("这个妹子在祈祷什么呢?");
                     }else if (position ==1){
                         T.showShort("这个妹子在地上听什么歌曲呢?");
+                        JumpUtils.jump(mContext,homeActivity.class,null);
                     }else {
                         T.showShort("这个妹子为什么泡浴缸不脱衣服呢?");
                     }
@@ -106,28 +109,28 @@ public class HomeFragment extends BaseFragment {
     /**
      * 请求参数
      */
-    private void GetGetDicts() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("type", "top");  //
-        params.put("key", "65a63052634458a9ba2859f95ce6b218");  //
-
-        new NetRequest.Builder().create().requestDate(mConnService.GetHeadline(params).compose(RxHelper.handleResult()),
-                new NetCallBack<ArrayList<HomeBean>>() {
-                    @Override
-                    public void onSuccess(ArrayList<HomeBean> data) {
-                        if (null != data) {
-                            mAdapter.setmDatas(data);
-                            mAdapter.notifyDataSetChanged();
-                        }
-                    }
-
-                    @Override
-                    public void updataLayout(int flag) {
-                        L.e("请求失败");
-                        L.e(params.toString());
-                    }
-                });
-    }
+//    private void GetGetDicts() {
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("type", "top");  //
+//        params.put("key", "65a63052634458a9ba2859f95ce6b218");  //
+//
+//        new NetRequest.Builder().create().requestDate(mConnService.GetHeadline(params).compose(RxHelper.handleResult()),
+//                new NetCallBack<ArrayList<HomeBean>>() {
+//                    @Override
+//                    public void onSuccess(ArrayList<HomeBean> data) {
+//                        if (null != data) {
+//                            mAdapter.setmDatas(data);
+//                            mAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void updataLayout(int flag) {
+//                        L.e("请求失败");
+//                        L.e(params.toString());
+//                    }
+//                });
+//    }
 
 
     @Override

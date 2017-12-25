@@ -65,6 +65,8 @@
         <!-- 修改个人信息 activity -->
         <activity
                 android:name=".modify.ModifyInfoActivity"/>
+        <activity
+                android:name=".activity.homeActivity"/>
     </application>
 
 </manifest>
