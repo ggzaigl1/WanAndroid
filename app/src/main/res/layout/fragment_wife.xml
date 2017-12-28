@@ -25,12 +25,19 @@
                 android:textColor="@color/myTxtColor"/>
 
     </HorizontalScrollView>
-
+    <TextView
+            android:id="@+id/tv_Os"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/myTxtColor"/>
 
     <Button
             android:id="@+id/bt_Dial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/bgColor"
+            android:background="@drawable/button_selector"
             android:text="Dial"/>
 
 </LinearLayout>

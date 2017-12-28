@@ -1,6 +1,7 @@
 package com.example.gab.babylove.modify;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -15,7 +16,9 @@ import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.TimeUtils;
 import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
+import com.fy.img.picker.ImagePicker;
 import com.fy.img.picker.PickerConfig;
+import com.fy.img.picker.bean.ImageItem;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -60,6 +63,21 @@ public class ModifyInfoActivity extends BaseActivity {
         ImgLoadUtils.loadCircleImg("http://img1.3lian.com/2015/w22/87/d/105.jpg", imgHeadModify);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && null != data){
+            switch (requestCode){
+                case ImagePicker.Picture_Selection:
+                    Bundle bundle = data.getExtras();
+                    ImageItem imgItem = (ImageItem) bundle.getSerializable("pickerImgData");
+
+                    ImgLoadUtils.loadCircleImg(imgItem.getPath(), imgHeadModify);
+                    break;
+            }
+        }
+    }
+
     @OnClick({R.id.llHead, R.id.llSex, R.id.llBirthday, R.id.llNation, R.id.llSchool, R.id.llAge, R.id.llHeight, R.id.llWeight, R.id.llParentPhone})
     @Override
     public void onClick(View view) {
@@ -72,7 +90,7 @@ public class ModifyInfoActivity extends BaseActivity {
                 Bundle bundle = new Bundle();
                 bundle.putInt(PickerConfig.KEY_MAX_COUNT, 0);
                 bundle.putBoolean(PickerConfig.KEY_ISTAKE_picture, true);
-                JumpUtils.jump(mContext, bundle, "com.fy.img.picker.multiselect.ImgPickerActivity", 10000);
+                JumpUtils.jump(mContext, bundle, "com.fy.img.picker.multiselect.ImgPickerActivity", ImagePicker.Picture_Selection);
                 break;
             case R.id.llSex://修改性别
 

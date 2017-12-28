@@ -1,5 +1,6 @@
 package com.example.gab.babylove.fragment;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -11,6 +12,7 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.DialActivity;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.utils.DeviceUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 
 import butterknife.BindView;
@@ -25,6 +27,8 @@ public class WifeFragment extends BaseFragment {
 
     @BindView(R.id.tv_baby)
     TextView tv_baby;
+    @BindView(R.id.tv_Os)
+    TextView tv_Os;
     @BindView(R.id.statusView)
     View statusView;
 
@@ -39,6 +43,7 @@ public class WifeFragment extends BaseFragment {
         return R.layout.fragment_wife;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void baseInit() {
         super.baseInit();
@@ -52,6 +57,8 @@ public class WifeFragment extends BaseFragment {
                 tv_baby.startAnimation(mRigthToLeftAnim);
             }
         });
+        tv_Os.setText("手机厂商:" + DeviceUtils.getDeviceMake() + "\n" + "手机型号:" + DeviceUtils.getSystemModel() + "\n"
+                + "Android版本号:" + DeviceUtils.getDeviceVersion() + "\n" + "手机IMEI:" + DeviceUtils.getIMEI(mContext));
         MdStatusBarCompat.setStatusView(mContext, statusView);
     }
 

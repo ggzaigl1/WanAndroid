@@ -107,6 +107,7 @@ public class LoginActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.tvLogin:
                 JumpUtils.jump(mContext, MainActivity.class, null);
+                finish();
 //                user_name = mUserNameEdt.getText().toString().trim();
 //                password = mPassword.getText().toString().trim();
 //                runLogin(user_name, password);
