@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 
+import java.util.Locale;
+
 /**
  * 获取设备信息 工具类
  * <p/>
@@ -56,6 +58,16 @@ public class DeviceUtils {
         }
         return null;
     }
+
+    /**
+     * 获取当前手机系统语言。
+     *
+     * @return 返回当前系统语言。例如：当前设置的是“中文-中国”，则返回“zh-CN”
+     */
+    public static String getSystemLanguage() {
+        return Locale.getDefault().getLanguage();
+    }
+
 
     /**
      * 打印设备内存信息

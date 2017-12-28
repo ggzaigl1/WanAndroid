@@ -64,4 +64,6 @@
     <string name="navigationTitle">&#160;&#160;&#160;&#160;&#160;Google Hot Air Balloon\nhttps://github.com/ggzaigl1</string>
     <string name="system_title" >系统提示</string>
     <string name="system_content" >您确定要退出登录吗?</string>
+    <string name="login_username" >请输入账号</string>
+    <string name="login_password" >请输入密码</string>
 </resources>
