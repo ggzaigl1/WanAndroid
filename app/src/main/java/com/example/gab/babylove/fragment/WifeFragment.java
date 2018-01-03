@@ -57,8 +57,10 @@ public class WifeFragment extends BaseFragment {
                 tv_baby.startAnimation(mRigthToLeftAnim);
             }
         });
-        tv_Os.setText("手机厂商:" + DeviceUtils.getDeviceMake() + "\n" + "手机型号:" + DeviceUtils.getSystemModel() + "\n"
-                + "Android版本号:" + DeviceUtils.getDeviceVersion() + "\n" + "手机IMEI:" + DeviceUtils.getIMEI(mContext));
+        tv_Os.setText("手机厂商:" + DeviceUtils.getDeviceMake()
+                + "\n" + "手机型号:" + DeviceUtils.getSystemModel()
+                + "\n" + "Android版本号:" + DeviceUtils.getDeviceVersion()
+                + "\n" + "手机IMEI:" + DeviceUtils.getIMEI(mContext));
         MdStatusBarCompat.setStatusView(mContext, statusView);
     }
 
