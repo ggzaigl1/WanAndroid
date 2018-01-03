@@ -84,16 +84,16 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-                startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
+        startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
                 new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO}), PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
-        Spannable sp = new SpannableString(getString(R.string.loginTitle)) ;
-        sp.setSpan(new AbsoluteSizeSpan(20,true),0,11,Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        Spannable sp = new SpannableString(getString(R.string.loginTitle));
+        sp.setSpan(new AbsoluteSizeSpan(20, true), 0, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)),
-                0,11,Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                0, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 
-        sp.setSpan(new AbsoluteSizeSpan(14,true),11,sp.length(),Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        sp.setSpan(new AbsoluteSizeSpan(14, true), 11, sp.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)),
-                11,sp.length(),Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                11, sp.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         tvLoginTitle.setText(sp);
 
         String userName = SpfUtils.getSpfSaveStr("UserID");
@@ -109,13 +109,13 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE){
-            switch (resultCode){
+        if (requestCode == PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE) {
+            switch (resultCode) {
                 case PermissionActivity.CALL_BACK_RESULT_CODE_SUCCESS:
-                    Toast.makeText(this,"权限申请成功！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "权限申请成功！", Toast.LENGTH_SHORT).show();
                     break;
                 case PermissionActivity.CALL_BACK_RESULE_CODE_FAILURE:
-                    Toast.makeText(this,"权限申请失败！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "权限申请失败！", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -125,7 +125,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void onClick(View view) {
         super.onClick(view);
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tvLogin:
                 JumpUtils.jump(mContext, MainActivity.class, null);
                 finish();
@@ -176,7 +176,7 @@ public class LoginActivity extends BaseActivity {
                                     LoginBean loginBean = bean.get(0);
 
                                     //判断是否是 医生登录
-                                    if (!loginBean.getIsDoc().equals("1")){
+                                    if (!loginBean.getIsDoc().equals("1")) {
                                         T.showLong("请使用正确的账号登录系统");
                                         return;
                                     }
