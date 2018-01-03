@@ -8,9 +8,13 @@
     <!--<item name="colorAccent">@color/colorAccent</item>-->
     <!--</style>-->
 
-    //valuse
-
     <style name="TranslucentTheme" parent="AppTheme">
+    </style>
+
+    <style name="NoTitleTranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <!-- dialog 样式 -->

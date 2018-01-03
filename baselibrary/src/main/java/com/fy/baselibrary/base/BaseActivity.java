@@ -1,5 +1,7 @@
 package com.fy.baselibrary.base;
 
+import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fy.baselibrary.R;
 import com.fy.baselibrary.retrofit.ApiService;
@@ -23,6 +26,7 @@ import com.fy.baselibrary.statuslayout.StatusLayoutManager;
 import com.fy.baselibrary.utils.FileUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.PermissionActivity;
 import com.fy.baselibrary.utils.cache.ACache;
 
 import javax.inject.Inject;
@@ -63,10 +67,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         component.inJect(this);
         mCache = ACache.get(this);
         mContext = this;
-//
+
+
         if (getContentView() != 0) {
             setContentView(R.layout.activity_base);
-//
             RootFrameLayout viewContent = findViewById(R.id.viewContent);
             //将继承 TopBarBaseActivity 的布局解析到 FrameLayout 里面
             initSLManager(viewContent);
@@ -90,6 +94,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
         mConnService.toString();
     }
+
 
     /**
      * 获取自定义 ContentView

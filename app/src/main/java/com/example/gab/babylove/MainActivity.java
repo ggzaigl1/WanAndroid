@@ -1,19 +1,13 @@
 package com.example.gab.babylove;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,7 +35,6 @@ import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.NetRequest;
 import com.fy.baselibrary.retrofit.RxHelper;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
-import com.fy.baselibrary.statusbar.StatusBarUtils;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
@@ -98,7 +91,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         initBottomNavigation();
         switchContent(mHomeFragment);
         mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
-
+//        startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
+//                new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO}), PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
         View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);
         ImageView imageView = headerView.findViewById(R.id.headerView);
         imageView.setOnClickListener(v -> JumpUtils.jump(mContext, PhotoViewActivity.class,null));

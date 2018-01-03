@@ -66,4 +66,9 @@
     <string name="system_content" >您确定要退出登录吗?</string>
     <string name="login_username" >请输入账号</string>
     <string name="login_password" >请输入密码</string>
+
+    <string name="dialog_title">提示</string>
+    <string name="set">设置</string>
+    <string name="defaule_first_message">为了您的安全，您需要授权该权限才可以正常使用相关功能哦。</string>
+    <string name="defaule_always_message">当前应用缺少相应的权限，您需要设置相应的权限后才可正常相关功能。</string>
 </resources>

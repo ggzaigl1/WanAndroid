@@ -6,26 +6,18 @@ import android.support.v7.widget.RecyclerView;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.homeActivity;
 import com.example.gab.babylove.adapter.HomeAdapter;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.base.recyclerv.divider.DividerParams;
-import com.fy.baselibrary.entity.HomeBean;
-import com.fy.baselibrary.retrofit.NetCallBack;
-import com.fy.baselibrary.retrofit.NetRequest;
-import com.fy.baselibrary.retrofit.RxHelper;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.T;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 

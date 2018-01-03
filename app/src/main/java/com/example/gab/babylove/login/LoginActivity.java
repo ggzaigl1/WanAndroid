@@ -1,6 +1,8 @@
 package com.example.gab.babylove.login;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -16,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
@@ -30,6 +33,7 @@ import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.PermissionActivity;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.TransfmtUtils;
@@ -80,6 +84,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+                startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO}), PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
         Spannable sp = new SpannableString(getString(R.string.loginTitle)) ;
         sp.setSpan(new AbsoluteSizeSpan(20,true),0,11,Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)),
@@ -98,6 +104,21 @@ public class LoginActivity extends BaseActivity {
         }
 
 //        cBoxPass.setChecked(true);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE){
+            switch (resultCode){
+                case PermissionActivity.CALL_BACK_RESULT_CODE_SUCCESS:
+                    Toast.makeText(this,"权限申请成功！",Toast.LENGTH_SHORT).show();
+                    break;
+                case PermissionActivity.CALL_BACK_RESULE_CODE_FAILURE:
+                    Toast.makeText(this,"权限申请失败！",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
     }
 
     @OnClick({R.id.tvLogin})

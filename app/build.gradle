@@ -55,4 +55,8 @@ dependencies {
     compile 'id.arieridwan:pageloader:0.0.2'
     compile 'com.github.vipulasri:timelineview:1.0.5'
     implementation project(':pickerdate')
+
+    compile 'com.github.hotchemi:permissionsdispatcher:2.3.2'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.3.2'
+
 }

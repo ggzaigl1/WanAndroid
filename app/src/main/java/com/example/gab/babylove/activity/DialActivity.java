@@ -1,11 +1,7 @@
 package com.example.gab.babylove.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gab.babylove.MainActivity;
@@ -17,14 +13,14 @@ import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
 
+
 import butterknife.BindView;
 
 /**
  * Created by Gab on 2017/12/12 0012.
  * 积分大转盘
  */
-
-public class DialActivity extends BaseActivity implements LuckPanLayout.AnimationEndListener {
+public class DialActivity extends BaseActivity implements LuckPanLayout.AnimationEndListener{
 
     @BindView(R.id.luckpan_layout)
     LuckPanLayout luckPanLayout;
@@ -65,4 +61,5 @@ public class DialActivity extends BaseActivity implements LuckPanLayout.Animatio
     public void endAnimation(int position) {
         Toast.makeText(this, strs[position], Toast.LENGTH_SHORT).show();
     }
+
 }
