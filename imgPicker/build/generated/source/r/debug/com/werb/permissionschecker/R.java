@@ -329,12 +329,12 @@ public final class R {
         public static int secondary_text_default_material_light = 0x7f060084;
         public static int secondary_text_disabled_material_dark = 0x7f060085;
         public static int secondary_text_disabled_material_light = 0x7f060086;
-        public static int switch_thumb_disabled_material_dark = 0x7f06008e;
-        public static int switch_thumb_disabled_material_light = 0x7f06008f;
-        public static int switch_thumb_material_dark = 0x7f060090;
-        public static int switch_thumb_material_light = 0x7f060091;
-        public static int switch_thumb_normal_material_dark = 0x7f060092;
-        public static int switch_thumb_normal_material_light = 0x7f060093;
+        public static int switch_thumb_disabled_material_dark = 0x7f060091;
+        public static int switch_thumb_disabled_material_light = 0x7f060092;
+        public static int switch_thumb_material_dark = 0x7f060093;
+        public static int switch_thumb_material_light = 0x7f060094;
+        public static int switch_thumb_normal_material_dark = 0x7f060095;
+        public static int switch_thumb_normal_material_light = 0x7f060096;
     }
     public static final class dimen {
         public static int abc_action_bar_content_inset_material = 0x7f080001;
@@ -725,12 +725,12 @@ public final class R {
         public static int abc_shareactionprovider_share_with = 0x7f15001d;
         public static int abc_shareactionprovider_share_with_application = 0x7f15001e;
         public static int abc_toolbar_collapse_description = 0x7f15001f;
-        public static int check_info_exit = 0x7f150028;
-        public static int check_info_message = 0x7f150029;
-        public static int check_info_setting = 0x7f15002a;
-        public static int check_info_title = 0x7f15002b;
-        public static int search_menu_title = 0x7f15005b;
-        public static int status_bar_notification_info_overflow = 0x7f15005f;
+        public static int check_info_exit = 0x7f15002b;
+        public static int check_info_message = 0x7f15002c;
+        public static int check_info_setting = 0x7f15002d;
+        public static int check_info_title = 0x7f15002e;
+        public static int search_menu_title = 0x7f15006c;
+        public static int status_bar_notification_info_overflow = 0x7f150072;
     }
     public static final class style {
         public static int AlertDialog_AppCompat = 0x7f160001;

@@ -4,7 +4,7 @@
 
     <uses-sdk
         android:minSdkVersion="19"
-        android:targetSdkVersion="22" />
+        android:targetSdkVersion="26" />
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
@@ -12,6 +12,8 @@
         android:handleProfiling="false"
         android:label="Tests for com.bigkoo.pickerview.test"
         android:targetPackage="com.bigkoo.pickerview.test" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"

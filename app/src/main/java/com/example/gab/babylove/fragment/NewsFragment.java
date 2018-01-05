@@ -4,15 +4,24 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.activity.RecyclerviewActivity;
 import com.example.gab.babylove.activity.TraceListActivity;
+import com.example.gab.babylove.adapter.ListAdapter;
+import com.example.gab.babylove.widget.FastScrollLinearLayoutManager;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,12 +37,14 @@ public class NewsFragment extends BaseFragment {
     View statusView;
     @BindView(R.id.bt_OnTrace)
     Button bt_OnTrace;
+
     private static int AUDIO_CODE = 1;
     private static int PHONE_STATE_CODE = 1;
     long[] mHints = new long[5];
     final static int COUNTS = 5;//点击次数
     final static long DURATION = 3 * 1000;//规定有效时间
     long[] mHits = new long[COUNTS];
+
 
     @Override
     protected int getContentLayout() {
@@ -48,16 +59,17 @@ public class NewsFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace})
+    @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace,R.id.bt_recycleview})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_OnTraceList:
                 JumpUtils.jump(mContext, TraceListActivity.class, null);
                 break;
+            case R.id.bt_recycleview:
+                JumpUtils.jump(mContext, RecyclerviewActivity.class, null);
+                break;
             case R.id.bt_OnTrace:
-
-
                 System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
                 //实现左移，然后最后一个位置更新距离开机的时间，如果最后一个时间和最开始时间小于DURATION，即连续5次点击
                 mHits[mHits.length - 1] = SystemClock.uptimeMillis();
@@ -74,6 +86,7 @@ public class NewsFragment extends BaseFragment {
                 break;
         }
     }
+
 
     public void onDisplaySettingButton(View view) {
         System.arraycopy(mHints, 1, mHints, 0, mHints.length - 1);//把从第二位至最后一位之间的数字复制到第一位至倒数第一位

@@ -727,8 +727,8 @@ public final class R {
         public static final int check_info_message = 0x7f0c002a;
         public static final int check_info_setting = 0x7f0c002b;
         public static final int check_info_title = 0x7f0c002c;
-        public static final int search_menu_title = 0x7f0c0069;
-        public static final int status_bar_notification_info_overflow = 0x7f0c006b;
+        public static final int search_menu_title = 0x7f0c006c;
+        public static final int status_bar_notification_info_overflow = 0x7f0c006f;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f0d0000;

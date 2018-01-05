@@ -252,8 +252,8 @@ public final class R {
         public static int secondary_text_default_material_light = 0x7f060084;
         public static int secondary_text_disabled_material_dark = 0x7f060085;
         public static int secondary_text_disabled_material_light = 0x7f060086;
-        public static int switch_thumb_normal_material_dark = 0x7f060092;
-        public static int switch_thumb_normal_material_light = 0x7f060093;
+        public static int switch_thumb_normal_material_dark = 0x7f060095;
+        public static int switch_thumb_normal_material_light = 0x7f060096;
     }
     public static final class dimen {
         public static int abc_action_bar_default_height_material = 0x7f080003;

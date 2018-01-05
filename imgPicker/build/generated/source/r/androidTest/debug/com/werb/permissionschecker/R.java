@@ -328,12 +328,12 @@ public final class R {
         public static final int secondary_text_default_material_light = 0x7f05007e;
         public static final int secondary_text_disabled_material_dark = 0x7f05007f;
         public static final int secondary_text_disabled_material_light = 0x7f050080;
-        public static final int switch_thumb_disabled_material_dark = 0x7f050088;
-        public static final int switch_thumb_disabled_material_light = 0x7f050089;
-        public static final int switch_thumb_material_dark = 0x7f05008a;
-        public static final int switch_thumb_material_light = 0x7f05008b;
-        public static final int switch_thumb_normal_material_dark = 0x7f05008c;
-        public static final int switch_thumb_normal_material_light = 0x7f05008d;
+        public static final int switch_thumb_disabled_material_dark = 0x7f05008b;
+        public static final int switch_thumb_disabled_material_light = 0x7f05008c;
+        public static final int switch_thumb_material_dark = 0x7f05008d;
+        public static final int switch_thumb_material_light = 0x7f05008e;
+        public static final int switch_thumb_normal_material_dark = 0x7f05008f;
+        public static final int switch_thumb_normal_material_light = 0x7f050090;
     }
     public static final class dimen {
         public static final int abc_action_bar_content_inset_material = 0x7f060000;
@@ -723,12 +723,12 @@ public final class R {
         public static final int abc_shareactionprovider_share_with = 0x7f0c001c;
         public static final int abc_shareactionprovider_share_with_application = 0x7f0c001d;
         public static final int abc_toolbar_collapse_description = 0x7f0c001e;
-        public static final int check_info_exit = 0x7f0c0027;
-        public static final int check_info_message = 0x7f0c0028;
-        public static final int check_info_setting = 0x7f0c0029;
-        public static final int check_info_title = 0x7f0c002a;
-        public static final int search_menu_title = 0x7f0c005a;
-        public static final int status_bar_notification_info_overflow = 0x7f0c005e;
+        public static final int check_info_exit = 0x7f0c002a;
+        public static final int check_info_message = 0x7f0c002b;
+        public static final int check_info_setting = 0x7f0c002c;
+        public static final int check_info_title = 0x7f0c002d;
+        public static final int search_menu_title = 0x7f0c006b;
+        public static final int status_bar_notification_info_overflow = 0x7f0c0071;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f0d0000;

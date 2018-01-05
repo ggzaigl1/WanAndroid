@@ -37,6 +37,7 @@
         android:paddingTop="13dp"
         android:singleLine="true"
         android:text="返回"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="@dimen/textSize_medium"
         app:layout_constraintBottom_toBottomOf="parent"

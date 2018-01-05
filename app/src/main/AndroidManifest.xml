@@ -66,6 +66,8 @@
                 android:name=".modify.ModifyInfoActivity"/>
         <activity
                 android:name=".activity.homeActivity"/>
+        <activity
+                android:name=".activity.RecyclerviewActivity"/>
 
         <activity
                 android:name="com.fy.baselibrary.utils.PermissionActivity"
