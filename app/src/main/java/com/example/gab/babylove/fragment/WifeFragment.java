@@ -45,6 +45,8 @@ public class WifeFragment extends BaseFragment implements View.OnTouchListener {
     TextView tv_Os;
     @BindView(R.id.statusView)
     View statusView;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
     @BindView(R.id.rvPatientList)
     RecyclerView rvPatientList;
     @BindView(R.id.horizontal_view)
@@ -70,6 +72,7 @@ public class WifeFragment extends BaseFragment implements View.OnTouchListener {
     @Override
     protected void baseInit() {
         super.baseInit();
+        tvTitle.setText("杂乱无章的什么玩意儿");
         tv_baby.post(() -> {
             mRigthToLeftAnim = new TranslateAnimation(mHorizontalScrollView.getWidth(), -tv_baby.getWidth(), 0, 0);
             mRigthToLeftAnim.setRepeatCount(Animation.INFINITE);

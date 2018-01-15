@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.RecyclerviewActivity;
@@ -39,6 +40,8 @@ public class NewsFragment extends BaseFragment {
     View statusView;
     @BindView(R.id.bt_OnTrace)
     Button bt_OnTrace;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
 
     @BindView(R.id.different_radius_test)
     StateButton radius;
@@ -59,6 +62,7 @@ public class NewsFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
+        tvTitle.setText("杂七杂八鬼名堂");
         MdStatusBarCompat.setStatusView(mContext, statusView);
         onDisplaySettingButton(bt_OnTrace);
 
