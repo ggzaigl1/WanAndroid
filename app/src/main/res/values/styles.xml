@@ -83,9 +83,20 @@
     </style>
 
     <style name="MyStyle">
-                   
         <item name="android:textColor">@color/orange</item>
         <item name="android:textSize">12sp</item>
+    </style>
 
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@mipmap/loading</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="AppSplash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@mipmap/loading</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">@color/BgColor</item>
+        <item name="colorPrimaryDark">@color/black</item>
     </style>
 </resources>

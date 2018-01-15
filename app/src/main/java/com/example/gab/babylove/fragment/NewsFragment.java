@@ -13,8 +13,10 @@ import android.widget.Button;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.RecyclerviewActivity;
 import com.example.gab.babylove.activity.TraceListActivity;
+import com.example.gab.babylove.activity.WebViewActivity;
 import com.example.gab.babylove.adapter.ListAdapter;
 import com.example.gab.babylove.widget.FastScrollLinearLayoutManager;
+import com.example.gab.babylove.widget.StateButton;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.JumpUtils;
@@ -38,6 +40,9 @@ public class NewsFragment extends BaseFragment {
     @BindView(R.id.bt_OnTrace)
     Button bt_OnTrace;
 
+    @BindView(R.id.different_radius_test)
+    StateButton radius;
+
     private static int AUDIO_CODE = 1;
     private static int PHONE_STATE_CODE = 1;
     long[] mHints = new long[5];
@@ -56,10 +61,15 @@ public class NewsFragment extends BaseFragment {
         super.baseInit();
         MdStatusBarCompat.setStatusView(mContext, statusView);
         onDisplaySettingButton(bt_OnTrace);
+
+        //设置不同状态下文字变色
+//        text.setOnClickListener(view -> text.setEnabled(false));
+        //设置四个角不同的圆角
+        radius.setRadius(new float[]{0, 0, 20, 20, 40, 40, 60, 60});
     }
 
 
-    @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace,R.id.bt_recycleview})
+    @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace,R.id.bt_recycleview,R.id.text_webView})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -83,6 +93,9 @@ public class NewsFragment extends BaseFragment {
                     String tips = "您已在[" + DURATION + "]ms内连续点击【" + mHits.length + "】次了！！！";
                     T.showShort(tips);
                 }
+                break;
+            case R.id.text_webView:
+                JumpUtils.jump(mContext, WebViewActivity.class, null);
                 break;
         }
     }

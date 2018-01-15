@@ -1,9 +1,6 @@
 package com.example.gab.babylove.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +8,8 @@ import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.adapter.ListAdapter;
-import com.example.gab.babylove.fragment.NewsFragment;
 import com.example.gab.babylove.widget.FastScrollLinearLayoutManager;
 import com.fy.baselibrary.base.BaseActivity;
-import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.T;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +19,7 @@ import butterknife.OnClick;
 
 /**
  * Created by Gab on 2018/1/5 0005.
- *
+ * Recycleview 相关
  */
 
 public class RecyclerviewActivity extends BaseActivity {

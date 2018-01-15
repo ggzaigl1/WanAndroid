@@ -1,16 +1,19 @@
 package com.example.gab.babylove;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +24,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.activity.PersonalCenterActivity;
 import com.example.gab.babylove.activity.PhotoViewActivity;
 import com.example.gab.babylove.activity.ToolsActivity;
+import com.example.gab.babylove.adapter.GuideAdapter;
 import com.example.gab.babylove.fragment.HomeFragment;
 import com.example.gab.babylove.fragment.NewsFragment;
 import com.example.gab.babylove.fragment.OtherFragment;

@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.activity.homeActivity;
+import com.example.gab.babylove.activity.HomeDataActivity;
 import com.example.gab.babylove.adapter.HomeAdapter;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.fy.baselibrary.base.BaseFragment;
@@ -80,7 +80,7 @@ public class HomeFragment extends BaseFragment {
                         T.showShort("这个妹子在祈祷什么呢?");
                     }else if (position ==1){
                         T.showShort("这个妹子在地上听什么歌曲呢?");
-                        JumpUtils.jump(mContext,homeActivity.class,null);
+                        JumpUtils.jump(mContext,HomeDataActivity.class,null);
                     }else {
                         T.showShort("这个妹子为什么泡浴缸不脱衣服呢?");
                     }

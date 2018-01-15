@@ -1,5 +1,6 @@
 package com.fy.baselibrary.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
@@ -51,6 +52,7 @@ public class DeviceUtils {
      *
      * @return 手机IMEI
      */
+    @SuppressLint("MissingPermission")
     public static String getIMEI(Context ctx) {
         TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Activity.TELEPHONY_SERVICE);
         if (tm != null) {

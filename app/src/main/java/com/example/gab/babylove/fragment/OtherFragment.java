@@ -30,18 +30,18 @@ public class OtherFragment extends BaseFragment {
 
     @BindView(R.id.imgHead)
     AppCompatImageView imgHead;
-    @BindView(R.id.night_switch)
-    Switch night_switch;
-    @BindView(R.id.tvAge)
-    TextView tvAge;
-    @BindView(R.id.tvHeight)
-    TextView tvHeight;
-    @BindView(R.id.tvWeight)
-    TextView tvWeight;
-    @BindView(R.id.tvName)
-    TextView tvName;
-    @BindView(R.id.tvEdit)
-    TextView tvEdit;
+//    @BindView(R.id.night_switch)
+//    Switch night_switch;
+//    @BindView(R.id.tvAge)
+//    TextView tvAge;
+//    @BindView(R.id.tvHeight)
+//    TextView tvHeight;
+//    @BindView(R.id.tvWeight)
+//    TextView tvWeight;
+//    @BindView(R.id.tvName)
+//    TextView tvName;
+//    @BindView(R.id.tvEdit)
+//    TextView tvEdit;
 
     @Override
     protected int getContentLayout() {
@@ -51,10 +51,10 @@ public class OtherFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
-        tvAge.setText(getSpann(R.string.age, "25"));
-        tvHeight.setText(getSpann(R.string.height, "165"));
-        tvWeight.setText(getSpann(R.string.weight, "63"));
-        ImgLoadUtils.loadCircleImg("http://img1.3lian.com/2015/w22/87/d/105.jpg", imgHead);
+//        tvAge.setText(getSpann(R.string.age, "25"));
+//        tvHeight.setText(getSpann(R.string.height, "165"));
+//        tvWeight.setText(getSpann(R.string.weight, "63"));
+//        ImgLoadUtils.loadCircleImg("http://img1.3lian.com/2015/w22/87/d/105.jpg", imgHead);
     }
 
     /**
@@ -73,24 +73,24 @@ public class OtherFragment extends BaseFragment {
         return sp;
     }
 
-    @OnClick({R.id.night_switch,R.id.tvEdit})
-    @Override
-    public void onClick(View view) {
-        super.onClick(view);
-        switch (view.getId()) {
-            case R.id.night_switch:
-                Switch sw = (Switch) view;
-                boolean isChecked = sw.isChecked();
-                if(isChecked){
-                    T.showShort("开启");
-                }else {
-                    T.showShort("关闭");
-                }
-                break;
-            case R.id.tvEdit:
-                JumpUtils.jump(mContext, ModifyInfoActivity.class, null);
-                break;
-        }
-    }
+//    @OnClick({R.id.night_switch,R.id.tvEdit})
+//    @Override
+//    public void onClick(View view) {
+//        super.onClick(view);
+//        switch (view.getId()) {
+//            case R.id.night_switch:
+//                Switch sw = (Switch) view;
+//                boolean isChecked = sw.isChecked();
+//                if(isChecked){
+//                    T.showShort("开启");
+//                }else {
+//                    T.showShort("关闭");
+//                }
+//                break;
+//            case R.id.tvEdit:
+//                JumpUtils.jump(mContext, ModifyInfoActivity.class, null);
+//                break;
+//        }
+//    }
 
 }

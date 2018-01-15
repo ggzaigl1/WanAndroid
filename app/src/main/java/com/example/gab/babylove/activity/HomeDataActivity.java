@@ -39,7 +39,7 @@ import butterknife.BindView;
  * CoordinatorLayout +  AppBarLayout + CollapsingToolbarLayout
  */
 
-public class homeActivity extends AppCompatActivity {
+public class HomeDataActivity extends AppCompatActivity {
 
     private String[] images = {
             "http://192.168.100.30:8098/YDYS/20171219/20171220161832.png",

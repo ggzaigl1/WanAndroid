@@ -85,7 +85,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
-                new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO}), PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_PHONE_STATE})
+                , PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
         Spannable sp = new SpannableString(getString(R.string.loginTitle));
         sp.setSpan(new AbsoluteSizeSpan(20, true), 0, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)),

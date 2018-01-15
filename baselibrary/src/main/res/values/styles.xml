@@ -22,8 +22,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="BaseAppTheme">
+        <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
     </style>
+
 
     
     <style name="myTransparent" parent="AppTheme">
@@ -77,6 +79,5 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
     </style>
-
 
 </resources>
