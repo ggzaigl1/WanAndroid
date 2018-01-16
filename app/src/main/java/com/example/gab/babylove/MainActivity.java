@@ -70,8 +70,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     NavigationView mNavigation;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawer;
-    @BindView(R.id.rl_content)
-    LinearLayout rl_content;
 
     @Override
     protected int getHeadView() {

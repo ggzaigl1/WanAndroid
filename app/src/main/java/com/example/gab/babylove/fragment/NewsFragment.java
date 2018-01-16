@@ -3,10 +3,6 @@ package com.example.gab.babylove.fragment;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,16 +11,11 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.RecyclerviewActivity;
 import com.example.gab.babylove.activity.TraceListActivity;
 import com.example.gab.babylove.activity.WebViewActivity;
-import com.example.gab.babylove.adapter.ListAdapter;
-import com.example.gab.babylove.widget.FastScrollLinearLayoutManager;
 import com.example.gab.babylove.widget.StateButton;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,8 +37,6 @@ public class NewsFragment extends BaseFragment {
     @BindView(R.id.different_radius_test)
     StateButton radius;
 
-    private static int AUDIO_CODE = 1;
-    private static int PHONE_STATE_CODE = 1;
     long[] mHints = new long[5];
     final static int COUNTS = 5;//点击次数
     final static long DURATION = 3 * 1000;//规定有效时间
@@ -101,6 +90,9 @@ public class NewsFragment extends BaseFragment {
             case R.id.text_webView:
                 JumpUtils.jump(mContext, WebViewActivity.class, null);
                 break;
+//            case R.id.background_test:
+//                T.showShort("这是真的成功测试热更新123");
+//                break;
         }
     }
 

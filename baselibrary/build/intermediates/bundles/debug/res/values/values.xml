@@ -149,6 +149,7 @@
     <string name="upLoading">正在上传…</string>
     <string name="userName">账号：</string>
     <string name="user_login">正在登录…</string>
+    <string name="web_error">抱歉~\n加载失败,点击重新加载</string>
     <string name="weight">%1$s\n体重(kg)</string>
     <string name="weightModify">体重(kg)</string>
     <string name="woman">女</string>
@@ -173,6 +174,7 @@
         <item name="android:windowExitAnimation">@anim/anim_slide_bottom_out</item>
     </style>
     <style name="AppTheme" parent="BaseAppTheme">
+        <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus" ns1:targetApi="kitkat">true</item>
     </style>
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">

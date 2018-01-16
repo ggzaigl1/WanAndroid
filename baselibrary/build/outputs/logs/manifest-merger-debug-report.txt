@@ -3,21 +3,9 @@ manifest
 ADDED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:1-5:12
 INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:1-5:12
 INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:1-5:12
-INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:1-5:12
-INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:1-5:12
-INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:1-5:12
-INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:1-5:12
 	package
 		ADDED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:11-39
 		INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml
-		INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml
-	android:versionName
-		INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml
-		ADDED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:1-5:12
-		INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml
-	android:versionCode
-		INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml
-		ADDED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:1:1-5:12
 		INJECTED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from E:\BabyLove\baselibrary\src\main\AndroidManifest.xml:2:11-69

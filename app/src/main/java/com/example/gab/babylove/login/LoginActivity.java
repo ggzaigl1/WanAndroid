@@ -84,14 +84,14 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        //动态判断权限
         startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
                 new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_PHONE_STATE})
-                , PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
+                ,PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
+
         Spannable sp = new SpannableString(getString(R.string.loginTitle));
         sp.setSpan(new AbsoluteSizeSpan(20, true), 0, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)),
-                0, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-
+        sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)), 0, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         sp.setSpan(new AbsoluteSizeSpan(14, true), 11, sp.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)),
                 11, sp.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -113,10 +113,10 @@ public class LoginActivity extends BaseActivity {
         if (requestCode == PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE) {
             switch (resultCode) {
                 case PermissionActivity.CALL_BACK_RESULT_CODE_SUCCESS:
-                    Toast.makeText(this, "权限申请成功！", Toast.LENGTH_SHORT).show();
+                    T.showShort("0");
                     break;
                 case PermissionActivity.CALL_BACK_RESULE_CODE_FAILURE:
-                    Toast.makeText(this, "权限申请失败！", Toast.LENGTH_SHORT).show();
+                    T.showShort("1");
                     break;
             }
         }

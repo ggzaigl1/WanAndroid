@@ -1359,9 +1359,10 @@ int string system_title 0x7f0c0069
 int string upLoading 0x7f0c006a
 int string userName 0x7f0c006b
 int string user_login 0x7f0c006c
-int string weight 0x7f0c006d
-int string weightModify 0x7f0c006e
-int string woman 0x7f0c006f
+int string web_error 0x7f0c006d
+int string weight 0x7f0c006e
+int string weightModify 0x7f0c006f
+int string woman 0x7f0c0070
 int style AlertDialog_AppCompat 0x7f0d0000
 int style AlertDialog_AppCompat_Light 0x7f0d0001
 int style AnimDown 0x7f0d0002

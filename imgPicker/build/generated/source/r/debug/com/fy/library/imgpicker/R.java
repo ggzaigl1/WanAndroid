@@ -1470,9 +1470,10 @@ public final class R {
         public static int upLoading = 0x7f150076;
         public static int userName = 0x7f150077;
         public static int user_login = 0x7f150078;
-        public static int weight = 0x7f150079;
-        public static int weightModify = 0x7f15007a;
-        public static int woman = 0x7f15007b;
+        public static int web_error = 0x7f150079;
+        public static int weight = 0x7f15007a;
+        public static int weightModify = 0x7f15007b;
+        public static int woman = 0x7f15007c;
     }
     public static final class style {
         public static int AlertDialog_AppCompat = 0x7f160001;

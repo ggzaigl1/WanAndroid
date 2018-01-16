@@ -116,7 +116,7 @@
                     android:padding="10dp"
                     android:text="change background"
                     android:textColor="@android:color/white"
-                    app:normalBackgroundColor="@color/colorPrimary"
+                    app:normalBackgroundColor="@color/textGreen"
                     app:pressedBackgroundColor="@color/colorPrimaryDark"
                     app:unableBackgroundColor="@android:color/holo_red_light"/>
 

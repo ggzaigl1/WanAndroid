@@ -1450,15 +1450,16 @@ public final class R {
         public static final int upLoading = 0x7f0c0073;
         public static final int userName = 0x7f0c0074;
         public static final int user_login = 0x7f0c0075;
-        public static final int weight = 0x7f0c0076;
-        public static final int weightModify = 0x7f0c0077;
-        public static final int woman = 0x7f0c0078;
-        public static final int xlistview_footer_hint_normal = 0x7f0c0079;
-        public static final int xlistview_footer_hint_ready = 0x7f0c007a;
-        public static final int xlistview_header_hint_loading = 0x7f0c007b;
-        public static final int xlistview_header_hint_normal = 0x7f0c007c;
-        public static final int xlistview_header_hint_ready = 0x7f0c007d;
-        public static final int xlistview_header_last_time = 0x7f0c007e;
+        public static final int web_error = 0x7f0c0076;
+        public static final int weight = 0x7f0c0077;
+        public static final int weightModify = 0x7f0c0078;
+        public static final int woman = 0x7f0c0079;
+        public static final int xlistview_footer_hint_normal = 0x7f0c007a;
+        public static final int xlistview_footer_hint_ready = 0x7f0c007b;
+        public static final int xlistview_header_hint_loading = 0x7f0c007c;
+        public static final int xlistview_header_hint_normal = 0x7f0c007d;
+        public static final int xlistview_header_hint_ready = 0x7f0c007e;
+        public static final int xlistview_header_last_time = 0x7f0c007f;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f0d0000;

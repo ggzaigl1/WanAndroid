@@ -92,5 +92,4 @@ public class OtherFragment extends BaseFragment {
                 break;
         }
     }
-
 }
