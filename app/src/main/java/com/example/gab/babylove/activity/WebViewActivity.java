@@ -1,7 +1,6 @@
 package com.example.gab.babylove.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.fy.baselibrary.base.BaseActivity;
-import com.fy.baselibrary.utils.T;
 
 import butterknife.BindView;
 import butterknife.OnClick;

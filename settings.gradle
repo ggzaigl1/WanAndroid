@@ -1,1 +1,1 @@
-include ':app', ':baselibrary', ':imgPicker', ':pickerdate'
+include ':app', ':baselibrary', ':imgPicker', ':pickerdate', ':IMKit', ':IMLib'

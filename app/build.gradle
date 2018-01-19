@@ -44,7 +44,7 @@ dependencies {
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
     // 菜单栏
     implementation project(':imgPicker')
-//    compile 'com.github.chrisbanes:PhotoView:2.1.2'
+    //    compile 'com.github.chrisbanes:PhotoView:2.1.2'
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     //点击图片放大
     compile 'com.afollestad.material-dialogs:core:0.9.6.0'

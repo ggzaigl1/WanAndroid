@@ -30,6 +30,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_demo"/>
+
             <com.example.gab.babylove.widget.StateButton
                     android:id="@+id/bt_OnTraceList"
                     android:layout_width="match_parent"

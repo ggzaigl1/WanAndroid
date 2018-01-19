@@ -63,5 +63,4 @@ dependencies {
     compile 'com.werb.permissionschecker:permissionschecker:0.0.1-beta2'
     compile 'id.arieridwan:pageloader:0.0.2'
 
-
 }

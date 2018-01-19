@@ -1,6 +1,8 @@
 package com.example.gab.babylove.activity;
 
+import android.content.ComponentName;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +30,10 @@ public class GuideActivity extends AppCompatActivity {
 
     private ImageView[] imgViews;
     private Boolean exit = false;
+    private ComponentName mDefault;
+    private ComponentName mDoublel1;
+    private ComponentName mDoublel2;
+    private PackageManager mPackageManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +42,12 @@ public class GuideActivity extends AppCompatActivity {
         getWindow().setBackgroundDrawable(null);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_guide);
+        mDefault = getComponentName();
+        mDoublel1 = new ComponentName(getBaseContext(),"com.example.gab.babylove.Test1");
+        mDoublel2 = new ComponentName(getBaseContext(),"com.example.gab.babylove.Test2");
+        mPackageManager = getApplicationContext().getPackageManager();
+        changeIcon1();
+        changeIcon2();
 //        if (!isTaskRoot()) {
 //            Intent intent = getIntent();
 //            String action = intent.getAction();
@@ -72,6 +84,25 @@ public class GuideActivity extends AppCompatActivity {
         }
     }
 
+    /** 动态更换icon图标**/
+    public void  changeIcon1(){
+        disableComponent(mDefault);
+        disableComponent(mDoublel2);
+        enableComponent(mDoublel1);
+    }
+    public void  changeIcon2(){
+        disableComponent(mDefault);
+        disableComponent(mDoublel1);
+        enableComponent(mDoublel2);
+    }
+    private void  enableComponent(ComponentName componentName){
+        mPackageManager.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
+    }
+    private void  disableComponent(ComponentName componentName){
+        mPackageManager.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+    }
     //显示引导图
     @SuppressWarnings("deprecation")
     private void initLayout() {

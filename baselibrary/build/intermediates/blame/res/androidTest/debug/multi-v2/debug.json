@@ -505,6 +505,21 @@
             ]
         },
         {
+            "outputFile": "E:\\BabyLove\\baselibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-en-rCA_values-en-rCA.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.1.aar\\20d67ba0e23beb753bab89d2dd2b1d6f\\res\\values-en-rCA\\values-en-rCA.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,209,309,417,501,601,716,793,869,951,1054,1158,1257,1362,1465,1569,1725,1825",
+                        "endColumns": "103,99,107,83,99,114,76,75,81,102,103,98,104,102,103,155,99,81",
+                        "endOffsets": "204,304,412,496,596,711,788,864,946,1049,1153,1252,1357,1460,1564,1720,1820,1902"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "E:\\BabyLove\\baselibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-el_values-el.arsc.flat",
             "map": [
                 {
@@ -621,6 +636,21 @@
                         "startOffsets": "55,166,274,397,512,623,705,811,941,1024,1104,1190,1300,1412,1515,1626,1733,1840,1962,2061,2147",
                         "endColumns": "110,107,122,114,110,81,105,129,82,79,85,109,111,102,110,106,106,121,98,85,100",
                         "endOffsets": "161,269,392,507,618,700,806,936,1019,1099,1185,1295,1407,1510,1621,1728,1835,1957,2056,2142,2243"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\BabyLove\\baselibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values-en-rXC_values-en-rXC.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.1.aar\\20d67ba0e23beb753bab89d2dd2b1d6f\\res\\values-en-rXC\\values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,310,510,719,904,1106,1321,1494,1671,1855,2059,2264,2465,2672,2874,3079,3351,3551",
+                        "endColumns": "204,199,208,184,201,214,172,176,183,203,204,200,206,201,204,271,199,178",
+                        "endOffsets": "305,505,714,899,1101,1316,1489,1666,1850,2054,2259,2460,2667,2869,3074,3346,3546,3725"
                     }
                 }
             ]

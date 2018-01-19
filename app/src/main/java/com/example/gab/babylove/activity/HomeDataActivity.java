@@ -10,10 +10,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -22,17 +20,12 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.adapter.HomeAdapter;
 import com.example.gab.babylove.view.NetworkImageHolderView;
-import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.base.recyclerv.divider.DividerParams;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
-import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import butterknife.BindView;
 
 /**
  * Created by Gab on 2017/12/25 0025.
@@ -102,7 +95,6 @@ public class HomeDataActivity extends AppCompatActivity {
             mCollapsingToolbarLayout.setTitle("我需要这个CollapsingToolbarLayout");
         }
     }
-
 
     private void initBanner() {
         List<String> networkImages = Arrays.asList(images);
