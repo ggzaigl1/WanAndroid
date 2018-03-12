@@ -85,10 +85,10 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        //动态判断权限
-        startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
-                new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_PHONE_STATE})
-                ,PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
+//        //动态判断权限
+//        startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
+//                new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_PHONE_STATE})
+//                ,PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
 
         Spannable sp = new SpannableString(getString(R.string.loginTitle));
         sp.setSpan(new AbsoluteSizeSpan(20, true), 0, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -108,20 +108,20 @@ public class LoginActivity extends BaseActivity {
 //        cBoxPass.setChecked(true);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE) {
-            switch (resultCode) {
-                case PermissionActivity.CALL_BACK_RESULT_CODE_SUCCESS:
-                    T.showShort("0");
-                    break;
-                case PermissionActivity.CALL_BACK_RESULE_CODE_FAILURE:
-                    T.showShort("1");
-                    break;
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE) {
+//            switch (resultCode) {
+//                case PermissionActivity.CALL_BACK_RESULT_CODE_SUCCESS:
+//                    T.showShort("0");
+//                    break;
+//                case PermissionActivity.CALL_BACK_RESULE_CODE_FAILURE:
+//                    T.showShort("1");
+//                    break;
+//            }
+//        }
+//    }
 
     @OnClick({R.id.tvLogin})
     @Override

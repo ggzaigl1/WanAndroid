@@ -144,7 +144,11 @@ public class NewsFragment extends BaseFragment {
                 break;
                 //指纹相关
             case R.id.stroke_test:
-                JumpUtils.jump(mContext, FingerprintMainActivity.class, null);
+                if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+                    permissionChecker.requestPermissions();
+                }else {
+                    JumpUtils.jump(mContext, FingerprintMainActivity.class, null);
+                }
                 break;
         }
     }

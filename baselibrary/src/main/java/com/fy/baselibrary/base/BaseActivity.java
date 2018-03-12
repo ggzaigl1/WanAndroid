@@ -1,5 +1,6 @@
 package com.fy.baselibrary.base;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import com.fy.baselibrary.utils.FileUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.cache.ACache;
+import com.werb.permissionschecker.PermissionChecker;
 
 import javax.inject.Inject;
 
@@ -49,6 +51,12 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     private static long lastClickTime;
     public static String path = FileUtils.getSDCardPath()+ "01.png";//查房界面 图片保存地址
 
+    protected PermissionChecker permissionChecker;
+    protected static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+
     @Inject
     protected ApiService mConnService;
 
@@ -63,6 +71,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         mCache = ACache.get(this);
         mContext = this;
 
+        permissionChecker = new PermissionChecker(mContext);
+        permissionChecker.setTitle(getString(R.string.check_info_title));
+        permissionChecker.setMessage(getString(R.string.check_info_message));
 
         if (getContentView() != 0) {
             setContentView(R.layout.activity_base);
@@ -90,6 +101,24 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         mConnService.toString();
     }
 
+    /**
+     * 请求权限返回结果
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @android.support.annotation.NonNull String[] permissions, @android.support.annotation.NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PermissionChecker.PERMISSION_REQUEST_CODE:
+                if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
+
+                } else {
+                    permissionChecker.showDialog();
+                }
+                break;
+        }
+    }
 
     /**
      * 获取自定义 ContentView
