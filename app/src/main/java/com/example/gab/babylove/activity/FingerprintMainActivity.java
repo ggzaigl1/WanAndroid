@@ -40,6 +40,7 @@ public class FingerprintMainActivity extends BaseActivity {
      */
     @Override
     protected void init(Bundle savedInstanceState) {
+        tvTitle.setText("指纹识别");
         mFingerprintCore = new FingerprintCore(mContext);
         mFingerprintCore.setFingerprintManager(mResultListener);
         mKeyguardLockScreenManager = new KeyguardLockScreenManager(mContext);

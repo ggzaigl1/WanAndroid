@@ -99,6 +99,8 @@
         <!--<activity android:name=".MainActivity"/>-->
         <!-- 大转盘 -->
         <activity
+                android:name=".MainActivity"/>
+        <activity
                 android:name=".activity.DialActivity"/>
         <activity
                 android:name=".activity.AnimationActivity"/>

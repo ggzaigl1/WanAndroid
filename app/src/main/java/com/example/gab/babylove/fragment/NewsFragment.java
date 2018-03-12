@@ -104,6 +104,7 @@ public class NewsFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_OnTraceList:
+                //模拟快递布局
                 JumpUtils.jump(mContext, TraceListActivity.class, null);
                 break;
             case R.id.bt_recycleview:
@@ -133,13 +134,15 @@ public class NewsFragment extends BaseFragment {
 //            case R.id.background_test:
 //                T.showShort("这是真的成功测试热更新123");
 //                break;
+                //空
             case R.id.different_radius_test:
                 JumpUtils.jump(mContext, CalendarViewActivity.class, null);
                 break;
+                // AgentWeb 封装
             case R.id.dash_test:
                 JumpUtils.jump(mContext, AgentWebActivity.class, null);
                 break;
-                //
+                //指纹相关
             case R.id.stroke_test:
                 JumpUtils.jump(mContext, FingerprintMainActivity.class, null);
                 break;
