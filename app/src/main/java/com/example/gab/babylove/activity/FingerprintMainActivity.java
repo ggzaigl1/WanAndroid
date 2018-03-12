@@ -109,7 +109,8 @@ public class FingerprintMainActivity extends BaseActivity {
     private void cancelFingerprintRecognition() {
         if (mFingerprintCore.isAuthenticating()) {
             mFingerprintCore.cancelAuthenticate();
-            resetGuideViewState();
+            mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
+            mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
         }
     }
 
@@ -128,12 +129,6 @@ public class FingerprintMainActivity extends BaseActivity {
         mKeyguardLockScreenManager.showAuthenticationScreen(this);
     }
 
-
-    private void resetGuideViewState() {
-        mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
-        mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
-    }
-
     /**
      * 指纹识别回调接口
      */
@@ -141,7 +136,8 @@ public class FingerprintMainActivity extends BaseActivity {
         @Override
         public void onAuthenticateSuccess() {
             T.showShort(R.string.fingerprint_recognition_success);
-            resetGuideViewState();
+            mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
+            mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
             openFingerPrintSettingPage(mContext);
         }
 
@@ -153,7 +149,8 @@ public class FingerprintMainActivity extends BaseActivity {
 
         @Override
         public void onAuthenticateError(int errMsgId) {
-            resetGuideViewState();
+            mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
+            mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
             T.showShort(R.string.fingerprint_recognition_error);
         }
 
