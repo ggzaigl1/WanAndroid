@@ -1,7 +1,5 @@
 package com.fy.baselibrary.base;
 
-import android.Manifest;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +9,11 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fy.baselibrary.R;
 import com.fy.baselibrary.retrofit.ApiService;
 import com.fy.baselibrary.retrofit.DaggerRequestComponent;
 import com.fy.baselibrary.retrofit.RequestComponent;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.statusbar.StatusBarUtils;
 import com.fy.baselibrary.statuslayout.OnRetryListener;
 import com.fy.baselibrary.statuslayout.OnShowHideViewListener;
@@ -26,7 +22,6 @@ import com.fy.baselibrary.statuslayout.StatusLayoutManager;
 import com.fy.baselibrary.utils.FileUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
-import com.fy.baselibrary.utils.PermissionActivity;
 import com.fy.baselibrary.utils.cache.ACache;
 
 import javax.inject.Inject;

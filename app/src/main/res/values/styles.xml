@@ -99,4 +99,5 @@
         <item name="colorPrimary">@color/BgColor</item>
         <item name="colorPrimaryDark">@color/black</item>
     </style>
+
 </resources>

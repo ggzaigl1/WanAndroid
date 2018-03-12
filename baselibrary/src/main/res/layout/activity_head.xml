@@ -4,7 +4,7 @@
     android:id="@+id/rlHead"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/appHeadBg">
+     android:background="@drawable/color_list">
 
     <TextView
         android:id="@+id/tvTitle"

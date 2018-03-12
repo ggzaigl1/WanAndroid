@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
+import java.security.MessageDigest;
+
 /**
  * 将图片转化为圆形
  * Created by 下载 on 2017/5/5.
@@ -50,4 +52,5 @@ public class GlideCircleTransform extends BitmapTransformation {
     @Override public String getId() {
         return getClass().getName();
     }
+
 }

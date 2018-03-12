@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- 从SDCard读取数据权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -61,7 +62,7 @@
                 m3SgsPq+UnrOlQTIWQDaGvMumObz87aNmkQ1P8igpYyEZCB0zeMKl4/+VR5Aa8aXytS0QrjU5Rth+edoaDfSQTv
                 y7KkyhwJHDRzYDcjNSAWACdYp/RfKnzRWguM=" />
         <activity
-                android:name=".activity.GuideActivity"
+                android:name=".login.LoginActivity"
                 android:theme="@style/AppSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -69,33 +70,33 @@
             </intent-filter>
         </activity>
         <!-- 动态更换 Launcher-->
-        <activity-alias
-                android:name=".Test1"
-                android:enabled="false"
-                android:icon="@mipmap/logo"
-                android:label="第一次"
-                android:targetActivity=".activity.GuideActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity-alias>
+        <!--<activity-alias-->
+                <!--android:name=".Test1"-->
+                <!--android:enabled="false"-->
+                <!--android:icon="@mipmap/logo"-->
+                <!--android:label="第一次"-->
+                <!--android:targetActivity=".activity.GuideActivity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        <!--</activity-alias>-->
 
-        <activity-alias
-                android:name=".Test2"
-                android:enabled="false"
-                android:icon="@mipmap/ic_launcher_round"
-                android:label="第二次"
-                android:targetActivity=".activity.GuideActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity-alias>
+        <!--<activity-alias-->
+                <!--android:name=".Test2"-->
+                <!--android:enabled="false"-->
+                <!--android:icon="@mipmap/ic_launcher_round"-->
+                <!--android:label="第二次"-->
+                <!--android:targetActivity=".activity.GuideActivity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        <!--</activity-alias>-->
         <!-- 登录 -->
-        <activity android:name=".login.LoginActivity"
-                />
-        <activity android:name=".MainActivity"/>
+        <!--<activity android:name=".login.LoginActivity"-->
+                <!--/>-->
+        <!--<activity android:name=".MainActivity"/>-->
         <!-- 大转盘 -->
         <activity
                 android:name=".activity.DialActivity"/>
@@ -116,6 +117,12 @@
         <!-- 工具 activity -->
         <activity
                 android:name=".activity.ToolsActivity"/>
+        <activity
+                android:name=".activity.CalendarViewActivity"/>
+        <activity
+                android:name=".activity.AgentWebActivity"/>
+        <activity
+                android:name=".activity.FingerprintMainActivity"/>
         <!-- 修改个人信息 activity -->
         <activity
                 android:name=".modify.ModifyInfoActivity"/>

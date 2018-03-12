@@ -54,13 +54,14 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     //    通过OkHttp中的interceptor来实现实际的底层的请求和响应日志
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
-    //    glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    //    glide
     compile 'com.tencent.bugly:crashreport:2.6.6.1'
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
     compile 'com.tencent.bugly:nativecrashreport:3.3.1'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
-    compile 'com.werb.permissionschecker:permissionschecker:0.0.1-beta2'
     compile 'id.arieridwan:pageloader:0.0.2'
-
+    compile 'com.getkeepsafe.taptargetview:taptargetview:1.11.0'
+    compile 'com.just.agentweb:agentweb:3.1.0'
+    compile 'com.werb.permissionschecker:permissionschecker:0.0.1-beta2'
 }

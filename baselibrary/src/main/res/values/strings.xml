@@ -62,14 +62,30 @@
     <string name="rememberPass">记住密码</string>
     <string name="loginTitle">全 国 体 育 联 盟\nNational Sports Union</string>
     <string name="navigationTitle">&#160;&#160;&#160;&#160;&#160;Google Hot Air Balloon\nhttps://github.com/ggzaigl1</string>
-    <string name="system_title" >系统提示</string>
-    <string name="system_content" >您确定要退出登录吗?</string>
-    <string name="login_username" >请输入账号</string>
-    <string name="login_password" >请输入密码</string>
+    <string name="system_title">系统提示</string>
+    <string name="system_content">您确定要退出登录吗?</string>
+    <string name="login_username">请输入账号</string>
+    <string name="login_password">请输入密码</string>
     <string name="web_error">抱歉~\n加载失败,点击重新加载</string>
 
     <string name="dialog_title">提示</string>
     <string name="set">设置</string>
     <string name="defaule_first_message">为了您的安全，您需要授权该权限才可以正常使用相关功能哦。</string>
     <string name="defaule_always_message">当前应用缺少相应的权限，您需要设置相应的权限后才可正常相关功能。</string>
+
+    <string name="fingerprint_recognition_start">开始指纹识别</string>
+    <string name="fingerprint_recognition_cancel">取消指纹识别</string>
+    <string name="fingerprint_recognition_guide_tip">点击“开始指纹识别”按钮</string>
+    <string name="fingerprint_recognition_tip">请进行指纹识别，长按指纹解锁键</string>
+    <string name="fingerprint_recognition_not_support">此设备不支持指纹解锁</string>
+    <string name="fingerprint_recognition_success">指纹识别成功</string>
+    <string name="fingerprint_recognition_failed">指纹识别失败，请重试！</string>
+    <string name="fingerprint_recognition_error">指纹识别错误，等待几秒之后再重试</string>
+    <string name="fingerprint_recognition_authenticating">指纹识别已经开启，长按指纹解锁键</string>
+    <string name="fingerprint_recognition_unlock_screen">测试密码解锁屏幕</string>
+    <string name="fingerprint_recognition_not_enrolled">您还没有录制指纹，请录入！</string>
+    <string name="fingerprint_not_set_unlock_screen_pws">系统没有设置锁屏密码，请设置！</string>
+    <string name="fingerprint_sys_setting_page">进入系统指纹设置页面</string>
+    <string name="sys_pwd_recognition_success">系统密码识别成功</string>
+    <string name="sys_pwd_recognition_failed">系统密码识别失败</string>
 </resources>

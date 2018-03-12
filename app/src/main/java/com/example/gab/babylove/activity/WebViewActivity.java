@@ -50,6 +50,7 @@ public class WebViewActivity extends BaseActivity {
         initview();
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void initview() {
         //加快HTML网页加载完成的速度，等页面finish再加载图片
         if(Build.VERSION.SDK_INT >= 19) {
@@ -61,6 +62,7 @@ public class WebViewActivity extends BaseActivity {
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         //设置WebView支持javascript脚本
+        webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSupportZoom(true);          //允许缩放
         webSettings.setBuiltInZoomControls(true);  //原网页基础上缩放
