@@ -18,6 +18,8 @@
     <uses-permission android:name="android.permission.READ_LOGS"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
@@ -32,10 +34,10 @@
             android:theme="@style/AppTheme">
         <meta-data
                 android:name="com.taobao.android.hotfix.IDSECRET"
-                android:value="24768300-1" />
+                android:value="24768300-1"/>
         <meta-data
                 android:name="com.taobao.android.hotfix.APPSECRET"
-                android:value="17530de33dec5e28d4185a9745b63ed6" />
+                android:value="17530de33dec5e28d4185a9745b63ed6"/>
         <meta-data
                 android:name="com.taobao.android.hotfix.RSASECRET"
                 android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQD
@@ -60,7 +62,8 @@
                 8sYJrGQ9YxcTuXU45fCSyPWqHzXV0MK6sc6sPrDRTP5/9lSzcQEG3R2WmEDPlJCOvB4jMluveLvNFVNUs3ljk
                 dUaxFjQ2usKieC7KuTGDbwIYpFvkRVvjFAoGAM1Y+QTdpLzi3dkEEK9icOdIC2xK5VHc9NOntNe6EoTSIemym
                 m3SgsPq+UnrOlQTIWQDaGvMumObz87aNmkQ1P8igpYyEZCB0zeMKl4/+VR5Aa8aXytS0QrjU5Rth+edoaDfSQTv
-                y7KkyhwJHDRzYDcjNSAWACdYp/RfKnzRWguM=" />
+                y7KkyhwJHDRzYDcjNSAWACdYp/RfKnzRWguM="/>
+
         <activity
                 android:name=".login.LoginActivity"
                 android:theme="@style/AppSplash">
@@ -71,31 +74,31 @@
         </activity>
         <!-- 动态更换 Launcher-->
         <!--<activity-alias-->
-                <!--android:name=".Test1"-->
-                <!--android:enabled="false"-->
-                <!--android:icon="@mipmap/logo"-->
-                <!--android:label="第一次"-->
-                <!--android:targetActivity=".activity.GuideActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+        <!--android:name=".Test1"-->
+        <!--android:enabled="false"-->
+        <!--android:icon="@mipmap/logo"-->
+        <!--android:label="第一次"-->
+        <!--android:targetActivity=".activity.GuideActivity">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.MAIN"/>-->
+        <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+        <!--</intent-filter>-->
         <!--</activity-alias>-->
 
         <!--<activity-alias-->
-                <!--android:name=".Test2"-->
-                <!--android:enabled="false"-->
-                <!--android:icon="@mipmap/ic_launcher_round"-->
-                <!--android:label="第二次"-->
-                <!--android:targetActivity=".activity.GuideActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+        <!--android:name=".Test2"-->
+        <!--android:enabled="false"-->
+        <!--android:icon="@mipmap/ic_launcher_round"-->
+        <!--android:label="第二次"-->
+        <!--android:targetActivity=".activity.GuideActivity">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.MAIN"/>-->
+        <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+        <!--</intent-filter>-->
         <!--</activity-alias>-->
         <!-- 登录 -->
         <!--<activity android:name=".login.LoginActivity"-->
-                <!--/>-->
+        <!--/>-->
         <!--<activity android:name=".MainActivity"/>-->
         <!-- 大转盘 -->
         <activity
@@ -125,6 +128,8 @@
                 android:name=".activity.AgentWebActivity"/>
         <activity
                 android:name=".activity.FingerprintMainActivity"/>
+        <activity
+                android:name=".activity.GSYVideoPlayerActivity"/>
         <!-- 修改个人信息 activity -->
         <activity
                 android:name=".modify.ModifyInfoActivity"/>
@@ -146,7 +151,13 @@
         <activity
                 android:name="com.fy.baselibrary.utils.PermissionActivity"
                 android:theme="@style/NoTitleTranslucentTheme"/>
+        <!-- 权限相关 -->
+        <activity
+                android:name=".activity.SurfaceActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="sensor"
+                android:windowSoftInputMode="stateHidden|adjustResize"/>
 
     </application>
-    
+
 </manifest>

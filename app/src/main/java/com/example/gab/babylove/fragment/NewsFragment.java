@@ -14,6 +14,7 @@ import com.example.gab.babylove.activity.AgentWebActivity;
 import com.example.gab.babylove.activity.CalendarViewActivity;
 import com.example.gab.babylove.activity.CustomViewActivity;
 import com.example.gab.babylove.activity.FingerprintMainActivity;
+import com.example.gab.babylove.activity.GSYVideoPlayerActivity;
 import com.example.gab.babylove.activity.RecyclerviewActivity;
 import com.example.gab.babylove.activity.TraceListActivity;
 import com.example.gab.babylove.activity.WebViewActivity;
@@ -99,7 +100,8 @@ public class NewsFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace, R.id.bt_recycleview, R.id.text_webView, R.id.abo_Advice,R.id.dash_test,R.id.stroke_test})
+    @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace, R.id.bt_recycleview, R.id.text_webView, R.id.abo_Advice, R.id.dash_test, R.id.stroke_test
+            , R.id.stroke_background_test})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -134,21 +136,24 @@ public class NewsFragment extends BaseFragment {
 //            case R.id.background_test:
 //                T.showShort("这是真的成功测试热更新123");
 //                break;
-                //空
+            //空
             case R.id.different_radius_test:
                 JumpUtils.jump(mContext, CalendarViewActivity.class, null);
                 break;
-                // AgentWeb 封装
+            // AgentWeb 封装
             case R.id.dash_test:
                 JumpUtils.jump(mContext, AgentWebActivity.class, null);
                 break;
-                //指纹相关
+            //指纹相关
             case R.id.stroke_test:
                 if (permissionChecker.isLackPermissions(PERMISSIONS)) {
                     permissionChecker.requestPermissions();
-                }else {
+                } else {
                     JumpUtils.jump(mContext, FingerprintMainActivity.class, null);
                 }
+                break;
+            case R.id.stroke_background_test:
+                JumpUtils.jump(mContext, GSYVideoPlayerActivity.class, null);
                 break;
         }
     }

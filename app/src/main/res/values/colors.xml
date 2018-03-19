@@ -67,6 +67,7 @@
     <!-- shape 菜单dialog 点击背景变化色 -->
     <color name="shape_dialog_menu_selection">#cacaca</color>
 
+    <color name="control_color">#88000000</color>
 </resources>
 
         <!-- 颜色透明度 对比表 -->

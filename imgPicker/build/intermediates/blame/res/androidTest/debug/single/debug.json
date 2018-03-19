@@ -4,24 +4,24 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
-        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_design_navigation_item_subheader.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_list_pressed_holo_dark.9.png"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_push_scale_right_in.xml.flat",
-        "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\push_scale_right_in.xml"
-    },
-    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23_abc_tint_spinner.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\color-v23\\abc_tint_spinner.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_push_scale_right_in.xml.flat",
+        "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\push_scale_right_in.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-xxhdpi-v4_grid_camera.png.flat",
@@ -72,6 +72,18 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_play.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_play.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_seek_progress.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_seek_progress.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_repeat_all.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_tint_btn_checkable.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\color\\abc_tint_btn_checkable.xml"
     },
@@ -88,12 +100,12 @@
         "source": "E:\\BabyLove\\imgPicker\\build\\intermediates\\bundles\\debug\\res\\layout\\act_img_picker.xml"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_notification_bg_low.xml.flat",
-        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5088a8fe0394baf9bb584bf677c75ef1\\res\\drawable\\notification_bg_low.xml"
-    },
-    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_notification_bg_low.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5088a8fe0394baf9bb584bf677c75ef1\\res\\drawable\\notification_bg_low.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_login_btn_bg_press.xml.flat",
@@ -106,6 +118,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_fastforward.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_vector_refresh.xml.flat",
@@ -122,6 +138,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_small_close.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_small_close.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_search_url_text.xml.flat",
@@ -144,16 +164,36 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
-        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_pause_normal.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_pause_normal.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\animator-v21_design_appbar_state_list_animator.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\animator-v21\\design_appbar_state_list_animator.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_repeat_one.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_pause.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_pause.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_unlock.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\unlock.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_list_longpressed_holo.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_ic_file_download_black_24dp.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\agentweb-3.1.0.aar\\6518aac207c86d96775899ff421521d1\\res\\drawable-xhdpi-v4\\ic_file_download_black_24dp.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
@@ -192,6 +232,10 @@
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\selector_patient_exitlogin_white.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_play_normal.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_play_normal.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_secondary_text_material_light.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\color\\abc_secondary_text_material_light.xml"
     },
@@ -212,24 +256,32 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_adapter_camera.xml.flat",
+        "source": "E:\\BabyLove\\imgPicker\\build\\intermediates\\bundles\\debug\\res\\layout\\adapter_camera.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_btn_default_mtrl_shape.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_adapter_camera.xml.flat",
-        "source": "E:\\BabyLove\\imgPicker\\build\\intermediates\\bundles\\debug\\res\\layout\\adapter_camera.xml"
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_share_normal.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\share_normal.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_notification_bg.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5088a8fe0394baf9bb584bf677c75ef1\\res\\drawable\\notification_bg.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_list_pressed_holo_light.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
-        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_previous.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_previous.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_ic_clear_material.xml.flat",
@@ -256,12 +308,12 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_cab_background_internal_bg.xml"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
-        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_rotate_anim.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\pageloader-0.0.2.aar\\280adb964ec51f5980e7170aadd92dd1\\res\\anim\\rotate_anim.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
@@ -276,12 +328,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5088a8fe0394baf9bb584bf677c75ef1\\res\\layout-v21\\notification_template_custom_big.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_ic_file_download_black_24dp.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\agentweb-3.1.0.aar\\6518aac207c86d96775899ff421521d1\\res\\drawable-xxxhdpi-v4\\ic_file_download_black_24dp.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_list_pressed_holo_light.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_tint_default.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\color\\abc_tint_default.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_play.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_play.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_selector_grid_camera_bg.xml.flat",
@@ -298,6 +358,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_color_third.xml.flat",
+        "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\color_third.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-xhdpi-v4_head_img.png.flat",
@@ -320,8 +384,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_previous.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_previous.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_textfield_search_material.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_pause_pressed.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_pause_pressed.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_previous.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_previous.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_design_ic_visibility_off.png.flat",
@@ -348,6 +424,10 @@
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\push_scale_top_out.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_pause.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_pause.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
@@ -360,20 +440,32 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_video_layout_normal.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\layout\\video_layout_normal.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_design_bottom_sheet_slide_out.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\anim\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_video_progress_dialog.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\layout\\video_progress_dialog.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_screen_toolbar.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ic_star_black_36dp.png.flat",
-        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_ic_star_black_36dp.png"
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_video_layout_custom.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\layout\\video_layout_custom.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_right_mtrl_light.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ic_star_black_36dp.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_notification_bg_low_pressed.9.png.flat",
@@ -386,6 +478,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_color_firth.xml.flat",
+        "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\color_firth.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ic_star_black_48dp.png.flat",
@@ -408,20 +504,28 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_vector_arrow.xml.flat",
-        "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\vector_arrow.xml"
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_message_tip_bg.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\message_tip_bg.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21_avd_hide_password.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\drawable-v21\\avd_hide_password.xml"
     },
     {
-        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_abc_slide_in_top.xml.flat",
-        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\anim\\abc_slide_in_top.xml"
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_vector_arrow.xml.flat",
+        "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\vector_arrow.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_abc_slide_in_top.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\anim\\abc_slide_in_top.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_repeat_off.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_repeat_off.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_list_focused_holo.9.png.flat",
@@ -448,8 +552,16 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_repeat_off.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_pause.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_pause.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_select_dialog_item_bg_buttom.xml.flat",
@@ -482,6 +594,14 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_divider_bg.xml.flat",
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\divider_bg.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_pause.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_pause.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_lock.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\lock.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
@@ -576,6 +696,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_play.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_play.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_ic_not_found.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\pageloader-0.0.2.aar\\280adb964ec51f5980e7170aadd92dd1\\res\\drawable\\ic_not_found.xml"
     },
@@ -592,8 +716,16 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_seek_thumb_pressed.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_seek_thumb_pressed.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxxhdpi-v4\\abc_ic_star_half_black_36dp.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_click_error_selector.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_click_error_selector.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
@@ -612,8 +744,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_shuffle.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_shuffle.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_progress.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_progress.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_ic_file_download_black_24dp.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\agentweb-3.1.0.aar\\6518aac207c86d96775899ff421521d1\\res\\drawable-anydpi-v21\\ic_file_download_black_24dp.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_anim_slide_left_in.xml.flat",
@@ -622,6 +766,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_btn_check_material.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_repeat_off.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_select_dialog_item_material.xml.flat",
@@ -638,6 +786,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_ic_voice_search_api_material.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_ic_voice_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_rewind.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_rewind.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_design_ic_visibility.png.flat",
@@ -700,6 +852,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_repeat_one.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_design_navigation_menu.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\layout\\design_navigation_menu.xml"
     },
@@ -732,6 +888,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_rewind.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_rewind.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21_abc_btn_colored_material.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-v21\\abc_btn_colored_material.xml"
     },
@@ -744,8 +904,20 @@
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\push_scale_top_in.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_next.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_next.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_action_menu_layout.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_click_play_selector.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_click_play_selector.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_ic_file_download_black_24dp.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\agentweb-3.1.0.aar\\6518aac207c86d96775899ff421521d1\\res\\drawable-hdpi-v4\\ic_file_download_black_24dp.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_select_color.xml.flat",
@@ -772,6 +944,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_share_pressed.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\share_pressed.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },
@@ -796,6 +972,14 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_fastforward.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_fastforward.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_shuffle.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_shuffle.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_tooltip_frame_light.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\tooltip_frame_light.xml"
     },
@@ -808,8 +992,16 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_list_focused_holo.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_seek_thumb_normal.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_seek_thumb_normal.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_design_bottom_navigation_item_background.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\drawable\\design_bottom_navigation_item_background.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_play.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_play.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21_design_password_eye.xml.flat",
@@ -834,6 +1026,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_fragment_head.xml.flat",
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_head.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_previous.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_previous.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_template_lines_media.xml.flat",
@@ -896,6 +1092,10 @@
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\selector_exit_button.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_repeat_one.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
@@ -910,6 +1110,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_load_dialog_bg.xml.flat",
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_load_dialog_bg.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_next.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_next.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_notification_bg_low_normal.9.png.flat",
@@ -948,6 +1152,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5088a8fe0394baf9bb584bf677c75ef1\\res\\drawable-xhdpi-v4\\notification_bg_low_pressed.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_video_brightness.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\layout\\video_brightness.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_design_ic_visibility.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\drawable-xxhdpi-v4\\design_ic_visibility.png"
     },
@@ -964,8 +1172,16 @@
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_dialog_top_bg.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_video_layout_sample_ad.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\layout\\video_layout_sample_ad.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_shuffle.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_shuffle.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_search_dropdown_item_icons_2line.xml.flat",
@@ -996,6 +1212,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\anim\\tooltip_exit.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_next.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_next.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_abc_fade_in.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\anim\\abc_fade_in.xml"
     },
@@ -1012,12 +1232,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_exo_simple_player_view.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\layout\\exo_simple_player_view.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_color_second.xml.flat",
+        "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\color_second.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_selector_patient_white.xml.flat",
@@ -1040,6 +1268,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\anim\\design_snackbar_in.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_repeat_one.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_repeat_one.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxxhdpi-v4\\abc_text_select_handle_right_mtrl_light.png"
     },
@@ -1060,6 +1292,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\drawable-anydpi-v21\\design_ic_visibility_off.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_exo_playback_control_view.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\layout\\exo_playback_control_view.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_action_mode_bar.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_action_mode_bar.xml"
     },
@@ -1070,6 +1306,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_jump_btn_bg.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_jump_btn_bg.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_activity_chooser_view.xml.flat",
@@ -1112,12 +1352,20 @@
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_exit_comment.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_error_normal.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_error_normal.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_ratingbar_material.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_ratingbar_material.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape_patient_btn_bg_normal.xml.flat",
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape_patient_btn_bg_normal.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_rewind.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_rewind.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
@@ -1128,12 +1376,28 @@
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\push_scale_left_out.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_video_layout_standard.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\layout\\video_layout_standard.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_back.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_back.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_edit_mode_logo.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_action_menu_item_layout.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_loading_progress.gif.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\loading_progress.gif"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
@@ -1144,8 +1408,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_list_pressed_holo_light.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_repeat_off.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_text_cursor_material.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_fastforward.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_fastforward.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_play_pressed.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_play_pressed.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_select_dialog_multichoice_material.xml.flat",
@@ -1162,6 +1438,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23_abc_btn_colored_text_material.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\color-v23\\abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_dialog_progress.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_dialog_progress.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_activity_head.xml.flat",
@@ -1234,6 +1514,14 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_next.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_next.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_agentweb_error_page.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\agentweb-3.1.0.aar\\6518aac207c86d96775899ff421521d1\\res\\layout\\agentweb_error_page.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
@@ -1328,6 +1616,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\3220cd2c8bc29d51033f2b92caf1199e\\res\\layout\\notification_template_big_media_custom.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_edit_mode_logo.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_template_big_media_narrow_custom.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\3220cd2c8bc29d51033f2b92caf1199e\\res\\layout\\notification_template_big_media_narrow_custom.xml"
     },
@@ -1350,6 +1642,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_ic_file_download_black_24dp.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\agentweb-3.1.0.aar\\6518aac207c86d96775899ff421521d1\\res\\drawable-xxhdpi-v4\\ic_file_download_black_24dp.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_ic_star_half_black_36dp.png.flat",
@@ -1380,6 +1676,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_alert_dialog_title_material.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_shuffle.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_shuffle.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_text_select_handle_right_mtrl_light.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_text_select_handle_right_mtrl_light.png"
     },
@@ -1404,6 +1704,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_ic_search_api_material.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_repeat_all.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-xxhdpi-v4_checkbox_normal.png.flat",
         "source": "E:\\BabyLove\\imgPicker\\build\\intermediates\\bundles\\debug\\res\\mipmap-xxhdpi-v4\\checkbox_normal.png"
     },
@@ -1414,6 +1718,18 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_activity_chooser_view_list_item.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_edit_mode_logo.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_edit_mode_logo.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_repeat_all.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_play.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_play.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_push_scale_left_in.xml.flat",
@@ -1444,8 +1760,16 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_text_select_handle_middle_mtrl_light.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_edit_mode_logo.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_list_menu_item_layout.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_loading_bg.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_loading_bg.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_primary_text_disable_only_material_light.xml.flat",
@@ -1464,8 +1788,16 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_ratingbar_small_material.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_next.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_next.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_screen_simple_overlay_action_mode.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_repeat_all.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_switch_thumb_material_dark.xml.flat",
@@ -1496,6 +1828,14 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\layout\\design_navigation_item.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_pause.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_pause.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_repeat_off.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_design_fab_background.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\drawable\\design_fab_background.xml"
     },
@@ -1520,12 +1860,28 @@
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\selector_btn_leftbottom_radian.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_color_list.xml.flat",
+        "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\color_list.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_exo_controls_repeat_all.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-anydpi-v21\\exo_controls_repeat_all.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_ic_star_half_black_36dp.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_ic_star_half_black_36dp.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_ic_file_download_black_24dp.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\agentweb-3.1.0.aar\\6518aac207c86d96775899ff421521d1\\res\\drawable-ldpi-v4\\ic_file_download_black_24dp.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_edit_mode_logo.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_list_menu_item_checkbox.xml.flat",
@@ -1564,6 +1920,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_ic_star_black_48dp.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_error_pressed.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_error_pressed.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_dialog_warning_comment.xml.flat",
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_warning_comment.xml"
     },
@@ -1600,8 +1960,16 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5088a8fe0394baf9bb584bf677c75ef1\\res\\drawable-xhdpi-v4\\notification_bg_low_normal.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_dialog_progress_bg.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_dialog_progress_bg.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\mipmap-xhdpi-v4_back.png.flat",
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\mipmap-xhdpi-v4\\back.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_rewind.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_rewind.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_primary_text_material_dark.xml.flat",
@@ -1620,12 +1988,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_backward_icon.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_backward_icon.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_include_viewpager.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\convenientbanner-2.0.5.aar\\739557ca3eea83e7b61d224e38954d8a\\res\\layout\\include_viewpager.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_menu_hardkey_panel_mtrl_mult.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_seek_thumb.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_seek_thumb.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_abc_ratingbar_indicator_material.xml.flat",
@@ -1660,8 +2036,16 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_list_menu_item_icon.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_volume_progress_bg.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_volume_progress_bg.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_design_snackbar_background.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\drawable\\design_snackbar_background.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml_web_files_paths.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\agentweb-3.1.0.aar\\6518aac207c86d96775899ff421521d1\\res\\xml\\web_files_paths.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
@@ -1672,8 +2056,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\anim\\design_bottom_sheet_slide_in.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_play.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_play.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_previous.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_previous.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_ic_star_black_16dp.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_brightness_6_white_36dp.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_brightness_6_white_36dp.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_text_select_handle_middle_mtrl_light.png.flat",
@@ -1684,8 +2080,16 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_btn_radio_material.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_loading.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_loading.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shape.xml.flat",
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\shape.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xhdpi-v4\\exo_controls_fastforward.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_select_dialog_material.xml.flat",
@@ -1702,6 +2106,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_design_ic_visibility_off.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\drawable-xhdpi-v4\\design_ic_visibility_off.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_video_layout_ad.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\layout\\video_layout_ad.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_alert_dialog_material.xml.flat",
@@ -1728,12 +2136,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable\\abc_seekbar_tick_mark_material.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_repeat_all.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-ldrtl-xxxhdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_click_pause_selector.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_click_pause_selector.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_action_mode_close_item_material.xml.flat",
@@ -1764,16 +2180,40 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\color-v23\\abc_tint_switch_track.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_video_title_bg.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\video_title_bg.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldrtl-xxhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-ldrtl-xxhdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_next.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_next.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_notification_action_tombstone.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5088a8fe0394baf9bb584bf677c75ef1\\res\\layout\\notification_action_tombstone.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_repeat_one.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_pause.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_pause.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_anim_slide_left_out.xml.flat",
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\anim_slide_left_out.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_rewind.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_rewind.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_color_first.xml.flat",
+        "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\color_first.xml"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
@@ -1788,8 +2228,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\color\\design_error.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_repeat_off.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_previous.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_previous.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23_design_tint_password_toggle.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b2cee0eb6605e319714ac4b6925837c5\\res\\color-v23\\design_tint_password_toggle.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_fastforward.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-anydpi-v21_design_ic_visibility.xml.flat",
@@ -1832,8 +2284,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_controls_shuffle.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_controls_shuffle.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_abc_list_menu_item_radio.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-mdpi-v4\\exo_edit_mode_logo.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxxhdpi-v4\\exo_edit_mode_logo.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-v21_abc_action_bar_item_background_material.xml.flat",
@@ -1850,6 +2314,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color_abc_hint_foreground_material_light.xml.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\color\\abc_hint_foreground_material_light.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_volume_icon.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_volume_icon.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
@@ -1920,6 +2388,10 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\anim\\abc_fade_out.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_forward_icon.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_forward_icon.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxxhdpi-v4\\abc_ic_star_black_36dp.png"
     },
@@ -1956,8 +2428,20 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_exo_controls_shuffle.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-xxhdpi-v4\\exo_controls_shuffle.png"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-mdpi-v4\\abc_text_select_handle_right_mtrl_dark.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-ldpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-ldpi-v4\\exo_controls_repeat_one.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_fastforward.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v26_abc_screen_toolbar.xml.flat",
@@ -1968,8 +2452,16 @@
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5088a8fe0394baf9bb584bf677c75ef1\\res\\layout-v21\\notification_action_tombstone.xml"
     },
     {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_empty_drawable.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable\\empty_drawable.xml"
+    },
+    {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim_anim_slide_right_in.xml.flat",
         "source": "E:\\BabyLove\\baselibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\anim_slide_right_in.xml"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4_ic_file_download_black_24dp.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\agentweb-3.1.0.aar\\6518aac207c86d96775899ff421521d1\\res\\drawable-mdpi-v4\\ic_file_download_black_24dp.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_select_dialog_singlechoice_material.xml.flat",
@@ -1986,6 +2478,14 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-xxhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_enlarge.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_enlarge.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_exo_controls_rewind.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\exoplayer-ui-2.6.1.aar\\165c35954d02f66f786dfc40a76e6dd7\\res\\drawable-hdpi-v4\\exo_controls_rewind.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
@@ -2006,6 +2506,10 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\5088a8fe0394baf9bb584bf677c75ef1\\res\\drawable-hdpi-v4\\notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4_video_shrink.png.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\drawable-xxhdpi-v4\\video_shrink.png"
     },
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_design_ic_visibility.png.flat",
@@ -2058,5 +2562,9 @@
     {
         "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4_abc_list_focused_holo.9.png.flat",
         "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\2301e3c91951de25e4045eb765853504\\res\\drawable-hdpi-v4\\abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "E:\\BabyLove\\imgPicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout_video_volume_dialog.xml.flat",
+        "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\gsyVideoPlayer-java-4.1.0.aar\\973fbc63d27ad3525940adf61b30b399\\res\\layout\\video_volume_dialog.xml"
     }
 ]
