@@ -104,6 +104,8 @@
         <activity
                 android:name=".MainActivity"/>
         <activity
+                android:name=".example.Camera2Activity"/>
+        <activity
                 android:name=".activity.DialActivity"/>
         <activity
                 android:name=".activity.AnimationActivity"/>

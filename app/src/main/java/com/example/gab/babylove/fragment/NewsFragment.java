@@ -18,6 +18,7 @@ import com.example.gab.babylove.activity.GSYVideoPlayerActivity;
 import com.example.gab.babylove.activity.RecyclerviewActivity;
 import com.example.gab.babylove.activity.TraceListActivity;
 import com.example.gab.babylove.activity.WebViewActivity;
+import com.example.gab.babylove.example.Camera2Activity;
 import com.example.gab.babylove.widget.StateButton;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
@@ -100,8 +101,8 @@ public class NewsFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace, R.id.bt_recycleview, R.id.text_webView, R.id.abo_Advice, R.id.dash_test, R.id.stroke_test
-            , R.id.stroke_background_test})
+    @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace, R.id.bt_recycleview, R.id.text_webView, R.id.abo_Advice, R.id.dash_test, R.id.stroke_test,
+            R.id.different_radius_test, R.id.stroke_background_test})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -138,7 +139,8 @@ public class NewsFragment extends BaseFragment {
 //                break;
             //空
             case R.id.different_radius_test:
-                JumpUtils.jump(mContext, CalendarViewActivity.class, null);
+//                JumpUtils.jump(mContext, CalendarViewActivity.class, null);
+                JumpUtils.jump(mContext, Camera2Activity.class, null);
                 break;
             // AgentWeb 封装
             case R.id.dash_test:
