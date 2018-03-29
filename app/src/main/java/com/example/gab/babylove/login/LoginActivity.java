@@ -66,6 +66,12 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.editPass)
     EditText mPassword;
     String user_name, password;
+    protected PermissionChecker permissionChecker;
+    protected static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE
+    };
 
     @Override
     protected void setStatusBarType() {
@@ -81,8 +87,32 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_login);
         super.onCreate(savedInstanceState);
+        permissionChecker = new PermissionChecker(mContext);
+        permissionChecker.setTitle(getString(R.string.check_info_title));
+        permissionChecker.setMessage(getString(R.string.check_info_message));
+        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+            permissionChecker.requestPermissions();
+        }
     }
 
+    /**
+     * 请求权限返回结果
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @android.support.annotation.NonNull String[] permissions, @android.support.annotation.NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PermissionChecker.PERMISSION_REQUEST_CODE:
+                if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
+
+                } else {
+                    permissionChecker.showDialog();
+                }
+                break;
+        }
+    }
     @Override
     protected void init(Bundle savedInstanceState) {
 //        //动态判断权限

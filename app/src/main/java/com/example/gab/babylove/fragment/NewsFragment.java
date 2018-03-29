@@ -11,14 +11,12 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.AgentWebActivity;
-import com.example.gab.babylove.activity.CalendarViewActivity;
 import com.example.gab.babylove.activity.CustomViewActivity;
 import com.example.gab.babylove.activity.FingerprintMainActivity;
 import com.example.gab.babylove.activity.GSYVideoPlayerActivity;
-import com.example.gab.babylove.activity.RecyclerviewActivity;
 import com.example.gab.babylove.activity.TraceListActivity;
 import com.example.gab.babylove.activity.WebViewActivity;
-import com.example.gab.babylove.example.Camera2Activity;
+import com.example.gab.babylove.channelmanage.ChannelManageActivity;
 import com.example.gab.babylove.widget.StateButton;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
@@ -111,7 +109,7 @@ public class NewsFragment extends BaseFragment {
                 JumpUtils.jump(mContext, TraceListActivity.class, null);
                 break;
             case R.id.bt_recycleview:
-                JumpUtils.jump(mContext, RecyclerviewActivity.class, null);
+//                JumpUtils.jump(mContext, RecyclerviewActivity.class, null);
                 break;
             case R.id.bt_OnTrace:
                 System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
@@ -130,6 +128,7 @@ public class NewsFragment extends BaseFragment {
                 break;
             case R.id.text_webView:
                 JumpUtils.jump(mContext, WebViewActivity.class, null);
+//                JumpUtils.jump(mContext, StoreWebViewActivity.class, null);
                 break;
             case R.id.abo_Advice: //自定义View相关内容
                 JumpUtils.jump(mContext, CustomViewActivity.class, null);
@@ -140,7 +139,8 @@ public class NewsFragment extends BaseFragment {
             //空
             case R.id.different_radius_test:
 //                JumpUtils.jump(mContext, CalendarViewActivity.class, null);
-                JumpUtils.jump(mContext, Camera2Activity.class, null);
+//                JumpUtils.jump(mContext, Camera2Activity.class, null);
+                JumpUtils.jump(mContext, ChannelManageActivity.class, null);
                 break;
             // AgentWeb 封装
             case R.id.dash_test:

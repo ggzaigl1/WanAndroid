@@ -146,9 +146,13 @@
         </activity>
         <activity
                 android:name=".activity.HomeDataActivity"/>
+        <activity
+                android:name=".activity.CustomViewActivity"/>
+        <activity
+                android:name=".activity.StoreWebViewActivity"/>
         <!-- RecyclerviewActivity -->
         <activity
-                android:name=".activity.RecyclerviewActivity"/>
+                android:name=".channelmanage.ChannelManageActivity"/>
         <!-- 权限相关 -->
         <activity
                 android:name="com.fy.baselibrary.utils.PermissionActivity"

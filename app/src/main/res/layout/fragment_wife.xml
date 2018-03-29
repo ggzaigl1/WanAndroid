@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -44,39 +43,18 @@
             android:padding="10dp"
             android:textColor="@color/myTxtColor"/>
 
-    <TextView
-            android:id="@+id/tv_ss"
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@color/myTxtColor"/>
+            android:layout_height="wrap_content">
 
-    <Button
-            android:id="@+id/bt_Dial"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/bgColor"
-            android:background="@drawable/button_selector"
-            android:text="Dial"/>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvPatientList"
+        <Button
+                android:id="@+id/bt_Dial"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/spacing_small_much"
-                app:layout_type="content"/>
+                android:layout_height="wrap_content"
+                android:textColor="@color/bgColor"
+                android:background="@drawable/button_selector"
+                android:text="Dial"/>
 
-        <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:layout_marginBottom="5dp"
-                android:src="@android:drawable/ic_dialog_email"/>
-    </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>

@@ -1,10 +1,13 @@
 package com.example.gab.babylove.fragment;
 
 import android.annotation.SuppressLint;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -12,22 +15,16 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.DialActivity;
-import com.example.gab.babylove.adapter.ListAdapter;
-import com.example.gab.babylove.widget.FastScrollLinearLayoutManager;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.DeviceUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -47,27 +44,23 @@ public class WifeFragment extends BaseFragment implements View.OnTouchListener {
     View statusView;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
-    @BindView(R.id.rvPatientList)
-    RecyclerView rvPatientList;
     @BindView(R.id.horizontal_view)
     HorizontalScrollView mHorizontalScrollView;
-    @BindView(R.id.tv_ss)
-    TextView mTvSs;
-    @BindView(R.id.flHead)
-    FrameLayout flHead;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
     private GestureDetector mGestureDetector;
     private TranslateAnimation mRigthToLeftAnim;
     private final static float SCOLL_V = 0.1f;
-    ListAdapter adapter;
-    private List<String> dummyData;
+    private int BatteryN;       //目前电量
+    private int BatteryV;       //电池电压
+    private double BatteryT;        //电池温度
+    private String BatteryStatus;   //电池状态
+    private String BatteryTemp;     //电池使用情况
 
     @Override
     protected int getContentLayout() {
         return R.layout.fragment_wife;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     @Override
     protected void baseInit() {
@@ -80,53 +73,69 @@ public class WifeFragment extends BaseFragment implements View.OnTouchListener {
             mRigthToLeftAnim.setDuration((long) ((mHorizontalScrollView.getWidth() + tv_baby.getWidth()) / SCOLL_V));
             tv_baby.startAnimation(mRigthToLeftAnim);
         });
+        mContext.registerReceiver(mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
         tv_Os.setText("手机厂商:" + DeviceUtils.getDeviceMake()
                 + "\n" + "手机型号:" + DeviceUtils.getSystemModel()
                 + "\n" + "Android版本号:" + DeviceUtils.getDeviceVersion()
-                + "\n" + "手机IMEI:" + DeviceUtils.getIMEI(mContext));
+                + "\n" + "手机IMEI:" + DeviceUtils.getIMEI(mContext)
+                + "\n" + "目前电量为" + BatteryN + "% --- " + BatteryStatus
+                + "\n" + "电压为" + BatteryV + "mV --- " + BatteryTemp
+                + "\n" + "温度为" + (BatteryT * 0.1) + "℃");
         MdStatusBarCompat.setStatusView(mContext, statusView);
         mGestureDetector = new GestureDetector(new gestureListener()); //使用派生自OnGestureListener
-        mGestureDetector.setOnDoubleTapListener(new doubleTapListener());
-        flHead.setOnTouchListener(this);
-        flHead.setFocusable(true);
-        flHead.setClickable(true);
-        flHead.setLongClickable(true);
-        setDummyData();
-        GetRecordData();
-
     }
 
+    /* 创建广播接收器 */
+    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            /*
+             * 如果捕捉到的action是ACTION_BATTERY_CHANGED， 就运行onBatteryInfoReceiver()
+             */
+            if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
+                BatteryN = intent.getIntExtra("level", 0);    //目前电量
+                BatteryV = intent.getIntExtra("voltage", 0);  //电池电压
+                BatteryT = intent.getIntExtra("temperature", 0);  //电池温度
 
-    private void GetRecordData() {
-        LinearLayoutManager manager = new FastScrollLinearLayoutManager(mContext);
-        rvPatientList.setLayoutManager(manager);
-        adapter = new ListAdapter(mContext, dummyData);
-        rvPatientList.setNestedScrollingEnabled(false);
-        rvPatientList.setAdapter(adapter);
-//        rvPatientList.addOnScrollListener(new MyRecyclerViewScrollListener());
-    }
-
-    //滑动监听
-    private class MyRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-            LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
-            int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
-            //当不滚动时
-            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                //  判断是否滚动超过一屏
-                if (firstVisibleItemPosition == 0) {
-                    fab.setVisibility(View.INVISIBLE);
-                } else {
-                    fab.setVisibility(View.VISIBLE);
+                switch (intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN)) {
+                    case BatteryManager.BATTERY_STATUS_CHARGING:
+                        BatteryStatus = "充电状态";
+                        break;
+                    case BatteryManager.BATTERY_STATUS_DISCHARGING:
+                        BatteryStatus = "放电状态";
+                        break;
+                    case BatteryManager.BATTERY_STATUS_NOT_CHARGING:
+                        BatteryStatus = "未充电";
+                        break;
+                    case BatteryManager.BATTERY_STATUS_FULL:
+                        BatteryStatus = "充满电";
+                        break;
+                    case BatteryManager.BATTERY_STATUS_UNKNOWN:
+                        BatteryStatus = "未知道状态";
+                        break;
                 }
 
-            } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {//拖动中
-                fab.setVisibility(View.INVISIBLE);
+                switch (intent.getIntExtra("health", BatteryManager.BATTERY_HEALTH_UNKNOWN)) {
+                    case BatteryManager.BATTERY_HEALTH_UNKNOWN:
+                        BatteryTemp = "未知错误";
+                        break;
+                    case BatteryManager.BATTERY_HEALTH_GOOD:
+                        BatteryTemp = "状态良好";
+                        break;
+                    case BatteryManager.BATTERY_HEALTH_DEAD:
+                        BatteryTemp = "电池没有电";
+                        break;
+                    case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
+                        BatteryTemp = "电池电压过高";
+                        break;
+                    case BatteryManager.BATTERY_HEALTH_OVERHEAT:
+                        BatteryTemp = "电池过热";
+                        break;
+                }
             }
         }
-    }
+    };
 
     @OnClick({R.id.bt_Dial})
     @Override
@@ -135,13 +144,6 @@ public class WifeFragment extends BaseFragment implements View.OnTouchListener {
             case R.id.bt_Dial://头部左边按钮
                 JumpUtils.jump(mContext, DialActivity.class, null);
                 break;
-        }
-    }
-
-    private void setDummyData() {
-        dummyData = new ArrayList();
-        for (int i = 0; i < 55; i++) {
-            dummyData.add("");
         }
     }
 
@@ -191,26 +193,4 @@ public class WifeFragment extends BaseFragment implements View.OnTouchListener {
         }
     }
 
-    //OnDoubleTapListener监听
-    private class doubleTapListener implements GestureDetector.OnDoubleTapListener {
-
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            Log.i("MyGesture", "onSingleTapConfirmed");
-            T.showShort("onSingleTapConfirmed");
-            return true;
-        }
-
-        public boolean onDoubleTap(MotionEvent e) {
-            Log.i("MyGesture", "onDoubleTap");
-            T.showShort("onDoubleTap");
-            return true;
-        }
-
-        public boolean onDoubleTapEvent(MotionEvent e) {
-            Log.i("MyGesture", "onDoubleTapEvent");
-            T.showShort("onDoubleTapEvent");
-            rvPatientList.smoothScrollToPosition(0);
-            return true;
-        }
-    }
 }
