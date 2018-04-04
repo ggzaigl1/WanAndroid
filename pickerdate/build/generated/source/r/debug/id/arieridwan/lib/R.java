@@ -761,10 +761,10 @@ public final class R {
         public static int abc_shareactionprovider_share_with_application = 0x7f15001e;
         public static int abc_toolbar_collapse_description = 0x7f15001f;
         public static int app_name = 0x7f150024;
-        public static int error_image_fail = 0x7f150033;
-        public static int error_text = 0x7f150034;
-        public static int loading_image_fail = 0x7f150058;
-        public static int loading_text = 0x7f15005c;
+        public static int error_image_fail = 0x7f150032;
+        public static int error_text = 0x7f150033;
+        public static int loading_image_fail = 0x7f150057;
+        public static int loading_text = 0x7f15005b;
         public static int search_menu_title = 0x7f150089;
         public static int status_bar_notification_info_overflow = 0x7f15008c;
     }

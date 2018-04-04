@@ -63,7 +63,6 @@ dependencies {
     compile 'id.arieridwan:pageloader:0.0.2'
     compile 'com.getkeepsafe.taptargetview:taptargetview:1.11.0'
     compile 'com.just.agentweb:agentweb:3.1.0'
-    compile 'com.werb.permissionschecker:permissionschecker:0.0.1-beta2'
 
     compile 'com.shuyu:GSYVideoPlayer:4.1.0'
 }

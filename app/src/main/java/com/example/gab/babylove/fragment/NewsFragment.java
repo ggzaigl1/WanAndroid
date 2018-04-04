@@ -11,11 +11,13 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.AgentWebActivity;
+import com.example.gab.babylove.activity.AnimationAudioActivity;
 import com.example.gab.babylove.activity.CustomViewActivity;
 import com.example.gab.babylove.activity.FingerprintMainActivity;
 import com.example.gab.babylove.activity.GSYVideoPlayerActivity;
 import com.example.gab.babylove.activity.TraceListActivity;
 import com.example.gab.babylove.activity.WebViewActivity;
+import com.example.gab.babylove.animation.AnimationActivity;
 import com.example.gab.babylove.channelmanage.ChannelManageActivity;
 import com.example.gab.babylove.widget.StateButton;
 import com.fy.baselibrary.base.BaseFragment;
@@ -70,37 +72,37 @@ public class NewsFragment extends BaseFragment {
         //设置四个角不同的圆角
         radius.setRadius(new float[]{0, 0, 20, 20, 40, 40, 60, 60});
 
-        TapTargetView.showFor(mContext, TapTarget.forView(mRootView.findViewById(R.id.bt_OnTraceList), "This is a target", "We have the best targets, believe me")
-                        // All options below are optional
-                        .outerCircleColor(R.color.red)      // Specify a color for the outer circle
-                        .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
-                        .targetCircleColor(R.color.white)   // Specify a color for the target circle
-                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
-                        .titleTextColor(R.color.white)      // Specify the color of the title text
-                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
-                        .descriptionTextColor(R.color.red)  // Specify the color of the description text
-                        .textColor(R.color.blue)            // Specify a color for both the title and description text
-                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
-                        .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
-                        .drawShadow(true)                   // Whether to draw a drop shadow or not
-                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-                        .tintTarget(true)                   // Whether to tint the target view's color
-                        .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
-                        .icon(ContextCompat.getDrawable(mContext, R.mipmap.back))// Specify a custom drawable to draw as the target
-                        .targetRadius(60),                  // Specify the target radius (in dp)
-                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
-                    @Override
-                    public void onTargetClick(TapTargetView view) {
-                        super.onTargetClick(view);
-                        // This call is optional
-                        T.showShort("看");
-                    }
-                });
+//        TapTargetView.showFor(mContext, TapTarget.forView(mRootView.findViewById(R.id.bt_OnTraceList), "This is a target", "We have the best targets, believe me")
+//                        // All options below are optional
+//                        .outerCircleColor(R.color.red)      // Specify a color for the outer circle
+//                        .outerCircleAlpha(0.96f)            // Specify the alpha amount for the outer circle
+//                        .targetCircleColor(R.color.white)   // Specify a color for the target circle
+//                        .titleTextSize(20)                  // Specify the size (in sp) of the title text
+//                        .titleTextColor(R.color.white)      // Specify the color of the title text
+//                        .descriptionTextSize(10)            // Specify the size (in sp) of the description text
+//                        .descriptionTextColor(R.color.red)  // Specify the color of the description text
+//                        .textColor(R.color.blue)            // Specify a color for both the title and description text
+//                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+//                        .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+//                        .drawShadow(true)                   // Whether to draw a drop shadow or not
+//                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+//                        .tintTarget(true)                   // Whether to tint the target view's color
+//                        .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
+//                        .icon(ContextCompat.getDrawable(mContext, R.mipmap.back))// Specify a custom drawable to draw as the target
+//                        .targetRadius(60),                  // Specify the target radius (in dp)
+//                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+//                    @Override
+//                    public void onTargetClick(TapTargetView view) {
+//                        super.onTargetClick(view);
+//                        // This call is optional
+//                        T.showShort("看");
+//                    }
+//                });
 
     }
 
     @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace, R.id.bt_recycleview, R.id.text_webView, R.id.abo_Advice, R.id.dash_test, R.id.stroke_test,
-            R.id.different_radius_test, R.id.stroke_background_test})
+            R.id.different_radius_test, R.id.stroke_background_test, R.id.animation})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -148,14 +150,13 @@ public class NewsFragment extends BaseFragment {
                 break;
             //指纹相关
             case R.id.stroke_test:
-                if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-                    permissionChecker.requestPermissions();
-                } else {
-                    JumpUtils.jump(mContext, FingerprintMainActivity.class, null);
-                }
+                JumpUtils.jump(mContext, FingerprintMainActivity.class, null);
                 break;
             case R.id.stroke_background_test:
                 JumpUtils.jump(mContext, GSYVideoPlayerActivity.class, null);
+                break;
+            case R.id.animation:
+                JumpUtils.jump(mContext, AnimationActivity.class, null);
                 break;
         }
     }
@@ -168,5 +169,9 @@ public class NewsFragment extends BaseFragment {
             bt_OnTrace.setVisibility(View.VISIBLE);
         }
     }
-
+    /**
+     * 看着相册里面的旧照片,仿佛就像是昨天经历过一样,一些场景历历在目,人总是喜欢念旧,但是却又向往美好的生活,但是当不经意的翻到那些旧照片的时候,心里总还是会有一些莫名的忧伤.
+     * 离开故乡算算也有9年的时间了,除了节假日能够回去外,基本上都呆在外地了.很奇怪的是,离开故乡的时候总是会想念故乡的种种美好,怀念着一切.但是,当人站在故乡的土地上时,却又厌倦这里的一点一滴.
+     *
+     */
 }

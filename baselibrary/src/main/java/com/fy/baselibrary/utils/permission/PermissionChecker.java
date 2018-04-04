@@ -9,7 +9,7 @@ import android.support.v4.app.ActivityCompat;
  * Created by 初夏小溪 on 2018/3/26 0026.
  */
 
-public class PermissionChecker  {
+public class PermissionChecker {
 
     public static final int PERMISSION_REQUEST_CODE = 0;
     private String[] permissions;
@@ -31,11 +31,11 @@ public class PermissionChecker  {
         ActivityCompat.requestPermissions(activity, permissions, PERMISSION_REQUEST_CODE);
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         dialog.setTitle(title);
     }
 
-    public void setMessage(String message){
+    public void setMessage(String message) {
         dialog.setMessage(message);
     }
 
@@ -48,7 +48,7 @@ public class PermissionChecker  {
         return true;
     }
 
-    public void showDialog(){
+    public void showDialog() {
         dialog.init();
         dialog.show();
     }

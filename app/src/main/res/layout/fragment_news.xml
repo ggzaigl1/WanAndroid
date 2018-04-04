@@ -196,13 +196,13 @@
                     app:pressedTextColor="@android:color/white"/>
 
             <com.example.gab.babylove.widget.StateButton
-                    android:id="@+id/stroke_background_test2"
+                    android:id="@+id/animation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="10dp"
                     android:padding="10dp"
-                    android:text="stroke_background"
+                    android:text="Animation"
                     app:radius="5dp"
                     app:normalStrokeColor="@android:color/white"
                     app:normalStrokeWidth="2dp"

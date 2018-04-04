@@ -2,11 +2,9 @@ package com.example.gab.babylove.login;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -19,8 +17,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.widget.AppLoading;
@@ -29,27 +28,21 @@ import com.fy.baselibrary.entity.LoginBean;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.NetRequest;
 import com.fy.baselibrary.retrofit.RxHelper;
-import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
-import com.fy.baselibrary.utils.PermissionActivity;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.TransfmtUtils;
-import com.werb.permissionschecker.PermissionChecker;
+import com.fy.baselibrary.utils.permission.PermissionChecker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * 登录
@@ -90,13 +83,38 @@ public class LoginActivity extends BaseActivity {
         permissionChecker = new PermissionChecker(mContext);
         permissionChecker.setTitle(getString(R.string.check_info_title));
         permissionChecker.setMessage(getString(R.string.check_info_message));
+        if (!permissionChecker.isLackPermissions(PERMISSIONS)) {
+        } else {
+            new MaterialDialog.Builder(this).title("需要获取以下权限")
+                    .content("通过相机权限和电话权限来进行拍照和确定本机设备ID,已保证为您个性化推荐内容;")
+                    .positiveText(R.string.next).onPositive(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    onPermission();
+                }
+            }).show();
+        }
+    }
+
+    /**
+     * 检查权限
+     */
+    private void onPermission() {
         if (permissionChecker.isLackPermissions(PERMISSIONS)) {
             permissionChecker.requestPermissions();
         }
     }
 
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        onPermission();
+    }
+
     /**
      * 请求权限返回结果
+     *
      * @param requestCode
      * @param permissions
      * @param grantResults
@@ -105,14 +123,16 @@ public class LoginActivity extends BaseActivity {
     public void onRequestPermissionsResult(int requestCode, @android.support.annotation.NonNull String[] permissions, @android.support.annotation.NonNull int[] grantResults) {
         switch (requestCode) {
             case PermissionChecker.PERMISSION_REQUEST_CODE:
+                //权限获取成功
                 if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
-
                 } else {
+                    //权限获取失败
                     permissionChecker.showDialog();
                 }
                 break;
         }
     }
+
     @Override
     protected void init(Bundle savedInstanceState) {
 //        //动态判断权限
@@ -153,7 +173,7 @@ public class LoginActivity extends BaseActivity {
 //        }
 //    }
 
-    @OnClick({R.id.tvLogin})
+    @OnClick({R.id.tvLogin, R.id.tvLoginTitle})
     @Override
     public void onClick(View view) {
         super.onClick(view);
@@ -164,6 +184,23 @@ public class LoginActivity extends BaseActivity {
 //                user_name = mUserNameEdt.getText().toString().trim();
 //                password = mPassword.getText().toString().trim();
 //                runLogin(user_name, password);
+                break;
+            case R.id.tvLoginTitle:
+                new MaterialDialog.Builder(this).title("需要获取以下权限").content("通过相机权限和电话权限来进行拍照和确定本机设备ID,已保证为您个性化推荐内容;")
+                        .positiveText("下一步").onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        permissionChecker = new PermissionChecker(mContext);
+                        permissionChecker.setTitle(getString(R.string.check_info_title));
+                        permissionChecker.setMessage(getString(R.string.check_info_message));
+                        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+                            permissionChecker.requestPermissions();
+                        } else {
+                            android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
+                            System.exit(0);
+                        }
+                    }
+                }).show();
                 break;
         }
     }

@@ -4,16 +4,6 @@
             "outputFile": "E:\\BabyLove\\pickerdate\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-en\\values-en.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\55204\\.gradle\\caches\\transforms-1\\files-1.1\\permissionschecker-0.0.1-beta2.aar\\cfd31a67e9f39e069c9ec05baaf65118\\res\\values-en\\values-en.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,106,261,316",
-                        "endColumns": "50,154,54,60",
-                        "endOffsets": "101,256,311,372"
-                    }
-                },
-                {
                     "source": "E:\\BabyLove\\pickerdate\\build\\intermediates\\bundles\\debug\\res\\values-en\\values-en.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
@@ -21,13 +11,6 @@
                         "startOffsets": "55,108,153,200,249,296,345,399",
                         "endColumns": "52,44,46,48,46,48,53,45",
                         "endOffsets": "103,148,195,244,291,340,394,440"
-                    },
-                    "to": {
-                        "startLines": "6,7,8,9,10,11,12,13",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "377,430,475,522,571,618,667,721",
-                        "endColumns": "52,44,46,48,46,48,53,45",
-                        "endOffsets": "425,470,517,566,613,662,716,762"
                     }
                 }
             ]

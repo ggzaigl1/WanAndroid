@@ -1,6 +1,7 @@
 package com.fy.baselibrary.utils.permission;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
@@ -11,10 +12,9 @@ import com.fy.baselibrary.R;
 
 /**
  * Created by 初夏小溪 on 2018/3/26 0026.
- *
  */
 
-public class PermissionDialog  {
+public class PermissionDialog {
 
     private AlertDialog.Builder builder;
     private Activity activity;
@@ -51,11 +51,23 @@ public class PermissionDialog  {
     }
 
     public void init() {
-        builder = new AlertDialog.Builder(activity);
-        builder.setTitle(getTitle());
-        builder.setMessage(getMessage());
-        builder.setNegativeButton(activity.getString(R.string.cancel),null)
-                .setPositiveButton(activity.getString(R.string.check_info_setting), (dialog, which) -> startAppSettings());
+        builder = new AlertDialog.Builder(activity)
+                .setTitle(getTitle())
+                .setMessage(getMessage())
+                .setCancelable(false)
+                .setNegativeButton(activity.getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
+                        System.exit(0);
+                    }
+                })
+                .setPositiveButton(activity.getString(R.string.check_info_setting), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PermissionDialog.this.startAppSettings();
+                    }
+                });
     }
 
     public void show() {

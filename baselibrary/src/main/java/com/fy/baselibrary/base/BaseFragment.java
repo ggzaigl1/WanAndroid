@@ -16,7 +16,7 @@ import com.fy.baselibrary.retrofit.ApiService;
 import com.fy.baselibrary.retrofit.DaggerRequestComponent;
 import com.fy.baselibrary.retrofit.RequestComponent;
 import com.fy.baselibrary.utils.cache.ACache;
-import com.werb.permissionschecker.PermissionChecker;
+import com.fy.baselibrary.utils.permission.PermissionChecker;
 
 import javax.inject.Inject;
 
@@ -35,11 +35,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     protected View mRootView;
     protected Unbinder unbinder;
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
-    public PermissionChecker permissionChecker;
-    public static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-    };
 
     @Inject
     protected ApiService mConnService;
@@ -81,12 +76,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
     protected void baseInitView() {
-        permissionChecker = new PermissionChecker(mContext);
-        permissionChecker.setTitle(getString(R.string.check_info_title));
-        permissionChecker.setMessage(getString(R.string.check_info_message));
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            permissionChecker.requestPermissions();
-        }
     }
 
     protected void baseInit() {
@@ -99,24 +88,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         super.onDestroy();
         if (null != unbinder){
             unbinder.unbind();
-        }
-    }
-    /**
-     * 需要权限获取返回结果
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @android.support.annotation.NonNull String[] permissions, @android.support.annotation.NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PermissionChecker.PERMISSION_REQUEST_CODE:
-                if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
-
-                } else {
-                    permissionChecker.showDialog();
-                }
-                break;
         }
     }
     //Fragment生命周期管理

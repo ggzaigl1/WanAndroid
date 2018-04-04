@@ -18,8 +18,8 @@
     <uses-permission android:name="android.permission.READ_LOGS"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
@@ -108,7 +108,7 @@
         <activity
                 android:name=".activity.DialActivity"/>
         <activity
-                android:name=".activity.AnimationActivity"/>
+                android:name=".activity.AnimationAudioActivity"/>
         <!-- 照片放大 -->
         <activity
                 android:name=".activity.PhotoViewActivity"/>
@@ -150,6 +150,10 @@
                 android:name=".activity.CustomViewActivity"/>
         <activity
                 android:name=".activity.StoreWebViewActivity"/>
+        <activity
+                android:name=".animation.AnimationActivity"/>
+        <activity
+                android:name=".animation.ListActivity"/>
         <!-- RecyclerviewActivity -->
         <activity
                 android:name=".channelmanage.ChannelManageActivity"/>

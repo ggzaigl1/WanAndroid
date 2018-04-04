@@ -29,6 +29,7 @@
     <string name="save">保存</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
+    <string name="next">下一步</string>
 
     <string name="photograph">拍照</string>
     <string name="album_selection">相册选择</string>
@@ -88,4 +89,8 @@
     <string name="fingerprint_sys_setting_page">进入系统指纹设置页面</string>
     <string name="sys_pwd_recognition_success">系统密码识别成功</string>
     <string name="sys_pwd_recognition_failed">系统密码识别失败</string>
+
+    <string name="check_info_message">未获得应用运行所需的基本权限，请在设置中开启权限后再使用</string>
+    <string name="check_info_title">权限提示</string>
+    <string name="check_info_setting">去设置</string>
 </resources>

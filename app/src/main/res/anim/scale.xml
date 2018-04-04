@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<scale-->
+    <!--android:duration="2000"-->
+    <!--android:fillAfter="false"-->
+    <!--android:fromXScale="0.0"-->
+    <!--android:fromYScale="0.0"-->
+    <!--android:interpolator="@android:anim/accelerate_decelerate_interpolator"-->
+    <!--android:pivotX="50%"-->
+    <!--android:pivotY="50%"-->
+    <!--android:toXScale="1.0"-->
+    <!--android:toYScale="1.0" />-->
+
+    <scale
+
+            android:fromXScale="10%"
+            android:toXScale="1.4"
+            android:fromYScale="10%"
+            android:toYScale="1.0"
+            android:duration="2000"
+            android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:fillAfter="true"
+            />
+
+    <!--android:fromXScale="0.0"           #起始x尺寸比例-->
+    <!--android:toXScale="1.4"             #最终x尺寸比例-->
+    <!--android:fromYScale="0.0"           #起始y尺寸比例-->
+    <!--android:toYScale="1.4"             #最终y尺寸比例-->
+    <!--android:pivotX="50%"               #缩放起点x轴坐标，取值可以是数值（50）、百分数（50%）、百-->
+    <!--分数p（50%p），当取值为数值时，缩放起点为View左上角坐标-->
+    <!--加具体数值像素，当取值为百分数时，表示在当前View左上角坐-->
+    <!--加上View宽度的具体百分比，当取值为百分数p时，表示在View-->
+    <!--左上角坐标加上父控件宽度的具体百分比-->
+    <!--android:pivotY="50%"               #同上-->
+    <!--android:duration="700"             #动画持续时间，毫秒为单位-->
+    <!--android:fillAfter="true"           #动画结束后，保持结束时的状态-->
+    <!--android:fillBefore="true"          #动画结束后，恢复为初始状态-->
+    <!--android:fillEnabled="true"         #效果同上-->
+    <!--android:repeatCount="5"            #重复次数,取值为-1时无限重复，默认动画执行一次-->
+    <!--android:repeatMode ="reverse"      #重复模式，有reverse和restart两个值，前者为倒序回放，后者为重新开始-->
+    <!--android::interpolator="@android:anim/accelerate_decelerate_interpolator" #插值器，后面单独讲-->
+
+</set>
