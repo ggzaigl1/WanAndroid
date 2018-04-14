@@ -179,7 +179,6 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 点击window外的区域 是否消失
-     * <p/>此方法 必须在 onCreateView（）执行前 设置 才有效
      * @param hide
      */
     public CommonDialog setHide(boolean hide) {

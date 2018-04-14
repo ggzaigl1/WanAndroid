@@ -132,4 +132,13 @@ public class Validator {
     public static boolean isIPAddr(String ipAddr) {
         return Pattern.matches(REGEX_IP_ADDR, ipAddr);
     }
+
+    /**
+     * 校验网络地址
+     * @param url
+     * @return
+     */
+    public static boolean isNetAddress(String url){
+        return Pattern.matches("^((https|http|ftp|rtsp|mms)?:\\/\\/)[^\\s]+", url);
+    }
 }

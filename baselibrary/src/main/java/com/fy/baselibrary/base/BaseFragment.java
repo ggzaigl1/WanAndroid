@@ -1,6 +1,5 @@
 package com.fy.baselibrary.base;
 
-import android.Manifest;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,17 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fy.baselibrary.R;
 import com.fy.baselibrary.retrofit.ApiService;
 import com.fy.baselibrary.retrofit.DaggerRequestComponent;
 import com.fy.baselibrary.retrofit.RequestComponent;
 import com.fy.baselibrary.utils.cache.ACache;
-import com.fy.baselibrary.utils.permission.PermissionChecker;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Fragment 基类
@@ -30,7 +28,6 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
 
     protected ACache mCache;
-
     protected BaseActivity mContext;
     protected View mRootView;
     protected Unbinder unbinder;
@@ -38,6 +35,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     @Inject
     protected ApiService mConnService;
+    protected CompositeDisposable mCompositeDisposable;
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -48,7 +46,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         super.onAttach(context);
         RequestComponent component = DaggerRequestComponent.builder().build();
         component.inJect(this);
-
+        mCompositeDisposable = new CompositeDisposable();
         this.mContext = (BaseActivity) context;
         mCache = ACache.get(mContext);
     }
@@ -59,8 +57,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if (null == mRootView) {
             mRootView = inflater.inflate(getContentLayout(), container, false);
             unbinder = ButterKnife.bind(this, mRootView);
-
-            baseInitView();
             baseInit();
         } else {
             ViewGroup parent = (ViewGroup) mRootView.getParent();
@@ -75,17 +71,16 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public void onClick(View view) {
     }
 
-    protected void baseInitView() {
-    }
-
     protected void baseInit() {
     }
 
     protected abstract int getContentLayout();
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mCompositeDisposable.clear();
         if (null != unbinder){
             unbinder.unbind();
         }
@@ -100,6 +95,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
             onResume();
         }
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

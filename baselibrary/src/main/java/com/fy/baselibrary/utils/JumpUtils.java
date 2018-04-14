@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.fy.baselibrary.R;
@@ -16,6 +17,13 @@ import java.io.File;
  * Created by fangs on 2017/5/9.
  */
 public class JumpUtils {
+
+//  一.只嵌套了一层Fragment（比如activity中使用了viewPager，viewPager中添加了几个Fragment） 在这种情况下要注意几个点：
+//  1.在Fragment中使用startActivityForResult的时候，不要使用getActivity().startActivityForResult,而是应该直接使startActivityForResult()。
+//  2.如果activity中重写了onActivityResult，那么activity中的onActivityResult一定要加上：
+//      super.onActivityResult(requestCode, resultCode, data)。
+//  如果违反了上面两种情况，那么onActivityResult只能够传递到activity中的，无法传递到Fragment中的。
+//  没有违反上面两种情况的前提下，可以直接在Fragment中使用startActivityForResult和onActivityResult，和在activity中使用的一样。
 
     /**
      * 跳转到指定 Action 的activity
@@ -69,21 +77,6 @@ public class JumpUtils {
     }
 
     /**
-     * 使用反射 跳转到指定 包路径的 activity; 带回调结果的跳转
-     * @param act
-     * @param bundle
-     * @param className
-     */
-    public static void jump(AppCompatActivity act, Bundle bundle, String className, int requestCode){
-        try {
-            Class cla = Class.forName(className);
-            jump(act, cla, bundle, requestCode);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * 带回调结果的跳转
      *
      * @param actClass    要跳转到的Activity
@@ -102,11 +95,74 @@ public class JumpUtils {
     }
 
     /**
-     * 退出当前activity
+     * 使用反射 跳转到指定 包路径的 activity
+     * @param act
+     * @param bundle
+     * @param className
      */
-    public static void exitActivity(AppCompatActivity act) {
-        act.finish();
-        act.overridePendingTransition(R.anim.anim_slide_right_in, R.anim.anim_slide_right_out);
+    public static void jump(AppCompatActivity act, Bundle bundle, String className){
+        try {
+            Class cla = Class.forName(className);
+            jump(act, cla, bundle);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 使用反射 跳转到指定 包路径的 activity; 带回调结果的跳转
+     * @param act
+     * @param bundle
+     * @param className
+     */
+    public static void jump(AppCompatActivity act, Bundle bundle, String className, int requestCode){
+        try {
+            Class cla = Class.forName(className);
+            jump(act, cla, bundle, requestCode);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 使用反射 从fragment 跳转到指定 包路径的 activity; 带回调结果的跳转
+     * @param act
+     * @param bundle
+     * @param className
+     * @param requestCode
+     */
+    public static void jump(Fragment act, Bundle bundle, String className, int requestCode){
+        try {
+            Class cla = Class.forName(className);
+            Intent intent = new Intent(act.getContext(), cla);
+            if (null != bundle) {
+                intent.putExtras(bundle);
+            }
+
+            act.startActivityForResult(intent, requestCode);
+            //第一个参数 下一界面进入效果；第二个参数 当前界面退出效果
+            act.getActivity().overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 从fragment 跳转到指定的 activity; 带回调结果的跳转
+     * @param act
+     * @param bundle
+     * @param actClass
+     * @param requestCode
+     */
+    public static void jump(Fragment act, Bundle bundle, Class actClass, int requestCode) {
+        Intent intent = new Intent(act.getContext(), actClass);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+
+        act.startActivityForResult(intent, requestCode);
+        //第一个参数 下一界面进入效果；第二个参数 当前界面退出效果
+        act.getActivity().overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
     }
 
     /**
@@ -120,6 +176,14 @@ public class JumpUtils {
             intent.putExtras(bundle);
         }
         act.setResult(Activity.RESULT_OK, intent);
+        act.finish();
+        act.overridePendingTransition(R.anim.anim_slide_right_in, R.anim.anim_slide_right_out);
+    }
+
+    /**
+     * 退出当前activity
+     */
+    public static void exitActivity(AppCompatActivity act) {
         act.finish();
         act.overridePendingTransition(R.anim.anim_slide_right_in, R.anim.anim_slide_right_out);
     }

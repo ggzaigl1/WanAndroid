@@ -37,7 +37,7 @@ public class RequestModule {
         return new Retrofit.Builder()
                 .addCallAdapterFactory(callAdapterFactory)
                 .addConverterFactory(gsonConverterFactory)
-                .baseUrl(Api.BASE_URL)
+                .baseUrl(ApiService.BASE_URL)
                 .client(client)
                 .build()
                 .create(ApiService.class);
@@ -59,9 +59,9 @@ public class RequestModule {
     @Provides
     protected OkHttpClient getClient(HttpLoggingInterceptor interceptor, Interceptor header) {
         return new OkHttpClient.Builder()
-                .connectTimeout(Api.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
-                .readTimeout(Api.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
-                .writeTimeout(Api.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .connectTimeout(ApiService.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .readTimeout(ApiService.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .writeTimeout(ApiService.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
                 .addInterceptor(interceptor)
                 .addInterceptor(header)
                 .build();
@@ -73,8 +73,7 @@ public class RequestModule {
         return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                L.i("拦截请求与相应", message);
-
+                L.e("net 请求or响应", message);
 //                FileUtils.fileToInputContent("log", "日志.txt", message);
             }
         }).setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -91,8 +90,8 @@ public class RequestModule {
                 //获取request
                 Request request = chain.request()
                         .newBuilder()
-                        .addHeader("Content-Type", "application/json;charse=UTF-8")
-                        .addHeader("Accept-Encoding", "gzip, deflate")
+                        .addHeader("Content-Type", "multipart/form-data;charse=UTF-8")
+//                        .addHeader("Accept-Encoding", "gzip, deflate")
                         .addHeader("Connection", "keep-alive")
                         .addHeader("Accept", "application/json")
                         .addHeader("Cookie", "add cookies here")

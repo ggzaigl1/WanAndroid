@@ -1,17 +1,14 @@
 package com.example.gab.babylove.fragment;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.SystemClock;
 import android.provider.MediaStore;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.AgentWebActivity;
-import com.example.gab.babylove.activity.AnimationAudioActivity;
 import com.example.gab.babylove.activity.CustomViewActivity;
 import com.example.gab.babylove.activity.FingerprintMainActivity;
 import com.example.gab.babylove.activity.GSYVideoPlayerActivity;
@@ -25,8 +22,6 @@ import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -54,7 +49,6 @@ public class NewsFragment extends BaseFragment {
     final static int COUNTS = 5;//点击次数
     final static long DURATION = 3 * 1000;//规定有效时间
     long[] mHits = new long[COUNTS];
-
 
     @Override
     protected int getContentLayout() {

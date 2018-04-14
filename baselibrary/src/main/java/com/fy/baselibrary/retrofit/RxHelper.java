@@ -1,8 +1,6 @@
 package com.fy.baselibrary.retrofit;
 
-import android.util.Log;
-
-import com.fy.baselibrary.utils.ConstantUtils;
+import com.fy.baselibrary.utils.L;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -33,12 +31,10 @@ public class RxHelper {
                 return upstream.flatMap(new Function<BeanModule<T>, ObservableSource<T>>() {
                     @Override
                     public ObservableSource<T> apply(@NonNull BeanModule<T> tBeanModule) throws Exception {
-                        //获取最新的token
-                        ConstantUtils.token  = tBeanModule.getResultToken();
                         if (tBeanModule.isSuccess()) {
-                            return createData(tBeanModule.getResultData());
+                            return createData(tBeanModule.getRows());
                         } else {
-                            return Observable.error(new ServerException(tBeanModule.getResultMes()));
+                            return Observable.error(new ServerException(tBeanModule.getMsg(), tBeanModule.getCode()));
                         }
                     }
                 })
@@ -60,11 +56,11 @@ public class RxHelper {
             @Override
             public void subscribe(@NonNull ObservableEmitter<T> subscriber) throws Exception {
                 try {
-                    Log.e("网络", "Activity _ onNext");
+                    L.e("net", "成功 _ onNext");
                     subscriber.onNext(data);
                     subscriber.onComplete();
                 } catch (Exception e) {
-                    Log.e("网络", "Activity _ onError");
+                    L.e("net", "异常 _ onError");
                     subscriber.onError(e);
                 }
             }

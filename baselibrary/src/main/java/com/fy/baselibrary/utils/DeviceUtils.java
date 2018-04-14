@@ -1,12 +1,9 @@
 package com.fy.baselibrary.utils;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
-
-import java.util.Locale;
 
 /**
  * 获取设备信息 工具类
@@ -52,7 +49,6 @@ public class DeviceUtils {
      *
      * @return 手机IMEI
      */
-    @SuppressLint("MissingPermission")
     public static String getIMEI(Context ctx) {
         TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Activity.TELEPHONY_SERVICE);
         if (tm != null) {
@@ -60,16 +56,6 @@ public class DeviceUtils {
         }
         return null;
     }
-
-    /**
-     * 获取当前手机系统语言。
-     *
-     * @return 返回当前系统语言。例如：当前设置的是“中文-中国”，则返回“zh-CN”
-     */
-    public static String getSystemLanguage() {
-        return Locale.getDefault().getLanguage();
-    }
-
 
     /**
      * 打印设备内存信息

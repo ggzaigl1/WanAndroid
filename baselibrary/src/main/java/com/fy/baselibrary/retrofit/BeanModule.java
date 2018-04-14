@@ -7,56 +7,53 @@ import java.io.Serializable;
  * Created by fangs on 2017/11/6.
  */
 public class BeanModule<T> implements Serializable{
+    /**
+     * msg : 操作成功
+     * code : 0
+     * rows : {"token":"3011bbfa26bea40ef490d281e7197282"}
+     */
+    private String msg = "";
+    private int code = -1;
+    private T rows;
 
-    private int ResultCode;
-    private String ResultToken = "";
-    private String ResultMes = "测试失败情况";
-    private T ResultData;
+    public String getMsg() {
+        return msg;
+    }
 
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public T getRows() {
+        return rows;
+    }
+
+    public void setRows(T rows) {
+        this.rows = rows;
+    }
+
+    /**
+     * 判断请求是否成功
+     * @return
+     */
     public boolean isSuccess(){
-        return ResultCode == 1;
-    }
-
-    public int getResultCode() {
-        return ResultCode;
-    }
-
-    public void setResultCode(int resultCode) {
-        ResultCode = resultCode;
-    }
-
-    public String getResultMes() {
-        return ResultMes;
-    }
-
-    public void setResultMes(String resultMes) {
-        ResultMes = resultMes;
-    }
-
-    public T getResultData() {
-        return ResultData;
-    }
-
-    public void setResultData(T resultData) {
-        ResultData = resultData;
-    }
-
-    public String getResultToken() {
-        return ResultToken;
-    }
-
-    public void setResultToken(String resultToken) {
-        ResultToken = resultToken;
+        return code == 0;
     }
 
     @Override
     public String toString() {
         return "BeanModule{" +
-                "ResultCode=" + ResultCode +
-                ", ResultToken='" + ResultToken + '\'' +
-                ", ResultMes='" + ResultMes + '\'' +
-                ", ResultData=" + ResultData +
+                "msg='" + msg + '\'' +
+                ", code=" + code +
+                ", rows=" + rows +
                 '}';
     }
 }

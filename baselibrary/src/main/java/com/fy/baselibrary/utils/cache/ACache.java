@@ -19,6 +19,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
+import com.fy.baselibrary.utils.FileUtils;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -82,11 +84,12 @@ public class ACache {
     }
 
     private ACache(File cacheDir, long max_size, int max_count) {
-        if (!cacheDir.exists() && !cacheDir.mkdirs()) {
-            throw new RuntimeException("can't make dirs in "
-                    + cacheDir.getAbsolutePath());
+        if (FileUtils.isSDCardEnable()){
+            if (!cacheDir.exists() && !cacheDir.mkdirs()) {
+                throw new RuntimeException("can't make dirs in " + cacheDir.getAbsolutePath());
+            }
+            mCache = new ACacheManager(cacheDir, max_size, max_count);
         }
-        mCache = new ACacheManager(cacheDir, max_size, max_count);
     }
 
     // =======================================

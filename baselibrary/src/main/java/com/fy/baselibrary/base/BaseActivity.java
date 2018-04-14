@@ -1,8 +1,11 @@
 package com.fy.baselibrary.base;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.KeyEvent;
@@ -15,6 +18,8 @@ import com.fy.baselibrary.R;
 import com.fy.baselibrary.retrofit.ApiService;
 import com.fy.baselibrary.retrofit.DaggerRequestComponent;
 import com.fy.baselibrary.retrofit.RequestComponent;
+import com.fy.baselibrary.startactivity.StartActivity;
+import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.statusbar.StatusBarUtils;
 import com.fy.baselibrary.statuslayout.OnRetryListener;
 import com.fy.baselibrary.statuslayout.OnShowHideViewListener;
@@ -23,10 +28,14 @@ import com.fy.baselibrary.statuslayout.StatusLayoutManager;
 import com.fy.baselibrary.utils.FileUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.cache.ACache;
 import com.fy.baselibrary.utils.permission.PermissionChecker;
+import com.githang.statusbar.StatusBarCompat;
 
 import javax.inject.Inject;
+
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Activity 基类，统一处理activity界面样式，多状态视图切换
@@ -37,23 +46,24 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     protected BaseActivity mContext;
 
-    /** 使用默认头部布局 */
+    /**
+     * 使用默认头部布局
+     */
     protected static final int USE_SON_LAYOUT = 0;
     protected ACache mCache;
     protected StatusLayoutManager slManager;
     protected TextView tvTitle;
     protected TextView tvBack;
-//    protected TextView tvClose;
     protected TextView tvMenu;
-    protected ImageView imgDropDown;
+    protected ConstraintLayout rlHead;
 
-    private static final int MIN_CLICK_DELAY_TIME = 3000;
-    private static long lastClickTime;
-    public static String path = FileUtils.getSDCardPath()+ "01.png";//查房界面 图片保存地址
-
-
+    protected PermissionChecker permissionChecker;
+    protected static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.CAMERA,
+    };
     @Inject
     protected ApiService mConnService;
+    protected CompositeDisposable mCompositeDisposable;
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -63,15 +73,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         RequestComponent component = DaggerRequestComponent.builder().build();
         component.inJect(this);
+        mCompositeDisposable = new CompositeDisposable();
         mCache = ACache.get(this);
         mContext = this;
-
         if (getContentView() != 0) {
             setContentView(R.layout.activity_base);
             RootFrameLayout viewContent = findViewById(R.id.viewContent);
             //将继承 TopBarBaseActivity 的布局解析到 FrameLayout 里面
             initSLManager(viewContent);
-
             ViewStub vStubTitleBar = findViewById(R.id.vStubTitleBar);
             if (getHeadView() == USE_SON_LAYOUT) {
                 vStubTitleBar.inflate();
@@ -81,31 +90,29 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                 vStubTitleBar.inflate();
             }
         }
-
-
         super.onCreate(savedInstanceState);
-
         init(savedInstanceState);
-
         setStatusBarType();
-
         mConnService.toString();
     }
 
     /**
      * 获取自定义 ContentView
+     *
      * @return
      */
     protected abstract int getContentView();
 
     /**
      * 初始化
+     *
      * @param savedInstanceState
      */
     protected abstract void init(Bundle savedInstanceState);
 
     /**
      * 头部布局
+     *
      * @return
      */
     protected int getHeadView() {
@@ -114,27 +121,33 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 设置状态栏类型
+     *
      * @return
      */
-    protected void setStatusBarType(){
-        StatusBarUtils.with(this).setColor(getResources().getColor(R.color.statusBar))
-                .setDrawable(getResources().getDrawable(R.drawable.shape))
-                .init();
-//        MdStatusBarCompat.setOrdinaryToolBar(this, R.color.alphaHeadBg);
-//        MdStatusBarCompat.setImageTransparent(this);
+    @SuppressLint("ResourceAsColor")
+    protected void setStatusBarType() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            MdStatusBarCompat.setOrdinaryToolBar(this, R.color.appHeadBg);
+            MdStatusBarCompat.StatusBarLightMode(this);
+            mContext.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        } else {
+            StatusBarCompat.setStatusBarColor(this, R.drawable.layer_title_bg);
+        }
     }
 
     /**
      * 重试
      */
-    protected void reTry(){}
+    protected void reTry() {
+    }
 
     /**
      * 设置 不同情况下 界面显示内容
+     *
      * @param flag
      */
-    protected void setStatusLayout(int flag){
-        switch (flag){
+    protected void setStatusLayout(int flag) {
+        switch (flag) {
             case RootFrameLayout.LAYOUT_LOADING_ID:
                 slManager.showLoading();
                 break;
@@ -155,6 +168,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 设置 多状态视图 管理器
+     *
      * @param viewContent
      */
     protected void initSLManager(RootFrameLayout viewContent) {
@@ -170,6 +184,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void onShowView(View view, int id) {
                     }
+
                     @Override
                     public void onHideView(View view, int id) {
                     }
@@ -190,10 +205,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         tvTitle = findViewById(R.id.tvTitle);
         tvBack = findViewById(R.id.tvBack);
         tvMenu = findViewById(R.id.tvMenu);
-        imgDropDown = findViewById(R.id.imgDropDown);
-//        tvClose = findViewById(R.id.tvClose);
+        rlHead = findViewById(R.id.rlHead);
         tvBack.setOnClickListener(this);
-//        tvClose.setOnClickListener(this);
         tvMenu.setOnClickListener(this);
     }
 
@@ -203,9 +216,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         if (i == R.id.tvBack) {
             JumpUtils.exitActivity(this);
         }
-//        else if (i == R.id.tvClose){
-//            JumpUtils.jump(this, "com.hjy.mobiledoctor.patientlist.PatientListActivity", null);
-//        }
     }
 
     @Override
@@ -217,9 +227,11 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mCompositeDisposable.clear();
     }
 
     public boolean isSaveInstanceState = false;
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -227,9 +239,24 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         L.e("Activity", "onSaveInstanceState");
     }
 
+    //保存点击的时间
+    private long exitTime = 0;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            String name = getClass().getName();
+            if (name.equals("com.example.gab.babylove.login.LoginActivity")) {
+                //处理 退出界面
+                if ((System.currentTimeMillis() - exitTime) > 2000) {
+                    T.showLong(R.string.exit_app);
+                    exitTime = System.currentTimeMillis();
+                } else {
+                    JumpUtils.exitApp(mContext, StartActivity.class);
+                }
+                return false;
+            }
             JumpUtils.exitActivity(this);
             return false;
         }
@@ -258,8 +285,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    /** 隐藏activity 标题栏 左边按钮 */
-    protected void hideBack(){
+    /**
+     * 隐藏activity 标题栏 左边按钮
+     */
+    protected void hideBack() {
         if (null != tvBack) {
             tvBack.setVisibility(View.INVISIBLE);
         }
@@ -270,7 +299,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @param resouseId
      */
-    protected void setActMenu(int resouseId) {
+    public void setActMenu(int resouseId) {
         if (null != tvMenu) {
             tvMenu.setText(resouseId);
         }
@@ -279,20 +308,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * 隐藏activity 标题栏 右边按钮
      */
-    protected void hideMenu() {
+    public void hideMenu() {
         if (null != tvMenu) {
             tvMenu.setVisibility(View.INVISIBLE);
         }
     }
-
-    public static boolean isFastClick() {
-        boolean flag = false;
-        long curClickTime = System.currentTimeMillis();
-        if ((curClickTime - lastClickTime) >= MIN_CLICK_DELAY_TIME) {
-            flag = true;
-        }
-        lastClickTime = curClickTime;
-        return flag;
-    }
-
 }

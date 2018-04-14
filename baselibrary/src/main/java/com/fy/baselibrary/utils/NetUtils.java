@@ -1,5 +1,6 @@
 package com.fy.baselibrary.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -35,9 +36,8 @@ public class NetUtils {
      */
     public static boolean isConnected(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
         if (null != connectivity) {
-
+            @SuppressLint("MissingPermission")
             NetworkInfo info = connectivity.getActiveNetworkInfo();
             if (null != info && info.isConnected()) {
                 if (info.getState() == NetworkInfo.State.CONNECTED) {
@@ -76,6 +76,7 @@ public class NetUtils {
     /**
      * 判断是否是wifi连接
      */
+    @SuppressLint("MissingPermission")
     public static boolean isWifi(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -98,18 +99,39 @@ public class NetUtils {
 
     /**
      * 把File集合转化成MultipartBody.Part 集合（retrofit 多文件文件上传）
+     * @param fileType 文件类型（如图片："image/"；视频："video/"）
+     * @param key     后台根据此 key获取数据（对应 通过控件id 获取控件）
      * @param files
      * @return
      */
-    public static List<MultipartBody.Part> filesToMultipartBodyParts(List<String> files) {
+    public static List<MultipartBody.Part> fileToMultipartBodyParts(String fileType, String key, List<String> files) {
         List<MultipartBody.Part> parts = new ArrayList<>(files.size());
         for (String path : files) {
+
             File file = new File(path);//访问手机端的文件资源，保证手机端sdcdrd中必须有这个文件
 
             String fileStr = path.substring(path.lastIndexOf(".") + 1);
 
+            RequestBody requestBody = RequestBody.create(MediaType.parse(fileType + fileStr), file);
+            MultipartBody.Part part = MultipartBody.Part.createFormData(key, file.getName(), requestBody);
+            parts.add(part);
+        }
+        return parts;
+    }
+
+    /**
+     * 把File集合转化成MultipartBody.Part 集合（retrofit 多文件文件上传）
+     * @param files
+     * @return
+     */
+    public static List<MultipartBody.Part> fileToMultipartBodyPart(List<File> files) {
+        List<MultipartBody.Part> parts = new ArrayList<>(files.size());
+        for (File file : files) {//访问手机端的文件资源，保证手机端sdcdrd中必须有这个文件
+            String path = file.getPath();
+            String fileStr = path.substring(path.lastIndexOf(".") + 1);
+
             RequestBody requestBody = RequestBody.create(MediaType.parse("image/" + fileStr), file);
-            MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+            MultipartBody.Part part = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
             parts.add(part);
         }
         return parts;

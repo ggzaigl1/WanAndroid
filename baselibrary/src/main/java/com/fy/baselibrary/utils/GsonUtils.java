@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,6 +14,7 @@ import java.util.Map;
  * Created by fangs on 2017/7/18.
  */
 public class GsonUtils {
+
     private GsonUtils() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
@@ -33,7 +36,6 @@ public class GsonUtils {
      */
     public static JsonObject jsonStrToJsonObj(String jsonStr){
         JsonObject returnData = new JsonParser().parse(jsonStr).getAsJsonObject();
-
         return returnData;
     }
 
@@ -54,9 +56,35 @@ public class GsonUtils {
      * @param params
      * @return
      */
-    public static String mapToJsonStr(Map<String, String> params){
+    public static String mapToJsonStr(Map<String, Object> params){
         Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
 
         return gson.toJson(params);
     }
+
+
+    /**
+     * 将Json字符串转换成 List集合
+     * @param jsonStr
+     * @param <T>
+     * @return
+     */
+    public static<T> List<T> jsonToList(String jsonStr){
+        Gson gson = new Gson();
+
+        List<T> list = gson.fromJson(jsonStr, new TypeToken<List<T>>(){}.getType());
+
+        return list;
+    }
+
+    /**
+     * 将 list 转换成json字符串
+     * @return
+     */
+    public static<T> String listToJson(List<T> data){
+        Gson gson = new Gson();
+
+        return gson.toJson(data);
+    }
+
 }

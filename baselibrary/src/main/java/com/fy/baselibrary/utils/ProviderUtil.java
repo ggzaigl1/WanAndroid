@@ -7,6 +7,11 @@ import android.content.Context;
  */
 public class ProviderUtil {
 
+    private ProviderUtil() {
+        /* cannot be instantiated */
+        throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
     public static String getFileProviderName(Context context){
         return context.getPackageName()+".provider";
     }

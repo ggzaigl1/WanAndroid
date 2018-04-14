@@ -1,5 +1,9 @@
 package com.fy.baselibrary.retrofit;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
 import com.fy.baselibrary.application.BaseApplication;
 import com.fy.baselibrary.base.CommonDialog;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
@@ -33,7 +37,7 @@ public abstract class NetCallBack<V> implements Observer<V> {
         init();
     }
 
-    private void init(){
+    private void init() {
         if (null == progressDialog) return;
         dialog = progressDialog.getDialog();
         if (null == dialog) return;
@@ -44,15 +48,17 @@ public abstract class NetCallBack<V> implements Observer<V> {
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
-        L.e("test---onSubscribe ", "onSubscribe()");
+        L.e("net", "onSubscribe()");
 
         this.disposed = d;
-        if (null != progressDialog)progressDialog.show();
+        if (null != progressDialog && null != disposed && !disposed.isDisposed()) {
+            progressDialog.show();
+        }
     }
 
     @Override
     public void onNext(V t) {
-        L.e("test---onNext ", "onNext()");
+        L.e("net", "onNext()");
 
         updataLayout(RootFrameLayout.LAYOUT_CONTENT_ID);
         if (null != t) {
@@ -64,18 +70,34 @@ public abstract class NetCallBack<V> implements Observer<V> {
 
     @Override
     public void onError(Throwable e) {
-        L.e("test---onError ", "onError()");
+        L.e("net", "onError()");
         e.printStackTrace();
         if (!NetUtils.isConnected(BaseApplication.getApplication())) {
             actionResponseError("网络不可用");
             updataLayout(RootFrameLayout.LAYOUT_NETWORK_ERROR_ID);
         } else if (e instanceof ServerException) {
-            actionResponseError(e.getMessage());
+            if (e.getMessage().equals("token失效，请重新登录")) {//token 失效 进入登录页面
+                try {
+                    Class cla = Class.forName("com.hjy.sports.student.login.LoginActivity");
+                    Context context = BaseApplication.getApplication();
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean("untoken",true);
+                    Intent intent = new Intent(context, cla);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
+            if (((ServerException) e).code != 401)actionResponseError(e.getMessage());
             updataLayout(RootFrameLayout.REQUEST_FAIL);
-        } else if (e instanceof ConnectException){
+        } else if (e instanceof ConnectException) {
             actionResponseError("请求超时，请稍后再试...");
             updataLayout(RootFrameLayout.REQUEST_FAIL);
-        } else if (e instanceof SocketTimeoutException){
+        } else if (e instanceof SocketTimeoutException) {
             actionResponseError("服务器响应超时，请稍后再试...");
             updataLayout(RootFrameLayout.REQUEST_FAIL);
         } else {
@@ -87,7 +109,7 @@ public abstract class NetCallBack<V> implements Observer<V> {
 
     @Override
     public void onComplete() {
-        L.e("test---onComplete ", "onComplete()");
+        L.e("net", "onComplete()");
         dismissProgress();
     }
 
@@ -124,4 +146,5 @@ public abstract class NetCallBack<V> implements Observer<V> {
      * @param flag
      */
     protected abstract void updataLayout(int flag);
+
 }

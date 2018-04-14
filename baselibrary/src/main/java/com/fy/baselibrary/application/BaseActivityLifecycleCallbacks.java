@@ -3,7 +3,6 @@ package com.fy.baselibrary.application;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 
 import butterknife.ButterKnife;
@@ -20,23 +19,21 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
         Log.d(TAG, "Create()");
 
         BaseActivityBean activityBean = new BaseActivityBean();
-
-        BaseOrientoinListener orientoinListener = new BaseOrientoinListener(activity);
-        boolean autoRotateOn = (android.provider.Settings.System.getInt(activity.getContentResolver(),
-                Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
-
-        //检查系统是否开启自动旋转
-        if (autoRotateOn) {
-            orientoinListener.enable();
-        }
-
-        activityBean.setOrientoinListener(orientoinListener);
+//        注册屏幕旋转监听
+//        BaseOrientoinListener orientoinListener = new BaseOrientoinListener(activity);
+//        boolean autoRotateOn = (android.provider.Settings.System.getInt(activity.getContentResolver(),
+//                Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
+//
+//        //检查系统是否开启自动旋转
+//        if (autoRotateOn) {
+//            orientoinListener.enable();
+//        }
+//
+//        activityBean.setOrientoinListener(orientoinListener);
 
         activityBean.setUnbinder(ButterKnife.bind(activity));
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ActivityBean", activityBean);
-        activity.getIntent().putExtra("BaseActivityBean", bundle);
+        activity.getIntent().putExtra("ActivityBean", activityBean);
     }
 
     @Override
@@ -71,9 +68,10 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
     public void onActivityDestroyed(Activity activity) {
         Log.d(TAG, "Destroy()");
 
-        Bundle bundle = activity.getIntent().getBundleExtra("BaseActivityBean");
-        BaseActivityBean activityBean = (BaseActivityBean) bundle.getSerializable("ActivityBean");
-        activityBean.getUnbinder().unbind();
-        activityBean.getOrientoinListener().disable();
+        BaseActivityBean activityBean = (BaseActivityBean) activity.getIntent().getSerializableExtra("ActivityBean");
+        if (null != activityBean) {
+            activityBean.getUnbinder().unbind();
+//            activityBean.getOrientoinListener().disable();//销毁 屏幕旋转监听
+        }
     }
 }

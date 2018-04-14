@@ -27,6 +27,14 @@ import retrofit2.http.Streaming;
  */
 public interface ApiService {
 
+    int DEFAULT_MILLISECONDS = 60000;             //默认的超时时间
+
+    String BASE_URL = "http://47.104.176.229:80/";    //阿里云正式 地址
+
+    String IMG_BASE_URL = BASE_URL + "image";
+
+    String IMG_BASE_URL_THUM = BASE_URL + "image/thum";
+
     /**
      * 医护人员登入接口
      */

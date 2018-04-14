@@ -17,46 +17,29 @@ public class ConstantUtils {
     public static String userId = "userid";
 
     /**
-     * 用户的科室id (DeptID)
-     */
-    public static String DeptID = "";
-    /**
-     * 用户的科室UserName (UserName)
-     */
-    public static String UserName = "";
-
-    /**
      * 操作令牌
      */
     public static String token = "";
 
     /**
-     * PatID
-     **/
-    public static String PatID = "";
+     * 角色
+     */
+    public static String role = "";
 
     /**
-     * 当前选中的 患者 key
+     * student实体类中id
      */
-    public static String selectPatient = "SelectPatient";
+    public static int studentID = 0;
 
-    /**
-     * 当前选中的 出院患者 key
-     */
-    public static String selectvisitPatient = "selectvisitPatient";
-    /**
-     * 当前选中的 回访信息 key
-     */
-    public static String selectvisitPatientCall = "selectvisitPatientCall";
     /**
      * 当前个人信息图片上传 key
      */
     public static String selectvisitimager = "selectvisitimager";
 
     /**
-     * 用户是否登录
+     * 学生实体类 缓存 key
      */
-    public static final String isLogin = "userIsLogin";
+    public static final String student = "stuInfo";
 
     /**
      * APP 当前模式 （日间/夜间）
@@ -66,7 +49,7 @@ public class ConstantUtils {
     /**
      * 用户是否 第一次打开APP
      */
-    public static final String isfirstOpenApp = "userIsFirstOpenApp";
+    public static String isfirstOpenApp = "";
 
     /**
      * 普通 状态栏
@@ -102,5 +85,28 @@ public class ConstantUtils {
      * DrawerLayout+ToolBar 状态栏
      */
     public static final int DrawerToolbar = 8;
+
+    /**
+     * 年级编码
+     */
+    public static String ncode = "";
+
+    /**
+     * 学生体质信息 缓存 key
+     */
+    public static final String totalHealthInfoBean = "";
+
+    /**
+     * 学生头像
+     */
+    public static String head_portrait = "";
+
+    //练习项目
+    public static final String SPORTS_METHODTOAPP = "sports_methodtoapp";
+    //获取某日打卡记录
+    public static final String PUNCH_CLOCKTOAPP = "punch_clocktoapp";
+    //获取获取某月打卡记录日期
+    public static final String PUNCHC_LOCKBYMONTH = "punchc_lockbymonth";
+
 
 }

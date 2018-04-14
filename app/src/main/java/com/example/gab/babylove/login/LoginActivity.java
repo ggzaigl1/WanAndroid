@@ -22,24 +22,12 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.widget.AppLoading;
 import com.fy.baselibrary.base.BaseActivity;
-import com.fy.baselibrary.entity.LoginBean;
-import com.fy.baselibrary.retrofit.NetCallBack;
-import com.fy.baselibrary.retrofit.NetRequest;
-import com.fy.baselibrary.retrofit.RxHelper;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
-import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
-import com.fy.baselibrary.utils.TransfmtUtils;
 import com.fy.baselibrary.utils.permission.PermissionChecker;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -203,69 +191,6 @@ public class LoginActivity extends BaseActivity {
                 }).show();
                 break;
         }
-    }
-
-    /**
-     * 登陆请求
-     *
-     * @param UserID
-     * @param PassWd
-     */
-    private void runLogin(String UserID, String PassWd) {
-        if (!checkInput()) {
-            return;
-        }
-        AppLoading.show(mContext);
-//        IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.user_login);
-        String key = System.currentTimeMillis() + "";
-        String passMd5 = TransfmtUtils.getMD5(PassWd);
-        String sign = TransfmtUtils.getMD5(UserID + key + passMd5);
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("UserID", UserID);
-        params.put("PassWd", passMd5);
-        params.put("sign", sign);
-        params.put("key", key);
-
-        new NetRequest.Builder()
-                .create()
-                .requestDate(mConnService.DocAndNurse(params).compose(RxHelper.handleResult()),
-                        new NetCallBack<ArrayList<LoginBean>>() {
-                            @Override
-                            public void onSuccess(ArrayList<LoginBean> bean) {
-                                L.e("login_成功");
-                                AppLoading.close();
-                                if (bean != null && bean.size() > 0) {
-                                    if (cBoxPass.isChecked()) {//是否保存账号
-                                        SpfUtils.saveStrToSpf("UserID", UserID);
-                                    } else {
-                                        SpfUtils.saveStrToSpf("UserID", "");
-                                    }
-
-                                    LoginBean loginBean = bean.get(0);
-
-                                    //判断是否是 医生登录
-                                    if (!loginBean.getIsDoc().equals("1")) {
-                                        T.showLong("请使用正确的账号登录系统");
-                                        return;
-                                    }
-
-                                    ConstantUtils.userId = loginBean.getUserID();
-                                    ConstantUtils.DeptID = loginBean.getDeptID();
-                                    ConstantUtils.UserName = loginBean.getUserName();
-
-                                    mCache.put("token", ConstantUtils.token);
-                                    mCache.put("UserName", loginBean);
-                                    JumpUtils.jump(mContext, MainActivity.class, null);
-                                    finish();
-                                }
-                            }
-
-                            @Override
-                            public void updataLayout(int flag) {
-                                L.e("login_失败");
-                            }
-                        });
     }
 
     private boolean checkInput() {

@@ -1,5 +1,6 @@
 package com.example.gab.babylove.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,6 +43,7 @@ public class GankMZActivity extends BaseActivity {
         getCourseDetails();
     }
 
+    @SuppressLint("CheckResult")
     private void getCourseDetails() {
         mConnService.getCourseDetails(20,1)
                 .subscribeOn(Schedulers.io())

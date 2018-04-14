@@ -49,6 +49,18 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     }
 
 //////////////////////以下为 常用控件设置文本 图片 点击事件 方法 可根据需要添加///////////////////////
+
+    /**
+     * 设置指定 viewID 的 背景色
+     * @param viewId
+     * @param color
+     * @return
+     */
+    public ViewHolder setBackground(int viewId, int color){
+        getView(viewId).setBackgroundResource(color);
+        return this;
+    }
+
     /**
      * 设置指定 viewID 的TextView 的文本
      * @param viewId

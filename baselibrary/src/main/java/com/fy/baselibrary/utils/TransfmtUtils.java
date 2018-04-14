@@ -148,6 +148,7 @@ public class TransfmtUtils {
 
     /**
      * 把字节数组转换成 16进制字符串
+     *
      * @param bytes
      * @return
      */
@@ -157,7 +158,7 @@ public class TransfmtUtils {
         for (byte b : bytes) {
             // 将每个字节与0xFF进行与运算，然后转化为10进制，然后借助于Integer再转化为16进制
             tmp = Integer.toHexString(0xFF & b);
-            if (tmp.length() == 1){// 每个字节8为，转为16进制标志，2个16进制位
+            if (tmp.length() == 1) {// 每个字节8为，转为16进制标志，2个16进制位
                 tmp = "0" + tmp;
             }
             sb.append(tmp);
@@ -172,7 +173,7 @@ public class TransfmtUtils {
      * @param s
      */
     public static String getMD5(String s) {
-		char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 //        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
         try {
             byte[] btInput = s.getBytes("utf-8");
@@ -191,6 +192,37 @@ public class TransfmtUtils {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    /**
+     * 判断字符串是否是数字
+     */
+    public static boolean isNumber(String value) {
+        return isInteger(value) || isDouble(value);
+    }
+
+    /**
+     * 判断字符串是否是整数
+     */
+    public static boolean isInteger(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     * 判断字符串是否是浮点数
+     */
+    public static boolean isDouble(String value) {
+        try {
+            Double.parseDouble(value);
+            return value.contains(".");
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }

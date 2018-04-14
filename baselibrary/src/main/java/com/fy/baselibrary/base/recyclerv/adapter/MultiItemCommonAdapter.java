@@ -1,6 +1,6 @@
 package com.fy.baselibrary.base.recyclerv.adapter;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public abstract class MultiItemCommonAdapter<Item> extends RecyclerCommonAdapter
 
     protected MultiItemTypeSupport<Item> mMultiItemTypeSupport;
 
-    public MultiItemCommonAdapter(AppCompatActivity context, List<Item> datas,
+    public MultiItemCommonAdapter(Context context, List<Item> datas,
                                   MultiItemTypeSupport<Item> multiItemTypeSupport) {
         super(context, -1, datas);
         mMultiItemTypeSupport = multiItemTypeSupport;

@@ -1,7 +1,6 @@
 package com.fy.baselibrary.base.recyclerv.adapter;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -15,18 +14,14 @@ import java.util.List;
  */
 public abstract class RecyclerCommonAdapter<Item> extends RecyclerView.Adapter<ViewHolder> {
 
-    protected AppCompatActivity mContext;
+    protected Context mContext;
     protected int mLayoutId;
     protected List<Item> mDatas;
     protected LayoutInflater mInflater;
 
     protected SparseBooleanArray mSelectedPositions;//保存多选 数据
 
-    static {
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
-
-    public RecyclerCommonAdapter(AppCompatActivity context, int layoutId, List<Item> datas) {
+    public RecyclerCommonAdapter(Context context, int layoutId, List<Item> datas) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
         mLayoutId = layoutId;
@@ -84,7 +79,23 @@ public abstract class RecyclerCommonAdapter<Item> extends RecyclerView.Adapter<V
         this.mDatas.addAll(data);
     }
 
+    /**
+     * 插入一个集合
+     * @param location
+     * @param data
+     */
+    public void addData(int location, List<Item> data){
+        this.mDatas.addAll(location, data);
+    }
 
+    /**
+     * 替换指定位置的 data
+     * @param location
+     * @param item
+     */
+    public void setData(int location, Item item) {
+        this.mDatas.set(location, item);
+    }
 
     /**
      * 删除指定 Location 位置的data
@@ -95,11 +106,19 @@ public abstract class RecyclerCommonAdapter<Item> extends RecyclerView.Adapter<V
     }
 
     /**
+     *  从列表中移除所有元素
+     */
+    public void cleanData(){
+        this.mDatas.clear();
+    }
+
+    /**
      * 清理 多选状态
      */
     public void cleanChecked(){
         mSelectedPositions.clear();
     }
+
     /**
      * 设置给定位置条目的选择状态
      * @param array

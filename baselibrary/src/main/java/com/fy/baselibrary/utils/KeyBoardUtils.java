@@ -1,15 +1,10 @@
 package com.fy.baselibrary.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 
 /**
  * 打开或关闭软键盘
@@ -18,40 +13,99 @@ import io.reactivex.functions.Consumer;
  */
 public class KeyBoardUtils {
 
-    private KeyBoardUtils(){
+    private KeyBoardUtils() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     /**
-     * 隐藏系统软键盘
-     * @param mContext
-     * @param mEditText
+     * 关闭键盘
      */
-    public static void goneKeyboard(Context mContext, EditText mEditText) {
-        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mEditText.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    public static void closeKeyBoard(Activity activity) {
+
+//		if (activity.getCurrentFocus() != null) {
+        InputMethodManager imm = (InputMethodManager) activity
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            View view = activity.getWindow().peekDecorView();
+            activity.getWindow().getDecorView();
+            if (view != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(),
+                        0);
+//
+//				}
+            }
+        }
+    }
+
+    public static void forceCloseKeyBoard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+//		imm.hideSoftInputFromWindow(screen.getWindowToken(), 0);
+        imm.toggleSoftInput(0, InputMethodManager.RESULT_HIDDEN);
+    }
+
+
+    /**
+     * 打开输入法
+     */
+    public static void openKeyBoard(Activity activity, View view) {
+        InputMethodManager imm = (InputMethodManager) activity
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        // 接受软键盘输入的编辑文本或其它视图
+        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
     }
 
     /**
-     * 显示系统软键盘
-     *
-     * @param msg_input
+     * 打开输入法
      */
-    public static void visibleKeyboard(final EditText msg_input) {
-        msg_input.setFocusable(true);
-        msg_input.setFocusableInTouchMode(true);
-        msg_input.requestFocus();
+    public static void openKeyBoard(Activity activity) {
+//		activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
+//				|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+//		imm.showSoftInput(activity.getWindow().getDecorView(),0);
+        imm.toggleSoftInput(InputMethodManager.RESULT_SHOWN, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 
-        Observable.timer(900, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程;
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(@NonNull Long aLong) throws Exception {
-                        InputMethodManager inputManager = (InputMethodManager)msg_input.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        inputManager.showSoftInput(msg_input, 0);
-                    }
-                });
+
+    /**
+     * 关闭输入法
+     */
+    public static void closeInput(Activity activity, View view) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+    }
+
+    /**
+     * 关闭输入法
+     */
+    public static void closeInput(Activity activity, ViewGroup view) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    /**
+     * 若返回true，则表示输入法打开
+     *
+     * @return
+     */
+    public static boolean isInputType(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        return imm.isActive();
+    }
+
+    // 两次点击按钮之间的点击间隔不能少于2000毫秒
+    private static final int MIN_CLICK_DELAY_TIME = 2000;
+    private static long lastClickTime;
+
+    public static boolean isFastClick() {
+        boolean flag = false;
+        long curClickTime = System.currentTimeMillis();
+        if ((curClickTime - lastClickTime) >= MIN_CLICK_DELAY_TIME) {
+            flag = true;
+        }
+        lastClickTime = curClickTime;
+        return flag;
     }
 
 }

@@ -62,6 +62,6 @@ public class LocalImageHolderView implements Holder<ImageItem> {
         File file = new File(imgData.path);
         imageView.setImage(ImageSource.uri(file.getAbsolutePath()));
 
-        ImgLoadUtils.loadImg(context, imgData.path, imgGlide);
+//        ImgLoadUtils.loadImg(context, imgData.path, imgGlide);
     }
 }
