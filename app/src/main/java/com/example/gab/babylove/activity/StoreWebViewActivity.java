@@ -18,16 +18,9 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.entity.LoginBean;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
-import com.fy.baselibrary.utils.ConstantUtils;
-import com.fy.baselibrary.utils.GsonUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.SpfUtils;
-import com.fy.baselibrary.utils.cache.ACache;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 

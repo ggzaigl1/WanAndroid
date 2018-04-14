@@ -147,8 +147,8 @@ public class SurfaceActivity extends BaseActivity implements SurfaceHolder.Callb
             //设置手动设置
             Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
             //获取屏幕亮度,获取失败则返回255
-            currLight = android.provider.Settings.System.getInt(getContentResolver(),
-                    android.provider.Settings.System.SCREEN_BRIGHTNESS,
+            currLight = Settings.System.getInt(getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS,
                     255);
             f = currLight / 255f;
         } catch (Settings.SettingNotFoundException e) {

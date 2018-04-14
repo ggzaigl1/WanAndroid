@@ -13,7 +13,6 @@ import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
 
-
 import butterknife.BindView;
 
 /**

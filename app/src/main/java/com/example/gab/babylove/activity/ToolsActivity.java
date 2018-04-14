@@ -1,9 +1,6 @@
 package com.example.gab.babylove.activity;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
 
 import com.example.gab.babylove.R;
 import com.fy.baselibrary.base.BaseActivity;

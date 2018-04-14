@@ -1,23 +1,25 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml:1:1-4:12
-INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml:1:1-4:12
-INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml:1:1-4:12
+ADDED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml:1:1-4:12
+INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml:1:1-4:12
+INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml:1:1-4:12
 	package
-		ADDED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml:1:11-42
-		INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
-		INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
+		ADDED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml:1:11-42
+		INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
+		INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml:1:1-4:12
 uses-sdk
-INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
-INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
-INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
-INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
+INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
+INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
+INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
+INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
-		ADDED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
-		INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
+		INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
+		ADDED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
+		INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
-		ADDED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
-		INJECTED from E:\BabyLove\pickerdate\src\main\AndroidManifest.xml
+		INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
+		ADDED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml
+		INJECTED from F:\program\BabyLove\pickerdate\src\main\AndroidManifest.xml

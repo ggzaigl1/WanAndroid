@@ -1,16 +1,10 @@
 package com.example.gab.babylove.adapter;
 
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.base.recyclerv.OnItemClickListner;
 import com.fy.baselibrary.base.recyclerv.adapter.RecyclerCommonAdapter;
 import com.fy.baselibrary.base.recyclerv.adapter.ViewHolder;
-import com.fy.baselibrary.entity.HomeBean;
-import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
 
 import java.util.List;
 

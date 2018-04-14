@@ -130,7 +130,9 @@ public class WebViewActivity extends BaseActivity {
                     mWebView.getSettings().setLoadsImagesAutomatically(true);
                 }
             }
+
         });
+
         mWebView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

@@ -3,13 +3,12 @@ package com.example.gab.babylove.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.gab.babylove.R;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
 
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by Gab on 2017/12/12 0012.
@@ -30,17 +29,11 @@ public class PhotoViewActivity extends AppCompatActivity {
         //网络加载
 //        ImgLoadUtils.loadImage(mContext,"http://img2.3lian.com/2014/f2/37/d/40.jpg",mPhotoView);
 //        PhotoViewAttacher attacher = new PhotoViewAttacher(mPhotoView); //阻止点击返回
-        mPhotoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+        mPhotoView.setOnPhotoTapListener(new OnPhotoTapListener() {
             @Override
-            public void onPhotoTap(View view, float v, float v1) {
+            public void onPhotoTap(ImageView view, float x, float y) {
                 finish();
             }
-
-            @Override
-            public void onOutsidePhotoTap() {
-
-            }
-
         });
     }
 }

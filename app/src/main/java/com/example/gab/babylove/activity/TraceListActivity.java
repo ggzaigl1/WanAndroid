@@ -1,18 +1,13 @@
 package com.example.gab.babylove.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.adapter.TraceListAdapter;
 import com.example.gab.babylove.bean.Trace;
 import com.fy.baselibrary.base.BaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
-import com.fy.baselibrary.statusbar.StatusBarUtils;
 
 import java.util.ArrayList;
 import java.util.List;

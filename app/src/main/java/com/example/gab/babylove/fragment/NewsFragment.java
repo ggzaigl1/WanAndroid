@@ -15,6 +15,7 @@ import com.example.gab.babylove.activity.AnimationAudioActivity;
 import com.example.gab.babylove.activity.CustomViewActivity;
 import com.example.gab.babylove.activity.FingerprintMainActivity;
 import com.example.gab.babylove.activity.GSYVideoPlayerActivity;
+import com.example.gab.babylove.activity.GankMZActivity;
 import com.example.gab.babylove.activity.TraceListActivity;
 import com.example.gab.babylove.activity.WebViewActivity;
 import com.example.gab.babylove.animation.AnimationActivity;
@@ -102,7 +103,7 @@ public class NewsFragment extends BaseFragment {
     }
 
     @OnClick({R.id.bt_OnTraceList, R.id.bt_OnTrace, R.id.bt_recycleview, R.id.text_webView, R.id.abo_Advice, R.id.dash_test, R.id.stroke_test,
-            R.id.different_radius_test, R.id.stroke_background_test, R.id.animation})
+            R.id.different_radius_test, R.id.stroke_background_test, R.id.animation,R.id.GankMZ})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -157,6 +158,9 @@ public class NewsFragment extends BaseFragment {
                 break;
             case R.id.animation:
                 JumpUtils.jump(mContext, AnimationActivity.class, null);
+                break;
+            case R.id.GankMZ:
+                JumpUtils.jump(mContext, GankMZActivity.class, null);
                 break;
         }
     }

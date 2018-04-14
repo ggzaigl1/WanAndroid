@@ -1,5 +1,6 @@
 package com.fy.baselibrary.retrofit;
 
+import com.fy.baselibrary.entity.GankBean;
 import com.fy.baselibrary.entity.HomeBean;
 import com.fy.baselibrary.entity.LoginBean;
 
@@ -16,6 +17,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 
@@ -50,6 +52,13 @@ public interface ApiService {
     Observable<BeanModule<ArrayList<HomeBean>>> GetHeadline(@QueryMap Map<String, Object> options);
 
 
+    /**
+     * 运动课程 ---运动详情
+     */
+    @Headers({"url_name:user"})
+    @GET("http://gank.io/api/data/福利/{count}/{page}")
+    Observable<GankBean> getCourseDetails(@Path("count") int count, @Path("page") int page);
+
 
     /**
      * 多图片上传
@@ -63,8 +72,8 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @POST("/app/ydys/UploadPostFile")
     Observable<BeanModule<ArrayList<HomeBean>>> uploadPostFile(@Part("Token") RequestBody token,
-                                                              @Part("PatID") RequestBody PatID,
-                                                              @Part("UserID") RequestBody UserID,
-                                                              @Part("UploadType") RequestBody UploadType,
-                                                              @Part List<MultipartBody.Part> parts);
+                                                               @Part("PatID") RequestBody PatID,
+                                                               @Part("UserID") RequestBody UserID,
+                                                               @Part("UploadType") RequestBody UploadType,
+                                                               @Part List<MultipartBody.Part> parts);
 }

@@ -1,6 +1,5 @@
 package com.example.gab.babylove.activity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
