@@ -3,8 +3,8 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:background="@drawable/color_list">
+              android:background="@drawable/color_list"
+              android:orientation="vertical">
 
     <include
         android:id="@+id/statusView"
@@ -59,13 +59,13 @@
                 android:layout_margin="10dp"
                 android:padding="10dp"
                 android:text="traceList"
-                app:radius="5dp"
                 app:animationDuration="200"
                 app:normalStrokeColor="@android:color/white"
                 app:normalStrokeWidth="2dp"
                 app:normalTextColor="@android:color/white"
                 app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:pressedTextColor="@android:color/white"/>
+                app:pressedTextColor="@android:color/white"
+                app:radius="5dp"/>
 
             <com.example.gab.babylove.widget.StateButton
                 android:id="@+id/bt_recycleview"
@@ -78,8 +78,8 @@
                 android:textColor="@android:color/white"
                 app:normalBackgroundColor="@color/colorPrimary"
                 app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:round="true"
                 app:radius="2dp"
+                app:round="true"
                 app:unableBackgroundColor="@android:color/holo_red_light"/>
 
             <com.example.gab.babylove.widget.StateButton
@@ -91,8 +91,8 @@
                 android:textColor="@color/myTxtLight"
                 app:normalBackgroundColor="@color/white"
                 app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:round="true"
                 app:radius="2dp"
+                app:round="true"
                 app:unableBackgroundColor="@android:color/holo_red_light"/>
 
             <com.example.gab.babylove.widget.StateButton
@@ -145,15 +145,15 @@
                 android:layout_margin="10dp"
                 android:padding="10dp"
                 android:text="AgentWeb"
-                app:radius="5dp"
-                app:strokeDashGap="5dp"
-                app:strokeDashWidth="5dp"
                 app:normalStrokeColor="@android:color/white"
                 app:normalStrokeWidth="2dp"
                 app:normalTextColor="@android:color/white"
                 app:pressedStrokeColor="@android:color/holo_red_light"
                 app:pressedStrokeWidth="2dp"
                 app:pressedTextColor="@android:color/holo_red_light"
+                app:radius="5dp"
+                app:strokeDashGap="5dp"
+                app:strokeDashWidth="5dp"
                 app:unableStrokeColor="@android:color/holo_orange_dark"
                 app:unableStrokeWidth="2dp"
                 app:unableTextColor="@android:color/holo_orange_dark"/>
@@ -166,13 +166,13 @@
                 android:layout_margin="10dp"
                 android:padding="10dp"
                 android:text="指纹相关"
-                app:radius="5dp"
                 app:normalStrokeColor="@android:color/white"
                 app:normalStrokeWidth="2dp"
                 app:normalTextColor="@android:color/white"
                 app:pressedStrokeColor="@android:color/holo_red_light"
                 app:pressedStrokeWidth="2dp"
                 app:pressedTextColor="@android:color/holo_red_light"
+                app:radius="5dp"
                 app:unableStrokeColor="@android:color/holo_orange_dark"
                 app:unableStrokeWidth="2dp"
                 app:unableTextColor="@android:color/holo_orange_dark"/>
@@ -185,14 +185,14 @@
                 android:layout_margin="10dp"
                 android:padding="10dp"
                 android:text="keep stroke"
-                app:radius="5dp"
                 app:normalStrokeColor="@android:color/white"
                 app:normalStrokeWidth="2dp"
                 app:normalTextColor="@android:color/white"
-                app:pressedStrokeWidth="2dp"
-                app:pressedStrokeColor="@android:color/white"
                 app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:pressedTextColor="@android:color/white"/>
+                app:pressedStrokeColor="@android:color/white"
+                app:pressedStrokeWidth="2dp"
+                app:pressedTextColor="@android:color/white"
+                app:radius="5dp"/>
 
             <com.example.gab.babylove.widget.StateButton
                 android:id="@+id/animation"
@@ -202,12 +202,12 @@
                 android:layout_margin="10dp"
                 android:padding="10dp"
                 android:text="Animation"
-                app:radius="5dp"
                 app:normalStrokeColor="@android:color/white"
                 app:normalStrokeWidth="2dp"
                 app:normalTextColor="@android:color/white"
                 app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:pressedTextColor="@android:color/white"/>
+                app:pressedTextColor="@android:color/white"
+                app:radius="5dp"/>
 
             <com.example.gab.babylove.widget.StateButton
                 android:id="@+id/GankMZ"
@@ -217,12 +217,12 @@
                 android:layout_margin="10dp"
                 android:padding="10dp"
                 android:text="GankMZ"
-                app:radius="5dp"
                 app:normalStrokeColor="@android:color/white"
                 app:normalStrokeWidth="2dp"
                 app:normalTextColor="@android:color/white"
                 app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:pressedTextColor="@android:color/white"/>
+                app:pressedTextColor="@android:color/white"
+                app:radius="5dp"/>
 
         </LinearLayout>
     </ScrollView>
