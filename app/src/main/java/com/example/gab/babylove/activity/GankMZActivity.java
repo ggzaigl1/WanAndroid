@@ -59,16 +59,6 @@ public class GankMZActivity extends BaseActivity {
                         T.showShort(throwable.getMessage());
                     }
                 });
-//                .subscribe(new NetCallBack<GankBean>() {
-//                    @Override
-//                    protected void onSuccess(GankBean t) {
-//                        mAdapter.setNewData(t.getResults());
-//                    }
-//
-//                    @Override
-//                    protected void updataLayout(int flag) {
-//                    }
-//                });
     }
 
     private void initRv() {
