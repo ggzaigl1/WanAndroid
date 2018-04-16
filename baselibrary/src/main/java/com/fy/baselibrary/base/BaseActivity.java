@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewStub;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fy.baselibrary.R;
@@ -20,12 +19,10 @@ import com.fy.baselibrary.retrofit.DaggerRequestComponent;
 import com.fy.baselibrary.retrofit.RequestComponent;
 import com.fy.baselibrary.startactivity.StartActivity;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
-import com.fy.baselibrary.statusbar.StatusBarUtils;
 import com.fy.baselibrary.statuslayout.OnRetryListener;
 import com.fy.baselibrary.statuslayout.OnShowHideViewListener;
 import com.fy.baselibrary.statuslayout.RootFrameLayout;
 import com.fy.baselibrary.statuslayout.StatusLayoutManager;
-import com.fy.baselibrary.utils.FileUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.T;
@@ -55,6 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected TextView tvTitle;
     protected TextView tvBack;
     protected TextView tvMenu;
+    protected ViewStub vStubTitleBar;
     protected ConstraintLayout rlHead;
 
     protected PermissionChecker permissionChecker;
@@ -81,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             RootFrameLayout viewContent = findViewById(R.id.viewContent);
             //将继承 TopBarBaseActivity 的布局解析到 FrameLayout 里面
             initSLManager(viewContent);
-            ViewStub vStubTitleBar = findViewById(R.id.vStubTitleBar);
+            vStubTitleBar = findViewById(R.id.vStubTitleBar);
             if (getHeadView() == USE_SON_LAYOUT) {
                 vStubTitleBar.inflate();
                 initTitleBar();
@@ -135,7 +133,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    /**
+    /**.
      * 重试
      */
     protected void reTry() {

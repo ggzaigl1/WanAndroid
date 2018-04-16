@@ -39,6 +39,10 @@ public class NewsFragment extends BaseFragment {
     Button bt_OnTrace;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
+    @BindView(R.id.tvBack)
+    TextView tvBack;
+    @BindView(R.id.tvMenu)
+    TextView tvMenu;
     @BindView(R.id.bt_OnTraceList)
     TextView bt_OnTraceList;
 
@@ -59,6 +63,8 @@ public class NewsFragment extends BaseFragment {
     protected void baseInit() {
         super.baseInit();
         tvTitle.setText("杂七杂八鬼名堂");
+        tvMenu.setVisibility(View.GONE);
+        tvBack.setVisibility(View.GONE);
         MdStatusBarCompat.setStatusView(mContext, statusView);
         onDisplaySettingButton(bt_OnTrace);
 

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.fy.baselibrary.R;
 import com.fy.baselibrary.utils.ScreenUtils;
@@ -173,7 +174,7 @@ public class MdStatusBarCompat {
      */
     public static void setStatusView(Context context, View statusView) {
         //动态设置状态栏高度
-        ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ScreenUtils.getStatusHeight(context));
         statusView.setLayoutParams(lp);
     }

@@ -39,7 +39,7 @@ public class JumpUtils {
 
         intent.setAction(action);
         act.startActivity(intent);
-        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+//        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
     }
 
     /**
@@ -57,7 +57,7 @@ public class JumpUtils {
         intent.setAction(action);
         act.startActivityForResult(intent, requestCode);
         //第一个参数 下一界面进入效果；第二个参数 当前界面退出效果
-        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+//        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
     }
 
     /**
@@ -73,7 +73,7 @@ public class JumpUtils {
         }
 
         act.startActivity(intent);
-        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+//        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
     }
 
     /**
@@ -91,7 +91,7 @@ public class JumpUtils {
 
         act.startActivityForResult(intent, requestCode);
         //第一个参数 下一界面进入效果；第二个参数 当前界面退出效果
-        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+//        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
     }
 
     /**
@@ -141,7 +141,7 @@ public class JumpUtils {
 
             act.startActivityForResult(intent, requestCode);
             //第一个参数 下一界面进入效果；第二个参数 当前界面退出效果
-            act.getActivity().overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+//            act.getActivity().overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -162,7 +162,7 @@ public class JumpUtils {
 
         act.startActivityForResult(intent, requestCode);
         //第一个参数 下一界面进入效果；第二个参数 当前界面退出效果
-        act.getActivity().overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+//        act.getActivity().overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
     }
 
     /**
@@ -177,7 +177,7 @@ public class JumpUtils {
         }
         act.setResult(Activity.RESULT_OK, intent);
         act.finish();
-        act.overridePendingTransition(R.anim.anim_slide_right_in, R.anim.anim_slide_right_out);
+//        act.overridePendingTransition(R.anim.anim_slide_right_in, R.anim.anim_slide_right_out);
     }
 
     /**
@@ -185,7 +185,7 @@ public class JumpUtils {
      */
     public static void exitActivity(AppCompatActivity act) {
         act.finish();
-        act.overridePendingTransition(R.anim.anim_slide_right_in, R.anim.anim_slide_right_out);
+//        act.overridePendingTransition(R.anim.anim_slide_right_in, R.anim.anim_slide_right_out);
     }
 
     /**
@@ -196,7 +196,6 @@ public class JumpUtils {
         Intent intent = new Intent(act, actClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //注意
         act.startActivity(intent);
-
         exitActivity(act);
     }
 

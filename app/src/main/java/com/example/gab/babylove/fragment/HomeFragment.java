@@ -101,29 +101,6 @@ public class HomeFragment extends BaseFragment {
     /**
      * 请求参数
      */
-//    private void GetGetDicts() {
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("type", "top");  //
-//        params.put("key", "65a63052634458a9ba2859f95ce6b218");  //
-//
-//        new NetRequest.Builder().create().requestDate(mConnService.GetHeadline(params).compose(RxHelper.handleResult()),
-//                new NetCallBack<ArrayList<HomeBean>>() {
-//                    @Override
-//                    public void onSuccess(ArrayList<HomeBean> data) {
-//                        if (null != data) {
-//                            mAdapter.setmDatas(data);
-//                            mAdapter.notifyDataSetChanged();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void updataLayout(int flag) {
-//                        L.e("请求失败");
-//                        L.e(params.toString());
-//                    }
-//                });
-//    }
-
 
     @Override
     public void onResume() {
