@@ -1,8 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bgColor">
+        android:background="@color/BgColor"
+        android:orientation="vertical">
+
+
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/BgColor"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+                android:id="@+id/llInfo2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_small"
+                    android:background="@color/BgColor"/>
+
+            <LinearLayout style="@style/myListStyle">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/vector_night_mode"
+                        android:gravity="center_vertical"
+                        android:text="夜间模式"
+                        android:drawablePadding="@dimen/spacing_medium_large"
+                        android:textColor="@color/myTxtColor"
+                        android:textSize="@dimen/textSize_medium_small"/>
+
+                <Switch
+                        android:id="@+id/night_switch"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/Ll_cache"
+                    style="@style/myListStyle">
+
+                <TextView
+                        android:id="@+id/tv_cache_clear"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="清空缓存"
+                        android:drawableLeft="@drawable/vector_cache_clear"
+                        android:drawablePadding="@dimen/spacing_medium_large"
+                        android:textColor="@color/myTxtColor"
+                        android:textSize="@dimen/textSize_medium_small"
+                        />
+
+                <TextView
+                        android:id="@+id/tv_cache_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:textSize="14sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/Ll_praise"
+                    style="@style/myListStyle">
+
+                <TextView
+                        android:id="@+id/tv_praise"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="给个好评"
+                        android:drawableLeft="@drawable/vector_praise"
+                        android:drawablePadding="@dimen/spacing_medium_large"
+                        android:textColor="@color/myTxtColor"
+                        android:textSize="@dimen/textSize_medium_small"
+                        />
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
