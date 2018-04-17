@@ -187,14 +187,14 @@ public class LoginActivity extends BaseActivity {
         mConnService.getLogin(param)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<LoginBean>>(progressDialog) {
+                .subscribe(new NetCallBack<LoginBean>(progressDialog) {
                     @Override
-                    protected void onSuccess(BeanModule<LoginBean> login) {
+                    protected void onSuccess(LoginBean login) {
                         ACache mCache = ACache.get(BaseApplication.getApplication());
                         mCache.put(ConstantUtils.userName, login);
 
                         SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
-                        SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getRows().getUsername());
+                        SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getUsername());
                         Bundle bundle = new Bundle();
                         bundle.putString("LoginBean", mCache.getAsString("User_Name"));
                         JumpUtils.jump(mContext, MainActivity.class, bundle);

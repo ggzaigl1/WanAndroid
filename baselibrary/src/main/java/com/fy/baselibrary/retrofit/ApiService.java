@@ -43,7 +43,7 @@ public interface ApiService {
     @Streaming
     @Headers({"url_name:user"})
     @POST("user/login")
-    Observable<BeanModule<LoginBean>> getLogin(@Body Map<String, Object> options);
+    Observable<LoginBean> getLogin(@Body Map<String, Object> options);
 
     /**
      * 登出接口
