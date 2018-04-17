@@ -2,7 +2,6 @@ package com.example.gab.babylove.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
 
 import java.util.List;
@@ -65,11 +65,12 @@ public class ToolsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.night_switch, R.id.Ll_cache, R.id.Ll_praise})
+    @OnClick({R.id.night_switch, R.id.Ll_cache, R.id.Ll_praise, R.id.Ll_phoneUtils})
     @Override
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
+            //夜间模式
             case R.id.night_switch:
                 Switch sw = (Switch) view;
                 boolean isChecked = sw.isChecked();
@@ -79,35 +80,34 @@ public class ToolsActivity extends BaseActivity {
                     T.showShort("关闭夜间模式");
                 }
                 break;
+            //给个好评
             case R.id.Ll_praise:
                 startMarket();
                 break;
+            //手机相关信息
+            case R.id.Ll_phoneUtils:
+                JumpUtils.jump(mContext, PhoneUtilsActivity.class, null);
+                break;
+            //清除缓存
             case R.id.Ll_cache:
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
-                        .setTitle("确认清除")
-                        .setMessage("是否清除缓存")
-                        .setCancelable(false)
-                        .setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        CleanMessageUtil.clearAllCache(getApplicationContext());
-                                        mHandler.sendEmptyMessage(0);
-                                    }
-                                }).start();
-
-                            }
-                        }).setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        });
-                builder.show();
+                Cache(mContext);
                 break;
         }
+    }
+
+    private void Cache(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+                .setTitle("确认清除")
+                .setMessage("是否清除缓存")
+                .setCancelable(false)
+                .setNegativeButton("确定", (dialogInterface, i) -> new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CleanMessageUtil.clearAllCache(getApplicationContext());
+                        mHandler.sendEmptyMessage(0);
+                    }
+                }).start()).setPositiveButton("取消", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
     }
 
     public void startMarket() {

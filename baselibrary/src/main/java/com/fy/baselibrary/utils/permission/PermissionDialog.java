@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 
 import com.fy.baselibrary.R;
+import com.fy.baselibrary.utils.SystemUtils;
 
 /**
  * Created by 初夏小溪 on 2018/3/26 0026.
@@ -58,8 +59,7 @@ public class PermissionDialog {
                 .setNegativeButton(activity.getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
-                        System.exit(0);
+                        SystemUtils.ExitSystem();
                     }
                 })
                 .setPositiveButton(activity.getString(R.string.check_info_setting), new DialogInterface.OnClickListener() {

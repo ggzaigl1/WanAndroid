@@ -22,12 +22,13 @@ import com.example.gab.babylove.activity.ToolsActivity;
 import com.example.gab.babylove.fragment.HomeFragment;
 import com.example.gab.babylove.fragment.NewsFragment;
 import com.example.gab.babylove.fragment.OtherFragment;
-import com.example.gab.babylove.fragment.WifeFragment;
+import com.example.gab.babylove.fragment.PrettyPicturesFragment;
 import com.example.gab.babylove.tbs.FileBrowsingActivity;
 import com.example.gab.babylove.utils.Util;
 import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.SystemUtils;
 import com.fy.baselibrary.utils.T;
 
 import butterknife.BindView;
@@ -40,7 +41,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private FragmentManager mFragmentManager;
     private HomeFragment mHomeFragment;
     private NewsFragment mNewsFragment;
-    private WifeFragment mWifeFragment;
+    private PrettyPicturesFragment mPrettyPicturesFragment;
     private OtherFragment mOtherFragment;
     private Fragment mCurrentFrag; //当前的fragment
     private long exitTime = 0; //保存点击的时间
@@ -70,7 +71,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
         mNewsFragment = new NewsFragment();
-        mWifeFragment = new WifeFragment();
+        mPrettyPicturesFragment = new PrettyPicturesFragment();
         mOtherFragment = new OtherFragment();
         initBottomNavigation();
         switchContent(mHomeFragment);
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //                new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO}), PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
         View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);
         ImageView imageView = headerView.findViewById(R.id.headerView);
-        imageView.setOnClickListener(v -> JumpUtils.jump(mContext, PhotoViewActivity.class,null));
+        imageView.setOnClickListener(v -> JumpUtils.jump(mContext, PhotoViewActivity.class, null));
         TextView tv_title = headerView.findViewById(R.id.tv_title);
     }
 
@@ -138,7 +139,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 switchContent(mNewsFragment);
                 break;
             case 2:
-                switchContent(mWifeFragment);
+                switchContent(mPrettyPicturesFragment);
                 break;
             case 3:
                 switchContent(mOtherFragment);
@@ -162,17 +163,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            JumpUtils.jump(mContext, PersonalCenterActivity.class,null);
+            JumpUtils.jump(mContext, PersonalCenterActivity.class, null);
             // Handle the camera action
         } else if (id == R.id.nav_personal_center) {
-            JumpUtils.jump(mContext, FileBrowsingActivity.class,null);
+            JumpUtils.jump(mContext, FileBrowsingActivity.class, null);
         } else if (id == R.id.nav_share) {
             T.showShort("nav_share");
         } else if (id == R.id.nav_send) {
             T.showShort("nav_send");
         } else if (id == R.id.nav_exit) {
-        }else if (id ==R.id.nav_manage){
-            JumpUtils.jump(mContext, ToolsActivity.class,null);
+            SystemUtils.ExitSystem();
+        } else if (id == R.id.nav_manage) {
+            JumpUtils.jump(mContext, ToolsActivity.class, null);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -187,7 +189,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
             } else if ((System.currentTimeMillis() - exitTime) >= 2000) {
-                Util.CustomToast.INSTANCE.showToast(mContext,R.string.exit_app);
+                Util.CustomToast.INSTANCE.showToast(mContext, R.string.exit_app);
 //                T.showLong(R.string.exit_app);
                 exitTime = System.currentTimeMillis();
             } else {

@@ -15,8 +15,6 @@ import id.arieridwan.lib.PageLoader;
 
 public class PersonalCenterActivity extends BaseActivity {
 
-    @BindView(R.id.pageloader)
-    PageLoader mPageLoader;
 
     @Override
     protected int getContentView() {
@@ -25,6 +23,5 @@ public class PersonalCenterActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        mPageLoader.startProgress();
     }
 }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/constraintLayout"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white">
-
+        android:orientation="vertical">
 
     <include
             android:id="@+id/statusView"
@@ -20,41 +21,31 @@
         <include layout="@layout/activity_head"/>
     </FrameLayout>
 
-    <HorizontalScrollView
-            android:id="@+id/horizontal_view"
-            android:scrollbars="none"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            >
 
-        <TextView
-                android:id="@+id/tv_baby"
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="大宝贝的专用库"
-                android:padding="10dp"
-                android:textColor="@color/myTxtColor"/>
+                android:layout_height="match_parent"/>
 
-    </HorizontalScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <TextView
-            android:id="@+id/tv_Os"
-            android:layout_width="match_parent"
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_top"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@color/myTxtColor"/>
-
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <Button
-                android:id="@+id/bt_Dial"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/bgColor"
-                android:background="@drawable/button_selector"
-                android:text="Dial"/>
-
-    </RelativeLayout>
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_fab_love"/>
 
 </LinearLayout>

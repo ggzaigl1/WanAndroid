@@ -60,10 +60,10 @@
     <string name="birthday">出生日期</string>
     <string name="school">学校</string>
     <string name="parentPhone">本人电话</string>
-    <string name="nav_00_title">主页</string>
-    <string name="nav_01_title">新闻</string>
-    <string name="nav_02_title">玩意</string>
-    <string name="nav_03_title">她的</string>
+    <string name="nav_00_title">Home</string>
+    <string name="nav_01_title">News</string>
+    <string name="nav_02_title">Pictures</string>
+    <string name="nav_03_title">Star</string>
     <string name="userName">账号：</string>
     <string name="passWord">密码：</string>
     <string name="rememberPass">记住密码</string>

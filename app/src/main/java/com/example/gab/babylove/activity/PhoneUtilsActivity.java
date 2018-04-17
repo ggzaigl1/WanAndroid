@@ -1,13 +1,15 @@
-package com.example.gab.babylove.fragment;
+package com.example.gab.babylove.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.BatteryManager;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -18,10 +20,9 @@ import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.PhoneUtils;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.activity.DialActivity;
-import com.fy.baselibrary.base.BaseFragment;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.utils.DeviceUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
@@ -30,24 +31,16 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by Gab on 2017/12/15 0015.
- * 大宝贝的专用类
+ * Created by 初夏小溪 on 2018/4/17 0017.
+ * 手機相關信息
  */
 
-public class WifeFragment extends BaseFragment implements View.OnTouchListener {
+public class PhoneUtilsActivity extends BaseActivity implements View.OnTouchListener {
 
     @BindView(R.id.tv_baby)
     TextView tv_baby;
     @BindView(R.id.tv_Os)
     TextView tv_Os;
-    @BindView(R.id.statusView)
-    View statusView;
-    @BindView(R.id.tvTitle)
-    TextView tvTitle;
-    @BindView(R.id.tvBack)
-    TextView tvBack;
-    @BindView(R.id.tvMenu)
-    TextView tvMenu;
     @BindView(R.id.horizontal_view)
     HorizontalScrollView mHorizontalScrollView;
     private GestureDetector mGestureDetector;
@@ -59,17 +52,16 @@ public class WifeFragment extends BaseFragment implements View.OnTouchListener {
     private String BatteryStatus;   //电池状态
     private String BatteryTemp;     //电池使用情况
 
+
     @Override
-    protected int getContentLayout() {
-        return R.layout.fragment_wife;
+    protected int getContentView() {
+        return R.layout.activity_phone_utils;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
+    @SuppressLint("SetTextI18n")
     @Override
-    protected void baseInit() {
-        super.baseInit();
-        tvTitle.setText("杂乱无章的什么玩意儿");
+    protected void init(Bundle savedInstanceState) {
+        tvTitle.setText("手機相關信息");
         tvMenu.setVisibility(View.GONE);
         tvBack.setVisibility(View.GONE);
         tv_baby.post(() -> {
@@ -81,14 +73,18 @@ public class WifeFragment extends BaseFragment implements View.OnTouchListener {
         });
         mContext.registerReceiver(mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
-        tv_Os.setText("手机厂商:" + DeviceUtils.getDeviceMake()
-                + "\n" + "手机型号:" + DeviceUtils.getSystemModel()
-                + "\n" + "Android版本号:" + DeviceUtils.getDeviceVersion()
-                + "\n" + "手机IMEI:" + DeviceUtils.getIMEI(mContext)
-                + "\n" + "目前电量为" + BatteryN + "% --- " + BatteryStatus
-                + "\n" + "电压为" + BatteryV + "mV --- " + BatteryTemp
-                + "\n" + "温度为" + (BatteryT * 0.1) + "℃");
-        MdStatusBarCompat.setStatusView(mContext, statusView);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            return;
+        }
+        tv_Os.setText("手機廠商:" + DeviceUtils.getDeviceMake()
+                + "\n" + "手機型號:" + DeviceUtils.getSystemModel()
+                + "\n" + "Android版本號:" + DeviceUtils.getDeviceVersion()
+                + "\n" + "手機IMEI:" + DeviceUtils.getIMEI(mContext)
+                + "\n" + "手機MEID：" + PhoneUtils.getMEID()
+                + "\n" + "目前電量為" + BatteryN + "% --- " + BatteryStatus
+                + "\n" + "電壓為" + BatteryV + "mV --- " + BatteryTemp
+                + "\n" + "溫度為" + (BatteryT * 0.1) + "℃");
         mGestureDetector = new GestureDetector(new gestureListener()); //使用派生自OnGestureListener
     }
 
@@ -198,5 +194,4 @@ public class WifeFragment extends BaseFragment implements View.OnTouchListener {
             return true;
         }
     }
-
 }

@@ -88,6 +88,23 @@
                         />
 
             </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/Ll_phoneUtils"
+                    style="@style/myListStyle">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="手机相关"
+                        android:drawableLeft="@drawable/vector_phoneutils"
+                        android:drawablePadding="@dimen/spacing_medium_large"
+                        android:textColor="@color/myTxtColor"
+                        android:textSize="@dimen/textSize_medium_small"
+                        />
+
+            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

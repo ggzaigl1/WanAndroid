@@ -16,7 +16,7 @@ import com.example.gab.babylove.R;
 
 /**
  * Created by Gab on 2018/1/23 0023.
- *
+ * 自定义view
  */
 
 public class CustomView extends View {

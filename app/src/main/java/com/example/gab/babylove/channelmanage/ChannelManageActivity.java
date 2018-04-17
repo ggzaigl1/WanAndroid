@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.example.gab.babylove.R;
@@ -38,6 +39,7 @@ public class ChannelManageActivity extends BaseActivity implements ChannelAdapte
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        tvMenu.setVisibility(View.GONE);
         initView();
     }
     private void initView(){

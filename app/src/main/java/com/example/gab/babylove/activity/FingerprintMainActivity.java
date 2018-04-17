@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *  指紋相关工具类
+ * 指紋相关工具类
  */
 public class FingerprintMainActivity extends BaseActivity {
 
@@ -36,17 +36,19 @@ public class FingerprintMainActivity extends BaseActivity {
 
     /**
      * 初始化相关内容
+     *
      * @param savedInstanceState
      */
     @Override
     protected void init(Bundle savedInstanceState) {
         tvTitle.setText("指纹识别");
+        tvMenu.setVisibility(View.GONE);
         mFingerprintCore = new FingerprintCore(mContext);
         mFingerprintCore.setFingerprintManager(mResultListener);
         mKeyguardLockScreenManager = new KeyguardLockScreenManager(mContext);
     }
 
-    @OnClick({R.id.fingerprint_recognition_start, R.id.fingerprint_recognition_cancel, R.id.fingerprint_recognition_sys_unlock,
+    @OnClick({R.id.tvBack, R.id.fingerprint_recognition_start, R.id.fingerprint_recognition_cancel, R.id.fingerprint_recognition_sys_unlock,
             R.id.fingerprint_recognition_sys_setting})
     @Override
     public void onClick(View view) {
@@ -63,11 +65,15 @@ public class FingerprintMainActivity extends BaseActivity {
             case R.id.fingerprint_recognition_sys_setting:
                 openFingerPrintSettingPage(mContext);
                 break;
+            case R.id.tvBack:
+                this.finish();
+                break;
         }
     }
 
     /**
      * 跳转到设置页面
+     *
      * @param context
      */
     public void openFingerPrintSettingPage(Context context) {

@@ -1,4 +1,4 @@
-package com.example.gab.babylove.activity;
+package com.example.gab.babylove.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -11,13 +11,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Interpolator;
+import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.activity.PictureDetailActivity;
 import com.example.gab.babylove.adapter.GankMAdapter;
 import com.example.gab.babylove.bean.OrListBean;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.entity.GankBean;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.T;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -33,17 +36,23 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by 初夏小溪 on 2018/4/13 0013.
- *
+ * Created by Gab on 2017/12/15 0015.
+ * 美圖欣賞
  */
 
-public class GankMZActivity extends BaseActivity {
+public class PrettyPicturesFragment extends BaseFragment {
+
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.tvBack)
+    TextView tvBack;
+    @BindView(R.id.tvMenu)
+    TextView tvMenu;
 
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-
     @BindView(R.id.fab_top)
     FloatingActionButton fab_top;
     GankMAdapter mAdapter;
@@ -51,18 +60,20 @@ public class GankMZActivity extends BaseActivity {
     private final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
 
     @Override
-    protected int getContentView() {
-        return R.layout.activity_gank;
+    protected int getContentLayout() {
+        return R.layout.fragment_wife;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        tvTitle.setText("看美女");
+    protected void baseInit() {
+        super.baseInit();
+        tvMenu.setVisibility(View.GONE);
+        tvBack.setVisibility(View.GONE);
+        tvTitle.setText("美圖欣賞");
         tvMenu.setVisibility(View.GONE);
         initRv();
         initRefresh();
         getCourseDetails(mCurPage);
-
     }
 
     private void initRefresh() {
@@ -102,8 +113,10 @@ public class GankMZActivity extends BaseActivity {
                                 mAdapter.getData().addAll(gankBean.getResults());
                                 mRefreshLayout.finishLoadmore();
                                 mAdapter.notifyDataSetChanged();
+                                T.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
                             } else {
                                 mAdapter.setNewData(gankBean.getResults());
+                                T.showShort("加载了" + gankBean.getResults().size() + "妹子");
                             }
                         }
                     }

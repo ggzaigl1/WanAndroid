@@ -47,11 +47,13 @@ public class WebViewActivity extends BaseActivity {
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void init(Bundle savedInstanceState) {
-        initview();
+        tvMenu.setVisibility(View.GONE);
+        tvBack.setOnClickListener(v -> finish());
+        initView();
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void initview() {
+    private void initView() {
         //加快HTML网页加载完成的速度，等页面finish再加载图片
         if(Build.VERSION.SDK_INT >= 19) {
             mWebView.getSettings().setLoadsImagesAutomatically(true);
