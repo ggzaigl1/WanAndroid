@@ -19,6 +19,7 @@ import com.example.gab.babylove.adapter.GankMAdapter;
 import com.example.gab.babylove.bean.OrListBean;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.entity.GankBean;
+import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -67,10 +68,8 @@ public class PrettyPicturesFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
-        tvMenu.setVisibility(View.GONE);
         tvBack.setVisibility(View.GONE);
         tvTitle.setText("美圖欣賞");
-        tvMenu.setVisibility(View.GONE);
         initRv();
         initRefresh();
         getCourseDetails(mCurPage);
@@ -84,7 +83,6 @@ public class PrettyPicturesFragment extends BaseFragment {
             public void onLoadmore(RefreshLayout refreshlayout) {
                 mCurPage += 1;
                 getCourseDetails(mCurPage);
-
             }
 
             @Override
@@ -95,7 +93,6 @@ public class PrettyPicturesFragment extends BaseFragment {
         });
     }
 
-
     @SuppressLint("CheckResult")
     private void getCourseDetails(int mCurPage) {
         mConnService.getCourseDetails(20, mCurPage)
@@ -105,7 +102,6 @@ public class PrettyPicturesFragment extends BaseFragment {
                     @Override
                     public void accept(GankBean gankBean) throws Exception {
                         if (null != gankBean && null != gankBean.getResults()) {
-//                            mPageNo = bean();
                             if (mRefreshLayout.isRefreshing()) {
                                 mAdapter.setNewData(gankBean.getResults());
                                 mRefreshLayout.finishRefresh();

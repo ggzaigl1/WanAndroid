@@ -1,5 +1,7 @@
 package com.fy.baselibrary.retrofit;
 
+import com.fy.baselibrary.entity.ArticleBean;
+import com.fy.baselibrary.entity.BannerBean;
 import com.fy.baselibrary.entity.GankBean;
 import com.fy.baselibrary.entity.HomeBean;
 import com.fy.baselibrary.entity.LoginBean;
@@ -36,7 +38,7 @@ public interface ApiService {
     String IMG_BASE_URL_THUM = BASE_URL + "image/thum";
 
     /**
-     * 医护人员登入接口
+     * 登入接口
      */
     @Streaming
     @Headers({"url_name:user"})
@@ -44,7 +46,7 @@ public interface ApiService {
     Observable<BeanModule<ArrayList<LoginBean>>> DocAndNurse(@Body Map<String, Object> options);
 
     /**
-     * 医护人员登出接口
+     * 登出接口
      */
     @Streaming
     @Headers({"url_name:user"})
@@ -59,13 +61,27 @@ public interface ApiService {
     @GET("/toutiao/index")
     Observable<BeanModule<ArrayList<HomeBean>>> GetHeadline(@QueryMap Map<String, Object> options);
 
+    /**
+     * 首页 banner
+     */
+    @Headers({"url_name:user"})
+    @GET("http://www.wanandroid.com/banner/json")
+    Observable<BannerBean> getBanner(@QueryMap Map<String, Object> options);
 
     /**
-     * 运动课程 ---运动详情
+     * 美图图片
      */
     @Headers({"url_name:user"})
     @GET("http://gank.io/api/data/福利/{count}/{page}")
     Observable<GankBean> getCourseDetails(@Path("count") int count, @Path("page") int page);
+
+    /**
+     * 首页文章列表
+     */
+    @Headers({"url_name:user"})
+    @GET("http://www.wanandroid.com/article/list/{page}/json")
+    Observable<ArticleBean> getArticleList(@Path("page") int page);
+
 
 
     /**

@@ -41,7 +41,7 @@ import butterknife.OnClick;
  * 其他
  */
 
-public class OtherFragment extends BaseFragment {
+public class StarFragment extends BaseFragment {
 
     @BindView(R.id.imgHead)
     AppCompatImageView imgHead;

@@ -54,7 +54,6 @@ public class WebViewFragment extends Fragment {
             }
         });
         tvTitle.setText("产品推荐");
-        tvMenu.setVisibility(View.GONE);
         tvBack.setVisibility(View.GONE);
         mWebView.loadUrl(TIME_OUT_URL);
         // Enable Javascript

@@ -62,7 +62,6 @@ public class PhoneUtilsActivity extends BaseActivity implements View.OnTouchList
     @Override
     protected void init(Bundle savedInstanceState) {
         tvTitle.setText("手機相關信息");
-        tvMenu.setVisibility(View.GONE);
         tvBack.setVisibility(View.GONE);
         tv_baby.post(() -> {
             mRigthToLeftAnim = new TranslateAnimation(mHorizontalScrollView.getWidth(), -tv_baby.getWidth(), 0, 0);

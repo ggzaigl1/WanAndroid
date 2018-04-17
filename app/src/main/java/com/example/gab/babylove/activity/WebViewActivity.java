@@ -47,7 +47,6 @@ public class WebViewActivity extends BaseActivity {
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void init(Bundle savedInstanceState) {
-        tvMenu.setVisibility(View.GONE);
         tvBack.setOnClickListener(v -> finish());
         initView();
     }

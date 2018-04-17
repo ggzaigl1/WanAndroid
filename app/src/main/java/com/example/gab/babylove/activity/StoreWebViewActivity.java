@@ -63,7 +63,6 @@ public class StoreWebViewActivity extends AppCompatActivity {
         tvMenu = findViewById(R.id.tvMenu);
         tvBack = findViewById(R.id.tvBack);
         tvTitle = findViewById(R.id.tvTitle);
-        tvMenu.setVisibility(View.GONE);
         tvBack.setVisibility(View.GONE);
 //         Enable Javascript
         WebSettings webSettings = mWebView.getSettings();

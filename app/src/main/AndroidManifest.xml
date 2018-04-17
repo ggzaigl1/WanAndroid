@@ -128,7 +128,7 @@
         <activity
                 android:name=".activity.PhoneUtilsActivity"/>
         <activity
-                android:name=".activity.GankMZActivity"/>
+                android:name=".activity.SelectorButtonActivity"/>
         <activity
                 android:name=".activity.PictureDetailActivity"/>
         <activity

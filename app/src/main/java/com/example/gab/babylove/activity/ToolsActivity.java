@@ -56,7 +56,6 @@ public class ToolsActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         tvTitle.setText("设置");
-        tvMenu.setVisibility(View.GONE);
 
         try {
             tv_cache_size.setText(CleanMessageUtil.getTotalCacheSize(mContext));
@@ -65,7 +64,7 @@ public class ToolsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.night_switch, R.id.Ll_cache, R.id.Ll_praise, R.id.Ll_phoneUtils})
+    @OnClick({R.id.night_switch, R.id.Ll_cache, R.id.Ll_praise, R.id.Ll_phoneUtils, R.id.Ll_stroke,R.id.Ll_Button})
     @Override
     public void onClick(View view) {
         super.onClick(view);
@@ -91,6 +90,14 @@ public class ToolsActivity extends BaseActivity {
             //清除缓存
             case R.id.Ll_cache:
                 Cache(mContext);
+                break;
+            //指纹相关
+            case R.id.Ll_stroke:
+                JumpUtils.jump(mContext, FingerprintMainActivity.class, null);
+                break;
+            //指纹相关
+            case R.id.Ll_Button:
+                JumpUtils.jump(mContext, SelectorButtonActivity.class, null);
                 break;
         }
     }

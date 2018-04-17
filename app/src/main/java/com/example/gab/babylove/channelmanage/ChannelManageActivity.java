@@ -39,7 +39,6 @@ public class ChannelManageActivity extends BaseActivity implements ChannelAdapte
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        tvMenu.setVisibility(View.GONE);
         initView();
     }
     private void initView(){

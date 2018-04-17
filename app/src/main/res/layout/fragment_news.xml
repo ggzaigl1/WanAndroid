@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@drawable/color_list"
@@ -19,117 +18,11 @@
         <include layout="@layout/activity_head"/>
     </FrameLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
-
-        <LinearLayout
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_demo"/>
-
-            <com.example.gab.babylove.widget.StateButton
-                android:id="@+id/bt_OnTraceList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:text="模拟快递布局"
-                android:textColor="@android:color/white"
-                app:normalBackgroundColor="@color/pink"
-                app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:radius="10dp"
-                app:unableBackgroundColor="@android:color/holo_red_light"/>
-
-            <com.example.gab.babylove.widget.StateButton
-                android:id="@+id/text_webView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:text="WebView"
-                app:animationDuration="200"
-                app:normalStrokeColor="@android:color/white"
-                app:normalStrokeWidth="2dp"
-                app:normalTextColor="@android:color/white"
-                app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:pressedTextColor="@android:color/white"
-                app:radius="5dp"/>
-
-            <com.example.gab.babylove.widget.StateButton
-                    android:id="@+id/dash_test"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:text="AgentWeb"
-                    app:normalStrokeColor="@android:color/white"
-                    app:normalStrokeWidth="2dp"
-                    app:normalTextColor="@android:color/white"
-                    app:pressedStrokeColor="@android:color/holo_red_light"
-                    app:pressedStrokeWidth="2dp"
-                    app:pressedTextColor="@android:color/holo_red_light"
-                    app:radius="5dp"
-                    app:strokeDashGap="5dp"
-                    app:strokeDashWidth="5dp"
-                    app:unableStrokeColor="@android:color/holo_orange_dark"
-                    app:unableStrokeWidth="2dp"
-                    app:unableTextColor="@android:color/holo_orange_dark"/>
-
-            <com.example.gab.babylove.widget.StateButton
-                android:id="@+id/different_radius_test"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_gravity="center"
-                android:text="different_radius"
-                android:textColor="@color/myTxtLight"
-                app:normalBackgroundColor="@color/white"
-                app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:radius="2dp"
-                app:round="true"
-                app:unableBackgroundColor="@android:color/holo_red_light"/>
-
-            <com.example.gab.babylove.widget.StateButton
-                android:id="@+id/stroke_test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:text="指纹相关"
-                android:textColor="@android:color/white"
-                app:normalBackgroundColor="@color/textGreen"
-                app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:unableBackgroundColor="@android:color/holo_red_light"/>
-
-            <com.example.gab.babylove.widget.StateButton
-                android:id="@+id/animation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:text="Animation"
-                app:normalStrokeColor="@android:color/white"
-                app:normalStrokeWidth="2dp"
-                app:normalTextColor="@android:color/white"
-                app:pressedBackgroundColor="@color/colorPrimaryDark"
-                app:pressedTextColor="@android:color/white"
-                app:radius="5dp"/>
-
-        </LinearLayout>
-    </ScrollView>
+            android:overScrollMode="never"
+            android:scrollbars="none"/>
 
 </LinearLayout>

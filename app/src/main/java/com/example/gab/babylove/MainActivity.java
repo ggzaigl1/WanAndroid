@@ -21,7 +21,7 @@ import com.example.gab.babylove.activity.PhotoViewActivity;
 import com.example.gab.babylove.activity.ToolsActivity;
 import com.example.gab.babylove.fragment.HomeFragment;
 import com.example.gab.babylove.fragment.NewsFragment;
-import com.example.gab.babylove.fragment.OtherFragment;
+import com.example.gab.babylove.fragment.StarFragment;
 import com.example.gab.babylove.fragment.PrettyPicturesFragment;
 import com.example.gab.babylove.tbs.FileBrowsingActivity;
 import com.example.gab.babylove.utils.Util;
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private HomeFragment mHomeFragment;
     private NewsFragment mNewsFragment;
     private PrettyPicturesFragment mPrettyPicturesFragment;
-    private OtherFragment mOtherFragment;
+    private StarFragment mOtherFragment;
     private Fragment mCurrentFrag; //当前的fragment
     private long exitTime = 0; //保存点击的时间
     @BindView(R.id.fl_content)
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mHomeFragment = new HomeFragment();
         mNewsFragment = new NewsFragment();
         mPrettyPicturesFragment = new PrettyPicturesFragment();
-        mOtherFragment = new OtherFragment();
+        mOtherFragment = new StarFragment();
         initBottomNavigation();
         switchContent(mHomeFragment);
         mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
