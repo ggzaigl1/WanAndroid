@@ -9,6 +9,7 @@
         android:paddingRight="8dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
+        app:cardElevation="5dp"
         android:background="@color/BgColor">
 
     <LinearLayout
