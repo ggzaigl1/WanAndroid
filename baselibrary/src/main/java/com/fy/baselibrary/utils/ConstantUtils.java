@@ -12,7 +12,22 @@ public class ConstantUtils {
     public static String custom_Url = "";
 
     /**
-     * 区分不同用户的缓存 key
+     * 默认的超时时间
+     */
+    public static int DEFAULT_MILLISECONDS = 60000;
+
+    /**
+     * 服务器地址
+     */
+    public static String BASE_URL = "http://www.wanandroid.com/";
+
+    /**
+     * 图片 地址 (可选)
+     */
+    public static String IMG_BASE_URL = BASE_URL + "image";
+
+    /**
+     * 用户id
      */
     public static String userId = "userid";
 
@@ -22,24 +37,15 @@ public class ConstantUtils {
     public static String token = "";
 
     /**
-     * 角色
+     * 用户是否登录 key
      */
-    public static String role = "";
+    public static String isLogin = "is_Login";
 
     /**
-     * student实体类中id
+     * 缓存用户名 key
      */
-    public static int studentID = 0;
+    public static String userName = "User_Name";
 
-    /**
-     * 当前个人信息图片上传 key
-     */
-    public static String selectvisitimager = "selectvisitimager";
-
-    /**
-     * 学生实体类 缓存 key
-     */
-    public static final String student = "stuInfo";
 
     /**
      * APP 当前模式 （日间/夜间）
@@ -49,64 +55,14 @@ public class ConstantUtils {
     /**
      * 用户是否 第一次打开APP
      */
-    public static String isfirstOpenApp = "";
+    public static final String isfirstOpenApp = "userIsFirstOpenApp";
+
 
     /**
-     * 普通 状态栏
+     * 吸附 ViewType
      */
-    public static final int OrdinaryStatus = 1;
-    /**
-     * 全屏透明 状态栏
-     */
-    public static final int ImageTransparent = 2;
-    /**
-     * 全屏半透明 状态栏
-     */
-    public static final int ImageTranslucent = 3;
+    public static final int StickyType = 58;
 
-    /**
-     * ToolBar+TabLayout可伸缩 状态栏
-     */
-    public static final int TelescopicStatus = 4;
-    /**
-     * DrawerLayout+ToolBar+TabLayout 可伸缩 状态栏
-     */
-    public static final int DrawerToolbarTabLayout = 5;
-    /**
-     * CollapsingToolbarLayout状态栏(可折叠图片) 状态栏
-     */
-    public static final int CollapsingToolbar = 6;
-    /**
-     * CollapsingToolbar折叠时statusBar显示和隐藏 状态栏
-     */
-    public static final int CollapsingToolbarStatus = 7;
-
-    /**
-     * DrawerLayout+ToolBar 状态栏
-     */
-    public static final int DrawerToolbar = 8;
-
-    /**
-     * 年级编码
-     */
-    public static String ncode = "";
-
-    /**
-     * 学生体质信息 缓存 key
-     */
-    public static final String totalHealthInfoBean = "";
-
-    /**
-     * 学生头像
-     */
-    public static String head_portrait = "";
-
-    //练习项目
-    public static final String SPORTS_METHODTOAPP = "sports_methodtoapp";
-    //获取某日打卡记录
-    public static final String PUNCH_CLOCKTOAPP = "punch_clocktoapp";
-    //获取获取某月打卡记录日期
-    public static final String PUNCHC_LOCKBYMONTH = "punchc_lockbymonth";
 
 
 }

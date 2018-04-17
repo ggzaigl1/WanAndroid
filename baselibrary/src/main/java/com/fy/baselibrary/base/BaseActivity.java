@@ -56,10 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected ViewStub vStubTitleBar;
     protected LinearLayout rlHead;
 
-    protected PermissionChecker permissionChecker;
-    protected static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.CAMERA,
-    };
     @Inject
     protected ApiService mConnService;
     protected CompositeDisposable mCompositeDisposable;

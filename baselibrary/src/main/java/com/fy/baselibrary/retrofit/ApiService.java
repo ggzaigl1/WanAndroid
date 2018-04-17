@@ -38,12 +38,12 @@ public interface ApiService {
     String IMG_BASE_URL_THUM = BASE_URL + "image/thum";
 
     /**
-     * 登入接口
+     * 登录
      */
     @Streaming
     @Headers({"url_name:user"})
-    @POST("/app/ydys/DocAndNurse")
-    Observable<BeanModule<ArrayList<LoginBean>>> DocAndNurse(@Body Map<String, Object> options);
+    @POST("user/login")
+    Observable<BeanModule<LoginBean>> getLogin(@Body Map<String, Object> options);
 
     /**
      * 登出接口

@@ -5,32 +5,45 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.text.Spannable;
-import android.text.SpannableString;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.text.Editable;
 import android.text.TextUtils;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.ForegroundColorSpan;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
+import com.fy.baselibrary.application.BaseApplication;
 import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.entity.ArticleBean;
+import com.fy.baselibrary.entity.LoginBean;
+import com.fy.baselibrary.retrofit.BeanModule;
+import com.fy.baselibrary.retrofit.NetCallBack;
+import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.cache.ACache;
 import com.fy.baselibrary.utils.permission.PermissionChecker;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 登录
@@ -40,18 +53,17 @@ public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.cBoxPass)
     CheckBox cBoxPass;
-    @BindView(R.id.tvLoginTitle)
-    TextView tvLoginTitle;
-    @BindView(R.id.editUser)
-    EditText mUserNameEdt;
+    @BindView(R.id.extInputLayout)
+    TextInputLayout iLayoutPass;
+
+    @BindView(R.id.editName)
+    TextInputEditText editName;
     @BindView(R.id.editPass)
-    EditText mPassword;
-    String user_name, password;
+    TextInputEditText editPass;
+
     protected PermissionChecker permissionChecker;
     protected static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.CAMERA,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE
     };
 
     @Override
@@ -82,7 +94,30 @@ public class LoginActivity extends BaseActivity {
                 }
             }).show();
         }
+
+        editPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String text = editPass.getText().toString().trim();
+                if (!TextUtils.isEmpty(text) && text.length() > 12) {
+                    iLayoutPass.setError("密码不符合规则!!!");
+                } else {
+                    if (null != iLayoutPass.getError()) {
+                        iLayoutPass.setError(null);
+                    }
+                }
+            }
+        });
     }
+
 
     /**
      * 检查权限
@@ -123,94 +158,55 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-//        //动态判断权限
-//        startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
-//                new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_PHONE_STATE})
-//                ,PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
 
-        Spannable sp = new SpannableString(getString(R.string.loginTitle));
-        sp.setSpan(new AbsoluteSizeSpan(20, true), 0, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)), 0, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new AbsoluteSizeSpan(14, true), 11, sp.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        sp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.myTxtColor)),
-                11, sp.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        tvLoginTitle.setText(sp);
-
-        String userName = SpfUtils.getSpfSaveStr("UserID");
-        if (!TextUtils.isEmpty(userName)) {
-            mUserNameEdt.setText(userName);
-            mUserNameEdt.setSelection(userName.length());
-            cBoxPass.setChecked(true);
-        }
-
-//        cBoxPass.setChecked(true);
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE) {
-//            switch (resultCode) {
-//                case PermissionActivity.CALL_BACK_RESULT_CODE_SUCCESS:
-//                    T.showShort("0");
-//                    break;
-//                case PermissionActivity.CALL_BACK_RESULE_CODE_FAILURE:
-//                    T.showShort("1");
-//                    break;
-//            }
-//        }
-//    }
 
-    @OnClick({R.id.tvLogin, R.id.tvLoginTitle})
+    @OnClick({R.id.tvLogin})
     @Override
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
             case R.id.tvLogin:
-                JumpUtils.jump(mContext, MainActivity.class, null);
-                finish();
-//                user_name = mUserNameEdt.getText().toString().trim();
-//                password = mPassword.getText().toString().trim();
+                login();
 //                runLogin(user_name, password);
                 break;
-            case R.id.tvLoginTitle:
-                new MaterialDialog.Builder(this).title("需要获取以下权限").content("通过相机权限和电话权限来进行拍照和确定本机设备ID,已保证为您个性化推荐内容;")
-                        .positiveText("下一步").onPositive(new MaterialDialog.SingleButtonCallback() {
+        }
+    }
+
+    private void login() {
+        IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.user_login);
+
+        String mUserName = editName.getText().toString().trim();//"ggzaigl1"
+        String mPassWord = editPass.getText().toString().trim();//"tmdligen"
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("username", mUserName);
+        param.put("password", mPassWord);
+
+        mConnService.getLogin(param)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetCallBack<BeanModule<LoginBean>>(progressDialog) {
                     @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        permissionChecker = new PermissionChecker(mContext);
-                        permissionChecker.setTitle(getString(R.string.check_info_title));
-                        permissionChecker.setMessage(getString(R.string.check_info_message));
-                        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-                            permissionChecker.requestPermissions();
-                        } else {
-                            android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
-                            System.exit(0);
-                        }
+                    protected void onSuccess(BeanModule<LoginBean> login) {
+                        ACache mCache = ACache.get(BaseApplication.getApplication());
+                        mCache.put(ConstantUtils.userName, login);
+
+                        SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
+                        SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getRows().getUsername());
+                        Bundle bundle = new Bundle();
+                        bundle.putString("LoginBean", mCache.getAsString("User_Name"));
+                        JumpUtils.jump(mContext, MainActivity.class, bundle);
                     }
-                }).show();
-                break;
-        }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
     }
 
-    private boolean checkInput() {
-        if (user_name.length() < 1) {
-            T.showShort("用户名错误");
-            mUserNameEdt.requestFocus();
-            InputMethodManager imm = (InputMethodManager) mUserNameEdt.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
-            return false;
-        }
-        if (password.isEmpty()) {
-            T.showShort("密码不能为空");
-            mPassword.requestFocus();
-            InputMethodManager imm = (InputMethodManager) mPassword.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
-            return false;
-        }
-
-        return true;
-    }
 
     /**
      * 点击空白位置 隐藏软键盘

@@ -158,17 +158,20 @@ public class HomeFragment extends BaseFragment {
         mConnService.getArticleList(mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((ArticleBean articleBean) -> {
-                    if (null != articleBean && null != articleBean.getData().getDatas()) {
-                        if (mRefreshLayout.isRefreshing()) {
-                            mAdapter.setNewData(articleBean.getData().getDatas());
-                            mRefreshLayout.finishRefresh();
-                        } else if (mRefreshLayout.isLoading()) {
-                            mAdapter.getData().addAll(articleBean.getData().getDatas());
-                            mRefreshLayout.finishLoadmore();
-                            mAdapter.notifyDataSetChanged();
-                        } else {
-                            mAdapter.setNewData(articleBean.getData().getDatas());
+                .subscribe(new Consumer<ArticleBean>() {
+                    @Override
+                    public void accept(ArticleBean articleBean) throws Exception {
+                        if (null != articleBean && null != articleBean.getData().getDatas()) {
+                            if (mRefreshLayout.isRefreshing()) {
+                                mAdapter.setNewData(articleBean.getData().getDatas());
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mAdapter.getData().addAll(articleBean.getData().getDatas());
+                                mRefreshLayout.finishLoadmore();
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mAdapter.setNewData(articleBean.getData().getDatas());
+                            }
                         }
                     }
                 });
