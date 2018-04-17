@@ -51,7 +51,7 @@ public class NewsFragment extends BaseFragment {
     protected void baseInit() {
         super.baseInit();
         tvTitle.setText("新闻资讯");
-        tvBack.setVisibility(View.GONE);
+        tvBack.setVisibility(View.INVISIBLE);
         MdStatusBarCompat.setStatusView(mContext, statusView);
 
     }

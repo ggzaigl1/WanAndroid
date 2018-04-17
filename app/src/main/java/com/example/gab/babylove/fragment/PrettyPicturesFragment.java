@@ -68,8 +68,8 @@ public class PrettyPicturesFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
-        tvBack.setVisibility(View.GONE);
         tvTitle.setText("美圖欣賞");
+        tvBack.setVisibility(View.INVISIBLE);
         initRv();
         initRefresh();
         getCourseDetails(mCurPage);

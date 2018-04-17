@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fy.baselibrary.R;
@@ -53,7 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected TextView tvBack;
     protected TextView tvMenu;
     protected ViewStub vStubTitleBar;
-    protected ConstraintLayout rlHead;
+    protected LinearLayout rlHead;
 
     protected PermissionChecker permissionChecker;
     protected static final String[] PERMISSIONS = new String[]{

@@ -24,7 +24,6 @@
 
     <color name="bule">#20C5FA</color>
     <!-- 界面字体颜色 深色-->
-    <color name="color_main_string">#333333</color>
     <color name="myTxtColor">#333333</color>
     <!-- 界面字体颜色 浅色-->
     <color name="myTxtLight">#666666</color>

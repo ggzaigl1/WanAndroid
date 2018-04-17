@@ -1,11 +1,13 @@
 package com.example.gab.babylove.adapter;
 
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
 import com.fy.baselibrary.entity.ArticleBean;
+import com.fy.baselibrary.utils.ResourceUtils;
 
 import java.util.List;
 
@@ -22,7 +24,9 @@ public class HomeAdapter extends BaseQuickAdapter<ArticleBean.DataBean.DatasBean
 
     @Override
     protected void convert(BaseViewHolder helper, ArticleBean.DataBean.DatasBean item) {
-        helper.setText(R.id.tv_title, item.getTitle()).setText(R.id.tv_author_name, item.getAuthor())
-                .setText(R.id.tv_date, item.getNiceDate()).setText(R.id.tv_chapterName, "分类：" + item.getChapterName());
+        helper.setText(R.id.tv_title, item.getTitle())
+                .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
+                .setText(R.id.tv_date, item.getNiceDate())
+                .setText(R.id.tv_chapterName, "分类：" + item.getChapterName()).setTextColor(R.id.tv_chapterName,ResourceUtils.getRandomColor());
     }
 }

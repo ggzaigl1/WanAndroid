@@ -32,7 +32,6 @@ public class AgentWebActivity extends BaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         mLinearLayout = findViewById(R.id.mLinearLayout);
-        tvTitle.setText("内容详情");
         mUrl = getIntent().getStringExtra("UrlBean");
         mAgentWeb = AgentWeb.with(this)//
                 .setAgentWebParent(mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
@@ -41,7 +40,7 @@ public class AgentWebActivity extends BaseActivity {
                 .setReceivedTitleCallback(new ChromeClientCallbackManager.ReceivedTitleCallback() {
                     @Override
                     public void onReceivedTitle(WebView view, String title) {
-                            tvTitle.setText("内容详情");
+                            tvTitle.setText(title);
                     }
                 })//设置 Web 页面的 title 回调
                 .setWebChromeClient(mWebChromeClient)
@@ -54,7 +53,6 @@ public class AgentWebActivity extends BaseActivity {
 
     //WebViewClient
     private WebViewClient mWebViewClient = new WebViewClient() {
-
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);

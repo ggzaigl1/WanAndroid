@@ -44,6 +44,7 @@ public class BaseApplication extends Application {
         NineGridView.setImageLoader(new GlideImageLoader());
     }
 
+
     /**
      * 单例模式，获取BTApplication的实例
      *

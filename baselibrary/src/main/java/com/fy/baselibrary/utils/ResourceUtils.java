@@ -1,11 +1,18 @@
 package com.fy.baselibrary.utils;
 
+import android.graphics.Color;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
 import com.fy.baselibrary.application.BaseApplication;
 
+import java.util.Random;
+
+/**
+ * 通过 getResources() 获取资源
+ * Created by fangs on 2017/9/13.
+ */
 /**
  * 通过 getResources() 为控件 设置内容
  * Created by fangs on 2017/9/13.
@@ -24,6 +31,19 @@ public class ResourceUtils {
      */
     public static float getDimen(int dimenId){
         return BaseApplication.getApplication().getResources().getDimension(dimenId);
+    }
+
+    /**
+     * 生成随机颜色
+     * @return
+     */
+    public static int getRandomColor(){
+        Random random = new Random();
+        int r = random.nextInt(256);
+        int g = random.nextInt(256);
+        int b = random.nextInt(256);
+
+        return Color.rgb(r,g,b);
     }
 
     /**

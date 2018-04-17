@@ -30,6 +30,11 @@ import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,12 +54,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeFragment extends BaseFragment {
 
-    //    private String[] images = {
-//            List<String> networkImages = Arrays.asList(images);
-//            "http://192.168.100.30:8098/YDYS/20171219/20171220161832.png",
-//            "http://img5.duitang.com/uploads/item/201606/01/20160601001315_wC3mU.jpeg",
-//            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513314151355&di=3c0d90cff5a9c95b5696720a1282adcf&imgtype=0&src=http%3A%2F%2Fi2.17173cdn.com%2Fz0og4j%2FYWxqaGBf%2Fnewgame%2F20160729%2FSNzFzpbkyAkFEwk.jpg",
-//            "http://www.8kmm.com/UploadFiles/2012/8/201208140920132659.jpg"};
     @BindView(R.id.banner)
     ConvenientBanner mConvenientBanner;
     @BindView(R.id.collapsing_toolbar_layout)
@@ -65,7 +64,11 @@ public class HomeFragment extends BaseFragment {
     AppBarLayout mAppBarLayout;
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout mRefreshLayout;
+
     HomeAdapter mAdapter;
+    private int mPageNo = 1;
 
     @Override
     protected int getContentLayout() {
@@ -76,8 +79,9 @@ public class HomeFragment extends BaseFragment {
     protected void baseInit() {
         super.baseInit();
         getStandardsToApp();
-        getArticleList(1);
+        getArticleList(mPageNo);
         initRecyle();
+        initRefresh();
         //通过CollapsingToolbarLayout修改字体颜色
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
@@ -89,12 +93,11 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
-     * banner 轮播图 加载数据
+     * banner 轮播图 加载数据 接口
      */
     private void getStandardsToApp() {
         IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.data_loading);
-        Map<String, Object> param = new HashMap<>();
-        mConnService.getBanner(param)
+        mConnService.getBanner()
                 .doOnSubscribe(disposable -> mCompositeDisposable.add(disposable))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -125,20 +128,22 @@ public class HomeFragment extends BaseFragment {
                 });
     }
 
+    /**
+     * 轮播图 相关设置
+     * @param Pic
+     * @param bean
+     */
     private void bannerView(List<String> Pic, BannerBean bean) {
         mConvenientBanner.setPages(() -> new NetworkImageHolderView(), Pic)
                 .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
                 .setPointViewVisible(true)
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
                 .setPageTransformer(new AccordionTransformer())
-                .setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        String Url = bean.getData().get(position).getUrl();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("UrlBean", Url);
-                        JumpUtils.jump(mContext, AgentWebActivity.class, bundle);
-                    }
+                .setOnItemClickListener(position -> {
+                    String Url = bean.getData().get(position).getUrl();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("UrlBean", Url);
+                    JumpUtils.jump(mContext, AgentWebActivity.class, bundle);
                 })
                 .setcurrentitem(0);
     }
@@ -155,23 +160,53 @@ public class HomeFragment extends BaseFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((ArticleBean articleBean) -> {
                     if (null != articleBean && null != articleBean.getData().getDatas()) {
-                        mAdapter.setNewData(articleBean.getData().getDatas());
+                        if (mRefreshLayout.isRefreshing()) {
+                            mAdapter.setNewData(articleBean.getData().getDatas());
+                            mRefreshLayout.finishRefresh();
+                        } else if (mRefreshLayout.isLoading()) {
+                            mAdapter.getData().addAll(articleBean.getData().getDatas());
+                            mRefreshLayout.finishLoadmore();
+                            mAdapter.notifyDataSetChanged();
+                        } else {
+                            mAdapter.setNewData(articleBean.getData().getDatas());
+                        }
                     }
                 });
     }
 
+    /**
+     *  分页加载数据
+     */
+    private void initRefresh() {
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(mContext));
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(mContext));
+        mRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                mPageNo += 1;
+                getArticleList(mPageNo);
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                mPageNo = 1;
+                getArticleList(1);
+            }
+        });
+    }
+
+    /**
+     * recycleview 相关设置
+     */
     private void initRecyle() {
         GridLayoutManager gManager = new GridLayoutManager(getActivity(), 1);
         mRecyclerView.setLayoutManager(gManager);
         mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ArticleBean.DataBean.DatasBean bean = mAdapter.getData().get(position);
-                Bundle bundle = new Bundle();
-                bundle.putString("UrlBean", bean.getLink());
-                JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
-            }
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            ArticleBean.DataBean.DatasBean bean = mAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("UrlBean", bean.getLink());
+            JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
         });
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -180,12 +215,17 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         mConvenientBanner.startTurning(2000);//开始翻页
-//        GetGetDicts();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mConvenientBanner.stopTurning();//停止翻页
+        if (mRefreshLayout.isRefreshing()) {
+            mRefreshLayout.finishRefresh();
+        }
+        if (mRefreshLayout.isLoading()) {
+            mRefreshLayout.finishLoadmore();
+        }
     }
 }

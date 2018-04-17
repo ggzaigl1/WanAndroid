@@ -31,7 +31,7 @@ public interface ApiService {
 
     int DEFAULT_MILLISECONDS = 60000;             //默认的超时时间
 
-    String BASE_URL = "http://47.104.176.229:80/";    //阿里云正式 地址
+    String BASE_URL = "http://www.wanandroid.com/";    //服务器 地址
 
     String IMG_BASE_URL = BASE_URL + "image";
 
@@ -65,8 +65,8 @@ public interface ApiService {
      * 首页 banner
      */
     @Headers({"url_name:user"})
-    @GET("http://www.wanandroid.com/banner/json")
-    Observable<BannerBean> getBanner(@QueryMap Map<String, Object> options);
+    @GET("banner/json")
+    Observable<BannerBean> getBanner();
 
     /**
      * 美图图片
@@ -79,7 +79,7 @@ public interface ApiService {
      * 首页文章列表
      */
     @Headers({"url_name:user"})
-    @GET("http://www.wanandroid.com/article/list/{page}/json")
+    @GET("article/list/{page}/json")
     Observable<ArticleBean> getArticleList(@Path("page") int page);
 
 
