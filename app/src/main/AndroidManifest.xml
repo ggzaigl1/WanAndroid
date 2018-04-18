@@ -128,6 +128,11 @@
                 android:name=".modify.ModifyInfoActivity"
                 android:label="@string/myData"
                 android:screenOrientation="portrait"/>
+        <!-- 关于我们 -->
+        <activity
+                android:name=".about.AboutActivity"
+                android:label="@string/about_us"
+                android:screenOrientation="portrait"/>
 
 
 

@@ -30,6 +30,10 @@
                     android:icon="@drawable/ic_menu_send"
                     android:title="Send"/>
             <item
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/vector_about_us"
+                    android:title="关于我们"/>
+            <item
                     android:id="@+id/nav_exit"
                     android:icon="@drawable/ic_menu_exit"
                     android:title="退出应用"/>

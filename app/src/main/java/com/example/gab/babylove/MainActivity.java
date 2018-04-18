@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.gab.babylove.about.AboutActivity;
 import com.example.gab.babylove.activity.PersonalCenterActivity;
 import com.example.gab.babylove.activity.PhotoViewActivity;
 import com.example.gab.babylove.activity.ToolsActivity;
@@ -98,13 +99,13 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
 
         Tv_Login.setOnClickListener(v -> {
             boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
-            if (isLogin){
+            if (isLogin) {
                 Tv_Name.setText(R.string.notLogin);
                 Tv_Login.setText(R.string.clickLogin);
                 ACache mCache = ACache.get(BaseApp.getAppCtx());
                 mCache.clear();
                 SpfUtils.clear();
-            }else {
+            } else {
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
         });
@@ -216,6 +217,8 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             SystemUtils.ExitSystem();
         } else if (id == R.id.nav_manage) {
             JumpUtils.jump(this, ToolsActivity.class, null);
+        } else if (id == R.id.nav_about) {
+            JumpUtils.jump(this, AboutActivity.class, null);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

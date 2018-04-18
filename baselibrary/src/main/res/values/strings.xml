@@ -78,6 +78,7 @@
     <string name="login_password">请输入密码</string>
     <string name="tools">工具</string>
     <string name="phone_system">手机相关信息</string>
+    <string name="about_us">关于我们</string>
     <string name="selector_button">SelectorButton</string>
     <string name="fingerprint">Fingerprint</string>
     <string name="web_error">抱歉~\n加载失败,点击重新加载</string>

@@ -1,9 +1,13 @@
 package com.fy.baselibrary.utils;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+
+import com.fy.baselibrary.application.BaseApp;
 
 import java.util.List;
 
@@ -24,8 +28,9 @@ public class AppUtils {
     /**
      * 获取应用程序名称
      */
-    public static String getAppName(Context context) {
+    public static String getAppName() {
         try {
+            Context context = BaseApp.getAppCtx();
             PackageManager packageManager = context.getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
             int labelRes = packageInfo.applicationInfo.labelRes;
@@ -38,11 +43,10 @@ public class AppUtils {
 
     /**
      * 获取当前应用的版本号 versionCode
-     *
-     * @param context
      * @return
      */
-    public static int getVersionCode(Context context) {
+    public static int getVersionCode() {
+        Context context = BaseApp.getAppCtx();
         PackageInfo info = null;
         try {
             info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
@@ -56,11 +60,10 @@ public class AppUtils {
 
     /**
      * 获取当前应用的版本名称 versionName
-     *
-     * @param context
      * @return
      */
-    public static String getVersionName(Context context) {
+    public static String getVersionName() {
+        Context context = BaseApp.getAppCtx();
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo = null;
         try {
@@ -75,11 +78,10 @@ public class AppUtils {
 
     /**
      * 获取当前应用的 包名
-     *
-     * @param context
      * @return
      */
-    public static String getLocalPackageName(Context context) {
+    public static String getLocalPackageName() {
+        Context context = BaseApp.getAppCtx();
         PackageManager packageManager = context.getPackageManager();
         PackageInfo info = null;
         try {
@@ -108,6 +110,37 @@ public class AppUtils {
             L.e("TDvice", e.getMessage());
         }
         return false;
+    }
+
+    private static boolean isSpace(final String s) {
+        if (s == null) return true;
+        for (int i = 0, len = s.length(); i < len; ++i) {
+            if (!Character.isWhitespace(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 返回应用程序的签名
+     *
+     * @param packageName The name of the package.
+     * @return the application's signature
+     */
+    public static Signature[] getAppSignature(final String packageName) {
+        Context context = BaseApp.getAppCtx();
+
+        if (isSpace(packageName)) return null;
+        try {
+            PackageManager pm = context.getPackageManager();
+            @SuppressLint("PackageManagerGetSignatures")
+            PackageInfo pi = pm.getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+            return pi == null ? null : pi.signatures;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
