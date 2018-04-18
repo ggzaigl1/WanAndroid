@@ -1,77 +1,77 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:1:1-41:12
-INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:1:1-41:12
-INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:1:1-41:12
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:1:1-41:12
+INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:1:1-41:12
+INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:1:1-41:12
 	package
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:2:5-39
-		INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
-		INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:2:5-39
+		INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
+		INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:1:11-69
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:1:11-69
 application
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:4:5-39:19
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:4:5-39:19
 	android:supportsRtl
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:7:9-35
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:7:9-35
 	android:label
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:6:9-41
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:6:9-41
 	android:allowBackup
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:5:9-35
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:5:9-35
 activity#com.fy.img.picker.multiselect.ImgPickerActivity
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:10:9-17:20
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:10:9-17:20
 	android:screenOrientation
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:12:13-49
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:12:13-49
 	android:name
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:11:13-75
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:11:13-75
 intent-filter#action:name:com.fy.img.picker.ImgPickerActivity+category:name:android.intent.category.DEFAULT
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:13:13-16:29
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:13:13-16:29
 action#com.fy.img.picker.ImgPickerActivity
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:14:17-78
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:14:17-78
 	android:name
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:14:25-75
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:14:25-75
 category#android.intent.category.DEFAULT
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:15:17-76
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:15:17-76
 	android:name
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:15:27-73
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:15:27-73
 activity#com.fy.img.picker.preview.PicturePreviewActivity
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:20:9-27:20
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:20:9-27:20
 	android:screenOrientation
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:22:13-49
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:22:13-49
 	android:name
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:21:13-76
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:21:13-76
 intent-filter#action:name:com.fy.img.picker.preview.PicturePreviewActivity+category:name:android.intent.category.DEFAULT
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:23:13-26:29
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:23:13-26:29
 action#com.fy.img.picker.preview.PicturePreviewActivity
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:24:17-91
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:24:17-91
 	android:name
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:24:25-88
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:24:25-88
 provider#com.fy.img.picker.ImagePickerProvider
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:29:9-37:20
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:29:9-37:20
 	android:grantUriPermissions
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:33:13-47
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:33:13-47
 	android:authorities
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:31:13-60
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:31:13-60
 	android:exported
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:32:13-37
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:32:13-37
 	android:name
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:30:13-65
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:30:13-65
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:34:13-36:58
+ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:34:13-36:58
 	android:resource
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:36:17-55
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:36:17-55
 	android:name
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml:35:17-67
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml:35:17-67
 uses-sdk
-INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
-INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
-INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
-INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
+INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
+INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
+INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
+INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
-		INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
+		INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
+		INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
-		ADDED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
-		INJECTED from F:\program\BabyLove\imgPicker\src\main\AndroidManifest.xml
+		INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
+		ADDED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml
+		INJECTED from D:\BabyLove\imgPicker\src\main\AndroidManifest.xml

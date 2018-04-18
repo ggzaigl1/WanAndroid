@@ -2,6 +2,7 @@ package com.fy.baselibrary.utils;
 
 import android.graphics.Color;
 import android.support.annotation.ColorRes;
+import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
@@ -44,6 +45,15 @@ public class ResourceUtils {
         int b = random.nextInt(256);
 
         return Color.rgb(r,g,b);
+    }
+
+    /**
+     * 获取 strings 资源文件 指定 id 的资源
+     * @param stringId
+     * @return
+     */
+    public static String getStr(@StringRes int stringId){
+        return BaseApplication.getApplication().getResources().getString(stringId);
     }
 
     /**

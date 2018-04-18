@@ -23,13 +23,21 @@ import com.example.gab.babylove.fragment.HomeFragment;
 import com.example.gab.babylove.fragment.NewsFragment;
 import com.example.gab.babylove.fragment.StarFragment;
 import com.example.gab.babylove.fragment.PrettyPicturesFragment;
+import com.example.gab.babylove.login.LoginActivity;
 import com.example.gab.babylove.tbs.FileBrowsingActivity;
 import com.example.gab.babylove.utils.Util;
+import com.fy.baselibrary.application.BaseApplication;
 import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.ResourceUtils;
+import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.SystemUtils;
 import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.cache.ACache;
+
+import org.w3c.dom.Text;
 
 import butterknife.BindView;
 
@@ -53,6 +61,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     NavigationView mNavigation;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawer;
+    TextView Tv_Login;
+    TextView Tv_Name;
 
     @Override
     protected int getHeadView() {
@@ -76,12 +86,33 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         initBottomNavigation();
         switchContent(mHomeFragment);
         mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
-//        startActivityForResult(new Intent(this, PermissionActivity.class).putExtra(PermissionActivity.KEY_PERMISSIONS_ARRAY,
-//                new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO}), PermissionActivity.CALL_BACK_PERMISSION_REQUEST_CODE);
-        View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);
+        View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);//
         ImageView imageView = headerView.findViewById(R.id.headerView);
+        Tv_Login = headerView.findViewById(R.id.tv_login);//点击登录
+        Tv_Name = headerView.findViewById(R.id.tv_name);
         imageView.setOnClickListener(v -> JumpUtils.jump(mContext, PhotoViewActivity.class, null));
-        TextView tv_title = headerView.findViewById(R.id.tv_title);
+
+        Tv_Login.setOnClickListener(v -> {
+            boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
+            if (isLogin){
+                Tv_Name.setText(R.string.notLogin);
+                Tv_Login.setText(R.string.clickLogin);
+                ACache mCache = ACache.get(BaseApplication.getApplication());
+                mCache.clear();
+                SpfUtils.clear();
+            }else {
+                JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
+        Tv_Name.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
+        Tv_Login.setText(isLogin ? R.string.exitLogin : R.string.clickLogin);
     }
 
     @Override

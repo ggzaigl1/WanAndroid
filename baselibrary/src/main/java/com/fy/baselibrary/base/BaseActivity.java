@@ -1,11 +1,9 @@
 package com.fy.baselibrary.base;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.KeyEvent;
@@ -28,7 +26,6 @@ import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.cache.ACache;
-import com.fy.baselibrary.utils.permission.PermissionChecker;
 import com.githang.statusbar.StatusBarCompat;
 
 import javax.inject.Inject;
@@ -242,7 +239,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 
             String name = getClass().getName();
-            if (name.equals("com.example.gab.babylove.login.LoginActivity")) {
+            if (name.equals("")) {
                 //处理 退出界面
                 if ((System.currentTimeMillis() - exitTime) > 2000) {
                     T.showLong(R.string.exit_app);

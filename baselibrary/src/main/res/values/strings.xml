@@ -99,4 +99,8 @@
     <string name="check_info_message">未获得应用运行所需的基本权限，请在设置中开启权限后再使用</string>
     <string name="check_info_title">权限提示</string>
     <string name="check_info_setting">去设置</string>
+
+    <string name="notLogin">Google Hot Air Balloon</string>
+    <string name="exitLogin">退出登录</string>
+    <string name="clickLogin">点击登录</string>
 </resources>

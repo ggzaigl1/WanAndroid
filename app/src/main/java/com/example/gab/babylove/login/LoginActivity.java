@@ -7,9 +7,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.view.GravityCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,6 +22,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.utils.Util;
 import com.fy.baselibrary.application.BaseApplication;
 import com.fy.baselibrary.base.BaseActivity;
 import com.fy.baselibrary.entity.ArticleBean;
@@ -27,6 +30,7 @@ import com.fy.baselibrary.entity.LoginBean;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
+import com.fy.baselibrary.startactivity.StartActivity;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
@@ -62,6 +66,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.editPass)
     TextInputEditText editPass;
 
+    private long exitTime = 0;
     protected PermissionChecker permissionChecker;
     protected static final String[] PERMISSIONS = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -84,8 +89,7 @@ public class LoginActivity extends BaseActivity {
         permissionChecker = new PermissionChecker(mContext);
         permissionChecker.setTitle(getString(R.string.check_info_title));
         permissionChecker.setMessage(getString(R.string.check_info_message));
-        if (!permissionChecker.isLackPermissions(PERMISSIONS)) {
-        } else {
+        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
             new MaterialDialog.Builder(this).title("需要获取以下权限")
                     .content("通过相机权限和电话权限来进行拍照和确定本机设备ID,已保证为您个性化推荐内容;")
                     .positiveText(R.string.next).onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -94,6 +98,8 @@ public class LoginActivity extends BaseActivity {
                     onPermission();
                 }
             }).show();
+        } else {
+
         }
 
         editPass.addTextChangedListener(new TextWatcher() {
@@ -200,7 +206,8 @@ public class LoginActivity extends BaseActivity {
                             Bundle bundle = new Bundle();
                             bundle.putString("LoginBean", mCache.getAsString("User_Name"));
                             JumpUtils.jump(mContext, MainActivity.class, null);
-                        }else {
+                            finish();
+                        } else {
                             T.showShort(login.getErrorMsg());
                         }
 
@@ -225,4 +232,19 @@ public class LoginActivity extends BaseActivity {
         }
         return super.onTouchEvent(event);
     }
+
+//    //退出程序
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+//            if ((System.currentTimeMillis() - exitTime) >= 2000) {
+//                Util.CustomToast.INSTANCE.showToast(mContext, R.string.exit_app);
+//                exitTime = System.currentTimeMillis();
+//            } else {
+//                finish();
+//            }
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 }
