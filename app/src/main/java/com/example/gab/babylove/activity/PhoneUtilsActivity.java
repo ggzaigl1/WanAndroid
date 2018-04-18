@@ -2,6 +2,7 @@ package com.example.gab.babylove.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -22,7 +24,8 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.PhoneUtils;
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.DeviceUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
@@ -35,7 +38,7 @@ import butterknife.OnClick;
  * 手機相關信息
  */
 
-public class PhoneUtilsActivity extends BaseActivity implements View.OnTouchListener {
+public class PhoneUtilsActivity extends AppCompatActivity implements IBaseActivity, View.OnTouchListener {
 
     @BindView(R.id.tv_baby)
     TextView tv_baby;
@@ -54,15 +57,22 @@ public class PhoneUtilsActivity extends BaseActivity implements View.OnTouchList
 
 
     @Override
-    protected int getContentView() {
+    public boolean isShowHeadView() {
+        return true;
+    }
+
+    @Override
+    public int setView() {
         return R.layout.activity_phone_utils;
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    protected void init(Bundle savedInstanceState) {
-        tvTitle.setText("手機相關信息");
-        tvBack.setVisibility(View.GONE);
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         tv_baby.post(() -> {
             mRigthToLeftAnim = new TranslateAnimation(mHorizontalScrollView.getWidth(), -tv_baby.getWidth(), 0, 0);
             mRigthToLeftAnim.setRepeatCount(Animation.INFINITE);
@@ -70,7 +80,7 @@ public class PhoneUtilsActivity extends BaseActivity implements View.OnTouchList
             mRigthToLeftAnim.setDuration((long) ((mHorizontalScrollView.getWidth() + tv_baby.getWidth()) / SCOLL_V));
             tv_baby.startAnimation(mRigthToLeftAnim);
         });
-        mContext.registerReceiver(mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        this.registerReceiver(mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -79,12 +89,27 @@ public class PhoneUtilsActivity extends BaseActivity implements View.OnTouchList
         tv_Os.setText("手機廠商:" + DeviceUtils.getDeviceMake()
                 + "\n" + "手機型號:" + DeviceUtils.getSystemModel()
                 + "\n" + "Android版本號:" + DeviceUtils.getDeviceVersion()
-                + "\n" + "手機IMEI:" + DeviceUtils.getIMEI(mContext)
+                + "\n" + "手機IMEI:" + DeviceUtils.getIMEI(this)
                 + "\n" + "手機MEID：" + PhoneUtils.getMEID()
                 + "\n" + "目前電量為" + BatteryN + "% --- " + BatteryStatus
                 + "\n" + "電壓為" + BatteryV + "mV --- " + BatteryTemp
                 + "\n" + "溫度為" + (BatteryT * 0.1) + "℃");
         mGestureDetector = new GestureDetector(new gestureListener()); //使用派生自OnGestureListener
+    }
+
+    @OnClick({R.id.bt_Dial})
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_Dial://头部左边按钮
+                JumpUtils.jump(PhoneUtilsActivity.this, DialActivity.class, null);
+                break;
+        }
+    }
+
+    @Override
+    public void reTry() {
+
     }
 
     /* 创建广播接收器 */
@@ -137,16 +162,6 @@ public class PhoneUtilsActivity extends BaseActivity implements View.OnTouchList
             }
         }
     };
-
-    @OnClick({R.id.bt_Dial})
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bt_Dial://头部左边按钮
-                JumpUtils.jump(mContext, DialActivity.class, null);
-                break;
-        }
-    }
 
     /*
    * 在onTouch()方法中，我们调用GestureDetector的onTouchEvent()方法，将捕捉到的MotionEvent交给GestureDetector

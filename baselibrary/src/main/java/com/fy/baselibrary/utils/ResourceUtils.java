@@ -6,7 +6,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
-import com.fy.baselibrary.application.BaseApplication;
+import com.fy.baselibrary.application.BaseApp;
 
 import java.util.Random;
 
@@ -31,7 +31,7 @@ public class ResourceUtils {
      * @return
      */
     public static float getDimen(int dimenId){
-        return BaseApplication.getApplication().getResources().getDimension(dimenId);
+        return BaseApp. getAppCtx().getResources().getDimension(dimenId);
     }
 
     /**
@@ -53,7 +53,7 @@ public class ResourceUtils {
      * @return
      */
     public static String getStr(@StringRes int stringId){
-        return BaseApplication.getApplication().getResources().getString(stringId);
+        return BaseApp. getAppCtx().getResources().getString(stringId);
     }
 
     /**
@@ -62,7 +62,7 @@ public class ResourceUtils {
      * @return
      */
     public static int getColor(@ColorRes int colorId){
-        return ContextCompat.getColor(BaseApplication.getApplication(), colorId);
+        return ContextCompat.getColor(BaseApp. getAppCtx(), colorId);
     }
 
 //    %d   （表示整数）
@@ -75,7 +75,7 @@ public class ResourceUtils {
      * @param replaceStr 将要替换的内容
      */
     public static void setText(TextView tv, int id, String replaceStr){
-        String format = BaseApplication.getApplication().getResources().getString(id);
+        String format = BaseApp. getAppCtx().getResources().getString(id);
         String text = String.format(format, replaceStr);
         tv.setText(text);
     }
@@ -87,7 +87,7 @@ public class ResourceUtils {
      * @param replaceInt 将要替换的内容
      */
     public static void setText(TextView tv, int id, int replaceInt){
-        String format = BaseApplication.getApplication().getResources().getString(id);
+        String format = BaseApp. getAppCtx().getResources().getString(id);
         String text = String.format(format, replaceInt);
         tv.setText(text);
     }
@@ -99,7 +99,7 @@ public class ResourceUtils {
      * @return 替换后的字符串
      */
     public static String getText(int id, String replaceStr){
-        String format = BaseApplication.getApplication().getResources().getString(id);
+        String format = BaseApp. getAppCtx().getResources().getString(id);
 
         return String.format(format, replaceStr);
     }
@@ -111,7 +111,7 @@ public class ResourceUtils {
      * @return 替换后的字符串
      */
     public static String getText(int id, int replaceStr){
-        String format = BaseApplication.getApplication().getResources().getString(id);
+        String format = BaseApp. getAppCtx().getResources().getString(id);
 
         return String.format(format, replaceStr);
     }
@@ -122,6 +122,6 @@ public class ResourceUtils {
      * @return
      */
     public static void setTvColor(TextView tv, int colorId){
-        tv.setTextColor(ContextCompat.getColor(BaseApplication.getApplication(), colorId));
+        tv.setTextColor(ContextCompat.getColor(BaseApp. getAppCtx(), colorId));
     }
 }

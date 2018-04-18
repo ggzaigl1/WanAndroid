@@ -9,6 +9,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
@@ -16,10 +17,12 @@ import android.widget.TextView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.PictureDetailActivity;
 import com.example.gab.babylove.adapter.GankMAdapter;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.bean.OrListBean;
+import com.example.gab.babylove.entity.GankBean;
 import com.fy.baselibrary.base.BaseFragment;
-import com.fy.baselibrary.entity.GankBean;
-import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
+import com.fy.baselibrary.retrofit.RequestUtils;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -43,37 +46,35 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PrettyPicturesFragment extends BaseFragment {
 
-    @BindView(R.id.tvTitle)
-    TextView tvTitle;
-    @BindView(R.id.tvBack)
-    TextView tvBack;
-    @BindView(R.id.tvMenu)
-    TextView tvMenu;
-
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.fab_top)
     FloatingActionButton fab_top;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     GankMAdapter mAdapter;
     private int mCurPage = 1;
     private final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
 
     @Override
-    protected int getContentLayout() {
+    protected int setContentLayout() {
         return R.layout.fragment_wife;
     }
+
 
     @Override
     protected void baseInit() {
         super.baseInit();
-        tvTitle.setText("美圖欣賞");
-        tvBack.setVisibility(View.INVISIBLE);
         initRv();
         initRefresh();
         getCourseDetails(mCurPage);
+        toolbar.setTitle("美图欣赏");
+        MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
     }
+
 
     private void initRefresh() {
         mRefreshLayout.setRefreshHeader(new ClassicsHeader(mContext));
@@ -95,7 +96,8 @@ public class PrettyPicturesFragment extends BaseFragment {
 
     @SuppressLint("CheckResult")
     private void getCourseDetails(int mCurPage) {
-        mConnService.getCourseDetails(20, mCurPage)
+        RequestUtils.create(ApiService.class)
+                .getCourseDetails(20, mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<GankBean>() {

@@ -8,120 +8,138 @@
               android:orientation="vertical"
               android:background="@color/white">
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:background="@mipmap/input_bg"
-                tools:ignore="ExtraText">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@mipmap/input_bg"
+            tools:ignore="ExtraText">
 
-            /*
-            app:counterEnabled="true"//设置是否可以开启计数器，默认是false
-            app:counterOverflowTextAppearance="@style/MyStyle2"//设置计算器越位后的文字颜色和大小
-            app:counterTextAppearance="@style/MyStyle"//设置正常情况下的计数器文字颜色和大小
-            app:counterMaxLength="11"//设置计算器的最大字数限制
-            app:errorEnabled="true"//是否允许错误提示
-            app:errorTextAppearance="@style/MyStyle2"//错误提示的文字大小和颜色
-            */
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_user_select"
-                    android:drawablePadding="@dimen/spacing_small"
-                    android:singleLine="true"
-                    android:textColor="@color/login"
-                    android:textSize="@dimen/textSize_small"/>
-
-            <android.support.design.widget.TextInputLayout
-                    android:id="@+id/extInputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/login_username"
-                    app:counterEnabled="true"
-                    app:counterOverflowTextAppearance="@style/MyStyle"
-                    app:counterMaxLength="11"
-                    app:errorEnabled="true"
-                    app:errorTextAppearance="@style/MyStyle"
-                    >
-
-                <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:gravity="center_vertical"
-                android:background="@mipmap/input_bg">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_pass_select"
-                    android:drawablePadding="@dimen/spacing_small"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/login"
-                    android:textSize="@dimen/textSize_small"/>
-
-            <android.support.design.widget.TextInputLayout
-                    android:id="@+id/iLayoutPass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/login_password"
-                    android:gravity="center_vertical"
-                    app:counterEnabled="true"
-                    app:counterOverflowTextAppearance="@style/MyStyle"
-                    app:counterMaxLength="11"
-                    app:errorEnabled="true"
-                    app:errorTextAppearance="@style/MyStyle"
-                    app:passwordToggleEnabled="true"
-                    >
-
-                <android.support.design.widget.TextInputEditText
-                        android:id="@+id/editPass"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:singleLine="true" />
-
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-
-        <CheckBox
-                android:id="@+id/cBoxPass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:drawableLeft="@drawable/selector_check"
-                android:drawablePadding="@dimen/spacing_medium_small"
-                android:button="@null"
-                android:singleLine="true"
-                android:textColor="@color/myTxtSuperLight"
-                android:textSize="@dimen/textSize_small_much"
-                android:text="@string/rememberPass"/>
+        /*
+        app:counterEnabled="true"//设置是否可以开启计数器，默认是false
+        app:counterOverflowTextAppearance="@style/MyStyle2"//设置计算器越位后的文字颜色和大小
+        app:counterTextAppearance="@style/MyStyle"//设置正常情况下的计数器文字颜色和大小
+        app:counterMaxLength="11"//设置计算器的最大字数限制
+        app:errorEnabled="true"//是否允许错误提示
+        app:errorTextAppearance="@style/MyStyle2"//错误提示的文字大小和颜色
+        */
 
         <TextView
-                android:id="@+id/tvLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="@string/login"
+                android:drawableLeft="@drawable/ic_user_select"
+                android:drawablePadding="@dimen/spacing_small"
+                android:singleLine="true"
                 android:textColor="@color/login"
-                android:background="@mipmap/btn_bg"/>
+                android:textSize="@dimen/textSize_small"/>
+
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/extInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_username"
+                app:counterEnabled="true"
+                app:counterOverflowTextAppearance="@style/MyStyle"
+                app:counterMaxLength="11"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/MyStyle"
+                >
+
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center_vertical"
+            android:background="@mipmap/input_bg">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_pass_select"
+                android:drawablePadding="@dimen/spacing_small"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/login"
+                android:textSize="@dimen/textSize_small"/>
+
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/iLayoutPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_password"
+                android:gravity="center_vertical"
+                app:counterEnabled="true"
+                app:counterOverflowTextAppearance="@style/MyStyle"
+                app:counterMaxLength="11"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/MyStyle"
+                app:passwordToggleEnabled="true"
+                >
+
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <CheckBox
+            android:id="@+id/cBoxPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:drawableLeft="@drawable/selector_check"
+            android:drawablePadding="@dimen/spacing_medium_small"
+            android:button="@null"
+            android:singleLine="true"
+            android:textColor="@color/myTxtSuperLight"
+            android:textSize="@dimen/textSize_small_much"
+            android:text="@string/rememberPass"/>
+
+    <com.example.gab.babylove.widget.StateButton
+            android:id="@+id/bt_Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:text="@string/login"
+            android:textSize="18dp"
+            app:round="true"
+            android:textColor="@android:color/white"
+            app:normalBackgroundColor="@color/green"
+            app:pressedBackgroundColor="@color/textGreen"
+            app:unableBackgroundColor="@android:color/holo_red_light"/>
+
+    <com.example.gab.babylove.widget.StateButton
+            android:id="@+id/bt_register"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:text="@string/register"
+            app:animationDuration="200"
+            app:normalStrokeColor="@android:color/holo_red_light"
+            app:normalStrokeWidth="2dp"
+            app:normalTextColor="@color/red"
+            app:pressedBackgroundColor="@android:color/holo_red_light"
+            app:pressedTextColor="@android:color/white"
+            app:radius="5dp"/>
 
 </LinearLayout>

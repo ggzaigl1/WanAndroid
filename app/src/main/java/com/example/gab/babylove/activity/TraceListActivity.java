@@ -1,13 +1,17 @@
 package com.example.gab.babylove.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.adapter.TraceListAdapter;
 import com.example.gab.babylove.bean.Trace;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,24 +23,42 @@ import butterknife.BindView;
  * 模拟快递布局
  */
 
-public class TraceListActivity extends BaseActivity {
+public class TraceListActivity extends AppCompatActivity implements IBaseActivity{
 
     @BindView(R.id.rvTrace)
     RecyclerView mRecyclerView;
     private List<Trace> traceList = new ArrayList<>(10);
     private TraceListAdapter adapter;
 
+    @Override
+    public boolean isShowHeadView() {
+        return true;
+    }
 
     @Override
-    protected int getContentView() {
+    public int setView() {
         return R.layout.activity_tracelist;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         initData();
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void reTry() {
+
+    }
     private void initData() {
         // 模拟一些假的数据
         traceList.add(new Trace("2016-05-25 17:48:00", "[沈阳市] [沈阳和平五部]的派件已签收 感谢使用中通快递,期待再次为您服务!"));

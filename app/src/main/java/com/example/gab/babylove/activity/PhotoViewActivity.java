@@ -1,27 +1,50 @@
 package com.example.gab.babylove.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.gab.babylove.R;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 
 /**
  * Created by Gab on 2017/12/12 0012.
- * 照片放大
+ * PhotoView
  */
 
-public class PhotoViewActivity extends AppCompatActivity {
+public class PhotoViewActivity extends AppCompatActivity implements IBaseActivity {
+
+    @BindView(R.id.mPhotoView)
+    PhotoView mPhotoView;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_photo);
-        PhotoView mPhotoView = findViewById(R.id.mPhotoView);
+    public boolean isShowHeadView() {
+        return true;
+    }
+
+    @Override
+    public int setView() {
+        return R.layout.activity_photo;
+    }
+
+    @Override
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         mPhotoView.setImageResource(R.mipmap.wechat_image);
         //本地设置
 //        Glide.with(this).load(R.mipmap.wechat_image).into(mPhotoView);
@@ -34,5 +57,16 @@ public class PhotoViewActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @OnClick
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void reTry() {
+
     }
 }

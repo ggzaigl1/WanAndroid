@@ -1,12 +1,11 @@
 package com.example.gab.babylove.adapter;
 
-import android.graphics.Color;
 import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.entity.ArticleBean;
+import com.example.gab.babylove.entity.ArticleBean;
 import com.fy.baselibrary.utils.ResourceUtils;
 
 import java.util.List;

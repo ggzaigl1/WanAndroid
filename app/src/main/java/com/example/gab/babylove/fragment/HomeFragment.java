@@ -4,33 +4,25 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.TextView;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.listener.OnItemClickListener;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.AgentWebActivity;
 import com.example.gab.babylove.adapter.HomeAdapter;
+import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.entity.ArticleBean;
+import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.fy.baselibrary.base.BaseFragment;
-import com.fy.baselibrary.base.recyclerv.divider.DividerParams;
-import com.fy.baselibrary.entity.ArticleBean;
-import com.fy.baselibrary.entity.BannerBean;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
+import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.L;
-import com.fy.baselibrary.utils.T;
-import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -44,7 +36,6 @@ import java.util.Map;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -72,11 +63,6 @@ public class HomeFragment extends BaseFragment {
     private int mPageNo = 1;
 
     @Override
-    protected int getContentLayout() {
-        return R.layout.fragment_home;
-    }
-
-    @Override
     protected void baseInit() {
         super.baseInit();
         getStandardsToApp();
@@ -93,13 +79,19 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+    @Override
+    protected int setContentLayout() {
+        return R.layout.fragment_home;
+    }
+
     /**
      * banner 轮播图 加载数据 接口
      */
     private void getStandardsToApp() {
         IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.data_loading);
-        mConnService.getBanner()
-                .doOnSubscribe(disposable -> mCompositeDisposable.add(disposable))
+        RequestUtils.create(ApiService.class)
+                .getBanner()
+                .doOnSubscribe(RequestUtils::addDispos)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetCallBack<BeanModule<List<BannerBean>>>(progressDialog) {
@@ -164,7 +156,8 @@ public class HomeFragment extends BaseFragment {
     private void getArticleList(int mCurPage) {
         Map<String, Object> param = new HashMap<>();
         param.put("page", mCurPage);
-        mConnService.getArticleList(mCurPage)
+        RequestUtils.create(ApiService.class)
+                .getArticleList(mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BeanModule<ArticleBean>>() {

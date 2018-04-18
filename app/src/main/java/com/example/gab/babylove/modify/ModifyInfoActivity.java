@@ -1,24 +1,22 @@
 package com.example.gab.babylove.modify;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bigkoo.pickerview.utils.DateSelectUtils;
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.TimeUtils;
 import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
-import com.fy.img.picker.ImagePicker;
-import com.fy.img.picker.PickerConfig;
-import com.fy.img.picker.bean.ImageItem;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,7 +26,7 @@ import butterknife.OnClick;
  * 修改个人信息
  */
 
-public class ModifyInfoActivity extends BaseActivity {
+public class ModifyInfoActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.imgHeadModify)
     AppCompatImageView imgHeadModify;
@@ -49,55 +47,60 @@ public class ModifyInfoActivity extends BaseActivity {
     @BindView(R.id.tvParentPhoneModify)
     TextView tvParentPhoneModify;
 
+    @Override
+    public boolean isShowHeadView() {
+        return true;
+    }
 
     @Override
-    protected int getContentView() {
+    public int setView() {
         return R.layout.activity_modify_info;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        tvTitle.setText(R.string.myData);
-        tvMenu.setText(R.string.complete);
-
-        ImgLoadUtils.loadCircleImg("http://img1.3lian.com/2015/w22/87/d/105.jpg", imgHeadModify);
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && null != data){
-            switch (requestCode){
-                case ImagePicker.Picture_Selection:
-                    Bundle bundle = data.getExtras();
-                    ImageItem imgItem = (ImageItem) bundle.getSerializable("pickerImgData");
-
-                    ImgLoadUtils.loadCircleImg(imgItem.getPath(), imgHeadModify);
-                    break;
-            }
-        }
+    public void initData(Activity activity, Bundle savedInstanceState) {
+        ImgLoadUtils.loadCircleImg("http://img1.3lian.com/2015/w22/87/d/105.jpg", imgHeadModify);
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_OK && null != data){
+//            switch (requestCode){
+//                case ImagePicker.Picture_Selection:
+//                    Bundle bundle = data.getExtras();
+//                    ImageItem imgItem = (ImageItem) bundle.getSerializable("pickerImgData");
+//
+//                    ImgLoadUtils.loadCircleImg(imgItem.getPath(), imgHeadModify);
+//                    break;
+//            }
+//        }
+//    }
 
     @OnClick({R.id.llHead, R.id.llSex, R.id.llBirthday, R.id.llNation, R.id.llSchool, R.id.llAge, R.id.llHeight, R.id.llWeight, R.id.llParentPhone})
     @Override
     public void onClick(View view) {
-        super.onClick(view);
         switch (view.getId()) {
             case R.id.tvMenu://完成
 
                 break;
             case R.id.llHead://修改头像
-                Bundle bundle = new Bundle();
-                bundle.putInt(PickerConfig.KEY_MAX_COUNT, 0);
-                bundle.putBoolean(PickerConfig.KEY_ISTAKE_picture, true);
-                JumpUtils.jump(mContext, bundle, "com.fy.img.picker.multiselect.ImgPickerActivity", ImagePicker.Picture_Selection);
+//                Bundle bundle = new Bundle();
+//                bundle.putInt(PickerConfig.KEY_MAX_COUNT, 0);
+//                bundle.putBoolean(PickerConfig.KEY_ISTAKE_picture, true);
+//                JumpUtils.jump(ModifyInfoActivity.this, bundle, "com.fy.img.picker.multiselect.ImgPickerActivity", ImagePicker.Picture_Selection);
                 break;
             case R.id.llSex://修改性别
 
                 break;
             case R.id.llBirthday://修改生日
-                DateSelectUtils.getDatePicker(mContext, date -> tvBirthdayModify.setText(TimeUtils.Data2String(date, "yyyyMMdd"))
-                ).show();
+//                DateSelectUtils.getDatePicker(ModifyInfoActivity.this, date -> tvBirthdayModify.setText(TimeUtils.Data2String(date, "yyyyMMdd"))
+//                ).show();
                 break;
             case R.id.llNation://修改民族
 
@@ -116,7 +119,7 @@ public class ModifyInfoActivity extends BaseActivity {
                 break;
             case R.id.llParentPhone://电话
                 Snackbar.make(view, "想知道我的电话吗?", Snackbar.LENGTH_SHORT)
-                        .setActionTextColor(ContextCompat.getColor(mContext, R.color.button_press))
+                        .setActionTextColor(ContextCompat.getColor(ModifyInfoActivity.this, R.color.button_press))
                         .setAction("点击我试试", new View.OnClickListener() {
                     @SuppressLint("SetTextI18n")
                     @Override
@@ -126,5 +129,10 @@ public class ModifyInfoActivity extends BaseActivity {
                 }).show();
                 break;
         }
+    }
+
+    @Override
+    public void reTry() {
+
     }
 }

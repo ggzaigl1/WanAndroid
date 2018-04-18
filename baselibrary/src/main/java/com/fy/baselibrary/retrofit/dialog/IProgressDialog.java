@@ -1,7 +1,8 @@
 package com.fy.baselibrary.retrofit.dialog;
 
-import com.fy.baselibrary.base.BaseActivity;
-import com.fy.baselibrary.base.CommonDialog;
+import android.support.v7.app.AppCompatActivity;
+
+import com.fy.baselibrary.base.dialog.CommonDialog;
 
 /**
  * 自定义对话框的dialog</p>
@@ -9,10 +10,10 @@ import com.fy.baselibrary.base.CommonDialog;
  */
 public class IProgressDialog {
 
-    BaseActivity mContext;
+    AppCompatActivity mContext;
     CommonDialog dialog;
 
-    public IProgressDialog init(BaseActivity mContext) {
+    public IProgressDialog init(AppCompatActivity mContext) {
         this.mContext = mContext;
 
         return this;
@@ -22,8 +23,7 @@ public class IProgressDialog {
     public IProgressDialog setDialogMsg(int msg){
 
         if (null == dialog) {
-            dialog = DialogLoad.init()
-                    .setMsg(mContext.getString(msg));
+            dialog = DialogLoad.init().setMsg(mContext.getString(msg));
         }
 
         return this;
@@ -33,8 +33,7 @@ public class IProgressDialog {
     public IProgressDialog setDialogMsg(String msg){
 
         if (null == dialog) {
-            dialog = DialogLoad.init()
-                    .setMsg("正在登录...");
+            dialog = DialogLoad.init().setMsg("正在登录...");
         }
 
         return this;
@@ -52,8 +51,8 @@ public class IProgressDialog {
 
     /** 关闭对话框 */
     public void close() {
-        if (null != dialog && null != mContext && !mContext.isSaveInstanceState) {
-            dialog.dismiss();
+        if (null != dialog && null != mContext) {
+            dialog.dismiss(false);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.gab.babylove.animation;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +14,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.base.BaseActivity;
-import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.application.IBaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,26 +23,36 @@ import butterknife.OnClick;
  * Created by 初夏小溪 on 2018/3/30 0030.
  */
 
-public class AnimationActivity extends BaseActivity {
+public class AnimationActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.image)
     ImageView mImage;
     Animation loadAnimation;
 
     @Override
-    protected int getContentView() {
+    public boolean isShowHeadView() {
+        return false;
+    }
+
+    @Override
+    public int setView() {
         return R.layout.activity_animation_new;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    public void setStatusBar(Activity activity) {
+
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
+
     }
 
     @OnClick({R.id.scale, R.id.alpha, R.id.rotate, R.id.translate, R.id.continue_btn, R.id.continue_btn2, R.id.flash, R.id.move, R.id.change,
             R.id.layout, R.id.frame})
     @Override
     public void onClick(View view) {
-        super.onClick(view);
         switch (view.getId()) {
             case R.id.scale: {
 //                loadAnimation = AnimationUtils.loadAnimation(this, R.anim.scale);
@@ -149,22 +159,17 @@ public class AnimationActivity extends BaseActivity {
                 break;
             }
 
-            case R.id.change: {
-                jumps(mContext, ListActivity.class, null);
-                break;
-            }
-
-            case R.id.layout: {
-                JumpUtils.jump(mContext, ListActivity.class, null);
-                break;
-            }
-
             case R.id.frame: {
                 mImage.setImageResource(R.drawable.anim_list);
                 break;
 
             }
         }
+    }
+
+    @Override
+    public void reTry() {
+
     }
 
     /**

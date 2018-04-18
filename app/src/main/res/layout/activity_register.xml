@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/BgColor"
+        android:scrollbars="none">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium_small">
+
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilRegisterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:hint="@string/userName"
+                android:theme="@style/customLineColor"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextAppearance="@style/HintAppearance">
+
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editRegisterName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilRegisterPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/passWord"
+                android:theme="@style/customLineColor"
+                app:counterEnabled="true"
+                app:counterMaxLength="12"
+                app:counterOverflowTextAppearance="@style/HintErrorAppearance"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/errorAppearance"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextAppearance="@style/HintAppearance"
+                app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editRegisterPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilRegisterPass2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirmPass"
+                android:theme="@style/customLineColor"
+                app:counterEnabled="true"
+                app:counterMaxLength="12"
+                app:counterOverflowTextAppearance="@style/HintErrorAppearance"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/errorAppearance"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextAppearance="@style/HintAppearance"
+                app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editRegisterPass2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <com.example.gab.babylove.widget.StateButton
+                android:id="@+id/btn_Register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:text="@string/registerTitle"
+                android:textSize="18dp"
+                app:round="true"
+                android:textColor="@android:color/white"
+                app:normalBackgroundColor="@color/green"
+                app:pressedBackgroundColor="@color/textGreen"
+                app:unableBackgroundColor="@android:color/holo_red_light"/>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

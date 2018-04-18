@@ -1,6 +1,7 @@
 package com.example.gab.babylove.bean;
 
-import com.fy.baselibrary.entity.GankBean;
+
+import com.example.gab.babylove.entity.GankBean;
 
 import java.io.Serializable;
 import java.util.List;

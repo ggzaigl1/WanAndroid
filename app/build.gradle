@@ -45,7 +45,6 @@ dependencies {
     implementation project(':baselibrary')
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
     // 菜单栏
-    implementation project(':imgPicker')
     //    compile 'com.github.chrisbanes:PhotoView:2.1.2'
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     //点击图片放大
@@ -55,7 +54,6 @@ dependencies {
     implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
     compile 'id.arieridwan:pageloader:0.0.2'
     compile 'com.github.vipulasri:timelineview:1.0.5'
-    implementation project(':pickerdate')
     compile 'com.github.hotchemi:permissionsdispatcher:3.0.1'
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
     //阿里热修复

@@ -1,8 +1,10 @@
 package com.example.gab.babylove.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,7 +12,8 @@ import android.widget.TextView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.fingerprintCore.FingerprintCore;
 import com.example.gab.babylove.fingerprintCore.KeyguardLockScreenManager;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.T;
 
 import butterknife.BindView;
@@ -19,7 +22,7 @@ import butterknife.OnClick;
 /**
  * 指紋相关工具类
  */
-public class FingerprintMainActivity extends BaseActivity {
+public class FingerprintMainActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.fingerprint_guide)
     ImageView mFingerprintGuide;
@@ -30,21 +33,25 @@ public class FingerprintMainActivity extends BaseActivity {
     private KeyguardLockScreenManager mKeyguardLockScreenManager;
 
     @Override
-    protected int getContentView() {
+    public boolean isShowHeadView() {
+        return true;
+    }
+
+    @Override
+    public int setView() {
         return R.layout.activity_fingerprint_main;
     }
 
-    /**
-     * 初始化相关内容
-     *
-     * @param savedInstanceState
-     */
     @Override
-    protected void init(Bundle savedInstanceState) {
-        tvTitle.setText("指纹识别");
-        mFingerprintCore = new FingerprintCore(mContext);
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
+        mFingerprintCore = new FingerprintCore(this);
         mFingerprintCore.setFingerprintManager(mResultListener);
-        mKeyguardLockScreenManager = new KeyguardLockScreenManager(mContext);
+        mKeyguardLockScreenManager = new KeyguardLockScreenManager(this);
     }
 
     @OnClick({R.id.tvBack, R.id.fingerprint_recognition_start, R.id.fingerprint_recognition_cancel, R.id.fingerprint_recognition_sys_unlock,
@@ -62,12 +69,17 @@ public class FingerprintMainActivity extends BaseActivity {
                 startFingerprintRecognitionUnlockScreen();
                 break;
             case R.id.fingerprint_recognition_sys_setting:
-                openFingerPrintSettingPage(mContext);
+                openFingerPrintSettingPage(this);
                 break;
             case R.id.tvBack:
                 this.finish();
                 break;
         }
+    }
+
+    @Override
+    public void reTry() {
+
     }
 
     /**
@@ -92,7 +104,7 @@ public class FingerprintMainActivity extends BaseActivity {
         if (mFingerprintCore.isSupport()) {
             if (!mFingerprintCore.isHasEnrolledFingerprints()) {
                 T.showShort(R.string.fingerprint_recognition_not_enrolled);
-                openFingerPrintSettingPage(mContext);
+                openFingerPrintSettingPage(this);
                 return;
             }
             T.showShort(R.string.fingerprint_recognition_tip);
@@ -129,7 +141,7 @@ public class FingerprintMainActivity extends BaseActivity {
         }
         if (!mKeyguardLockScreenManager.isOpenLockScreenPwd()) {
             T.showShort(R.string.fingerprint_not_set_unlock_screen_pws);
-            openFingerPrintSettingPage(mContext);
+            openFingerPrintSettingPage(this);
             return;
         }
         mKeyguardLockScreenManager.showAuthenticationScreen(this);
@@ -144,7 +156,7 @@ public class FingerprintMainActivity extends BaseActivity {
             T.showShort(R.string.fingerprint_recognition_success);
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
             mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
-            openFingerPrintSettingPage(mContext);
+            openFingerPrintSettingPage(FingerprintMainActivity.this);
         }
 
         @Override

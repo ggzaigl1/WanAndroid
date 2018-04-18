@@ -2,8 +2,7 @@ package com.example.gab.babylove.Application;
 
 import android.util.Log;
 
-import com.example.gab.babylove.BuildConfig;
-import com.fy.baselibrary.application.BaseApplication;
+import com.fy.baselibrary.application.BaseApp;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
@@ -14,7 +13,7 @@ import com.tencent.smtt.sdk.QbSdk;
  *
  */
 
-public class MyApplication extends BaseApplication {
+public class MyApplication extends BaseApp {
 
     @Override
     public void onCreate() {

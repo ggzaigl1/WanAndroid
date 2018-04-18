@@ -1,158 +1,188 @@
 package com.fy.baselibrary.base.popupwindow;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.LayoutRes;
+import android.support.v7.app.AppCompatDelegate;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.PopupWindow;
 
+import com.fy.baselibrary.base.PopupDismissListner;
+import com.fy.baselibrary.base.ViewHolder;
 import com.fy.baselibrary.utils.DensityUtils;
 
 /**
- * 公共 popupWindow
- * Created by fangs on 2017/6/15.
+ * popupWindow 封装
+ * Created by fangs on 2018/3/21.
  */
-public class CommonPopupWindow extends PopupWindow {
+public abstract class CommonPopupWindow extends PopupWindow {
 
-    final PopupController controller;
+    Context mContext;
+    @LayoutRes
+    protected int layoutId;
+    View view;
 
-    private CommonPopupWindow(Context context) {
-        controller = new PopupController(context, this);
+    int mWidth, mHeight;//弹窗的宽和高
+
+    boolean isShowAnim;
+    int anim;//动画Id
+    boolean isHide = true;
+    float bgAlpha = 0.5f;
+
+    PopupDismissListner dismissListner;
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
+
 
     @Override
     public int getWidth() {
-        return controller.mPopupView.getMeasuredWidth();
+        return view.getMeasuredWidth();
     }
 
     @Override
     public int getHeight() {
-        return controller.mPopupView.getMeasuredHeight();
+        return view.getMeasuredHeight();
+    }
+
+    /** 设置 PopupWindow 布局 */
+    protected abstract int initLayoutId();
+
+    /** 渲染数据到View中 */
+    public abstract void convertView(ViewHolder holder);
+
+    public CommonPopupWindow() {
+    }
+
+    /**
+     * 绘制 Popup UI
+     * @param context
+     */
+    public CommonPopupWindow onCreateView(Context context) {
+        mContext = context;
+
+        layoutId = initLayoutId();
+
+        view = LayoutInflater.from(context).inflate(layoutId, null);
+        DensityUtils.measureWidthAndHeight(view);
+
+        convertView(ViewHolder.createViewHolder(context, view));
+
+        initParams(view);
+
+
+        return this;
+    }
+
+    /**
+     * 初始化 PopupWindow 样式
+     */
+    protected void initParams(View view) {
+        setContentView(view);
+
+        if (mWidth == 0 || mHeight == 0) {
+            //如果没设置宽高，默认是WRAP_CONTENT
+            setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+            setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        } else {
+            setWidth(DensityUtils.dp2px(mContext, mWidth));
+            setHeight(DensityUtils.dp2px(mContext, mHeight));
+        }
+
+
+        //设置动画
+        if (isShowAnim)setAnimationStyle(anim);
+        setHide(isHide);
+        bgAlpha(bgAlpha);
+    }
+
+    /**
+     * 点击 window外的区域 是否消失
+     * @param touchable 是否可点击
+     */
+    private void setHide(boolean touchable) {
+        setBackgroundDrawable(new ColorDrawable(0x000000));//设置透明背景
+        setOutsideTouchable(touchable);//设置outside可点击
+        setFocusable(touchable);
+    }
+
+    /**
+     * 设置添加屏幕的背景透明度
+     * @param bgAlpha
+     */
+    public void bgAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = ((Activity) mContext).getWindow().getAttributes();
+        lp.alpha = bgAlpha;
+        ((Activity) mContext).getWindow().setAttributes(lp);
     }
 
     @Override
     public void dismiss() {
         super.dismiss();
-        if (null != controller.listner){
-            controller.listner.onDismiss();
-        }
+        bgAlpha(1.0f);// popupWindow隐藏时恢复屏幕正常透明度
+        if (null != dismissListner) dismissListner.onDismiss();
     }
 
 
 
-    /** 弹出关闭监听 接口 */
-    public interface PopDismissListner{
-        void onDismiss();
+    /**
+     * 设置宽度和高度 如果不设置 默认是wrap_content
+     *
+     * @param width  宽(dp)
+     * @param height 高(dp)
+     * @return Builder
+     */
+    public CommonPopupWindow setWidthAndHeight(int width, int height) {
+        mWidth = width;
+        mHeight = height;
+        return this;
     }
 
-    public interface ViewInterface {
-        void getChildView(View view, int layoutResId);
+    /**
+     * 是否可点击Outside消失
+     *
+     * @param touchable 是否可点击
+     * @return CommonPopupWindow
+     */
+    public CommonPopupWindow setOutside(boolean touchable) {
+        isHide = touchable;
+        return this;
     }
 
-
-
-    public static class Builder {
-        private final PopupController.PopupParams params;
-        private ViewInterface listener;
-
-        public Builder(Context context) {
-            params = new PopupController.PopupParams(context);
-        }
-
-        /**
-         * @param layoutResId 设置PopupWindow 布局ID
-         * @return Builder
-         */
-        public Builder setView(int layoutResId) {
-            params.mView = null;
-            params.layoutResId = layoutResId;
-            return this;
-        }
-
-        /**
-         * @param view 设置PopupWindow布局
-         * @return Builder
-         */
-        public Builder setView(View view) {
-            params.mView = view;
-            params.layoutResId = 0;
-            return this;
-        }
-
-        /**
-         * 设置子View
-         *
-         * @param listener ViewInterface
-         * @return Builder
-         */
-        public Builder setViewOnclickListener(ViewInterface listener) {
-            this.listener = listener;
-            return this;
-        }
-
-        /**
-         * 设置宽度和高度 如果不设置 默认是wrap_content
-         *
-         * @param width 宽
-         * @return Builder
-         */
-        public Builder setWidthAndHeight(int width, int height) {
-            params.mWidth = width;
-            params.mHeight = height;
-            return this;
-        }
-
-        /**
-         * 设置背景灰色程度
-         *
-         * @param level 0.0f-1.0f
-         * @return Builder
-         */
-        public Builder setBackGroundLevel(float level) {
-            params.isShowBg = true;
-            params.bg_level = level;
-            return this;
-        }
-
-        /**
-         * 是否可点击Outside消失
-         *
-         * @param touchable 是否可点击
-         * @return Builder
-         */
-        public Builder setOutsideTouchable(boolean touchable) {
-            params.isTouchable = touchable;
-            return this;
-        }
-
-        /**
-         * 设置动画
-         *
-         * @return Builder
-         */
-        public Builder setAnimationStyle(int animationStyle) {
-            params.isShowAnim = true;
-            params.animationStyle = animationStyle;
-            return this;
-        }
-
-        /**
-         * 设置 窗口 dismiss 监听
-         * @param listener
-         * @return
-         */
-        public Builder setListener(PopDismissListner listener) {
-            params.listner = listener;
-            return this;
-        }
-
-        public CommonPopupWindow create() {
-            final CommonPopupWindow popupWindow = new CommonPopupWindow(params.mContext);
-            params.apply(popupWindow.controller);
-            if (listener != null && params.layoutResId != 0) {
-                listener.getChildView(popupWindow.controller.mPopupView, params.layoutResId);
-            }
-            DensityUtils.measureWidthAndHeight(popupWindow.controller.mPopupView);
-
-            return popupWindow;
-        }
+    /**
+     * 设置 popupWindow 背景透明度
+     * @param bgAlpha  0.0-1.0   0表示完全透明
+     * @return
+     */
+    public CommonPopupWindow setBgAlpha(float bgAlpha) {
+        this.bgAlpha = bgAlpha;
+        return this;
     }
+
+    /**
+     * 设置动画
+     * @return CommonPopupWindow
+     */
+    public CommonPopupWindow setAnim(int anim) {
+        isShowAnim = true;
+        this.anim = anim;
+        return this;
+    }
+
+    /**
+     * 设置 窗口 dismiss 监听
+     *
+     * @param dismissListner
+     * @return
+     */
+    public CommonPopupWindow setDismissListner(PopupDismissListner dismissListner) {
+        this.dismissListner = dismissListner;
+        return this;
+    }
+
 }

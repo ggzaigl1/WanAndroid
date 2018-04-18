@@ -1,15 +1,19 @@
 package com.example.gab.babylove.activity;
 
+import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,7 +26,7 @@ import butterknife.BindView;
  *  low 动画
  */
 
-public class AnimationAudioActivity extends BaseActivity {
+public class AnimationAudioActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.ll_record)
     LinearLayout ll_record;
@@ -38,12 +42,22 @@ public class AnimationAudioActivity extends BaseActivity {
     private MediaPlayer mediaPlayer = new MediaPlayer();
 
     @Override
-    protected int getContentView() {
+    public boolean isShowHeadView() {
+        return true;
+    }
+
+    @Override
+    public int setView() {
         return R.layout.activity_animation;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         //显示录音时间
         int duration = mediaPlayer.getDuration();
         String timeLong = duration / 1000 + "s";
@@ -67,6 +81,17 @@ public class AnimationAudioActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void reTry() {
+
+    }
+
 
     private void initMediaPlayer(String t) {
         try {

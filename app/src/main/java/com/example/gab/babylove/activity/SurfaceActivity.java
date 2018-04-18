@@ -1,5 +1,6 @@
 package com.example.gab.babylove.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,7 +29,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -39,7 +42,7 @@ import butterknife.BindView;
  * 使用 SurfaceView+MediaPlayer 自定义播放器
  */
 
-public class SurfaceActivity extends BaseActivity implements SurfaceHolder.Callback, View.OnClickListener
+public class SurfaceActivity extends AppCompatActivity implements IBaseActivity, SurfaceHolder.Callback, View.OnClickListener
         , SeekBar.OnSeekBarChangeListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener,
         MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnSeekCompleteListener {
 
@@ -120,12 +123,22 @@ public class SurfaceActivity extends BaseActivity implements SurfaceHolder.Callb
     };
 
     @Override
-    protected int getContentView() {
+    public boolean isShowHeadView() {
+        return true;
+    }
+
+    @Override
+    public int setView() {
         return R.layout.activity_surface;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         mHolder = surfaceView.getHolder();
         mediaPlayer = new MediaPlayer();
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -300,6 +313,7 @@ public class SurfaceActivity extends BaseActivity implements SurfaceHolder.Callb
         Log.e("TAG", "surfaceDestroyed");
     }
 
+
     @Override
     public void onClick(View v) {
         isControl = false;
@@ -334,6 +348,11 @@ public class SurfaceActivity extends BaseActivity implements SurfaceHolder.Callb
                 }
                 break;
         }
+    }
+
+    @Override
+    public void reTry() {
+
     }
 
     //横竖屏切换

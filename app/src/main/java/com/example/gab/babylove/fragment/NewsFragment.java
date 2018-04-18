@@ -1,11 +1,13 @@
 package com.example.gab.babylove.fragment;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.fy.baselibrary.base.BaseFragment;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 
 import butterknife.BindView;
@@ -17,30 +19,24 @@ import butterknife.BindView;
 
 public class NewsFragment extends BaseFragment {
 
-    @BindView(R.id.statusView)
-    View statusView;
-    @BindView(R.id.tvTitle)
-    TextView tvTitle;
-    @BindView(R.id.tvBack)
-    TextView tvBack;
-    @BindView(R.id.tvMenu)
-    TextView tvMenu;
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
-    protected int getContentLayout() {
+    protected int setContentLayout() {
         return R.layout.fragment_news;
     }
 
     @Override
     protected void baseInit() {
         super.baseInit();
-        tvTitle.setText("新闻资讯");
-        tvBack.setVisibility(View.INVISIBLE);
-        MdStatusBarCompat.setStatusView(mContext, statusView);
-
+        toolbar.setTitle("新闻资讯");
+        MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
     }
+
+
 
 //    @OnClick({R.id.bt_OnTraceList})
 //    @Override

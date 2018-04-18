@@ -10,13 +10,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.utils.CleanMessageUtil;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.T;
 
@@ -30,7 +32,7 @@ import butterknife.OnClick;
  * 工具栏
  */
 
-public class ToolsActivity extends BaseActivity {
+public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.tv_cache_size)
     TextView tv_cache_size;
@@ -49,16 +51,25 @@ public class ToolsActivity extends BaseActivity {
     };
 
     @Override
-    protected int getContentView() {
+    public boolean isShowHeadView() {
+        return true;
+    }
+
+    @Override
+    public int setView() {
         return R.layout.activity_tools;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        tvTitle.setText("设置");
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
 
         try {
-            tv_cache_size.setText(CleanMessageUtil.getTotalCacheSize(mContext));
+            tv_cache_size.setText(CleanMessageUtil.getTotalCacheSize(this));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,7 +78,6 @@ public class ToolsActivity extends BaseActivity {
     @OnClick({R.id.night_switch, R.id.Ll_cache, R.id.Ll_praise, R.id.Ll_phoneUtils, R.id.Ll_stroke,R.id.Ll_Button})
     @Override
     public void onClick(View view) {
-        super.onClick(view);
         switch (view.getId()) {
             //夜间模式
             case R.id.night_switch:
@@ -85,21 +95,26 @@ public class ToolsActivity extends BaseActivity {
                 break;
             //手机相关信息
             case R.id.Ll_phoneUtils:
-                JumpUtils.jump(mContext, PhoneUtilsActivity.class, null);
+                JumpUtils.jump(this, PhoneUtilsActivity.class, null);
                 break;
             //清除缓存
             case R.id.Ll_cache:
-                Cache(mContext);
+                Cache(this);
                 break;
             //指纹相关
             case R.id.Ll_stroke:
-                JumpUtils.jump(mContext, FingerprintMainActivity.class, null);
+                JumpUtils.jump(this, FingerprintMainActivity.class, null);
                 break;
             //指纹相关
             case R.id.Ll_Button:
-                JumpUtils.jump(mContext, SelectorButtonActivity.class, null);
+                JumpUtils.jump(this, SelectorButtonActivity.class, null);
                 break;
         }
+    }
+
+    @Override
+    public void reTry() {
+
     }
 
     private void Cache(Activity activity) {
@@ -119,7 +134,7 @@ public class ToolsActivity extends BaseActivity {
 
     public void startMarket() {
         Uri uri = Uri.parse(String.format("market://details?id=%s", getPackageName()));
-        if (isIntentSafe(mContext, uri)) {
+        if (isIntentSafe(this, uri)) {
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

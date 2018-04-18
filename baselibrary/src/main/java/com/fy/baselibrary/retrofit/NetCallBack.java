@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.fy.baselibrary.application.BaseApplication;
-import com.fy.baselibrary.base.CommonDialog;
+import com.fy.baselibrary.application.BaseApp;
+import com.fy.baselibrary.base.dialog.CommonDialog;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
-import com.fy.baselibrary.statuslayout.RootFrameLayout;
+import com.fy.baselibrary.statuslayout.StatusLayoutManager;
 import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.NetUtils;
 import com.fy.baselibrary.utils.T;
@@ -59,27 +59,21 @@ public abstract class NetCallBack<V> implements Observer<V> {
     @Override
     public void onNext(V t) {
         L.e("net", "onNext()");
-
-        updataLayout(RootFrameLayout.LAYOUT_CONTENT_ID);
-        if (null != t) {
-            onSuccess(t);
-        } else {
-            actionResponseError("请求失败");
-        }
+        onSuccess(t);
     }
 
     @Override
     public void onError(Throwable e) {
         L.e("net", "onError()");
         e.printStackTrace();
-        if (!NetUtils.isConnected(BaseApplication.getApplication())) {
+        if (!NetUtils.isConnected(BaseApp.getAppCtx())) {
             actionResponseError("网络不可用");
-            updataLayout(RootFrameLayout.LAYOUT_NETWORK_ERROR_ID);
+            updataLayout(StatusLayoutManager.LAYOUT_NETWORK_ERROR_ID);
         } else if (e instanceof ServerException) {
             if (e.getMessage().equals("token失效，请重新登录")) {//token 失效 进入登录页面
                 try {
-                    Class cla = Class.forName("com.hjy.sports.student.login.LoginActivity");
-                    Context context = BaseApplication.getApplication();
+                    Class cla = Class.forName("wanandroid.fy.com.login.LoginActivity");
+                    Context context = BaseApp.getAppCtx();
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("untoken",true);
                     Intent intent = new Intent(context, cla);
@@ -93,16 +87,16 @@ public abstract class NetCallBack<V> implements Observer<V> {
             }
 
             if (((ServerException) e).code != 401)actionResponseError(e.getMessage());
-            updataLayout(RootFrameLayout.REQUEST_FAIL);
+            updataLayout(StatusLayoutManager.REQUEST_FAIL);
         } else if (e instanceof ConnectException) {
             actionResponseError("请求超时，请稍后再试...");
-            updataLayout(RootFrameLayout.REQUEST_FAIL);
+            updataLayout(StatusLayoutManager.REQUEST_FAIL);
         } else if (e instanceof SocketTimeoutException) {
             actionResponseError("服务器响应超时，请稍后再试...");
-            updataLayout(RootFrameLayout.REQUEST_FAIL);
+            updataLayout(StatusLayoutManager.REQUEST_FAIL);
         } else {
             actionResponseError("请求失败，请稍后再试...");
-            updataLayout(RootFrameLayout.REQUEST_FAIL);
+            updataLayout(StatusLayoutManager.REQUEST_FAIL);
         }
         dismissProgress();
     }
@@ -110,6 +104,7 @@ public abstract class NetCallBack<V> implements Observer<V> {
     @Override
     public void onComplete() {
         L.e("net", "onComplete()");
+        updataLayout(StatusLayoutManager.LAYOUT_CONTENT_ID);
         dismissProgress();
     }
 

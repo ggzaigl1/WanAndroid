@@ -1,9 +1,12 @@
 package com.example.gab.babylove.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +21,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,7 +32,7 @@ import butterknife.OnClick;
  * WebView 相关内容
  */
 
-public class WebViewActivity extends BaseActivity {
+public class WebViewActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.web_view)
     WebView mWebView;
@@ -36,19 +40,46 @@ public class WebViewActivity extends BaseActivity {
     ProgressBar progressBar1;
     @BindView(R.id.showError)
     TextView showError;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     public static final String TIME_OUT_URL = "https://www.jianshu.com/";
 
     @Override
-    protected int getContentView() {
-        return R.layout.activity_webview;
+    public boolean isShowHeadView() {
+        return true;
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     @Override
-    protected void init(Bundle savedInstanceState) {
-        tvBack.setOnClickListener(v -> finish());
+    public int setView() {
+        return  R.layout.activity_webview;
+    }
+
+    @Override
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         initView();
+    }
+
+    @OnClick({R.id.showError})
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.showError:
+                mWebView.setVisibility(View.VISIBLE);
+                showError.setVisibility(View.GONE);
+                mWebView.reload();
+                break;
+        }
+    }
+
+    @Override
+    public void reTry() {
+
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -87,9 +118,9 @@ public class WebViewActivity extends BaseActivity {
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
                 if (null != title) {
-                    tvTitle.setText(title);
+                    toolbar.setTitle(title);
                 } else {
-                    tvTitle.setText("资讯新闻");
+                    toolbar.setTitle("资讯新闻");
                 }
             }
 
@@ -169,18 +200,6 @@ public class WebViewActivity extends BaseActivity {
                 return false;
             }
         });
-    }
-
-    @OnClick({R.id.showError})
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.showError:
-                mWebView.setVisibility(View.VISIBLE);
-                showError.setVisibility(View.GONE);
-                mWebView.reload();
-                break;
-        }
     }
 
     /**

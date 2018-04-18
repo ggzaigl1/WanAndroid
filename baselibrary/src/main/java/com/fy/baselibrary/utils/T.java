@@ -2,7 +2,7 @@ package com.fy.baselibrary.utils;
 
 import android.widget.Toast;
 
-import com.fy.baselibrary.application.BaseApplication;
+import com.fy.baselibrary.application.BaseApp;
 
 /**
  * Toast统一管理类 (解决多次弹出toast)
@@ -10,7 +10,9 @@ import com.fy.baselibrary.application.BaseApplication;
  */
 public class T {
 
-    /** 显示toast 开关 */
+    /**
+     * 显示toast 开关
+     */
     public static boolean isShow = true;
     private static Toast toast;
 
@@ -34,7 +36,7 @@ public class T {
      * @param message
      */
     public static void showShort(int message) {
-        show(BaseApplication.getApplication().getResources().getString(message), Toast.LENGTH_SHORT);
+        show(BaseApp.getAppCtx().getResources().getString(message), Toast.LENGTH_SHORT);
     }
 
     /**
@@ -52,18 +54,19 @@ public class T {
      * @param message
      */
     public static void showLong(int message) {
-        show(BaseApplication.getApplication().getResources().getString(message), Toast.LENGTH_LONG);
+        show(BaseApp.getAppCtx().getResources().getString(message), Toast.LENGTH_LONG);
     }
 
     /**
      * 显示系统 toast
+     *
      * @param message 消息
      */
-    private static void show(String message, int duration){
-        if (isShow){
+    private static void show(String message, int duration) {
+        if (isShow) {
 
-            if (null == toast){
-                toast =  Toast.makeText(BaseApplication.getApplication(), message, duration);
+            if (null == toast) {
+                toast = Toast.makeText(BaseApp.getAppCtx(), message, duration);
             } else {
                 toast.setText(message);
             }

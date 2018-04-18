@@ -2,8 +2,11 @@ package com.fy.baselibrary.retrofit;
 
 import android.text.TextUtils;
 
+import com.fy.baselibrary.retrofit.cookie.AddCookiesInterceptor;
+import com.fy.baselibrary.retrofit.cookie.ReceivedCookiesInterceptor;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.L;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,15 +35,14 @@ public class RequestModule {
 
     @Singleton
     @Provides
-    protected ApiService getService(RxJava2CallAdapterFactory callAdapterFactory, GsonConverterFactory
+    protected Retrofit getService(RxJava2CallAdapterFactory callAdapterFactory, GsonConverterFactory
             gsonConverterFactory, OkHttpClient client) {
         return new Retrofit.Builder()
                 .addCallAdapterFactory(callAdapterFactory)
                 .addConverterFactory(gsonConverterFactory)
-                .baseUrl(ApiService.BASE_URL)
+                .baseUrl(ConstantUtils.BASE_URL)
                 .client(client)
-                .build()
-                .create(ApiService.class);
+                .build();
     }
 
     @Singleton
@@ -52,18 +54,27 @@ public class RequestModule {
     @Singleton
     @Provides
     protected GsonConverterFactory getGsonConvertFactory() {
-        return GsonConverterFactory.create();
+        return GsonConverterFactory.create(new GsonBuilder()
+                .setLenient()// json宽松
+                .enableComplexMapKeySerialization()//支持Map的key为复杂对象的形式
+                .serializeNulls() //智能null
+                .setPrettyPrinting()// 调教格式
+                .disableHtmlEscaping() //默认是GSON把HTML 转义的
+                .create());
+//        return DES3GsonConverterFactory.create();//使用 自定义 GsonConverter
     }
 
     @Singleton
     @Provides
     protected OkHttpClient getClient(HttpLoggingInterceptor interceptor, Interceptor header) {
         return new OkHttpClient.Builder()
-                .connectTimeout(ApiService.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
-                .readTimeout(ApiService.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
-                .writeTimeout(ApiService.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .connectTimeout(ConstantUtils.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .readTimeout(ConstantUtils.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .writeTimeout(ConstantUtils.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS)
                 .addInterceptor(interceptor)
                 .addInterceptor(header)
+                .addInterceptor(new ReceivedCookiesInterceptor())
+                .addInterceptor(new AddCookiesInterceptor())
                 .build();
     }
 
@@ -91,7 +102,7 @@ public class RequestModule {
                 Request request = chain.request()
                         .newBuilder()
                         .addHeader("Content-Type", "multipart/form-data;charse=UTF-8")
-//                        .addHeader("Accept-Encoding", "gzip, deflate")
+//                        .addHeader("Accept-Encoding", "gzip, deflate")//根据服务器要求添加（避免重复压缩乱码）
                         .addHeader("Connection", "keep-alive")
                         .addHeader("Accept", "application/json")
                         .addHeader("Cookie", "add cookies here")

@@ -1,13 +1,16 @@
 package com.example.gab.babylove.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.animation.AnimationActivity;
 import com.example.gab.babylove.channelmanage.ChannelManageActivity;
 import com.example.gab.babylove.widget.StateButton;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
 
 import butterknife.BindView;
@@ -18,19 +21,28 @@ import butterknife.OnClick;
  * SelectorButton
  */
 
-public class SelectorButtonActivity extends BaseActivity {
+public class SelectorButtonActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.different_radius_test)
     StateButton radius;
 
     @Override
-    protected int getContentView() {
+    public boolean isShowHeadView() {
+        return true;
+    }
+
+    @Override
+    public int setView() {
         return R.layout.activity_selector_button;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        tvTitle.setText("SelectorButton");
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         //设置四个角不同的圆角
         radius.setRadius(new float[]{0, 0, 20, 20, 40, 40, 60, 60});
     }
@@ -43,25 +55,30 @@ public class SelectorButtonActivity extends BaseActivity {
                 JumpUtils.exitActivity(this);
             case R.id.bt_OnTraceList:
                 //模拟快递布局
-                JumpUtils.jump(mContext, TraceListActivity.class, null);
+                JumpUtils.jump(this, TraceListActivity.class, null);
                 break;
             case R.id.text_webView:
-                JumpUtils.jump(mContext, WebViewActivity.class, null);
-//                JumpUtils.jump(mContext, StoreWebViewActivity.class, null);
+                JumpUtils.jump(this, WebViewActivity.class, null);
+//                JumpUtils.jump(this, StoreWebViewActivity.class, null);
                 break;
             case R.id.different_radius_test:
-//                JumpUtils.jump(mContext, CalendarViewActivity.class, null);
-//                JumpUtils.jump(mContext, Camera2Activity.class, null);
-                JumpUtils.jump(mContext, ChannelManageActivity.class, null);
+//                JumpUtils.jump(this, CalendarViewActivity.class, null);
+//                JumpUtils.jump(this, Camera2Activity.class, null);
+                JumpUtils.jump(this, ChannelManageActivity.class, null);
                 break;
             // AgentWeb 封装
             case R.id.dash_test:
-                JumpUtils.jump(mContext, AgentWebActivity.class, null);
+                JumpUtils.jump(this, AgentWebActivity.class, null);
                 break;
             //动画
             case R.id.animation:
-                JumpUtils.jump(mContext, AnimationActivity.class, null);
+                JumpUtils.jump(this, AnimationActivity.class, null);
                 break;
         }
+    }
+
+    @Override
+    public void reTry() {
+
     }
 }

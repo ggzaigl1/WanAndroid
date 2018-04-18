@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.entity.GankBean;
+import com.example.gab.babylove.entity.GankBean;
 import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
 
 import java.util.List;

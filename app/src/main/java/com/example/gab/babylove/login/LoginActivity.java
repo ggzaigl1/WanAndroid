@@ -1,40 +1,35 @@
 package com.example.gab.babylove.login;
 
 import android.Manifest;
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.view.GravityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
-import android.widget.EditText;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.utils.Util;
-import com.fy.baselibrary.application.BaseApplication;
-import com.fy.baselibrary.base.BaseActivity;
-import com.fy.baselibrary.entity.ArticleBean;
-import com.fy.baselibrary.entity.LoginBean;
+import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.entity.LoginBean;
+import com.fy.baselibrary.application.BaseApp;
+import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
+import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
-import com.fy.baselibrary.startactivity.StartActivity;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.cache.ACache;
@@ -46,15 +41,13 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
  * 登录
  * Created by fangs on 2017/12/12.
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.cBoxPass)
     CheckBox cBoxPass;
@@ -73,20 +66,23 @@ public class LoginActivity extends BaseActivity {
     };
 
     @Override
-    protected void setStatusBarType() {
-        MdStatusBarCompat.setImageTransparent(this);
+    public boolean isShowHeadView() {
+        return true;
     }
 
     @Override
-    protected int getContentView() {
-        return 0;
+    public int setView() {
+        return R.layout.activity_login;
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setContentView(R.layout.activity_login);
-        super.onCreate(savedInstanceState);
-        permissionChecker = new PermissionChecker(mContext);
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
+        permissionChecker = new PermissionChecker(this);
         permissionChecker.setTitle(getString(R.string.check_info_title));
         permissionChecker.setMessage(getString(R.string.check_info_message));
         if (permissionChecker.isLackPermissions(PERMISSIONS)) {
@@ -125,6 +121,24 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
+    @OnClick({R.id.bt_Login,R.id.bt_register})
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_Login:
+                login();
+                break;
+            case R.id.bt_register:
+                JumpUtils.jump(this, RegisterActivity.class, null);
+                break;
+        }
+    }
+
+    @Override
+    public void reTry() {
+
+    }
+
 
     /**
      * 检查权限
@@ -134,7 +148,6 @@ public class LoginActivity extends BaseActivity {
             permissionChecker.requestPermissions();
         }
     }
-
 
     @Override
     protected void onRestart() {
@@ -163,26 +176,9 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void init(Bundle savedInstanceState) {
-
-    }
-
-
-    @OnClick({R.id.tvLogin})
-    @Override
-    public void onClick(View view) {
-        super.onClick(view);
-        switch (view.getId()) {
-            case R.id.tvLogin:
-                login();
-//                JumpUtils.jump(mContext, MainActivity.class, null);
-                break;
-        }
-    }
 
     private void login() {
-        IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.user_login);
+        IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.user_login);
 
         String mUserName = editName.getText().toString().trim();//"ggzaigl1"
         String mPassWord = editPass.getText().toString().trim();//"tmdligen"
@@ -191,21 +187,22 @@ public class LoginActivity extends BaseActivity {
         param.put("username", mUserName);
         param.put("password", mPassWord);
 
-        mConnService.getLogin(param)
+        RequestUtils.create(ApiService.class)
+        .getLogin(param)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetCallBack<BeanModule<LoginBean>>(progressDialog) {
                     @Override
                     protected void onSuccess(BeanModule<LoginBean> login) {
                         if (login.isSuccess()) {
-                            ACache mCache = ACache.get(BaseApplication.getApplication());
+                            ACache mCache = ACache.get(BaseApp.getAppCtx());
                             mCache.put(ConstantUtils.userName, login);
 
                             SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
                             SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getData().getUsername());
                             Bundle bundle = new Bundle();
                             bundle.putString("LoginBean", mCache.getAsString("User_Name"));
-                            JumpUtils.jump(mContext, MainActivity.class, null);
+                            JumpUtils.jump(LoginActivity.this, MainActivity.class, null);
                             finish();
                         } else {
                             T.showShort(login.getErrorMsg());

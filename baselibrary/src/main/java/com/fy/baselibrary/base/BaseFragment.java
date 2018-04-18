@@ -4,59 +4,42 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fy.baselibrary.retrofit.ApiService;
-import com.fy.baselibrary.retrofit.DaggerRequestComponent;
-import com.fy.baselibrary.retrofit.RequestComponent;
+import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.cache.ACache;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Fragment 基类
  * Created by fangs on 2017/4/26.
  */
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
+    public static final String TAG = "Fragment";
 
     protected ACache mCache;
-    protected BaseActivity mContext;
+
+    protected AppCompatActivity mContext;
     protected View mRootView;
     protected Unbinder unbinder;
-    private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
-
-    @Inject
-    protected ApiService mConnService;
-    protected CompositeDisposable mCompositeDisposable;
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        RequestComponent component = DaggerRequestComponent.builder().build();
-        component.inJect(this);
-        mCompositeDisposable = new CompositeDisposable();
-        this.mContext = (BaseActivity) context;
-        mCache = ACache.get(mContext);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (null == mRootView) {
-            mRootView = inflater.inflate(getContentLayout(), container, false);
+            mRootView = inflater.inflate(setContentLayout(), container, false);
             unbinder = ButterKnife.bind(this, mRootView);
+
             baseInit();
         } else {
             ViewGroup parent = (ViewGroup) mRootView.getParent();
@@ -64,27 +47,19 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                 parent.removeView(mRootView);
             }
         }
+        L.e(TAG, "onCreateView()");
         return mRootView;
     }
 
     @Override
-    public void onClick(View view) {
-    }
+    public void onClick(View view) {}
 
-    protected void baseInit() {
-    }
+    protected void baseInit() {}
 
-    protected abstract int getContentLayout();
+    protected abstract int setContentLayout();
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mCompositeDisposable.clear();
-        if (null != unbinder){
-            unbinder.unbind();
-        }
-    }
+
     //Fragment生命周期管理
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -97,27 +72,71 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (null != savedInstanceState) {
-            boolean isSupportHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
+    @Override//当Activity中的onCreate方法执行完后调用
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        L.e(TAG, "onActivityCreated()");
+    }
 
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            if (isSupportHidden) {
-                ft.hide(this);
-            } else {
-                ft.show(this);
-            }
-            ft.commit();
-        }
+    @Override//Fragment和Activity建立关联的时候调用
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        L.e(TAG, "onAttach()");
+
+        this.mContext = (AppCompatActivity) context;
+        mCache = ACache.get(mContext);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (outState != null) {
-            outState.putBoolean(STATE_SAVE_IS_HIDDEN, isHidden());
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        L.e(TAG, "onCreate()");
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        L.e(TAG, "onStart()");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        L.e(TAG, "onResume()");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        L.e(TAG, "onPause()");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        L.e(TAG, "onStop()");
+    }
+
+    @Override//Fragment中的布局被移除时调用
+    public void onDestroyView() {
+        super.onDestroyView();
+        L.e(TAG, "onDestroyView()");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        L.e(TAG, "onDestroy()");
+
+        if (null != unbinder){
+            unbinder.unbind();
         }
+    }
+
+    @Override//Fragment和Activity解除关联的时候调用
+    public void onDetach() {
+        super.onDetach();
+        L.e(TAG, "onDetach()");
     }
 }

@@ -1,57 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rlHead"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:orientation="horizontal"
-        android:background="@color/statusBar">
-    <!-- android:background="@drawable/layer_title_bg"-->
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
 
-    <TextView
-            android:id="@+id/tvBack"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="@drawable/selector"
-            android:drawableLeft="@drawable/ic_back"
-            android:gravity="center"
-            android:padding="@dimen/spacing_medium_small"
-            android:singleLine="true"
-            android:text="@string/back"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_medium_small"/>
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/appHeadBg"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:titleTextColor="@color/white" >
 
-    <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="0dp"
-            android:layout_weight="2.5"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/spacing_medium_small"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_medium"/>
+        <!--<TextView-->
+                <!--android:id="@+id/tvName"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Google Assistant"/>-->
 
-    <TextView
-            android:id="@+id/tvMenu"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector"
-            android:gravity="center"
-            android:padding="@dimen/spacing_medium_small"
-            android:singleLine="true"
-            android:text="注销"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_medium_small"
-            android:visibility="invisible"/>
+    </android.support.v7.widget.Toolbar>
 
-    <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:background="@color/BgColor"/>
-
-</LinearLayout>
+</android.support.design.widget.AppBarLayout>

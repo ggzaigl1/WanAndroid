@@ -1,6 +1,6 @@
 package com.fy.baselibrary.retrofit;
 
-import com.fy.baselibrary.application.BaseApplication;
+import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.SpfUtils;
@@ -48,42 +48,37 @@ public class RxNetCache {
      */
     public <T> Observable<T> request(Observable<T> fromNetwork) {
 
-        if (builder.isCache){
-            /**
-             * 定义读取缓存数据的 被观察者
-             */
-            Observable<T> fromCache = Observable.create(new ObservableOnSubscribe<T>() {
-                @Override
-                public void subscribe(@NonNull ObservableEmitter<T> subscriber) throws Exception {
-                    ACache mCache = ACache.get(BaseApplication.getApplication());
-                    T cache = (T) mCache.getAsObject(builder.getApi());
-                    if (null != cache) {
-                        L.e("net cache", cache.toString());
-                        subscriber.onNext(cache);
-                    }
-                    subscriber.onComplete();
+        /** 定义读取缓存数据的 被观察者 */
+        Observable<T> fromCache = Observable.create(new ObservableOnSubscribe<T>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<T> subscriber) throws Exception {
+                ACache mCache = ACache.get(BaseApp.getAppCtx());
+                T cache = (T) mCache.getAsObject(builder.getApi());
+                if (null != cache) {
+                    L.e("net cache", cache.toString());
+                    subscriber.onNext(cache);
                 }
-            }).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread());
+                subscriber.onComplete();
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
 
-            /**
-             * 使用doOnNext 操作符，对网络请求的数据 缓存到本地
-             * 这里的fromNetwork 不需要指定Schedule,在handleRequest中已经变换了
-             */
-            fromNetwork = fromNetwork.doOnNext(new Consumer<T>() {
-                @Override
-                public void accept(T result) throws Exception {
-                    L.e("net doOnNext", result.toString());
-                    ACache mCache = ACache.get(BaseApplication.getApplication());
-                    mCache.put(builder.getApi(), (Serializable)result, builder.getExpireTime());
-                }
-            });
+        /**
+         * 使用doOnNext 操作符，对网络请求的数据 缓存到本地
+         * 这里的fromNetwork 不需要指定Schedule,在handleRequest中已经变换了
+         */
+        fromNetwork = fromNetwork.doOnNext(new Consumer<T>() {
+            @Override
+            public void accept(T result) throws Exception {
+                L.e("net doOnNext", result.toString());
+                ACache mCache = ACache.get(BaseApp.getAppCtx());
+                mCache.put(builder.getApi(), (Serializable)result, builder.getExpireTime());
+            }
+        });
 
-            return Observable.concat(fromCache, fromNetwork);
-        } else {
-            return fromNetwork;
-        }
+        return Observable.concat(fromCache, fromNetwork);
     }
+
 
     public RxNetCache setBuilder(Builder builder) {
         this.builder = builder;
@@ -93,20 +88,10 @@ public class RxNetCache {
 
 
     public static class Builder {
-        boolean isCache = false;//是否缓存
         String api = "";//缓存key
         int expireTime = 86400;//默认一天超时时间(单位：秒；-1：表示没有过期时间)
 
         public Builder() {
-        }
-
-        public boolean isCache() {
-            return isCache;
-        }
-
-        public Builder setCache(boolean cache) {
-            isCache = cache;
-            return this;
         }
 
         public String getApi() {

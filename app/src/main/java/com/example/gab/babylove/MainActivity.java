@@ -1,5 +1,6 @@
 package com.example.gab.babylove;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +28,8 @@ import com.example.gab.babylove.fragment.PrettyPicturesFragment;
 import com.example.gab.babylove.login.LoginActivity;
 import com.example.gab.babylove.tbs.FileBrowsingActivity;
 import com.example.gab.babylove.utils.Util;
-import com.fy.baselibrary.application.BaseApplication;
-import com.fy.baselibrary.base.BaseActivity;
+import com.fy.baselibrary.application.BaseApp;
+import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
@@ -37,14 +39,12 @@ import com.fy.baselibrary.utils.SystemUtils;
 import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.cache.ACache;
 
-import org.w3c.dom.Text;
-
 import butterknife.BindView;
 
 /**
  * 主方法
  */
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements IBaseActivity, BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager mFragmentManager;
     private HomeFragment mHomeFragment;
@@ -65,18 +65,22 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     TextView Tv_Name;
 
     @Override
-    protected int getHeadView() {
-        return -1;
+    public boolean isShowHeadView() {
+        return false;
     }
 
     @Override
-    protected int getContentView() {
+    public int setView() {
         return R.layout.activity_main;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-//        StatusBarUtils.with(this).setDrawerLayoutContentId(true, R.id.rl_content).init();
+    public void setStatusBar(Activity activity) {
+        MdStatusBarCompat.setImageTransparent(this);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         mFragmentManager = getSupportFragmentManager();
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
@@ -90,20 +94,30 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         ImageView imageView = headerView.findViewById(R.id.headerView);
         Tv_Login = headerView.findViewById(R.id.tv_login);//点击登录
         Tv_Name = headerView.findViewById(R.id.tv_name);
-        imageView.setOnClickListener(v -> JumpUtils.jump(mContext, PhotoViewActivity.class, null));
+        imageView.setOnClickListener(v -> JumpUtils.jump(MainActivity.this, PhotoViewActivity.class, null));
 
         Tv_Login.setOnClickListener(v -> {
             boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
             if (isLogin){
                 Tv_Name.setText(R.string.notLogin);
                 Tv_Login.setText(R.string.clickLogin);
-                ACache mCache = ACache.get(BaseApplication.getApplication());
+                ACache mCache = ACache.get(BaseApp.getAppCtx());
                 mCache.clear();
                 SpfUtils.clear();
             }else {
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
         });
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void reTry() {
 
     }
 
@@ -115,10 +129,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         Tv_Login.setText(isLogin ? R.string.exitLogin : R.string.clickLogin);
     }
 
-    @Override
-    protected void setStatusBarType() {
-        MdStatusBarCompat.setImageTransparent(this);
-    }
 
     private void initBottomNavigation() {
         //设置导航栏背景模式 setBackgroundStyle（）
@@ -194,10 +204,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            JumpUtils.jump(mContext, PersonalCenterActivity.class, null);
+            JumpUtils.jump(this, PersonalCenterActivity.class, null);
             // Handle the camera action
         } else if (id == R.id.nav_personal_center) {
-            JumpUtils.jump(mContext, FileBrowsingActivity.class, null);
+            JumpUtils.jump(this, FileBrowsingActivity.class, null);
         } else if (id == R.id.nav_share) {
             T.showShort("nav_share");
         } else if (id == R.id.nav_send) {
@@ -205,7 +215,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         } else if (id == R.id.nav_exit) {
             SystemUtils.ExitSystem();
         } else if (id == R.id.nav_manage) {
-            JumpUtils.jump(mContext, ToolsActivity.class, null);
+            JumpUtils.jump(this, ToolsActivity.class, null);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -220,7 +230,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
             } else if ((System.currentTimeMillis() - exitTime) >= 2000) {
-                Util.CustomToast.INSTANCE.showToast(mContext, R.string.exit_app);
+                Util.CustomToast.INSTANCE.showToast(MainActivity.this, R.string.exit_app);
 //                T.showLong(R.string.exit_app);
                 exitTime = System.currentTimeMillis();
             } else {
@@ -230,4 +240,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
 }

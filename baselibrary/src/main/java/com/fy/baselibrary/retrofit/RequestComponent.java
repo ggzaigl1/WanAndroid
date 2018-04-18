@@ -1,8 +1,5 @@
 package com.fy.baselibrary.retrofit;
 
-import com.fy.baselibrary.base.BaseActivity;
-import com.fy.baselibrary.base.BaseFragment;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -15,6 +12,5 @@ import dagger.Component;
 @Component(modules = RequestModule.class)
 public interface RequestComponent {
 
-    void inJect(BaseActivity requestConn);
-    void inJect(BaseFragment requestConn);
+    void inJect(RequestUtils requestConn);
 }
