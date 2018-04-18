@@ -194,9 +194,9 @@ public class LoginActivity extends BaseActivity {
         mConnService.getLogin(param)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<BeanModule<LoginBean>>() {
+                .subscribe(new NetCallBack<BeanModule<LoginBean>>(progressDialog) {
                     @Override
-                    public void accept(BeanModule<LoginBean> login) throws Exception {
+                    protected void onSuccess(BeanModule<LoginBean> login) {
                         if (login.isSuccess()) {
                             ACache mCache = ACache.get(BaseApplication.getApplication());
                             mCache.put(ConstantUtils.userName, login);
@@ -210,12 +210,11 @@ public class LoginActivity extends BaseActivity {
                         } else {
                             T.showShort(login.getErrorMsg());
                         }
-
                     }
-                }, new Consumer<Throwable>() {
+
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        L.e(throwable.getMessage());
+                    protected void updataLayout(int flag) {
+
                     }
                 });
     }
