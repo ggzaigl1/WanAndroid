@@ -106,7 +106,7 @@ public class StatusBarUtils {
         if (isActionBar()) {
             //要增加内容视图的 paddingTop,否则内容被 ActionBar 遮盖
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                ViewGroup rootView = (ViewGroup) mActivity.getWindow().getDecorView().findViewById(android.R.id.content);
+                ViewGroup rootView = mActivity.getWindow().getDecorView().findViewById(android.R.id.content);
                 rootView.setPadding(0, getStatusBarHeight(mActivity) + getActionBarHeight(mActivity), 0, 0);
             }
         }
@@ -131,7 +131,7 @@ public class StatusBarUtils {
      * @param activity
      */
     private void fitsSystemWindows(Activity activity) {
-        ViewGroup contentFrameLayout = (ViewGroup) activity.findViewById(android.R.id.content);
+        ViewGroup contentFrameLayout = activity.findViewById(android.R.id.content);
         View parentView = contentFrameLayout.getChildAt(0);
         if (parentView != null && Build.VERSION.SDK_INT >= 14) {
             parentView.setFitsSystemWindows(true);
@@ -185,7 +185,7 @@ public class StatusBarUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (isDrawerLayout()) {
                 //要在内容布局增加状态栏，否则会盖在侧滑菜单上
-                ViewGroup rootView = (ViewGroup) activity.findViewById(android.R.id.content);
+                ViewGroup rootView = activity.findViewById(android.R.id.content);
                 //DrawerLayout 则需要在第一个子视图即内容试图中添加padding
                 View parentView = rootView.getChildAt(0);
                 LinearLayout linearLayout = new LinearLayout(activity);
@@ -208,7 +208,7 @@ public class StatusBarUtils {
                 drawer.addView(linearLayout, 0);
             } else {
                 //设置 paddingTop
-                ViewGroup rootView = (ViewGroup) mActivity.getWindow().getDecorView().findViewById(android.R.id.content);
+                ViewGroup rootView = mActivity.getWindow().getDecorView().findViewById(android.R.id.content);
                 rootView.setPadding(0, getStatusBarHeight(mActivity), 0, 0);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     //直接设置状态栏颜色
@@ -244,7 +244,7 @@ public class StatusBarUtils {
             }
             if (isDrawerLayout()) {
                 //要在内容布局增加状态栏，否则会盖在侧滑菜单上
-                ViewGroup rootView = (ViewGroup) activity.findViewById(android.R.id.content);
+                ViewGroup rootView = activity.findViewById(android.R.id.content);
                 //DrawerLayout 则需要在第一个子视图即内容试图中添加padding
                 View parentView = rootView.getChildAt(0);
                 LinearLayout linearLayout = new LinearLayout(activity);
@@ -266,7 +266,7 @@ public class StatusBarUtils {
                 ViewGroup decorView = (ViewGroup) mActivity.getWindow().getDecorView();
                 decorView.addView(statusBarView, lp);
                 //设置 paddingTop
-                ViewGroup rootView = (ViewGroup) mActivity.getWindow().getDecorView().findViewById(android.R.id.content);
+                ViewGroup rootView = mActivity.getWindow().getDecorView().findViewById(android.R.id.content);
                 rootView.setPadding(0, getStatusBarHeight(mActivity), 0, 0);
             }
         }

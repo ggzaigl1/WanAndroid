@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.bean.Trace;
+import com.example.gab.babylove.entity.TraceBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +20,11 @@ import java.util.List;
 public class TraceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
     private LayoutInflater inflater;
-    private List<Trace> traceList = new ArrayList<>(1);
+    private List<TraceBean> traceList = new ArrayList<>(1);
     private static final int TYPE_TOP = 0x0000;
     private static final int TYPE_NORMAL= 0x0001;
 
-    public TraceListAdapter(Context context, List<Trace> traceList) {
+    public TraceListAdapter(Context context, List<TraceBean> traceList) {
         inflater = LayoutInflater.from(context);
         this.traceList = traceList;
     }
@@ -72,13 +72,13 @@ public class TraceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         private TextView tvTopLine, tvDot;
         public ViewHolder(View itemView) {
             super(itemView);
-            tvAcceptTime = (TextView) itemView.findViewById(R.id.tvAcceptTime);
-            tvAcceptStation = (TextView) itemView.findViewById(R.id.tvAcceptStation);
-            tvTopLine = (TextView) itemView.findViewById(R.id.tvTopLine);
-            tvDot = (TextView) itemView.findViewById(R.id.tvDot);
+            tvAcceptTime = itemView.findViewById(R.id.tvAcceptTime);
+            tvAcceptStation = itemView.findViewById(R.id.tvAcceptStation);
+            tvTopLine = itemView.findViewById(R.id.tvTopLine);
+            tvDot = itemView.findViewById(R.id.tvDot);
         }
 
-        public void bindHolder(Trace trace) {
+        public void bindHolder(TraceBean trace) {
             tvAcceptTime.setText(trace.getAcceptTime());
             tvAcceptStation.setText(trace.getAcceptStation());
         }

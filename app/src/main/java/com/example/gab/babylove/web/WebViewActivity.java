@@ -1,4 +1,4 @@
-package com.example.gab.babylove.activity;
+package com.example.gab.babylove.web;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

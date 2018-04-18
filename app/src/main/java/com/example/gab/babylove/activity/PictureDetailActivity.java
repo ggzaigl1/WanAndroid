@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.adapter.PhotoAdapter;
-import com.example.gab.babylove.bean.OrListBean;
+import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.widget.PhotoViewPager;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.T;

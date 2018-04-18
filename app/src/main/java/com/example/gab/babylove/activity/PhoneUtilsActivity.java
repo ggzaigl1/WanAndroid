@@ -1,7 +1,6 @@
 package com.example.gab.babylove.activity;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,6 +23,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.PhoneUtils;
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.other.DialActivity;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.DeviceUtils;

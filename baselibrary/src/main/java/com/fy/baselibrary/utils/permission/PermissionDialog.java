@@ -81,10 +81,6 @@ public class PermissionDialog {
     }
 
     public boolean isEmpty(String src) {
-        if (TextUtils.isEmpty(src)) {
-            return true;
-        } else {
-            return false;
-        }
+        return TextUtils.isEmpty(src);
     }
 }

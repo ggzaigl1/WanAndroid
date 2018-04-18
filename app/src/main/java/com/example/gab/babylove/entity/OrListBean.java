@@ -1,4 +1,4 @@
-package com.example.gab.babylove.bean;
+package com.example.gab.babylove.entity;
 
 
 import com.example.gab.babylove.entity.GankBean;

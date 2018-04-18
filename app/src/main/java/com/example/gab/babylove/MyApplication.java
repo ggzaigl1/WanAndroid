@@ -1,4 +1,4 @@
-package com.example.gab.babylove.Application;
+package com.example.gab.babylove;
 
 import android.util.Log;
 

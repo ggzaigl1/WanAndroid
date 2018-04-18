@@ -42,10 +42,10 @@ public class ExitDialog extends CommonDialog {
     @Override
     protected void baseInit() {
 //        tvDialogTitle = mRootView.findViewById(R.id.tvDialogTitle);
-        tvInfo = (TextView) mRootView.findViewById(R.id.tvInfo);
-        tvTitle = (TextView) mRootView.findViewById(R.id.tvTitle);
-        tvLeft = (Button) mRootView.findViewById(R.id.tvLeft);
-        tvRight = (Button) mRootView.findViewById(R.id.tvRight);
+        tvInfo = mRootView.findViewById(R.id.tvInfo);
+        tvTitle = mRootView.findViewById(R.id.tvTitle);
+        tvLeft = mRootView.findViewById(R.id.tvLeft);
+        tvRight = mRootView.findViewById(R.id.tvRight);
         tvInfo.setText(params.getInfo());
         tvTitle.setText(params.getTitle());
 

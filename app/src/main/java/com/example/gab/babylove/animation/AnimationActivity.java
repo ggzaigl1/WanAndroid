@@ -21,6 +21,7 @@ import butterknife.OnClick;
 
 /**
  * Created by 初夏小溪 on 2018/3/30 0030.
+ * 动画
  */
 
 public class AnimationActivity extends AppCompatActivity implements IBaseActivity {

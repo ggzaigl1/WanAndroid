@@ -32,7 +32,7 @@
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
-            android:name=".Application.MyApplication"
+            android:name=".MyApplication"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
@@ -116,7 +116,7 @@
                 android:screenOrientation="portrait"/>
         <!-- AgentWeb -->
         <activity
-                android:name=".activity.AgentWebActivity"
+                android:name=".web.AgentWebActivity"
                 android:screenOrientation="portrait"/>
         <!-- 指紋相关工具类 -->
         <activity
@@ -138,11 +138,11 @@
                 android:screenOrientation="portrait"/>
         <!-- 积分大转盘 -->
         <activity
-                android:name=".activity.DialActivity"
+                android:name=".other.DialActivity"
                 android:screenOrientation="portrait"/>
         <!-- 动画 -->
         <activity
-                android:name=".activity.AnimationAudioActivity"
+                android:name=".other.AnimationAudioActivity"
                 android:screenOrientation="portrait"/>
         <!-- 个人中心 -->
         <activity
@@ -150,7 +150,7 @@
                 android:screenOrientation="portrait"/>
         <!-- 模拟快递布局 -->
         <activity
-                android:name=".activity.TraceListActivity"
+                android:name=".other.TraceListActivity"
                 android:screenOrientation="portrait"/>
         <!-- 不同格式文件浏览 activity -->
         <activity
@@ -161,7 +161,7 @@
         <!-- 8.0关于WebView的新特性 -->
 
         <activity
-                android:name=".activity.WebViewActivity"
+                android:name=".web.WebViewActivity"
                 android:screenOrientation="portrait">
             <meta-data
                     android:name="android.webkit.WebView.EnableSafeBrowing"
@@ -170,7 +170,7 @@
         </activity>
         <!-- WebView -->
         <activity
-                android:name=".activity.StoreWebViewActivity"
+                android:name=".web.StoreWebViewActivity"
                 android:screenOrientation="portrait"/>
         <!--Animation -->
         <activity
@@ -187,7 +187,7 @@
                 android:theme="@style/NoTitleTranslucentTheme"/>
         <!-- SurfaceView+MediaPlayer 自定义播放器 -->
         <activity
-                android:name=".activity.SurfaceActivity"
+                android:name=".other.SurfaceActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize"
                 android:screenOrientation="sensor"
                 android:windowSoftInputMode="stateHidden|adjustResize"/>

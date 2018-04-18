@@ -1,4 +1,4 @@
-package com.example.gab.babylove.activity;
+package com.example.gab.babylove.other;
 
 import android.app.Activity;
 import android.os.Bundle;

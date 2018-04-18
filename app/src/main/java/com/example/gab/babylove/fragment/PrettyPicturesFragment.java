@@ -12,13 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.Interpolator;
-import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.activity.PictureDetailActivity;
 import com.example.gab.babylove.adapter.GankMAdapter;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.bean.OrListBean;
+import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.entity.GankBean;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.RequestUtils;

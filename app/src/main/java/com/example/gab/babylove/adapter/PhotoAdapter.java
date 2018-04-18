@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.gab.babylove.bean.OrListBean;
+import com.example.gab.babylove.entity.OrListBean;
 import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
 import com.github.chrisbanes.photoview.PhotoView;
 

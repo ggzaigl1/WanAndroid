@@ -12,7 +12,7 @@
         android:horizontalSpacing="2dp"
         android:numColumns="3"
         android:scrollbars="none"
-        android:verticalSpacing="2dp"></GridView>
+        android:verticalSpacing="2dp"/>
 
 
     <FrameLayout

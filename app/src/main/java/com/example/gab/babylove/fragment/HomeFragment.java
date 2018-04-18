@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.activity.AgentWebActivity;
+import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.adapter.HomeAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;

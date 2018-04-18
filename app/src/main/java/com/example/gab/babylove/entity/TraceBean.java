@@ -1,20 +1,20 @@
-package com.example.gab.babylove.bean;
+package com.example.gab.babylove.entity;
 
 /**
  * Created by Gab on 2017/12/18 0018.
  */
 
-public class Trace {
+public class TraceBean {
 
     /** 时间 */
     private String acceptTime;
     /** 描述 */
     private String acceptStation;
 
-    public Trace() {
+    public TraceBean() {
     }
 
-    public Trace(String acceptTime, String acceptStation) {
+    public TraceBean(String acceptTime, String acceptStation) {
         this.acceptTime = acceptTime;
         this.acceptStation = acceptStation;
     }

@@ -24,7 +24,7 @@ public class LoadSirUtil {
         if (target instanceof Activity) {
             Activity activity = (Activity) target;
             context = activity;
-            contentParent = (ViewGroup) activity.findViewById(R.id.linearLRoot);
+            contentParent = activity.findViewById(R.id.linearLRoot);
         } else if (target instanceof View) {
             View view = (View) target;
             contentParent = (ViewGroup) (view.getParent());
