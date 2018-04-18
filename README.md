@@ -1,3 +1,4 @@
-# BabyLove
-###一个神奇的烂玩意APP,千万不要点击..
-####我说的是认真的...筒子们
+# Play Together Android
+### Complete a fun application based on the Play Android API.
+
+
