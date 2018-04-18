@@ -14,6 +14,8 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -40,13 +42,13 @@ public interface ApiService {
     /**
      * 登录
      */
-    @Streaming
+    @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("user/login")
-    Observable<LoginBean> getLogin(@Body Map<String, Object> options);
+    Observable<BeanModule<LoginBean>> getLogin(@FieldMap Map<String, Object> options);
 
     /**
-     * 登出接口
+     * 注册接口
      */
     @Streaming
     @Headers({"url_name:user"})
@@ -54,19 +56,11 @@ public interface ApiService {
     Observable<BeanModule<ArrayList<LoginBean>>> LogOut(@Body Map<String, Object> options);
 
     /**
-     * 头条
-     */
-    @Streaming
-    @Headers({"url_name:user"})
-    @GET("/toutiao/index")
-    Observable<BeanModule<ArrayList<HomeBean>>> GetHeadline(@QueryMap Map<String, Object> options);
-
-    /**
      * 首页 banner
      */
     @Headers({"url_name:user"})
     @GET("banner/json")
-    Observable<BannerBean> getBanner();
+    Observable<BeanModule<List<BannerBean>>> getBanner();
 
     /**
      * 美图图片
@@ -80,12 +74,12 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("article/list/{page}/json")
-    Observable<ArticleBean> getArticleList(@Path("page") int page);
-
+    Observable<BeanModule<ArticleBean>> getArticleList(@Path("page") int page);
 
 
     /**
      * 多图片上传
+     *
      * @param token
      * @param PatID
      * @param UserID

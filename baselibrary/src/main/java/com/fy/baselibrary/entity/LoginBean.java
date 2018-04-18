@@ -10,21 +10,21 @@ import java.util.List;
 public class LoginBean implements Serializable {
 
     /**
-     * collectIds : [1578,983]
+     * collectIds : [2481]
      * email :
      * icon :
-     * id : 4267
-     * password : fangs123
+     * id : 3555
+     * password : tmdligen
      * type : 0
-     * username : fangshuai
+     * username : ggzaigl1
      */
 
-    private String email = "";
-    private String icon = "";
+    private String email;
+    private String icon;
     private int id;
-    private String password = "";
+    private String password;
     private int type;
-    private String username = "";
+    private String username;
     private List<Integer> collectIds;
 
     public String getEmail() {

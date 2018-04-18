@@ -16,14 +16,14 @@ import java.util.List;
  * 主页数据adapter
  */
 
-public class HomeAdapter extends BaseQuickAdapter<ArticleBean.DataBean.DatasBean, BaseViewHolder> {
+public class HomeAdapter extends BaseQuickAdapter<ArticleBean.DatasBean, BaseViewHolder> {
 
-    public HomeAdapter(int layoutResId, @Nullable List<ArticleBean.DataBean.DatasBean> data) {
+    public HomeAdapter(int layoutResId, @Nullable List<ArticleBean.DatasBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, ArticleBean.DataBean.DatasBean item) {
+    protected void convert(BaseViewHolder helper, ArticleBean.DatasBean item) {
         helper.setText(R.id.tv_title, item.getTitle())
                 .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
                 .setText(R.id.tv_date, item.getNiceDate())

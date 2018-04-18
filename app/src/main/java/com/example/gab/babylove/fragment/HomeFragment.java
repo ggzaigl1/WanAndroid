@@ -23,6 +23,7 @@ import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.base.recyclerv.divider.DividerParams;
 import com.fy.baselibrary.entity.ArticleBean;
 import com.fy.baselibrary.entity.BannerBean;
+import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
@@ -101,18 +102,23 @@ public class HomeFragment extends BaseFragment {
                 .doOnSubscribe(disposable -> mCompositeDisposable.add(disposable))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BannerBean>(progressDialog) {
+                .subscribe(new NetCallBack<BeanModule<List<BannerBean>>>(progressDialog) {
                     @Override
-                    protected void onSuccess(BannerBean bean) {
-                        List<String> pic = new ArrayList<>();
-                        List<String> url = new ArrayList<>();
-                        List<String> title = new ArrayList<>();
-                        for (BannerBean.DataBean dataBean : bean.getData()) {
-                            pic.add(dataBean.getImagePath());
-                            url.add(dataBean.getUrl());
-                            title.add(dataBean.getTitle());
+                    protected void onSuccess(BeanModule<List<BannerBean>> bean) {
+                        List<String> pics = new ArrayList<>();
+                        List<String> urls = new ArrayList<>();
+                        List<String> titles = new ArrayList<>();
+
+                        for (BannerBean bannerBean : bean.getData()) {
+                            pics.add(bannerBean.getImagePath());
+                            urls.add(bannerBean.getUrl());
+                            titles.add(bannerBean.getTitle());
                         }
-                        bannerView(pic, bean);
+
+//                        for (BannerBean.DataBean dataBean : bean.getData()) {
+//
+//                        }
+                        bannerView(pics, urls);
                         //给页面设置工具栏
                         if (mCollapsingToolbarLayout != null) {
                             //设置隐藏图片时候ToolBar的颜色
@@ -124,25 +130,27 @@ public class HomeFragment extends BaseFragment {
 
                     @Override
                     protected void updataLayout(int flag) {
+
                     }
                 });
     }
 
     /**
      * 轮播图 相关设置
+     *
      * @param Pic
-     * @param bean
+     * @param urls
      */
-    private void bannerView(List<String> Pic, BannerBean bean) {
+    private void bannerView(List<String> Pic, List<String> urls) {
         mConvenientBanner.setPages(() -> new NetworkImageHolderView(), Pic)
                 .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
                 .setPointViewVisible(true)
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
                 .setPageTransformer(new AccordionTransformer())
                 .setOnItemClickListener(position -> {
-                    String Url = bean.getData().get(position).getUrl();
+                    String Ulr = urls.get(position);
                     Bundle bundle = new Bundle();
-                    bundle.putString("UrlBean", Url);
+                    bundle.putString("UrlBean", Ulr);
                     JumpUtils.jump(mContext, AgentWebActivity.class, bundle);
                 })
                 .setcurrentitem(0);
@@ -150,6 +158,7 @@ public class HomeFragment extends BaseFragment {
 
     /**
      * 首页列表数据加载
+     *
      * @param mCurPage
      */
     private void getArticleList(int mCurPage) {
@@ -158,10 +167,10 @@ public class HomeFragment extends BaseFragment {
         mConnService.getArticleList(mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ArticleBean>() {
+                .subscribe(new Consumer<BeanModule<ArticleBean>>() {
                     @Override
-                    public void accept(ArticleBean articleBean) throws Exception {
-                        if (null != articleBean && null != articleBean.getData().getDatas()) {
+                    public void accept(BeanModule<ArticleBean> articleBean) throws Exception {
+                        if (null != articleBean && null != articleBean.getData()) {
                             if (mRefreshLayout.isRefreshing()) {
                                 mAdapter.setNewData(articleBean.getData().getDatas());
                                 mRefreshLayout.finishRefresh();
@@ -178,7 +187,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
-     *  分页加载数据
+     * 分页加载数据
      */
     private void initRefresh() {
         mRefreshLayout.setRefreshHeader(new ClassicsHeader(mContext));
@@ -206,7 +215,7 @@ public class HomeFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(gManager);
         mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ArticleBean.DataBean.DatasBean bean = mAdapter.getData().get(position);
+            ArticleBean.DatasBean bean = mAdapter.getData().get(position);
             Bundle bundle = new Bundle();
             bundle.putString("UrlBean", bean.getLink());
             JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情

@@ -30,6 +30,7 @@ import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.L;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.cache.ACache;
@@ -169,7 +170,7 @@ public class LoginActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tvLogin:
                 login();
-//                runLogin(user_name, password);
+//                JumpUtils.jump(mContext, MainActivity.class, null);
                 break;
         }
     }
@@ -187,22 +188,27 @@ public class LoginActivity extends BaseActivity {
         mConnService.getLogin(param)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<LoginBean>(progressDialog) {
+                .subscribe(new Consumer<BeanModule<LoginBean>>() {
                     @Override
-                    protected void onSuccess(LoginBean login) {
-                        ACache mCache = ACache.get(BaseApplication.getApplication());
-                        mCache.put(ConstantUtils.userName, login);
+                    public void accept(BeanModule<LoginBean> login) throws Exception {
+                        if (login.isSuccess()) {
+                            ACache mCache = ACache.get(BaseApplication.getApplication());
+                            mCache.put(ConstantUtils.userName, login);
 
-                        SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
-                        SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getUsername());
-                        Bundle bundle = new Bundle();
-                        bundle.putString("LoginBean", mCache.getAsString("User_Name"));
-                        JumpUtils.jump(mContext, MainActivity.class, bundle);
+                            SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
+                            SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getData().getUsername());
+                            Bundle bundle = new Bundle();
+                            bundle.putString("LoginBean", mCache.getAsString("User_Name"));
+                            JumpUtils.jump(mContext, MainActivity.class, null);
+                        }else {
+                            T.showShort(login.getErrorMsg());
+                        }
+
                     }
-
+                }, new Consumer<Throwable>() {
                     @Override
-                    protected void updataLayout(int flag) {
-
+                    public void accept(Throwable throwable) throws Exception {
+                        L.e(throwable.getMessage());
                     }
                 });
     }
