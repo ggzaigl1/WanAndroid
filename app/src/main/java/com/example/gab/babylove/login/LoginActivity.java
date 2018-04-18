@@ -139,7 +139,6 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
 
     }
 
-
     /**
      * 检查权限
      */
@@ -189,8 +188,8 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
 
         RequestUtils.create(ApiService.class)
         .getLogin(param)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())//在IO线程进行网络请求
+                .observeOn(AndroidSchedulers.mainThread())//回到主线程去处理请求结果
                 .subscribe(new NetCallBack<BeanModule<LoginBean>>(progressDialog) {
                     @Override
                     protected void onSuccess(BeanModule<LoginBean> login) {

@@ -31,7 +31,7 @@ import com.example.gab.babylove.tbs.FileBrowsingActivity;
 import com.example.gab.babylove.utils.Util;
 import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
 
     @Override
     public void setStatusBar(Activity activity) {
-        MdStatusBarCompat.setImageTransparent(this);
+        MdStatusBar.setColorBar(this, R.color.statusBar, R.color.statusBar);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
         });
-
+//todo 优化string资源 删除无用的内容,调试1.3 1.4接口 整体项目删除无用资源
     }
 
     @Override

@@ -2,13 +2,10 @@ package com.example.gab.babylove.fragment;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
 
 import butterknife.BindView;
 

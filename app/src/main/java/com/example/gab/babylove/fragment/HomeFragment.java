@@ -1,5 +1,6 @@
 package com.example.gab.babylove.fragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -100,16 +101,11 @@ public class HomeFragment extends BaseFragment {
                         List<String> pics = new ArrayList<>();
                         List<String> urls = new ArrayList<>();
                         List<String> titles = new ArrayList<>();
-
                         for (BannerBean bannerBean : bean.getData()) {
                             pics.add(bannerBean.getImagePath());
                             urls.add(bannerBean.getUrl());
                             titles.add(bannerBean.getTitle());
                         }
-
-//                        for (BannerBean.DataBean dataBean : bean.getData()) {
-//
-//                        }
                         bannerView(pics, urls);
                         //给页面设置工具栏
                         if (mCollapsingToolbarLayout != null) {
@@ -153,6 +149,7 @@ public class HomeFragment extends BaseFragment {
      *
      * @param mCurPage
      */
+    @SuppressLint("CheckResult")
     private void getArticleList(int mCurPage) {
         Map<String, Object> param = new HashMap<>();
         param.put("page", mCurPage);

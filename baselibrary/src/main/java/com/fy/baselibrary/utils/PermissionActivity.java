@@ -62,17 +62,17 @@ public class PermissionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFirstRefuseMessage = getString(R.string.defaule_always_message);
+        mFirstRefuseMessage = getString(R.string.default_always_message);
         if (getIntent() != null) {
             mPermissions = getIntent().getStringArrayExtra(KEY_PERMISSIONS_ARRAY);
             mFirstRefuseMessage = getIntent().getStringExtra(KEY_FIRST_MESSAGE);
             mAlwaysRefuseMessage = getIntent().getStringExtra(KEY_ALWAYS_MESSAGE);
         }
         if (TextUtils.isEmpty(mFirstRefuseMessage)) {
-            mFirstRefuseMessage = getString(R.string.defaule_first_message);
+            mFirstRefuseMessage = getString(R.string.default_first_message);
         }
         if (TextUtils.isEmpty(mAlwaysRefuseMessage)) {
-            mAlwaysRefuseMessage = getString(R.string.defaule_always_message);
+            mAlwaysRefuseMessage = getString(R.string.default_always_message);
         }
         checkPermission(mPermissions);
     }

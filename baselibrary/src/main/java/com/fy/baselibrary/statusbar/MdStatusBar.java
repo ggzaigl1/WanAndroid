@@ -61,10 +61,7 @@ public class MdStatusBar {
      * @param navDepth    NavigationBar color depth (applyNav = true)
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static void setColorBar(Activity act, @ColorInt int statusColor, int statusDepth,
-                                   boolean applyNav,
-                                   @ColorInt int navColor, int navDepth) {
-
+    public static void setColorBar(Activity act, @ColorInt int statusColor, int statusDepth, boolean applyNav, @ColorInt int navColor, int navDepth) {
         int realStatusDepth = limitDepthOrAlpha(statusDepth);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = act.getWindow();
@@ -119,10 +116,7 @@ public class MdStatusBar {
      * @param navAlpha    NavigationBar alpha (applyNav == true)
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static void setTransparentBar(Activity act, @ColorInt int statusColor, int statusAlpha,
-                                         boolean applyNav,
-                                         @ColorInt int navColor, int navAlpha) {
-
+    public static void setTransparentBar(Activity act, @ColorInt int statusColor, int statusAlpha, boolean applyNav, @ColorInt int navColor, int navAlpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = act.getWindow();
             View decorView = window.getDecorView();
@@ -204,9 +198,7 @@ public class MdStatusBar {
      * @param navDepth
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static void setColorBarForDrawer(Activity act, @ColorInt int statusColor, int statusDepth,
-                                            boolean applyNav,
-                                            @ColorInt int navColor, int navDepth) {
+    public static void setColorBarForDrawer(Activity act, @ColorInt int statusColor, int statusDepth, boolean applyNav, @ColorInt int navColor, int navDepth) {
         int realStatusDepth = limitDepthOrAlpha(statusDepth);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = act.getWindow();

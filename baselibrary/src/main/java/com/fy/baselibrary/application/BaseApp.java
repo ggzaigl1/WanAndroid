@@ -2,8 +2,6 @@ package com.fy.baselibrary.application;
 
 import android.app.Application;
 
-import com.fy.baselibrary.widget.GlideImageLoader;
-import com.lzy.ninegrid.NineGridView;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -26,7 +24,6 @@ public class BaseApp extends Application {
 //        bugly
         CrashReport.initCrashReport(getApplicationContext(), "b51864b95a", false);
 
-        NineGridView.setImageLoader(new GlideImageLoader());
     }
 
 

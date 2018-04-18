@@ -11,7 +11,7 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.adapter.PhotoAdapter;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.widget.PhotoViewPager;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.T;
 
 /**
@@ -27,7 +27,7 @@ public class PictureDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MdStatusBarCompat.setOrdinaryToolBar(this, R.color.black);
+        MdStatusBar.setColorBar(this, R.color.black, R.color.black);
         setContentView(R.layout.activity_picture_detail);
         PhotoViewPager viewPager = findViewById(R.id.view_page);
         TextView tv_image_count = findViewById(R.id.tv_image_count);

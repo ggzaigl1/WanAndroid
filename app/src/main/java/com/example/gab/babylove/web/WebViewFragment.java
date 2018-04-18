@@ -1,4 +1,4 @@
-package com.example.gab.babylove.fragment.fragment_webview;
+package com.example.gab.babylove.web;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.statusbar.MdStatusBarCompat;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 
 /**
  * Created by Gab on 2018/1/15 0015.
@@ -38,7 +38,7 @@ public class WebViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_webview, container, false);
         View statusView = view.findViewById(R.id.statusView);
-        MdStatusBarCompat.setStatusView(getActivity(), statusView);
+        MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
         mWebView = view.findViewById(R.id.web_view);
         progressBar1 = view.findViewById(R.id.progressBar1);
         TextView tvTitle = view.findViewById(R.id.tvTitle);
