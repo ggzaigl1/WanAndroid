@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.adapter.HomeAdapter;
@@ -157,7 +158,12 @@ public class HomeFragment extends BaseFragment {
      * @param urls
      */
     private void bannerView(List<String> Pic, List<String> urls) {
-        mConvenientBanner.setPages(() -> new NetworkImageHolderView(), Pic)
+        mConvenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+            @Override
+            public NetworkImageHolderView createHolder() {
+                return new NetworkImageHolderView();
+            }
+        }, Pic)
                 .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
                 .setPointViewVisible(true)
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向

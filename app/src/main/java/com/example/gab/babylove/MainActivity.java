@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
         });
+        //Todo ConvenientBanner 切换fragment 变黑 , HomeFragment 继续完成
     }
 
     @Override

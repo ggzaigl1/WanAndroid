@@ -42,7 +42,7 @@
         <activity
                 android:name=".login.StartUpActivity"
                 android:screenOrientation="portrait"
-                android:launchMode="singleTop"
+                android:launchMode="singleTask"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -52,9 +52,9 @@
 
         <activity
                 android:name=".MainActivity"
-                android:launchMode="singleTask"
                 android:screenOrientation="portrait">
         </activity>
+
         <!-- 登录 -->
         <activity
                 android:name=".login.LoginActivity"

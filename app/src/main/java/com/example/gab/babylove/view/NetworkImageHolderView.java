@@ -25,7 +25,6 @@ public class NetworkImageHolderView implements Holder<String> {
     @Override
     public void UpdateUI(Context context,int position, String data) {
         imageView.setImageResource(R.drawable.ic_launcher_background);
-
         ImgLoadUtils.loadImage(context, data, imageView);
     }
 }
