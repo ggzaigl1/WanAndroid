@@ -5,6 +5,7 @@ import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.HomeBean;
 import com.example.gab.babylove.entity.LoginBean;
+import com.example.gab.babylove.entity.TreeBean;
 import com.fy.baselibrary.retrofit.BeanModule;
 
 import java.util.ArrayList;
@@ -63,10 +64,17 @@ public interface ApiService {
      * 首页文章列表
      */
     @Headers({"url_name:user"})
-    @GET("article/list/{page}/json")
-    Observable<BeanModule<ArticleBean>> getArticleList(@Path("page") int page);
+    @GET("article/list/{id}/json")
+    Observable<BeanModule<ArticleBean>> getArticleList(@Path("id") int page);
 
-
+    /**
+     * 体系数据
+     *
+     * @return
+     */
+    @Headers({"url_name:user"})
+    @GET("tree/json")
+    Observable<BeanModule<List<TreeBean>>> getTreeList();
     /**
      * 多图片上传
      *

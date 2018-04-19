@@ -32,7 +32,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="作者"
+                    android:text=""
                     android:textColor="@color/myTxtSuperLight"
                     android:textSize="@dimen/textSize_small"/>
 
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="Data"
+                    android:text=""
                     android:textColor="@color/myTxtSuperLight"
                     android:textSize="@dimen/textSize_small"/>
         </LinearLayout>
@@ -57,10 +57,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:maxLines="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:maxLines="2"
                     android:ellipsize="end"
-                    android:text="Title"
+                    android:text=""
                     android:textColor="@color/myTxtColor"
                     android:textSize="@dimen/textSize_medium_small"/>
 
@@ -80,7 +81,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="分类"
+                    android:text=""
                     android:textColor="@color/myTxtSuperLight"
                     android:textSize="@dimen/textSize_small"/>
 

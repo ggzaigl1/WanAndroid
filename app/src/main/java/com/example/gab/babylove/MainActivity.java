@@ -20,13 +20,13 @@ import android.widget.TextView;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.about.AboutActivity;
-import com.example.gab.babylove.activity.PersonalCenterActivity;
+import com.example.gab.babylove.activity.BelleActivity;
 import com.example.gab.babylove.activity.PhotoViewActivity;
 import com.example.gab.babylove.activity.ToolsActivity;
 import com.example.gab.babylove.fragment.HomeFragment;
 import com.example.gab.babylove.fragment.NewsFragment;
 import com.example.gab.babylove.fragment.StarFragment;
-import com.example.gab.babylove.fragment.PrettyPicturesFragment;
+import com.example.gab.babylove.fragment.BookmarksFragment;
 import com.example.gab.babylove.login.LoginActivity;
 import com.example.gab.babylove.tbs.FileBrowsingActivity;
 import com.example.gab.babylove.utils.Util;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     private FragmentManager mFragmentManager;
     private HomeFragment mHomeFragment;
     private NewsFragment mNewsFragment;
-    private PrettyPicturesFragment mPrettyPicturesFragment;
+    private BookmarksFragment mPrettyPicturesFragment;
     private StarFragment mOtherFragment;
     private Fragment mCurrentFrag; //当前的fragment
     private long exitTime = 0; //保存点击的时间
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
         mNewsFragment = new NewsFragment();
-        mPrettyPicturesFragment = new PrettyPicturesFragment();
+        mPrettyPicturesFragment = new BookmarksFragment();
         mOtherFragment = new StarFragment();
         initBottomNavigation();
         switchContent(mHomeFragment);
@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
         });
-//todo 调试1.3 1.4接口 整体项目删除无用资源
     }
 
     @Override
@@ -208,11 +207,11 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            JumpUtils.jump(this, PersonalCenterActivity.class, null);
-            // Handle the camera action
+        if (id == R.id.nav_belle) {
+            //美图欣赏
+            JumpUtils.jump(this, BelleActivity.class, null);
         } else if (id == R.id.nav_personal_center) {
+            //使用tbs
             JumpUtils.jump(this, FileBrowsingActivity.class, null);
         } else if (id == R.id.nav_share) {
             T.showShort("nav_share");
@@ -221,8 +220,10 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         } else if (id == R.id.nav_exit) {
             SystemUtils.ExitSystem();
         } else if (id == R.id.nav_manage) {
+//            工具类
             JumpUtils.jump(this, ToolsActivity.class, null);
         } else if (id == R.id.nav_about) {
+            //关于我们
             JumpUtils.jump(this, AboutActivity.class, null);
         }
 

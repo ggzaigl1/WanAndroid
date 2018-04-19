@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.LinearLayout;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -61,7 +63,7 @@ public class HomeFragment extends BaseFragment {
     SmartRefreshLayout mRefreshLayout;
 
     HomeAdapter mAdapter;
-    private int mPageNo = 1;
+    private int mPageNo = 0;
 
     @Override
     protected void baseInit() {
@@ -151,8 +153,6 @@ public class HomeFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int mCurPage) {
-        Map<String, Object> param = new HashMap<>();
-        param.put("page", mCurPage);
         RequestUtils.create(ApiService.class)
                 .getArticleList(mCurPage)
                 .subscribeOn(Schedulers.io())
@@ -201,8 +201,7 @@ public class HomeFragment extends BaseFragment {
      * recycleview 相关设置
      */
     private void initRecyle() {
-        GridLayoutManager gManager = new GridLayoutManager(getActivity(), 1);
-        mRecyclerView.setLayoutManager(gManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             ArticleBean.DatasBean bean = mAdapter.getData().get(position);

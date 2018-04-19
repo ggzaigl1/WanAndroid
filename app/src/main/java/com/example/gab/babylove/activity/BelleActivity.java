@@ -1,11 +1,13 @@
-package com.example.gab.babylove.fragment;
+package com.example.gab.babylove.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,12 +16,11 @@ import android.view.View;
 import android.view.animation.Interpolator;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.activity.PictureDetailActivity;
 import com.example.gab.babylove.adapter.GankMAdapter;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.entity.GankBean;
-import com.fy.baselibrary.base.BaseFragment;
+import com.example.gab.babylove.entity.OrListBean;
+import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
@@ -39,11 +40,11 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Gab on 2017/12/15 0015.
- * 美圖欣賞
+ * Created by Gab on 2017/12/19 0019.
+ * 美图欣赏
  */
 
-public class PrettyPicturesFragment extends BaseFragment {
+public class BelleActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
@@ -51,33 +52,46 @@ public class PrettyPicturesFragment extends BaseFragment {
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.fab_top)
     FloatingActionButton fab_top;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
     GankMAdapter mAdapter;
     private int mCurPage = 1;
     private final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
 
     @Override
-    protected int setContentLayout() {
-        return R.layout.fragment_wife;
+    public boolean isShowHeadView() {
+        return true;
     }
 
+    @Override
+    public int setView() {
+        return R.layout.activity_belle;
+    }
 
     @Override
-    protected void baseInit() {
-        super.baseInit();
+    public void setStatusBar(Activity activity) {
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         initRv();
         initRefresh();
         getCourseDetails(mCurPage);
-        toolbar.setTitle("美图欣赏");
-        MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void reTry() {
+
+    }
 
     private void initRefresh() {
-        mRefreshLayout.setRefreshHeader(new ClassicsHeader(mContext));
-        mRefreshLayout.setRefreshFooter(new ClassicsFooter(mContext));
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
         mRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
@@ -121,7 +135,7 @@ public class PrettyPicturesFragment extends BaseFragment {
     }
 
     private void initRv() {
-        GridLayoutManager layoutManager = new GridLayoutManager(mContext, 2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new GankMAdapter(R.layout.item_gank_list_context, new ArrayList<>());
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -143,7 +157,7 @@ public class PrettyPicturesFragment extends BaseFragment {
             Bundle bundle = new Bundle();
             bundle.putInt("position", position);
             bundle.putSerializable("orListBean", orListBean);
-            JumpUtils.jump(mContext, PictureDetailActivity.class, bundle);
+            JumpUtils.jump(this, PictureDetailActivity.class, bundle);
         });
 
         fab_top.setOnClickListener(v -> {

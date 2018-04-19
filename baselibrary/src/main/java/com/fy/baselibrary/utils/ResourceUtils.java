@@ -124,4 +124,19 @@ public class ResourceUtils {
     public static void setTvColor(TextView tv, int colorId){
         tv.setTextColor(ContextCompat.getColor(BaseApp. getAppCtx(), colorId));
     }
+
+
+    /**
+     * %d   （表示整数）
+     * %f   （表示浮点数）
+     * %s   （表示字符串）<br>
+     * 获取 strings 资源文件，指定 id 的资源，替换后的字符串
+     * @param id      资源ID（如：ID内容为 “病人ID：%1$d”）
+     * @param args    将要替换的内容
+     * @return 替换后的字符串
+     */
+    public static String getReplaceStr(@StringRes int id, Object... args){
+        String format = getStr(id);
+        return String.format(format, args);
+    }
 }

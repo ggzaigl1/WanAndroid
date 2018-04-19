@@ -5,14 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_camera"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="Import"/>
+                android:id="@+id/nav_belle"
+                android:icon="@mipmap/ic_live_tv"
+                android:title="隐性福利"/>
         <item
                 android:id="@+id/nav_personal_center"
                 android:icon="@drawable/ic_personal_center"
                 android:title="Personal Center"/>
-
         <item
                 android:id="@+id/nav_manage"
                 android:icon="@drawable/ic_menu_manage"

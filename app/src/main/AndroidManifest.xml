@@ -110,6 +110,11 @@
                 android:name=".activity.SelectorButtonActivity"
                 android:label="@string/selector_button"
                 android:screenOrientation="portrait"/>
+        <!-- 美图欣赏 -->
+        <activity
+                android:name=".activity.BelleActivity"
+                android:label="@string/pretty_picture"
+                android:screenOrientation="portrait"/>
         <!-- 美图欣赏 图片详情页 -->
         <activity
                 android:name=".activity.PictureDetailActivity"
@@ -141,17 +146,9 @@
         <activity
                 android:name=".example.Camera2Activity"
                 android:screenOrientation="portrait"/>
-        <!-- 积分大转盘 -->
-        <activity
-                android:name=".other.DialActivity"
-                android:screenOrientation="portrait"/>
         <!-- 动画 -->
         <activity
                 android:name=".other.AnimationAudioActivity"
-                android:screenOrientation="portrait"/>
-        <!-- 个人中心 -->
-        <activity
-                android:name=".activity.PersonalCenterActivity"
                 android:screenOrientation="portrait"/>
         <!-- 模拟快递布局 -->
         <activity

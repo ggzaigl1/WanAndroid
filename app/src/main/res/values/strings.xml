@@ -54,6 +54,7 @@
     <string name="system_content">您确定要退出登录吗?</string>
     <string name="tools">工具</string>
     <string name="phone_system">手机相关信息</string>
+    <string name="pretty_picture">美图欣赏</string>
     <string name="about_us">关于我们</string>
     <string name="selector_button">SelectorButton</string>
     <string name="fingerprint">Fingerprint</string>
@@ -92,7 +93,8 @@
     <string name="exit_loading">正在退出&#8230;</string>
     <string name="modify_success">修改成功</string>
     <string name="get_success">获取成功</string>
-
+    <!-- 适配字符串 后面有一个汉字宽度的空格 -->
+    <string name="space">%1$s&#160;&#160;&#8201;</string>
     <string name="about_content">
         <![CDATA[
             <h2>网站内容</h2>
