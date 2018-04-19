@@ -16,6 +16,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.tbs.FileBrowsingActivity;
 import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
@@ -108,6 +109,10 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
             //指纹相关
             case R.id.Ll_Button:
                 JumpUtils.jump(this, SelectorButtonActivity.class, null);
+                break;
+            //指纹相关
+            case R.id.Ll_personal_center:
+                JumpUtils.jump(this, FileBrowsingActivity.class, null);
                 break;
         }
     }

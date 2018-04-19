@@ -9,9 +9,9 @@
                 android:icon="@mipmap/ic_live_tv"
                 android:title="隐性福利"/>
         <item
-                android:id="@+id/nav_personal_center"
-                android:icon="@drawable/ic_personal_center"
-                android:title="Personal Center"/>
+                android:id="@+id/nav_website"
+                android:icon="@drawable/vector_website"
+                android:title="常用网站"/>
         <item
                 android:id="@+id/nav_manage"
                 android:icon="@drawable/ic_menu_manage"

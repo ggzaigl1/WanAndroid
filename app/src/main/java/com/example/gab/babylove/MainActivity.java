@@ -23,6 +23,7 @@ import com.example.gab.babylove.about.AboutActivity;
 import com.example.gab.babylove.activity.BelleActivity;
 import com.example.gab.babylove.activity.PhotoViewActivity;
 import com.example.gab.babylove.activity.ToolsActivity;
+import com.example.gab.babylove.activity.WebsiteActivity;
 import com.example.gab.babylove.fragment.HomeFragment;
 import com.example.gab.babylove.fragment.NewsFragment;
 import com.example.gab.babylove.fragment.StarFragment;
@@ -210,9 +211,9 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         if (id == R.id.nav_belle) {
             //美图欣赏
             JumpUtils.jump(this, BelleActivity.class, null);
-        } else if (id == R.id.nav_personal_center) {
-            //使用tbs
-            JumpUtils.jump(this, FileBrowsingActivity.class, null);
+        } else if (id == R.id.nav_website) {
+            //常用网站
+            JumpUtils.jump(this, WebsiteActivity.class, null);
         } else if (id == R.id.nav_share) {
             T.showShort("nav_share");
         } else if (id == R.id.nav_send) {

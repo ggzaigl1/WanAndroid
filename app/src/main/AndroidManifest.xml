@@ -119,6 +119,10 @@
         <activity
                 android:name=".activity.PictureDetailActivity"
                 android:screenOrientation="portrait"/>
+        <!-- Website 常用网站 -->
+        <activity
+                android:name=".activity.WebsiteActivity"
+                android:screenOrientation="portrait"/>
         <!-- AgentWeb -->
         <activity
                 android:name=".web.AgentWebActivity"

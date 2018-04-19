@@ -8,19 +8,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <!--<include-->
-            <!--android:id="@+id/statusView"-->
-            <!--layout="@layout/status_view"/>-->
-
-    <FrameLayout
-            android:id="@+id/flHead"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <include layout="@layout/activity_head"/>
-    </FrameLayout>
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"

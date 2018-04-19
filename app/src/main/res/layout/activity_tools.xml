@@ -137,6 +137,23 @@
                         />
 
             </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/Ll_personal_center"
+                    style="@style/myListStyle">
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="SelectorButton"
+                        android:drawableLeft="@drawable/ic_personal_center"
+                        android:drawablePadding="@dimen/spacing_medium_large"
+                        android:textColor="@color/myTxtColor"
+                        android:textSize="@dimen/textSize_medium_small"
+                        />
+
+            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

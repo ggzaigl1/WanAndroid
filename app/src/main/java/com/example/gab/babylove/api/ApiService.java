@@ -2,6 +2,7 @@ package com.example.gab.babylove.api;
 
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.entity.BannerBean;
+import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.HomeBean;
 import com.example.gab.babylove.entity.LoginBean;
@@ -75,6 +76,14 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("tree/json")
     Observable<BeanModule<List<TreeBean>>> getTreeList();
+
+    /**
+     * 常用网站
+     */
+    @Headers({"url_name:user"})
+    @GET("friend/json")
+    Observable<BeanModule<List<BookmarkBean>>> getBookmarkList();
+
     /**
      * 多图片上传
      *
