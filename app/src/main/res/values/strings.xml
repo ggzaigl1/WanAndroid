@@ -1,11 +1,6 @@
 <resources>
 
     <string name="app_name">一起玩Android</string>
-    <string name="ss">特等奖\n京东E卡100元</string>
-    <string name="asb">2017-11-29 14:30:30 服饰 iPhone8s puls 2017-11-29 15:41:28 新年的许愿 MacBook Pro 2017-11-29 16:22:45 魅力的姑娘 iPhone X</string>
-    <string name="bsa">1.点击页面Go按钮，进入抽奖流程，按提示操作即可(参与本活动无需支付任何费用)。\n2.活动期间，每个手机号，获得的“劵号”后7位数字作为本次活动的“抽奖号”。</string>
-    <string name="context">请您确认该号码是否是您本人的联系方式。</string>
-    <string name="action_settings">Settings</string>
     <string name="exit_app">再按一次退出程序！</string>
 
     <string name="save">保存</string>
@@ -27,40 +22,48 @@
     <string name="height">%1$s\n身高(cm)</string>
     <string name="weight">%1$s\n体重(kg)</string>
 
+    <string name="nav_00_title">Home</string>
+    <string name="nav_01_title">News</string>
+    <string name="nav_02_title">Pictures</string>
+    <string name="nav_03_title">Star</string>
+
     <string name="userName">账号：</string>
     <string name="passWord">密码：</string>
     <string name="registerTitle">注册</string>
     <string name="confirmPass">确认密码：</string>
+    <string name="login_username">请输入账号</string>
+    <string name="login_password">请输入密码</string>
     <string name="login">登录</string>
     <string name="register">注册账号</string>
-    <string name="login_exit">退出登录</string>
+    <string name="rememberPass">记住密码</string>
+
     <string name="myData">个人资料</string>
     <string name="imgHead">头像</string>
     <string name="sex">性别属性</string>
     <string name="nation">民族</string>
-    <string name="agemodify">年龄</string>
+    <string name="age_modify">年龄</string>
     <string name="heightModify">身高(cm)</string>
     <string name="weightModify">体重(kg)</string>
     <string name="schoolNum">学籍号</string>
     <string name="birthday">出生日期</string>
     <string name="school">学校</string>
     <string name="parentPhone">本人电话</string>
-    <string name="nav_00_title">Home</string>
-    <string name="nav_01_title">News</string>
-    <string name="nav_02_title">Pictures</string>
-    <string name="nav_03_title">Star</string>
-    <string name="rememberPass">记住密码</string>
-    <string name="loginTitle">全 国 体 育 联 盟\nNational Sports Union</string>
+
     <string name="navigationTitle">&#160;&#160;&#160;&#160;&#160;Google Hot Air Balloon\nhttps://github.com/ggzaigl1</string>
     <string name="system_title">系统提示</string>
     <string name="system_content">您确定要退出登录吗?</string>
-    <string name="login_username">请输入账号</string>
-    <string name="login_password">请输入密码</string>
     <string name="tools">工具</string>
     <string name="phone_system">手机相关信息</string>
     <string name="about_us">关于我们</string>
     <string name="selector_button">SelectorButton</string>
     <string name="fingerprint">Fingerprint</string>
+    <string name="notLogin">Google Hot Air Balloon</string>
+    <string name="clickLogin">点击登录</string>
+    <string name="login_exit">退出登录</string>
+
+    <string name="yes">确定</string>
+    <string name="no">取消</string>
+
     <string name="web_error">抱歉~\n加载失败,点击重新加载</string>
 
     <string name="fingerprint_recognition_start">开始指纹识别</string>
@@ -79,13 +82,6 @@
     <string name="sys_pwd_recognition_success">系统密码识别成功</string>
     <string name="sys_pwd_recognition_failed">系统密码识别失败</string>
 
-    <string name="notLogin">Google Hot Air Balloon</string>
-    <string name="exitLogin">退出登录</string>
-    <string name="clickLogin">点击登录</string>
-
-    <string name="app_crash_cue">很抱歉，程序遭遇异常，即将退出！</string>
-    <string name="loadProgress">%1$d%%\n正在加载&#8230;</string>
-
     <string name="upLoading">正在上传&#8230;</string>
     <string name="publish_loading">正在发表&#8230;</string>
     <string name="loading_modify">正在修改&#8230;</string>
@@ -96,11 +92,6 @@
     <string name="exit_loading">正在退出&#8230;</string>
     <string name="modify_success">修改成功</string>
     <string name="get_success">获取成功</string>
-    <string name="phoenError">手机号码错误！</string>
-    <string name="passError">密码错误！</string>
-    <string name="login_success">登录成功</string>
-
-    <string name="numPass">账号密码不能为空!!!</string>
 
     <string name="about_content">
         <![CDATA[

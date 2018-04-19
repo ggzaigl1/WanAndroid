@@ -15,7 +15,6 @@ import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
-import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;

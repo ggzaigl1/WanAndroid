@@ -8,11 +8,8 @@ import android.graphics.Path;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
-
-import com.example.gab.babylove.R;
 
 /**
  * Created by Gab on 2018/1/23 0023.

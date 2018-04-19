@@ -99,7 +99,7 @@ public class FingerprintCore {
             } catch (SecurityException e2) {
                 notifyStartAuthenticateResult(false, Log.getStackTraceString(e2));
             } catch (Throwable throwable) {
-
+                e.printStackTrace();
             }
         } catch (Throwable throwable) {
 

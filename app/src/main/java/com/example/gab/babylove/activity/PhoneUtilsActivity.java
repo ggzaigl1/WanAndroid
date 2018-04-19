@@ -1,6 +1,7 @@
 package com.example.gab.babylove.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,7 +24,6 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.PhoneUtils;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.other.DialActivity;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.DeviceUtils;
@@ -71,6 +71,7 @@ public class PhoneUtilsActivity extends AppCompatActivity implements IBaseActivi
         MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         tv_baby.post(() -> {
@@ -97,14 +98,9 @@ public class PhoneUtilsActivity extends AppCompatActivity implements IBaseActivi
         mGestureDetector = new GestureDetector(new gestureListener()); //使用派生自OnGestureListener
     }
 
-    @OnClick({R.id.bt_Dial})
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bt_Dial://头部左边按钮
-                JumpUtils.jump(PhoneUtilsActivity.this, DialActivity.class, null);
-                break;
-        }
+    public void onClick(View v) {
+
     }
 
     @Override

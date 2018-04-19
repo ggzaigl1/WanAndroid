@@ -1,6 +1,7 @@
 package com.example.gab.babylove;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -100,16 +101,20 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         Tv_Login.setOnClickListener(v -> {
             boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
             if (isLogin) {
-                Tv_Name.setText(R.string.notLogin);
-                Tv_Login.setText(R.string.clickLogin);
-                ACache mCache = ACache.get(BaseApp.getAppCtx());
-                mCache.clear();
-                SpfUtils.clear();
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.system_title).setMessage(R.string.system_content)
+                        .setPositiveButton(R.string.yes, (dialog, which) -> {
+                            Tv_Name.setText(R.string.notLogin);
+                            Tv_Login.setText(R.string.clickLogin);
+                            ACache mCache = ACache.get(BaseApp.getAppCtx());
+                            mCache.clear();
+                            SpfUtils.clear();
+                        }).setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss()).create().show();
             } else {
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
         });
-//todo 优化string资源 删除无用的内容,调试1.3 1.4接口 整体项目删除无用资源
+//todo 调试1.3 1.4接口 整体项目删除无用资源
     }
 
     @Override
@@ -127,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         super.onResume();
         boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
         Tv_Name.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
-        Tv_Login.setText(isLogin ? R.string.exitLogin : R.string.clickLogin);
+        Tv_Login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
     }
 
 

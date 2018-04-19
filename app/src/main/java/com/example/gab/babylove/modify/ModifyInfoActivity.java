@@ -2,7 +2,6 @@ package com.example.gab.babylove.modify;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -14,8 +13,6 @@ import android.widget.TextView;
 import com.example.gab.babylove.R;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.TimeUtils;
 import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
 
 import butterknife.BindView;

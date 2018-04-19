@@ -18,7 +18,7 @@ public class AddCookiesInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        if (null == chain) L.d("http", "Addchain == null");
+        if (null == chain) L.d("http", "Add_chain == null");
 
         final Request.Builder builder = chain.request().newBuilder();
 

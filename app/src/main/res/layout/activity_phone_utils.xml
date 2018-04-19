@@ -29,18 +29,4 @@
             android:padding="10dp"
             android:textColor="@color/myTxtColor"/>
 
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <Button
-                android:id="@+id/bt_Dial"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/bgColor"
-                android:background="@drawable/button_selector"
-                android:text="Dial"/>
-
-    </RelativeLayout>
-
 </LinearLayout>

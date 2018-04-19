@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012-2013, Michael Yang 杨福海 (www.yangfuhai.com).
+ * Copyright (c) 2012-2013, Michael Yang 杨福海 (www.yamaha.com).
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,15 +65,15 @@ public class ACache {
         return get(cacheDir, MAX_SIZE, MAX_COUNT);
     }
 
-    public static ACache get(Context ctx, long max_zise, int max_count) {
+    public static ACache get(Context ctx, long max_size, int max_count) {
         File f = new File(ctx.getExternalCacheDir(), "MoveNurse");
-        return get(f, max_zise, max_count);
+        return get(f, max_size, max_count);
     }
 
-    public static ACache get(File cacheDir, long max_zise, int max_count) {
+    public static ACache get(File cacheDir, long max_size, int max_count) {
         ACache manager = mInstanceMap.get(cacheDir.getAbsoluteFile() + myPid());
         if (manager == null) {
-            manager = new ACache(cacheDir, max_zise, max_count);
+            manager = new ACache(cacheDir, max_size, max_count);
             mInstanceMap.put(cacheDir.getAbsolutePath() + myPid(), manager);
         }
         return manager;
@@ -371,13 +371,13 @@ public class ACache {
      * @param saveTime  保存的时间，单位：秒
      */
     public void put(String key, Serializable value, int saveTime) {
-        ByteArrayOutputStream baos = null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
         ObjectOutputStream oos = null;
         try {
-            baos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(baos);
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(byteArrayOutputStream);
             oos.writeObject(value);
-            byte[] data = baos.toByteArray();
+            byte[] data = byteArrayOutputStream.toByteArray();
             if (saveTime != -1) {
                 put(key, data, saveTime);
             } else {
@@ -389,6 +389,7 @@ public class ACache {
             try {
                 oos.close();
             } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -401,11 +402,11 @@ public class ACache {
     public Object getAsObject(String key) {
         byte[] data = getAsBinary(key);
         if (data != null) {
-            ByteArrayInputStream bais = null;
+            ByteArrayInputStream byteArrayInputStream = null;
             ObjectInputStream ois = null;
             try {
-                bais = new ByteArrayInputStream(data);
-                ois = new ObjectInputStream(bais);
+                byteArrayInputStream = new ByteArrayInputStream(data);
+                ois = new ObjectInputStream(byteArrayInputStream);
                 Object reObject = ois.readObject();
                 return reObject;
             } catch (Exception e) {
@@ -413,8 +414,8 @@ public class ACache {
                 return null;
             } finally {
                 try {
-                    if (bais != null)
-                        bais.close();
+                    if (byteArrayInputStream != null)
+                        byteArrayInputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

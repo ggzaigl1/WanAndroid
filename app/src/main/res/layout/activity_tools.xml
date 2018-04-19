@@ -96,7 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="手机相关"
-                        android:drawableLeft="@drawable/vector_phoneutils"
+                        android:drawableLeft="@drawable/vector_phone_utils"
                         android:drawablePadding="@dimen/spacing_medium_large"
                         android:textColor="@color/myTxtColor"
                         android:textSize="@dimen/textSize_medium_small"

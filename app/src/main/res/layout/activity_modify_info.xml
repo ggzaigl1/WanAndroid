@@ -123,7 +123,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/agemodify" />
+                android:text="@string/age_modify" />
 
             <TextView
                 android:id="@+id/tvAgeModify"
