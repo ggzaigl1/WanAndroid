@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     private FragmentManager mFragmentManager;
     private HomeFragment mHomeFragment;
     private NewsFragment mNewsFragment;
-    private BookmarksFragment mPrettyPicturesFragment;
-    private StarFragment mOtherFragment;
+    private BookmarksFragment mBookmarksFragment;
+    private StarFragment mStarFragment;
     private Fragment mCurrentFrag; //当前的fragment
     private long exitTime = 0; //保存点击的时间
     @BindView(R.id.fl_content)
@@ -85,11 +85,13 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         mFragmentManager = getSupportFragmentManager();
+
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
         mNewsFragment = new NewsFragment();
-        mPrettyPicturesFragment = new BookmarksFragment();
-        mOtherFragment = new StarFragment();
+        mBookmarksFragment = new BookmarksFragment();
+        mStarFragment = new StarFragment();
+
         initBottomNavigation();
         switchContent(mHomeFragment);
         mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
          * MODE_SHIFTING+BACKGROUND_STYLE_STATIC 效果
          * MODE_SHIFTING+BACKGROUND_STYLE_RIPPLE 效果
          */
-        mBottomNavigation.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
+        mBottomNavigation.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
                 .setMode(BottomNavigationBar.MODE_FIXED)
                 .addItem(new BottomNavigationItem(R.mipmap.ic_home, getString(R.string.nav_00_title)).setActiveColorResource(R.color.colorPrimary))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_view_headline, getString(R.string.nav_01_title)).setActiveColorResource(R.color.colorPrimary))
@@ -186,10 +188,10 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 switchContent(mNewsFragment);
                 break;
             case 2:
-                switchContent(mPrettyPicturesFragment);
+                switchContent(mBookmarksFragment);
                 break;
             case 3:
-                switchContent(mOtherFragment);
+                switchContent(mStarFragment);
                 break;
         }
     }

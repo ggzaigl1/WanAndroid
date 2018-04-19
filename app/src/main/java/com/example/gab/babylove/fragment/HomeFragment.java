@@ -24,6 +24,7 @@ import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
+import com.fy.baselibrary.retrofit.RxHelper;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -38,7 +39,9 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -63,15 +66,15 @@ public class HomeFragment extends BaseFragment {
     SmartRefreshLayout mRefreshLayout;
 
     HomeAdapter mAdapter;
-    private int mPageNo = 0;
+    int mPageNo = 0;
 
     @Override
     protected void baseInit() {
         super.baseInit();
-        getStandardsToApp();
         getArticleList(mPageNo);
         initRecyle();
         initRefresh();
+        getData();
         //通过CollapsingToolbarLayout修改字体颜色
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
@@ -87,35 +90,56 @@ public class HomeFragment extends BaseFragment {
         return R.layout.fragment_home;
     }
 
+
     /**
      * banner 轮播图 加载数据 接口
      */
-    private void getStandardsToApp() {
-        IProgressDialog progressDialog = new IProgressDialog().init(mContext).setDialogMsg(R.string.data_loading);
-        RequestUtils.create(ApiService.class)
+    private void getData() {
+        Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
                 .getBanner()
-                .doOnSubscribe(RequestUtils::addDispos)
-                .subscribeOn(Schedulers.io())
+                .compose(RxHelper.handleResult())
+                .observeOn(Schedulers.io());
+
+        Observable<ArticleBean> observable2 = RequestUtils.create(ApiService.class)
+                .getArticleList(mPageNo)
+                .compose(RxHelper.handleResult())
+                .observeOn(Schedulers.io());
+
+
+        Observable.zip(observable1, observable2, new BiFunction<List<BannerBean>, ArticleBean, Map<String, Object>>() {
+            @Override
+            public Map<String, Object> apply(List<BannerBean> bannerBean, ArticleBean articleBean) throws Exception {
+                Map<String, Object> map = new HashMap<>();
+                map.put("banner", bannerBean);
+                map.put("article", articleBean);
+                return map;
+            }
+        }).doOnSubscribe(RequestUtils::addDispos)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<List<BannerBean>>>(progressDialog) {
+                .subscribe(new NetCallBack<Map<String, Object>>() {
                     @Override
-                    protected void onSuccess(BeanModule<List<BannerBean>> bean) {
-                        List<String> pics = new ArrayList<>();
-                        List<String> urls = new ArrayList<>();
-                        List<String> titles = new ArrayList<>();
-                        for (BannerBean bannerBean : bean.getData()) {
-                            pics.add(bannerBean.getImagePath());
-                            urls.add(bannerBean.getUrl());
-                            titles.add(bannerBean.getTitle());
+                    protected void onSuccess(Map<String, Object> map) {
+                        List<BannerBean> banner = (List<BannerBean>) map.get("banner");
+                        if (null != banner && banner.size() > 0){
+                            List<String> pics = new ArrayList<>();
+                            List<String> urls = new ArrayList<>();
+                            List<String> titles = new ArrayList<>();
+
+                            for (BannerBean bannerBean : banner) {
+                                pics.add(bannerBean.getImagePath());
+                                urls.add(bannerBean.getUrl());
+                                titles.add(bannerBean.getTitle());
+                            }
+                            bannerView(pics, urls);
+                            //给页面设置工具栏
+                            if (mCollapsingToolbarLayout != null) {
+                                //设置隐藏图片时候ToolBar的颜色
+                                mCollapsingToolbarLayout.setContentScrimColor(Color.parseColor("#20C5FA"));
+                                //设置工具栏标题
+                                mCollapsingToolbarLayout.setTitle("一起玩Android");
+                            }
                         }
-                        bannerView(pics, urls);
-                        //给页面设置工具栏
-                        if (mCollapsingToolbarLayout != null) {
-                            //设置隐藏图片时候ToolBar的颜色
-                            mCollapsingToolbarLayout.setContentScrimColor(Color.parseColor("#20C5FA"));
-                            //设置工具栏标题
-                            mCollapsingToolbarLayout.setTitle("一起玩Android");
-                        }
+
                     }
 
                     @Override
@@ -124,6 +148,7 @@ public class HomeFragment extends BaseFragment {
                     }
                 });
     }
+
 
     /**
      * 轮播图 相关设置
@@ -215,6 +240,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+//        getStandardsToApp();
         mConvenientBanner.startTurning(2000);//开始翻页
     }
 

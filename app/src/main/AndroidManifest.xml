@@ -36,44 +36,13 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <!--<meta-data-->
-        <!--android:name="com.taobao.android.hotfix.IDSECRET"-->
-        <!--android:value="24768300-1"/>-->
-        <!--<meta-data-->
-        <!--android:name="com.taobao.android.hotfix.APPSECRET"-->
-        <!--android:value="17530de33dec5e28d4185a9745b63ed6"/>-->
-        <!--<meta-data-->
-        <!--android:name="com.taobao.android.hotfix.RSASECRET"-->
-        <!--android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQD-->
-        <!--Xjs2kZ3xZQOljOPySBEUyKi7UFw18O0s0/KAPcrPDlKmhd/RNcB6D8bC+II1oRJoI7-->
-        <!--ADDUkkCFEvp8ilH0KS0XjUbar19szmTr8rmE7J4x94gD42ZlVXsigtIwAtdR7ExgNz-->
-        <!--T0LW7LhuQIl2aa6EDZLfnuEyIdr4ZF9JBP9zhiUd5iHSY9BwCJMPVTojPdjjKfUAc8-->
-        <!--iM4kdd/SjaCPbvccBnQkc8rGHgRZ64y1EnlBdcUl5PkrrsNPSbxCLzWUSq8sb2En7X-->
-        <!--eKmhpxJJnBEAa7yghAEQo/hTDw6djRLfin2zL6FHfbqri99v5eAcCoxxnUu+FobkCv-->
-        <!--yRn92cO6HYpAgMBAAECggEAEpwXkOwGRkZeX9yZoZmQx8XwiQr8dQ9BbO+qeerzLh1-->
-        <!--1j6UliFH3sHh7Q87XpnrVuZN2dWZzOyS5cRchDTwsHA5OE3Hhrip8/A0fPUHSFK9cs/-->
-        <!--Pjy7Ci3GsGkl9SG9mGqLlxVzAboG9Yndb5sc0892gIoI6+vMFTpCL0WgHDdg0Vbw1/xJ-->
-        <!--Ibm/J5Dx1Jc0GokPUwmwDDnZ1J7ROcFXP/5YvyMtQR6MRi02owdC1SyKZUggNp8Asaua5-->
-        <!--C9HVY1gMFBjXpmRmjPFc9sZtwcdDf+OwAnXF70fPffKvew1X7ysAIy3D92qEzb5IN6jAQw-->
-        <!--xAIhSbuPFFjVbIArezqOMvQoQKBgQD1V118eCSugV6WoC1RJcHs21BvqwohwzZ9bWl6ylx-->
-        <!--wNUdOOY8X2Zoiz2ZO8xT10d5clbhieSSyEEks5cKsSNDGRkGUHklckfCH/3uXoAjli8qUE5-->
-        <!--4uM72DIgWZwf+nO1er5RdHWt4AdEhlbEyZkHTdUR4v69m46MSwD9i2lzR7XQKBgQDg7DFbZN-->
-        <!--2JSAhHvXwLkayFuvj7gpXPwvUeDrtOzyHvjaXdpzJH+eJvVA7FToHui3URVEEEMu9ZwudHeNh-->
-        <!--UoZjeY6n+jTFSmjVCj1XTt/23UmyhYSx1Li9mn7CvpTe2OCou9nsyWeVc2KyACsXDRXEjbumT7WmLD-->
-        <!--BKZRJeUP1NFPQKBgQDByAO7MFooy14est2YXq5Rmthpmzshd8MuRqEtr3Bb4Hk1vBjdya4JGK/CZBWGJ-->
-        <!--AHyNv+wJ+doDZz+rWuaENl2AkAB8foX9914Tb8c//aG+GdFlkk2TP++97xcufJn8GNLDmPYpFj9Gtuj4Gq-->
-        <!--QUJ09wbiKOUt61b+lIJ8XeU6msQKBgE3AeGNun8J4GxypnPrm1au48Z8ICj+y1kcYsplQsxt7bM4NoS0Obb-->
-        <!--8sYJrGQ9YxcTuXU45fCSyPWqHzXV0MK6sc6sPrDRTP5/9lSzcQEG3R2WmEDPlJCOvB4jMluveLvNFVNUs3ljk-->
-        <!--dUaxFjQ2usKieC7KuTGDbwIYpFvkRVvjFAoGAM1Y+QTdpLzi3dkEEK9icOdIC2xK5VHc9NOntNe6EoTSIemym-->
-        <!--m3SgsPq+UnrOlQTIWQDaGvMumObz87aNmkQ1P8igpYyEZCB0zeMKl4/+VR5Aa8aXytS0QrjU5Rth+edoaDfSQTv-->
-        <!--y7KkyhwJHDRzYDcjNSAWACdYp/RfKnzRWguM="/>-->
+            android:theme="@style/BaseAppTheme">
 
+        <!-- 欢迎 -->
         <activity
-                android:name=".MainActivity"
-                android:theme="@style/AppSplash"
+                android:name=".login.StartUpActivity"
                 android:screenOrientation="portrait"
-                android:launchMode="singleTask"
+                android:launchMode="singleTop"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -81,6 +50,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+                android:name=".MainActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait">
+        </activity>
         <!-- 登录 -->
         <activity
                 android:name=".login.LoginActivity"
@@ -142,8 +116,6 @@
                 android:name=".about.AboutActivity"
                 android:label="@string/about_us"
                 android:screenOrientation="portrait"/>
-
-
 
 
         <!-- 相机Camera2 -->

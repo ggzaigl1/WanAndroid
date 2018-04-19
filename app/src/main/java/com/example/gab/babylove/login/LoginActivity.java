@@ -175,7 +175,6 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
         }
     }
 
-
     private void login() {
         IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.user_login);
 
@@ -227,19 +226,4 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
         }
         return super.onTouchEvent(event);
     }
-
-//    //退出程序
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-//            if ((System.currentTimeMillis() - exitTime) >= 2000) {
-//                Util.CustomToast.INSTANCE.showToast(mContext, R.string.exit_app);
-//                exitTime = System.currentTimeMillis();
-//            } else {
-//                finish();
-//            }
-//            return true;
-//        }
-//        return super.onKeyDown(keyCode, event);
-//    }
 }
