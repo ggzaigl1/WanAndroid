@@ -26,11 +26,10 @@ import com.example.gab.babylove.activity.PhotoViewActivity;
 import com.example.gab.babylove.activity.ToolsActivity;
 import com.example.gab.babylove.activity.WebsiteActivity;
 import com.example.gab.babylove.fragment.HomeFragment;
+import com.example.gab.babylove.fragment.NavigationViewFragment;
 import com.example.gab.babylove.fragment.NewsFragment;
 import com.example.gab.babylove.fragment.StarFragment;
-import com.example.gab.babylove.fragment.BookmarksFragment;
 import com.example.gab.babylove.login.LoginActivity;
-import com.example.gab.babylove.tbs.FileBrowsingActivity;
 import com.example.gab.babylove.utils.Util;
 import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.application.IBaseActivity;
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     private FragmentManager mFragmentManager;
     private HomeFragment mHomeFragment;
     private NewsFragment mNewsFragment;
-    private BookmarksFragment mBookmarksFragment;
+    private NavigationViewFragment mNavigationViewFragment;
     private StarFragment mStarFragment;
     private Fragment mCurrentFrag; //当前的fragment
     private long exitTime = 0; //保存点击的时间
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
         mNewsFragment = new NewsFragment();
-        mBookmarksFragment = new BookmarksFragment();
+        mNavigationViewFragment = new NavigationViewFragment();
         mStarFragment = new StarFragment();
 
         initBottomNavigation();
@@ -149,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
          * MODE_SHIFTING+BACKGROUND_STYLE_STATIC 效果
          * MODE_SHIFTING+BACKGROUND_STYLE_RIPPLE 效果
          */
-        mBottomNavigation.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
-                .setMode(BottomNavigationBar.MODE_FIXED)
+        mBottomNavigation.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
+                .setMode(BottomNavigationBar.MODE_SHIFTING)
                 .addItem(new BottomNavigationItem(R.mipmap.ic_home, getString(R.string.nav_00_title)).setActiveColorResource(R.color.colorPrimary))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_view_headline, getString(R.string.nav_01_title)).setActiveColorResource(R.color.colorPrimary))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_live_tv, getString(R.string.nav_02_title)).setActiveColorResource(R.color.colorPrimary))
@@ -189,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 switchContent(mNewsFragment);
                 break;
             case 2:
-                switchContent(mBookmarksFragment);
+                switchContent(mNavigationViewFragment);
                 break;
             case 3:
                 switchContent(mStarFragment);

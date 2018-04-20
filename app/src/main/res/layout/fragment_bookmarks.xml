@@ -18,11 +18,27 @@
         <include layout="@layout/activity_head"/>
     </FrameLayout>
 
-    <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/rv_title"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:overScrollMode="never"-->
-            <!--android:scrollbars="none"/>-->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_title"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_context"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none"/>
+
+    </LinearLayout>
 
 </LinearLayout>

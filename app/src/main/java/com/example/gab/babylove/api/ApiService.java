@@ -6,6 +6,7 @@ import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.HomeBean;
 import com.example.gab.babylove.entity.LoginBean;
+import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.entity.TreeBean;
 import com.fy.baselibrary.retrofit.BeanModule;
 
@@ -47,7 +48,7 @@ public interface ApiService {
     @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("user/register")
-    Observable<BeanModule< LoginBean>> getRegister(@FieldMap Map<String, Object> options);
+    Observable<BeanModule<LoginBean>> getRegister(@FieldMap Map<String, Object> options);
 
     /**
      * 首页 banner
@@ -78,6 +79,7 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("tree/json")
     Observable<BeanModule<List<TreeBean>>> getTreeList();
+
     /**
      * 体系数据 详情
      *
@@ -100,6 +102,13 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("hotkey/json")
     Observable<BeanModule<List<BookmarkBean>>> getHotkeykList();
+
+    /**
+     * 视图导航
+     */
+    @Headers({"url_name:user"})
+    @GET("navi/json")
+    Observable<BeanModule<List<NavigationBean>>> getNaviList();
 
     /**
      * 多图片上传
