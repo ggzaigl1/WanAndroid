@@ -9,10 +9,9 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.adapter.NavigationCidAdpater;
-import com.example.gab.babylove.adapter.NavigationViewAdpater;
+import com.example.gab.babylove.adapter.NavigationCidAdapter;
+import com.example.gab.babylove.adapter.NavigationViewAdapter;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.base.BaseFragment;
@@ -22,6 +21,11 @@ import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +48,8 @@ public class NavigationViewFragment extends BaseFragment {
     @BindView(R.id.rv_context)
     RecyclerView mRecyclerView_Context;
 
-    NavigationViewAdpater mAdapter;
-    NavigationCidAdpater mNavigationViewAdpater;
+    NavigationViewAdapter mAdapter;
+    NavigationCidAdapter mNavigationViewAdpater;
 
     @Override
     protected int setContentLayout() {
@@ -90,7 +94,7 @@ public class NavigationViewFragment extends BaseFragment {
 
     private void initRecyle() {
         mRecyclerView_Title.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new NavigationViewAdpater(R.layout.item_navigation, new ArrayList<>());
+        mAdapter = new NavigationViewAdapter(R.layout.item_navigation, new ArrayList<>());
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -103,8 +107,14 @@ public class NavigationViewFragment extends BaseFragment {
     }
 
     private void initRecyleCid() {
-        mRecyclerView_Context.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mNavigationViewAdpater = new NavigationCidAdpater(R.layout.item_navigation, new ArrayList<>());
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getActivity());
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setAlignItems(AlignItems.STRETCH);
+        layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
+
+        mRecyclerView_Context.setLayoutManager(layoutManager);
+        mNavigationViewAdpater = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
         mNavigationViewAdpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

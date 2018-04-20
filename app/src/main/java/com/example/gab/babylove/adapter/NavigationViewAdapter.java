@@ -16,9 +16,9 @@ import java.util.List;
  * 视图导航
  */
 
-public class NavigationViewAdpater extends BaseQuickAdapter<NavigationBean, BaseViewHolder> {
+public class NavigationViewAdapter extends BaseQuickAdapter<NavigationBean, BaseViewHolder> {
 
-    public NavigationViewAdpater(int layoutResId, @Nullable List<NavigationBean> data) {
+    public NavigationViewAdapter(int layoutResId, @Nullable List<NavigationBean> data) {
         super(layoutResId, data);
     }
 

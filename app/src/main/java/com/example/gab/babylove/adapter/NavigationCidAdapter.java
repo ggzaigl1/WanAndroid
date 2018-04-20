@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.NavigationBean;
+import com.fy.baselibrary.utils.ResourceUtils;
 
 import java.util.List;
 
@@ -14,15 +15,15 @@ import java.util.List;
  * 视图导航
  */
 
-public class NavigationCidAdpater extends BaseQuickAdapter<NavigationBean.ArticlesBean, BaseViewHolder> {
+public class NavigationCidAdapter extends BaseQuickAdapter<NavigationBean.ArticlesBean, BaseViewHolder> {
 
-    public NavigationCidAdpater(int layoutResId, @Nullable List<NavigationBean.ArticlesBean> data) {
+    public NavigationCidAdapter(int layoutResId, @Nullable List<NavigationBean.ArticlesBean> data) {
         super(layoutResId, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, NavigationBean.ArticlesBean item) {
-        helper.setText(R.id.tv_date,item.getTitle());
+        helper.setText(R.id.tv_date, item.getTitle()).setTextColor(R.id.tv_date, ResourceUtils.getRandomColor());
     }
 
 }
