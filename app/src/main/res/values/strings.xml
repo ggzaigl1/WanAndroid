@@ -55,6 +55,8 @@
     <string name="tools">工具</string>
     <string name="phone_system">手机相关信息</string>
     <string name="pretty_picture">美图欣赏</string>
+    <string name="website">常用网站 </string>
+    <string name="knowledge">知识体系 </string>
     <string name="about_us">关于我们</string>
     <string name="selector_button">SelectorButton</string>
     <string name="fingerprint">Fingerprint</string>

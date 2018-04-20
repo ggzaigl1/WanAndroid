@@ -65,14 +65,13 @@ public class HomeFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-
+    ConvenientBanner<BannerBean> bannerView ;
     HomeAdapter mAdapter;
     int mPageNo = 0;
 
     @Override
     protected void baseInit() {
         super.baseInit();
-        getArticleList(mPageNo);
         initRecyle();
         initRefresh();
         getData();
@@ -102,7 +101,7 @@ public class HomeFragment extends BaseFragment {
                 .observeOn(Schedulers.io());
 
         Observable<ArticleBean> observable2 = RequestUtils.create(ApiService.class)
-                .getArticleList(mPageNo)
+                .getArticleHomeList(mPageNo)
                 .compose(RxHelper.handleResult())
                 .observeOn(Schedulers.io());
 
@@ -121,7 +120,7 @@ public class HomeFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(Map<String, Object> map) {
                         List<BannerBean> banner = (List<BannerBean>) map.get("banner");
-                        if (null != banner && banner.size() > 0){
+                        if (null != banner && banner.size() > 0) {
                             List<String> pics = new ArrayList<>();
                             List<String> urls = new ArrayList<>();
                             List<String> titles = new ArrayList<>();
@@ -141,6 +140,19 @@ public class HomeFragment extends BaseFragment {
                             }
                         }
 
+                        ArticleBean articleBean = (ArticleBean) map.get("article");
+                        if (null != articleBean && null != articleBean.getDatas()) {
+                            if (mRefreshLayout.isRefreshing()) {
+                                mAdapter.setNewData(articleBean.getDatas());
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mAdapter.getData().addAll(articleBean.getDatas());
+                                mRefreshLayout.finishLoadmore();
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mAdapter.setNewData(articleBean.getDatas());
+                            }
+                        }
                     }
 
                     @Override
@@ -158,34 +170,37 @@ public class HomeFragment extends BaseFragment {
      * @param urls
      */
     private void bannerView(List<String> Pic, List<String> urls) {
-        mConvenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+        mConvenientBanner.setPages(new CBViewHolderCreator() {
             @Override
-            public NetworkImageHolderView createHolder() {
+            public Object createHolder() {
                 return new NetworkImageHolderView();
             }
         }, Pic)
-                .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
-                .setPointViewVisible(true)
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
-                .setPageTransformer(new AccordionTransformer())
+                .startTurning(2000)
+//                .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
+//                .setPointViewVisible(true)
+//                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
+//                .setPageTransformer(new AccordionTransformer())
                 .setOnItemClickListener(position -> {
                     String Ulr = urls.get(position);
                     Bundle bundle = new Bundle();
                     bundle.putString("UrlBean", Ulr);
                     JumpUtils.jump(mContext, AgentWebActivity.class, bundle);
                 })
-                .setcurrentitem(0);
+                //设置手动影响（设置了该项无法手动切换）
+                .setManualPageable(true);
+//                .setcurrentitem(0);
     }
 
     /**
      * 首页列表数据加载
      *
-     * @param mCurPage
+//     * @param mCurPage
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int mCurPage) {
         RequestUtils.create(ApiService.class)
-                .getArticleList(mCurPage)
+                .getArticleHomeList(mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BeanModule<ArticleBean>>() {
@@ -222,8 +237,8 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                mPageNo = 1;
-                getArticleList(1);
+                mPageNo = 0;
+                getArticleList(0);
             }
         });
     }
@@ -246,14 +261,13 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-//        getStandardsToApp();
-        mConvenientBanner.startTurning(2000);//开始翻页
+        if (null != bannerView) bannerView.startTurning(2000);//开始翻页
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mConvenientBanner.stopTurning();//停止翻页
+        if (null != bannerView) bannerView.stopTurning();//停止翻
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.finishRefresh();
         }

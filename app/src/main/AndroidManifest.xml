@@ -52,6 +52,7 @@
 
         <activity
                 android:name=".MainActivity"
+                android:launchMode="singleTask"
                 android:screenOrientation="portrait">
         </activity>
 
@@ -96,6 +97,12 @@
         <!-- Website 常用网站 -->
         <activity
                 android:name=".activity.WebsiteActivity"
+                android:label="@string/website"
+                android:screenOrientation="portrait"/>
+        <!-- 知识体系 详情 -->
+        <activity
+                android:name=".activity.SystemActivity"
+                android:label="@string/knowledge"
                 android:screenOrientation="portrait"/>
         <!-- AgentWeb -->
         <activity

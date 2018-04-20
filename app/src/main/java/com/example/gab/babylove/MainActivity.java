@@ -2,6 +2,7 @@ package com.example.gab.babylove;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -117,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
         });
-        //Todo ConvenientBanner 切换fragment 变黑 , HomeFragment 继续完成
     }
 
     @Override
@@ -218,7 +218,11 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             //常用网站
             JumpUtils.jump(this, WebsiteActivity.class, null);
         } else if (id == R.id.nav_share) {
-            T.showShort("nav_share");
+            Intent textIntent = new Intent(Intent.ACTION_SEND);
+            textIntent.setType("text/plain");
+            textIntent.putExtra(Intent.EXTRA_TEXT, "分享");
+            startActivity(Intent.createChooser(textIntent, "分享"));
+
         } else if (id == R.id.nav_send) {
             T.showShort("nav_send");
         } else if (id == R.id.nav_exit) {

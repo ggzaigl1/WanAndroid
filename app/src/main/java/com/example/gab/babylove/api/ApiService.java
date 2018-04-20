@@ -24,6 +24,8 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * 通用的 api接口 </p>
@@ -66,7 +68,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("article/list/{id}/json")
-    Observable<BeanModule<ArticleBean>> getArticleList(@Path("id") int page);
+    Observable<BeanModule<ArticleBean>> getArticleHomeList(@Path("id") int page);
 
     /**
      * 体系数据
@@ -76,6 +78,14 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("tree/json")
     Observable<BeanModule<List<TreeBean>>> getTreeList();
+    /**
+     * 体系数据 详情
+     *
+     * @return
+     */
+    @Headers({"url_name:user"})
+    @GET("article/list/{id}/json")
+    Observable<BeanModule<ArticleBean>> getArticleList(@Path("id") int page, @Query("cid") int cid);
 
     /**
      * 常用网站
@@ -83,6 +93,13 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("friend/json")
     Observable<BeanModule<List<BookmarkBean>>> getBookmarkList();
+
+    /**
+     * 搜索热词
+     */
+    @Headers({"url_name:user"})
+    @GET("hotkey/json")
+    Observable<BeanModule<List<BookmarkBean>>> getHotkeykList();
 
     /**
      * 多图片上传

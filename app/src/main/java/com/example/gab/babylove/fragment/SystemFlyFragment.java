@@ -5,73 +5,81 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.activity.SystemActivity;
-import com.example.gab.babylove.adapter.NewsAdapter;
+import com.example.gab.babylove.adapter.HomeAdapter;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.TreeBean;
+import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
-import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Gab on 2017/12/15 0015.
- * 体系 Fragment
+ * Created by 初夏小溪 on 2018/4/20 0020.
+ * 知识体系 TabLayout Fragment
  */
 
-public class NewsFragment extends BaseFragment {
+public class SystemFlyFragment extends BaseFragment {
 
-    @BindView(R.id.rv_title)
+    @BindView(R.id.rvLayout)
     RecyclerView mRecyclerView;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    NewsAdapter mAdapter;
+    HomeAdapter mAdapter;
+    public static final String ARG_PARAM1 = "param1";
+    public static final String ARG_PARAM2 = "param2";
+    int mPageNo = 0;
 
+    public static SystemFlyFragment getInstance(int param1, String param2) {
+        SystemFlyFragment fragment = new SystemFlyFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected int setContentLayout() {
-        return R.layout.fragment_news;
+        return R.layout.fragment_system_fly;
     }
 
     @Override
     protected void baseInit() {
         super.baseInit();
-        toolbar.setTitle("知识体系");
+        Bundle arguments = getArguments();
+        int id = arguments.getInt(ARG_PARAM1);
         initRecyle();
-        getArticleList();
-        MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
+        getArticleList(id);
+
     }
 
     /**
      * 列表数据加载
      */
     @SuppressLint("CheckResult")
-    private void getArticleList() {
+    private void getArticleList(int id) {
         IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
+
         RequestUtils.create(ApiService.class)
-                .getTreeList()
+                .getArticleList(mPageNo, id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<List<TreeBean>>>(progressDialog) {
+                .subscribe(new NetCallBack<BeanModule<ArticleBean>>(progressDialog) {
                     @Override
-                    protected void onSuccess(BeanModule<List<TreeBean>> listBeanModule) {
-                        if (null != listBeanModule && null != listBeanModule.getData()) {
-                            mAdapter.setNewData(listBeanModule.getData());
+                    protected void onSuccess(BeanModule<ArticleBean> articleBean) {
+                        if (null != articleBean && null != articleBean.getData()) {
+                            mAdapter.setNewData(articleBean.getData().getDatas());
                         }
                     }
 
@@ -82,17 +90,15 @@ public class NewsFragment extends BaseFragment {
                 });
     }
 
-    /**
-     * recycleview 相关设置
-     */
+
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new NewsAdapter(R.layout.item_news, new ArrayList<>());
+        mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            TreeBean bean = mAdapter.getData().get(position);
+            ArticleBean.DatasBean bean = mAdapter.getData().get(position);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("bean",bean);
-            JumpUtils.jump(mContext, SystemActivity.class, bundle);// 详情
+            bundle.putString("UrlBean", bean.getLink());
+            JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
         });
         mRecyclerView.setAdapter(mAdapter);
     }

@@ -54,6 +54,7 @@
     <color name="btn_bg">#e9e9e9</color>
     <color name="color1">#F0F0F0</color>
     <color name="color2">#FFFFFF</color>
+    <color name="system_color">#E45171</color>
 
     <!-- 统一按钮背景色  -->
     <color name="button_normals">#ff8193</color>
