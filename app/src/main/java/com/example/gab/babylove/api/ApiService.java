@@ -8,6 +8,7 @@ import com.example.gab.babylove.entity.HomeBean;
 import com.example.gab.babylove.entity.LoginBean;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.entity.TreeBean;
+import com.example.gab.babylove.entity.ProjectBean;
 import com.fy.baselibrary.retrofit.BeanModule;
 
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 /**
  * 通用的 api接口 </p>
@@ -109,6 +109,13 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("navi/json")
     Observable<BeanModule<List<NavigationBean>>> getNaviList();
+
+    /**
+     * 项目
+     */
+    @Headers({"url_name:user"})
+    @GET("project/tree/json")
+    Observable<BeanModule<List<ProjectBean>>> getProjectList();
 
     /**
      * 多图片上传

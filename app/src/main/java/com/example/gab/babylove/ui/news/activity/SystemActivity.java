@@ -30,7 +30,6 @@ import butterknife.BindView;
 
 public class SystemActivity extends AppCompatActivity implements IBaseActivity {
 
-
     private ArrayList<SystemFlyFragment> mFragments = new ArrayList<>();
     private MyPagerAdapter mAdapter;
     private List<TreeBean.ChildrenBean> mChildren;

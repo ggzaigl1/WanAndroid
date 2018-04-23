@@ -19,10 +19,6 @@
     <string name="man">男</string>
     <string name="woman">女</string>
 
-    <string name="age">%1$s\n年龄</string>
-    <string name="height">%1$s\n身高(cm)</string>
-    <string name="weight">%1$s\n体重(kg)</string>
-
     <string name="nav_00_title">Home</string>
     <string name="nav_01_title">News</string>
     <string name="nav_02_title">Pictures</string>
