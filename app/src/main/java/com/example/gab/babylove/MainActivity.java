@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
             } else if ((System.currentTimeMillis() - exitTime) >= 2000) {
-                Snackbar.make(mDrawer, R.string.exit_app + R.string.app_name, Snackbar.LENGTH_SHORT)
+                Snackbar.make(mDrawer, R.string.exit_app , Snackbar.LENGTH_SHORT)
                         .setActionTextColor(ContextCompat.getColor(this, R.color.white))
                         .show();
 //                Util.CustomToast.INSTANCE.showToast(MainActivity.this, R.string.exit_app);

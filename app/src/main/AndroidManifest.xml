@@ -118,13 +118,6 @@
                 android:name=".ui.main.activity.AboutActivity"
                 android:label="@string/about_us"
                 android:screenOrientation="portrait"/>
-        <!-- 项目 -->
-        <activity
-                android:name=".ui.project.activity.ProjectActivity"
-                android:label="@string/knowledge"
-                android:screenOrientation="portrait"/>
-
-
         <!-- 相机Camera2 -->
         <activity
                 android:name=".widget.camera.Camera2Activity"
