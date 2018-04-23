@@ -25,10 +25,6 @@
                     android:icon="@drawable/ic_menu_share"
                     android:title="分享"/>
             <item
-                    android:id="@+id/nav_send"
-                    android:icon="@drawable/ic_menu_send"
-                    android:title="Send"/>
-            <item
                     android:id="@+id/nav_about"
                     android:icon="@drawable/vector_about_us"
                     android:title="关于我们"/>

@@ -40,7 +40,7 @@
 
         <!-- 欢迎 -->
         <activity
-                android:name=".login.StartUpActivity"
+                android:name=".ui.main.login.StartUpActivity"
                 android:screenOrientation="portrait"
                 android:launchMode="singleTask"
                 >
@@ -58,50 +58,50 @@
 
         <!-- 登录 -->
         <activity
-                android:name=".login.LoginActivity"
+                android:name=".ui.main.login.LoginActivity"
                 android:label="@string/login"
                 android:screenOrientation="portrait"/>
         <!-- 注册 -->
         <activity
-                android:name=".login.RegisterActivity"
+                android:name=".ui.main.login.RegisterActivity"
                 android:label="@string/registerTitle"
                 android:screenOrientation="portrait"/>
         <!-- PhotoView -->
         <activity
-                android:name=".activity.PhotoViewActivity"
+                android:name=".ui.main.activity.PhotoViewActivity"
                 android:screenOrientation="portrait"/>
         <!-- 工具 activity -->
         <activity
-                android:name=".activity.ToolsActivity"
+                android:name=".ui.main.activity.ToolsActivity"
                 android:label="@string/tools"
                 android:screenOrientation="portrait"/>
         <!-- 手機相關信息 -->
         <activity
-                android:name=".activity.PhoneUtilsActivity"
+                android:name=".ui.main.activity.PhoneUtilsActivity"
                 android:label="@string/phone_system"
                 android:screenOrientation="portrait"/>
         <!-- SelectorButton -->
         <activity
-                android:name=".activity.SelectorButtonActivity"
+                android:name=".ui.main.activity.SelectorButtonActivity"
                 android:label="@string/selector_button"
                 android:screenOrientation="portrait"/>
         <!-- 美图欣赏 -->
         <activity
-                android:name=".activity.BelleActivity"
+                android:name=".ui.main.activity.BelleActivity"
                 android:label="@string/pretty_picture"
                 android:screenOrientation="portrait"/>
         <!-- 美图欣赏 图片详情页 -->
         <activity
-                android:name=".activity.PictureDetailActivity"
+                android:name=".ui.main.activity.PictureDetailActivity"
                 android:screenOrientation="portrait"/>
         <!-- Website 常用网站 -->
         <activity
-                android:name=".activity.WebsiteActivity"
+                android:name=".ui.main.activity.WebsiteActivity"
                 android:label="@string/website"
                 android:screenOrientation="portrait"/>
         <!-- 知识体系 详情 -->
         <activity
-                android:name=".activity.SystemActivity"
+                android:name=".ui.news.activity.SystemActivity"
                 android:label="@string/knowledge"
                 android:screenOrientation="portrait"/>
         <!-- AgentWeb -->
@@ -110,36 +110,32 @@
                 android:screenOrientation="portrait"/>
         <!-- 指紋相关工具类 -->
         <activity
-                android:name=".activity.FingerprintMainActivity"
+                android:name=".ui.main.activity.FingerprintMainActivity"
                 android:label="@string/fingerprint"
                 android:screenOrientation="portrait"/>
         <!-- 修改个人信息 activity -->
         <activity
-                android:name=".modify.ModifyInfoActivity"
+                android:name=".ui.personal.activity.ModifyInfoActivity"
                 android:label="@string/myData"
                 android:screenOrientation="portrait"/>
         <!-- 关于我们 -->
         <activity
-                android:name=".about.AboutActivity"
+                android:name=".ui.main.activity.AboutActivity"
                 android:label="@string/about_us"
                 android:screenOrientation="portrait"/>
 
 
         <!-- 相机Camera2 -->
         <activity
-                android:name=".example.Camera2Activity"
+                android:name=".widget.camera.Camera2Activity"
                 android:screenOrientation="portrait"/>
         <!-- 动画 -->
         <activity
-                android:name=".other.AnimationAudioActivity"
-                android:screenOrientation="portrait"/>
-        <!-- 模拟快递布局 -->
-        <activity
-                android:name=".other.TraceListActivity"
+                android:name=".ui.main.activity.AnimationActivity"
                 android:screenOrientation="portrait"/>
         <!-- 不同格式文件浏览 activity -->
         <activity
-                android:name=".tbs.FileBrowsingActivity"
+                android:name=".ui.main.activity.FileBrowsingActivity"
                 android:screenOrientation="portrait"/>
 
         <!-- WebView 相关 activity -->
@@ -153,18 +149,6 @@
                     android:value="true">
             </meta-data>
         </activity>
-        <!-- WebView -->
-        <activity
-                android:name=".web.StoreWebViewActivity"
-                android:screenOrientation="portrait"/>
-        <!--Animation -->
-        <activity
-                android:name=".animation.AnimationActivity"
-                android:screenOrientation="portrait"/>
-        <!-- RecyclerviewActivity -->
-        <activity
-                android:name=".channelmanage.ChannelManageActivity"
-                android:screenOrientation="portrait"/>
         <!-- 权限相关 -->
         <activity
                 android:name="com.fy.baselibrary.utils.PermissionActivity"
@@ -172,7 +156,7 @@
                 android:theme="@style/NoTitleTranslucentTheme"/>
         <!-- SurfaceView+MediaPlayer 自定义播放器 -->
         <activity
-                android:name=".other.SurfaceActivity"
+                android:name=".widget.SurfaceActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize"
                 android:screenOrientation="sensor"
                 android:windowSoftInputMode="stateHidden|adjustResize"/>

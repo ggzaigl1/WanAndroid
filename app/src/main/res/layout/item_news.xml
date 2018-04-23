@@ -4,13 +4,17 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_8"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@color/white"
+        app:cardCornerRadius="@dimen/dp_3"
         app:cardElevation="5dp"
-        android:background="@color/white">
+        >
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -61,8 +65,9 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.1"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:layout_gravity="right|center_vertical"
-                app:srcCompat="@mipmap/icon_more"
+                app:srcCompat="@drawable/vector_icon_more"
                 />
 
     </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.gab.babylove.web;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,7 +53,7 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
 
     @Override
     public int setView() {
-        return  R.layout.activity_webview;
+        return R.layout.activity_webview;
     }
 
     @Override
@@ -85,7 +86,7 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
     @SuppressLint("SetJavaScriptEnabled")
     private void initView() {
         //加快HTML网页加载完成的速度，等页面finish再加载图片
-        if(Build.VERSION.SDK_INT >= 19) {
+        if (Build.VERSION.SDK_INT >= 19) {
             mWebView.getSettings().setLoadsImagesAutomatically(true);
         } else {
             mWebView.getSettings().setLoadsImagesAutomatically(false);
@@ -137,8 +138,16 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return super.shouldOverrideUrlLoading(view, url);
+                if (url.contains("alipays://platformapi/startApp?")) {
+                    startAlipayActivity(url);
+                    // android  6.0 两种方式获取intent都可以跳转支付宝成功,7.1测试不成功
+                } else if ((Build.VERSION.SDK_INT > Build.VERSION_CODES.M)
+                        && (url.contains("platformapi") && url.contains("startapp"))) {
+                    startAlipayActivity(url);
+                } else {
+                    mWebView.loadUrl(url);
+                }
+                return true;
             }
 
             @Override
@@ -147,6 +156,7 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
                 showError.setVisibility(View.VISIBLE);
                 super.onReceivedError(view, request, error);
             }
+
             //在认证证书不被Android所接受的情况下，我们可以通过设置重写WebViewClient的onReceivedSslError方法在其中设置接受所有网站的证书来解决
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
@@ -155,10 +165,11 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
                 handler.proceed();// 接受所有网站的证书
                 // handleMessage(Message msg);// 进行其他处理
             }
+
             //加快HTML网页加载完成的速度，等页面finish再加载图片
             @Override
             public void onPageFinished(WebView view, String url) {
-                if(!mWebView.getSettings().getLoadsImagesAutomatically()) {
+                if (!mWebView.getSettings().getLoadsImagesAutomatically()) {
                     mWebView.getSettings().setLoadsImagesAutomatically(true);
                 }
             }
@@ -168,7 +179,7 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
         mWebView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                WebView.HitTestResult result = ((WebView)v).getHitTestResult();
+                WebView.HitTestResult result = ((WebView) v).getHitTestResult();
                 if (null == result)
                     return false;
                 int type = result.getType();
@@ -200,6 +211,18 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
                 return false;
             }
         });
+    }
+    private void startAlipayActivity(String url) {
+        Intent intent;
+        try {
+            intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+            intent.addCategory(Intent.CATEGORY_BROWSABLE);
+            intent.setComponent(null);
+            startActivity(intent);
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -240,4 +263,5 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
      Activity级别
      <activity android:hardwareAccelerated="true"...>
      */
+
 }

@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -20,16 +22,16 @@ import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.example.gab.babylove.about.AboutActivity;
-import com.example.gab.babylove.activity.BelleActivity;
-import com.example.gab.babylove.activity.PhotoViewActivity;
-import com.example.gab.babylove.activity.ToolsActivity;
-import com.example.gab.babylove.activity.WebsiteActivity;
-import com.example.gab.babylove.fragment.HomeFragment;
-import com.example.gab.babylove.fragment.NavigationViewFragment;
-import com.example.gab.babylove.fragment.NewsFragment;
-import com.example.gab.babylove.fragment.StarFragment;
-import com.example.gab.babylove.login.LoginActivity;
+import com.example.gab.babylove.ui.main.activity.AboutActivity;
+import com.example.gab.babylove.ui.main.activity.BelleActivity;
+import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
+import com.example.gab.babylove.ui.main.activity.ToolsActivity;
+import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
+import com.example.gab.babylove.ui.main.fragment.HomeFragment;
+import com.example.gab.babylove.ui.main.login.LoginActivity;
+import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
+import com.example.gab.babylove.ui.news.fragment.NewsFragment;
+import com.example.gab.babylove.ui.personal.fragment.StarFragment;
 import com.example.gab.babylove.utils.Util;
 import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.application.IBaseActivity;
@@ -39,7 +41,6 @@ import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.SystemUtils;
-import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.cache.ACache;
 
 import butterknife.BindView;
@@ -221,9 +222,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             textIntent.setType("text/plain");
             textIntent.putExtra(Intent.EXTRA_TEXT, "分享");
             startActivity(Intent.createChooser(textIntent, "分享"));
-
-        } else if (id == R.id.nav_send) {
-            T.showShort("nav_send");
         } else if (id == R.id.nav_exit) {
             SystemUtils.ExitSystem();
         } else if (id == R.id.nav_manage) {
@@ -246,7 +244,10 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
             } else if ((System.currentTimeMillis() - exitTime) >= 2000) {
-                Util.CustomToast.INSTANCE.showToast(MainActivity.this, R.string.exit_app);
+                Snackbar.make(mDrawer, R.string.exit_app + R.string.app_name, Snackbar.LENGTH_SHORT)
+                        .setActionTextColor(ContextCompat.getColor(this, R.color.white))
+                        .show();
+//                Util.CustomToast.INSTANCE.showToast(MainActivity.this, R.string.exit_app);
 //                T.showLong(R.string.exit_app);
                 exitTime = System.currentTimeMillis();
             } else {

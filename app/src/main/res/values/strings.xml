@@ -2,7 +2,7 @@
 
     <string name="awesome_wan_android">Awesome WanAndroid</string>
     <string name="app_name">一起玩Android</string>
-    <string name="exit_app">再按一次退出程序！</string>
+    <string name="exit_app">再按一次返回键退出</string>
 
     <string name="save">保存</string>
     <string name="ok">确定</string>
@@ -111,7 +111,7 @@
                 </ul>
 
             <p>\t\t可以在
-                <a href="https://github.com/ggzaigl1/BabyLove" target="_blank">https://github.com/ggzaigl1/BabyLove</a>
+                <a href="https://github.com/ggzaigl1/WanAndroid" target="_blank">https://github.com/ggzaigl1/WanAndroid</a>
                 项目中以issue的形式提出，我们会及时跟进。
             </p>
             <h2>源码位置</h2>
