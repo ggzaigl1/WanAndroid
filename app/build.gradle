@@ -13,7 +13,7 @@ android {
         multiDexEnabled true
         ndk {
             // 设置支持的SO库架构
-            abiFilters "armeabi","x86" ,"armeabi-v7a", "x86", "mips"
+            abiFilters "armeabi", "x86", "armeabi-v7a", "x86", "mips"
         }
     }
     buildTypes {
@@ -61,6 +61,8 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     //https://github.com/google/flexbox-layout
     implementation 'com.google.android:flexbox:0.3.2'
-
+    // Lottie是一个支持Android、iOS、React Native，并由 Adobe After Effects制作aep格式的动画，然后经由bodymovin插件转化渲染为json格式可被移动端本地识别解析的Airbnb开源库。
+//    Lottie实时呈现After Effects动画效果，让应用程序可以像使用静态图片一样轻松地使用动画 Lottie支持API 14及以上。
+    compile 'com.airbnb.android:lottie:2.3.0'
 
 }

@@ -67,7 +67,10 @@ dependencies {
     //BRVAH官方使用指南 baseRecyclerViewAdapterHelper
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     //下拉刷新上拉加载
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    //SmartRefreshLayout Android智能下拉刷新框架，支持越界回弹，集成了几十种炫酷的Header和 Footer。 RefreshLayout，OverScroll.
+    //https://github.com/scwang90/SmartRefreshLayout
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'//如果使用了特殊的Header
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     //PhotoView
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
     //AndroidUtilCode
