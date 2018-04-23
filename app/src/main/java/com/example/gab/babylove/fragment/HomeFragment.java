@@ -162,7 +162,6 @@ public class HomeFragment extends BaseFragment {
                 });
     }
 
-
     /**
      * 轮播图 相关设置
      *
