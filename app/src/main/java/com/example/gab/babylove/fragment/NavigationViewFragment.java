@@ -49,7 +49,10 @@ public class NavigationViewFragment extends BaseFragment {
     RecyclerView mRecyclerView_Context;
 
     NavigationViewAdapter mAdapter;
-    NavigationCidAdapter mNavigationViewAdpater;
+    NavigationCidAdapter mNavigationCidAdapter;
+
+    private int mSelectedPos = 0;//实现单选  方法二，变量保存当前选中的position
+    private LinearLayoutManager mLinearLayoutManager;
 
     @Override
     protected int setContentLayout() {
@@ -81,6 +84,10 @@ public class NavigationViewFragment extends BaseFragment {
                     protected void onSuccess(BeanModule<List<NavigationBean>> navigationBeanBeanModule) {
                         if (null != navigationBeanBeanModule && null != navigationBeanBeanModule.getData()) {
                             mAdapter.setNewData(navigationBeanBeanModule.getData());
+                            if (mSelectedPos == 0) {
+                                mAdapter.getData().get(mSelectedPos).setSelected(true);
+                                mNavigationCidAdapter.setNewData(navigationBeanBeanModule.getData().get(mSelectedPos).getArticles());
+                            }
                         }
                     }
 
@@ -93,13 +100,28 @@ public class NavigationViewFragment extends BaseFragment {
 
 
     private void initRecyle() {
-        mRecyclerView_Title.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mLinearLayoutManager = new LinearLayoutManager(mContext);
+        mRecyclerView_Title.setLayoutManager(mLinearLayoutManager);
         mAdapter = new NavigationViewAdapter(R.layout.item_navigation, new ArrayList<>());
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 NavigationBean navigationBean = mAdapter.getData().get(position);
-                mNavigationViewAdpater.setNewData(navigationBean.getArticles());
+                if (mSelectedPos != position) {
+                    mAdapter.getData().get(mSelectedPos).setSelected(false);
+                    mAdapter.notifyItemChanged(mSelectedPos);
+                    mSelectedPos = position;
+                    mAdapter.getData().get(mSelectedPos).setSelected(true);
+                    mAdapter.notifyItemChanged(mSelectedPos);
+
+                }
+                mNavigationCidAdapter.setNewData(navigationBean.getArticles());
+
+                View childAt = mRecyclerView_Title.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
+                if (childAt != null) {
+                    int y = childAt.getTop() - mRecyclerView_Title.getHeight() / 2;
+                    mRecyclerView_Title.smoothScrollBy(0, y);
+                }
 
             }
         });
@@ -114,17 +136,17 @@ public class NavigationViewFragment extends BaseFragment {
         layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
 
         mRecyclerView_Context.setLayoutManager(layoutManager);
-        mNavigationViewAdpater = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
-        mNavigationViewAdpater.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        mNavigationCidAdapter = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
+        mNavigationCidAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                NavigationBean.ArticlesBean navigationBean = mNavigationViewAdpater.getData().get(position);
+                NavigationBean.ArticlesBean navigationBean = mNavigationCidAdapter.getData().get(position);
                 Bundle bundle = new Bundle();
                 bundle.putString("UrlBean", navigationBean.getLink());
                 JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
 
             }
         });
-        mRecyclerView_Context.setAdapter(mNavigationViewAdpater);
+        mRecyclerView_Context.setAdapter(mNavigationCidAdapter);
     }
 }

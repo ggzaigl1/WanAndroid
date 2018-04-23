@@ -3,13 +3,13 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/color_navigation_list">
+        android:padding="6dp"
+        android:background="@color/deep_grey">
 
     <TextView
             android:id="@+id/tv_date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center"
             android:textColor="@color/myTxtColor"
             android:textSize="@dimen/textSize_small"/>

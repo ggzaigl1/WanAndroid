@@ -18,6 +18,15 @@ public class NavigationBean implements Serializable {
     private int cid;
     private String name;
     private List<ArticlesBean> articles;
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public int getCid() {
         return cid;

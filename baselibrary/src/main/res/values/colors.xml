@@ -14,6 +14,7 @@
     <!-- UI设计原色之 橙色 -->
     <color name="orange">#f39b39</color>
     <color name="button_press">#f3af5d</color>
+    <color name="shallow_green">#FF36BC9B</color>
     <!-- UI设计原色之 绿色 -->
     <color name="green">#93cc2f</color>
     <!-- UI设计原色之 浅蓝 -->
@@ -22,6 +23,7 @@
     <color name="blue">#3ec2d9</color>
     <!-- UI设计原色之 白色 -->
     <color name="white">#ffffff</color>
+    <color name="deep_grey">#e6e6e6</color>
     <color name="txtSuperLight">#b3b3b3</color>
     <color name="imgPreviewBottomBg">#bf000000</color>
     <color name="imgPreviewHeadBg">#80000000</color>
