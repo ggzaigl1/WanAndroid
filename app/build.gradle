@@ -44,11 +44,11 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation project(':baselibrary')
     // 菜单栏
-    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
+    api 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
     //    compile 'com.github.chrisbanes:PhotoView:2.1.2' 点击图片放大
-    compile 'com.github.chrisbanes:PhotoView:1.2.6'
+    api 'com.github.chrisbanes:PhotoView:1.2.6'
     //对话框 Material Dialogs
-    compile 'com.afollestad.material-dialogs:core:0.9.6.0'
+    api 'com.afollestad.material-dialogs:core:0.9.6.0'
     //腾讯浏览服务jar(tbs)
     implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
 //    compile 'id.arieridwan:pageloader:0.0.2'
@@ -56,13 +56,13 @@ dependencies {
 //    compile 'com.github.hotchemi:permissionsdispatcher:3.0.1'
 //    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
     //阿里热修复
-    compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.9'
+    api 'com.aliyun.ams:alicloud-android-hotfix:3.1.9'
 
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     //https://github.com/google/flexbox-layout
     implementation 'com.google.android:flexbox:0.3.2'
     // Lottie是一个支持Android、iOS、React Native，并由 Adobe After Effects制作aep格式的动画，然后经由bodymovin插件转化渲染为json格式可被移动端本地识别解析的Airbnb开源库。
 //    Lottie实时呈现After Effects动画效果，让应用程序可以像使用静态图片一样轻松地使用动画 Lottie支持API 14及以上。
-    compile 'com.airbnb.android:lottie:2.3.0'
+    api 'com.airbnb.android:lottie:2.3.0'
 
 }

@@ -30,53 +30,53 @@ dependencies {
     //noinspection GradleCompatible
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
-    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    api "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    api "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
+    api "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
+    api "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     //    butterknife
-    compile 'com.jakewharton:butterknife:8.5.1'
+    api 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //    dagger2
-    compile 'com.google.dagger:dagger:2.4'
+    api 'com.google.dagger:dagger:2.4'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.4'
     //    rxjava
-    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'io.reactivex.rxjava2:rxjava:2.1.1'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //    retrofit2
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
     //    为retrofit添加gson转换器的依赖
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
     //    Retrofit与RxJava结合
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     //    通过OkHttp中的interceptor来实现实际的底层的请求和响应日志
-    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     //    glide
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    api 'com.github.bumptech.glide:glide:3.7.0'
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
-    compile 'com.tencent.bugly:crashreport:2.6.6.1'
+    api 'com.tencent.bugly:crashreport:2.6.6.1'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
-    compile 'com.tencent.bugly:nativecrashreport:3.3.1'
+    api 'com.tencent.bugly:nativecrashreport:3.3.1'
     //    AgentWeb
-    compile 'com.just.agentweb:agentweb:3.1.0'
+    api 'com.just.agentweb:agentweb:3.1.0'
     //视频播放器，支持基本的拖动，声音、亮度调节，支持边播边缓存，支持视频本身自带 rotation 属性的旋转，
     // 重力旋转与手动旋转的同步支持，支持列表播放 ，直接添加控件为封，兼容一些 5.0 的过场效果
-    compile 'com.shuyu:GSYVideoPlayer:4.1.0'
+    api 'com.shuyu:GSYVideoPlayer:4.1.0'
     //BRVAH官方使用指南 baseRecyclerViewAdapterHelper
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     //下拉刷新上拉加载
     //SmartRefreshLayout Android智能下拉刷新框架，支持越界回弹，集成了几十种炫酷的Header和 Footer。 RefreshLayout，OverScroll.
     //https://github.com/scwang90/SmartRefreshLayout
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'//如果使用了特殊的Header
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'//如果使用了特殊的Header
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     //PhotoView
-    compile 'com.github.chrisbanes:PhotoView:2.0.0'
+    api 'com.github.chrisbanes:PhotoView:2.0.0'
     //AndroidUtilCode
-    compile 'com.blankj:utilcode:1.13.11'
+    api 'com.blankj:utilcode:1.13.11'
     //banner
-    compile 'com.bigkoo:convenientbanner:2.0.5'
+    api 'com.bigkoo:convenientbanner:2.0.5'
 //    ViewPagerTransforms 切换动画
-    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    api 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 }
