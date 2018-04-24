@@ -38,7 +38,7 @@ public class StarFragment extends BaseFragment {
     @BindView(R.id.view_page)
     ViewPager mViewPager;
     private MyPagerAdapter mAdapter;
-    private ArrayList<SystemFlyFragment> mFragments = new ArrayList<>();
+    private ArrayList<SystemStarFragment> mFragments = new ArrayList<>();
 
     List<ProjectBean> data;
 
@@ -70,7 +70,7 @@ public class StarFragment extends BaseFragment {
                         if (null != beanModule && null != beanModule.getData()) {
                             data = beanModule.getData();
                             for (ProjectBean bean : data) {
-                                SystemFlyFragment systemFlyFragment = SystemFlyFragment.getInstance(bean.getId(), "");
+                                SystemStarFragment systemFlyFragment = SystemStarFragment.getInstance(bean.getId(), "");
                                 mFragments.add(systemFlyFragment);
                             }
                             mAdapter = new MyPagerAdapter(getFragmentManager());

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +18,9 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.entity.BannerBean;
+import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
+import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.base.BaseFragment;
@@ -25,7 +28,9 @@ import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.RxHelper;
+import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.T;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -62,8 +67,7 @@ public class HomeFragment extends BaseFragment {
     AppBarLayout mAppBarLayout;
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
-    @BindView(R.id.refreshLayout)
-    SmartRefreshLayout mRefreshLayout;
+    public static SmartRefreshLayout mRefreshLayout;
     ConvenientBanner<BannerBean> bannerView;
     HomeAdapter mAdapter;
     int mPageNo = 0;
@@ -71,6 +75,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
+        mRefreshLayout = mRootView.findViewById(R.id.refreshLayout);
         initRecyle();
         initRefresh();
         getData();
@@ -271,16 +276,20 @@ public class HomeFragment extends BaseFragment {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.image_collect:
-                        if (mAdapter.getData().get(position).isCollect()) { //收藏
-                            uncollectArticle(mAdapter.getData().get(position).getId());
-                            mAdapter.getData().get(position).setCollect(false);
-                            mAdapter.notifyItemChanged(position, "");
+                        if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                            if (mAdapter.getData().get(position).isCollect()) { //收藏
+                                uncollectArticle(mAdapter.getData().get(position).getId());
+                                mAdapter.getData().get(position).setCollect(false);
+                                mAdapter.notifyItemChanged(position, "");
+                            } else {
+                                collectArticle(mAdapter.getData().get(position).getId());
+                                mAdapter.getData().get(position).setCollect(true);
+                                mAdapter.notifyItemChanged(position, "");
+                            }
                         } else {
-                            collectArticle(mAdapter.getData().get(position).getId());
-                            mAdapter.getData().get(position).setCollect(true);
-                            mAdapter.notifyItemChanged(position, "");
+                            JumpUtils.jump(mContext, LoginActivity.class, null);
+                            T.showShort("登录之后才能查看已收藏内容");
                         }
-
                         break;
                 }
             }

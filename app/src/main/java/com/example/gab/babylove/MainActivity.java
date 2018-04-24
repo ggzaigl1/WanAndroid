@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                             ACache mCache = ACache.get(BaseApp.getAppCtx());
                             mCache.clear();
                             SpfUtils.clear();
+                            HomeFragment.mRefreshLayout.autoRefresh();
                         }).setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss()).create().show();
             } else {
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);

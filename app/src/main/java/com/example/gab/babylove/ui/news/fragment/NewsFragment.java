@@ -28,7 +28,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Gab on 2017/12/15 0015.
- * 体系 Fragment
+ * 体系 主Fragment
  */
 
 public class NewsFragment extends BaseFragment {

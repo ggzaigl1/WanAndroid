@@ -1,4 +1,4 @@
-package com.example.gab.babylove.ui.news.fragment;
+package com.example.gab.babylove.ui.project.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.news.adapter.SystemFlyAdapter;
+import com.example.gab.babylove.ui.project.adapter.StarAdapter;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.BeanModule;
@@ -27,20 +27,20 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 初夏小溪 on 2018/4/20 0020.
- * 知识体系 TabLayout Fragment
+ * 項目 TabLayout Fragment
  */
 
-public class SystemFlyFragment extends BaseFragment {
+public class SystemStarFragment extends BaseFragment {
 
     @BindView(R.id.rvLayout)
     RecyclerView mRecyclerView;
-    SystemFlyAdapter mAdapter;
+    StarAdapter mAdapter;
     public static final String ARG_PARAM1 = "param1";
     public static final String ARG_PARAM2 = "param2";
     int mPageNo = 0;
 
-    public static SystemFlyFragment getInstance(int param1, String param2) {
-        SystemFlyFragment fragment = new SystemFlyFragment();
+    public static SystemStarFragment getInstance(int param1, String param2) {
+        SystemStarFragment fragment = new SystemStarFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -92,7 +92,7 @@ public class SystemFlyFragment extends BaseFragment {
 
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new SystemFlyAdapter(R.layout.item_home, new ArrayList<>());
+        mAdapter = new StarAdapter(R.layout.item_fly, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             ArticleBean.DatasBean bean = mAdapter.getData().get(position);
             Bundle bundle = new Bundle();

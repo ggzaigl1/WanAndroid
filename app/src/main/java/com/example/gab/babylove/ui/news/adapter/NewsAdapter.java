@@ -32,7 +32,8 @@ public class NewsAdapter extends BaseQuickAdapter<TreeBean, BaseViewHolder> {
             }
         }
         helper.setText(R.id.tv_title, item.getName())
-                .setText(R.id.tv_context,strBuilder.toString()).setTextColor(R.id.tv_context, ResourceUtils.getRandomColor());
+                .setText(R.id.tv_context,strBuilder.toString())
+                .setTextColor(R.id.tv_context, ResourceUtils.getRandomColor());
     }
 
 }

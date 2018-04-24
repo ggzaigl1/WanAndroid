@@ -74,6 +74,7 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+        mRefreshLayout.autoRefresh();
         initRv();
         initRefresh();
         getCourseDetails(mCurPage);
