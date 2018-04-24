@@ -90,7 +90,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/vector_collect_false"
+                    app:srcCompat="@drawable/vector_collect"
                     />
         </LinearLayout>
     </LinearLayout>

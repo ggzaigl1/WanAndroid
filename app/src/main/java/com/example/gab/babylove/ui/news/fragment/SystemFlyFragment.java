@@ -10,6 +10,7 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
+import com.example.gab.babylove.ui.news.adapter.SystemFlyAdapter;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.BeanModule;
@@ -33,7 +34,7 @@ public class SystemFlyFragment extends BaseFragment {
 
     @BindView(R.id.rvLayout)
     RecyclerView mRecyclerView;
-    HomeAdapter mAdapter;
+    SystemFlyAdapter mAdapter;
     public static final String ARG_PARAM1 = "param1";
     public static final String ARG_PARAM2 = "param2";
     int mPageNo = 0;
@@ -91,7 +92,7 @@ public class SystemFlyFragment extends BaseFragment {
 
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
+        mAdapter = new SystemFlyAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             ArticleBean.DatasBean bean = mAdapter.getData().get(position);
             Bundle bundle = new Bundle();

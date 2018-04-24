@@ -3,6 +3,7 @@ package com.example.gab.babylove.api;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.entity.BookmarkBean;
+import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.HomeBean;
 import com.example.gab.babylove.entity.LoginBean;
@@ -18,6 +19,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -116,6 +118,41 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("project/tree/json")
     Observable<BeanModule<List<ProjectBean>>> getProjectList();
+
+
+    /**
+     * 收藏文章列表
+     */
+    @Headers({"url_name:user"})
+    @GET("lg/collect/list/{id}/json")
+    Observable<BeanModule<CollectBean>> getCollectList(@Path("id") int page);
+
+    /**
+     * 收藏站内文章
+     */
+    @FormUrlEncoded
+    @Headers({"url_name:user"})
+    @POST("lg/collect/{id}/json")
+    Observable<BeanModule<Object>> getCollectArticle(@Path("id") int articleId ,
+                                                     @Field("reason") String reason);
+
+    /**
+     * 站内文章  取消收藏 (文章列表)
+     */
+    @FormUrlEncoded
+    @Headers({"url_name:user"})
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<BeanModule<Object>> uncollectArticle(@Path("id") int articleId,
+                                                    @Field("reason") String reason);
+
+    /**
+     * 站内文章 取消收藏 [我的收藏页面（该页面包含自己录入的内容）]
+     */
+    @FormUrlEncoded
+    @Headers({"url_name:user"})
+    @POST("lg/uncollect/{id}/json")
+    Observable<BeanModule<Object>> unMyCollectArticle(@Path("id") int articleId,
+                                                      @Field("originId") int originId);
 
     /**
      * 多图片上传

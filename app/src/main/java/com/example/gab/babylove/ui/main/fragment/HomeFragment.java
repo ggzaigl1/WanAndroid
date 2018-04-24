@@ -8,14 +8,16 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.entity.BannerBean;
+import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.base.BaseFragment;
@@ -24,11 +26,12 @@ import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.RxHelper;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.T;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.OnRefreshLoadmoreListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +64,7 @@ public class HomeFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-    ConvenientBanner<BannerBean> bannerView ;
+    ConvenientBanner<BannerBean> bannerView;
     HomeAdapter mAdapter;
     int mPageNo = 0;
 
@@ -75,10 +78,6 @@ public class HomeFragment extends BaseFragment {
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
         mContext.setSupportActionBar(toolbar);
-        //是否显示返回箭头
-//        mContext.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        toolbar.setNavigationOnClickListener(v -> mContext.finish());
-
     }
 
     @Override
@@ -87,6 +86,36 @@ public class HomeFragment extends BaseFragment {
     }
 
 
+    /**
+     * 轮播图 相关设置
+     *
+     * @param Pic
+     * @param urls
+     */
+    private void bannerView(List<String> Pic, List<String> urls) {
+        mConvenientBanner.setPages(new CBViewHolderCreator() {
+            @Override
+            public Object createHolder() {
+                return new NetworkImageHolderView();
+            }
+        }, Pic)
+                .startTurning(2000)
+//                .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
+//                .setPointViewVisible(true)
+//                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
+//                .setPageTransformer(new AccordionTransformer())
+                .setOnItemClickListener(position -> {
+                    String Ulr = urls.get(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("UrlBean", Ulr);
+                    JumpUtils.jump(mContext, AgentWebActivity.class, bundle);
+                })
+                //设置手动影响（设置了该项无法手动切换）
+                .setManualPageable(true);
+//                .setcurrentitem(0);
+    }
+
+    /****************************************开始调接口*****************************************************/
     /**
      * banner 轮播图 加载数据 接口
      */
@@ -143,7 +172,7 @@ public class HomeFragment extends BaseFragment {
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
                                 mAdapter.getData().addAll(articleBean.getDatas());
-                                mRefreshLayout.finishLoadmore();
+                                mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
                             } else {
                                 mAdapter.setNewData(articleBean.getDatas());
@@ -158,39 +187,11 @@ public class HomeFragment extends BaseFragment {
                 });
     }
 
-    /**
-     * 轮播图 相关设置
-     *
-     * @param Pic
-     * @param urls
-     */
-    private void bannerView(List<String> Pic, List<String> urls) {
-        mConvenientBanner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Object createHolder() {
-                return new NetworkImageHolderView();
-            }
-        }, Pic)
-                .startTurning(2000)
-//                .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
-//                .setPointViewVisible(true)
-//                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
-//                .setPageTransformer(new AccordionTransformer())
-                .setOnItemClickListener(position -> {
-                    String Ulr = urls.get(position);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("UrlBean", Ulr);
-                    JumpUtils.jump(mContext, AgentWebActivity.class, bundle);
-                })
-                //设置手动影响（设置了该项无法手动切换）
-                .setManualPageable(true);
-//                .setcurrentitem(0);
-    }
 
     /**
      * 首页列表数据加载
-     *
-//     * @param mCurPage
+     * <p>
+     * //     * @param mCurPage
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int mCurPage) {
@@ -207,7 +208,7 @@ public class HomeFragment extends BaseFragment {
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
                                 mAdapter.getData().addAll(articleBean.getData().getDatas());
-                                mRefreshLayout.finishLoadmore();
+                                mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
                             } else {
                                 mAdapter.setNewData(articleBean.getData().getDatas());
@@ -218,25 +219,40 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
-     * 分页加载数据
+     * 收藏
+     *
+     * @param id
      */
-    private void initRefresh() {
-        mRefreshLayout.setRefreshHeader(new ClassicsHeader(mContext));
-        mRefreshLayout.setRefreshFooter(new ClassicsFooter(mContext));
-        mRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                mPageNo += 1;
-                getArticleList(mPageNo);
-            }
-
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                mPageNo = 0;
-                getArticleList(0);
-            }
-        });
+    private void collectArticle(int id) {
+        RequestUtils.create(ApiService.class)
+                .getCollectArticle(id, "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(RequestUtils::addDispos)
+                .subscribe(new Consumer<BeanModule<Object>>() {
+                    @Override
+                    public void accept(BeanModule<Object> objectBeanModule) throws Exception {
+                        T.showShort("收藏成功");
+                    }
+                });
     }
+
+    //    取消收藏
+    private void uncollectArticle(int id) {
+        RequestUtils.create(ApiService.class)
+                .uncollectArticle(id, "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(RequestUtils::addDispos)
+                .subscribe(new Consumer<BeanModule<Object>>() {
+                    @Override
+                    public void accept(BeanModule<Object> objectBeanModule) throws Exception {
+                        T.showLong("取消收藏成功");
+                    }
+                });
+    }
+
+    /********************************************End***************************************************/
 
     /**
      * recycleview 相关设置
@@ -250,13 +266,54 @@ public class HomeFragment extends BaseFragment {
             bundle.putString("UrlBean", bean.getLink());
             JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
         });
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()) {
+                    case R.id.image_collect:
+                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                            uncollectArticle(mAdapter.getData().get(position).getId());
+                            mAdapter.getData().get(position).setCollect(false);
+                            mAdapter.notifyItemChanged(position, "");
+                        } else {
+                            collectArticle(mAdapter.getData().get(position).getId());
+                            mAdapter.getData().get(position).setCollect(true);
+                            mAdapter.notifyItemChanged(position, "");
+                        }
+
+                        break;
+                }
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    /**
+     * 分页加载数据
+     */
+    private void initRefresh() {
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(mContext));
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(mContext));
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                mPageNo += 1;
+                getArticleList(mPageNo);
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                mPageNo = 0;
+                getArticleList(0);
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
         if (null != bannerView) bannerView.startTurning(2000);//开始翻页
+        mRefreshLayout.autoRefresh();//自动刷新
     }
 
     @Override
@@ -267,7 +324,7 @@ public class HomeFragment extends BaseFragment {
             mRefreshLayout.finishRefresh();
         }
         if (mRefreshLayout.isLoading()) {
-            mRefreshLayout.finishLoadmore();
+            mRefreshLayout.finishLoadMore();
         }
     }
 }

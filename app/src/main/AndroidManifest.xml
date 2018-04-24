@@ -99,6 +99,11 @@
                 android:name=".ui.main.activity.WebsiteActivity"
                 android:label="@string/website"
                 android:screenOrientation="portrait"/>
+        <!-- 我的收藏 -->
+        <activity
+                android:name=".ui.main.activity.MyCollectActivity"
+                android:label="@string/collect"
+                android:screenOrientation="portrait"/>
         <!-- 知识体系 详情 -->
         <activity
                 android:name=".ui.news.activity.SystemActivity"

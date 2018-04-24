@@ -24,6 +24,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.ui.main.activity.AboutActivity;
 import com.example.gab.babylove.ui.main.activity.BelleActivity;
+import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
 import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
 import com.example.gab.babylove.ui.main.activity.ToolsActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
@@ -40,6 +41,7 @@ import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.SystemUtils;
+import com.fy.baselibrary.utils.T;
 import com.fy.baselibrary.utils.cache.ACache;
 
 import butterknife.BindView;
@@ -216,6 +218,14 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         } else if (id == R.id.nav_website) {
             //常用网站
             JumpUtils.jump(this, WebsiteActivity.class, null);
+        } else if (id == R.id.nav_collect) {
+            //我的收藏
+            if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                JumpUtils.jump(this, MyCollectActivity.class, null);
+            } else {
+                JumpUtils.jump(this, LoginActivity.class, null);
+                T.showShort("登录之后才能查看已收藏内容");
+            }
         } else if (id == R.id.nav_share) {
             Intent textIntent = new Intent(Intent.ACTION_SEND);
             textIntent.setType("text/plain");
@@ -243,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
             } else if ((System.currentTimeMillis() - exitTime) >= 2000) {
-                Snackbar.make(mDrawer, R.string.exit_app , Snackbar.LENGTH_SHORT)
+                Snackbar.make(mDrawer, R.string.exit_app, Snackbar.LENGTH_SHORT)
                         .setActionTextColor(ContextCompat.getColor(this, R.color.white))
                         .show();
 //                Util.CustomToast.INSTANCE.showToast(MainActivity.this, R.string.exit_app);

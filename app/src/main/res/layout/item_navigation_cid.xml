@@ -7,9 +7,9 @@
 
     <TextView
             android:id="@+id/tv_date"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
+            android:background="#f099"
             android:textColor="@color/titleBarCon"
             android:textSize="@dimen/textSize_medium_large" />
 

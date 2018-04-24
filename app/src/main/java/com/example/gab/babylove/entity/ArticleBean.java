@@ -119,6 +119,7 @@ public class ArticleBean implements Serializable {
         private String desc;
         private String envelopePic;
         private boolean fresh;
+        private int originId = -1;
         private int id;
         private String link;
         private String niceDate;
@@ -267,6 +268,13 @@ public class ArticleBean implements Serializable {
 
         public void setSuperChapterName(String superChapterName) {
             this.superChapterName = superChapterName;
+        }
+        public int getOriginId() {
+            return originId;
+        }
+
+        public void setOriginId(int originId) {
+            this.originId = originId;
         }
 
         public String getTitle() {
