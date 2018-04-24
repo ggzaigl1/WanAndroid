@@ -1,11 +1,13 @@
 package com.example.gab.babylove.ui.navigation.adapter;
 
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.NavigationBean;
+import com.example.gab.babylove.utils.SelectUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
 
 import java.util.List;
@@ -23,7 +25,10 @@ public class NavigationCidAdapter extends BaseQuickAdapter<NavigationBean.Articl
 
     @Override
     protected void convert(BaseViewHolder helper, NavigationBean.ArticlesBean item) {
-        helper.setText(R.id.tv_date, item.getTitle()).setTextColor(R.id.tv_date, ResourceUtils.getRandomColor());
+        TextView tv_date = helper.getView(R.id.tv_date);
+        tv_date.setText(item.getTitle());
+        tv_date.setTextColor(ResourceUtils.getRandomColor());
+        tv_date.setBackground(SelectUtils.getTagSelector(R.drawable.shape_tag));
     }
 
 }

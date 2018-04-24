@@ -27,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 初夏小溪 on 2018/4/20 0020.
- * 知识体系 TabLayout Fragment
+ * 知识体系 和 项目分类 TabLayout Fragment
  */
 
 public class SystemFlyFragment extends BaseFragment {
@@ -92,7 +92,7 @@ public class SystemFlyFragment extends BaseFragment {
 
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new SystemFlyAdapter(R.layout.item_home, new ArrayList<>());
+        mAdapter = new SystemFlyAdapter(R.layout.item_fly, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             ArticleBean.DatasBean bean = mAdapter.getData().get(position);
             Bundle bundle = new Bundle();
