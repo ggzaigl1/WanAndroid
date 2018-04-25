@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.view.OrientationEventListener;
 
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
+
 
 /**
  * 监听系统 屏幕方向
@@ -27,7 +28,7 @@ public class BaseOrientoinListener extends OrientationEventListener {
 
     @Override
     public void onOrientationChanged(int orientation) {
-        L.d(TAG, "orention" + orientation);
+        LogUtils.d(TAG, "orention" + orientation);
         int screenOrientation = context.getResources().getConfiguration().orientation;
         if (((orientation >= 0) && (orientation < 45)) || (orientation > 315)) {//设置竖屏
             if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT && orientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {

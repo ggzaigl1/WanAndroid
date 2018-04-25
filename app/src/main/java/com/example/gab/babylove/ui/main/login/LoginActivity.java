@@ -31,7 +31,7 @@ import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.SpfUtils;
-import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.ToastUtils;
 import com.fy.baselibrary.utils.cache.ACache;
 import com.fy.baselibrary.utils.permission.PermissionChecker;
 
@@ -203,7 +203,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                             JumpUtils.jump(LoginActivity.this, MainActivity.class, null);
                             finish();
                         } else {
-                            T.showShort(login.getErrorMsg());
+                            ToastUtils.showShortToast(login.getErrorMsg());
                         }
                     }
 

@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 
 import com.fy.baselibrary.application.BaseApp;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 
 import java.io.File;
 
@@ -30,7 +30,7 @@ public class UpdateMedia implements MediaScannerConnection.MediaScannerConnectio
 
     @Override
     public void onMediaScannerConnected() {
-        L.e(TAG, "扫描");
+        LogUtils.e(TAG, "扫描");
         /** 这个方法一次只能扫描一个文件，path 必须是一个具体的文件，不能是目录 */
         mediaScanConn.scanFile(filePath, "");
     }
@@ -38,7 +38,7 @@ public class UpdateMedia implements MediaScannerConnection.MediaScannerConnectio
     @Override
     public void onScanCompleted(String path, Uri uri) {
         //当client和MediaScaner扫描完成后  进行关闭我们的连接
-        L.e(TAG, "扫描完成");
+        LogUtils.e(TAG, "扫描完成");
         mediaScanConn.disconnect();
     }
 

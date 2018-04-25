@@ -74,7 +74,7 @@ dependencies {
     //PhotoView
     api 'com.github.chrisbanes:PhotoView:2.0.0'
     //AndroidUtilCode
-    api 'com.blankj:utilcode:1.13.11'
+//    api 'com.blankj:utilcode:1.13.11'
     //banner
     api 'com.bigkoo:convenientbanner:2.0.5'
 //    ViewPagerTransforms 切换动画

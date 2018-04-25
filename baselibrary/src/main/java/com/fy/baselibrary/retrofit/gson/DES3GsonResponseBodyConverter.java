@@ -1,6 +1,6 @@
 package com.fy.baselibrary.retrofit.gson;
 
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -37,7 +37,7 @@ public class DES3GsonResponseBodyConverter  <T> implements Converter<ResponseBod
 //        String response = Des3.decode(value.string());
         String response = value.string();
 
-        L.e("后台数据", response);
+        LogUtils.e("后台数据", response);
 //        BaseResponseBean baseResponseBean = gson.fromJson(response, BaseResponseBean.class);
 //        if(baseResponseBean.isTokenTimeOut()){
 //            value.close();

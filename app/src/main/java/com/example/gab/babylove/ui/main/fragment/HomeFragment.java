@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +17,6 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.entity.BannerBean;
-import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
@@ -31,7 +29,7 @@ import com.fy.baselibrary.retrofit.RxHelper;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.SpfUtils;
-import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -79,6 +77,7 @@ public class HomeFragment extends BaseFragment {
         initRecyle();
         initRefresh();
         getData();
+        mRefreshLayout.autoRefresh();//自动刷新
         //通过CollapsingToolbarLayout修改字体颜色
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
@@ -237,7 +236,7 @@ public class HomeFragment extends BaseFragment {
                 .subscribe(new Consumer<BeanModule<Object>>() {
                     @Override
                     public void accept(BeanModule<Object> objectBeanModule) throws Exception {
-                        T.showShort("收藏成功");
+                        ToastUtils.showShortToast(mContext,"收藏成功");
                     }
                 });
     }
@@ -252,7 +251,7 @@ public class HomeFragment extends BaseFragment {
                 .subscribe(new Consumer<BeanModule<Object>>() {
                     @Override
                     public void accept(BeanModule<Object> objectBeanModule) throws Exception {
-                        T.showLong("取消收藏成功");
+                         ToastUtils.showShortToast(mContext,"取消收藏成功");
                     }
                 });
     }
@@ -288,7 +287,7 @@ public class HomeFragment extends BaseFragment {
                             }
                         } else {
                             JumpUtils.jump(mContext, LoginActivity.class, null);
-                            T.showShort("登录之后才能查看已收藏内容");
+                            ToastUtils.showShortToast(mContext,"登录之后才能查看已收藏内容");
                         }
                         break;
                 }
@@ -322,7 +321,6 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         if (null != bannerView) bannerView.startTurning(2000);//开始翻页
-        mRefreshLayout.autoRefresh();//自动刷新
     }
 
     @Override

@@ -2,27 +2,14 @@ package com.example.gab.babylove.ui.main.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
-import com.fy.baselibrary.retrofit.BeanModule;
-import com.fy.baselibrary.retrofit.NetCallBack;
-import com.fy.baselibrary.retrofit.RequestUtils;
-import com.fy.baselibrary.retrofit.RxHelper;
 import com.fy.baselibrary.utils.ResourceUtils;
-import com.fy.baselibrary.utils.T;
-import com.fy.baselibrary.utils.TintUtils;
 
 import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Gab on 2017/12/18 0018.

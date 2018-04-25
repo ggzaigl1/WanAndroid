@@ -14,7 +14,7 @@ import com.example.gab.babylove.widget.fingerprintCore.FingerprintCore;
 import com.example.gab.babylove.widget.fingerprintCore.KeyguardLockScreenManager;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -100,20 +100,20 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
     private void startFingerprintRecognition() {
         if (mFingerprintCore.isSupport()) {
             if (!mFingerprintCore.isHasEnrolledFingerprints()) {
-                T.showShort(R.string.fingerprint_recognition_not_enrolled);
+                ToastUtils.showShortToast(getString(R.string.fingerprint_recognition_not_enrolled));
                 openFingerPrintSettingPage(this);
                 return;
             }
-            T.showShort(R.string.fingerprint_recognition_tip);
+            ToastUtils.showShortToast(getString(R.string.fingerprint_recognition_tip));
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_tip);
             mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_guide);
             if (mFingerprintCore.isAuthenticating()) {
-                T.showShort(R.string.fingerprint_recognition_authenticating);
+                ToastUtils.showShortToast(getString(R.string.fingerprint_recognition_authenticating));
             } else {
                 mFingerprintCore.startAuthenticate();
             }
         } else {
-            T.showShort(R.string.fingerprint_recognition_not_support);
+            ToastUtils.showShortToast(getString(R.string.fingerprint_recognition_not_support));
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_tip);
         }
     }
@@ -137,7 +137,7 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
             return;
         }
         if (!mKeyguardLockScreenManager.isOpenLockScreenPwd()) {
-            T.showShort(R.string.fingerprint_not_set_unlock_screen_pws);
+            ToastUtils.showShortToast(getString(R.string.fingerprint_not_set_unlock_screen_pws));
             openFingerPrintSettingPage(this);
             return;
         }
@@ -150,7 +150,7 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
     private FingerprintCore.IFingerprintResultListener mResultListener = new FingerprintCore.IFingerprintResultListener() {
         @Override
         public void onAuthenticateSuccess() {
-            T.showShort(R.string.fingerprint_recognition_success);
+            ToastUtils.showShortToast(getString(R.string.fingerprint_recognition_success));
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
             mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
             openFingerPrintSettingPage(FingerprintMainActivity.this);
@@ -158,7 +158,7 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
 
         @Override
         public void onAuthenticateFailed(int helpId) {
-            T.showShort(R.string.fingerprint_recognition_failed);
+            ToastUtils.showShortToast(getString(R.string.fingerprint_recognition_failed));
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_failed);
         }
 
@@ -166,7 +166,7 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
         public void onAuthenticateError(int errMsgId) {
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
             mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
-            T.showShort(R.string.fingerprint_recognition_error);
+            ToastUtils.showShortToast(getString(R.string.fingerprint_recognition_error));
         }
 
         @Override
@@ -180,9 +180,9 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
         if (requestCode == KeyguardLockScreenManager.REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS) {
             // Challenge completed, proceed with using cipher
             if (resultCode == RESULT_OK) {
-                T.showShort(R.string.sys_pwd_recognition_success);
+                ToastUtils.showShortToast(getString(R.string.sys_pwd_recognition_success));
             } else {
-                T.showShort(R.string.sys_pwd_recognition_failed);
+                ToastUtils.showShortToast(getString(R.string.sys_pwd_recognition_failed));
             }
         }
     }

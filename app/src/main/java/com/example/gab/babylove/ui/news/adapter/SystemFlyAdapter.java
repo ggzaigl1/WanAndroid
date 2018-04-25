@@ -2,15 +2,12 @@ package com.example.gab.babylove.ui.news.adapter;
 
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.blankj.utilcode.util.ImageUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.fy.baselibrary.utils.ResourceUtils;
-import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
 
 import java.util.List;
 

@@ -8,9 +8,9 @@ import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.base.dialog.CommonDialog;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.statuslayout.StatusLayoutManager;
-import com.fy.baselibrary.utils.L;
-import com.fy.baselibrary.utils.NetUtils;
-import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.LogUtils;
+import com.fy.baselibrary.utils.NetworkUtils;
+import com.fy.baselibrary.utils.ToastUtils;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -48,7 +48,7 @@ public abstract class NetCallBack<V> implements Observer<V> {
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
-        L.e("net", "onSubscribe()");
+        LogUtils.e("net", "onSubscribe()");
 
         this.disposed = d;
         if (null != progressDialog && null != disposed && !disposed.isDisposed()) {
@@ -58,15 +58,15 @@ public abstract class NetCallBack<V> implements Observer<V> {
 
     @Override
     public void onNext(V t) {
-        L.e("net", "onNext()");
+        LogUtils.e("net", "onNext()");
         onSuccess(t);
     }
 
     @Override
     public void onError(Throwable e) {
-        L.e("net", "onError()");
+        LogUtils.e("net", "onError()");
         e.printStackTrace();
-        if (!NetUtils.isConnected(BaseApp.getAppCtx())) {
+        if (!NetworkUtils.isConnected(BaseApp.getAppCtx())) {
             actionResponseError("网络不可用");
             updataLayout(StatusLayoutManager.LAYOUT_NETWORK_ERROR_ID);
         } else if (e instanceof ServerException) {
@@ -103,7 +103,7 @@ public abstract class NetCallBack<V> implements Observer<V> {
 
     @Override
     public void onComplete() {
-        L.e("net", "onComplete()");
+        LogUtils.e("net", "onComplete()");
         updataLayout(StatusLayoutManager.LAYOUT_CONTENT_ID);
         dismissProgress();
     }
@@ -114,7 +114,7 @@ public abstract class NetCallBack<V> implements Observer<V> {
      * @param msg
      */
     private void actionResponseError(String msg) {
-        T.showShort(msg);
+        ToastUtils.showShortToastSafe(msg);
     }
 
     /**

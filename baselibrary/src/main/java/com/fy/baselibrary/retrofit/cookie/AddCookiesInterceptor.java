@@ -1,6 +1,6 @@
 package com.fy.baselibrary.retrofit.cookie;
 
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ public class AddCookiesInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        if (null == chain) L.d("http", "Add_chain == null");
+        if (null == chain) LogUtils.d("http", "Add_chain == null");
 
         final Request.Builder builder = chain.request().newBuilder();
 
@@ -27,7 +27,7 @@ public class AddCookiesInterceptor implements Interceptor {
         Observable.fromArray(cookieArray)
                 .subscribe(cookie -> {
                     //添加cookie
-                    L.d("http", "AddCookiesInterceptor" + cookie);
+                    LogUtils.d("http", "AddCookiesInterceptor" + cookie);
                     builder.addHeader("cookie", cookie);
                 });
 

@@ -8,7 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.fy.baselibrary.utils.FileUtils;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 import com.tencent.smtt.sdk.TbsReaderView;
 
 import java.io.File;
@@ -60,16 +60,16 @@ public class SuperFileLayout extends FrameLayout implements TbsReaderView.Reader
             File bsReaderTempFile =new File(bsReaderTemp);
 
             if (!bsReaderTempFile.exists()) {
-                L.d("准备创建/storage/emulated/0/TbsReaderTemp！！");
+                LogUtils.d("准备创建/storage/emulated/0/TbsReaderTemp！！");
                 boolean mkdir = bsReaderTempFile.mkdir();
                 if(!mkdir){
-                    L.e("创建/storage/emulated/0/TbsReaderTemp失败！！！！！");
+                    LogUtils.e("创建/storage/emulated/0/TbsReaderTemp失败！！！！！");
                 }
             }
 
             //加载文件
             Bundle localBundle = new Bundle();
-            L.d(mFile.toString());
+            LogUtils.d(mFile.toString());
             localBundle.putString("filePath", mFile.toString());
 
             localBundle.putString("tempPath", FileUtils.getSDCardPath() + "TbsReaderTemp");
@@ -81,7 +81,7 @@ public class SuperFileLayout extends FrameLayout implements TbsReaderView.Reader
                 this.mTbsReaderView.openFile(localBundle);
             }
         } else {
-            L.e("文件路径无效！");
+            LogUtils.e("文件路径无效！");
         }
 
     }
@@ -96,19 +96,19 @@ public class SuperFileLayout extends FrameLayout implements TbsReaderView.Reader
         String str = "";
 
         if (TextUtils.isEmpty(paramString)) {
-            L.d(TAG, "paramString---->null");
+            LogUtils.d(TAG, "paramString---->null");
             return str;
         }
-        L.d(TAG, "paramString:" + paramString);
+        LogUtils.d(TAG, "paramString:" + paramString);
         int i = paramString.lastIndexOf('.');
         if (i <= -1) {
-            L.d(TAG, "i <= -1");
+            LogUtils.d(TAG, "i <= -1");
             return str;
         }
 
 
         str = paramString.substring(i + 1);
-        L.d(TAG, "paramString.substring(i + 1)------>" + str);
+        LogUtils.d(TAG, "paramString.substring(i + 1)------>" + str);
         return str;
     }
 
@@ -128,7 +128,7 @@ public class SuperFileLayout extends FrameLayout implements TbsReaderView.Reader
 
     @Override
     public void onCallBackAction(Integer integer, Object o, Object o1) {
-        L.e("****************************************************" + integer);
+        LogUtils.e("****************************************************" + integer);
     }
 
     public void onStopDisplay() {

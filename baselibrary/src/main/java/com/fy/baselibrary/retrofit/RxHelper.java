@@ -1,6 +1,7 @@
 package com.fy.baselibrary.retrofit;
 
-import com.fy.baselibrary.utils.L;
+
+import com.fy.baselibrary.utils.LogUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -58,11 +59,11 @@ public class RxHelper {
             @Override
             public void subscribe(@NonNull ObservableEmitter<T> subscriber) throws Exception {
                 try {
-                    L.e("net", "成功 _ onNext");
+                    LogUtils.e("net", "成功 _ onNext");
                     subscriber.onNext(data);
                     subscriber.onComplete();
                 } catch (Exception e) {
-                    L.e("net", "异常 _ onError");
+                    LogUtils.e("net", "异常 _ onError");
                     subscriber.onError(e);
                 }
             }

@@ -21,7 +21,7 @@ import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.cache.ACache;
 
@@ -120,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
 
                     @Override
                     protected void updataLayout(int flag) {
-                        L.e("net updataLayout", flag + "-----");
+                        LogUtils.e("net updataLayout", flag + "-----");
                     }
                 });
     }

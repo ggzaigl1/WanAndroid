@@ -1,6 +1,6 @@
 package com.fy.baselibrary.retrofit.cookie;
 
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 
 import java.io.IOException;
@@ -17,10 +17,10 @@ public class ReceivedCookiesInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        if (null == chain) L.d("http", "Receivedchain == null");
+        if (null == chain) LogUtils.d("http", "Receivedchain == null");
 
         Response response = chain.proceed(chain.request());
-        L.d("http", "originalResponse" + response.toString());
+        LogUtils.d("http", "originalResponse" + response.toString());
 
         if (!response.headers("set-cookie").isEmpty()) {
 
@@ -34,7 +34,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
 
             SpfUtils.saveStrToSpf("cookie", cookieBuffer.toString());
 
-            L.d("http", "ReceivedCookiesInterceptor" + cookieBuffer.toString());
+            LogUtils.d("http", "ReceivedCookiesInterceptor" + cookieBuffer.toString());
         }
 
         return response;

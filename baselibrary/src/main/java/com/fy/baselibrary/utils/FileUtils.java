@@ -4,11 +4,14 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.text.TextUtils;
 
+
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 
 /**
  * 文件工具类
@@ -200,19 +203,19 @@ public class FileUtils {
         String str = "";
 
         if (TextUtils.isEmpty(paramString)) {
-            L.d("file", "paramString---->null");
+            LogUtils.d("file", "paramString---->null");
             return str;
         }
-        L.d("file","paramString:"+paramString);
+        LogUtils.d("file","paramString:"+paramString);
         int i = paramString.lastIndexOf('.');
         if (i <= -1) {
-            L.d("file","i <= -1");
+            LogUtils.d("file","i <= -1");
             return str;
         }
 
 
         str = paramString.substring(i + 1);
-        L.d("file","paramString.substring(i + 1)------>"+str);
+        LogUtils.d("file","paramString.substring(i + 1)------>"+str);
         return str;
     }
 
@@ -275,6 +278,56 @@ public class FileUtils {
         String filename = prefix + dateFormat.format(new Date(System.currentTimeMillis())) + suffix;
 
         return new File(folder, filename).getPath();
+    }
+
+    /**
+     * 根据文件路径获取文件
+     *
+     * @param filePath 文件路径
+     * @return 文件
+     */
+    public static File getFileByPath(String filePath) {
+        return StringUtils.isSpace(filePath) ? null : new File(filePath);
+    }
+
+    /**
+     * 判断目录是否存在，不存在则判断是否创建成功
+     *
+     * @param file 文件
+     * @return {@code true}: 存在或创建成功<br>{@code false}: 不存在或创建失败
+     */
+    public static boolean createOrExistsDir(File file) {
+        // 如果存在，是目录则返回true，是文件则返回false，不存在则返回是否创建成功
+        return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
+    }
+
+    /**
+     * 判断文件是否存在，不存在则判断是否创建成功
+     *
+     * @param filePath 文件路径
+     * @return {@code true}: 存在或创建成功<br>{@code false}: 不存在或创建失败
+     */
+    public static boolean createOrExistsFile(String filePath) {
+        return createOrExistsFile(getFileByPath(filePath));
+    }
+
+    /**
+     * 判断文件是否存在，不存在则判断是否创建成功
+     *
+     * @param file 文件
+     * @return {@code true}: 存在或创建成功<br>{@code false}: 不存在或创建失败
+     */
+    public static boolean createOrExistsFile(File file) {
+        if (file == null) return false;
+        // 如果存在，是文件则返回true，是目录则返回false
+        if (file.exists()) return file.isFile();
+        if (!createOrExistsDir(file.getParentFile())) return false;
+        try {
+            return file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

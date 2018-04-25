@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 
 /**
  * Created by popfisher on 2016/11/8.
@@ -42,7 +42,7 @@ public class KeyguardLockScreenManager {
         try {
             keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
         } catch (Throwable throwable) {
-            L.e("getKeyguardManager exception");
+            LogUtils.e("getKeyguardManager exception");
         }
         return keyguardManager;
     }

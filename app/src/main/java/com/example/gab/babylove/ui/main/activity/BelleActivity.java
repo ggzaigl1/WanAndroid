@@ -15,16 +15,15 @@ import android.view.View;
 import android.view.animation.Interpolator;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.ui.main.activity.PictureDetailActivity;
-import com.example.gab.babylove.ui.main.adapter.GankMAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.OrListBean;
+import com.example.gab.babylove.ui.main.adapter.GankMAdapter;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.OnRefreshLoadmoreListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -125,10 +124,10 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
                                 mAdapter.getData().addAll(gankBean.getResults());
                                 mRefreshLayout.finishLoadmore();
                                 mAdapter.notifyDataSetChanged();
-                                T.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
+                                ToastUtils.showShortToast("又加载了" + gankBean.getResults().size() + "位妹子");
                             } else {
                                 mAdapter.setNewData(gankBean.getResults());
-                                T.showShort("加载了" + gankBean.getResults().size() + "妹子");
+                               ToastUtils.showShortToast("加载了" + gankBean.getResults().size() + "妹子");
                             }
                         }
                     }

@@ -41,7 +41,7 @@ import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.SystemUtils;
-import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.ToastUtils;
 import com.fy.baselibrary.utils.cache.ACache;
 
 import butterknife.BindView;
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 JumpUtils.jump(this, MyCollectActivity.class, null);
             } else {
                 JumpUtils.jump(this, LoginActivity.class, null);
-                T.showShort("登录之后才能查看已收藏内容");
+                ToastUtils.showShortToast("登录之后才能查看已收藏内容");
             }
         } else if (id == R.id.nav_share) {
             Intent textIntent = new Intent(Intent.ACTION_SEND);

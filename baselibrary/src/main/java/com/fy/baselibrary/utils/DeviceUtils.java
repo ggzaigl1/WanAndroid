@@ -69,6 +69,6 @@ public class DeviceUtils {
         long freeMemory = ((int) Runtime.getRuntime().freeMemory())/1024/1024;
         System.out.println("---> maxMemory="+maxMemory+"M,totalMemory="+totalMemory+"M,freeMemory="+freeMemory+"M");
 
-        L.e("maxMemory" + maxMemory + "totalMemory" + totalMemory + "freeMemory" + freeMemory);
+        LogUtils.e("maxMemory" + maxMemory + "totalMemory" + totalMemory + "freeMemory" + freeMemory);
     }
 }

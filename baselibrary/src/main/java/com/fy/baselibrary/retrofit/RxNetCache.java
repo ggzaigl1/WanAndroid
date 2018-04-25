@@ -2,7 +2,7 @@ package com.fy.baselibrary.retrofit;
 
 import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.utils.ConstantUtils;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.cache.ACache;
 
@@ -55,7 +55,7 @@ public class RxNetCache {
                 ACache mCache = ACache.get(BaseApp.getAppCtx());
                 T cache = (T) mCache.getAsObject(builder.getApi());
                 if (null != cache) {
-                    L.e("net cache", cache.toString());
+                    LogUtils.e("net cache", cache.toString());
                     subscriber.onNext(cache);
                 }
                 subscriber.onComplete();
@@ -70,7 +70,7 @@ public class RxNetCache {
         fromNetwork = fromNetwork.doOnNext(new Consumer<T>() {
             @Override
             public void accept(T result) throws Exception {
-                L.e("net doOnNext", result.toString());
+                LogUtils.e("net doOnNext", result.toString());
                 ACache mCache = ACache.get(BaseApp.getAppCtx());
                 mCache.put(builder.getApi(), (Serializable)result, builder.getExpireTime());
             }

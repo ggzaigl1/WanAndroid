@@ -107,7 +107,7 @@ public class AppUtils {
 
             if (null != pckInfo) return true;
         } catch (PackageManager.NameNotFoundException e) {
-            L.e("TDvice", e.getMessage());
+            LogUtils.e("TDvice", e.getMessage());
         }
         return false;
     }
@@ -159,17 +159,18 @@ public class AppUtils {
                 BACKGROUND=400 EMPTY=500 FOREGROUND=100
                 GONE=1000 PERCEPTIBLE=130 SERVICE=300 ISIBLE=200
                  */
-                L.i(context.getPackageName(), "此appimportace =" + appProcess.importance + ",context.getClass().getName()=" + context.getClass().getName());
+                LogUtils.i(context.getPackageName(), "此appimportace =" + appProcess.importance + ",context.getClass().getName()=" + context.getClass().getName());
                 if (appProcess.importance != ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                    L.i(context.getPackageName(), "处于后台" + appProcess.processName);
+                    LogUtils.i(context.getPackageName(), "处于后台" + appProcess.processName);
                     return true;
                 } else {
-                    L.i(context.getPackageName(), "处于前台" + appProcess.processName);
+                    LogUtils.i(context.getPackageName(), "处于前台" + appProcess.processName);
                     return false;
                 }
             }
         }
         return false;
     }
+
 
 }

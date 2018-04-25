@@ -20,7 +20,7 @@ import com.fy.baselibrary.R;
 import com.fy.baselibrary.base.PopupDismissListner;
 import com.fy.baselibrary.base.ViewHolder;
 import com.fy.baselibrary.utils.DensityUtils;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 
 /**
  * 应用 所有dialog 的父类
@@ -246,7 +246,7 @@ public abstract class CommonDialog extends DialogFragment {
         this.getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                L.v("dialog onkey", "按下返回键");
+                LogUtils.v("dialog onkey", "按下返回键");
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
                     dismiss(false);
                     return true;

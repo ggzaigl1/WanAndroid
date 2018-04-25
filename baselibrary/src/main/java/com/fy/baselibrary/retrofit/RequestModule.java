@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.fy.baselibrary.retrofit.cookie.AddCookiesInterceptor;
 import com.fy.baselibrary.retrofit.cookie.ReceivedCookiesInterceptor;
 import com.fy.baselibrary.utils.ConstantUtils;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
@@ -84,7 +84,7 @@ public class RequestModule {
         return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                L.e("net 请求or响应", message);
+                LogUtils.e("net 请求or响应", message);
 //                FileUtils.fileToInputContent("log", "日志.txt", message);
             }
         }).setLevel(HttpLoggingInterceptor.Level.BODY);

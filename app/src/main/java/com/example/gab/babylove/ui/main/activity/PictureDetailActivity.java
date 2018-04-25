@@ -12,7 +12,7 @@ import com.example.gab.babylove.ui.main.adapter.PhotoAdapter;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.widget.PhotoViewPager;
 import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.ToastUtils;
 
 /**
  * Created by 初夏小溪 on 2018/4/16 0016.
@@ -47,7 +47,7 @@ public class PictureDetailActivity extends AppCompatActivity {
                 mCurrentPosition = position;
                 tv_image_count.setText((mCurrentPosition + 1) + "/" + actionsBean.getData().size());
                 if (mCurrentPosition == actionsBean.getData().size() - 1) {
-                    T.showShort("已经是最后一张图片了");
+                    ToastUtils.showShortToast("已经是最后一张图片了");
                 }
             }
         });

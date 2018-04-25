@@ -8,7 +8,7 @@ import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.util.Log;
 
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -62,11 +62,11 @@ public class CryptoObjectCreator {
                         // Set up the crypto object for later. The object will be authenticated by use
                         // of the fingerprint.
                         if (!initCipher()) {
-                            L.e("Failed to init Cipher.");
+                            LogUtils.e("Failed to init Cipher.");
                         }
                     }
                 } catch (Exception e) {
-                    L.e(" Failed to init Cipher, e:" + Log.getStackTraceString(e));
+                    LogUtils.e(" Failed to init Cipher, e:" + Log.getStackTraceString(e));
                 }
                 if (createListener != null) {
                     createListener.onDataPrepared(mCryptoObject);
@@ -99,7 +99,7 @@ public class CryptoObjectCreator {
             mKeyGenerator.generateKey();
         } catch (NoSuchAlgorithmException | InvalidAlgorithmParameterException
                 | CertificateException | IOException e) {
-            L.e(" Failed to createKey, e:" + Log.getStackTraceString(e));
+            LogUtils.e(" Failed to createKey, e:" + Log.getStackTraceString(e));
             throw new RuntimeException(e);
         }
     }
@@ -119,11 +119,11 @@ public class CryptoObjectCreator {
             mCipher.init(Cipher.ENCRYPT_MODE, key);
             return true;
         } catch (KeyPermanentlyInvalidatedException e) {
-            L.e(" Failed to initCipher, e:" + Log.getStackTraceString(e));
+            LogUtils.e(" Failed to initCipher, e:" + Log.getStackTraceString(e));
             return false;
         } catch (KeyStoreException | CertificateException | UnrecoverableKeyException | IOException
                 | NoSuchAlgorithmException | InvalidKeyException e) {
-            L.e(" Failed to initCipher, e :" + Log.getStackTraceString(e));
+            LogUtils.e(" Failed to initCipher, e :" + Log.getStackTraceString(e));
             throw new RuntimeException("Failed to init Cipher", e);
         }
     }

@@ -9,7 +9,7 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.widget.SuperFileLayout;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 import java.io.File;
 
 import butterknife.BindView;
@@ -35,7 +35,7 @@ public class FileBrowsingActivity extends AppCompatActivity implements IBaseActi
 
     @Override
     public void onDestroy() {
-        L.e("FileDisplayActivity-->onDestroy");
+        LogUtils.e("FileDisplayActivity-->onDestroy");
 
         if (null != mSuperFileView) {
             mSuperFileView.onStopDisplay();

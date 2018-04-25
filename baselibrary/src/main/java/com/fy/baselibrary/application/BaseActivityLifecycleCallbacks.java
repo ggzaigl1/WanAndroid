@@ -16,7 +16,7 @@ import com.fy.baselibrary.R;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.statuslayout.StatusLayoutManager;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 
 import butterknife.ButterKnife;
 
@@ -34,7 +34,7 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        L.d(TAG, "Create()");
+        LogUtils.d(TAG, "Create()");
 
         BaseActivityBean activityBean = new BaseActivityBean();
 
@@ -80,23 +80,23 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
 
     @Override
     public void onActivityPaused(Activity activity) {
-        L.d(TAG, "Pause()");
+        LogUtils.d(TAG, "Pause()");
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        L.d(TAG, "Stop()");
+        LogUtils.d(TAG, "Stop()");
         RequestUtils.clearDispos();
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        L.d(TAG, "SaveInstanceState()");
+        LogUtils.d(TAG, "SaveInstanceState()");
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        L.d(TAG, "Destroy()");
+        LogUtils.d(TAG, "Destroy()");
 
         BaseActivityBean activityBean = (BaseActivityBean) activity.getIntent()
                 .getSerializableExtra("ActivityBean");

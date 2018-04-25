@@ -11,7 +11,7 @@ import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.FileUtils;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 
 import java.io.File;
 
@@ -31,9 +31,9 @@ public class StartActivity extends AppCompatActivity implements IBaseActivity{
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        L.e("StartActivity", "onNewIntent- false");
+        LogUtils.e("StartActivity", "onNewIntent- false");
         if ((Intent.FLAG_ACTIVITY_CLEAR_TOP & intent.getFlags()) != 0) {
-            L.e("StartActivity", "onNewIntent");
+            LogUtils.e("StartActivity", "onNewIntent");
             exitApp();
         }
     }
@@ -43,7 +43,7 @@ public class StartActivity extends AppCompatActivity implements IBaseActivity{
         super.onSaveInstanceState(outState);
         if (outState != null) {
             outState.putBoolean(FLAG_EXIT, true);
-            L.e("StartActivity", "onSaveInstanceState");
+            LogUtils.e("StartActivity", "onSaveInstanceState");
         }
     }
 
@@ -95,7 +95,7 @@ public class StartActivity extends AppCompatActivity implements IBaseActivity{
         })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(integer -> L.e("aaaab", "" + Thread.currentThread().getName() ));
+                .subscribe(integer -> LogUtils.e("aaaab", "" + Thread.currentThread().getName() ));
 
         Intent intent = getIntent();
         if (null != savedInstanceState) {
@@ -104,10 +104,10 @@ public class StartActivity extends AppCompatActivity implements IBaseActivity{
                 return;
             }
         } else if ((Intent.FLAG_ACTIVITY_CLEAR_TOP & intent.getFlags()) != 0) {
-            L.e("StartActivity", "----- 1");
+            LogUtils.e("StartActivity", "----- 1");
             exitApp();
         } else {
-            L.e("StartActivity", "----- 2");
+            LogUtils.e("StartActivity", "----- 2");
             isStartActivityOnly();
         }
     }

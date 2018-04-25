@@ -22,16 +22,13 @@ import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.PhoneUtils;
 import com.example.gab.babylove.R;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.DeviceUtils;
-import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.ToastUtils;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Created by 初夏小溪 on 2018/4/17 0017.
@@ -91,7 +88,7 @@ public class PhoneUtilsActivity extends AppCompatActivity implements IBaseActivi
                 + "\n" + "手機型號:" + DeviceUtils.getSystemModel()
                 + "\n" + "Android版本號:" + DeviceUtils.getDeviceVersion()
                 + "\n" + "手機IMEI:" + DeviceUtils.getIMEI(this)
-                + "\n" + "手機MEID：" + PhoneUtils.getMEID()
+//                + "\n" + "手機MEID：" + PhoneUtils.getMEID()
                 + "\n" + "目前電量為" + BatteryN + "% --- " + BatteryStatus
                 + "\n" + "電壓為" + BatteryV + "mV --- " + BatteryTemp
                 + "\n" + "溫度為" + (BatteryT * 0.1) + "℃");
@@ -172,35 +169,35 @@ public class PhoneUtilsActivity extends AppCompatActivity implements IBaseActivi
 
         public boolean onDown(MotionEvent e) {
             Log.i("MyGesture", "onDown");
-            T.showShort("onDown");
+            ToastUtils.showShortToast("onDown");
             return false;
         }
 
         public void onShowPress(MotionEvent e) {
             Log.i("MyGesture", "onShowPress");
-            T.showShort("onShowPress");
+            ToastUtils.showShortToast("onShowPress");
         }
 
         public boolean onSingleTapUp(MotionEvent e) {
             Log.i("MyGesture", "onSingleTapUp");
-            T.showShort("onSingleTapUp");
+            ToastUtils.showShortToast("onSingleTapUp");
             return true;
         }
 
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             Log.i("MyGesture22", "onScroll:" + (e2.getX() - e1.getX()) + "   " + distanceX);
-            T.showShort("onScroll");
+            ToastUtils.showShortToast("onScroll");
             return true;
         }
 
         public void onLongPress(MotionEvent e) {
             Log.i("MyGesture", "onLongPress");
-            T.showShort("onLongPress");
+            ToastUtils.showShortToast("onLongPress");
         }
 
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             Log.i("MyGesture", "onFling");
-            T.showShort("onFling");
+            ToastUtils.showShortToast("onFling");
             return true;
         }
     }

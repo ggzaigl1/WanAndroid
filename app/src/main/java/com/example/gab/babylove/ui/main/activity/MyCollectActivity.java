@@ -10,18 +10,15 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.ui.main.adapter.CollectAdapter;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.BeanModule;
-import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
-import com.fy.baselibrary.retrofit.RxHelper;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.T;
+import com.fy.baselibrary.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -167,7 +164,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
                     public void accept(Object o) throws Exception {
                         mAdapter.remove(position);
                         mAdapter.notifyDataSetChanged();
-                        T.showLong("取消收藏成功");
+                        ToastUtils.showShortToast("取消收藏成功");
                     }
                 });
     }

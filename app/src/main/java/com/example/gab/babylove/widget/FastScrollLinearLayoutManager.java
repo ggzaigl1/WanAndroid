@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
-import com.fy.baselibrary.utils.L;
+import com.fy.baselibrary.utils.LogUtils;
 
 /**
  * Created by Gab on 2018/1/4 0004.
@@ -67,7 +67,7 @@ public class FastScrollLinearLayoutManager extends LinearLayoutManager {
                 }
 
                 int time = super.calculateTimeForScrolling(dx);
-                L.d(String.valueOf(time));//打印时间看下
+               LogUtils.d(String.valueOf(time));//打印时间看下
 
                 return time;
             }
