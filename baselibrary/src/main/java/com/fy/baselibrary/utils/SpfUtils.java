@@ -84,11 +84,12 @@ public class SpfUtils {
      * @param key
      * @param value
      */
-    public static void saveBooleanToSpf(String key, boolean value){
+    public static boolean saveBooleanToSpf(String key, boolean value){
         SharedPreferences.Editor editor = getSpf().edit();
 
         editor.putBoolean(key, value);
         editor.apply();
+        return value;
     }
 
     /**

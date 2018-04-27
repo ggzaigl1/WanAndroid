@@ -6,6 +6,11 @@ package com.fy.baselibrary.utils;
  */
 public class ConstantUtils {
 
+    public static final String ISNIGHT = "isNight";
+    public static final String CURRENT_INDEX = "currentIndex";
+    public static final String TRANSITION_PIC = "transitionPic";
+    public static final String TRANSITION_SEARCHVIEW = "transitionSearchView";
+
     /**
      * 动态服务器地址
      */

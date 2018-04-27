@@ -4,6 +4,8 @@ import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.entity.CollectBean;
+import com.example.gab.babylove.entity.CourseDetails;
+import com.example.gab.babylove.entity.CourseList;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.HomeBean;
 import com.example.gab.babylove.entity.LoginBean;
@@ -29,6 +31,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * 通用的 api接口 </p>
@@ -153,6 +156,21 @@ public interface ApiService {
     @POST("lg/uncollect/{id}/json")
     Observable<BeanModule<Object>> unMyCollectArticle(@Path("id") int articleId,
                                                       @Field("originId") int originId);
+
+    /**
+     * 运动课程 ---运动列表
+     */
+    @Headers({"url_name:user"})
+    @GET("http://api.fithub.cc/api/trainitem/trainitemlist")
+    Observable<CourseList> getCourseList(@Query("pageNo") int page);
+
+    /**
+     * 运动课程 ---运动详情
+     */
+    @Headers({"url_name:user"})
+    @GET("http://api.fithub.cc/api/v44/train/course")
+    Observable<CourseDetails> getCourseDetails(@Query("id") int id);
+
 
     /**
      * 多图片上传

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:padding="10dp">
+
+    <ImageView
+            android:id="@+id/imgHead"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+        <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="18dp"
+                android:text="课程名称"
+                android:textColor="@color/white"
+                android:layout_above="@+id/ll_star"
+                android:textSize="@dimen/textSize_medium_small"/>
+
+        <LinearLayout
+                android:id="@+id/ll_star"
+                android:layout_marginLeft="18dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSize_small_much"
+                    android:text="难度:"/>
+
+
+            <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/Rb_trainlevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="12dp"
+                    android:minHeight="16dp"
+                    android:maxHeight="16dp"
+                    android:numStars="5"
+                    android:stepSize="0.1"
+                    app:mrb_progressBackgroundTint="@color/white"
+                    app:mrb_progressTint="@color/white"
+                    app:mrb_secondaryProgressTint="@color/white"
+                    style="@style/Widget.MaterialRatingBar.RatingBar.Indicator"/>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/tv_joinnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="4dp"
+                android:text="1818人参加:"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_much"
+                android:layout_marginBottom="@dimen/spacing_medium_small"
+                android:layout_marginRight="@dimen/spacing_medium_small"/>
+    </RelativeLayout>
+
+
+</FrameLayout>
+

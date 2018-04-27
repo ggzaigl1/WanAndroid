@@ -25,6 +25,14 @@
     <item android:title="Communicate">
         <menu>
             <item
+                    android:id="@+id/nav_night"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="夜间模式"/>
+            <item
+                    android:id="@+id/nav_ornamental"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="健康运动"/>
+            <item
                     android:id="@+id/nav_share"
                     android:icon="@drawable/ic_menu_share"
                     android:title="分享"/>

@@ -77,7 +77,7 @@ public class HomeFragment extends BaseFragment {
         initRecyle();
         initRefresh();
         getData();
-        mRefreshLayout.autoRefresh();//自动刷新
+//        mRefreshLayout.autoRefresh();//自动刷新
         //通过CollapsingToolbarLayout修改字体颜色
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
@@ -236,7 +236,7 @@ public class HomeFragment extends BaseFragment {
                 .subscribe(new Consumer<BeanModule<Object>>() {
                     @Override
                     public void accept(BeanModule<Object> objectBeanModule) throws Exception {
-                        ToastUtils.showShortToast(mContext,"收藏成功");
+                        ToastUtils.showShort("收藏成功");
                     }
                 });
     }
@@ -251,7 +251,7 @@ public class HomeFragment extends BaseFragment {
                 .subscribe(new Consumer<BeanModule<Object>>() {
                     @Override
                     public void accept(BeanModule<Object> objectBeanModule) throws Exception {
-                         ToastUtils.showShortToast(mContext,"取消收藏成功");
+                         ToastUtils.showShort("取消收藏成功");
                     }
                 });
     }
@@ -287,7 +287,7 @@ public class HomeFragment extends BaseFragment {
                             }
                         } else {
                             JumpUtils.jump(mContext, LoginActivity.class, null);
-                            ToastUtils.showShortToast(mContext,"登录之后才能查看已收藏内容");
+                            ToastUtils.showShort("登录之后才能查看已收藏内容");
                         }
                         break;
                 }

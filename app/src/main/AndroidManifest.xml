@@ -123,6 +123,21 @@
                 android:name=".ui.main.activity.AboutActivity"
                 android:label="@string/about_us"
                 android:screenOrientation="portrait"/>
+        <!-- 运动健身 -->
+        <activity
+                android:name=".ui.main.activity.OrnamentalListContextActivity"
+                android:label="@string/ornamental"
+                android:screenOrientation="portrait"/>
+        <!-- 运动健身 -->
+        <activity
+                android:name=".ui.main.activity.OrnamentalContextActivity"
+                android:label="@string/ornamental"
+                android:screenOrientation="portrait"/>
+        <!-- 运动健身 -->
+        <activity
+                android:name=".ui.main.activity.OrnamentalMotionActivity"
+                android:label="@string/ornamental"
+                android:screenOrientation="portrait"/>
         <!-- 相机Camera2 -->
         <activity
                 android:name=".widget.camera.Camera2Activity"

@@ -3,6 +3,7 @@ package com.example.gab.babylove;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.ui.main.activity.AboutActivity;
 import com.example.gab.babylove.ui.main.activity.BelleActivity;
 import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
+import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
 import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
 import com.example.gab.babylove.ui.main.activity.ToolsActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
@@ -33,6 +36,7 @@ import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.example.gab.babylove.ui.news.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
+import com.example.gab.babylove.utils.NightModeConfig;
 import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
@@ -225,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 JumpUtils.jump(this, MyCollectActivity.class, null);
             } else {
                 JumpUtils.jump(this, LoginActivity.class, null);
-                ToastUtils.showShortToast("登录之后才能查看已收藏内容");
+                ToastUtils.showShort("登录之后才能查看已收藏内容");
             }
         } else if (id == R.id.nav_share) {
             Intent textIntent = new Intent(Intent.ACTION_SEND);
@@ -240,6 +244,25 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         } else if (id == R.id.nav_about) {
             //关于我们
             JumpUtils.jump(this, AboutActivity.class, null);
+        }else if (id ==R.id.nav_night){
+            //夜间模式
+            //获取当前的模式，设置相反的模式，这里只使用了，夜间和非夜间模式
+            int currentMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            if (currentMode != Configuration.UI_MODE_NIGHT_YES) {
+                //保存夜间模式状态,Application中可以根据这个值判断是否设置夜间模式
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                //ThemeConfig主题配置，这里只是保存了是否是夜间模式的boolean值
+                NightModeConfig.getInstance().setNightMode(getApplicationContext(),true);
+                ToastUtils.showShort("开启夜间模式");
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                NightModeConfig.getInstance().setNightMode(getApplicationContext(),false);
+                ToastUtils.showShort("关闭夜间模式");
+            }
+            recreate();//需要recreate才能生效
+        }else if (id == R.id.nav_ornamental){
+            //强身健体
+            JumpUtils.jump(this, OrnamentalListContextActivity.class, null);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -1,8 +1,13 @@
 package com.example.gab.babylove;
 
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
+import com.example.gab.babylove.utils.NightModeConfig;
 import com.fy.baselibrary.application.BaseApp;
+import com.fy.baselibrary.utils.ConstantUtils;
+import com.fy.baselibrary.utils.LogUtils;
+import com.fy.baselibrary.utils.SpfUtils;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
@@ -18,6 +23,16 @@ public class MyApplication extends BaseApp {
     @Override
     public void onCreate() {
         super.onCreate();
+        //根据app上次退出的状态来判断是否需要设置夜间模式,提前在SharedPreference中存了一个是否是夜间模式的boolean值
+//        boolean isNightMode = NightModeConfig.getInstance().getNightMode(getApplicationContext());
+//        if (isNightMode) {
+//            //使用夜间模式
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//        }else {
+//            //不使用夜间模式
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//        }
+
         //  tbs
         QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
             @Override

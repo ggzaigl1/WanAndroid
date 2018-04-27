@@ -164,7 +164,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
                     public void accept(Object o) throws Exception {
                         mAdapter.remove(position);
                         mAdapter.notifyDataSetChanged();
-                        ToastUtils.showShortToast("取消收藏成功");
+                        ToastUtils.showShort("取消收藏成功");
                     }
                 });
     }

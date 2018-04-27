@@ -47,7 +47,7 @@ public class PictureDetailActivity extends AppCompatActivity {
                 mCurrentPosition = position;
                 tv_image_count.setText((mCurrentPosition + 1) + "/" + actionsBean.getData().size());
                 if (mCurrentPosition == actionsBean.getData().size() - 1) {
-                    ToastUtils.showShortToast("已经是最后一张图片了");
+                    ToastUtils.showShort("已经是最后一张图片了");
                 }
             }
         });

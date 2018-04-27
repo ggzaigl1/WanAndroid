@@ -114,7 +114,7 @@ public abstract class NetCallBack<V> implements Observer<V> {
      * @param msg
      */
     private void actionResponseError(String msg) {
-        ToastUtils.showShortToastSafe(msg);
+        ToastUtils.showShort(msg);
     }
 
     /**

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -44,6 +45,8 @@ public class NavigationViewFragment extends BaseFragment {
     RecyclerView mRecyclerView_Title;
     @BindView(R.id.rv_context)
     RecyclerView mRecyclerView_Context;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     NavigationViewAdapter mAdapter;
     NavigationCidAdapter mNavigationCidAdapter;
@@ -59,6 +62,7 @@ public class NavigationViewFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
+        mToolbar.setTitle("首页");
         MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
         initRecyle();
         initRecyleCid();

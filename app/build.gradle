@@ -65,4 +65,6 @@ dependencies {
 //    Lottie实时呈现After Effects动画效果，让应用程序可以像使用静态图片一样轻松地使用动画 Lottie支持API 14及以上。
     api 'com.airbnb.android:lottie:2.3.0'
 
+    api 'me.zhanghai.android.materialratingbar:library:1.2.0'
+
 }

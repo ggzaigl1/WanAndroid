@@ -124,10 +124,10 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
                                 mAdapter.getData().addAll(gankBean.getResults());
                                 mRefreshLayout.finishLoadmore();
                                 mAdapter.notifyDataSetChanged();
-                                ToastUtils.showShortToast("又加载了" + gankBean.getResults().size() + "位妹子");
+                                ToastUtils.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
                             } else {
                                 mAdapter.setNewData(gankBean.getResults());
-                               ToastUtils.showShortToast("加载了" + gankBean.getResults().size() + "妹子");
+                               ToastUtils.showShort("加载了" + gankBean.getResults().size() + "妹子");
                             }
                         }
                     }

@@ -169,35 +169,35 @@ public class PhoneUtilsActivity extends AppCompatActivity implements IBaseActivi
 
         public boolean onDown(MotionEvent e) {
             Log.i("MyGesture", "onDown");
-            ToastUtils.showShortToast("onDown");
+            ToastUtils.showShort("onDown");
             return false;
         }
 
         public void onShowPress(MotionEvent e) {
             Log.i("MyGesture", "onShowPress");
-            ToastUtils.showShortToast("onShowPress");
+            ToastUtils.showShort("onShowPress");
         }
 
         public boolean onSingleTapUp(MotionEvent e) {
             Log.i("MyGesture", "onSingleTapUp");
-            ToastUtils.showShortToast("onSingleTapUp");
+            ToastUtils.showShort("onSingleTapUp");
             return true;
         }
 
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             Log.i("MyGesture22", "onScroll:" + (e2.getX() - e1.getX()) + "   " + distanceX);
-            ToastUtils.showShortToast("onScroll");
+            ToastUtils.showShort("onScroll");
             return true;
         }
 
         public void onLongPress(MotionEvent e) {
             Log.i("MyGesture", "onLongPress");
-            ToastUtils.showShortToast("onLongPress");
+            ToastUtils.showShort("onLongPress");
         }
 
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             Log.i("MyGesture", "onFling");
-            ToastUtils.showShortToast("onFling");
+            ToastUtils.showShort("onFling");
             return true;
         }
     }

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#474745">
+
+    <RelativeLayout
+            android:id="@+id/video_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <SurfaceView
+                android:id="@+id/surface_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <ProgressBar
+                android:id="@+id/load_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+        <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@mipmap/back"/>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/video_layout">
+
+        <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="24dp"
+                android:textColor="@color/white"
+                />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#656563"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/Rl_Or"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#262626"
+            android:layout_alignParentBottom="true">
+
+        <ImageView
+                android:id="@+id/iv_left"
+                android:paddingLeft="@dimen/spacing_medium_small"
+                android:paddingRight="@dimen/spacing_medium_small"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/right_button"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                />
+
+        <TextView
+                android:id="@+id/tv_current"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textSize="24dp"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/tv_parent"/>
+
+        <TextView
+                android:id="@+id/tv_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"/>
+
+        <TextView
+                android:id="@+id/tv_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/tv_parent"/>
+
+
+        <ImageView
+                android:id="@+id/iv_right"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="12dp"
+                android:paddingLeft="@dimen/spacing_medium_small"
+                android:paddingRight="@dimen/spacing_medium_small"
+                android:src="@mipmap/left_button"
+                />
+    </RelativeLayout>
+</RelativeLayout>

@@ -203,7 +203,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                             JumpUtils.jump(LoginActivity.this, MainActivity.class, null);
                             finish();
                         } else {
-                            ToastUtils.showShortToast(login.getErrorMsg());
+                            ToastUtils.showShort(login.getErrorMsg());
                         }
                     }
 
