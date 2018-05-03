@@ -52,7 +52,9 @@
  
 ##部分截图
 
+
 ##下载APK（Android5.0或以上）
+
 ![](https://i.imgur.com/VAyufMy.png)
  
 ##技术点
