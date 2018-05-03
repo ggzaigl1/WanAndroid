@@ -1,27 +1,27 @@
 # Play Together Android
 ### Complete a fun application based on the Play Android API.
 
-# 玩Android
-
-## 简介
+#简介
 
 ###该项目是根据鸿洋的wanandroid开发的一款个人App,一个致力于分享各种Android干货的平台。如果您有任何好的建议，可以在https://github.com/hongyangAndroid/xueandroid项目中以issu的形式提出好的建议。      
 
-##Apk
+#Apk
 
  <a href="https://www.pgyer.com/6osT" target="_blank">1.0.1</a>
- ##接口
+
+#接口
+
   <a href="http://www.wanandroid.com/blog/show/2" target="_blank">玩Android</a>
   
-  ##技术框架( Material Design + RxJava2 + Retrofit + Dagger2  + Glide)
+#技术框架( Material Design + RxJava2 + Retrofit + Dagger2  + Glide)
   -  <a href="https://github.com/amitshekhariitbhu/RxJava2-Android-Samples" target="_blank">RxJava2</a>
   - <a href="http://square.github.io/retrofit/" target="_blank">Retrofit</a>
   -  <a href="https://github.com/google/dagger" target="_blank">Dagger</a>
   -  <a href="https://github.com/bumptech/glide" target="_blank">Glide</a>
   -  <a href="https://github.com/Justson/AgentWeb" target="_blank">AgentWeb</a>
   
-  ##版本迭代
-  V1.0.1
+#版本迭代
+###V1.0.1
   -  首页
   -  知识体系
   -  登录、注册
@@ -29,28 +29,31 @@
   -  搜索
   -  分享
   
-  ##功能
+#功能
   
-  ####登录和注册
-  
+##登录和注册
   -  登录
   -  注册
-  ####首页相关
-  
+
+
+##首页相关
   -  首页文章列表
   -  首页banner
-  #### 体系
-  
+
+
+##体系
   -  知识体系
- -   知识体系下的文章
- ####  收藏
+  -  知识体系下的文章
+
+##收藏
  -   收藏文章列表
  -   收藏站内文章
  -   取消收藏(文章列表和我的收藏页面)
  
- ##部分截图
- 下载APK（Android5.0或以上）
- ![](https://i.imgur.com/m74JCnA.png)
+##部分截图
+
+##下载APK（Android5.0或以上）
+![](https://i.imgur.com/VAyufMy.png)
  
  ##技术点
  -  项目代码尽力遵循了阿里巴巴Java开发规范和阿里巴巴Android开发规范，并有良好的注释。

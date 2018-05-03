@@ -51,6 +51,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
+
         MdStatusBar.setColorBar(this, R.color.statusBar, R.color.statusBar);
         tvAbout = findViewById(R.id.tvAbout);
         tvAppInformation = findViewById(R.id.tvAppInformation);
