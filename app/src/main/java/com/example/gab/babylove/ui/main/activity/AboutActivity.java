@@ -72,7 +72,7 @@ public class AboutActivity extends AppCompatActivity {
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
         //设置内容
         try {
-            String versionStr = getString(R.string.awesome_wan_android) + " V" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            String versionStr = getString(R.string.awesome_wan_android) + "\n" + " V" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
             tvAppInformation.setText(versionStr);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
