@@ -1,11 +1,20 @@
 package com.example.gab.babylove.ui.main.login;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 
 import com.example.gab.babylove.MainActivity;
@@ -38,7 +47,7 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends AppCompatActivity implements IBaseActivity {
 
-    @BindView(R.id.editRegisterName)
+    @BindView(R.id.et_username)
     TextInputEditText editRegisterName;
 
     @BindView(R.id.tilRegisterPass)
@@ -53,6 +62,10 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
 
     @BindView(R.id.btn_Register)
     Button btn_Register;
+    @BindView(R.id.fab)
+    FloatingActionButton mFloatingActionButton;
+    @BindView(R.id.cv_add)
+    CardView mCardView;
 
     @Override
     public boolean isShowHeadView() {
@@ -61,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
 
     @Override
     public int setView() {
-        return R.layout.activity_register;
+        return R.layout.activity_register_material;
     }
 
     @Override
@@ -71,15 +84,18 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-
+        ShowEnterAnimation();
     }
 
-    @OnClick({R.id.btn_Register})
+    @OnClick({R.id.btn_Register,R.id.fab})
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_Register:
                 register();
+                break;
+            case R.id.fab:
+                animateRevealClose();
                 break;
         }
     }
@@ -89,6 +105,84 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
 
     }
 
+    private void ShowEnterAnimation() {
+        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.fabtransition);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setSharedElementEnterTransition(transition);
+            transition.addListener(new Transition.TransitionListener() {
+                @Override
+                public void onTransitionStart(Transition transition) {
+                    mCardView.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onTransitionEnd(Transition transition) {
+                    transition.removeListener(this);
+                    animateRevealShow();
+                }
+
+                @Override
+                public void onTransitionCancel(Transition transition) {
+
+                }
+
+                @Override
+                public void onTransitionPause(Transition transition) {
+
+                }
+
+                @Override
+                public void onTransitionResume(Transition transition) {
+
+                }
+            });
+        }
+    }
+
+    public void animateRevealShow() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Animator mAnimator = ViewAnimationUtils.createCircularReveal(mCardView, mCardView.getWidth()/2,0, mFloatingActionButton.getWidth() / 2, mCardView.getHeight());
+            mAnimator.setDuration(500);
+            mAnimator.setInterpolator(new AccelerateInterpolator());
+            mAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                }
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    mCardView.setVisibility(View.VISIBLE);
+                    super.onAnimationStart(animation);
+                }
+            });
+            mAnimator.start();
+        }
+    }
+
+    public void animateRevealClose() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Animator mAnimator = ViewAnimationUtils.createCircularReveal(mCardView,mCardView.getWidth()/2,0, mCardView.getHeight(), mFloatingActionButton.getWidth() / 2);
+            mAnimator.setDuration(500);
+            mAnimator.setInterpolator(new AccelerateInterpolator());
+            mAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mCardView.setVisibility(View.INVISIBLE);
+                    super.onAnimationEnd(animation);
+                    mFloatingActionButton.setImageResource(R.mipmap.plus);
+                    RegisterActivity.super.onBackPressed();
+                }
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                }
+            });
+            mAnimator.start();
+        }
+
+    }
     private void register() {
         IProgressDialog progressDialog = new IProgressDialog().init(this)
                 .setDialogMsg(R.string.register_loading);

@@ -44,7 +44,7 @@ import butterknife.BindView;
 
 public class SurfaceActivity extends AppCompatActivity implements IBaseActivity, SurfaceHolder.Callback, View.OnClickListener
         , SeekBar.OnSeekBarChangeListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener,
-        MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnSeekCompleteListener {
+        MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnSeekCompleteListener, View.OnTouchListener {
 
     @BindView(R.id.surface_view)
     SurfaceView surfaceView;
@@ -191,33 +191,35 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         mediaPlayer.setOnBufferingUpdateListener(this);
         mediaPlayer.setOnPreparedListener(this);
         mediaPlayer.setOnSeekCompleteListener(this);
-        surfaceView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        dX = event.getX();
-                        dY = event.getY();
-                        refreshControlLayout();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        if (isFullScreen) {
-                            uY = event.getY();
-                            if (dX > getWidth() / 2) {//声音控制
-                                if (Math.abs(uY - dY) > 25)
-                                    setVolume(uY - dY);
-                            } else if (dX <= getWidth() / 2) {//亮度控制
-                                setLight(dY - uY);
-                            }
-                        }
-                        break;
-                }
-                return true;
-            }
-        });
+        surfaceView.setOnTouchListener(this);
+    }
 
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                dX = event.getX();
+                dY = event.getY();
+                refreshControlLayout();
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (isFullScreen) {
+                    uY = event.getY();
+                    if (dX > getWidth() / 2) {//声音控制
+                        if (Math.abs(uY - dY) > 25)
+                            setVolume(uY - dY);
+                    } else if (dX <= getWidth() / 2) {//亮度控制
+                        setLight(dY - uY);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     //手势调节音量

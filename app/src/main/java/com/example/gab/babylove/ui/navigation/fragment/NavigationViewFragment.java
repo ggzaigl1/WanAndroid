@@ -134,7 +134,7 @@ public class NavigationViewFragment extends BaseFragment {
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setAlignItems(AlignItems.STRETCH);
         layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
-
+        mRecyclerView_Context.scrollToPosition(0);
         mRecyclerView_Context.setLayoutManager(layoutManager);
         mNavigationCidAdapter = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
         mNavigationCidAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

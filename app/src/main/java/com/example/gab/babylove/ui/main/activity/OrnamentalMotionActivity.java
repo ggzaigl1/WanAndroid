@@ -25,6 +25,7 @@ import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.OrnamentalListBean;
 import com.example.gab.babylove.ui.main.adapter.OrnamentalMotionAdapter;
 import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.LogUtils;
 
 import java.io.IOException;
@@ -83,7 +84,7 @@ public class OrnamentalMotionActivity extends AppCompatActivity implements IBase
 
     @Override
     public void setStatusBar(Activity activity) {
-
+        MdStatusBar.setColorBar(this, R.color.statusBar, R.color.statusBar);
     }
 
     @Override

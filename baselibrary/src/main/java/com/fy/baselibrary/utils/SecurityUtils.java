@@ -1,6 +1,7 @@
 package com.fy.baselibrary.utils;
 
 
+import android.annotation.SuppressLint;
 import android.util.Base64;
 
 import java.util.regex.Matcher;
@@ -28,7 +29,7 @@ public class SecurityUtils {
 		try {
 			String password = AES_KEY;
 			SecretKeySpec skeySpec = new SecretKeySpec(password.getBytes(), "AES");
-			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+			@SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 			cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
 			String strTmp = Base64.encodeToString(cipher.doFinal(str.getBytes()), Base64.DEFAULT);
 			return strTmp;
@@ -49,7 +50,7 @@ public class SecurityUtils {
 		try {
 			String password = AES_KEY;
 			SecretKeySpec skeySpec = new SecretKeySpec(password.getBytes(), "AES");
-			Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+			@SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 			cipher.init(Cipher.DECRYPT_MODE, skeySpec);
 			String strTmp = new String(cipher.doFinal(Base64.decode(str, Base64.DEFAULT)));
 			return strTmp;

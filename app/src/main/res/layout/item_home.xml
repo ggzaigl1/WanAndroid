@@ -9,8 +9,7 @@
         android:paddingRight="8dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        app:cardElevation="5dp"
-        android:background="@color/BgColor">
+        app:cardElevation="5dp">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +33,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text=""
-                    android:textColor="@color/myTxtSuperLight"
                     android:textSize="@dimen/textSize_small"/>
 
             <TextView
@@ -43,7 +41,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:text=""
-                    android:textColor="@color/myTxtSuperLight"
                     android:textSize="@dimen/textSize_small"/>
         </LinearLayout>
 
@@ -63,7 +60,6 @@
                     android:maxLines="2"
                     android:ellipsize="end"
                     android:text=""
-                    android:textColor="@color/myTxtColor"
                     android:textSize="@dimen/textSize_medium_small"/>
 
         </LinearLayout>
@@ -83,7 +79,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text=""
-                    android:textColor="@color/myTxtSuperLight"
                     android:textSize="@dimen/textSize_small"/>
 
             <android.support.v7.widget.AppCompatImageView

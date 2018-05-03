@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="78dp"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="78dp"
     android:layout_height="38dp">
 
     <TextView
@@ -16,9 +17,11 @@
         android:background="#f0f0f0" />
 
     <ImageView
-        android:layout_width="15dp"
-        android:id="@+id/channel_delete"
-        android:layout_height="15dp"
-        android:layout_gravity="right|top"
-        android:src="@mipmap/icon_close" />
+            android:layout_width="15dp"
+            android:id="@+id/channel_delete"
+            android:layout_height="15dp"
+            android:layout_gravity="right|top"
+            android:src="@mipmap/icon_close"
+            android:contentDescription="TODO"
+            tools:ignore="ContentDescription"/>
 </FrameLayout>

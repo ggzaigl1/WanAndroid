@@ -3,6 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/refreshLayout"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
@@ -10,15 +11,14 @@
 
     <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/bgColor">
+            android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
                 android:id="@+id/appbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                android:theme="@style/AppTheme.AppBarOverlay">
             <!--包含一个可折叠的toolbarlayout
                   layout_scrollFlags
                   scroll 若想让toolbar 滚动就必须设置这个属性
@@ -36,10 +36,11 @@
                     app:expandedTitleMarginStart="20dp"
                     app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
                     app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
-                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
                     >
                 <!--layout_collapseMode
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed" 滑动显示toolbar
+                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways" //滑动隐藏toolBar
                  app:contentScrim="@color/colorPrimary"
                  1，pin 没有视觉差！
                 2，parallax  有视觉差   可以配合layout_collapseParallaxMultiplier 视觉差因子 设置  val  0-1-->
@@ -48,7 +49,6 @@
                         android:id="@+id/banner"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:background="@color/black"
                         app:canLoop="true"/>
 
                 <!--<ImageView-->

@@ -2,19 +2,24 @@ package com.example.gab.babylove;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,6 +48,7 @@ import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
+import com.fy.baselibrary.utils.ScreenUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.SystemUtils;
 import com.fy.baselibrary.utils.ToastUtils;
@@ -144,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         Tv_Login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
     }
 
-
     private void initBottomNavigation() {
         //设置导航栏背景模式 setBackgroundStyle（）
         //设置BottomNavigationItem颜色 setActiveColor, setInActiveColor, setBarBackgroundColor
@@ -244,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         } else if (id == R.id.nav_about) {
             //关于我们
             JumpUtils.jump(this, AboutActivity.class, null);
-        }else if (id ==R.id.nav_night){
+        } else if (id == R.id.nav_night) {
             //夜间模式
             //获取当前的模式，设置相反的模式，这里只使用了，夜间和非夜间模式
             int currentMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
@@ -252,15 +257,15 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 //保存夜间模式状态,Application中可以根据这个值判断是否设置夜间模式
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 //ThemeConfig主题配置，这里只是保存了是否是夜间模式的boolean值
-                NightModeConfig.getInstance().setNightMode(getApplicationContext(),true);
+                NightModeConfig.getInstance().setNightMode(getApplicationContext(), true);
                 ToastUtils.showShort("开启夜间模式");
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                NightModeConfig.getInstance().setNightMode(getApplicationContext(),false);
+                NightModeConfig.getInstance().setNightMode(getApplicationContext(), false);
                 ToastUtils.showShort("关闭夜间模式");
             }
             recreate();//需要recreate才能生效
-        }else if (id == R.id.nav_ornamental){
+        } else if (id == R.id.nav_ornamental) {
             //强身健体
             JumpUtils.jump(this, OrnamentalListContextActivity.class, null);
         }

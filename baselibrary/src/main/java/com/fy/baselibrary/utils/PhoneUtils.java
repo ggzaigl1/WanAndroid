@@ -1,16 +1,13 @@
 package com.fy.baselibrary.utils;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.SystemClock;
-import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -393,6 +390,8 @@ public class PhoneUtils {
             xmlSerializer.flush();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            cursor.close();
         }
     }
 }

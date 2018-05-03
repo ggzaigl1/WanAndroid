@@ -20,6 +20,7 @@
     <path
         android:fillAlpha="0.25"
         android:fillColor="#71c6fc"
+
         android:fillType="evenOdd"
         android:pathData="M730.3,-48.1l3.2,-0.3 -117.4,211 -2.7,-1.5Z"
         android:strokeAlpha="0.25" />

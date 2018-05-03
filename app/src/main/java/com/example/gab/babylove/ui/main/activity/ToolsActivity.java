@@ -5,18 +5,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.utils.CleanMessageUtil;
+import com.example.gab.babylove.utils.NightModeConfig;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
@@ -76,47 +79,37 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
         }
     }
 
-    @OnClick({R.id.night_switch, R.id.Ll_cache, R.id.Ll_praise, R.id.Ll_phoneUtils, R.id.Ll_stroke,R.id.Ll_Button})
+    @OnClick({R.id.Ll_cache_clear, R.id.tv_praise})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            //夜间模式
-            case R.id.night_switch:
-                Switch sw = (Switch) view;
-                boolean isChecked = sw.isChecked();
-                if (isChecked) {
-                    ToastUtils.showShortToast("开启夜间模式");
-                } else {
-                    ToastUtils.showShortToast("关闭夜间模式");
-                }
-                break;
             //给个好评
-            case R.id.Ll_praise:
+            case R.id.tv_praise:
                 startMarket();
                 break;
-            //手机相关信息
-            case R.id.Ll_phoneUtils:
-                if (NetworkUtils.isConnected(this)){
-                    ToastUtils.showShortToast("网络连接");
-                }
-                JumpUtils.jump(this, PhoneUtilsActivity.class, null);
-                break;
+//            //手机相关信息
+//            case R.id.Ll_phoneUtils:
+//                if (NetworkUtils.isConnected(this)) {
+//                    ToastUtils.showShortToast("网络连接");
+//                }
+//                JumpUtils.jump(this, PhoneUtilsActivity.class, null);
+//                break;
             //清除缓存
-            case R.id.Ll_cache:
+            case R.id.Ll_cache_clear:
                 Cache(this);
                 break;
-            //指纹相关
-            case R.id.Ll_stroke:
-                JumpUtils.jump(this, FingerprintMainActivity.class, null);
-                break;
-            //指纹相关
-            case R.id.Ll_Button:
-                JumpUtils.jump(this, SelectorButtonActivity.class, null);
-                break;
-            //指纹相关
-            case R.id.Ll_personal_center:
-                JumpUtils.jump(this, FileBrowsingActivity.class, null);
-                break;
+//            //指纹相关
+//            case R.id.Ll_stroke:
+//                JumpUtils.jump(this, FingerprintMainActivity.class, null);
+//                break;
+//            //SelectorButton
+//            case R.id.Ll_Button:
+//                JumpUtils.jump(this, SelectorButtonActivity.class, null);
+//                break;
+//            //FileBrowsing
+//            case R.id.Ll_personal_center:
+//                JumpUtils.jump(this, FileBrowsingActivity.class, null);
+//                break;
         }
     }
 
@@ -147,7 +140,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else {
-            ToastUtils.showShortToast("无法打开应用市场");
+            ToastUtils.showShort("无法打开应用市场");
         }
     }
 

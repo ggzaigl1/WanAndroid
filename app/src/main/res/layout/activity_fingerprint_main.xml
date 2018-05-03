@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/activity_fingerprint_main"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -14,25 +15,24 @@
             android:id="@+id/fingerprint_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@mipmap/fingerprint_normal"/>
+            android:background="@mipmap/fingerprint_normal"
+            android:contentDescription="TODO"
+            tools:ignore="ContentDescription"/>
 
     <TextView
             android:id="@+id/fingerprint_guide_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:text="@string/fingerprint_recognition_guide_tip"
             android:textSize="18sp"
             android:textColor="@color/colorAccent"
-            android:layout_below="@id/fingerprint_guide"/>
+            />
 
     <Button
             android:id="@+id/fingerprint_recognition_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/fingerprint_guide_tip"
             android:layout_marginTop="10dp"
             android:text="@string/fingerprint_recognition_start"/>
 
@@ -40,7 +40,6 @@
             android:id="@+id/fingerprint_recognition_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/fingerprint_recognition_start"
             android:layout_marginTop="10dp"
             android:text="@string/fingerprint_recognition_cancel"/>
 
@@ -48,7 +47,6 @@
             android:id="@+id/fingerprint_recognition_sys_unlock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/fingerprint_recognition_cancel"
             android:layout_marginTop="10dp"
             android:text="@string/fingerprint_recognition_unlock_screen"/>
 
@@ -56,7 +54,6 @@
             android:id="@+id/fingerprint_recognition_sys_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/fingerprint_recognition_sys_unlock"
             android:layout_marginTop="10dp"
             android:text="@string/fingerprint_sys_setting_page"/>
 </LinearLayout>

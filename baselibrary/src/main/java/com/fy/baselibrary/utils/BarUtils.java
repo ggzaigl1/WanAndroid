@@ -1,5 +1,6 @@
 package com.fy.baselibrary.utils;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -159,9 +160,6 @@ public class BarUtils {
      * @param statusBarAlpha 状态栏透明度
      */
     public static void setTranslucent(Activity activity, int statusBarAlpha) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
         setTransparent(activity);
         addTranslucentView(activity, statusBarAlpha);
     }
@@ -707,6 +705,7 @@ public class BarUtils {
      */
     private static void invokePanels(Context context, String methodName) {
         try {
+            @SuppressLint("WrongConstant")
             Object service = context.getSystemService("statusbar");
             Class<?> statusBarManager = Class.forName("android.app.StatusBarManager");
             Method expand = statusBarManager.getMethod(methodName);

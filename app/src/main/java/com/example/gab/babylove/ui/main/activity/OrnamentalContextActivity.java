@@ -111,7 +111,7 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
     @OnClick({R.id.tv_back})
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
+        switch (view.getId()){
             case R.id.tv_back:
                 JumpUtils.exitActivity(this);
                 break;

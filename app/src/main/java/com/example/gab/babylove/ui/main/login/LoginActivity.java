@@ -2,14 +2,20 @@ package com.example.gab.babylove.ui.main.login;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.transition.Explode;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -45,21 +51,20 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * 登录
- * Created by fangs on 2017/12/12.
+ * Created by 初夏小溪 on 2017/12/12.
+ * https://github.com/fanrunqi/MaterialLogin
  */
 public class LoginActivity extends AppCompatActivity implements IBaseActivity {
 
-    @BindView(R.id.cBoxPass)
-    CheckBox cBoxPass;
     @BindView(R.id.extInputLayout)
     TextInputLayout iLayoutPass;
-
     @BindView(R.id.editName)
     TextInputEditText editName;
     @BindView(R.id.editPass)
     TextInputEditText editPass;
+    @BindView(R.id.fab_register)
+    FloatingActionButton mFloatingActionButton;
 
-    private long exitTime = 0;
     protected PermissionChecker permissionChecker;
     protected static final String[] PERMISSIONS = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -72,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
 
     @Override
     public int setView() {
-        return R.layout.activity_login;
+        return R.layout.activity_login_material;
     }
 
     @Override
@@ -82,6 +87,12 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Explode explode = new Explode();
+            explode.setDuration(500);
+            getWindow().setExitTransition(explode);
+            getWindow().setEnterTransition(explode);
+        }
         permissionChecker = new PermissionChecker(this);
         permissionChecker.setTitle(getString(R.string.check_info_title));
         permissionChecker.setMessage(getString(R.string.check_info_message));
@@ -121,15 +132,20 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
         });
     }
 
-    @OnClick({R.id.bt_Login,R.id.bt_register})
+    @OnClick({R.id.bt_Login, R.id.fab_register})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_Login:
                 login();
                 break;
-            case R.id.bt_register:
-                JumpUtils.jump(this, RegisterActivity.class, null);
+            case R.id.fab_register:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getWindow().setExitTransition(null);
+                    getWindow().setEnterTransition(null);
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, mFloatingActionButton, mFloatingActionButton.getTransitionName());
+                    startActivity(new Intent(LoginActivity.this, RegisterActivity.class), options.toBundle());
+                }
                 break;
         }
     }
@@ -148,11 +164,6 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
         }
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        onPermission();
-    }
 
     /**
      * 请求权限返回结果
@@ -186,7 +197,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
         param.put("password", mPassWord);
 
         RequestUtils.create(ApiService.class)
-        .getLogin(param)
+                .getLogin(param)
                 .subscribeOn(Schedulers.io())//在IO线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread())//回到主线程去处理请求结果
                 .subscribe(new NetCallBack<BeanModule<LoginBean>>(progressDialog) {
@@ -200,8 +211,18 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                             SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getData().getUsername());
                             Bundle bundle = new Bundle();
                             bundle.putString("LoginBean", mCache.getAsString("User_Name"));
-                            JumpUtils.jump(LoginActivity.this, MainActivity.class, null);
-                            finish();
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                Explode explode = new Explode();
+                                explode.setDuration(500);
+                                getWindow().setExitTransition(explode);
+                                getWindow().setEnterTransition(explode);
+                                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+                                Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(i2, oc2.toBundle());
+                            } else {
+                                JumpUtils.jump(LoginActivity.this, MainActivity.class, null);
+                                finish();
+                            }
                         } else {
                             ToastUtils.showShort(login.getErrorMsg());
                         }
@@ -214,6 +235,18 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                 });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        onPermission();
+        mFloatingActionButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mFloatingActionButton.setVisibility(View.VISIBLE);
+    }
 
     /**
      * 点击空白位置 隐藏软键盘
