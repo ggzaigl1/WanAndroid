@@ -1,5 +1,5 @@
 # Play Together Android
-### Complete a fun application based on the Play Android API.
+## Complete a fun application based on the Play Android API.
 
 #简介
 
@@ -55,7 +55,7 @@
 ##下载APK（Android5.0或以上）
 ![](https://i.imgur.com/VAyufMy.png)
  
- ##技术点
+##技术点
  -  项目代码尽力遵循了阿里巴巴Java开发规范和阿里巴巴Android开发规范，并有良好的注释。
  -  使用RxJava2结合Retrofit2进行网络请求。
  -  使用RxJava2的操作符对事件流进行进行转换、延时、过滤等操作，其中使用Compose操作符结合RxUtils工具类简化线程切换调用的代码数量。
@@ -69,7 +69,7 @@
  
  
   
- ##License
+#License
  
  Copyright 2018 JsonChao
  
