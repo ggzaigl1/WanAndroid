@@ -1,6 +1,3 @@
-# Play Together Android
-## Complete a fun application based on the Play Android API.
-
 # 简介
 
 ### 该项目是根据鸿洋的wanandroid开发的一款个人App,一个致力于分享各种Android干货的平台。如果您有任何好的建议，可以在[https://github.com/hongyangAndroid/xueandroid](https://github.com/hongyangAndroid/xueandroid)项目中以issu的形式提出好的建议。      
