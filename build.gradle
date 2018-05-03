@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.0.1'
 
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -19,10 +19,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+
         maven { url "https://jitpack.io" }
-        maven {
-            url "http://maven.aliyun.com/nexus/content/repositories/releases"
-        }
     }
 }
 
@@ -30,12 +28,14 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext{
-    compileSdkVersion=26
-    buildToolsVersion="26.0.2"
+ext {
+    var = [
+            compileSdkVersion    : 27,
+            buildToolsVersion    : "27.0.2",
 
-    minSdkVersion=19
-    targetSdkVersion=26
+            minSdkVersion        : 19,
+            targetSdkVersion     : 26,
 
-    supportLibraryVersion="26.1.0"
+            supportLibraryVersion: "27.0.2"
+    ]
 }

@@ -2,7 +2,6 @@ package com.fy.baselibrary.application;
 
 import android.app.Application;
 
-import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * 基础 application
@@ -15,14 +14,11 @@ public class BaseApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        CrashReport.initCrashReport(getApplicationContext(), "afb9b266b0", false);
 
         mApplication = this;
 //        设置activity 生命周期回调
         registerActivityLifecycleCallbacks(new BaseActivityLifecycleCallbacks());
 
-//        bugly
-        CrashReport.initCrashReport(getApplicationContext(), "b51864b95a", false);
 
     }
 

@@ -1,70 +1,54 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion var.compileSdkVersion
+    buildToolsVersion var.buildToolsVersion
+
     defaultConfig {
         applicationId "com.example.gab.babylove"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion var.minSdkVersion
+        targetSdkVersion var.targetSdkVersion
+
         versionCode 1
         versionName "1.0.1"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true//配置5.0 版本一下可以使用svg
         multiDexEnabled true
-        ndk {
-            // 设置支持的SO库架构
-            abiFilters "armeabi", "x86", "armeabi-v7a", "x86", "mips"
-        }
     }
+
     buildTypes {
         release {
-            debuggable false
-            minifyEnabled true
-            shrinkResources true
+//            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-    buildToolsVersion '27.0.3'
+
+    packagingOptions {
+//        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+//        exclude 'META-INF/LICENSE.txt'
+//        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.android.support:design:27.0.2'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:support-vector-drawable:27.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation project(':baselibrary')
-    // 菜单栏
-    api 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
-    //    compile 'com.github.chrisbanes:PhotoView:2.1.2' 点击图片放大
-    api 'com.github.chrisbanes:PhotoView:1.2.6'
-    //对话框 Material Dialogs
-    api 'com.afollestad.material-dialogs:core:0.9.6.0'
-    //腾讯浏览服务jar(tbs)
-    implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
-//    compile 'id.arieridwan:pageloader:0.0.2'
-//    compile 'com.github.vipulasri:timelineview:1.0.5'
-//    compile 'com.github.hotchemi:permissionsdispatcher:3.0.1'
-//    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1'
-    //阿里热修复
-    api 'com.aliyun.ams:alicloud-android-hotfix:3.1.9'
-
-    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     //https://github.com/google/flexbox-layout
     implementation 'com.google.android:flexbox:0.3.2'
-    // Lottie是一个支持Android、iOS、React Native，并由 Adobe After Effects制作aep格式的动画，然后经由bodymovin插件转化渲染为json格式可被移动端本地识别解析的Airbnb开源库。
-//    Lottie实时呈现After Effects动画效果，让应用程序可以像使用静态图片一样轻松地使用动画 Lottie支持API 14及以上。
-    api 'com.airbnb.android:lottie:2.3.0'
-
-    api 'me.zhanghai.android.materialratingbar:library:1.2.0'
-
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    api project(':baselibrary')
+    implementation 'com.bigkoo:convenientbanner:2.0.5'
 }

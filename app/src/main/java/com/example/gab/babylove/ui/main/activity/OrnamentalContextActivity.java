@@ -1,11 +1,14 @@
 package com.example.gab.babylove.ui.main.activity;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,6 +23,7 @@ import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.ResourceUtils;
 import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
 
 import java.util.ArrayList;
@@ -51,6 +55,10 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
     TextView mTvDo;
     @BindView(R.id.tv_point)
     TextView mTvPoint;
+    @BindView(R.id.collapsing_toolbar_layout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private OrnamentalContextAdapter mAdapter;
 
@@ -74,6 +82,11 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
         int id = getIntent().getExtras().getInt("id");
         getCourseDetails(id);
         initRecycle();
+        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
+        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> JumpUtils.exitActivity(this));
     }
 
     private void getCourseDetails(int mPageNo) {
@@ -96,6 +109,12 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
                                 mAdapter.setNewData(data.getGroups().get(0).getActions());
                                 mTvPoint.setText("注意事项");
                                 mTvDo.setText("训练动作");
+                                if (mCollapsingToolbarLayout != null) {
+                                    //设置隐藏图片时候ToolBar的颜色
+                                    mCollapsingToolbarLayout.setContentScrimColor(ResourceUtils.getRandomColor());
+                                    //设置工具栏标题
+                                    mCollapsingToolbarLayout.setTitle(data.getTitle());
+                                }
                             }
                         }
                     }
@@ -108,14 +127,14 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
     }
 
 
-    @OnClick({R.id.tv_back})
+    @OnClick({})
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tv_back:
-                JumpUtils.exitActivity(this);
-                break;
-        }
+//        switch (view.getId()){
+//            case R.id.tv_back:
+//                JumpUtils.exitActivity(this);
+//                break;
+//        }
     }
 
     @Override
