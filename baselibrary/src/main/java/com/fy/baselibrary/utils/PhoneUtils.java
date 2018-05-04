@@ -236,7 +236,7 @@ public class PhoneUtils {
      */
     public static List<HashMap<String, String>> getAllContactInfo(Context context) {
         SystemClock.sleep(3000);
-        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
         // 1.获取内容解析者
         ContentResolver resolver = context.getContentResolver();
         // 2.获取内容提供者的地址:com.android.contacts
@@ -265,7 +265,7 @@ public class PhoneUtils {
                 Cursor c = resolver.query(date_uri, new String[]{"data1",
                                 "mimetype"}, "raw_contact_id=?",
                         new String[]{contact_id}, null);
-                HashMap<String, String> map = new HashMap<String, String>();
+                HashMap<String, String> map = new HashMap<>();
                 // 8.解析c
                 while (c.moveToNext()) {
                     // 9.获取数据

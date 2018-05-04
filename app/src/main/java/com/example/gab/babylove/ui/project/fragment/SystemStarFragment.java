@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
-import com.example.gab.babylove.ui.news.adapter.SystemFlyAdapter;
 import com.example.gab.babylove.ui.project.adapter.StarAdapter;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.base.BaseFragment;

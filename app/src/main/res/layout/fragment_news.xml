@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:layout_marginRight="18dp"
+                    android:layout_marginEnd="18dp"
                     android:text="知识体系"
                     android:textColor="@color/white"/>
 

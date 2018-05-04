@@ -69,20 +69,17 @@ public class HeaderAndFooterWrapper extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        WrapperUtils.onAttachedToRecyclerView(mInnerAdapter, recyclerView, new WrapperUtils.SpanSizeCallback() {
-            @Override
-            public int getSpanSize(GridLayoutManager layoutManager, GridLayoutManager.SpanSizeLookup oldLookup, int position) {
-                int viewType = getItemViewType(position);
-                if (mHeaderViews.get(viewType) != null) {
-                    return layoutManager.getSpanCount();
-                } else if (mFootViews.get(viewType) != null) {
-                    return layoutManager.getSpanCount();
-                }
-
-                if (oldLookup != null) return oldLookup.getSpanSize(position);
-
-                return 1;
+        WrapperUtils.onAttachedToRecyclerView(mInnerAdapter, recyclerView, (layoutManager, oldLookup, position) -> {
+            int viewType = getItemViewType(position);
+            if (mHeaderViews.get(viewType) != null) {
+                return layoutManager.getSpanCount();
+            } else if (mFootViews.get(viewType) != null) {
+                return layoutManager.getSpanCount();
             }
+
+            if (oldLookup != null) return oldLookup.getSpanSize(position);
+
+            return 1;
         });
     }
 

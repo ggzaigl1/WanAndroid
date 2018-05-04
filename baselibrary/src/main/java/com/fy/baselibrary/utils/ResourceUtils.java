@@ -11,10 +11,6 @@ import com.fy.baselibrary.application.BaseApp;
 import java.util.Random;
 
 /**
- * 通过 getResources() 获取资源
- * Created by fangs on 2017/9/13.
- */
-/**
  * 通过 getResources() 为控件 设置内容
  * Created by fangs on 2017/9/13.
  */

@@ -37,7 +37,7 @@ public class CleanMessageUtil {
     }
 
     private static boolean deleteDir(File dir) {
-        Log.e("TAG",dir.toString());
+        Log.e("TAG", dir.toString());
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();
             int size = 0;
@@ -51,12 +51,7 @@ public class CleanMessageUtil {
                 }
             }
         }
-        if (dir == null) {
-            return true;
-        } else {
-
-            return dir.delete();
-        }
+        return dir == null || dir.delete();
     }
 
     // 获取文件

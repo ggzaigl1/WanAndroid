@@ -101,20 +101,6 @@
                     app:pressedBackgroundColor="@color/colorPrimaryDark"
                     app:unableBackgroundColor="@android:color/holo_red_light"/>
 
-            <com.example.gab.babylove.widget.StateButton
-                    android:id="@+id/animation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
-                    android:padding="10dp"
-                    android:text="Animation"
-                    app:normalStrokeColor="@android:color/holo_red_light"
-                    app:normalStrokeWidth="2dp"
-                    app:normalTextColor="@android:color/holo_red_light"
-                    app:pressedBackgroundColor="@color/colorPrimaryDark"
-                    app:pressedTextColor="@android:color/white"
-                    app:radius="5dp"/>
 
         </LinearLayout>
     </ScrollView>

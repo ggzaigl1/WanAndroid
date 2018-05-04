@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +27,7 @@ import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.RxHelper;
+import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.SpfUtils;
@@ -97,12 +99,7 @@ public class HomeFragment extends BaseFragment {
      * @param urls
      */
     private void bannerView(List<String> Pic, List<String> urls) {
-        mConvenientBanner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Object createHolder() {
-                return new NetworkImageHolderView();
-            }
-        }, Pic)
+        mConvenientBanner.setPages(() -> new NetworkImageHolderView(), Pic)
                 .startTurning(2000)
 //                .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
 //                .setPointViewVisible(true)
@@ -119,11 +116,11 @@ public class HomeFragment extends BaseFragment {
 //                .setcurrentitem(0);
     }
 
-    /****************************************开始调接口*****************************************************/
     /**
      * banner 轮播图 加载数据 接口
      */
     private void getData() {
+        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
         Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
                 .getBanner()
                 .compose(RxHelper.handleResult())
@@ -135,17 +132,14 @@ public class HomeFragment extends BaseFragment {
                 .observeOn(Schedulers.io());
 
 
-        Observable.zip(observable1, observable2, new BiFunction<List<BannerBean>, ArticleBean, Map<String, Object>>() {
-            @Override
-            public Map<String, Object> apply(List<BannerBean> bannerBean, ArticleBean articleBean) throws Exception {
-                Map<String, Object> map = new HashMap<>();
-                map.put("banner", bannerBean);
-                map.put("article", articleBean);
-                return map;
-            }
+        Observable.zip(observable1, observable2, (bannerBean, articleBean) -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("banner", bannerBean);
+            map.put("article", articleBean);
+            return map;
         }).doOnSubscribe(RequestUtils::addDispos)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<Map<String, Object>>() {
+                .subscribe(new NetCallBack<Map<String, Object>>(progressDialog) {
                     @Override
                     protected void onSuccess(Map<String, Object> map) {
                         List<BannerBean> banner = (List<BannerBean>) map.get("banner");
@@ -203,20 +197,17 @@ public class HomeFragment extends BaseFragment {
                 .getArticleHomeList(mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<BeanModule<ArticleBean>>() {
-                    @Override
-                    public void accept(BeanModule<ArticleBean> articleBean) throws Exception {
-                        if (null != articleBean && null != articleBean.getData()) {
-                            if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(articleBean.getData().getDatas());
-                                mRefreshLayout.finishRefresh();
-                            } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(articleBean.getData().getDatas());
-                                mRefreshLayout.finishLoadMore();
-                                mAdapter.notifyDataSetChanged();
-                            } else {
-                                mAdapter.setNewData(articleBean.getData().getDatas());
-                            }
+                .subscribe(articleBean -> {
+                    if (null != articleBean && null != articleBean.getData()) {
+                        if (mRefreshLayout.isRefreshing()) {
+                            mAdapter.setNewData(articleBean.getData().getDatas());
+                            mRefreshLayout.finishRefresh();
+                        } else if (mRefreshLayout.isLoading()) {
+                            mAdapter.getData().addAll(articleBean.getData().getDatas());
+                            mRefreshLayout.finishLoadMore();
+                            mAdapter.notifyDataSetChanged();
+                        } else {
+                            mAdapter.setNewData(articleBean.getData().getDatas());
                         }
                     }
                 });
@@ -233,12 +224,7 @@ public class HomeFragment extends BaseFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(new Consumer<BeanModule<Object>>() {
-                    @Override
-                    public void accept(BeanModule<Object> objectBeanModule) throws Exception {
-                        ToastUtils.showShort("收藏成功");
-                    }
-                });
+                .subscribe(objectBeanModule -> ToastUtils.showShort("收藏成功"));
     }
 
     //    取消收藏
@@ -248,15 +234,8 @@ public class HomeFragment extends BaseFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(new Consumer<BeanModule<Object>>() {
-                    @Override
-                    public void accept(BeanModule<Object> objectBeanModule) throws Exception {
-                         ToastUtils.showShort("取消收藏成功");
-                    }
-                });
+                .subscribe(objectBeanModule -> ToastUtils.showShort("取消收藏成功"));
     }
-
-    /********************************************End***************************************************/
 
     /**
      * recycleview 相关设置
@@ -270,27 +249,24 @@ public class HomeFragment extends BaseFragment {
             bundle.putString("UrlBean", bean.getLink());
             JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
         });
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()) {
-                    case R.id.image_collect:
-                        if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                            if (mAdapter.getData().get(position).isCollect()) { //收藏
-                                uncollectArticle(mAdapter.getData().get(position).getId());
-                                mAdapter.getData().get(position).setCollect(false);
-                                mAdapter.notifyItemChanged(position, "");
-                            } else {
-                                collectArticle(mAdapter.getData().get(position).getId());
-                                mAdapter.getData().get(position).setCollect(true);
-                                mAdapter.notifyItemChanged(position, "");
-                            }
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.image_collect:
+                    if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                            uncollectArticle(mAdapter.getData().get(position).getId());
+                            mAdapter.getData().get(position).setCollect(false);
+                            mAdapter.notifyItemChanged(position, "");
                         } else {
-                            JumpUtils.jump(mContext, LoginActivity.class, null);
-                            ToastUtils.showShort("登录之后才能查看已收藏内容");
+                            collectArticle(mAdapter.getData().get(position).getId());
+                            mAdapter.getData().get(position).setCollect(true);
+                            mAdapter.notifyItemChanged(position, "");
                         }
-                        break;
-                }
+                    } else {
+                        JumpUtils.jump(mContext, LoginActivity.class, null);
+                        ToastUtils.showShort("登录之后才能查看已收藏内容");
+                    }
+                    break;
             }
         });
         mRecyclerView.setAdapter(mAdapter);

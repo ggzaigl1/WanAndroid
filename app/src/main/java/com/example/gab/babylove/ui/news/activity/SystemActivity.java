@@ -31,7 +31,6 @@ import butterknife.BindView;
 public class SystemActivity extends AppCompatActivity implements IBaseActivity {
 
     private ArrayList<SystemFlyFragment> mFragments = new ArrayList<>();
-    private MyPagerAdapter mAdapter;
     private List<TreeBean.ChildrenBean> mChildren;
     TreeBean bean;
 
@@ -64,8 +63,8 @@ public class SystemActivity extends AppCompatActivity implements IBaseActivity {
             SystemFlyFragment systemFlyFragment = SystemFlyFragment.getInstance(child.getId(), "");
             mFragments.add(systemFlyFragment);
         }
-        mAdapter = new MyPagerAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(mAdapter);
+        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
     }

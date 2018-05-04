@@ -19,7 +19,6 @@ import android.transition.Explode;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -97,14 +96,9 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
         permissionChecker.setTitle(getString(R.string.check_info_title));
         permissionChecker.setMessage(getString(R.string.check_info_message));
         if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            new MaterialDialog.Builder(this).title("需要获取以下权限")
-                    .content("通过相机权限和电话权限来进行拍照和确定本机设备ID,已保证为您个性化推荐内容;")
-                    .positiveText(R.string.next).onPositive(new MaterialDialog.SingleButtonCallback() {
-                @Override
-                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                    onPermission();
-                }
-            }).show();
+            new MaterialDialog.Builder(this).title(R.string.require_acquisition)
+                    .content(R.string.default_always_message)
+                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
         } else {
 
         }
@@ -122,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
             public void afterTextChanged(Editable s) {
                 String text = editPass.getText().toString().trim();
                 if (!TextUtils.isEmpty(text) && text.length() > 12) {
-                    iLayoutPass.setError("密码不符合规则!!!");
+                    iLayoutPass.setError(getString(R.string.correct_password));
                 } else {
                     if (null != iLayoutPass.getError()) {
                         iLayoutPass.setError(null);
@@ -204,24 +198,22 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                     @Override
                     protected void onSuccess(BeanModule<LoginBean> login) {
                         if (login.isSuccess()) {
-                            ACache mCache = ACache.get(BaseApp.getAppCtx());
-                            mCache.put(ConstantUtils.userName, login);
-
-                            SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
-                            SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getData().getUsername());
-                            Bundle bundle = new Bundle();
-                            bundle.putString("LoginBean", mCache.getAsString("User_Name"));
                             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ACache mCache = ACache.get(BaseApp.getAppCtx());
+                                mCache.put(ConstantUtils.userName, login);
+
+                                SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
+                                SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getData().getUsername());
+                                Bundle bundle = new Bundle();
+                                bundle.putString("LoginBean", mCache.getAsString("User_Name"));
                                 Explode explode = new Explode();
                                 explode.setDuration(500);
                                 getWindow().setExitTransition(explode);
                                 getWindow().setEnterTransition(explode);
-                                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-                                Intent i2 = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(i2, oc2.toBundle());
-                            } else {
-                                JumpUtils.jump(LoginActivity.this, MainActivity.class, null);
-                                finish();
+                                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+                                JumpUtils.jump(LoginActivity.this, MainActivity.class, activityOptionsCompat.toBundle());
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent, activityOptionsCompat.toBundle());
                             }
                         } else {
                             ToastUtils.showShort(login.getErrorMsg());

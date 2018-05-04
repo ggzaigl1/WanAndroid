@@ -6,8 +6,6 @@ import android.os.Bundle;
 
 /**
  * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
  *     time  : 2016/9/23
  *     desc  : Activity相关工具类
  * </pre>

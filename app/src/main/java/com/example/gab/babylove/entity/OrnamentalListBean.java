@@ -1,7 +1,5 @@
 package com.example.gab.babylove.entity;
 
-
-
 import java.io.Serializable;
 import java.util.List;
 

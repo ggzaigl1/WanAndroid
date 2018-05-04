@@ -47,7 +47,7 @@ public class SelectorButtonActivity extends AppCompatActivity implements IBaseAc
         radius.setRadius(new float[]{0, 0, 20, 20, 40, 40, 60, 60});
     }
 
-    @OnClick({R.id.bt_OnTraceList, R.id.text_webView, R.id.dash_test, R.id.stroke_test, R.id.different_radius_test, R.id.animation})
+    @OnClick({R.id.bt_OnTraceList, R.id.text_webView, R.id.dash_test, R.id.stroke_test, R.id.different_radius_test})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -58,10 +58,6 @@ public class SelectorButtonActivity extends AppCompatActivity implements IBaseAc
             // AgentWeb 封装
             case R.id.dash_test:
                 JumpUtils.jump(this, AgentWebActivity.class, null);
-                break;
-            //动画
-            case R.id.animation:
-                JumpUtils.jump(this, AnimationActivity.class, null);
                 break;
         }
     }

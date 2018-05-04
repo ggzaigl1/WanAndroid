@@ -190,21 +190,13 @@ public class IntentUtils {
         return intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 /*
-    *//**
-     * 获取选择照片的Intent
-     *
-     * @return
-     *//*
+    *//*
     public static Intent getPickIntentWithGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         return intent.setType("image*//*");
     }
 
-    *//**
-     * 获取从文件中选择照片的Intent
-     *
-     * @return
-     *//*
+    *//*
     public static Intent getPickIntentWithDocuments() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         return intent.setType("image*//*");

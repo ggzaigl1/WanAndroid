@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#1976D2</color>
-    <color name="colorAccent">#b3b3b3</color>
+    <color name="colorAccent">#EF8994</color>
 
     <!-- UI设计原色之 红色 -->
     <color name="red">#e84c3d</color>

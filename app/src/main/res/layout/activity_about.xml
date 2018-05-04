@@ -25,7 +25,7 @@
                 android:drawablePadding="@dimen/dp_8"
                 android:drawableTop="@mipmap/icon_wan_android_round"
                 android:gravity="center"
-                android:text="@string/awesome_wan_android"
+                android:text="@string/about_awesome_wan_android"
                 android:textAllCaps="false"
                 android:textColor="@color/comment_text"
                 android:textSize="@dimen/sp_16" />

@@ -113,22 +113,19 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
                 .getCourseDetails(20, mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<GankBean>() {
-                    @Override
-                    public void accept(GankBean gankBean) throws Exception {
-                        if (null != gankBean && null != gankBean.getResults()) {
-                            if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(gankBean.getResults());
-                                mRefreshLayout.finishRefresh();
-                            } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(gankBean.getResults());
-                                mRefreshLayout.finishLoadmore();
-                                mAdapter.notifyDataSetChanged();
-                                ToastUtils.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
-                            } else {
-                                mAdapter.setNewData(gankBean.getResults());
-                               ToastUtils.showShort("加载了" + gankBean.getResults().size() + "妹子");
-                            }
+                .subscribe(gankBean -> {
+                    if (null != gankBean && null != gankBean.getResults()) {
+                        if (mRefreshLayout.isRefreshing()) {
+                            mAdapter.setNewData(gankBean.getResults());
+                            mRefreshLayout.finishRefresh();
+                        } else if (mRefreshLayout.isLoading()) {
+                            mAdapter.getData().addAll(gankBean.getResults());
+                            mRefreshLayout.finishLoadmore();
+                            mAdapter.notifyDataSetChanged();
+                            ToastUtils.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
+                        } else {
+                            mAdapter.setNewData(gankBean.getResults());
+                           ToastUtils.showShort("加载了" + gankBean.getResults().size() + "妹子");
                         }
                     }
                 });

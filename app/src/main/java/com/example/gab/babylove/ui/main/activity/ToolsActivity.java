@@ -5,25 +5,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.utils.CleanMessageUtil;
-import com.example.gab.babylove.utils.NightModeConfig;
+import com.example.gab.babylove.widget.SurfaceActivity;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.NetworkUtils;
 import com.fy.baselibrary.utils.ToastUtils;
 
 import java.util.List;
@@ -49,7 +45,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
             int what = msg.what;
             if (what == 0) {
                 //在主线程中需要执行的操作，一般是UI操作
-                tv_cache_size.setText("0K");
+                tv_cache_size.setText(R.string.zero_k);
             }
         }
     };
@@ -96,6 +92,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
 //                break;
             //清除缓存
             case R.id.Ll_cache_clear:
+//                JumpUtils.jump(this, SurfaceActivity.class, null);
                 Cache(this);
                 break;
 //            //指纹相关
@@ -120,16 +117,13 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
 
     private void Cache(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity)
-                .setTitle("确认清除")
-                .setMessage("是否清除缓存")
+                .setTitle(R.string.system_title)
+                .setMessage(R.string.tools_clear_cache)
                 .setCancelable(false)
-                .setNegativeButton("确定", (dialogInterface, i) -> new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        CleanMessageUtil.clearAllCache(getApplicationContext());
-                        mHandler.sendEmptyMessage(0);
-                    }
-                }).start()).setPositiveButton("取消", (dialogInterface, i) -> dialogInterface.dismiss());
+                .setNegativeButton(R.string.ok, (dialogInterface, i) -> new Thread(() -> {
+                    CleanMessageUtil.clearAllCache(getApplicationContext());
+                    mHandler.sendEmptyMessage(0);
+                }).start()).setPositiveButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
     }
 
@@ -140,7 +134,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else {
-            ToastUtils.showShort("无法打开应用市场");
+            ToastUtils.showShort(R.string.tools_cannot_application);
         }
     }
 

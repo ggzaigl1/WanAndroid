@@ -103,27 +103,24 @@ public class NavigationViewFragment extends BaseFragment {
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView_Title.setLayoutManager(mLinearLayoutManager);
         mAdapter = new NavigationViewAdapter(R.layout.item_navigation, new ArrayList<>());
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                NavigationBean navigationBean = mAdapter.getData().get(position);
-                if (mSelectedPos != position) {
-                    mAdapter.getData().get(mSelectedPos).setSelected(false);
-                    mAdapter.notifyItemChanged(mSelectedPos);
-                    mSelectedPos = position;
-                    mAdapter.getData().get(mSelectedPos).setSelected(true);
-                    mAdapter.notifyItemChanged(mSelectedPos);
-
-                }
-                mNavigationCidAdapter.setNewData(navigationBean.getArticles());
-
-                View childAt = mRecyclerView_Title.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
-                if (childAt != null) {
-                    int y = childAt.getTop() - mRecyclerView_Title.getHeight() / 2;
-                    mRecyclerView_Title.smoothScrollBy(0, y);
-                }
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            NavigationBean navigationBean = mAdapter.getData().get(position);
+            if (mSelectedPos != position) {
+                mAdapter.getData().get(mSelectedPos).setSelected(false);
+                mAdapter.notifyItemChanged(mSelectedPos);
+                mSelectedPos = position;
+                mAdapter.getData().get(mSelectedPos).setSelected(true);
+                mAdapter.notifyItemChanged(mSelectedPos);
 
             }
+            mNavigationCidAdapter.setNewData(navigationBean.getArticles());
+
+            View childAt = mRecyclerView_Title.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
+            if (childAt != null) {
+                int y = childAt.getTop() - mRecyclerView_Title.getHeight() / 2;
+                mRecyclerView_Title.smoothScrollBy(0, y);
+            }
+
         });
         mRecyclerView_Title.setAdapter(mAdapter);
     }
@@ -137,15 +134,12 @@ public class NavigationViewFragment extends BaseFragment {
         mRecyclerView_Context.scrollToPosition(0);
         mRecyclerView_Context.setLayoutManager(layoutManager);
         mNavigationCidAdapter = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
-        mNavigationCidAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                NavigationBean.ArticlesBean navigationBean = mNavigationCidAdapter.getData().get(position);
-                Bundle bundle = new Bundle();
-                bundle.putString("UrlBean", navigationBean.getLink());
-                JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
+        mNavigationCidAdapter.setOnItemClickListener((adapter, view, position) -> {
+            NavigationBean.ArticlesBean navigationBean = mNavigationCidAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("UrlBean", navigationBean.getLink());
+            JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
 
-            }
         });
         mRecyclerView_Context.setAdapter(mNavigationCidAdapter);
     }

@@ -80,7 +80,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginStart="@dimen/dp_5"
                         android:layout_toEndOf="@id/tv_date"
-                        android:gravity="center|right"
+                        android:gravity="center|end"
                         tools:text="GcsSloop"/>
 
             </RelativeLayout>

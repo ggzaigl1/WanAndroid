@@ -2,24 +2,19 @@ package com.example.gab.babylove;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +43,6 @@ import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
-import com.fy.baselibrary.utils.ScreenUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.SystemUtils;
 import com.fy.baselibrary.utils.ToastUtils;
@@ -118,14 +112,14 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             if (isLogin) {
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.system_title).setMessage(R.string.system_content)
-                        .setPositiveButton(R.string.yes, (dialog, which) -> {
+                        .setPositiveButton(R.string.ok, (dialog, which) -> {
                             Tv_Name.setText(R.string.notLogin);
                             Tv_Login.setText(R.string.clickLogin);
                             ACache mCache = ACache.get(BaseApp.getAppCtx());
                             mCache.clear();
                             SpfUtils.clear();
                             HomeFragment.mRefreshLayout.autoRefresh();
-                        }).setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss()).create().show();
+                        }).setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss()).create().show();
             } else {
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
@@ -153,19 +147,12 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     private void initBottomNavigation() {
         //设置导航栏背景模式 setBackgroundStyle（）
         //设置BottomNavigationItem颜色 setActiveColor, setInActiveColor, setBarBackgroundColor
-        /**
-         * 组合
-         * MODE_FIXED+BACKGROUND_STYLE_STATIC 效果
-         * MODE_FIXED+BACKGROUND_STYLE_RIPPLE 效果
-         * MODE_SHIFTING+BACKGROUND_STYLE_STATIC 效果
-         * MODE_SHIFTING+BACKGROUND_STYLE_RIPPLE 效果
-         */
         mBottomNavigation.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
                 .setMode(BottomNavigationBar.MODE_SHIFTING)
-                .addItem(new BottomNavigationItem(R.mipmap.ic_home, getString(R.string.nav_00_title)).setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_view_headline, getString(R.string.nav_01_title)).setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_live_tv, getString(R.string.nav_02_title)).setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.icon_find, getString(R.string.nav_03_title)).setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_home, getString(R.string.nav_home_title)).setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_view_headline, getString(R.string.nav_system_title)).setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_live_tv, getString(R.string.nav_view_title)).setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.icon_find, getString(R.string.nav_project_title)).setActiveColorResource(R.color.colorPrimary))
                 .setFirstSelectedPosition(0)
                 .setTabSelectedListener(this)
                 .initialise();

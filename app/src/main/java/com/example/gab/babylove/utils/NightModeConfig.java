@@ -13,10 +13,6 @@ public class NightModeConfig {
     private static final String NIGHT_MODE = "Night_Mode";
     public static final String IS_NIGHT_MODE = "Is_Night_Mode";
 
-    private boolean mIsNightMode;
-
-    private SharedPreferences.Editor mEditor;
-
     private static NightModeConfig sModeConfig;
 
     public static NightModeConfig getInstance() {
@@ -29,17 +25,17 @@ public class NightModeConfig {
         if (mSharedPreference == null) {
             mSharedPreference = context.getSharedPreferences(NIGHT_MODE, context.MODE_PRIVATE);
         }
-        mIsNightMode = mSharedPreference.getBoolean(IS_NIGHT_MODE, false);
-        return mIsNightMode;
+        boolean isNightMode = mSharedPreference.getBoolean(IS_NIGHT_MODE, false);
+        return isNightMode;
     }
 
     public void setNightMode(Context context, boolean isNightMode) {
         if (mSharedPreference == null) {
             mSharedPreference = context.getSharedPreferences(NIGHT_MODE, context.MODE_PRIVATE);
         }
-        mEditor = mSharedPreference.edit();
+        SharedPreferences.Editor editor = mSharedPreference.edit();
 
-        mEditor.putBoolean(IS_NIGHT_MODE, isNightMode);
-        mEditor.commit();
+        editor.putBoolean(IS_NIGHT_MODE, isNightMode);
+        editor.commit();
     }
 }

@@ -48,32 +48,21 @@ public class RxNetCache {
      */
     public <T> Observable<T> request(Observable<T> fromNetwork) {
 
-        /** 定义读取缓存数据的 被观察者 */
-        Observable<T> fromCache = Observable.create(new ObservableOnSubscribe<T>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<T> subscriber) throws Exception {
-                ACache mCache = ACache.get(BaseApp.getAppCtx());
-                T cache = (T) mCache.getAsObject(builder.getApi());
-                if (null != cache) {
-                    LogUtils.e("net cache", cache.toString());
-                    subscriber.onNext(cache);
-                }
-                subscriber.onComplete();
+        Observable<T> fromCache = Observable.create((ObservableOnSubscribe<T>) subscriber -> {
+            ACache mCache = ACache.get(BaseApp.getAppCtx());
+            T cache = (T) mCache.getAsObject(builder.getApi());
+            if (null != cache) {
+                LogUtils.e("net cache", cache.toString());
+                subscriber.onNext(cache);
             }
+            subscriber.onComplete();
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
-        /**
-         * 使用doOnNext 操作符，对网络请求的数据 缓存到本地
-         * 这里的fromNetwork 不需要指定Schedule,在handleRequest中已经变换了
-         */
-        fromNetwork = fromNetwork.doOnNext(new Consumer<T>() {
-            @Override
-            public void accept(T result) throws Exception {
-                LogUtils.e("net doOnNext", result.toString());
-                ACache mCache = ACache.get(BaseApp.getAppCtx());
-                mCache.put(builder.getApi(), (Serializable)result, builder.getExpireTime());
-            }
+        fromNetwork = fromNetwork.doOnNext(result -> {
+            LogUtils.e("net doOnNext", result.toString());
+            ACache mCache = ACache.get(BaseApp.getAppCtx());
+            mCache.put(builder.getApi(), (Serializable)result, builder.getExpireTime());
         });
 
         return Observable.concat(fromCache, fromNetwork);

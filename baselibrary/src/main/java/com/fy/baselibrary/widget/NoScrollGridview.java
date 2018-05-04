@@ -1,11 +1,3 @@
-/**
- * <Title:NoScrollGridView.java>
- * <Description:不能滑动的GridView 用于嵌套在ScrollView中>
- * <Company:>
- * <Author:Frj>
- * <Mender:2014-6-7>
- * <Version:1.0>
- */
 package com.fy.baselibrary.widget;
 
 import android.content.Context;

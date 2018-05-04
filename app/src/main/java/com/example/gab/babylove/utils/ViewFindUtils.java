@@ -21,7 +21,7 @@ public class ViewFindUtils {
         SparseArray<View> viewHolder = (SparseArray<View>) view.getTag();
 
         if (viewHolder == null) {
-            viewHolder = new SparseArray<View>();
+            viewHolder = new SparseArray<>();
             view.setTag(viewHolder);
         }
 

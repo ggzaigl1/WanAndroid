@@ -91,14 +91,11 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
             bundle.putString("UrlBean", bean.getLink());
             JumpUtils.jump(this, AgentWebActivity.class, bundle);// 详情
         });
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()) {
-                    case R.id.image_collect:
-                        unMycollectArticle(mAdapter.getData().get(position).getId(), mAdapter.getData().get(position).getOriginId(), position);
-                        break;
-                }
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.image_collect:
+                    unMycollectArticle(mAdapter.getData().get(position).getId(), mAdapter.getData().get(position).getOriginId(), position);
+                    break;
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -112,20 +109,17 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
                 .getCollectList(mPageNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<BeanModule<CollectBean>>() {
-                    @Override
-                    public void accept(BeanModule<CollectBean> collectBeanBeanModule) throws Exception {
-                        if (null != collectBeanBeanModule) {
-                            if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
-                                mRefreshLayout.finishRefresh();
-                            } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(collectBeanBeanModule.getData().getDatas());
-                                mRefreshLayout.finishLoadMore();
-                                mAdapter.notifyDataSetChanged();
-                            } else {
-                                mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
-                            }
+                .subscribe(collectBeanBeanModule -> {
+                    if (null != collectBeanBeanModule) {
+                        if (mRefreshLayout.isRefreshing()) {
+                            mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
+                            mRefreshLayout.finishRefresh();
+                        } else if (mRefreshLayout.isLoading()) {
+                            mAdapter.getData().addAll(collectBeanBeanModule.getData().getDatas());
+                            mRefreshLayout.finishLoadMore();
+                            mAdapter.notifyDataSetChanged();
+                        } else {
+                            mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
                         }
                     }
                 });
@@ -159,13 +153,10 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(new Consumer<Object>() {
-                    @Override
-                    public void accept(Object o) throws Exception {
-                        mAdapter.remove(position);
-                        mAdapter.notifyDataSetChanged();
-                        ToastUtils.showShort("取消收藏成功");
-                    }
+                .subscribe(o -> {
+                    mAdapter.remove(position);
+                    mAdapter.notifyDataSetChanged();
+                    ToastUtils.showShort("取消收藏成功");
                 });
     }
 

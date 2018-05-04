@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="您确定要退出登录吗？"
             android:textColor="@color/myTxtColor"
             android:textSize="@dimen/textSize_medium_large"/>
 

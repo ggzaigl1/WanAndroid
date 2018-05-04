@@ -15,6 +15,7 @@
         <TextView
                 style="@style/CommonText"
                 android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight="1"
                 android:padding="10dp"
                 android:text="SwitchCompat"/>
@@ -37,10 +38,9 @@
                 android:layout_height="45dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
-                android:drawableLeft="@drawable/vector_cache_clear"
+                android:drawableStart="@drawable/vector_cache_clear"
                 android:padding="10dp"
                 android:text="清空缓存"/>
 
@@ -49,10 +49,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
-                android:textColor="@color/colorAccent"
                 android:textSize="14sp"/>
 
     </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@color/selection"/>
 
     <TextView
             android:id="@+id/tv_praise"
@@ -61,9 +67,16 @@
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:padding="10dp"
-            android:drawableLeft="@drawable/vector_cache_clear"
+            android:drawableStart="@drawable/vector_praise"
             android:drawablePadding="10dp"
             android:text="给个好评"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@color/selection"/>
 
     <TextView
             android:id="@+id/bottomNavigation"
@@ -72,7 +85,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:padding="10dp"
-            android:drawableLeft="@drawable/vector_phone_utils"
+            android:drawableStart="@drawable/vector_phone_utils"
             android:drawablePadding="10dp"
             android:visibility="gone"
             android:text="手机相关"/>

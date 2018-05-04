@@ -108,7 +108,7 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
 
     private static final int HIDE_CONTROL_LAYOUT = -1;
     //这个地址是我抓的某平台的，我发现这个地址是变化的，所以有可能不能使用，如果不能播放，换个正常的就可以运行了，不要用模拟器运行
-    private static final String VIDEO_URL = "http://vod.hcs.cmvideo.cn:8088/699056/20160330/16/2206381358/88401385/gx0308wx07sn_54.mp4.m3u8?msisdn=452046967&sid=2206381358&timestamp=20160702163222&Channel_ID=305300090030000&preview=1&playseek=000000-001000&encrypt=61b1958423d270fb55606bb955f62d3a";
+    private static final String VIDEO_URL = "http://ws-video.fithub.cc/trainaction/0/0/00641471c73445ce972ca17070957e14.mp4";
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -441,21 +441,18 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
 
     //更新进度
     private void updateSeekBar() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!isOnDestroy) { //结束线程标示
+        new Thread(() -> {
+            while (!isOnDestroy) { //结束线程标示
 
-                    if (isPlay && !isPause) {
-                        try {
-                            Message message = new Message();
-                            message.what = mediaPlayer.getCurrentPosition();
-                            handler.sendMessage(message);
-                            Log.e("TAG", "while");
-                            Thread.sleep(1000);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                if (isPlay && !isPause) {
+                    try {
+                        Message message = new Message();
+                        message.what = mediaPlayer.getCurrentPosition();
+                        handler.sendMessage(message);
+                        Log.e("TAG", "while");
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }

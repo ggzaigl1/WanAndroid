@@ -89,7 +89,7 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             context.startActivity(intent);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
     }

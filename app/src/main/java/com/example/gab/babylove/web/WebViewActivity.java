@@ -101,11 +101,6 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
         webSettings.setBuiltInZoomControls(true);  //原网页基础上缩放
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         // 5.0 以后的WebView加载的链接为Https开头，但是链接里面的内容，比如图片为Http链接，加载图片方法
-        /**
-         * MIXED_CONTENT_ALWAYS_ALLOW 允许从任何来源加载内容，即使起源是不安全的；
-         *MIXED_CONTENT_NEVER_ALLOW 不允许Https加载Http的内容，即不允许从安全的起源去加载一个不安全的资源；
-         *MIXED_CONTENT_COMPLTIBILITY_MODE 当涉及到混合式内容时，WebView会尝试去兼容最新Web浏览器的风格；
-         */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //两者都可以
             webSettings.setMixedContentMode(webSettings.getMixedContentMode());
@@ -176,40 +171,37 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
 
         });
 
-        mWebView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                WebView.HitTestResult result = ((WebView) v).getHitTestResult();
-                if (null == result)
-                    return false;
-                int type = result.getType();
-                if (type == WebView.HitTestResult.UNKNOWN_TYPE)
-                    return false;
-                // 这里可以拦截很多类型，我们只处理图片类型就可以了
-                switch (type) {
-                    case WebView.HitTestResult.PHONE_TYPE: // 处理拨号
-                        break;
-                    case WebView.HitTestResult.EMAIL_TYPE: // 处理Email
-                        break;
-                    case WebView.HitTestResult.GEO_TYPE: // 地图类型
-                        break;
-                    case WebView.HitTestResult.SRC_ANCHOR_TYPE: // 超链接
-                        break;
-                    case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
-                        break;
-                    case WebView.HitTestResult.IMAGE_TYPE: // 处理长按图片的菜单项
-                        // 获取图片的路径
-                        String saveImgUrl = result.getExtra();
-                        // 跳转到图片详情页，显示图片
+        mWebView.setOnLongClickListener(v -> {
+            WebView.HitTestResult result = ((WebView) v).getHitTestResult();
+            if (null == result)
+                return false;
+            int type = result.getType();
+            if (type == WebView.HitTestResult.UNKNOWN_TYPE)
+                return false;
+            // 这里可以拦截很多类型，我们只处理图片类型就可以了
+            switch (type) {
+                case WebView.HitTestResult.PHONE_TYPE: // 处理拨号
+                    break;
+                case WebView.HitTestResult.EMAIL_TYPE: // 处理Email
+                    break;
+                case WebView.HitTestResult.GEO_TYPE: // 地图类型
+                    break;
+                case WebView.HitTestResult.SRC_ANCHOR_TYPE: // 超链接
+                    break;
+                case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
+                    break;
+                case WebView.HitTestResult.IMAGE_TYPE: // 处理长按图片的菜单项
+                    // 获取图片的路径
+                    String saveImgUrl = result.getExtra();
+                    // 跳转到图片详情页，显示图片
 //                        Intent i = new Intent(MainActivity.this, ImageActivity.class);
 //                        i.putExtra("imgUrl", saveImgUrl);
 //                        startActivity(i);
-                        break;
-                    default:
-                        break;
-                }
-                return false;
+                    break;
+                default:
+                    break;
             }
+            return false;
         });
     }
     private void startAlipayActivity(String url) {
@@ -254,14 +246,5 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
         }
         return super.onKeyDown(keyCode, event);//退出整个应用程序
     }
-
-    /**
-     * WebView 开启硬件加速
-     * 下面看一下硬件加速， 硬件加速分为四个级别：
-     Application级别
-     <application android:hardwareAccelerated="true"...>
-     Activity级别
-     <activity android:hardwareAccelerated="true"...>
-     */
 
 }

@@ -107,14 +107,14 @@ public class Logger {
 			StackTraceElement[] sts = e.getStackTrace();
 
 			if (name != null) {
-				sb.append(name + " - " + e + "\r\n");
+				sb.append(name).append(" - ").append(e).append("\r\n");
 			} else {
-				sb.append(e + "\r\n");
+				sb.append(e).append("\r\n");
 			}
 			if (sts != null && sts.length > 0) {
 				for (StackTraceElement st : sts) {
 					if (st != null) {
-						sb.append("[ " + st.getFileName() + ":" + st.getLineNumber() + " ]\r\n");
+						sb.append("[ ").append(st.getFileName()).append(":").append(st.getLineNumber()).append(" ]\r\n");
 					}
 				}
 			}

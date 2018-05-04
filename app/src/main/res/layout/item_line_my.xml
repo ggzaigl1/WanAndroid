@@ -7,8 +7,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/itemSplit_line"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="@dimen/spacing_medium_small"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="@dimen/spacing_medium_small"
         android:background="@color/lineColor" />
 
 </merge>

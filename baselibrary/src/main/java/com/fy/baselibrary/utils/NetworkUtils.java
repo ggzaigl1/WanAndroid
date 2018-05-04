@@ -1,8 +1,5 @@
 package com.fy.baselibrary.utils;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -376,18 +373,15 @@ public class NetworkUtils {
     public static String getDomainAddress(final String domain) {
         try {
             ExecutorService exec = Executors.newCachedThreadPool();
-            Future<String> fs = exec.submit(new Callable<String>() {
-                @Override
-                public String call() throws Exception {
-                    InetAddress inetAddress;
-                    try {
-                        inetAddress = InetAddress.getByName(domain);
-                        return inetAddress.getHostAddress();
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
+            Future<String> fs = exec.submit(() -> {
+                InetAddress inetAddress;
+                try {
+                    inetAddress = InetAddress.getByName(domain);
+                    return inetAddress.getHostAddress();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
                 }
+                return null;
             });
             return fs.get();
         } catch (InterruptedException | ExecutionException e) {

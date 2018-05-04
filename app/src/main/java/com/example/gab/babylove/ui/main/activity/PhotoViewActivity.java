@@ -49,12 +49,7 @@ public class PhotoViewActivity extends AppCompatActivity implements IBaseActivit
         //网络加载
 //        ImgLoadUtils.loadImage(mContext,"http://img2.3lian.com/2014/f2/37/d/40.jpg",mPhotoView);
 //        PhotoViewAttacher attacher = new PhotoViewAttacher(mPhotoView); //阻止点击返回
-        mPhotoView.setOnPhotoTapListener(new OnPhotoTapListener() {
-            @Override
-            public void onPhotoTap(ImageView view, float x, float y) {
-                finish();
-            }
-        });
+        mPhotoView.setOnPhotoTapListener((view, x, y) -> finish());
     }
 
     @OnClick

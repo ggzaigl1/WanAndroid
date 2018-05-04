@@ -230,6 +230,7 @@ public class ConvertUtils {
      * @return bytes
      */
     public static byte[] bits2Bytes(String bits) {
+
         int lenMod = bits.length() % 8;
         int byteLen = bits.length() / 8;
         // 不是8的倍数前面补0

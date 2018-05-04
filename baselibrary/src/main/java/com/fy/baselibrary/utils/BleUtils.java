@@ -69,11 +69,8 @@ public class BleUtils {
             bluetoothAdapter = getBleAdapter(context);
         }
 
-        if (null != bluetoothAdapter) {
-            return bluetoothAdapter.enable();
-        }
+        return null != bluetoothAdapter && bluetoothAdapter.enable();
 
-        return false;
     }
 
     /**
@@ -87,11 +84,8 @@ public class BleUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             bluetoothAdapter = getBleAdapter(context);
         }
-        if (null != bluetoothAdapter) {
-            return bluetoothAdapter.disable();
-        }
+        return null != bluetoothAdapter && bluetoothAdapter.disable();
 
-        return false;
     }
 
     /**
@@ -105,11 +99,6 @@ public class BleUtils {
         //延迟1S 打开手机蓝牙
         Observable.timer(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(@NonNull Long aLong) throws Exception {
-                        turnOnBluetooth(context);
-                    }
-                });
+                .subscribe(aLong -> turnOnBluetooth(context));
     }
 }

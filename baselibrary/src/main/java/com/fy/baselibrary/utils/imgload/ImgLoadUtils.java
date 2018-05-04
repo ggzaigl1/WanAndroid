@@ -226,20 +226,17 @@ public class ImgLoadUtils {
      */
     public static void getImgCachePath(Context context, String url, Consumer<File> consumer) {
         Observable.just(url)
-                .map(new Function<String, File>() {
-                    @Override
-                    public File apply(String s) throws Exception {
-                        File cacheImg = null;
-                        try {
-                            cacheImg = Glide.with(context)
-                                    .load(url)
-                                    .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                                    .get();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return cacheImg;
+                .map(s -> {
+                    File cacheImg = null;
+                    try {
+                        cacheImg = Glide.with(context)
+                                .load(url)
+                                .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                                .get();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    return cacheImg;
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

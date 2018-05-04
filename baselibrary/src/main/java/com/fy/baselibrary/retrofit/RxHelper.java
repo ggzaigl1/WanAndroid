@@ -26,24 +26,18 @@ public class RxHelper {
      */
     public static <T> ObservableTransformer<BeanModule<T>, T> handleResult() {
 
-        return new ObservableTransformer<BeanModule<T>, T>() {
-            @Override
-            public ObservableSource<T> apply(@NonNull Observable<BeanModule<T>> upstream) {
-                return upstream.flatMap(new Function<BeanModule<T>, ObservableSource<T>>() {
-                    @Override
-                    public ObservableSource<T> apply(@NonNull BeanModule<T> tBeanModule) throws Exception {
-                        if (tBeanModule.isSuccess()) {
-                            return createData(tBeanModule.getData());
-                        } else {
-                            return Observable.error(new ServerException(tBeanModule.getErrorMsg(), tBeanModule.getErrorCode()));
-                        }
-                    }
-                })
-                        .subscribeOn(Schedulers.io())//指定的是上游发送事件的线程
-                        .observeOn(AndroidSchedulers.mainThread());//指定的是下游接收事件的线程
+        return upstream -> {
+            return upstream.flatMap(tBeanModule -> {
+                if (tBeanModule.isSuccess()) {
+                    return createData(tBeanModule.getData());
+                } else {
+                    return Observable.error(new ServerException(tBeanModule.getErrorMsg(), tBeanModule.getErrorCode()));
+                }
+            })
+                    .subscribeOn(Schedulers.io())//指定的是上游发送事件的线程
+                    .observeOn(AndroidSchedulers.mainThread());//指定的是下游接收事件的线程
 //              多次指定上游的线程只有第一次指定的有效, 也就是说多次调用subscribeOn() 只有第一次的有效, 其余的会被忽略.
 //              多次指定下游的线程是可以的, 也就是说每调用一次observeOn() , 下游的线程就会切换一次.
-            }
         };
     }
 
@@ -55,17 +49,14 @@ public class RxHelper {
      * @return
      */
     private static <T> Observable<T> createData(final T data) {
-        return Observable.create(new ObservableOnSubscribe<T>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<T> subscriber) throws Exception {
-                try {
-                    LogUtils.e("net", "成功 _ onNext");
-                    subscriber.onNext(data);
-                    subscriber.onComplete();
-                } catch (Exception e) {
-                    LogUtils.e("net", "异常 _ onError");
-                    subscriber.onError(e);
-                }
+        return Observable.create(subscriber -> {
+            try {
+                LogUtils.e("net", "成功 _ onNext");
+                subscriber.onNext(data);
+                subscriber.onComplete();
+            } catch (Exception e) {
+                LogUtils.e("net", "异常 _ onError");
+                subscriber.onError(e);
             }
         });
     }

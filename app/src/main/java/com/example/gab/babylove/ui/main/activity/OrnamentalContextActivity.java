@@ -152,16 +152,13 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
         mAdapter = new OrnamentalContextAdapter(R.layout.ornamental_context_recycle_item, new ArrayList<>());
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                List<CourseDetails.DataBean.GroupsBean.ActionsBean> data = mAdapter.getData();
-                OrnamentalListBean orListBean = new OrnamentalListBean(data);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("actionsBean", orListBean);
-                bundle.putInt("position", position);
-                JumpUtils.jump(OrnamentalContextActivity.this, OrnamentalMotionActivity.class, bundle);
-            }
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            List<CourseDetails.DataBean.GroupsBean.ActionsBean> data = mAdapter.getData();
+            OrnamentalListBean orListBean = new OrnamentalListBean(data);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("actionsBean", orListBean);
+            bundle.putInt("position", position);
+            JumpUtils.jump(OrnamentalContextActivity.this, OrnamentalMotionActivity.class, bundle);
         });
         mRecyclerView.setAdapter(mAdapter);
     }

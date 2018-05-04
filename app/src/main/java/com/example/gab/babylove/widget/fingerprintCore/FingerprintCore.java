@@ -62,12 +62,9 @@ public class FingerprintCore {
 
     private void initCryptoObject() {
         try {
-            mCryptoObjectCreator = new CryptoObjectCreator(new CryptoObjectCreator.ICryptoObjectCreateListener() {
-                @Override
-                public void onDataPrepared(FingerprintManager.CryptoObject cryptoObject) {
-                    // startAuthenticate(cryptoObject);
-                    // 如果需要一开始就进行指纹识别，可以在秘钥数据创建之后就启动指纹认证
-                }
+            mCryptoObjectCreator = new CryptoObjectCreator(cryptoObject -> {
+                // startAuthenticate(cryptoObject);
+                // 如果需要一开始就进行指纹识别，可以在秘钥数据创建之后就启动指纹认证
             });
         } catch (Throwable throwable) {
              LogUtils.e("create cryptoObject failed!");
@@ -75,7 +72,7 @@ public class FingerprintCore {
     }
 
     public void setFingerprintManager(IFingerprintResultListener fingerprintResultListener) {
-        mFpResultListener = new WeakReference<IFingerprintResultListener>(fingerprintResultListener);
+        mFpResultListener = new WeakReference<>(fingerprintResultListener);
     }
 
     public void startAuthenticate() {
@@ -101,7 +98,7 @@ public class FingerprintCore {
             } catch (Throwable throwable) {
                 e.printStackTrace();
             }
-        } catch (Throwable throwable) {
+        } catch (Throwable ignored) {
 
         }
     }
@@ -220,8 +217,7 @@ public class FingerprintCore {
     public boolean isHardwareDetected() {
         try {
             return mFingerprintManager.isHardwareDetected();
-        } catch (SecurityException e) {
-        } catch (Throwable e) {}
+        } catch (Throwable ignored) {}
         return false;
     }
 
@@ -233,8 +229,7 @@ public class FingerprintCore {
         try {
             // 有些厂商api23之前的版本可能没有做好兼容，这个方法内部会崩溃（redmi note2, redmi note3等）
             return mFingerprintManager.hasEnrolledFingerprints();
-        } catch (SecurityException e) {
-        } catch (Throwable e) {
+        } catch (Throwable ignored) {
         }
         return false;
     }

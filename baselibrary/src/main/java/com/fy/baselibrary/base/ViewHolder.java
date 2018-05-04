@@ -17,11 +17,10 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     private SparseArray<View> mViews;
     public View mConvertView;
-    private Context mContext;
 
     public ViewHolder(Context context, View itemView) {
         super(itemView);
-        mContext = context;
+        Context context1 = context;
         mConvertView = itemView;
         mViews = new SparseArray<>();
     }

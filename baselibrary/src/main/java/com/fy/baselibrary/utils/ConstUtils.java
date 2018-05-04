@@ -14,7 +14,6 @@ public class ConstUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    /******************** 存储相关常量 ********************/
     /**
      * Byte与Byte的倍数
      */
@@ -39,7 +38,6 @@ public class ConstUtils {
         GB
     }
 
-    /******************** 时间相关常量 ********************/
     /**
      * 毫秒与毫秒的倍数
      */
@@ -69,7 +67,6 @@ public class ConstUtils {
         DAY
     }
 
-    /******************** 正则相关常量 ********************/
     /**
      * 正则：手机号（简单）
      */

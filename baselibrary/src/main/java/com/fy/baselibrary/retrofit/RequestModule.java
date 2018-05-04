@@ -81,73 +81,67 @@ public class RequestModule {
     @Singleton
     @Provides
     protected HttpLoggingInterceptor getResponseIntercept() {
-        return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                LogUtils.e("net 请求or响应", message);
+        return new HttpLoggingInterceptor(message -> {
+            LogUtils.e("net 请求or响应", message);
 //                FileUtils.fileToInputContent("log", "日志.txt", message);
-            }
         }).setLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
     @Singleton
     @Provides
     protected Interceptor getHeader() {
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Response response = null;
+        return chain -> {
+            Response response = null;
 
-                //获取request
-                Request request = chain.request()
-                        .newBuilder()
-                        .addHeader("Content-Type", "multipart/form-data;charse=UTF-8")
+            //获取request
+            Request request = chain.request()
+                    .newBuilder()
+                    .addHeader("Content-Type", "multipart/form-data;charse=UTF-8")
 //                        .addHeader("Accept-Encoding", "gzip, deflate")//根据服务器要求添加（避免重复压缩乱码）
-                        .addHeader("Connection", "keep-alive")
-                        .addHeader("Accept", "application/json")
-                        .addHeader("Cookie", "add cookies here")
-                        .build();
+                    .addHeader("Connection", "keep-alive")
+                    .addHeader("Accept", "application/json")
+                    .addHeader("Cookie", "add cookies here")
+                    .build();
 
-                //获取request的创建者builder
-                Request.Builder builder = request.newBuilder();
+            //获取request的创建者builder
+            Request.Builder builder = request.newBuilder();
 
-                //从request中获取headers，通过给定的键url_name
-                List<String> headerValues = request.headers("url_name");
-                if (headerValues != null && headerValues.size() > 0) {
-                    //如果有这个header，先将配置的header删除，因为 此header仅用作app和okhttp之间使用
-                    builder.removeHeader("url_name");
+            //从request中获取headers，通过给定的键url_name
+            List<String> headerValues = request.headers("url_name");
+            if (headerValues != null && headerValues.size() > 0) {
+                //如果有这个header，先将配置的header删除，因为 此header仅用作app和okhttp之间使用
+                builder.removeHeader("url_name");
 
-                    //匹配获得新的BaseUrl
-                    String headerValue = headerValues.get(0);
-                    HttpUrl newBaseUrl = null;
-                    if ("user".equals(headerValue) && !TextUtils.isEmpty(ConstantUtils.custom_Url)) {
-                        newBaseUrl = HttpUrl.parse(ConstantUtils.custom_Url);
+                //匹配获得新的BaseUrl
+                String headerValue = headerValues.get(0);
+                HttpUrl newBaseUrl = null;
+                if ("user".equals(headerValue) && !TextUtils.isEmpty(ConstantUtils.custom_Url)) {
+                    newBaseUrl = HttpUrl.parse(ConstantUtils.custom_Url);
 
-                        //从request中获取原有的HttpUrl实例oldHttpUrl
-                        HttpUrl oldHttpUrl = request.url();
-                        //重建新的HttpUrl，修改需要修改的url部分
-                        HttpUrl newFullUrl = oldHttpUrl
-                                .newBuilder()
-                                .scheme(newBaseUrl.scheme())
-                                .host(newBaseUrl.host())
-                                .port(newBaseUrl.port())
-                                .build();
+                    //从request中获取原有的HttpUrl实例oldHttpUrl
+                    HttpUrl oldHttpUrl = request.url();
+                    //重建新的HttpUrl，修改需要修改的url部分
+                    HttpUrl newFullUrl = oldHttpUrl
+                            .newBuilder()
+                            .scheme(newBaseUrl.scheme())
+                            .host(newBaseUrl.host())
+                            .port(newBaseUrl.port())
+                            .build();
 
-                        //重建这个request，通过builder.url(newFullUrl).build()；
-                        //然后返回一个response至此结束修改
-                        response = chain.proceed(builder.url(newFullUrl).build());
-                    }
+                    //重建这个request，通过builder.url(newFullUrl).build()；
+                    //然后返回一个response至此结束修改
+                    response = chain.proceed(builder.url(newFullUrl).build());
                 }
-
-                if (null == response) {
-                    Request.Builder requestBuilder = request.newBuilder();
-
-                    Request newRequest = requestBuilder.build();
-                    response = chain.proceed(newRequest);
-                }
-
-                return response;
             }
+
+            if (null == response) {
+                Request.Builder requestBuilder = request.newBuilder();
+
+                Request newRequest = requestBuilder.build();
+                response = chain.proceed(newRequest);
+            }
+
+            return response;
         };
     }
 }

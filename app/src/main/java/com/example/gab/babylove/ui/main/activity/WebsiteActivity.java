@@ -23,7 +23,6 @@ import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.OnRefreshLoadmoreListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -113,20 +112,17 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
                 .getBookmarkList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<BeanModule<List<BookmarkBean>>>() {
-                    @Override
-                    public void accept(BeanModule<List<BookmarkBean>> listBeanModule) throws Exception {
-                        if (null != listBeanModule) {
-                            if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(listBeanModule.getData());
-                                mRefreshLayout.finishRefresh();
-                            } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(listBeanModule.getData());
-                                mRefreshLayout.finishLoadMore();
-                                mAdapter.notifyDataSetChanged();
-                            } else {
-                                mAdapter.setNewData(listBeanModule.getData());
-                            }
+                .subscribe(listBeanModule -> {
+                    if (null != listBeanModule) {
+                        if (mRefreshLayout.isRefreshing()) {
+                            mAdapter.setNewData(listBeanModule.getData());
+                            mRefreshLayout.finishRefresh();
+                        } else if (mRefreshLayout.isLoading()) {
+                            mAdapter.getData().addAll(listBeanModule.getData());
+                            mRefreshLayout.finishLoadMore();
+                            mAdapter.notifyDataSetChanged();
+                        } else {
+                            mAdapter.setNewData(listBeanModule.getData());
                         }
                     }
                 });

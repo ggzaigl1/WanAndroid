@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ProjectBean;
-import com.example.gab.babylove.ui.news.fragment.SystemFlyFragment;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;

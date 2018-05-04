@@ -144,12 +144,7 @@ public class StatusLayoutManager implements Serializable {
 
         if (retryView == null || onRetryListener == null) return;
 
-        retryView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onRetryListener.onRetry();
-            }
-        });
+        retryView.setOnClickListener(v -> onRetryListener.onRetry());
     }
 
     public static Builder newBuilder(Context context, Object target) {

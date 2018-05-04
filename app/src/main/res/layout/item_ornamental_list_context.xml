@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:text="课程名称"
                 android:textColor="@color/white"
                 android:layout_above="@+id/ll_star"
@@ -31,9 +31,9 @@
 
         <LinearLayout
                 android:id="@+id/ll_star"
-                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:layout_centerInParent="true"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
                     android:minHeight="16dp"
                     android:maxHeight="16dp"
                     android:numStars="5"
@@ -69,12 +69,12 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:text="1818人参加:"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize_small_much"
                 android:layout_marginBottom="@dimen/spacing_medium_small"
-                android:layout_marginRight="@dimen/spacing_medium_small"/>
+                android:layout_marginEnd="@dimen/spacing_medium_small"/>
     </RelativeLayout>
 
 

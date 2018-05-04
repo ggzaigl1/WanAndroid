@@ -70,15 +70,12 @@ public class GuideActivity extends AppCompatActivity {
                 mEditor.apply();
             }
         } else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (exit) {
-                        finish();
-                    } else {
-                        JumpUtils.jump(GuideActivity.this, LoginActivity.class, null);
-                        finish();
-                    }
+            new Handler().postDelayed(() -> {
+                if (exit) {
+                    finish();
+                } else {
+                    JumpUtils.jump(GuideActivity.this, LoginActivity.class, null);
+                    finish();
                 }
             }, 500);
         }

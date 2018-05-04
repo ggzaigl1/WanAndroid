@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="130dp"
+            android:layout_marginStart="130dp"
             android:gravity="center"
             android:background="@mipmap/btn_bg"
             android:textColor="@color/login"

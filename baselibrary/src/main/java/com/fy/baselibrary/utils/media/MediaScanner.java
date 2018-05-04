@@ -15,16 +15,16 @@ public class MediaScanner {
     private static final String TAG = MediaScanner.class.getSimpleName();
 
     private MediaScannerConnection mConn = null;
-    private SannerClient mClient = null;
     private File mFile = null;
     private String mMimeType = null;
 
     public MediaScanner(Context context) {
-        if (mClient == null) {
-            mClient = new SannerClient();
+        SannerClient client = null;
+        if (client == null) {
+            client = new SannerClient();
         }
         if (mConn == null) {
-            mConn = new MediaScannerConnection(context, mClient);
+            mConn = new MediaScannerConnection(context, client);
         }
     }
 

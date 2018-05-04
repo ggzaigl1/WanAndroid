@@ -31,7 +31,6 @@ public class UpdateMedia implements MediaScannerConnection.MediaScannerConnectio
     @Override
     public void onMediaScannerConnected() {
         LogUtils.e(TAG, "扫描");
-        /** 这个方法一次只能扫描一个文件，path 必须是一个具体的文件，不能是目录 */
         mediaScanConn.scanFile(filePath, "");
     }
 

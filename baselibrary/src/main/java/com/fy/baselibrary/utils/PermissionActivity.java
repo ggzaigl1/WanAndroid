@@ -162,18 +162,8 @@ public class PermissionActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(isAlwaysRefuse ? mAlwaysRefuseMessage : mFirstRefuseMessage).
                 setTitle(getString(R.string.dialog_title)).
-                setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        onCancelPermission();
-                    }
-                })
-                .setPositiveButton(isAlwaysRefuse ? getString(R.string.set) : getString(R.string.ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        onSurePermission(isAlwaysRefuse);
-                    }
-                })
+                setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> onCancelPermission())
+                .setPositiveButton(isAlwaysRefuse ? getString(R.string.set) : getString(R.string.ok), (dialogInterface, i) -> onSurePermission(isAlwaysRefuse))
                 .show();
 
     }

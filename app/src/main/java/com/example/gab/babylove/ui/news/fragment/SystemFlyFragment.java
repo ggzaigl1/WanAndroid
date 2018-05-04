@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.news.adapter.SystemFlyAdapter;

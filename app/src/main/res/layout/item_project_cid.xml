@@ -29,7 +29,7 @@
                     android:id="@+id/tv_title_name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textColor="@color/myTxtSuperLight"
@@ -71,7 +71,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:text=""
                     android:textColor="@color/myTxtSuperLight"
                     android:textSize="@dimen/textSize_small"/>
@@ -80,7 +80,7 @@
                     android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:text=""
                     android:textColor="@color/myTxtSuperLight"
                     android:textSize="@dimen/textSize_small"/>

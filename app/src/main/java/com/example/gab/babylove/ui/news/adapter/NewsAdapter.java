@@ -27,7 +27,7 @@ public class NewsAdapter extends BaseQuickAdapter<TreeBean, BaseViewHolder> {
         List<TreeBean.ChildrenBean> childrenBeans = item.getChildren();
         if (null != childrenBeans){
             for (TreeBean.ChildrenBean childrenBean : childrenBeans){
-                String str = ResourceUtils.getReplaceStr(R.string.space, childrenBean.getName());
+                String str = ResourceUtils.getReplaceStr(R.string.news_space, childrenBean.getName());
                 strBuilder.append(str);
             }
         }

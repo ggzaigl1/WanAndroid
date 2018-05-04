@@ -248,15 +248,12 @@ public abstract class CommonDialog extends DialogFragment {
 
 
     protected void setOnKeyListener() {
-        this.getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    dismiss();
-                    return true;
-                }
-                return false;
+        this.getDialog().setOnKeyListener((dialog, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dismiss();
+                return true;
             }
+            return false;
         });
     }
 }

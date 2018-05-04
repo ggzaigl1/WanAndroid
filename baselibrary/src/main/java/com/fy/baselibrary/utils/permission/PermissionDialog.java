@@ -56,18 +56,8 @@ public class PermissionDialog {
                 .setTitle(getTitle())
                 .setMessage(getMessage())
                 .setCancelable(false)
-                .setNegativeButton(activity.getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        SystemUtils.ExitSystem();
-                    }
-                })
-                .setPositiveButton(activity.getString(R.string.check_info_setting), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        PermissionDialog.this.startAppSettings();
-                    }
-                });
+                .setNegativeButton(activity.getString(android.R.string.cancel), (dialog, which) -> SystemUtils.ExitSystem())
+                .setPositiveButton(activity.getString(R.string.check_info_setting), (dialog, which) -> PermissionDialog.this.startAppSettings());
     }
 
     public void show() {

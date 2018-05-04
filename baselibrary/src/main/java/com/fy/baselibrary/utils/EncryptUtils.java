@@ -31,7 +31,6 @@ public class EncryptUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    /*********************** 哈希加密相关 ***********************/
     /**
      * MD2加密
      *
@@ -560,7 +559,6 @@ public class EncryptUtils {
         }
     }
 
-    /************************ DES加密相关 ***********************/
     /**
      * DES转变
      * <p>法算法名称/加密模式/填充方式</p>
@@ -636,7 +634,6 @@ public class EncryptUtils {
         return desTemplate(data, key, DES_Algorithm, DES_Transformation, false);
     }
 
-    /************************ 3DES加密相关 ***********************/
     /**
      * 3DES转变
      * <p>法算法名称/加密模式/填充方式</p>
@@ -713,7 +710,6 @@ public class EncryptUtils {
         return desTemplate(data, key, TripleDES_Algorithm, TripleDES_Transformation, false);
     }
 
-    /************************ AES加密相关 ***********************/
     /**
      * AES转变
      * <p>法算法名称/加密模式/填充方式</p>

@@ -16,23 +16,17 @@ import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.OnRefreshLoadmoreListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -141,14 +135,11 @@ public class OrnamentalListContextActivity extends AppCompatActivity implements 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new OrnamentalListContextAdapter(R.layout.item_ornamental_list_context, new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                List<CourseList.DataBean> data = mAdapter.getData();
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", data.get(position).getId());
-                JumpUtils.jump(OrnamentalListContextActivity.this, OrnamentalContextActivity.class, bundle);
-            }
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            List<CourseList.DataBean> data = mAdapter.getData();
+            Bundle bundle = new Bundle();
+            bundle.putInt("id", data.get(position).getId());
+            JumpUtils.jump(OrnamentalListContextActivity.this, OrnamentalContextActivity.class, bundle);
         });
     }
 
