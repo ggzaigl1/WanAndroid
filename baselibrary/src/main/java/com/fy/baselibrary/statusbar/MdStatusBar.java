@@ -203,11 +203,8 @@ public class MdStatusBar {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = act.getWindow();
             ViewGroup decorView = (ViewGroup) window.getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             window.setStatusBarColor(Color.TRANSPARENT);
-
             int finalStatusColor = realStatusDepth == 0 ? statusColor : calculateColor(statusColor, realStatusDepth);
             decorView.addView(createStatusBarView(act, finalStatusColor), 0);
             if (applyNav && navigationBarExist(act)) {

@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/surface_view"
-                android:background="@color/control_color"
+                android:background="@color/colorAutoDismissToast"
                 android:orientation="horizontal"
                 android:padding="5dp">
 

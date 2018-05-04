@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
 
     @Override
     public void setStatusBar(Activity activity) {
-        MdStatusBar.setColorBar(this, R.color.statusBar, R.color.statusBar);
+        MdStatusBar.setColorBarForDrawer(this, R.color.statusBar, R.color.statusBar);
     }
 
     @Override
