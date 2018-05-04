@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.CourseList;
@@ -91,7 +90,7 @@ public class OrnamentalListContextActivity extends AppCompatActivity implements 
                                     mRefreshLayout.finishRefresh();
                                 } else if (mRefreshLayout.isLoading()) {
                                     mAdapter.getData().addAll(t.getData());
-                                    mRefreshLayout.finishLoadmore();
+                                    mRefreshLayout.finishLoadMore();
                                     mAdapter.notifyDataSetChanged();
                                 } else {
                                     mAdapter.setNewData(t.getData());
@@ -107,7 +106,7 @@ public class OrnamentalListContextActivity extends AppCompatActivity implements 
                                 mRefreshLayout.finishRefresh();
                             }
                             if (mRefreshLayout.isLoading()) {
-                                mRefreshLayout.finishLoadmore();
+                                mRefreshLayout.finishLoadMore();
                             }
                         }
                     }
@@ -150,7 +149,7 @@ public class OrnamentalListContextActivity extends AppCompatActivity implements 
             mRefreshLayout.finishRefresh();
         }
         if (mRefreshLayout.isLoading()) {
-            mRefreshLayout.finishLoadmore();
+            mRefreshLayout.finishLoadMore();
         }
     }
 }

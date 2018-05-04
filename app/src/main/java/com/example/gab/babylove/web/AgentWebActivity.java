@@ -15,7 +15,6 @@ import com.example.gab.babylove.R;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.just.agentweb.AgentWeb;
-import com.just.agentweb.ChromeClientCallbackManager;
 
 import butterknife.BindView;
 
@@ -54,11 +53,9 @@ public class AgentWebActivity extends AppCompatActivity implements IBaseActivity
         mAgentWeb = AgentWeb.with(this)//
                 .setAgentWebParent(mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
                 .useDefaultIndicator()// 使用默认进度条
-                .defaultProgressBarColor() // 使用默认进度条颜色
-                .setReceivedTitleCallback((view, title) -> toolbar.setTitle(title))//设置 Web 页面的 title 回调
                 .setWebChromeClient(mWebChromeClient)
                 .setWebViewClient(mWebViewClient)
-                .setSecurityType(AgentWeb.SecurityType.strict)
+                .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK)
                 .createAgentWeb()//
                 .ready()
                 .go(url);
@@ -88,6 +85,14 @@ public class AgentWebActivity extends AppCompatActivity implements IBaseActivity
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             //do you work
+        }
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            if (null != title) {
+                toolbar.setTitle(title);
+            }
         }
     };
 
