@@ -159,8 +159,8 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
 
         fab_top.setOnClickListener(v -> {
             LinearLayoutManager manager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
-            //如果超过50项直接跳到开头，不然要滚好久
-            if (manager.findFirstVisibleItemPosition() < 50) {
+            //如果超过100项直接跳到开头，不然要滚好久
+            if (manager.findFirstVisibleItemPosition() < 100) {
                 mRecyclerView.smoothScrollToPosition(0);
             } else {
                 mRecyclerView.scrollToPosition(0);

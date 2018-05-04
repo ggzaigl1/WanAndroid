@@ -48,6 +48,7 @@ public class AgentWebActivity extends AppCompatActivity implements IBaseActivity
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+        toolbar.setTitle("");
         mLinearLayout = findViewById(R.id.mLinearLayout);
         String url = getIntent().getStringExtra("UrlBean");
         mAgentWeb = AgentWeb.with(this)//
