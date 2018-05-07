@@ -25,7 +25,7 @@
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher_round"
-            android:name=".MyApplication"
+            android:name="com.example.gab.babylove.MyApplication"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
@@ -34,7 +34,7 @@
 
         <!-- 欢迎 -->
         <activity
-                android:name=".ui.main.login.StartUpActivity"
+                android:name="com.example.gab.babylove.ui.main.login.StartUpActivity"
                 android:screenOrientation="portrait"
                 android:launchMode="singleTask"
                 >
@@ -45,28 +45,28 @@
         </activity>
 
         <activity
-                android:name=".MainActivity"
+                android:name="com.example.gab.babylove.MainActivity"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait">
         </activity>
 
         <!-- 登录 -->
         <activity
-                android:name=".ui.main.login.LoginActivity"
+                android:name="com.example.gab.babylove.ui.main.login.LoginActivity"
                 android:label="@string/login"
                 android:screenOrientation="portrait"/>
         <!-- 注册 -->
         <activity
-                android:name=".ui.main.login.RegisterActivity"
+                android:name="com.example.gab.babylove.ui.main.login.RegisterActivity"
                 android:label="@string/registerTitle"
                 android:screenOrientation="portrait"/>
         <!-- PhotoView -->
         <activity
-                android:name=".ui.main.activity.PhotoViewActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.PhotoViewActivity"
                 android:screenOrientation="portrait"/>
         <!-- 工具 activity -->
         <activity
-                android:name=".ui.main.activity.ToolsActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.ToolsActivity"
                 android:label="@string/tools"
                 android:screenOrientation="portrait"/>
         <!--&lt;!&ndash; 手機相關信息 &ndash;&gt;-->
@@ -76,65 +76,65 @@
                 <!--android:screenOrientation="portrait"/>-->
         <!-- SelectorButton -->
         <activity
-                android:name=".ui.main.activity.SelectorButtonActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.SelectorButtonActivity"
                 android:label="@string/selector_button"
                 android:screenOrientation="portrait"/>
         <!-- 美图欣赏 -->
         <activity
-                android:name=".ui.main.activity.BelleActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.BelleActivity"
                 android:label="@string/pretty_picture"
                 android:screenOrientation="portrait"/>
         <!-- 美图欣赏 图片详情页 -->
         <activity
-                android:name=".ui.main.activity.PictureDetailActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.PictureDetailActivity"
                 android:screenOrientation="portrait"/>
         <!-- Website 常用网站 -->
         <activity
-                android:name=".ui.main.activity.WebsiteActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.WebsiteActivity"
                 android:label="@string/website"
                 android:screenOrientation="portrait"/>
         <!-- 我的收藏 -->
         <activity
-                android:name=".ui.main.activity.MyCollectActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.MyCollectActivity"
                 android:label="@string/collect"
                 android:screenOrientation="portrait"/>
         <!-- 知识体系 详情 -->
         <activity
-                android:name=".ui.news.activity.SystemActivity"
+                android:name="com.example.gab.babylove.ui.news.activity.SystemActivity"
                 android:label="@string/knowledge"
                 android:screenOrientation="portrait"/>
         <!-- AgentWeb -->
         <activity
-                android:name=".web.AgentWebActivity"
+                android:name="com.example.gab.babylove.web.AgentWebActivity"
                 android:screenOrientation="portrait"/>
         <!-- 指紋相关工具类 -->
         <activity
-                android:name=".ui.main.activity.FingerprintMainActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.FingerprintMainActivity"
                 android:label="@string/fingerprint"
                 android:screenOrientation="portrait"/>
         <!-- 关于我们 -->
         <activity
-                android:name=".ui.main.activity.AboutActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.AboutActivity"
                 android:label="@string/about_us"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity
-                android:name=".ui.main.activity.OrnamentalListContextActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity"
                 android:label="@string/ornamental"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity
-                android:name=".ui.main.activity.OrnamentalContextActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.OrnamentalContextActivity"
                 android:label="@string/ornamental"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity
-                android:name=".ui.main.activity.OrnamentalMotionActivity"
+                android:name="com.example.gab.babylove.ui.main.activity.OrnamentalMotionActivity"
                 android:label="@string/ornamental"
                 android:screenOrientation="portrait"/>
         <!-- 相机Camera2 -->
         <activity
-                android:name=".widget.camera.Camera2Activity"
+                android:name="com.example.gab.babylove.widget.camera.Camera2Activity"
                 android:screenOrientation="portrait"/>
         <!-- 不同格式文件浏览 activity -->
         <!--<activity-->
@@ -145,7 +145,7 @@
         <!-- 8.0关于WebView的新特性 -->
 
         <activity
-                android:name=".web.WebViewActivity"
+                android:name="com.example.gab.babylove.web.WebViewActivity"
                 android:screenOrientation="portrait">
             <meta-data
                     android:name="android.webkit.WebView.EnableSafeBrowing"
@@ -159,7 +159,7 @@
                 android:theme="@style/NoTitleTranslucentTheme"/>
         <!-- SurfaceView+MediaPlayer 自定义播放器 -->
         <activity
-                android:name=".widget.SurfaceActivity"
+                android:name="com.example.gab.babylove.widget.SurfaceActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize"
                 android:screenOrientation="sensor"
                 android:windowSoftInputMode="stateHidden|adjustResize"/>

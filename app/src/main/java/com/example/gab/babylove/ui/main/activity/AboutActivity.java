@@ -3,6 +3,7 @@ package com.example.gab.babylove.ui.main.activity;
 import android.animation.ValueAnimator;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -15,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
@@ -52,7 +54,7 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
-        MdStatusBar.setColorBar(this, R.color.statusBar, R.color.statusBar);
+        MdStatusBar.setTransparentBar(this, R.color.statusBar, R.color.statusBar);
         tvAbout = findViewById(R.id.tvAbout);
         tvAppInformation = findViewById(R.id.tvAppInformation);
         mScrollView = findViewById(R.id.about_us_content);

@@ -14,6 +14,7 @@ import com.example.gab.babylove.ui.main.adapter.OrnamentalListContextAdapter;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -54,7 +55,7 @@ public class OrnamentalListContextActivity extends AppCompatActivity implements 
 
     @Override
     public void setStatusBar(Activity activity) {
-
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
     }
 
     @Override

@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.CourseDetails;
@@ -22,6 +21,7 @@ import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
+import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
 import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
@@ -74,7 +74,7 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
 
     @Override
     public void setStatusBar(Activity activity) {
-
+        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
     }
 
     @Override

@@ -16,10 +16,8 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.utils.CleanMessageUtil;
-import com.example.gab.babylove.widget.SurfaceActivity;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ToastUtils;
 
 import java.util.List;

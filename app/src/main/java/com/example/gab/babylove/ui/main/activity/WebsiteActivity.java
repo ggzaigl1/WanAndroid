@@ -13,7 +13,6 @@ import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
@@ -29,11 +28,9 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**

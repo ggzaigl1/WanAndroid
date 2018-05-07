@@ -28,7 +28,7 @@ import com.fy.baselibrary.utils.ScreenUtils;
 public class MdStatusBar {
 
     /** 状态栏透明度 */
-    public static int statusAlpha = 0;
+    public static int statusAlpha = 30;
 
     /** 导航栏透明度 */
     public static int navAlpha = 0;
@@ -120,17 +120,12 @@ public class MdStatusBar {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = act.getWindow();
             View decorView = window.getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            int finalStatusColor = statusColor == 0 ? Color.TRANSPARENT :
-                    Color.argb(limitDepthOrAlpha(statusAlpha), Color.red(statusColor),
-                            Color.green(statusColor), Color.blue(statusColor));
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            int finalStatusColor = statusColor == 0 ? Color.TRANSPARENT : Color.argb(limitDepthOrAlpha(statusAlpha), Color.red(statusColor), Color.green(statusColor), Color.blue(statusColor));
             window.setStatusBarColor(finalStatusColor);
             if (applyNav) {
                 option = option | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
-                int finalNavColor = navColor == 0 ? Color.TRANSPARENT :
-                        Color.argb(limitDepthOrAlpha(navAlpha), Color.red(navColor),
-                                Color.green(navColor), Color.blue(navColor));
+                int finalNavColor = navColor == 0 ? Color.TRANSPARENT : Color.argb(limitDepthOrAlpha(navAlpha), Color.red(navColor), Color.green(navColor), Color.blue(navColor));
                 window.setNavigationBarColor(finalNavColor);
             }
             decorView.setSystemUiVisibility(option);
@@ -139,15 +134,11 @@ public class MdStatusBar {
             Window window = act.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             ViewGroup decorView = (ViewGroup) window.getDecorView();
-            int finalStatusColor = statusColor == 0 ? Color.TRANSPARENT :
-                    Color.argb(limitDepthOrAlpha(statusAlpha), Color.red(statusColor),
-                            Color.green(statusColor), Color.blue(statusColor));
+            int finalStatusColor = statusColor == 0 ? Color.TRANSPARENT : Color.argb(limitDepthOrAlpha(statusAlpha), Color.red(statusColor), Color.green(statusColor), Color.blue(statusColor));
             decorView.addView(createStatusBarView(act, finalStatusColor));
             if (applyNav && navigationBarExist(act)) {
                 window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                int finalNavColor = navColor == 0 ? Color.TRANSPARENT :
-                        Color.argb(limitDepthOrAlpha(navAlpha), Color.red(navColor),
-                                Color.green(navColor), Color.blue(navColor));
+                int finalNavColor = navColor == 0 ? Color.TRANSPARENT : Color.argb(limitDepthOrAlpha(navAlpha), Color.red(navColor), Color.green(navColor), Color.blue(navColor));
                 decorView.addView(createNavBarView(act, finalNavColor));
             }
         }
@@ -163,13 +154,9 @@ public class MdStatusBar {
     private void setHideBar(Activity act, boolean applyNav) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             View decorView = act.getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
             if (applyNav) {
-                option = option | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+                option = option | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
             }
             decorView.setSystemUiVisibility(option);
         }
@@ -254,8 +241,7 @@ public class MdStatusBar {
      */
     private static View createStatusBarView(Context context, @ColorInt int color) {
         View statusBarView = new View(context);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams
-                (FrameLayout.LayoutParams.MATCH_PARENT, ScreenUtils.getStatusHeight(context));
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, ScreenUtils.getStatusHeight(context));
         params.gravity = Gravity.TOP;
         statusBarView.setLayoutParams(params);
         statusBarView.setBackgroundColor(color);
@@ -264,8 +250,7 @@ public class MdStatusBar {
 
     private static View createNavBarView(Context context, @ColorInt int color) {
         View navBarView = new View(context);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams
-                (FrameLayout.LayoutParams.MATCH_PARENT, ScreenUtils.getNavigationHeight(context));
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, ScreenUtils.getNavigationHeight(context));
         params.gravity = Gravity.BOTTOM;
         navBarView.setLayoutParams(params);
         navBarView.setBackgroundColor(color);

@@ -33,19 +33,6 @@ public class ImgLoadUtils {
     }
 
     /**
-     * 预加载 （把指定URL地址的图片 的原始尺寸保存到缓存中）
-     *
-     * @param url
-     */
-    public static void preloadImg(String url) {
-        Context context = BaseApp.getAppCtx();
-        Glide.with(context)
-                .load(url)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .preload();
-    }
-
-    /**
      * 加载指定URL的图片(从缓存中取得)
      *
      * @param url
@@ -71,8 +58,8 @@ public class ImgLoadUtils {
             Glide.with(context)
                     .load(url)
                     .fallback(R.mipmap.img_load_default)
-                    .error(R.mipmap.img_load_error)
-                    .placeholder(R.mipmap.icon_color)
+                    .error(R.mipmap.img_load_error)//加载错误图片
+                    .placeholder(R.mipmap.icon_color)//占位符
                     .diskCacheStrategy(DiskCacheStrategy.RESULT)//缓存最后一次那个image
                     .into(imageView);
         } else {
@@ -80,6 +67,7 @@ public class ImgLoadUtils {
         }
 
     }
+
 
     /**
      * 加载指定URL的图片(圆角)
@@ -102,22 +90,6 @@ public class ImgLoadUtils {
             Glide.with(context).load(R.mipmap.img_load_default).into(imageView);
         }
 
-    }
-
-    /**
-     * 加载指定URL的图片 不要缓存
-     *
-     * @param url
-     * @param imageView
-     */
-    public static void loadImages(String url, ImageView imageView) {
-        Context context = BaseApp.getAppCtx();
-        Glide.with(context)
-                .load(url)
-                .fallback(R.mipmap.img_load_default)
-                .error(R.mipmap.img_load_error)
-                .placeholder(R.mipmap.img_loading)
-                .into(imageView);
     }
 
     /**
@@ -241,6 +213,22 @@ public class ImgLoadUtils {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(consumer);
+    }
+
+    /**
+     * 加载指定URL的图片 不要缓存
+     *
+     * @param url
+     * @param imageView
+     */
+    public static void loadImages(String url, ImageView imageView) {
+        Context context = BaseApp.getAppCtx();
+        Glide.with(context)
+                .load(url)
+                .fallback(R.mipmap.img_load_default)
+                .error(R.mipmap.img_load_error)
+                .placeholder(R.mipmap.img_loading)
+                .into(imageView);
     }
 
 

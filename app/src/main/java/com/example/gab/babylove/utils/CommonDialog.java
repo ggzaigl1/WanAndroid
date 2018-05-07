@@ -1,6 +1,5 @@
 package com.example.gab.babylove.utils;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
