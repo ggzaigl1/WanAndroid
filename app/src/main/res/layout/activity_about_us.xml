@@ -5,6 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
         tools:context=".ui.main.activity.AboutActivity">
 
     <com.scwang.smartrefresh.header.flyrefresh.MountainSceneView
@@ -39,6 +41,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
+                    android:fitsSystemWindows="true"
+                    android:clipToPadding="true"
                     app:navigationIcon="?attr/homeAsUpIndicator"
                     app:title="@string/about_us"/>
         </android.support.design.widget.CollapsingToolbarLayout>

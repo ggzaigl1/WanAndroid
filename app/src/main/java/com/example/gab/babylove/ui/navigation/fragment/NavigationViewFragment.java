@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import dmax.dialog.SpotsDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -73,12 +74,13 @@ public class NavigationViewFragment extends BaseFragment {
      * 列表数据加载
      */
     private void getNaviList() {
-        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
+        SpotsDialog dialog = new SpotsDialog(getActivity());dialog.show();
+//        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
         RequestUtils.create(ApiService.class)
                 .getNaviList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<List<NavigationBean>>>(progressDialog) {
+                .subscribe(new NetCallBack<BeanModule<List<NavigationBean>>>() {
                     @Override
                     protected void onSuccess(BeanModule<List<NavigationBean>> navigationBeanBeanModule) {
                         if (null != navigationBeanBeanModule && null != navigationBeanBeanModule.getData()) {
@@ -88,6 +90,7 @@ public class NavigationViewFragment extends BaseFragment {
                                 mNavigationCidAdapter.setNewData(navigationBeanBeanModule.getData().get(mSelectedPos).getArticles());
                             }
                         }
+                        dialog.dismiss();
                     }
 
                     @Override

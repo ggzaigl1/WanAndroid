@@ -12,10 +12,11 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="AppTheme.Toolbar" parent="Widget.AppCompat.ActionBar">
+    <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_54</item>
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>-->
     </style>
 
     <!-- dialog 样式 -->
@@ -33,7 +34,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
 
     <!--白天主题-->
@@ -141,4 +141,16 @@
         <item name="colorControlActivated">#FFCC00</item>
     </style>
 
+    <!-- 使用android样式定制对话框。下一个提供自定义属性:
+        DialogTitleAppearance:样式参考
+        DialogTitleText:字符串
+        DialogSpotColor:颜色
+        DialogSpotCount:整数
+      -->
+    <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">
+        <!--<item name="DialogTitleAppearance">@android:style/TextAppearance.Medium.Inverse</item>-->
+        <item name="DialogTitleText">正在登录中</item>
+        <item name="DialogSpotColor">@android:color/holo_orange_light</item>
+        <item name="DialogSpotCount">4</item>
+    </style>
 </resources>

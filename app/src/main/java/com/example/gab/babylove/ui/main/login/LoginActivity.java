@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -44,6 +45,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -98,8 +100,6 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
             new MaterialDialog.Builder(this).title(R.string.require_acquisition)
                     .content(R.string.default_always_message)
                     .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
-        } else {
-
         }
 
         editPass.addTextChangedListener(new TextWatcher() {
@@ -180,7 +180,10 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
     }
 
     private void login() {
-        IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.user_login);
+//        new SpotsDialog(this, R.style.Custom).show();
+        SpotsDialog dialog = new SpotsDialog(this);
+        dialog.show();
+//        IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.user_login);
 
         String mUserName = editName.getText().toString().trim();//"ggzaigl1"
         String mPassWord = editPass.getText().toString().trim();//"tmdligen"
@@ -193,7 +196,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                 .getLogin(param)
                 .subscribeOn(Schedulers.io())//在IO线程进行网络请求
                 .observeOn(AndroidSchedulers.mainThread())//回到主线程去处理请求结果
-                .subscribe(new NetCallBack<BeanModule<LoginBean>>(progressDialog) {
+                .subscribe(new NetCallBack<BeanModule<LoginBean>>() {
                     @Override
                     protected void onSuccess(BeanModule<LoginBean> login) {
                         if (login.isSuccess()) {
@@ -213,6 +216,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                                 JumpUtils.jump(LoginActivity.this, MainActivity.class, activityOptionsCompat.toBundle());
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent, activityOptionsCompat.toBundle());
+                                dialog.dismiss();
                             }
                         } else {
                             ToastUtils.showShort(login.getErrorMsg());

@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import dmax.dialog.SpotsDialog;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -75,7 +76,6 @@ public class HomeFragment extends BaseFragment {
         initRefresh();
         getData();
 //        mRefreshLayout.autoRefresh();//自动刷新
-        MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
         //通过CollapsingToolbarLayout修改字体颜色
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
@@ -116,7 +116,8 @@ public class HomeFragment extends BaseFragment {
      * banner 轮播图 加载数据 接口
      */
     private void getData() {
-        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
+        SpotsDialog dialog = new SpotsDialog(getActivity());dialog.show();
+//        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
         Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
                 .getBanner()
                 .compose(RxHelper.handleResult())
@@ -135,7 +136,7 @@ public class HomeFragment extends BaseFragment {
             return map;
         }).doOnSubscribe(RequestUtils::addDispos)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<Map<String, Object>>(progressDialog) {
+                .subscribe(new NetCallBack<Map<String, Object>>() {
                     @Override
                     protected void onSuccess(Map<String, Object> map) {
                         List<BannerBean> banner = (List<BannerBean>) map.get("banner");
@@ -172,6 +173,7 @@ public class HomeFragment extends BaseFragment {
                                 mAdapter.setNewData(articleBean.getDatas());
                             }
                         }
+                        dialog.dismiss();
                     }
 
                     @Override

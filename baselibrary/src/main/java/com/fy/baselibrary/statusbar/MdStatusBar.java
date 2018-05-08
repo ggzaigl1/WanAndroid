@@ -28,7 +28,7 @@ import com.fy.baselibrary.utils.ScreenUtils;
 public class MdStatusBar {
 
     /** 状态栏透明度 */
-    public static int statusAlpha = 30;
+    public static int statusAlpha = 0;
 
     /** 导航栏透明度 */
     public static int navAlpha = 0;

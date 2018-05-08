@@ -31,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -90,13 +91,14 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
     }
 
     private void getCourseDetails(int mPageNo) {
-        IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.data_loading);
+        SpotsDialog dialog = new SpotsDialog(this);dialog.show();
+//        IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.data_loading);
         RequestUtils.create(ApiService.class)
                 .getCourseDetails(mPageNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(new NetCallBack<CourseDetails>(progressDialog) {
+                .subscribe(new NetCallBack<CourseDetails>() {
                     @Override
                     protected void onSuccess(CourseDetails t) {
                         if (t.getResult() == 1) {
@@ -117,6 +119,7 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
                                 }
                             }
                         }
+                        dialog.dismiss();
                     }
 
                     @Override

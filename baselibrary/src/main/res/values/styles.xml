@@ -10,7 +10,6 @@
         <!--<item name="colorPrimary">@color/statusBar</item>    &lt;!&ndash; 状态栏 &ndash;&gt;-->
         <!--<item name="colorPrimaryDark">@color/appHeadBg</item> &lt;!&ndash; toolbar &ndash;&gt;-->
         <!--<item name="colorAccent">@color/colorAccent</item>  &lt;!&ndash; 重点 &ndash;&gt;-->
-
         <item name="windowActionBar">false</item><!-- 不显示标题栏 -->
         <item name="windowNoTitle">true</item><!-- 无标题 -->
         <item name="android:windowBackground">@color/white</item><!-- 背景 -->

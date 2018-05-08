@@ -21,6 +21,7 @@ import com.fy.baselibrary.utils.JumpUtils;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import dmax.dialog.SpotsDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -67,18 +68,20 @@ public class SystemFlyFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int id) {
-        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
+//        SpotsDialog dialog = new SpotsDialog(getActivity());dialog.show();
+//        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
 
         RequestUtils.create(ApiService.class)
                 .getArticleList(mPageNo, id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<ArticleBean>>(progressDialog) {
+                .subscribe(new NetCallBack<BeanModule<ArticleBean>>() {
                     @Override
                     protected void onSuccess(BeanModule<ArticleBean> articleBean) {
                         if (null != articleBean && null != articleBean.getData()) {
                             mAdapter.setNewData(articleBean.getData().getDatas());
                         }
+//                        dialog.dismiss();
                     }
 
                     @Override

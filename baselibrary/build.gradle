@@ -35,8 +35,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     testImplementation 'junit:junit:4.12'
     compile "com.android.support:appcompat-v7:$var.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$var.supportLibraryVersion"
@@ -80,11 +80,14 @@ dependencies {
 //    ViewPagerTransforms 切换动画
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
     // 菜单栏
-    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
     //对话框 Material Dialogs
     compile 'com.afollestad.material-dialogs:core:0.9.6.0'
     // Lottie是一个支持Android、iOS、React Native，并由 Adobe After Effects制作aep格式的动画，然后经由bodymovin插件转化渲染为json格式可被移动端本地识别解析的Airbnb开源库。
     //    Lottie实时呈现After Effects动画效果，让应用程序可以像使用静态图片一样轻松地使用动画 Lottie支持API 14及以上。
     compile 'com.airbnb.android:lottie:2.3.0'
     compile 'me.zhanghai.android.materialratingbar:library:1.2.0'
+    //Spots progress dialog  https://github.com/d-max/spots-dialog
+    compile 'com.github.d-max:spots-dialog:0.7@aar'
+
 }

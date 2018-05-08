@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import dmax.dialog.SpotsDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -56,17 +57,19 @@ public class NewsFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList() {
-        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
+        SpotsDialog dialog = new SpotsDialog(getActivity());dialog.show();
+//        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
         RequestUtils.create(ApiService.class)
                 .getTreeList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<List<TreeBean>>>(progressDialog) {
+                .subscribe(new NetCallBack<BeanModule<List<TreeBean>>>() {
                     @Override
                     protected void onSuccess(BeanModule<List<TreeBean>> listBeanModule) {
                         if (null != listBeanModule && null != listBeanModule.getData()) {
                             mAdapter.setNewData(listBeanModule.getData());
                         }
+                        dialog.dismiss();
                     }
 
                     @Override

@@ -38,7 +38,7 @@ public class ACache {
     private ACacheManager mCache;
 
     public static ACache get(Context ctx) {
-        return get(ctx, "MoveNurse");
+        return get(ctx, "WanAndroid");
     }
 
     public static ACache get(Context ctx, String cacheName) {
@@ -51,7 +51,7 @@ public class ACache {
     }
 
     public static ACache get(Context ctx, long max_size, int max_count) {
-        File f = new File(ctx.getExternalCacheDir(), "MoveNurse");
+        File f = new File(ctx.getExternalCacheDir(), "WanAndroid");
         return get(f, max_size, max_count);
     }
 

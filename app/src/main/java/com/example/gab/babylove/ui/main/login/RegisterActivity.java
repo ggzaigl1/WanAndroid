@@ -39,6 +39,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by 初夏小溪 on 2018/4/18 0018.
@@ -87,10 +88,10 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
         ShowEnterAnimation();
     }
 
-    @OnClick({R.id.btn_Register,R.id.fab})
+    @OnClick({R.id.btn_Register, R.id.fab})
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_Register:
                 register();
                 break;
@@ -141,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
 
     public void animateRevealShow() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            Animator mAnimator = ViewAnimationUtils.createCircularReveal(mCardView, mCardView.getWidth()/2,0, mFloatingActionButton.getWidth() / 2, mCardView.getHeight());
+            Animator mAnimator = ViewAnimationUtils.createCircularReveal(mCardView, mCardView.getWidth() / 2, 0, mFloatingActionButton.getWidth() / 2, mCardView.getHeight());
             mAnimator.setDuration(500);
             mAnimator.setInterpolator(new AccelerateInterpolator());
             mAnimator.addListener(new AnimatorListenerAdapter() {
@@ -162,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
 
     public void animateRevealClose() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            Animator mAnimator = ViewAnimationUtils.createCircularReveal(mCardView,mCardView.getWidth()/2,0, mCardView.getHeight(), mFloatingActionButton.getWidth() / 2);
+            Animator mAnimator = ViewAnimationUtils.createCircularReveal(mCardView, mCardView.getWidth() / 2, 0, mCardView.getHeight(), mFloatingActionButton.getWidth() / 2);
             mAnimator.setDuration(500);
             mAnimator.setInterpolator(new AccelerateInterpolator());
             mAnimator.addListener(new AnimatorListenerAdapter() {
@@ -183,9 +184,11 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
         }
 
     }
+
     private void register() {
-        IProgressDialog progressDialog = new IProgressDialog().init(this)
-                .setDialogMsg(R.string.register_loading);
+        SpotsDialog dialog = new SpotsDialog(this);
+        dialog.show();
+//        IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.register_loading);
 
         String mUserName = editRegisterName.getText().toString().trim();
         String mPassWord = editRegisterPass.getText().toString().trim();
@@ -195,10 +198,10 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
         param.put("password", mPassWord);
         param.put("repassword", mPassWord);
         RequestUtils.create(ApiService.class)
-        .getRegister(param)
+                .getRegister(param)
                 .compose(RxHelper.handleResult())
 //                .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(new NetCallBack<LoginBean>(progressDialog) {
+                .subscribe(new NetCallBack<LoginBean>() {
                     @Override
                     protected void onSuccess(LoginBean login) {
                         ACache mCache = ACache.get(BaseApp.getAppCtx());
@@ -210,6 +213,7 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
                         Bundle bundle = new Bundle();
                         bundle.putString("LoginBean", mCache.getAsString("User_Name"));
                         JumpUtils.jump(RegisterActivity.this, MainActivity.class, bundle);
+                        dialog.dismiss();
                     }
 
                     @Override
