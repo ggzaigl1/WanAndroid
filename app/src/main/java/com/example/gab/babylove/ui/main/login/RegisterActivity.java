@@ -218,6 +218,7 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
 
                     @Override
                     protected void updataLayout(int flag) {
+                        dialog.dismiss();
                         LogUtils.e("net updataLayout", flag + "-----");
                     }
                 });

@@ -41,16 +41,16 @@ public class NetworkUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    public static final int NETWORK_WIFI    = 1;    // wifi network
-    public static final int NETWORK_4G      = 4;    // "4G" networks
-    public static final int NETWORK_3G      = 3;    // "3G" networks
-    public static final int NETWORK_2G      = 2;    // "2G" networks
+    public static final int NETWORK_WIFI = 1;    // wifi network
+    public static final int NETWORK_4G = 4;    // "4G" networks
+    public static final int NETWORK_3G = 3;    // "3G" networks
+    public static final int NETWORK_2G = 2;    // "2G" networks
     public static final int NETWORK_UNKNOWN = 5;    // unknown network
-    public static final int NETWORK_NO      = -1;   // no network
+    public static final int NETWORK_NO = -1;   // no network
 
-    private static final int NETWORK_TYPE_GSM      = 16;
+    private static final int NETWORK_TYPE_GSM = 16;
     private static final int NETWORK_TYPE_TD_SCDMA = 17;
-    private static final int NETWORK_TYPE_IWLAN    = 18;
+    private static final int NETWORK_TYPE_IWLAN = 18;
 
 
     /**
@@ -108,6 +108,18 @@ public class NetworkUtils {
             LogUtils.d("isAvailableByPing", result.successMsg);
         }
         return ret;
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager manager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager == null) {
+            return false;
+        }
+        NetworkInfo networkinfo = manager.getActiveNetworkInfo();
+        if (networkinfo == null || !networkinfo.isAvailable()) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -392,6 +404,7 @@ public class NetworkUtils {
 
     /**
      * 把File集合转化成MultipartBody.Part 集合（retrofit 多文件文件上传）
+     *
      * @param files
      * @return
      */
@@ -410,6 +423,7 @@ public class NetworkUtils {
 
     /**
      * 用于把File 集合对象转化成MultipartBody （retrofit 多文件文件上传）
+     *
      * @param files
      * @return
      */
@@ -433,8 +447,9 @@ public class NetworkUtils {
 
     /**
      * 把File集合转化成MultipartBody.Part 集合（retrofit 多文件文件上传）
+     *
      * @param fileType 文件类型（如图片："image/"；视频："video/"）
-     * @param key     后台根据此 key获取数据（对应 通过控件id 获取控件）
+     * @param key      后台根据此 key获取数据（对应 通过控件id 获取控件）
      * @param files
      * @return
      */

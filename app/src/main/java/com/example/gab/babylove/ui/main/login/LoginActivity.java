@@ -225,7 +225,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
 
                     @Override
                     protected void updataLayout(int flag) {
-
+                        dialog.dismiss();
                     }
                 });
     }

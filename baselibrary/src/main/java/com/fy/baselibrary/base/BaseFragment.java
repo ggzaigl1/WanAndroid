@@ -41,10 +41,10 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if (null == mRootView) {
             mRootView = inflater.inflate(setContentLayout(), container, false);
             unbinder = ButterKnife.bind(this, mRootView);
-            if (NetworkUtils.isAvailableByPing(getActivity())) {
-                ToastUtils.showShort("好像没有网络耶~");
-            }else {
+            if (NetworkUtils.isNetworkAvailable(getActivity())) {
                 baseInit();
+            }else {
+                ToastUtils.showShort("好像没有网络耶~");
             }
         } else {
             ViewGroup parent = (ViewGroup) mRootView.getParent();

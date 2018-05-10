@@ -1,14 +1,11 @@
 package com.example.gab.babylove.ui.main.fragment;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.example.gab.babylove.R;
@@ -55,8 +52,6 @@ public class HomeFragment extends BaseFragment {
     ConvenientBanner mConvenientBanner;
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.appbar_layout)
     AppBarLayout mAppBarLayout;
     @BindView(R.id.recyclerView)
@@ -74,16 +69,16 @@ public class HomeFragment extends BaseFragment {
         initRecyle();
         initRefresh();
         //给页面设置工具栏
-        if (mCollapsingToolbarLayout != null) {
-            //设置隐藏图片时候ToolBar的颜色
-            mCollapsingToolbarLayout.setContentScrimColor(Color.parseColor("#20C5FA"));
-            //设置工具栏标题
-            mCollapsingToolbarLayout.setTitle("一起玩Android");
-        }
+//        if (mCollapsingToolbarLayout != null) {
+//            //设置隐藏图片时候ToolBar的颜色
+//            mCollapsingToolbarLayout.setContentScrimColor(Color.parseColor("#20C5FA"));
+//            //设置工具栏标题
+//            mCollapsingToolbarLayout.setTitle("一起玩Android");
+//        }
         //通过CollapsingToolbarLayout修改字体颜色
-        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
-        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
-        mContext.setSupportActionBar(toolbar);
+//        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
+//        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
+//        mContext.setSupportActionBar(toolbar);
 //        mRefreshLayout.autoRefresh();//自动刷新
     }
 
