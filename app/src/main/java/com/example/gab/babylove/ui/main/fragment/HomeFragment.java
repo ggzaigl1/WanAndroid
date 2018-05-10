@@ -23,8 +23,6 @@ import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.retrofit.RxHelper;
-import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
-import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.SpfUtils;
@@ -63,7 +61,8 @@ public class HomeFragment extends BaseFragment {
     AppBarLayout mAppBarLayout;
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
-    public static SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.refreshLayout)
+    public SmartRefreshLayout mRefreshLayout;
     ConvenientBanner<BannerBean> bannerView;
     HomeAdapter mAdapter;
     int mPageNo = 0;
@@ -71,15 +70,21 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
-        mRefreshLayout = mRootView.findViewById(R.id.refreshLayout);
+        getData();
         initRecyle();
         initRefresh();
-        getData();
-//        mRefreshLayout.autoRefresh();//自动刷新
+        //给页面设置工具栏
+        if (mCollapsingToolbarLayout != null) {
+            //设置隐藏图片时候ToolBar的颜色
+            mCollapsingToolbarLayout.setContentScrimColor(Color.parseColor("#20C5FA"));
+            //设置工具栏标题
+            mCollapsingToolbarLayout.setTitle("一起玩Android");
+        }
         //通过CollapsingToolbarLayout修改字体颜色
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
         mContext.setSupportActionBar(toolbar);
+//        mRefreshLayout.autoRefresh();//自动刷新
     }
 
     @Override
@@ -116,7 +121,8 @@ public class HomeFragment extends BaseFragment {
      * banner 轮播图 加载数据 接口
      */
     private void getData() {
-        SpotsDialog dialog = new SpotsDialog(getActivity());dialog.show();
+        SpotsDialog dialog = new SpotsDialog(getActivity());
+        dialog.show();
 //        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
         Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
                 .getBanner()
@@ -151,13 +157,6 @@ public class HomeFragment extends BaseFragment {
                                 titles.add(bannerBean.getTitle());
                             }
                             bannerView(pics, urls);
-                            //给页面设置工具栏
-                            if (mCollapsingToolbarLayout != null) {
-                                //设置隐藏图片时候ToolBar的颜色
-                                mCollapsingToolbarLayout.setContentScrimColor(Color.parseColor("#20C5FA"));
-                                //设置工具栏标题
-                                mCollapsingToolbarLayout.setTitle("一起玩Android");
-                            }
                         }
 
                         ArticleBean articleBean = (ArticleBean) map.get("article");
@@ -295,6 +294,7 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         if (null != bannerView) bannerView.startTurning(2000);//开始翻页
+
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.gab.babylove;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.NetworkUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.SystemUtils;
@@ -91,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         mFragmentManager = getSupportFragmentManager();
-
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
         mNewsFragment = new NewsFragment();
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                             ACache mCache = ACache.get(BaseApp.getAppCtx());
                             mCache.clear();
                             SpfUtils.clear();
-                            HomeFragment.mRefreshLayout.autoRefresh();
+                            mHomeFragment.mRefreshLayout.autoRefresh();
                         }).setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss()).create().show();
             } else {
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
         Tv_Name.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
         Tv_Login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
+
     }
 
     private void initBottomNavigation() {
@@ -209,52 +211,57 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_belle) {
-            //美图欣赏
-            JumpUtils.jump(this, BelleActivity.class, null);
-        } else if (id == R.id.nav_website) {
-            //常用网站
-            JumpUtils.jump(this, WebsiteActivity.class, null);
-        } else if (id == R.id.nav_collect) {
-            //我的收藏
-            if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                JumpUtils.jump(this, MyCollectActivity.class, null);
-            } else {
-                JumpUtils.jump(this, LoginActivity.class, null);
-                ToastUtils.showShort("登录之后才能查看已收藏内容");
+        if (!NetworkUtils.isAvailableByPing(getApplicationContext())) {
+            if (id == R.id.nav_belle) {
+                //美图欣赏
+                JumpUtils.jump(this, BelleActivity.class, null);
+            } else if (id == R.id.nav_website) {
+                //常用网站
+                JumpUtils.jump(this, WebsiteActivity.class, null);
+            } else if (id == R.id.nav_collect) {
+                //我的收藏
+                if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                    JumpUtils.jump(this, MyCollectActivity.class, null);
+                } else {
+                    JumpUtils.jump(this, LoginActivity.class, null);
+                    ToastUtils.showShort("登录之后才能查看已收藏内容");
+                }
+            } else if (id == R.id.nav_exit) {
+                SystemUtils.ExitSystem();
+            } else if (id == R.id.nav_night) {
+                //夜间模式
+                //获取当前的模式，设置相反的模式，这里只使用了，夜间和非夜间模式
+                int currentMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                if (currentMode != Configuration.UI_MODE_NIGHT_YES) {
+                    //保存夜间模式状态,Application中可以根据这个值判断是否设置夜间模式
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    //ThemeConfig主题配置，这里只是保存了是否是夜间模式的boolean值
+                    NightModeConfig.getInstance().setNightMode(getApplicationContext(), true);
+                    ToastUtils.showShort("开启夜间模式");
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    NightModeConfig.getInstance().setNightMode(getApplicationContext(), false);
+                    ToastUtils.showShort("关闭夜间模式");
+                }
+                recreate();//需要recreate才能生效
+            } else if (id == R.id.nav_ornamental) {
+                //强身健体
+                JumpUtils.jump(this, OrnamentalListContextActivity.class, null);
             }
+        } else {
+            ToastUtils.showShort("請檢查網絡是否連接");
+        }
+        //关于我们
+        if (id == R.id.nav_about) {
+            JumpUtils.jump(this, AboutActivity.class, null);
         } else if (id == R.id.nav_share) {
             Intent textIntent = new Intent(Intent.ACTION_SEND);
             textIntent.setType("text/plain");
             textIntent.putExtra(Intent.EXTRA_TEXT, "分享");
             startActivity(Intent.createChooser(textIntent, "分享"));
-        } else if (id == R.id.nav_exit) {
-            SystemUtils.ExitSystem();
         } else if (id == R.id.nav_manage) {
 //            工具类
             JumpUtils.jump(this, ToolsActivity.class, null);
-        } else if (id == R.id.nav_about) {
-            //关于我们
-            JumpUtils.jump(this, AboutActivity.class, null);
-        } else if (id == R.id.nav_night) {
-            //夜间模式
-            //获取当前的模式，设置相反的模式，这里只使用了，夜间和非夜间模式
-            int currentMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-            if (currentMode != Configuration.UI_MODE_NIGHT_YES) {
-                //保存夜间模式状态,Application中可以根据这个值判断是否设置夜间模式
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                //ThemeConfig主题配置，这里只是保存了是否是夜间模式的boolean值
-                NightModeConfig.getInstance().setNightMode(getApplicationContext(), true);
-                ToastUtils.showShort("开启夜间模式");
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                NightModeConfig.getInstance().setNightMode(getApplicationContext(), false);
-                ToastUtils.showShort("关闭夜间模式");
-            }
-            recreate();//需要recreate才能生效
-        } else if (id == R.id.nav_ornamental) {
-            //强身健体
-            JumpUtils.jump(this, OrnamentalListContextActivity.class, null);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -282,6 +289,4 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
 }

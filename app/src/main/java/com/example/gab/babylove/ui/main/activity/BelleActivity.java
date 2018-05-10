@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Interpolator;
 
+import com.airbnb.lottie.L;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.GankBean;
@@ -23,12 +24,15 @@ import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
+import com.fy.baselibrary.utils.LogUtils;
+import com.fy.baselibrary.utils.NetworkUtils;
 import com.fy.baselibrary.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.OnRefreshLoadmoreListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,15 +95,15 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
     private void initRefresh() {
         mRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
         mRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
-        mRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
+            public void onLoadMore(RefreshLayout refreshLayout) {
                 mCurPage += 1;
                 getCourseDetails(mCurPage);
             }
 
             @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
+            public void onRefresh(RefreshLayout refreshLayout) {
                 mCurPage = 1;
                 getCourseDetails(1);
             }
@@ -205,7 +209,7 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
             mRefreshLayout.finishRefresh();
         }
         if (mRefreshLayout.isLoading()) {
-            mRefreshLayout.finishLoadmore();
+            mRefreshLayout.finishLoadMore();
         }
     }
 }

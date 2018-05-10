@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fy.baselibrary.utils.LogUtils;
+import com.fy.baselibrary.utils.NetworkUtils;
+import com.fy.baselibrary.utils.ToastUtils;
 import com.fy.baselibrary.utils.cache.ACache;
 
 import butterknife.ButterKnife;
@@ -39,8 +41,11 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if (null == mRootView) {
             mRootView = inflater.inflate(setContentLayout(), container, false);
             unbinder = ButterKnife.bind(this, mRootView);
-
-            baseInit();
+            if (NetworkUtils.isAvailableByPing(getActivity())) {
+                ToastUtils.showShort("好像没有网络耶~");
+            }else {
+                baseInit();
+            }
         } else {
             ViewGroup parent = (ViewGroup) mRootView.getParent();
             if (null != parent) {

@@ -41,22 +41,20 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
         IBaseActivity act = null;
         if (activity instanceof IBaseActivity) {
             act = (IBaseActivity) activity;
+                if (act.setView() != 0){
+                    activity.setContentView(R.layout.activity_base);
+                    LinearLayout linearLRoot = activity.findViewById(R.id.linearLRoot);
 
-            if (act.setView() != 0){
-                activity.setContentView(R.layout.activity_base);
-                LinearLayout linearLRoot = activity.findViewById(R.id.linearLRoot);
+                    if (act.isShowHeadView())initHead(activity);
 
-                if (act.isShowHeadView())initHead(activity);
+                    View view = LayoutInflater.from(activity).inflate(act.setView(), null);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-1, -1);
+                    linearLRoot.addView(view, params);
 
-                View view = LayoutInflater.from(activity).inflate(act.setView(), null);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-1, -1);
-                linearLRoot.addView(view, params);
-
-                StatusLayoutManager slManager = initSLManager(activity);
-                if (null != slManager) activityBean.setSlManager(slManager);
-            }
-
-            act.setStatusBar(activity);
+                    StatusLayoutManager slManager = initSLManager(activity);
+                    if (null != slManager) activityBean.setSlManager(slManager);
+                }
+                act.setStatusBar(activity);
         }
 
         //设置 黄油刀 简化 Android 样板代码
