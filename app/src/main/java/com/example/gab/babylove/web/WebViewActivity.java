@@ -24,6 +24,10 @@ import android.widget.TextView;
 import com.example.gab.babylove.R;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
+import com.fy.baselibrary.utils.ConstantUtils;
+import com.fy.baselibrary.utils.SpfUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,8 +47,10 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
     TextView showError;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
+    String url;
     public static final String TIME_OUT_URL = "https://www.jianshu.com/";
+
+    private List<String> list;
 
     @Override
     public boolean isShowHeadView() {
@@ -85,13 +91,14 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initView() {
+        url = getIntent().getStringExtra("UrlBean");
         //加快HTML网页加载完成的速度，等页面finish再加载图片
         if (Build.VERSION.SDK_INT >= 19) {
             mWebView.getSettings().setLoadsImagesAutomatically(true);
         } else {
             mWebView.getSettings().setLoadsImagesAutomatically(false);
         }
-        mWebView.loadUrl(TIME_OUT_URL);
+        mWebView.loadUrl(url);
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         //设置WebView支持javascript脚本
@@ -167,6 +174,8 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
                 if (!mWebView.getSettings().getLoadsImagesAutomatically()) {
                     mWebView.getSettings().setLoadsImagesAutomatically(true);
                 }
+                int position = SpfUtils.getInt(WebViewActivity.this, url, 0);
+                view.scrollTo(0, position);
             }
 
         });
@@ -204,6 +213,7 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
             return false;
         });
     }
+
     private void startAlipayActivity(String url) {
         Intent intent;
         try {
@@ -236,6 +246,19 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
         }
         super.onDestroy();
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //CacheUtils是我自己封装的SharedPreferences保存工具类
+        //记录上次访问的位置，这里的mArticleContent.aid是我的文章的id，
+        //当然你可用你的文章url作为key，value为你的webview滑动位置即可
+        if (mWebView != null) {
+            int scrollY = mWebView.getScrollY();
+            SpfUtils.putInt(this, url, scrollY);//保存访问的位置
+        }
+    }
+
 
     //改写物理按键——返回的逻辑
     @Override

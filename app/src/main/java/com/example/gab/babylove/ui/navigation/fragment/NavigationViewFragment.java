@@ -13,6 +13,7 @@ import com.example.gab.babylove.ui.navigation.adapter.NavigationViewAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.web.AgentWebActivity;
+import com.example.gab.babylove.web.WebViewActivity;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
@@ -45,8 +46,6 @@ public class NavigationViewFragment extends BaseFragment {
     RecyclerView mRecyclerView_Title;
     @BindView(R.id.rv_context)
     RecyclerView mRecyclerView_Context;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
 
     NavigationViewAdapter mAdapter;
     NavigationCidAdapter mNavigationCidAdapter;
@@ -62,7 +61,6 @@ public class NavigationViewFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
-        mToolbar.setTitle("首页");
         MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
         initRecyle();
         initRecyleCid();
@@ -140,7 +138,8 @@ public class NavigationViewFragment extends BaseFragment {
             NavigationBean.ArticlesBean navigationBean = mNavigationCidAdapter.getData().get(position);
             Bundle bundle = new Bundle();
             bundle.putString("UrlBean", navigationBean.getLink());
-            JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
+//            JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
+            JumpUtils.jump(mContext, WebViewActivity.class, bundle);// 详情
 
         });
         mRecyclerView_Context.setAdapter(mNavigationCidAdapter);

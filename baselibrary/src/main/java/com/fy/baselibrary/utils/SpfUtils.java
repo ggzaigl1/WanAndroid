@@ -18,13 +18,15 @@ public class SpfUtils {
 //	  DDMS->File Explorer /<package name>/shared_prefs/setting.xml
 
     private static String spfFileName = "fySpf";
+    private static final String NAME = "huxiu";
+    private static SharedPreferences sp = null;
 
     private SpfUtils() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
-    private static SharedPreferences getSpf(){
+    private static SharedPreferences getSpf() {
         Context ctx = BaseApp.getAppCtx();
         SharedPreferences mSpf = ctx.getSharedPreferences(spfFileName, Context.MODE_PRIVATE);
 
@@ -48,7 +50,7 @@ public class SpfUtils {
      * 从默认的SharedPreferences文件 取String数据
      *
      * @param key
-     * @return   没有对应的key 默认返回的""
+     * @return 没有对应的key 默认返回的""
      */
     public static String getSpfSaveStr(String key) {
 
@@ -72,7 +74,7 @@ public class SpfUtils {
      * 从默认的SharedPreferences文件 取int数据
      *
      * @param key
-     * @return   没有对应的key  默认返回-1值
+     * @return 没有对应的key  默认返回-1值
      */
     public static int getSpfSaveInt(String key) {
 
@@ -81,10 +83,11 @@ public class SpfUtils {
 
     /**
      * 向默认的SharedPreferences文件保存boolean内容
+     *
      * @param key
      * @param value
      */
-    public static boolean saveBooleanToSpf(String key, boolean value){
+    public static boolean saveBooleanToSpf(String key, boolean value) {
         SharedPreferences.Editor editor = getSpf().edit();
 
         editor.putBoolean(key, value);
@@ -96,7 +99,7 @@ public class SpfUtils {
      * 从默认的SharedPreferences文件获取 boolean数据
      *
      * @param key
-     * @return      没有对应的key 默认返回false
+     * @return 没有对应的key 默认返回false
      */
     public static boolean getSpfSaveBoolean(String key) {
 
@@ -106,6 +109,7 @@ public class SpfUtils {
 
     /**
      * 获取所有键值对
+     *
      * @return
      */
     public Map<String, ?> getAll() {
@@ -124,6 +128,7 @@ public class SpfUtils {
 
     /**
      * 删除已存内容
+     *
      * @param key The key of sp.
      */
     public static void remove(@NonNull final String key) {
@@ -132,6 +137,7 @@ public class SpfUtils {
 
     /**
      * Remove the preference in sp.
+     *
      * @param key      The key of sp.
      * @param isCommit True to use {@link SharedPreferences.Editor#commit()},
      *                 false to use {@link SharedPreferences.Editor#apply()}
@@ -144,13 +150,16 @@ public class SpfUtils {
         }
     }
 
-    /** 清除所有数据 */
+    /**
+     * 清除所有数据
+     */
     public static void clear() {
         clear(false);
     }
 
     /**
      * 清除所有数据
+     *
      * @param isCommit True to use {@link SharedPreferences.Editor#commit()},
      *                 false to use {@link SharedPreferences.Editor#apply()}
      */
@@ -162,4 +171,40 @@ public class SpfUtils {
         }
     }
 
+    /***********************************************************************************************/
+
+    // 存Strings
+    public static void putString(Context context, String key, String value) {
+        if (sp == null) {
+            sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        }
+        sp.edit().putString(key, value).commit();
+    }
+
+
+    // 取String
+    public static String getString(Context context, String key, String defValue) {
+        if (sp == null) {
+            sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        }
+        return sp.getString(key, defValue);
+    }
+
+
+    //存Int值
+    public static void putInt(Context context, String key, int value) {
+        if (sp == null) {
+            sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        }
+        sp.edit().putInt(key, value).commit();
+    }
+
+
+    //取int值
+    public static int getInt(Context context, String key, int defValue) {
+        if (sp == null) {
+            sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+        }
+        return sp.getInt(key, defValue);
+    }
 }
