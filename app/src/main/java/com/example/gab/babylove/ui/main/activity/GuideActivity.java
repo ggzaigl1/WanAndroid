@@ -104,7 +104,7 @@ public class GuideActivity extends AppCompatActivity {
     @SuppressWarnings("deprecation")
     private void initLayout() {
         ViewPager viewPager = findViewById(R.id.viewPager);
-        int[] img = new int[]{R.mipmap.loading, R.mipmap.loading, R.mipmap.loading};
+        int[] img = new int[]{R.mipmap.bg, R.mipmap.bg, R.mipmap.bg};
 
         imgViews = new ImageView[img.length];
         for (int i = 0; i < imgViews.length; i++) {
