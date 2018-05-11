@@ -2,8 +2,11 @@ package com.example.gab.babylove;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,25 +15,34 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.main.activity.AboutActivity;
 import com.example.gab.babylove.ui.main.activity.BelleActivity;
 import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
 import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
 import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
+import com.example.gab.babylove.ui.main.activity.SearchActivity;
 import com.example.gab.babylove.ui.main.activity.ToolsActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
@@ -39,8 +51,12 @@ import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.example.gab.babylove.ui.news.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.NightModeConfig;
+import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.retrofit.BeanModule;
+import com.fy.baselibrary.retrofit.NetCallBack;
+import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
@@ -51,7 +67,12 @@ import com.fy.baselibrary.utils.SystemUtils;
 import com.fy.baselibrary.utils.ToastUtils;
 import com.fy.baselibrary.utils.cache.ACache;
 
+import java.util.List;
+
 import butterknife.BindView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 主方法
@@ -104,12 +125,12 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
 
         initBottomNavigation();
         switchContent(mHomeFragment);
+        setSupportActionBar(mToolbar);
         mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
-        mToolbar.setTitle("玩Android");
         View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);//
         ImageView imageView = headerView.findViewById(R.id.headerView);
         Tv_Login = headerView.findViewById(R.id.tv_login);//点击登录
@@ -267,6 +288,31 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         }
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main_search, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setQueryHint("搜索知识点");
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("query", query);
+                JumpUtils.jump(MainActivity.this, SearchActivity.class, bundle);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
+
     }
 
     //退出程序

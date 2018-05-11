@@ -98,6 +98,11 @@
                 android:name="com.example.gab.babylove.ui.main.activity.MyCollectActivity"
                 android:label="@string/collect"
                 android:screenOrientation="portrait"/>
+        <!-- 搜索 -->
+        <activity
+                android:name="com.example.gab.babylove.ui.main.activity.SearchActivity"
+                android:label="@string/search"
+                android:screenOrientation="portrait"/>
         <!-- 知识体系 详情 -->
         <activity
                 android:name="com.example.gab.babylove.ui.news.activity.SystemActivity"

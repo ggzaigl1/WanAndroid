@@ -17,8 +17,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/appHeadBg"
+                app:title="@string/app_name"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:titleTextColor="@color/white">
+            <!--app:subtitle="详情信息"-->
+<!---->
+
         </android.support.v7.widget.Toolbar>
 
         <FrameLayout

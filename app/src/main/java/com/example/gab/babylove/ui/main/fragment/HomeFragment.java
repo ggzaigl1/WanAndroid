@@ -256,7 +256,7 @@ public class HomeFragment extends BaseFragment {
                         }
                     } else {
                         JumpUtils.jump(mContext, LoginActivity.class, null);
-                        ToastUtils.showShort("登录之后才能查看已收藏内容");
+                        ToastUtils.showShort(R.string.collect_login);
                     }
                     break;
             }

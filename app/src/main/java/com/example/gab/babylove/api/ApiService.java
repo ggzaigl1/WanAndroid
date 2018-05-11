@@ -135,7 +135,7 @@ public interface ApiService {
     @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("lg/collect/{id}/json")
-    Observable<BeanModule<Object>> getCollectArticle(@Path("id") int articleId ,
+    Observable<BeanModule<Object>> getCollectArticle(@Path("id") int articleId,
                                                      @Field("reason") String reason);
 
     /**
@@ -153,8 +153,7 @@ public interface ApiService {
     @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("lg/uncollect/{id}/json")
-    Observable<BeanModule<Object>> unMyCollectArticle(@Path("id") int articleId,
-                                                      @Field("originId") int originId);
+    Observable<BeanModule<Object>> unMyCollectArticle(@Path("id") int articleId, @Field("originId") int originId);
 
     /**
      * 运动课程 ---运动列表
@@ -170,6 +169,13 @@ public interface ApiService {
     @GET("http://api.fithub.cc/api/v44/train/course")
     Observable<CourseDetails> getCourseDetails(@Query("id") int id);
 
+    /**
+     * 搜索
+     */
+    @FormUrlEncoded
+    @Headers({"url_name:user"})
+    @POST("article/query/{id}/json")
+    Observable<BeanModule<ArticleBean>> getQuery(@Path("id") int articleId, @Field("k") String queryKey);
 
     /**
      * 多图片上传

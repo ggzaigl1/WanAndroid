@@ -39,6 +39,8 @@
     <string name="nav_context">https://github.com/ggzaigl1</string>
     <string name="tools_clear_cache">是否清除缓存</string>
     <string name="zero_k">0K</string>
+    <string name="collect_login">登录之后才能收藏或查看已收藏内容</string>
+    <string name="search_no_text">没有搜索到相关内容~"</string>
     <string name="tools_cannot_application">无法打开应用市场</string>
 
     <!-- navigation_drawer string 资源 -->
@@ -46,6 +48,7 @@
     <string name="tools">设置</string>
     <string name="website">常用网站 </string>
     <string name="collect">我的收藏 </string>
+    <string name="search">搜索详情 </string>
     <string name="knowledge">知识体系 </string>
     <string name="about_us">关于我们</string>
     <string name="share">分享</string>
