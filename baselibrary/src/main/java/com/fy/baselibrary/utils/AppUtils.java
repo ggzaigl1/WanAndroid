@@ -1,14 +1,20 @@
 package com.fy.baselibrary.utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.Uri;
+import android.os.Environment;
 
+import com.ashokvarma.bottomnavigation.utils.Utils;
 import com.fy.baselibrary.application.BaseApp;
 
+import java.io.File;
 import java.util.List;
 
 import static android.content.Context.ACTIVITY_SERVICE;
@@ -19,6 +25,9 @@ import static android.content.Context.ACTIVITY_SERVICE;
  * Created by fangs on 2017/3/1.
  */
 public class AppUtils {
+
+    // 下载存储的文件名
+    private static final String DOWNLOAD_NAME = "channelWe";
 
     private AppUtils() {
         /* cannot be instantiated */
@@ -43,6 +52,7 @@ public class AppUtils {
 
     /**
      * 获取当前应用的版本号 versionCode
+     *
      * @return
      */
     public static int getVersionCode() {
@@ -52,32 +62,15 @@ public class AppUtils {
             info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-
             return 1;
         }
         return info.versionCode;
     }
 
-    /**
-     * 获取当前应用的版本名称 versionName
-     * @return
-     */
-    public static String getVersionName() {
-        Context context = BaseApp.getAppCtx();
-        PackageManager packageManager = context.getPackageManager();
-        PackageInfo packageInfo = null;
-        try {
-            packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return "0.0.0";
-        }
-
-        return packageInfo.versionName;
-    }
 
     /**
      * 获取当前应用的 包名
+     *
      * @return
      */
     public static String getLocalPackageName() {
@@ -141,6 +134,13 @@ public class AppUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static void setUpdate(Activity activity) {
+        //安装应用
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory(), DOWNLOAD_NAME)), "application/vnd.android.package-archive");
+        activity.startActivity(intent);
     }
 
     /**

@@ -12,6 +12,7 @@ import com.example.gab.babylove.entity.LoginBean;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.entity.TreeBean;
 import com.example.gab.babylove.entity.ProjectBean;
+import com.example.gab.babylove.entity.UpdateAppInfoBean;
 import com.fy.baselibrary.retrofit.BeanModule;
 
 import java.util.ArrayList;
@@ -130,13 +131,20 @@ public interface ApiService {
     Observable<BeanModule<CollectBean>> getCollectList(@Path("id") int page);
 
     /**
+     * 更新
+     */
+    @FormUrlEncoded
+    @Headers({"url_name:user"})
+    @POST("lg/collect/{id}/json")
+    Observable<BeanModule<UpdateAppInfoBean>> getupdata(@Path("id") int articleId, @Field("reason") String reason);
+
+    /**
      * 收藏站内文章
      */
     @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("lg/collect/{id}/json")
-    Observable<BeanModule<Object>> getCollectArticle(@Path("id") int articleId,
-                                                     @Field("reason") String reason);
+    Observable<BeanModule<Object>> getCollectArticle(@Path("id") int articleId, @Field("reason") String reason);
 
     /**
      * 站内文章  取消收藏 (文章列表)
