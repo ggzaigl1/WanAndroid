@@ -4,8 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.ui.main.adapter.WebsiteAdapter;
@@ -19,6 +22,7 @@ import com.fy.baselibrary.utils.JumpUtils;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -42,9 +46,6 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
-    @BindView(R.id.refreshLayout)
-    SmartRefreshLayout mRefreshLayout;
-
     WebsiteAdapter mAdapter;
 
     @Override
@@ -66,7 +67,6 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
     public void initData(Activity activity, Bundle savedInstanceState) {
         initRecyle();
         getBookmarkList();
-        initRefresh();
     }
 
     @Override
@@ -80,27 +80,6 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
     }
 
     /**
-     * recycleview 相关设置
-     */
-    private void initRecyle() {
-        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
-        layoutManager.setFlexWrap(FlexWrap.WRAP);
-        layoutManager.setFlexDirection(FlexDirection.ROW);
-        layoutManager.setAlignItems(AlignItems.STRETCH);
-        layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
-
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new WebsiteAdapter(R.layout.item_website, new ArrayList<>());
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            BookmarkBean bean = mAdapter.getData().get(position);
-            Bundle bundle = new Bundle();
-            bundle.putString("UrlBean", bean.getLink());
-            JumpUtils.jump(this, AgentWebActivity.class, bundle);// 详情
-        });
-        mRecyclerView.setAdapter(mAdapter);
-    }
-
-    /**
      * 常用网站 数据加载
      */
     @SuppressLint("CheckResult")
@@ -110,49 +89,33 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(listBeanModule -> {
-                    if (null != listBeanModule) {
-                        if (mRefreshLayout.isRefreshing()) {
-                            mAdapter.setNewData(listBeanModule.getData());
-                            mRefreshLayout.finishRefresh();
-                        } else if (mRefreshLayout.isLoading()) {
-                            mAdapter.getData().addAll(listBeanModule.getData());
-                            mRefreshLayout.finishLoadMore();
-                            mAdapter.notifyDataSetChanged();
-                        } else {
-                            mAdapter.setNewData(listBeanModule.getData());
-                        }
+                    if (null != listBeanModule && null != listBeanModule.getData()) {
+                        mAdapter.setNewData(listBeanModule.getData());
                     }
                 });
     }
 
+
     /**
-     * 分页加载数据
+     * recycleview 相关设置
      */
-    private void initRefresh() {
-        mRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
-        mRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
-        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshLayout) {
-                getBookmarkList();
-            }
+    private void initRecyle() {
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setAlignItems(AlignItems.STRETCH);
+        layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
 
-            @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
-                getBookmarkList();
-            }
+//        new LinearLayoutManager(this)
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new WebsiteAdapter(R.layout.item_website, new ArrayList<>());
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            BookmarkBean bean = mAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("UrlBean", bean.getLink());
+            JumpUtils.jump(this, AgentWebActivity.class, bundle);// 详情
         });
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mRefreshLayout.isRefreshing()) {
-            mRefreshLayout.finishRefresh();
-        }
-        if (mRefreshLayout.isLoading()) {
-            mRefreshLayout.finishLoadMore();
-        }
+//        mAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

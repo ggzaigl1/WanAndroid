@@ -6,6 +6,8 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.example.gab.babylove.R;
@@ -241,6 +243,7 @@ public class HomeFragment extends BaseFragment {
             bundle.putString("UrlBean", bean.getLink());
             JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
         });
+        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:

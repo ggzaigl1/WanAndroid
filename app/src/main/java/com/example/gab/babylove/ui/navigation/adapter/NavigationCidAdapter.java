@@ -28,7 +28,7 @@ public class NavigationCidAdapter extends BaseQuickAdapter<NavigationBean.Articl
         TextView tv_date = helper.getView(R.id.tv_date);
         tv_date.setText(item.getTitle());
         tv_date.setTextColor(ResourceUtils.getRandomColor());
-        tv_date.setBackground(SelectUtils.getTagSelector(R.drawable.shape_tag));
+//        tv_date.setBackground(SelectUtils.getTagSelector(R.drawable.item_selector));
     }
 
 }

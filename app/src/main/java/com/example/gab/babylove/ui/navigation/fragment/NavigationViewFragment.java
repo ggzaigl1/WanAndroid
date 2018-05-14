@@ -72,7 +72,8 @@ public class NavigationViewFragment extends BaseFragment {
      * 列表数据加载
      */
     private void getNaviList() {
-        SpotsDialog dialog = new SpotsDialog(getActivity());dialog.show();
+        SpotsDialog dialog = new SpotsDialog(getActivity());
+        dialog.show();
 //        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
         RequestUtils.create(ApiService.class)
                 .getNaviList()
@@ -125,6 +126,12 @@ public class NavigationViewFragment extends BaseFragment {
         mRecyclerView_Title.setAdapter(mAdapter);
     }
 
+    private LinearLayoutManager mManager;
+    private boolean needScroll;
+    private int index;
+    private boolean isClickTab;
+
+
     private void initRecyleCid() {
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getActivity());
         layoutManager.setFlexWrap(FlexWrap.WRAP);
@@ -134,6 +141,33 @@ public class NavigationViewFragment extends BaseFragment {
         mRecyclerView_Context.scrollToPosition(0);
         mRecyclerView_Context.setLayoutManager(layoutManager);
         mNavigationCidAdapter = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
+        mRecyclerView_Context.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (needScroll && (newState == RecyclerView.SCROLL_STATE_IDLE)) {
+                    needScroll = false;
+                    int indexDistance = index - mManager.findFirstVisibleItemPosition();
+                    if (indexDistance >= 0 && indexDistance < mRecyclerView_Context.getChildCount()) {
+                        int top = mRecyclerView_Context.getChildAt(indexDistance).getTop();
+                        mRecyclerView_Context.smoothScrollBy(0, top);
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (needScroll) {
+                    needScroll = false;
+                    int indexDistance = index - mManager.findFirstVisibleItemPosition();
+                    if (indexDistance >= 0 && indexDistance < mRecyclerView_Context.getChildCount()) {
+                        int top = mRecyclerView_Context.getChildAt(indexDistance).getTop();
+                        mRecyclerView_Context.smoothScrollBy(0, top);
+                    }
+                }
+            }
+        });
         mNavigationCidAdapter.setOnItemClickListener((adapter, view, position) -> {
             NavigationBean.ArticlesBean navigationBean = mNavigationCidAdapter.getData().get(position);
             Bundle bundle = new Bundle();
@@ -144,4 +178,5 @@ public class NavigationViewFragment extends BaseFragment {
         });
         mRecyclerView_Context.setAdapter(mNavigationCidAdapter);
     }
+
 }

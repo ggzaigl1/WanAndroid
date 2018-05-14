@@ -23,6 +23,8 @@
     <color name="comment_text">#5b5d5c</color>
     <color name="button_normal2">#FFFAF0</color>
     <color name="button_pressed2">#cccccc</color>
+    <color name="while_most_color">#e4e4e4</color>
+    <color name="grey_bg">#EDEDED</color>
 
     <color name="bule">#20C5FA</color>
     <!-- 界面字体颜色 深色-->

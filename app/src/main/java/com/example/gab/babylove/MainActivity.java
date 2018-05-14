@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
 
         // 获取本版本号，是否更新
         int vision = AppUtils.getVersionCode();
-        getVersion(vision);
+//        getVersion(vision);
 
         mFragmentManager = getSupportFragmentManager();
         //初始化 主要的fragment 的

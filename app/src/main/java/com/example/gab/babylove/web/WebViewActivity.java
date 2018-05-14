@@ -98,6 +98,8 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
         } else {
             mWebView.getSettings().setLoadsImagesAutomatically(false);
         }
+        mWebView.setHorizontalScrollBarEnabled(false);//水平不显示
+        mWebView.setVerticalScrollBarEnabled(false); //垂直不显示
         mWebView.loadUrl(url);
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
