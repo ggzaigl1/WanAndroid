@@ -1,5 +1,6 @@
 package com.example.gab.babylove.ui.navigation.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,7 @@ import java.util.List;
 import butterknife.BindView;
 import dmax.dialog.SpotsDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -71,6 +73,7 @@ public class NavigationViewFragment extends BaseFragment {
     /**
      * 列表数据加载
      */
+    @SuppressLint("CheckResult")
     private void getNavigationList() {
         SpotsDialog dialog = new SpotsDialog(getActivity());
         dialog.show();
@@ -79,9 +82,9 @@ public class NavigationViewFragment extends BaseFragment {
                 .getNaviList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<List<NavigationBean>>>() {
+                .subscribe(new Consumer<BeanModule<List<NavigationBean>>>() {
                     @Override
-                    protected void onSuccess(BeanModule<List<NavigationBean>> navigationBeanBeanModule) {
+                    public void accept(BeanModule<List<NavigationBean>> navigationBeanBeanModule) throws Exception {
                         if (null != navigationBeanBeanModule && null != navigationBeanBeanModule.getData()) {
                             mAdapter.setNewData(navigationBeanBeanModule.getData());
                             if (mSelectedPos == 0) {
@@ -90,11 +93,6 @@ public class NavigationViewFragment extends BaseFragment {
                             }
                         }
                         dialog.dismiss();
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
                     }
                 });
     }
@@ -106,9 +104,11 @@ public class NavigationViewFragment extends BaseFragment {
         mAdapter = new NavigationViewAdapter(R.layout.item_navigation, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             NavigationBean navigationBean = mAdapter.getData().get(position);
+            //如果item位置不等于0 就不显示
             if (mSelectedPos != position) {
                 mAdapter.getData().get(mSelectedPos).setSelected(false);
                 mAdapter.notifyItemChanged(mSelectedPos);
+                // position 位置 赋予给mSelectedPos
                 mSelectedPos = position;
                 mAdapter.getData().get(mSelectedPos).setSelected(true);
                 mAdapter.notifyItemChanged(mSelectedPos);

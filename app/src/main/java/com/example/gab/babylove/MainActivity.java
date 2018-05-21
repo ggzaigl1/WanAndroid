@@ -53,6 +53,7 @@ import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.example.gab.babylove.ui.news.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.NightModeConfig;
+import com.example.gab.babylove.utils.Util;
 import com.example.gab.babylove.widget.CommonProgressDialog;
 import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.application.IBaseActivity;
@@ -512,11 +513,11 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
             } else if ((System.currentTimeMillis() - exitTime) >= 2000) {
-                Snackbar.make(mDrawer, R.string.exit_app, Snackbar.LENGTH_SHORT)
-                        .setActionTextColor(ContextCompat.getColor(this, R.color.white))
-                        .show();
-//                Util.CustomToast.INSTANCE.showToast(MainActivity.this, R.string.exit_app);
-//                T.showLong(R.string.exit_app);
+//                Snackbar.make(mDrawer, R.string.exit_app, Snackbar.LENGTH_SHORT)
+//                        .setActionTextColor(ContextCompat.getColor(this, R.color.white))
+//                        .show();
+                Util.CustomToast.INSTANCE.showToast(MainActivity.this, R.string.exit_app);
+                ToastUtils.showLong(R.string.exit_app);
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();

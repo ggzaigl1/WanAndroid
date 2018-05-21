@@ -1,6 +1,7 @@
 package com.example.gab.babylove.ui.navigation.adapter;
 
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -19,8 +20,11 @@ import java.util.List;
 
 public class NavigationCidAdapter extends BaseQuickAdapter<NavigationBean.ArticlesBean, BaseViewHolder> {
 
+    List<NavigationBean.ArticlesBean> mList;
+
     public NavigationCidAdapter(int layoutResId, @Nullable List<NavigationBean.ArticlesBean> data) {
         super(layoutResId, data);
+        this.mList = data;
     }
 
     @Override
@@ -29,6 +33,8 @@ public class NavigationCidAdapter extends BaseQuickAdapter<NavigationBean.Articl
         tv_date.setText(item.getTitle());
         tv_date.setTextColor(ResourceUtils.getRandomColor());
 //        tv_date.setBackground(SelectUtils.getTagSelector(R.drawable.item_selector));
+        if (helper.getLayoutPosition() == mList.size() - 1) {
+            //最后一条数据，隐藏时间轴的竖线和水平的分割线
+        }
     }
-
 }
