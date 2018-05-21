@@ -62,16 +62,16 @@ public class NavigationViewFragment extends BaseFragment {
     protected void baseInit() {
         super.baseInit();
         MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
-        initRecyle();
-        initRecyleCid();
-        getNaviList();
+        initRecycler();
+        initRecyclerCid();
+        getNavigationList();
 
     }
 
     /**
      * 列表数据加载
      */
-    private void getNaviList() {
+    private void getNavigationList() {
         SpotsDialog dialog = new SpotsDialog(getActivity());
         dialog.show();
 //        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
@@ -100,7 +100,7 @@ public class NavigationViewFragment extends BaseFragment {
     }
 
 
-    private void initRecyle() {
+    private void initRecycler() {
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView_Title.setLayoutManager(mLinearLayoutManager);
         mAdapter = new NavigationViewAdapter(R.layout.item_navigation, new ArrayList<>());
@@ -126,13 +126,7 @@ public class NavigationViewFragment extends BaseFragment {
         mRecyclerView_Title.setAdapter(mAdapter);
     }
 
-    private LinearLayoutManager mManager;
-    private boolean needScroll;
-    private int index;
-    private boolean isClickTab;
-
-
-    private void initRecyleCid() {
+    private void initRecyclerCid() {
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getActivity());
         layoutManager.setFlexWrap(FlexWrap.WRAP);
         layoutManager.setFlexDirection(FlexDirection.ROW);
@@ -141,33 +135,6 @@ public class NavigationViewFragment extends BaseFragment {
         mRecyclerView_Context.scrollToPosition(0);
         mRecyclerView_Context.setLayoutManager(layoutManager);
         mNavigationCidAdapter = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
-        mRecyclerView_Context.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (needScroll && (newState == RecyclerView.SCROLL_STATE_IDLE)) {
-                    needScroll = false;
-                    int indexDistance = index - mManager.findFirstVisibleItemPosition();
-                    if (indexDistance >= 0 && indexDistance < mRecyclerView_Context.getChildCount()) {
-                        int top = mRecyclerView_Context.getChildAt(indexDistance).getTop();
-                        mRecyclerView_Context.smoothScrollBy(0, top);
-                    }
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (needScroll) {
-                    needScroll = false;
-                    int indexDistance = index - mManager.findFirstVisibleItemPosition();
-                    if (indexDistance >= 0 && indexDistance < mRecyclerView_Context.getChildCount()) {
-                        int top = mRecyclerView_Context.getChildAt(indexDistance).getTop();
-                        mRecyclerView_Context.smoothScrollBy(0, top);
-                    }
-                }
-            }
-        });
         mNavigationCidAdapter.setOnItemClickListener((adapter, view, position) -> {
             NavigationBean.ArticlesBean navigationBean = mNavigationCidAdapter.getData().get(position);
             Bundle bundle = new Bundle();
