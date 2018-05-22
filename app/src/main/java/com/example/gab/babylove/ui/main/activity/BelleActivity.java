@@ -123,7 +123,7 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
                             mRefreshLayout.finishRefresh();
                         } else if (mRefreshLayout.isLoading()) {
                             mAdapter.getData().addAll(gankBean.getResults());
-                            mRefreshLayout.finishLoadmore();
+                            mRefreshLayout.finishLoadMore();
                             mAdapter.notifyDataSetChanged();
                             ToastUtils.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
                         } else {
@@ -144,7 +144,11 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
                 super.onScrollStateChanged(recyclerView, newState);
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findFirstVisibleItemPosition() != 0) {
-                    fabInAnim();
+                    /* 悬浮按钮显示动画 */
+                    if (fab_top.getVisibility() == View.GONE) {
+                        fab_top.setVisibility(View.VISIBLE);
+                        ViewCompat.animate(fab_top).scaleX(1.0F).scaleY(1.0F).alpha(1.0F).setInterpolator(INTERPOLATOR).withLayer().setListener(null).start();
+                    }
                 } else {
                     fabOutAnim();
                 }
@@ -172,13 +176,6 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
         });
     }
 
-    /* 悬浮按钮显示动画 */
-    private void fabInAnim() {
-        if (fab_top.getVisibility() == View.GONE) {
-            fab_top.setVisibility(View.VISIBLE);
-            ViewCompat.animate(fab_top).scaleX(1.0F).scaleY(1.0F).alpha(1.0F).setInterpolator(INTERPOLATOR).withLayer().setListener(null).start();
-        }
-    }
 
     /* 悬浮图标隐藏动画 */
     private void fabOutAnim() {

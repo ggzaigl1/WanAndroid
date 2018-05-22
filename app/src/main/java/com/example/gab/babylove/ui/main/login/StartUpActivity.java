@@ -1,5 +1,6 @@
 package com.example.gab.babylove.ui.main.login;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -100,6 +101,7 @@ public class StartUpActivity extends AppCompatActivity implements IBaseActivity 
     }
 
     //延迟200 毫秒 隐藏 加载图片控件
+    @SuppressLint("CheckResult")
     private void hideLoadView() {
         //显示欢迎页，并设置点击事件（但是不设置点击回调）
 //        loadImg.setVisibility(View.VISIBLE);

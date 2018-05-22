@@ -38,7 +38,6 @@
         <activity
                 android:name="com.example.gab.babylove.ui.main.login.StartUpActivity"
                 android:screenOrientation="portrait"
-                android:launchMode="singleTask"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
