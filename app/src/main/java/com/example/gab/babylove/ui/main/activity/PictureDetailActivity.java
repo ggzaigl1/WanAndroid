@@ -22,7 +22,6 @@ import com.fy.baselibrary.utils.ToastUtils;
 public class PictureDetailActivity extends AppCompatActivity {
 
     private int mCurrentPosition;
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
