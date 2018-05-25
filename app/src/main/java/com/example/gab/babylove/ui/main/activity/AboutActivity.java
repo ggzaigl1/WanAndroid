@@ -1,6 +1,7 @@
 package com.example.gab.babylove.ui.main.activity;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.widget.interpolator.ElasticOutInterpolator;
+import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ResourceUtils;
 import com.scwang.smartrefresh.header.FlyRefreshHeader;
@@ -35,27 +37,56 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 
+import butterknife.BindView;
+
 /**
  * 关于
  * Created by fangs on 2018/4/8.
  */
-public class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity implements IBaseActivity {
 
-    MountainSceneView mAboutUsMountain;
-    Toolbar mToolbar;
-    CollapsingToolbarLayout mAboutUsToolbarLayout;
-    AppBarLayout mAboutUsAppBar;
-    FlyRefreshHeader mFlyRefreshHeader;
-    SmartRefreshLayout mAboutUsRefreshLayout;
-    FloatingActionButton mAboutUsFab;
-    FlyView mAboutUsFlyView;
+    @BindView(R.id.tvAbout)
+    TextView tvAbout;
+    @BindView(R.id.tvAppInformation)
+    TextView tvAppInformation;
+    @BindView(R.id.about_us_content)
     NestedScrollView mScrollView;
-    TextView tvAbout, tvAppInformation;
+    @BindView(R.id.about_us_fly_view)
+    FlyView mAboutUsFlyView;
+    @BindView(R.id.about_us_fab)
+    FloatingActionButton mAboutUsFab;
+    @BindView(R.id.about_us_refresh_layout)
+    SmartRefreshLayout mAboutUsRefreshLayout;
+    @BindView(R.id.about_us_fly_refresh)
+    FlyRefreshHeader mFlyRefreshHeader;
+    @BindView(R.id.about_us_app_bar)
+    AppBarLayout mAboutUsAppBar;
+    @BindView(R.id.about_us_toolbar_layout)
+    CollapsingToolbarLayout mAboutUsToolbarLayout;
+    @BindView(R.id.about_us_toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.about_us_mountain)
+    MountainSceneView mAboutUsMountain;
+
     private View.OnClickListener mThemeListener;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public boolean isShowHeadView() {
+        return false;
+    }
+
+    @Override
+    public int setView() {
+        return R.layout.activity_about_us;
+    }
+
+    @Override
+    public void setStatusBar(Activity activity) {
+
+    }
+
+    @Override
+    public void initData(Activity activity, Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
@@ -64,28 +95,23 @@ public class AboutActivity extends AppCompatActivity {
             //获取样式中的属性值
             TypedValue typedValue = new TypedValue();
             this.getTheme().resolveAttribute(android.R.attr.colorPrimary, typedValue, true);
-            int[] attribute = new int[] { android.R.attr.colorPrimary };
+            int[] attribute = new int[]{android.R.attr.colorPrimary};
             TypedArray array = this.obtainStyledAttributes(typedValue.resourceId, attribute);
             int color = array.getColor(0, Color.TRANSPARENT);
             array.recycle();
             window.setStatusBarColor(color);
         }
-
-        setContentView(R.layout.activity_about_us);
-
-//        MdStatusBar.setTransparentBar(this, R.color.statusBar, R.color.statusBar);
-        tvAbout = findViewById(R.id.tvAbout);
-        tvAppInformation = findViewById(R.id.tvAppInformation);
-        mScrollView = findViewById(R.id.about_us_content);
-        mAboutUsFlyView = findViewById(R.id.about_us_fly_view);
-        mAboutUsFab = findViewById(R.id.about_us_fab);
-        mAboutUsRefreshLayout = findViewById(R.id.about_us_refresh_layout);
-        mFlyRefreshHeader = findViewById(R.id.about_us_fly_refresh);
-        mAboutUsAppBar = findViewById(R.id.about_us_app_bar);
-        mAboutUsToolbarLayout = findViewById(R.id.about_us_toolbar_layout);
-        mToolbar = findViewById(R.id.about_us_toolbar);
-        mAboutUsMountain = findViewById(R.id.about_us_mountain);
         initData();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void reTry() {
+
     }
 
     private void initData() {
@@ -203,4 +229,6 @@ public class AboutActivity extends AppCompatActivity {
         }
         mThemeListener.onClick(null);
     }
+
+
 }
