@@ -14,6 +14,7 @@ import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.ui.main.adapter.CollectAdapter;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -108,17 +110,20 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
                 .getCollectList(mPageNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(collectBeanBeanModule -> {
-                    if (null != collectBeanBeanModule) {
-                        if (mRefreshLayout.isRefreshing()) {
-                            mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
-                            mRefreshLayout.finishRefresh();
-                        } else if (mRefreshLayout.isLoading()) {
-                            mAdapter.getData().addAll(collectBeanBeanModule.getData().getDatas());
-                            mRefreshLayout.finishLoadMore();
-                            mAdapter.notifyDataSetChanged();
-                        } else {
-                            mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
+                .subscribe(new Consumer<BeanModule<CollectBean>>() {
+                    @Override
+                    public void accept(BeanModule<CollectBean> collectBeanBeanModule) throws Exception {
+                        if (null != collectBeanBeanModule) {
+                            if (mRefreshLayout.isRefreshing()) {
+                                mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mAdapter.getData().addAll(collectBeanBeanModule.getData().getDatas());
+                                mRefreshLayout.finishLoadMore();
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
+                            }
                         }
                     }
                 });

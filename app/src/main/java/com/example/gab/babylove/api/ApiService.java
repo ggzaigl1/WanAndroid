@@ -186,6 +186,13 @@ public interface ApiService {
     Observable<BeanModule<ArticleBean>> getQuery(@Path("id") int articleId, @Field("k") String queryKey);
 
     /**
+     * 版本更新
+     */
+    @Headers({"url_name:user"})
+    @GET("http://api.fithub.cc/api/trainitem/trainitemlist")
+    Observable<CourseList> getVersionsUpdata(@Query("pageNo") String page);
+
+    /**
      * 多图片上传
      *
      * @param token

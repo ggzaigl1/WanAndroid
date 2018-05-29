@@ -17,9 +17,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.entity.CourseList;
 import com.example.gab.babylove.widget.CustomDialog;
 import com.fy.baselibrary.application.IBaseActivity;
+import com.fy.baselibrary.retrofit.NetCallBack;
+import com.fy.baselibrary.retrofit.RequestUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,6 +35,9 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.net.URLConnection;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 初夏小溪 on 2018/5/28 0028.
@@ -61,6 +69,7 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         file = new File(Environment.getExternalStorageDirectory(), "ldz.apk");
+        getVersionsUpdata();
 //        MainHttp.versionInfo(new ResponseHandler() {
 //
 //            @Override
@@ -97,6 +106,36 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
     @Override
     public void reTry() {
 
+    }
+
+    private void getVersionsUpdata() {
+        RequestUtils.create(ApiService.class)
+                .getVersionsUpdata("")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetCallBack<CourseList>() {
+                    @Override
+                    protected void onSuccess(CourseList t) {
+//                        try {
+//                            String[] versionName = getPackageManager().getPackageInfo("com.jypj.ldz", 0).versionName.replace(".", "-").split("-");
+//                            String[] version = model.version.version.replace(".", "-").split("-");
+//                            if (Integer.valueOf(version[0]) > Integer.valueOf(versionName[0])) {
+//                                doNewVersionUpdate();
+//                            } else if (Integer.valueOf(version[1]) > Integer.valueOf(versionName[1])) {
+//                                doNewVersionUpdate();
+//                            } else if (Integer.valueOf(version[2]) > Integer.valueOf(versionName[2])) {
+//                                doNewVersionUpdate();
+//                            }
+//                        } catch (PackageManager.NameNotFoundException e) {
+//                            e.printStackTrace();
+//                        }
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
     }
 
     private void doNewVersionUpdate() {
@@ -231,24 +270,46 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
         }
     }
 
+    /**
+     * 1、首先我们对Android N及以上做判断；
+     * 2、然后添加flags，表明我们要被授予什么样的临时权限
+     * 3、以前我们直接 Uri.fromFile(apkFile)构建出一个Uri,现在我们使用FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileProvider", apkFile);
+     * 4、BuildConfig.APPLICATION_ID直接是应用的包名
+     *
+     * @param activity
+     */
     public static void install(UpdateActivity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        //判断是否是Android N以及更高版本
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "ldz.apk");
-            //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-            Uri apkUri = FileProvider.getUriForFile(activity, "com.example.gab.babylove.fileprovider", file);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            // 由于没有在Activity环境下启动Activity,设置下面的标签
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //添加这一句表示对目标应用临时授权该Uri所代表的文件
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
-            activity.startActivity(intent);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUrl = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileProvider", file);
+            intent.setDataAndType(contentUrl, "application/vnd.android.package-archive");
         } else {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(activity.file), "application/vnd.android.package-archive");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            activity.startActivity(intent);
-            activity.finish();
         }
+        activity.startActivity(intent);
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "ldz.apk");
+//            //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
+//            Uri apkUri = FileProvider.getUriForFile(activity, "com.example.gab.babylove.fileprovider", file);
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            // 由于没有在Activity环境下启动Activity,设置下面的标签
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            //添加这一句表示对目标应用临时授权该Uri所代表的文件
+//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+//            activity.startActivity(intent);
+//        } else {
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setDataAndType(Uri.fromFile(activity.file), "application/vnd.android.package-archive");
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            activity.startActivity(intent);
+//            activity.finish();
+//        }
     }
 }
