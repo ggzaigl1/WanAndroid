@@ -9,7 +9,7 @@ android {
         targetSdkVersion var.targetSdkVersion
 
         versionCode 1
-        versionName "1.0.5.2"
+        versionName "1.0.6"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true//配置5.0 版本一下可以使用svg
@@ -51,4 +51,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     api project(':baselibrary')
     implementation 'com.bigkoo:convenientbanner:2.0.5'
+
+    implementation 'cn.bingoogolapple:bga-update:1.0.2@aar'
+    implementation 'cn.bingoogolapple:bga-progressbar:1.0.0@aar'
 }

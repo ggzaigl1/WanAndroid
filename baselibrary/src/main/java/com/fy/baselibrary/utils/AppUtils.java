@@ -139,9 +139,13 @@ public class AppUtils {
     public static void setUpdate(Activity activity) {
         //安装应用
         Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setAction(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory(), DOWNLOAD_NAME)), "application/vnd.android.package-archive");
         activity.startActivity(intent);
     }
+
 
     /**
      * 判断app是否在前台还是在后台运行

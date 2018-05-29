@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BabyLove.iml" filepath="$PROJECT_DIR$/BabyLove.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WanAndroid.iml" filepath="$PROJECT_DIR$/WanAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
     </modules>

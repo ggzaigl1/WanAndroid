@@ -1,5 +1,6 @@
 package com.example.gab.babylove.ui.main.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -101,6 +102,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
     /**
      * 我的收藏 数据加载
      */
+    @SuppressLint("CheckResult")
     private void getArticleList(int mPageNo) {
         RequestUtils.create(ApiService.class)
                 .getCollectList(mPageNo)
@@ -144,6 +146,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
     }
 
     //    我的收藏页面, 取消收藏
+    @SuppressLint("CheckResult")
     private void unMycollectArticle(int id, int OriginId, int position) {
         RequestUtils.create(ApiService.class)
                 .unMyCollectArticle(id, OriginId)
