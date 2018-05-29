@@ -69,7 +69,7 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         file = new File(Environment.getExternalStorageDirectory(), "ldz.apk");
-        getVersionsUpdata();
+        getVersionsUpdate();
 //        MainHttp.versionInfo(new ResponseHandler() {
 //
 //            @Override
@@ -108,7 +108,7 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
 
     }
 
-    private void getVersionsUpdata() {
+    private void getVersionsUpdate() {
         RequestUtils.create(ApiService.class)
                 .getVersionsUpdata("")
                 .subscribeOn(Schedulers.io())
