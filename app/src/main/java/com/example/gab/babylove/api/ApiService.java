@@ -12,6 +12,7 @@ import com.example.gab.babylove.entity.LoginBean;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.entity.TreeBean;
 import com.example.gab.babylove.entity.ProjectBean;
+import com.example.gab.babylove.entity.UpDateBean;
 import com.example.gab.babylove.entity.UpdateAppInfoBean;
 import com.fy.baselibrary.retrofit.BeanModule;
 
@@ -189,8 +190,8 @@ public interface ApiService {
      * 版本更新
      */
     @Headers({"url_name:user"})
-    @GET("http://api.fithub.cc/api/trainitem/trainitemlist")
-    Observable<CourseList> getVersionsUpdata(@Query("pageNo") String page);
+    @GET("http://118.31.218.69/lesprint/api/version/versionInfo")
+    Observable<UpDateBean> getVersionsUpdate(@Query("deviceId") String deviceId, @Query("code") String android);
 
     /**
      * 多图片上传

@@ -21,6 +21,7 @@ import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.CourseList;
+import com.example.gab.babylove.entity.UpDateBean;
 import com.example.gab.babylove.widget.CustomDialog;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.NetCallBack;
@@ -49,7 +50,10 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
     private FileOutputStream fos;
     private File file;
     private final Handler mHandler = new MyHandler(this);
-
+    UpDateBean upDateBean;
+    private Button mConfirm;
+    private Button mCancel;
+    private TextView mVersion;
 
     @Override
     public boolean isShowHeadView() {
@@ -70,32 +74,6 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
     public void initData(Activity activity, Bundle savedInstanceState) {
         file = new File(Environment.getExternalStorageDirectory(), "ldz.apk");
         getVersionsUpdate();
-//        MainHttp.versionInfo(new ResponseHandler() {
-//
-//            @Override
-//            public void onSuccess(String response) {
-//                model = new Gson().fromJson(response, new TypeToken<VersionInfo>() {
-//                }.getType());
-//                try {
-//                    String[] versionName = getPackageManager().getPackageInfo("com.jypj.ldz", 0).versionName.replace(".", "-").split("-");
-//                    String[] version = model.version.version.replace(".", "-").split("-");
-//                    if (Integer.valueOf(version[0]) > Integer.valueOf(versionName[0])) {
-//                        doNewVersionUpdate();
-//                    } else if (Integer.valueOf(version[1]) > Integer.valueOf(versionName[1])) {
-//                        doNewVersionUpdate();
-//                    } else if (Integer.valueOf(version[2]) > Integer.valueOf(versionName[2])) {
-//                        doNewVersionUpdate();
-//                    }
-//                } catch (PackageManager.NameNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String message) {
-//
-//            }
-//        });
     }
 
     @Override
@@ -110,25 +88,25 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
 
     private void getVersionsUpdate() {
         RequestUtils.create(ApiService.class)
-                .getVersionsUpdata("")
+                .getVersionsUpdate("", "android")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<CourseList>() {
+                .subscribe(new NetCallBack<UpDateBean>() {
                     @Override
-                    protected void onSuccess(CourseList t) {
-//                        try {
-//                            String[] versionName = getPackageManager().getPackageInfo("com.jypj.ldz", 0).versionName.replace(".", "-").split("-");
-//                            String[] version = model.version.version.replace(".", "-").split("-");
-//                            if (Integer.valueOf(version[0]) > Integer.valueOf(versionName[0])) {
-//                                doNewVersionUpdate();
-//                            } else if (Integer.valueOf(version[1]) > Integer.valueOf(versionName[1])) {
-//                                doNewVersionUpdate();
-//                            } else if (Integer.valueOf(version[2]) > Integer.valueOf(versionName[2])) {
-//                                doNewVersionUpdate();
-//                            }
-//                        } catch (PackageManager.NameNotFoundException e) {
-//                            e.printStackTrace();
-//                        }
+                    protected void onSuccess(UpDateBean upDateBean) {
+                        try {
+                            String[] versionName = getPackageManager().getPackageInfo(" com.example.gab.babylove", 0).versionName.replace(".", "-").split("-");
+                            String[] version = upDateBean.getVersion().getVersion().replace(".", "-").split("-");
+                            if (Integer.valueOf(version[0]) > Integer.valueOf(versionName[0])) {
+                                doNewVersionUpdate();
+                            } else if (Integer.valueOf(version[1]) > Integer.valueOf(versionName[1])) {
+                                doNewVersionUpdate();
+                            } else if (Integer.valueOf(version[2]) > Integer.valueOf(versionName[2])) {
+                                doNewVersionUpdate();
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
@@ -143,49 +121,35 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
         dialog.setContentView(R.layout.dialog_update);
         dialog.setCancelable(false);
         dialog.show();
-        Button confirm = (Button) dialog.findViewById(R.id.positiveButton);
-        Button cancel = (Button) dialog.findViewById(R.id.negativeButton);
-        TextView version = (TextView) dialog.findViewById(R.id.version);
-//        version.setText(model.version.version);
-//        if (!model.version.is_force_update) {
-//            cancel.setVisibility(View.VISIBLE);
-//        }
-        confirm.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                pBar = new ProgressDialog(UpdateActivity.this);
-                pBar.setTitle("正在下载...");
-                pBar.setCancelable(false);
-                pBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                pBar.setButton("取消", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            if (fos != null) {
-                                fos.close();
-                                file.delete();
-                            }
-                            dialog.dismiss();
-//                            if (model.version.is_force_update) {
-//                                finish();
-//                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+        mConfirm = dialog.findViewById(R.id.positiveButton);
+        mCancel = dialog.findViewById(R.id.negativeButton);
+        mVersion = dialog.findViewById(R.id.version);
+        mVersion.setText(upDateBean.getVersion().getVersion());
+        if (!upDateBean.getVersion().isIs_force_update()) {
+            mCancel.setVisibility(View.VISIBLE);
+        }
+        mConfirm.setOnClickListener(arg0 -> {
+            pBar = new ProgressDialog(UpdateActivity.this);
+            pBar.setTitle("正在下载...");
+            pBar.setCancelable(false);
+            pBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            pBar.setButton(DialogInterface.BUTTON_POSITIVE, "取消", (dialog1, which) -> {
+                try {
+                    if (fos != null) {
+                        fos.close();
+                        file.delete();
                     }
-                });
-                downFile();
-            }
+                    dialog1.dismiss();
+                    if (upDateBean.getVersion().isIs_force_update()){
+                        finish();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            downFile();
         });
-        cancel.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                dialog.dismiss();
-            }
-        });
+        mCancel.setOnClickListener(arg0 -> dialog.dismiss());
     }
 
     private void downFile() {
@@ -194,8 +158,7 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
             @Override
             public void run() {
                 try {
-//                    URL url = new URL(model.version.down_url);
-                    URL url = new URL("");
+                    URL url = new URL(upDateBean.getVersion().getDown_url());
                     URLConnection conn = url.openConnection();
                     fileSize = conn.getContentLength();
                     InputStream is = conn.getInputStream();
