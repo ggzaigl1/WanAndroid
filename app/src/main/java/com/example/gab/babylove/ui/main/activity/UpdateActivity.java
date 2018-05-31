@@ -36,6 +36,9 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -74,6 +77,7 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
     public void initData(Activity activity, Bundle savedInstanceState) {
         file = new File(Environment.getExternalStorageDirectory(), "ldz.apk");
         getVersionsUpdate();
+
     }
 
     @Override
@@ -140,7 +144,7 @@ public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
                         file.delete();
                     }
                     dialog1.dismiss();
-                    if (upDateBean.getVersion().isIs_force_update()){
+                    if (upDateBean.getVersion().isIs_force_update()) {
                         finish();
                     }
                 } catch (IOException e) {
