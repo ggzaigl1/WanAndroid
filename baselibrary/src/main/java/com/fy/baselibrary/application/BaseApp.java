@@ -1,13 +1,13 @@
 package com.fy.baselibrary.application;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 
 /**
  * 基础 application
  * Created by fangs on 2017/5/5.
  */
-public class BaseApp extends Application {
+public class BaseApp extends MultiDexApplication {
 
     private static BaseApp mApplication; // 单例模式
 
@@ -21,7 +21,6 @@ public class BaseApp extends Application {
 
 
     }
-
 
     /**
      * 单例模式，获取BTApplication的实例

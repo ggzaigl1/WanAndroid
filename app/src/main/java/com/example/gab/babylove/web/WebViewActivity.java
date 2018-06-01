@@ -50,7 +50,6 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
     String url;
     public static final String TIME_OUT_URL = "https://www.jianshu.com/";
 
-    private List<String> list;
 
     @Override
     public boolean isShowHeadView() {

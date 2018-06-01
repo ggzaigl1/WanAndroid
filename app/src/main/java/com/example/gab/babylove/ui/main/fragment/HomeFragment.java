@@ -18,6 +18,7 @@ import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.example.gab.babylove.web.AgentWebActivity;
+import com.example.gab.babylove.web.WebViewActivity;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
@@ -212,6 +213,7 @@ public class HomeFragment extends BaseFragment {
      *
      * @param id
      */
+    @SuppressLint("CheckResult")
     private void collectArticle(int id) {
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
@@ -222,6 +224,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     //    取消收藏
+    @SuppressLint("CheckResult")
     private void uncollectArticle(int id) {
         RequestUtils.create(ApiService.class)
                 .uncollectArticle(id, "")
@@ -241,7 +244,8 @@ public class HomeFragment extends BaseFragment {
             ArticleBean.DatasBean bean = mAdapter.getData().get(position);
             Bundle bundle = new Bundle();
             bundle.putString("UrlBean", bean.getLink());
-            JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
+//            JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
+            JumpUtils.jump(mContext, WebViewActivity.class, bundle);// 详情
         });
         mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {

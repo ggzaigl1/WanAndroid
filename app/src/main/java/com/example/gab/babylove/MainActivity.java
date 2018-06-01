@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     private StarFragment mStarFragment;
     private Fragment mCurrentFrag; //当前的fragment
     private long exitTime = 0; //保存点击的时间
-    private CommonProgressDialog mProgressDialog;
     @BindView(R.id.fl_content)
     FrameLayout mFlContent;
     @BindView(R.id.bottom_navigation)
