@@ -1,5 +1,6 @@
 package com.example.gab.babylove.ui.main.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +13,13 @@ import android.view.ViewGroup;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
-import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
-import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
-import com.fy.baselibrary.retrofit.RxHelper;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.JumpUtils;
@@ -34,14 +32,8 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import dmax.dialog.SpotsDialog;
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -138,6 +130,7 @@ public class SearchActivity extends AppCompatActivity implements IBaseActivity {
      *
      * @param id
      */
+    @SuppressLint("CheckResult")
     private void collectArticle(int id) {
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
@@ -148,6 +141,7 @@ public class SearchActivity extends AppCompatActivity implements IBaseActivity {
     }
 
     //    取消收藏
+    @SuppressLint("CheckResult")
     private void uncollectArticle(int id) {
         RequestUtils.create(ApiService.class)
                 .uncollectArticle(id, "")

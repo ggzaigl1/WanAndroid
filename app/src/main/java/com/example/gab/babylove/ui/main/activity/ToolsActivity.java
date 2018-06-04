@@ -73,6 +73,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
         }
     }
 
+
     @OnClick({R.id.Ll_cache_clear, R.id.tv_praise})
     @Override
     public void onClick(View view) {

@@ -1,6 +1,7 @@
 package com.example.gab.babylove.widget;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
@@ -50,6 +51,7 @@ public class DragFloatActionButton extends FloatingActionButton {
         return true;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int rawX = (int) event.getRawX();

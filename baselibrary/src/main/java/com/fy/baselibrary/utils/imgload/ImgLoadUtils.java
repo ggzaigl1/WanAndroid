@@ -1,5 +1,6 @@
 package com.fy.baselibrary.utils.imgload;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
 import android.widget.ImageView;
@@ -17,7 +18,6 @@ import java.io.File;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -196,6 +196,7 @@ public class ImgLoadUtils {
      * @param url
      * @param consumer
      */
+    @SuppressLint("CheckResult")
     public static void getImgCachePath(Context context, String url, Consumer<File> consumer) {
         Observable.just(url)
                 .map(s -> {

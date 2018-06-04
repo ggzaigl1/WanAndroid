@@ -2,7 +2,6 @@ package com.example.gab.babylove.ui.main.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
@@ -15,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Interpolator;
 
-import com.airbnb.lottie.L;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.GankBean;
@@ -25,11 +23,8 @@ import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.LogUtils;
-import com.fy.baselibrary.utils.NetworkUtils;
 import com.fy.baselibrary.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.OnRefreshLoadmoreListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;

@@ -27,15 +27,19 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
 //        如果是RecyclerView的第一个子项
         int position = parent.getChildAdapterPosition(view);
-        if (position % 3 == 0 ) {
-            outRect.left = mSpace;
-            outRect.right = 0;
-        } else if (position % 3 == 1){
-            outRect.left = minmSpace;
-            outRect.right = 0;
-        }else if (position % 3 == 2){
-            outRect.left = minmSpace;
-            outRect.right = mSpace;
+        switch (position % 3) {
+            case 0:
+                outRect.left = mSpace;
+                outRect.right = 0;
+                break;
+            case 1:
+                outRect.left = minmSpace;
+                outRect.right = 0;
+                break;
+            case 2:
+                outRect.left = minmSpace;
+                outRect.right = mSpace;
+                break;
         }
     }
 

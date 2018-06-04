@@ -48,10 +48,10 @@ public class CommonProgressDialog extends AlertDialog {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.common_progress_dialog);
-		mProgress = (ProgressBar) findViewById(R.id.progress);
-		mProgressNumber = (TextView) findViewById(R.id.progress_number);
-		mProgressPercent = (TextView) findViewById(R.id.progress_percent);
-		mProgressMessage = (TextView) findViewById(R.id.progress_message);
+		mProgress = findViewById(R.id.progress);
+		mProgressNumber = findViewById(R.id.progress_number);
+		mProgressPercent = findViewById(R.id.progress_percent);
+		mProgressMessage = findViewById(R.id.progress_message);
 		// LayoutInflater inflater = LayoutInflater.from(getContext());
 		mViewUpdateHandler = new Handler() {
 			@Override

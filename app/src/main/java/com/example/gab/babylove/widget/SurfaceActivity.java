@@ -1,5 +1,6 @@
 package com.example.gab.babylove.widget;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -182,6 +183,7 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setListener() {
         playBtn.setOnClickListener(this);
         screenBtn.setOnClickListener(this);
@@ -195,6 +197,7 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {

@@ -20,7 +20,6 @@ import com.example.gab.babylove.ui.main.adapter.OrnamentalContextAdapter;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
-import com.fy.baselibrary.retrofit.dialog.IProgressDialog;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.JumpUtils;
 import com.fy.baselibrary.utils.ResourceUtils;

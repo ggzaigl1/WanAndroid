@@ -1,5 +1,7 @@
 package com.fy.baselibrary.retrofit.cookie;
 
+import android.annotation.SuppressLint;
+
 import com.fy.baselibrary.utils.LogUtils;
 import com.fy.baselibrary.utils.SpfUtils;
 
@@ -15,6 +17,7 @@ import okhttp3.Response;
  */
 public class ReceivedCookiesInterceptor implements Interceptor {
 
+    @SuppressLint("CheckResult")
     @Override
     public Response intercept(Chain chain) throws IOException {
         if (null == chain) LogUtils.d("http", "Receivedchain == null");

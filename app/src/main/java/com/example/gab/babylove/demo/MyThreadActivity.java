@@ -55,7 +55,6 @@ public class MyThreadActivity extends AppCompatActivity implements IBaseActivity
                 //启动二个线程，也即是窗口，开始卖票
                 mt1.start();
                 mt2.start();
-    /****************************分割线***************************************/
                 //总共100张票
                 MyThread1 mt = new MyThread1();
                 //因为要创建二个线程，模拟二个窗口卖票

@@ -1,5 +1,6 @@
 package com.fy.baselibrary.utils;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
@@ -11,8 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 
 /**
  * 低功耗蓝牙工具类
@@ -92,6 +91,7 @@ public class BleUtils {
      * 判断蓝牙是否打开，如果打开就重启蓝牙
      * @param context
      */
+    @SuppressLint("CheckResult")
     public static void reStartBluetooth(final Context context) {
         //先关闭手机蓝牙
         turnOffBluetooth(context);

@@ -11,7 +11,6 @@ import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Environment;
 
-import com.ashokvarma.bottomnavigation.utils.Utils;
 import com.fy.baselibrary.application.BaseApp;
 
 import java.io.File;

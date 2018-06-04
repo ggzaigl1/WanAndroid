@@ -35,7 +35,6 @@ import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
 import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
 import com.example.gab.babylove.ui.main.activity.SearchActivity;
 import com.example.gab.babylove.ui.main.activity.ToolsActivity;
-import com.example.gab.babylove.ui.main.activity.UpdateActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
@@ -44,7 +43,6 @@ import com.example.gab.babylove.ui.news.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.example.gab.babylove.utils.Util;
-import com.example.gab.babylove.widget.CommonProgressDialog;
 import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
@@ -226,54 +224,65 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_belle) {
-            //美图欣赏
-            JumpUtils.jump(this, BelleActivity.class, null);
-        } else if (id == R.id.nav_website) {
-            //常用网站
-            JumpUtils.jump(this, WebsiteActivity.class, null);
-        } else if (id == R.id.nav_collect) {
-            //我的收藏
-            if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                JumpUtils.jump(this, MyCollectActivity.class, null);
-            } else {
-                JumpUtils.jump(this, LoginActivity.class, null);
-                ToastUtils.showShort("登录之后才能查看已收藏内容");
-            }
-        } else if (id == R.id.nav_exit) {
-            SystemUtils.ExitSystem();
-        } else if (id == R.id.nav_night) {
-            //夜间模式
-            //获取当前的模式，设置相反的模式，这里只使用了，夜间和非夜间模式
-            int currentMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-            if (currentMode != Configuration.UI_MODE_NIGHT_YES) {
-                //保存夜间模式状态,Application中可以根据这个值判断是否设置夜间模式
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                //ThemeConfig主题配置，这里只是保存了是否是夜间模式的boolean值
-                NightModeConfig.getInstance().setNightMode(getApplicationContext(), true);
-                ToastUtils.showShort("开启夜间模式");
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                NightModeConfig.getInstance().setNightMode(getApplicationContext(), false);
-                ToastUtils.showShort("关闭夜间模式");
-            }
-            recreate();//需要recreate才能生效
-        } else if (id == R.id.nav_ornamental) {
-            //强身健体
-            JumpUtils.jump(this, OrnamentalListContextActivity.class, null);
-        } else if (id == R.id.nav_about) {
-            //关于我们
+        switch (id) {
+            case R.id.nav_belle:
+                //美图欣赏
+                JumpUtils.jump(this, BelleActivity.class, null);
+                break;
+            case R.id.nav_website:
+                //常用网站
+                JumpUtils.jump(this, WebsiteActivity.class, null);
+                break;
+            case R.id.nav_collect:
+                //我的收藏
+                if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                    JumpUtils.jump(this, MyCollectActivity.class, null);
+                } else {
+                    JumpUtils.jump(this, LoginActivity.class, null);
+                    ToastUtils.showShort("登录之后才能查看已收藏内容");
+                }
+                break;
+            case R.id.nav_exit:
+                SystemUtils.ExitSystem();
+                break;
+            case R.id.nav_night:
+                //夜间模式
+                //获取当前的模式，设置相反的模式，这里只使用了，夜间和非夜间模式
+                int currentMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                if (currentMode != Configuration.UI_MODE_NIGHT_YES) {
+                    //保存夜间模式状态,Application中可以根据这个值判断是否设置夜间模式
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    //ThemeConfig主题配置，这里只是保存了是否是夜间模式的boolean值
+                    NightModeConfig.getInstance().setNightMode(getApplicationContext(), true);
+                    ToastUtils.showShort("开启夜间模式");
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    NightModeConfig.getInstance().setNightMode(getApplicationContext(), false);
+                    ToastUtils.showShort("关闭夜间模式");
+                }
+                recreate();//需要recreate才能生效
+
+                break;
+            case R.id.nav_ornamental:
+                //强身健体
+                JumpUtils.jump(this, OrnamentalListContextActivity.class, null);
+                break;
+            case R.id.nav_about:
+                //关于我们
 //            JumpUtils.jump(this, AboutActivity.class, null);
 //            JumpUtils.jump(this, UpdateActivity.class, null);
-            JumpUtils.jump(this, MyThreadActivity.class, null);
-        } else if (id == R.id.nav_share) {
-            Intent textIntent = new Intent(Intent.ACTION_SEND);
-            textIntent.setType("text/plain");
-            textIntent.putExtra(Intent.EXTRA_TEXT, "分享");
-            startActivity(Intent.createChooser(textIntent, "分享"));
-        } else if (id == R.id.nav_manage) {
+                JumpUtils.jump(this, MyThreadActivity.class, null);
+                break;
+            case R.id.nav_share:
+                Intent textIntent = new Intent(Intent.ACTION_SEND);
+                textIntent.setType("text/plain");
+                textIntent.putExtra(Intent.EXTRA_TEXT, "分享");
+                startActivity(Intent.createChooser(textIntent, "分享"));
+                break;
+            case R.id.nav_manage:
 //            工具类
-            JumpUtils.jump(this, ToolsActivity.class, null);
+                JumpUtils.jump(this, ToolsActivity.class, null);
+                break;
         }
         mDrawer.closeDrawer(GravityCompat.START);
         return true;

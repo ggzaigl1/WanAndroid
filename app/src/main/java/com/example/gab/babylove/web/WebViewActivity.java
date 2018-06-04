@@ -23,13 +23,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.SpfUtils;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;

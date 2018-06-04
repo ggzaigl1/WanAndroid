@@ -20,14 +20,11 @@ import android.widget.TextView;
 import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.CourseList;
 import com.example.gab.babylove.entity.UpDateBean;
 import com.example.gab.babylove.widget.CustomDialog;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.NetCallBack;
 import com.fy.baselibrary.retrofit.RequestUtils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,9 +33,6 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

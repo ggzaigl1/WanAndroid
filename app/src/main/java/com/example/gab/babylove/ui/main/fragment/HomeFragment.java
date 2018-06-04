@@ -1,7 +1,6 @@
 package com.example.gab.babylove.ui.main.fragment;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +16,6 @@ import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
-import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.NetCallBack;

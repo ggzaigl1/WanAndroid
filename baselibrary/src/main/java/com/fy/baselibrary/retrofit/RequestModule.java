@@ -8,7 +8,6 @@ import com.fy.baselibrary.utils.ConstantUtils;
 import com.fy.baselibrary.utils.LogUtils;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 

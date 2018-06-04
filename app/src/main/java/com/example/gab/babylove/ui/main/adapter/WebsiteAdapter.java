@@ -7,7 +7,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.BookmarkBean;
-import com.example.gab.babylove.utils.SelectUtils;
 import com.fy.baselibrary.utils.ResourceUtils;
 
 import java.util.List;
