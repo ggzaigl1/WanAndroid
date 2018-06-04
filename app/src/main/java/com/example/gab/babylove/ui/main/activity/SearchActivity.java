@@ -16,6 +16,7 @@ import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.AgentWebActivity;
+import com.example.gab.babylove.web.WebViewActivity;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
@@ -162,9 +163,7 @@ public class SearchActivity extends AppCompatActivity implements IBaseActivity {
         mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             ArticleBean.DatasBean bean = mAdapter.getData().get(position);
-            Bundle bundle = new Bundle();
-            bundle.putString("UrlBean", bean.getLink());
-            JumpUtils.jump(this, AgentWebActivity.class, bundle);// 详情
+            WebViewActivity.startWebActivity(this, bean.getLink());// 详情
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {

@@ -11,6 +11,7 @@ import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.project.adapter.StarAdapter;
 import com.example.gab.babylove.web.AgentWebActivity;
+import com.example.gab.babylove.web.WebViewActivity;
 import com.fy.baselibrary.base.BaseFragment;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.NetCallBack;
@@ -96,9 +97,7 @@ public class SystemStarFragment extends BaseFragment {
         mAdapter = new StarAdapter(R.layout.item_fly, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             ArticleBean.DatasBean bean = mAdapter.getData().get(position);
-            Bundle bundle = new Bundle();
-            bundle.putString("UrlBean", bean.getLink());
-            JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
+            WebViewActivity.startWebActivity(mContext, bean.getLink());// 详情
         });
         mRecyclerView.setAdapter(mAdapter);
     }

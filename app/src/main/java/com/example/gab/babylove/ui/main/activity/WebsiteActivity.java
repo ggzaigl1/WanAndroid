@@ -15,6 +15,7 @@ import com.example.gab.babylove.ui.main.adapter.WebsiteAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.web.AgentWebActivity;
+import com.example.gab.babylove.web.WebViewActivity;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.RequestUtils;
 import com.fy.baselibrary.statusbar.MdStatusBar;
@@ -111,9 +112,7 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
         mAdapter = new WebsiteAdapter(R.layout.item_website, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             BookmarkBean bean = mAdapter.getData().get(position);
-            Bundle bundle = new Bundle();
-            bundle.putString("UrlBean", bean.getLink());
-            JumpUtils.jump(this, AgentWebActivity.class, bundle);// 详情
+            WebViewActivity.startWebActivity(this, bean.getLink());// 详情
         });
 //        mAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);

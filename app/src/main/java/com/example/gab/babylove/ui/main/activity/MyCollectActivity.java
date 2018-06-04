@@ -13,6 +13,7 @@ import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.ui.main.adapter.CollectAdapter;
 import com.example.gab.babylove.web.AgentWebActivity;
+import com.example.gab.babylove.web.WebViewActivity;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.retrofit.BeanModule;
 import com.fy.baselibrary.retrofit.RequestUtils;
@@ -87,9 +88,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
         mAdapter = new CollectAdapter(R.layout.item_collect_my, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             CollectBean.DatasBean bean = mAdapter.getData().get(position);
-            Bundle bundle = new Bundle();
-            bundle.putString("UrlBean", bean.getLink());
-            JumpUtils.jump(this, AgentWebActivity.class, bundle);// 详情
+            WebViewActivity.startWebActivity(this, bean.getLink());// 详情
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {

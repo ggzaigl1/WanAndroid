@@ -2,6 +2,7 @@ package com.example.gab.babylove.web;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ConstantUtils;
@@ -47,9 +49,9 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
     TextView showError;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    String url;
+    private String url;
     public static final String TIME_OUT_URL = "https://www.jianshu.com/";
-
+    private static final String WEB_URL = "web_url";
 
     @Override
     public boolean isShowHeadView() {
@@ -88,9 +90,16 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
 
     }
 
+    public static void startWebActivity(Context context, String url) {
+        Intent intent = new Intent(context, WebViewActivity.class);
+        intent.putExtra(WEB_URL, url);
+        context.startActivity(intent);
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     private void initView() {
-        url = getIntent().getStringExtra("UrlBean");
+//        url = getIntent().getStringExtra("UrlBean");
+        url = getIntent().getStringExtra(WEB_URL);
         //加快HTML网页加载完成的速度，等页面finish再加载图片
         if (Build.VERSION.SDK_INT >= 19) {
             mWebView.getSettings().setLoadsImagesAutomatically(true);

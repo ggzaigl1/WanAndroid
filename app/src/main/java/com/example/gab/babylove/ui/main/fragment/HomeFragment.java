@@ -106,9 +106,10 @@ public class HomeFragment extends BaseFragment {
 //                .setPageTransformer(new AccordionTransformer())
                 .setOnItemClickListener(position -> {
                     String Ulr = urls.get(position);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("UrlBean", Ulr);
-                    JumpUtils.jump(mContext, AgentWebActivity.class, bundle);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("UrlBean", Ulr);
+//                    JumpUtils.jump(mContext, AgentWebActivity.class, bundle);
+                    WebViewActivity.startWebActivity(getActivity(), Ulr);// 详情
                 })
                 //设置手动影响（设置了该项无法手动切换）
                 .setManualPageable(true);
@@ -242,10 +243,7 @@ public class HomeFragment extends BaseFragment {
         mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             ArticleBean.DatasBean bean = mAdapter.getData().get(position);
-            Bundle bundle = new Bundle();
-            bundle.putString("UrlBean", bean.getLink());
-//            JumpUtils.jump(mContext, AgentWebActivity.class, bundle);// 详情
-            JumpUtils.jump(mContext, WebViewActivity.class, bundle);// 详情
+            WebViewActivity.startWebActivity(getActivity(), bean.getLink());// 详情
         });
         mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
