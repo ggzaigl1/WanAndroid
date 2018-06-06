@@ -1,6 +1,5 @@
 package com.fy.baselibrary.base.dialog;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;

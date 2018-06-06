@@ -149,5 +149,11 @@ public class GuideActivity extends AppCompatActivity {
         exit = true;
         super.onBackPressed();
     }
-
+/**
+ *  调休半天 做西餐 意面 蜡烛 轻音乐 红酒 薯条 蒜蓉鸡翅
+ *
+ *  需要购买鸡翅 牛排 薯条 意面 番茄酱
+ */
 }
+
+
