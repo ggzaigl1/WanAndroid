@@ -6,8 +6,11 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+
+import java.lang.reflect.Method;
 
 /**
  * 屏幕相关的工具类
@@ -63,6 +66,7 @@ public class ScreenUtils {
 
     /**
      * 获得 状态栏 高度
+     *
      * @param context
      * @return
      */
@@ -75,6 +79,7 @@ public class ScreenUtils {
 
     /**
      * 获得 导航栏 高度
+     *
      * @param context
      * @return
      */
@@ -130,6 +135,7 @@ public class ScreenUtils {
 
     /**
      * 根据屏幕宽度与密度计算GridView显示的列数， 最少为三列，并获取Item宽度
+     *
      * @param context
      * @return
      */
@@ -141,5 +147,78 @@ public class ScreenUtils {
         cols = cols < 3 ? 3 : cols;
         int columnSpace = (int) (2 * getScreenDensity(context));
         return (screenWidth - columnSpace * (cols - 1)) / cols;
+    }
+
+    /**
+     * 华为start
+     */
+    //判断是否是华为刘海屏
+    public static boolean hasNotchInScreen(Context context) {
+        boolean ret = false;
+        try {
+            ClassLoader cl = context.getClassLoader();
+            Class HwNotchSizeUtil = cl.loadClass("com.huawei.android.util.HwNotchSizeUtil");
+            Method get = HwNotchSizeUtil.getMethod("hasNotchInScreen");
+            ret = (boolean) get.invoke(HwNotchSizeUtil);
+        } catch (ClassNotFoundException e) {
+            Log.e("test", "hasNotchInScreen ClassNotFoundException");
+        } catch (NoSuchMethodException e) {
+            Log.e("test", "hasNotchInScreen NoSuchMethodException");
+        } catch (Exception e) {
+            Log.e("test", "hasNotchInScreen Exception");
+        } finally {
+            return ret;
+        }
+    }
+
+    //获取华为刘海的高宽
+    public static int[] getNotchSize(Context context) {
+        int[] ret = new int[]{0, 0};
+        try {
+            ClassLoader cl = context.getClassLoader();
+            Class HwNotchSizeUtil = cl.loadClass("com.huawei.android.util.HwNotchSizeUtil");
+            Method get = HwNotchSizeUtil.getMethod("getNotchSize");
+            ret = (int[]) get.invoke(HwNotchSizeUtil);
+        } catch (ClassNotFoundException e) {
+            Log.e("test", "getNotchSize ClassNotFoundException");
+        } catch (NoSuchMethodException e) {
+            Log.e("test", "getNotchSize NoSuchMethodException");
+        } catch (Exception e) {
+            Log.e("test", "getNotchSize Exception");
+        } finally {
+            return ret;
+        }
+    }
+
+    /**
+     * Oppo start
+     */
+    public static boolean hasNotchInScreenAtOppo(Context context) {
+        return context.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
+    }
+
+    /**
+     * voio start
+     */
+    public static final int NOTCH_IN_SCREEN_VOIO = 0x00000020;//是否有凹槽
+    public static final int ROUNDED_IN_SCREEN_VOIO = 0x00000008;//是否有圆角
+
+    public static boolean hasNotchInScreenAtVoio(Context context) {
+        boolean ret = false;
+        try {
+            ClassLoader cl = context.getClassLoader();
+            Class FtFeature = cl.loadClass("com.util.FtFeature");
+            Method get = FtFeature.getMethod("isFeatureSupport", int.class);
+            ret = (boolean) get.invoke(FtFeature, NOTCH_IN_SCREEN_VOIO);
+
+        } catch (ClassNotFoundException e) {
+            Log.e("test", "hasNotchInScreen ClassNotFoundException");
+        } catch (NoSuchMethodException e) {
+            Log.e("test", "hasNotchInScreen NoSuchMethodException");
+        } catch (Exception e) {
+            Log.e("test", "hasNotchInScreen Exception");
+        } finally {
+            return ret;
+        }
     }
 }

@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,6 +54,9 @@ import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.SystemUtils;
 import com.fy.baselibrary.utils.ToastUtils;
 import com.fy.baselibrary.utils.cache.ACache;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import butterknife.BindView;
 
@@ -177,19 +181,19 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     /**
      * 动态添加fragment，不会重复创建fragment
      *
-     * @param to 将要加载的fragment
+     * @param fragment 将要加载的fragment
      */
-    private void switchContent(Fragment to) {
-        if (mCurrentFrag != to) {
-            if (!to.isAdded()) {
+    private void switchContent(Fragment fragment) {
+        if (mCurrentFrag != fragment) {
+            if (!fragment.isAdded()) {
                 if (mCurrentFrag != null) {
                     mFragmentManager.beginTransaction().hide(mCurrentFrag).commit();
                 }
-                mFragmentManager.beginTransaction().add(R.id.fl_content, to).commit();
+                mFragmentManager.beginTransaction().add(R.id.fl_content, fragment).commit();
             } else {
-                mFragmentManager.beginTransaction().hide(mCurrentFrag).show(to).commit();
+                mFragmentManager.beginTransaction().hide(mCurrentFrag).show(fragment).commit();
             }
-            mCurrentFrag = to;
+            mCurrentFrag = fragment;
         }
     }
 
@@ -201,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 break;
             case 1:
                 switchContent(mNewsFragment);
+
                 break;
             case 2:
                 switchContent(mNavigationViewFragment);

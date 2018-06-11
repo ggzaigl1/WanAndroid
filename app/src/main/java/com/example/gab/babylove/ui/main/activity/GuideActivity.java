@@ -43,8 +43,8 @@ public class GuideActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_guide);
         mDefault = getComponentName();
-        mDoublel1 = new ComponentName(getBaseContext(),"com.example.gab.babylove.Test1");
-        mDoublel2 = new ComponentName(getBaseContext(),"com.example.gab.babylove.Test2");
+        mDoublel1 = new ComponentName(getBaseContext(), "com.example.gab.babylove.Test1");
+        mDoublel2 = new ComponentName(getBaseContext(), "com.example.gab.babylove.Test2");
         mPackageManager = getApplicationContext().getPackageManager();
         changeIcon1();
         changeIcon2();
@@ -81,25 +81,31 @@ public class GuideActivity extends AppCompatActivity {
         }
     }
 
-    /** 动态更换icon图标**/
-    public void  changeIcon1(){
+    /**
+     * 动态更换icon图标
+     **/
+    public void changeIcon1() {
         disableComponent(mDefault);
         disableComponent(mDoublel2);
         enableComponent(mDoublel1);
     }
-    public void  changeIcon2(){
+
+    public void changeIcon2() {
         disableComponent(mDefault);
         disableComponent(mDoublel1);
         enableComponent(mDoublel2);
     }
-    private void  enableComponent(ComponentName componentName){
-        mPackageManager.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+
+    private void enableComponent(ComponentName componentName) {
+        mPackageManager.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
     }
-    private void  disableComponent(ComponentName componentName){
-        mPackageManager.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+
+    private void disableComponent(ComponentName componentName) {
+        mPackageManager.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
     }
+
     //显示引导图
     @SuppressWarnings("deprecation")
     private void initLayout() {
@@ -153,6 +159,7 @@ public class GuideActivity extends AppCompatActivity {
  *  调休半天 做西餐 意面 蜡烛 轻音乐 红酒 薯条 蒜蓉鸡翅
  *
  *  需要购买鸡翅 牛排 薯条 意面 番茄酱
+ *
  */
 }
 
