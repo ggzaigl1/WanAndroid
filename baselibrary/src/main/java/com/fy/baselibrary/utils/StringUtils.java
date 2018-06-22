@@ -44,14 +44,18 @@ public class StringUtils {
      * @return @return {@code true}: 相等<br>{@code false}: 不相等
      */
     public static boolean equals(CharSequence a, CharSequence b) {
-        if (a == b) return true;
+        if (a == b) {
+            return true;
+        }
         int length;
         if (a != null && b != null && (length = a.length()) == b.length()) {
             if (a instanceof String && b instanceof String) {
                 return a.equals(b);
             } else {
                 for (int i = 0; i < length; i++) {
-                    if (a.charAt(i) != b.charAt(i)) return false;
+                    if (a.charAt(i) != b.charAt(i)) {
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -113,7 +117,9 @@ public class StringUtils {
      */
     public static String reverse(String s) {
         int len = length(s);
-        if (len <= 1) return s;
+        if (len <= 1) {
+            return s;
+        }
         int mid = len >> 1;
         char[] chars = s.toCharArray();
         char c;
@@ -270,7 +276,9 @@ public class StringUtils {
      * @return 如果字符串长度是1返回的是对应的ascii码，否则返回-1
      */
     private static int oneCn2ASCII(String s) {
-        if (s.length() != 1) return -1;
+        if (s.length() != 1) {
+            return -1;
+        }
         int ascii = 0;
         try {
             byte[] bytes = s.getBytes("GB2312");
@@ -300,7 +308,9 @@ public class StringUtils {
      */
     private static String oneCn2PY(String s) {
         int ascii = oneCn2ASCII(s);
-        if (ascii == -1) return null;
+        if (ascii == -1) {
+            return null;
+        }
         String ret = null;
         if (0 <= ascii && ascii <= 127) {
             ret = String.valueOf((char) ascii);
@@ -322,11 +332,15 @@ public class StringUtils {
      * @return 拼音
      */
     public static String getPYFirstLetter(String s) {
-        if (isSpace(s)) return "";
+        if (isSpace(s)) {
+            return "";
+        }
         String first, py;
         first = s.substring(0, 1);
         py = oneCn2PY(first);
-        if (py == null) return null;
+        if (py == null) {
+            return null;
+        }
         return py.substring(0, 1);
     }
 

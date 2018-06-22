@@ -155,6 +155,8 @@ public class OrnamentalMotionActivity extends AppCompatActivity implements IBase
                 mTvTitle.setText(data.get(mPosition).getTitle());
                 playUrl(data.get(mPosition).getLink());
                 break;
+            default:
+                break;
         }
     }
 
@@ -184,7 +186,9 @@ public class OrnamentalMotionActivity extends AppCompatActivity implements IBase
         } else {
             isPause = false;
             mediaPlayer.setDisplay(holder);
-            if (isPlay) mediaPlayer.start();
+            if (isPlay) {
+                mediaPlayer.start();
+            }
         }
     }
 
@@ -256,8 +260,9 @@ public class OrnamentalMotionActivity extends AppCompatActivity implements IBase
         //更改播放状态
         isPlay = true;
         //更改状态
-        if (isFirstLoadVideo)
+        if (isFirstLoadVideo) {
             isFirstLoadVideo = false;
+        }
     }
 
     //seekTo()是异步的方法 在此监听是否执行完毕

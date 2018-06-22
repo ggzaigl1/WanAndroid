@@ -234,10 +234,14 @@ public abstract class CommonDialog extends DialogFragment {
      * @param isDismiss 是否拦截关闭对话框 命令
      */
     public void dismiss(boolean isDismiss) {
-        if (isDismiss) return;
+        if (isDismiss) {
+            return;
+        }
 
         super.dismiss();
-        if (null != dialogList)dialogList.onDismiss();
+        if (null != dialogList) {
+            dialogList.onDismiss();
+        }
     }
 
 

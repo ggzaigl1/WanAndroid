@@ -76,7 +76,9 @@ public class HeaderAndFooterWrapper extends RecyclerView.Adapter<RecyclerView.Vi
                 return layoutManager.getSpanCount();
             }
 
-            if (oldLookup != null) return oldLookup.getSpanSize(position);
+            if (oldLookup != null) {
+                return oldLookup.getSpanSize(position);
+            }
 
             return 1;
         });

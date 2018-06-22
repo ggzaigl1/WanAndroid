@@ -106,8 +106,9 @@ public class TransfmtUtils {
      * @return
      */
     public static String binaryString2hexString(String bString) {
-        if (bString == null || bString.equals("") || bString.length() % 8 != 0)
+        if (bString == null || "".equals(bString) || bString.length() % 8 != 0) {
             return null;
+        }
         StringBuffer tmp = new StringBuffer();
         int iTmp = 0;
         for (int i = 0; i < bString.length(); i += 4) {
@@ -127,7 +128,7 @@ public class TransfmtUtils {
      * @return
      */
     public static byte[] hexStringToBytes(String hexString) {
-        if (hexString == null || hexString.equals("")) {
+        if (hexString == null || "".equals(hexString)) {
             return null;
         }
         //将字符串中的字符 都转换为大写
@@ -173,7 +174,7 @@ public class TransfmtUtils {
      * @param s
      */
     public static String getMD5(String s) {
-        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+        char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 //        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
         try {
             byte[] btInput = s.getBytes("utf-8");
@@ -181,7 +182,7 @@ public class TransfmtUtils {
             mdInst.update(btInput);
             byte[] md = mdInst.digest();
             int j = md.length;
-            char str[] = new char[j * 2];
+            char[] str = new char[j * 2];
             int k = 0;
             for (int i = 0; i < j; i++) {
                 byte byte0 = md[i];

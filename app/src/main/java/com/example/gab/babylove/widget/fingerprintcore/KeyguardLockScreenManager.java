@@ -1,4 +1,4 @@
-package com.example.gab.babylove.widget.fingerprintCore;
+package com.example.gab.babylove.widget.fingerprintcore;
 
 import android.app.Activity;
 import android.app.KeyguardManager;

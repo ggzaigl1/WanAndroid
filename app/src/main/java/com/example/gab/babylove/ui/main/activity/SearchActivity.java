@@ -177,6 +177,8 @@ public class SearchActivity extends AppCompatActivity implements IBaseActivity {
                         ToastUtils.showShort(R.string.collect_login);
                     }
                     break;
+                default:
+                    break;
             }
         });
         mRecyclerView.setAdapter(mAdapter);

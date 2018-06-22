@@ -262,6 +262,8 @@ public class HomeFragment extends BaseFragment {
                         ToastUtils.showShort(R.string.collect_login);
                     }
                     break;
+                default:
+                    break;
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -291,14 +293,18 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (null != bannerView) bannerView.startTurning(2000);//开始翻页
+        if (null != bannerView) {
+            bannerView.startTurning(2000);//开始翻页
+        }
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (null != bannerView) bannerView.stopTurning();//停止翻
+        if (null != bannerView) {
+            bannerView.stopTurning();//停止翻
+        }
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.finishRefresh();
         }

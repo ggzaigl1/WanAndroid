@@ -146,6 +146,8 @@ public class TintUtils {
             case 3:
                 tv.setCompoundDrawables(null, null, null, drawable);
                 break;
+            default:
+                break;
         }
     }
 

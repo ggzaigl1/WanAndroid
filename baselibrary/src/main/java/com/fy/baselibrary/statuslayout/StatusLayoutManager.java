@@ -76,20 +76,23 @@ public class StatusLayoutManager implements Serializable {
 
     /** 显示空数据 */
     public void showEmptyData() {
-        if(inflateLayout(LAYOUT_EMPTYDATA_ID))
+        if(inflateLayout(LAYOUT_EMPTYDATA_ID)) {
             showHideViewById(LAYOUT_EMPTYDATA_ID);
+        }
     }
 
     /** 显示网络异常 */
     public void showNetWorkError() {
-        if(inflateLayout(LAYOUT_NETWORK_ERROR_ID))
+        if(inflateLayout(LAYOUT_NETWORK_ERROR_ID)) {
             showHideViewById(LAYOUT_NETWORK_ERROR_ID);
+        }
     }
 
     /** 显示异常 */
     public void showError() {
-        if(inflateLayout(LAYOUT_ERROR_ID))
+        if(inflateLayout(LAYOUT_ERROR_ID)) {
             showHideViewById(LAYOUT_ERROR_ID);
+        }
     }
 
     /**
@@ -104,7 +107,9 @@ public class StatusLayoutManager implements Serializable {
             targetContext.getParentView().removeViewAt(2);
         }
 
-        if (id == LAYOUT_CONTENT_ID) return;
+        if (id == LAYOUT_CONTENT_ID) {
+            return;
+        }
 
 
         for (int i = 0; i < layoutSparseArray.size(); i++) {
@@ -121,7 +126,9 @@ public class StatusLayoutManager implements Serializable {
 
     private boolean inflateLayout(int id) {
         boolean isShow = true;
-        if (layoutSparseArray.get(id) != null) return isShow;
+        if (layoutSparseArray.get(id) != null) {
+            return isShow;
+        }
         switch (id) {
             case LAYOUT_NETWORK_ERROR_ID:
                 isShow = addLayoutResId(netWorkErrorRetryViewId, LAYOUT_NETWORK_ERROR_ID);
@@ -131,6 +138,8 @@ public class StatusLayoutManager implements Serializable {
                 break;
             case LAYOUT_EMPTYDATA_ID:
                 isShow = addLayoutResId(emptyDataRetryViewId, LAYOUT_EMPTYDATA_ID);
+                break;
+            default:
                 break;
         }
 
@@ -142,7 +151,9 @@ public class StatusLayoutManager implements Serializable {
     public void retryLoad(View view, int id) {
         View retryView = view.findViewById(retryViewId != 0 ? retryViewId : id);
 
-        if (retryView == null || onRetryListener == null) return;
+        if (retryView == null || onRetryListener == null) {
+            return;
+        }
 
         retryView.setOnClickListener(v -> onRetryListener.onRetry());
     }

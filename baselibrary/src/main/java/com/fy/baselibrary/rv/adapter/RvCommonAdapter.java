@@ -111,7 +111,9 @@ public abstract class RvCommonAdapter<Item> extends RecyclerView.Adapter<ViewHol
      * @param location
      */
     public void removeData(int location){
-        if (location < getItemCount()) this.mDatas.remove(location);
+        if (location < getItemCount()) {
+            this.mDatas.remove(location);
+        }
     }
 
     /**

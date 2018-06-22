@@ -20,7 +20,9 @@ public class ReceivedCookiesInterceptor implements Interceptor {
     @SuppressLint("CheckResult")
     @Override
     public Response intercept(Chain chain) throws IOException {
-        if (null == chain) LogUtils.d("http", "Receivedchain == null");
+        if (null == chain) {
+            LogUtils.d("http", "Receivedchain == null");
+        }
 
         Response response = chain.proceed(chain.request());
         LogUtils.d("http", "originalResponse" + response.toString());

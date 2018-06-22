@@ -38,11 +38,17 @@ public abstract class NetCallBack<V> implements Observer<V> {
     }
 
     private void init() {
-        if (null == progressDialog) return;
+        if (null == progressDialog) {
+            return;
+        }
         dialog = progressDialog.getDialog();
-        if (null == dialog) return;
+        if (null == dialog) {
+            return;
+        }
         dialog.setDialogList(() -> {
-            if (null != disposed && !disposed.isDisposed()) disposed.dispose();
+            if (null != disposed && !disposed.isDisposed()) {
+                disposed.dispose();
+            }
         });
     }
 
@@ -86,7 +92,9 @@ public abstract class NetCallBack<V> implements Observer<V> {
                 }
             }
 
-            if (((ServerException) e).code != 401)actionResponseError(e.getMessage());
+            if (((ServerException) e).code != 401) {
+                actionResponseError(e.getMessage());
+            }
             updataLayout(StatusLayoutManager.REQUEST_FAIL);
         } else if (e instanceof ConnectException) {
             actionResponseError("请求超时，请稍后再试...");

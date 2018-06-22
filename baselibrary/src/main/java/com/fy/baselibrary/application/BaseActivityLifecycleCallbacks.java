@@ -45,14 +45,18 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
                     activity.setContentView(R.layout.activity_base);
                     LinearLayout linearLRoot = activity.findViewById(R.id.linearLRoot);
 
-                    if (act.isShowHeadView())initHead(activity);
+                    if (act.isShowHeadView()) {
+                        initHead(activity);
+                    }
 
                     View view = LayoutInflater.from(activity).inflate(act.setView(), null);
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-1, -1);
                     linearLRoot.addView(view, params);
 
                     StatusLayoutManager slManager = initSLManager(activity);
-                    if (null != slManager) activityBean.setSlManager(slManager);
+                    if (null != slManager) {
+                        activityBean.setSlManager(slManager);
+                    }
                 }
                 act.setStatusBar(activity);
         }
@@ -63,7 +67,9 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
         activity.getIntent().putExtra("ActivityBean", activityBean);
 
         //基础配置 执行完成，再执行 初始化 activity 操作
-        if (null != act) act.initData(activity, savedInstanceState);
+        if (null != act) {
+            act.initData(activity, savedInstanceState);
+        }
     }
 
     @Override
@@ -101,9 +107,13 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
 
         if (null != activityBean) {
             //解绑定 黄油刀
-            if (null != activityBean.getUnbinder()) activityBean.getUnbinder().unbind();
+            if (null != activityBean.getUnbinder()) {
+                activityBean.getUnbinder().unbind();
+            }
             //销毁 屏幕旋转监听
-            if (null != activityBean.getOrientoinListener())activityBean.getOrientoinListener().disable();
+            if (null != activityBean.getOrientoinListener()) {
+                activityBean.getOrientoinListener().disable();
+            }
         }
     }
 

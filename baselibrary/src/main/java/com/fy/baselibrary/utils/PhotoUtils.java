@@ -117,7 +117,7 @@ public class PhotoUtils {
     /**
      * 读取uri所在的图片
      *
-     * @param uri      图片对应的Uri
+     * @param uri 图片对应的Uri
      * @return 获取图像的Bitmap
      */
     public static Bitmap getBitmapFromUri(Uri uri) {
@@ -153,6 +153,8 @@ public class PhotoUtils {
                     break;
                 case ExifInterface.ORIENTATION_ROTATE_270:
                     degree = 270;
+                    break;
+                default:
                     break;
             }
         } catch (IOException e) {

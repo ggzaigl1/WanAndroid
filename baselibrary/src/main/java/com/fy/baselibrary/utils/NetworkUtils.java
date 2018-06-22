@@ -362,7 +362,9 @@ public class NetworkUtils {
                         String hostAddress = inetAddress.getHostAddress();
                         boolean isIPv4 = hostAddress.indexOf(':') < 0;
                         if (useIPv4) {
-                            if (isIPv4) return hostAddress;
+                            if (isIPv4) {
+                                return hostAddress;
+                            }
                         } else {
                             if (!isIPv4) {
                                 int index = hostAddress.indexOf('%');

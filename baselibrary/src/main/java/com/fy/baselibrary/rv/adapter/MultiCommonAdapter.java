@@ -9,7 +9,9 @@ import java.util.List;
 
 /**
  * RecyclerView多种ItemViewType 的adapter
- * Created by fangs on 2017/7/31.
+ *
+ * @author fangs
+ * @date 2017/7/31
  */
 public abstract class MultiCommonAdapter<Item> extends RvCommonAdapter<Item> {
 

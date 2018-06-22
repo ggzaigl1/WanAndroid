@@ -43,7 +43,9 @@ public class TimeUtils {
      */
     public static long timeString2long(String timeStr, String format){
 
-        if(null == timeStr || "".equals(timeStr))return -1;
+        if(null == timeStr || "".equals(timeStr)) {
+            return -1;
+        }
 
         Date date;
         try {

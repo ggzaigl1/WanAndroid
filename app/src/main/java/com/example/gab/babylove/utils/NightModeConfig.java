@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * Created by 初夏小溪 on 2018/4/25 0025.
+ *
+ * @author 初夏小溪
+ * @date 2018/4/25 0025
  */
 
 public class NightModeConfig {
@@ -23,7 +25,7 @@ public class NightModeConfig {
     public boolean getNightMode(Context context) {
 
         if (mSharedPreference == null) {
-            mSharedPreference = context.getSharedPreferences(NIGHT_MODE, context.MODE_PRIVATE);
+            mSharedPreference = context.getSharedPreferences(NIGHT_MODE, Context.MODE_PRIVATE);
         }
         boolean isNightMode = mSharedPreference.getBoolean(IS_NIGHT_MODE, false);
         return isNightMode;
@@ -31,7 +33,7 @@ public class NightModeConfig {
 
     public void setNightMode(Context context, boolean isNightMode) {
         if (mSharedPreference == null) {
-            mSharedPreference = context.getSharedPreferences(NIGHT_MODE, context.MODE_PRIVATE);
+            mSharedPreference = context.getSharedPreferences(NIGHT_MODE, Context.MODE_PRIVATE);
         }
         SharedPreferences.Editor editor = mSharedPreference.edit();
 

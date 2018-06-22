@@ -212,8 +212,9 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
                 if (isFullScreen) {
                     uY = event.getY();
                     if (dX > getWidth() / 2) {//声音控制
-                        if (Math.abs(uY - dY) > 25)
+                        if (Math.abs(uY - dY) > 25) {
                             setVolume(uY - dY);
+                        }
                     } else if (dX <= getWidth() / 2) {//亮度控制
                         setLight(dY - uY);
                     }
@@ -302,7 +303,9 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         } else {
             isPause = false;
             mediaPlayer.setDisplay(holder);
-            if (isPlay) mediaPlayer.start();
+            if (isPlay) {
+                mediaPlayer.start();
+            }
         }
     }
 
@@ -351,6 +354,8 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
                     fullScreen();
                     screenBtn.setBackgroundResource(R.mipmap.small_screen);
                 }
+                break;
+            default:
                 break;
         }
     }
@@ -509,8 +514,9 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         //更改播放状态
         isPlay = true;
         //更改状态
-        if (isFirstLoadVideo)
+        if (isFirstLoadVideo) {
             isFirstLoadVideo = false;
+        }
         //开启线程更新进度
         updateSeekBar();
     }

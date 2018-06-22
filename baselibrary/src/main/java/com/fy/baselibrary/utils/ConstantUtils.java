@@ -55,7 +55,7 @@ public class ConstantUtils {
     /**
      * APP 当前模式 （日间/夜间）
      */
-    public static final String appMode = "appModeSwitch";
+    public static final String APP_MODE = "appModeSwitch";
 
     /**
      * 用户是否 第一次打开APP

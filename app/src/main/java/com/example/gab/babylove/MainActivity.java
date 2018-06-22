@@ -18,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +28,6 @@ import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.example.gab.babylove.demo.MyThreadActivity;
 import com.example.gab.babylove.ui.main.activity.BelleActivity;
 import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
 import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
@@ -44,6 +42,7 @@ import com.example.gab.babylove.ui.news.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.example.gab.babylove.utils.Util;
+import com.example.gab.babylove.widget.camera.CameraActivity;
 import com.fy.baselibrary.application.BaseApp;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
@@ -55,13 +54,11 @@ import com.fy.baselibrary.utils.SystemUtils;
 import com.fy.baselibrary.utils.ToastUtils;
 import com.fy.baselibrary.utils.cache.ACache;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import butterknife.BindView;
 
 /**
  * 主方法
+ * @author 55204
  */
 public class MainActivity extends AppCompatActivity implements IBaseActivity, BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -72,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     private StarFragment mStarFragment;
     private Fragment mCurrentFrag; //当前的fragment
     private long exitTime = 0; //保存点击的时间
+    private long Time = 2000; //保存点击的时间
     @BindView(R.id.fl_content)
     FrameLayout mFlContent;
     @BindView(R.id.bottom_navigation)
@@ -83,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     @BindView(R.id.toolbar)
 
     public Toolbar mToolbar;
-    TextView Tv_Login;
-    TextView Tv_Name;
+    TextView tvLogin;
+    TextView tvName;
 
     @Override
     public boolean isShowHeadView() {
@@ -121,18 +119,18 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         toggle.syncState();
         View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);//
         ImageView imageView = headerView.findViewById(R.id.headerView);
-        Tv_Login = headerView.findViewById(R.id.tv_login);//点击登录
-        Tv_Name = headerView.findViewById(R.id.tv_name);
+        tvLogin = headerView.findViewById(R.id.tv_login);//点击登录
+        tvName = headerView.findViewById(R.id.tv_name);
         imageView.setOnClickListener(v -> JumpUtils.jump(MainActivity.this, PhotoViewActivity.class, null));
 
-        Tv_Login.setOnClickListener(v -> {
+        tvLogin.setOnClickListener(v -> {
             boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
             if (isLogin) {
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.system_title).setMessage(R.string.system_content)
                         .setPositiveButton(R.string.ok, (dialog, which) -> {
-                            Tv_Name.setText(R.string.notLogin);
-                            Tv_Login.setText(R.string.clickLogin);
+                            tvName.setText(R.string.notLogin);
+                            tvLogin.setText(R.string.clickLogin);
                             ACache mCache = ACache.get(BaseApp.getAppCtx());
                             mCache.clear();
                             SpfUtils.clear();
@@ -159,8 +157,8 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     protected void onResume() {
         super.onResume();
         boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
-        Tv_Name.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
-        Tv_Login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
+        tvName.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
+        tvLogin.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
 
     }
 
@@ -205,13 +203,14 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 break;
             case 1:
                 switchContent(mNewsFragment);
-
                 break;
             case 2:
                 switchContent(mNavigationViewFragment);
                 break;
             case 3:
                 switchContent(mStarFragment);
+                break;
+            default:
                 break;
         }
     }
@@ -275,8 +274,8 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             case R.id.nav_about:
                 //关于我们
 //            JumpUtils.jump(this, AboutActivity.class, null);
-//            JumpUtils.jump(this, UpdateActivity.class, null);
-                JumpUtils.jump(this, MyThreadActivity.class, null);
+                JumpUtils.jump(this, CameraActivity.class, null);
+//                JumpUtils.jump(this, MyThreadActivity.class, null);
                 break;
             case R.id.nav_share:
                 Intent textIntent = new Intent(Intent.ACTION_SEND);
@@ -287,6 +286,8 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             case R.id.nav_manage:
 //            工具类
                 JumpUtils.jump(this, ToolsActivity.class, null);
+                break;
+            default:
                 break;
         }
         mDrawer.closeDrawer(GravityCompat.START);
@@ -325,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
-            } else if ((System.currentTimeMillis() - exitTime) >= 2000) {
+            } else if ((System.currentTimeMillis() - exitTime) >= Time) {
 //                Snackbar.make(mDrawer, R.string.exit_app, Snackbar.LENGTH_SHORT)
 //                        .setActionTextColor(ContextCompat.getColor(this, R.color.white))
 //                        .show();

@@ -104,8 +104,11 @@ public class FileUtils {
 
         File dirpath;
 
-        if (isSDCardEnable()) dirpath = new File(getSDCardPath() + SAVE_FOLDER, fDirStr);
-        else dirpath = Environment.getDataDirectory();
+        if (isSDCardEnable()) {
+            dirpath = new File(getSDCardPath() + SAVE_FOLDER, fDirStr);
+        } else {
+            dirpath = Environment.getDataDirectory();
+        }
 
         if (!dirpath.exists() && !dirpath.isDirectory()) {
             dirpath.mkdirs();
@@ -155,7 +158,9 @@ public class FileUtils {
      */
     public static void recursionDeleteFile(File file){
 
-        if (!file.exists()) return;
+        if (!file.exists()) {
+            return;
+        }
 
         if(file.isFile()){
             deleteFileSafely(file);//删除当前 文件
@@ -256,9 +261,11 @@ public class FileUtils {
     public static String getImgPath(){
         String takeImageFilePath;
 
-        if (FileUtils.isSDCardEnable())
+        if (FileUtils.isSDCardEnable()) {
             takeImageFilePath = FileUtils.getSDCardPath() + "pictures/";
-        else takeImageFilePath = Environment.getDataDirectory().getPath() + "/pictures/";
+        } else {
+            takeImageFilePath = Environment.getDataDirectory().getPath() + "/pictures/";
+        }
 
         return takeImageFilePath;
     }
@@ -318,10 +325,16 @@ public class FileUtils {
      * @return {@code true}: 存在或创建成功<br>{@code false}: 不存在或创建失败
      */
     public static boolean createOrExistsFile(File file) {
-        if (file == null) return false;
+        if (file == null) {
+            return false;
+        }
         // 如果存在，是文件则返回true，是目录则返回false
-        if (file.exists()) return file.isFile();
-        if (!createOrExistsDir(file.getParentFile())) return false;
+        if (file.exists()) {
+            return file.isFile();
+        }
+        if (!createOrExistsDir(file.getParentFile())) {
+            return false;
+        }
         try {
             return file.createNewFile();
         } catch (IOException e) {

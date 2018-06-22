@@ -22,7 +22,9 @@ import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.fy.baselibrary.utils.JumpUtils;
 
 /**
- * Created by Gab on 2018/1/8 0008.
+ *
+ * @author Gab
+ * @date 2018/1/8 0008
  * 引导图
  */
 

@@ -45,8 +45,9 @@ public class IProgressDialog {
 
     /** 显示对话框 */
     public void show(){
-        if (null != dialog && null != mContext)
-        dialog.show(mContext.getSupportFragmentManager());
+        if (null != dialog && null != mContext) {
+            dialog.show(mContext.getSupportFragmentManager());
+        }
     }
 
     /** 关闭对话框 */

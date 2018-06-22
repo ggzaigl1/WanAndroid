@@ -97,7 +97,9 @@ public class AppUtils {
             PackageManager packageManager = context.getPackageManager();
             PackageInfo pckInfo = packageManager.getPackageInfo(pckName, 0);
 
-            if (null != pckInfo) return true;
+            if (null != pckInfo) {
+                return true;
+            }
         } catch (PackageManager.NameNotFoundException e) {
             LogUtils.e("TDvice", e.getMessage());
         }
@@ -105,7 +107,9 @@ public class AppUtils {
     }
 
     private static boolean isSpace(final String s) {
-        if (s == null) return true;
+        if (s == null) {
+            return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;
@@ -123,7 +127,9 @@ public class AppUtils {
     public static Signature[] getAppSignature(final String packageName) {
         Context context = BaseApp.getAppCtx();
 
-        if (isSpace(packageName)) return null;
+        if (isSpace(packageName)) {
+            return null;
+        }
         try {
             PackageManager pm = context.getPackageManager();
             @SuppressLint("PackageManagerGetSignatures")

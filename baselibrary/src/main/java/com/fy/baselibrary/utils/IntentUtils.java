@@ -42,7 +42,9 @@ public class IntentUtils {
      * @return intent
      */
     public static Intent getInstallAppIntent(File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         Intent intent = new Intent(Intent.ACTION_VIEW);
         String type;
         if (Build.VERSION.SDK_INT < 23) {
@@ -121,7 +123,9 @@ public class IntentUtils {
      * @return intent
      */
     public static Intent getShareImageIntent(String content, File image) {
-        if (!FilesUtils.isFileExists(image)) return null;
+        if (!FilesUtils.isFileExists(image)) {
+            return null;
+        }
         return getShareImageIntent(content, Uri.fromFile(image));
     }
 
@@ -161,7 +165,9 @@ public class IntentUtils {
      */
     public static Intent getComponentIntent(String packageName, String className, Bundle bundle) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        if (bundle != null) intent.putExtras(bundle);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
         ComponentName cn = new ComponentName(packageName, className);
         intent.setComponent(cn);
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

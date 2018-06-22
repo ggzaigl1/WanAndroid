@@ -22,7 +22,9 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * 欢迎页
- * Created by fangs on 2017/12/12.
+ *
+ * @author fangs
+ * @date 2017/12/12
  */
 public class StartUpActivity extends AppCompatActivity implements IBaseActivity {
 
@@ -100,7 +102,9 @@ public class StartUpActivity extends AppCompatActivity implements IBaseActivity 
 
     }
 
-    //延迟200 毫秒 隐藏 加载图片控件
+    /**
+     * 延迟200 毫秒 隐藏 加载图片控件
+     */
     @SuppressLint("CheckResult")
     private void hideLoadView() {
         //显示欢迎页，并设置点击事件（但是不设置点击回调）

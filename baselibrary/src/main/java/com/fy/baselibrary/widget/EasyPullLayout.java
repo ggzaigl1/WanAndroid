@@ -125,27 +125,30 @@ public class EasyPullLayout extends ViewGroup {
             View child = getChildAt(i++);
 
             LayoutParams lp = (LayoutParams) child.getLayoutParams();
-            if (null != getByType(childViews, lp.type))
+            if (null != getByType(childViews, lp.type)) {
                 throw new IllegalArgumentException("Each child type can only be defined once!");
-            else
+            } else {
                 childViews.put(child, new ChildViewAttr());
+            }
         }
 
         final View contentView = getByType(childViews, TYPE_CONTENT);
-        if (null == contentView)
+        if (null == contentView) {
             throw new IllegalArgumentException("Child type \"content\" must be defined!");
+        }
 
         setOnEdgeListener(() -> {
-            if (null != getByType(childViews, TYPE_EDGE_LEFT) && !contentView.canScrollHorizontally(-1))
+            if (null != getByType(childViews, TYPE_EDGE_LEFT) && !contentView.canScrollHorizontally(-1)) {
                 return TYPE_EDGE_LEFT;
-            else if (null != getByType(childViews, TYPE_EDGE_RIGHT) && !contentView.canScrollHorizontally(1))
+            } else if (null != getByType(childViews, TYPE_EDGE_RIGHT) && !contentView.canScrollHorizontally(1)) {
                 return TYPE_EDGE_RIGHT;
-            else if (null != getByType(childViews, TYPE_EDGE_TOP) && !contentView.canScrollVertically(-1))
+            } else if (null != getByType(childViews, TYPE_EDGE_TOP) && !contentView.canScrollVertically(-1)) {
                 return TYPE_EDGE_TOP;
-            else if (null != getByType(childViews, TYPE_EDGE_BOTTOM) && !contentView.canScrollVertically(1))
+            } else if (null != getByType(childViews, TYPE_EDGE_BOTTOM) && !contentView.canScrollVertically(1)) {
                 return TYPE_EDGE_BOTTOM;
-            else
+            } else {
                 return TYPE_NONE;
+            }
         });
     }
 
@@ -181,8 +184,9 @@ public class EasyPullLayout extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         View contentView = getByType(childViews, TYPE_CONTENT);
-        if (null == contentView)
+        if (null == contentView) {
             throw new IllegalArgumentException("EasyPullLayout must have and only have one layout_type \"content\"!");
+        }
 
         int contentWidth = contentView.getMeasuredWidth();
         int contentHeight = contentView.getMeasuredHeight();
@@ -219,23 +223,28 @@ public class EasyPullLayout extends ViewGroup {
 
         // bring the child to front if fixed
         View child = getByType(childViews, TYPE_EDGE_LEFT);
-        if (fixed_content_left && null != child)
+        if (fixed_content_left && null != child) {
             child.bringToFront();
+        }
         child = getByType(childViews, TYPE_EDGE_TOP);
-        if (fixed_content_top && null != child)
+        if (fixed_content_top && null != child) {
             child.bringToFront();
+        }
         child = getByType(childViews, TYPE_EDGE_RIGHT);
-        if (fixed_content_right && null != child)
+        if (fixed_content_right && null != child) {
             child.bringToFront();
+        }
         child = getByType(childViews, TYPE_EDGE_BOTTOM);
-        if (fixed_content_bottom && null != child)
+        if (fixed_content_bottom && null != child) {
             child.bringToFront();
+        }
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (currentState != STATE_IDLE)
+        if (currentState != STATE_IDLE) {
             return false;
+        }
 
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -247,16 +256,17 @@ public class EasyPullLayout extends ViewGroup {
                 float dx = ev.getX() - downX;
                 float dy = ev.getY() - downY;
                 currentType = type;
-                if (type == TYPE_EDGE_LEFT && (pullTypeMask & PULL_TYPE_LEFT) != 0)
+                if (type == TYPE_EDGE_LEFT && (pullTypeMask & PULL_TYPE_LEFT) != 0) {
                     return ev.getX() > downX && Math.abs(dx) > Math.abs(dy);
-                else if (type == TYPE_EDGE_RIGHT && (pullTypeMask & TYPE_EDGE_RIGHT) != 0)
+                } else if (type == TYPE_EDGE_RIGHT && (pullTypeMask & TYPE_EDGE_RIGHT) != 0) {
                     return ev.getX() < downX && Math.abs(dx) > Math.abs(dy);
-                else if (type == TYPE_EDGE_TOP && (pullTypeMask & TYPE_EDGE_TOP) != 0)
+                } else if (type == TYPE_EDGE_TOP && (pullTypeMask & TYPE_EDGE_TOP) != 0) {
                     return ev.getY() > downY && Math.abs(dy) > Math.abs(dx);
-                else if (type == TYPE_EDGE_BOTTOM && (pullTypeMask & TYPE_EDGE_BOTTOM) != 0)
+                } else if (type == TYPE_EDGE_BOTTOM && (pullTypeMask & TYPE_EDGE_BOTTOM) != 0) {
                     return ev.getY() < downY && Math.abs(dy) > Math.abs(dx);
-                else
+                } else {
                     return false;
+                }
         }
         return false;
     }
@@ -264,15 +274,17 @@ public class EasyPullLayout extends ViewGroup {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // check state
-        if (currentState != STATE_IDLE)
+        if (currentState != STATE_IDLE) {
             return false;
+        }
 
         // check pull type
         if (currentType == TYPE_EDGE_LEFT && (pullTypeMask & PULL_TYPE_LEFT) == 0 ||
                 currentType == TYPE_EDGE_TOP && (pullTypeMask & PULL_TYPE_TOP) == 0 ||
                 currentType == TYPE_EDGE_RIGHT && (pullTypeMask & PULL_TYPE_RIGHT) == 0 ||
-                currentType == TYPE_EDGE_BOTTOM && (pullTypeMask & PULL_TYPE_BOTTOM) == 0)
+                currentType == TYPE_EDGE_BOTTOM && (pullTypeMask & PULL_TYPE_BOTTOM) == 0) {
             return false;
+        }
 
         getParent().requestDisallowInterceptTouchEvent(true);
 
@@ -312,17 +324,18 @@ public class EasyPullLayout extends ViewGroup {
                     View childView = entry.getKey();
                     ChildViewAttr childViewAttr = entry.getValue();
                     if (currentType == TYPE_EDGE_LEFT &&
-                            (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_left))
+                            (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_left)) {
                         childView.setX(childViewAttr.left + offsetX);
-                    else if (currentType == TYPE_EDGE_RIGHT &&
-                            (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_right))
+                    } else if (currentType == TYPE_EDGE_RIGHT &&
+                            (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_right)) {
                         childView.setX(childViewAttr.left + offsetX);
-                    else if (currentType == TYPE_EDGE_TOP &&
-                            ((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_top)
+                    } else if (currentType == TYPE_EDGE_TOP &&
+                            ((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_top) {
                         childView.setY(childViewAttr.top + offsetY);
-                    else if (currentType == TYPE_EDGE_BOTTOM &&
-                            (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_bottom))
+                    } else if (currentType == TYPE_EDGE_BOTTOM &&
+                            (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_bottom)) {
                         childView.setY(childViewAttr.top + offsetY);
+                    }
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
@@ -363,16 +376,18 @@ public class EasyPullLayout extends ViewGroup {
                     for (Map.Entry<View, ChildViewAttr> entry : childViews.entrySet()) {
                         View childView = entry.getKey();
                         ChildViewAttr childViewAttr = entry.getValue();
-                        if (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_left)
+                        if (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_left) {
                             childView.setX(childViewAttr.left + triggerOffset + rollBackOffset * (float) animation.getAnimatedValue());
+                        }
                     }
                     break;
                 case TYPE_EDGE_RIGHT:
                     for (Map.Entry<View, ChildViewAttr> entry : childViews.entrySet()) {
                         View childView = entry.getKey();
                         ChildViewAttr childViewAttr = entry.getValue();
-                        if (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_right)
+                        if (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_right) {
                             childView.setX(childViewAttr.left + triggerOffset + rollBackOffset * (float) animation.getAnimatedValue());
+                        }
                     }
                     break;
             }
@@ -413,8 +428,9 @@ public class EasyPullLayout extends ViewGroup {
                     for (Map.Entry<View, ChildViewAttr> entry : childViews.entrySet()) {
                         View childView = entry.getKey();
                         ChildViewAttr childViewAttr = entry.getValue();
-                        if (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_top)
+                        if (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_top) {
                             childView.setY(childViewAttr.top + triggerOffset + rollBackOffset * (float) animation.getAnimatedValue());
+                        }
                     }
                     break;
 
@@ -422,8 +438,9 @@ public class EasyPullLayout extends ViewGroup {
                     for (Map.Entry<View, ChildViewAttr> entry : childViews.entrySet()) {
                         View childView = entry.getKey();
                         ChildViewAttr childViewAttr = entry.getValue();
-                        if (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_bottom)
+                        if (((LayoutParams) childView.getLayoutParams()).type != TYPE_CONTENT || !fixed_content_bottom) {
                             childView.setY(childViewAttr.top + triggerOffset + rollBackOffset * (float) animation.getAnimatedValue());
+                        }
                     }
                     break;
             }
@@ -486,13 +503,15 @@ public class EasyPullLayout extends ViewGroup {
      */
     public void setPullType(int pullType, boolean enable) {
         if (pullType != PULL_TYPE_LEFT && pullType != PULL_TYPE_TOP &&
-                pullType != PULL_TYPE_RIGHT && pullType != PULL_TYPE_BOTTOM)
+                pullType != PULL_TYPE_RIGHT && pullType != PULL_TYPE_BOTTOM) {
             return;
+        }
 
-        if (enable)
+        if (enable) {
             pullTypeMask |= pullType;
-        else
+        } else {
             pullTypeMask &= ~pullType;
+        }
     }
 
     @Override
@@ -560,8 +579,9 @@ public class EasyPullLayout extends ViewGroup {
 
     private View getByType(HashMap<View, ChildViewAttr> map, int type) {
         for (Map.Entry<View, ChildViewAttr> entry : map.entrySet()) {
-            if (((LayoutParams) entry.getKey().getLayoutParams()).type == type)
+            if (((LayoutParams) entry.getKey().getLayoutParams()).type == type) {
                 return entry.getKey();
+            }
         }
         return null;
     }

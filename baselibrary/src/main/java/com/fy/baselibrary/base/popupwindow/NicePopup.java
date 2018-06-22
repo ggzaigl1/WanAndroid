@@ -24,7 +24,9 @@ public class NicePopup extends CommonPopupWindow {
 
     @Override
     public void convertView(ViewHolder holder) {
-        if (null != convertListener) convertListener.convertView(holder);
+        if (null != convertListener) {
+            convertListener.convertView(holder);
+        }
     }
 
 

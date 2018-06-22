@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.widget.fingerprintCore.FingerprintCore;
-import com.example.gab.babylove.widget.fingerprintCore.KeyguardLockScreenManager;
+import com.example.gab.babylove.widget.fingerprintcore.FingerprintCore;
+import com.example.gab.babylove.widget.fingerprintcore.KeyguardLockScreenManager;
 import com.fy.baselibrary.application.IBaseActivity;
 import com.fy.baselibrary.statusbar.MdStatusBar;
 import com.fy.baselibrary.utils.ToastUtils;
@@ -70,6 +70,8 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
                 break;
             case R.id.fingerprint_recognition_sys_setting:
                 openFingerPrintSettingPage(this);
+                break;
+            default:
                 break;
         }
     }

@@ -37,6 +37,7 @@ public interface IBaseActivity extends View.OnClickListener{
      * 点击事件 回调
      * @param v
      */
+    @Override
     void onClick(View v);
 
     /**

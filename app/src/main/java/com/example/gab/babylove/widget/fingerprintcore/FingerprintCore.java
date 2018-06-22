@@ -1,4 +1,4 @@
-package com.example.gab.babylove.widget.fingerprintCore;
+package com.example.gab.babylove.widget.fingerprintcore;
 
 import android.annotation.TargetApi;
 import android.content.Context;

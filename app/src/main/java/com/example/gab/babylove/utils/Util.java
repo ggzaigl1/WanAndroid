@@ -12,6 +12,7 @@ import com.example.gab.babylove.R;
 /**
  * 时间: 2016-08-15 19:36
  */
+@SuppressWarnings("ALL")
 public class Util {
 
     public static int dip2px(Context context, float dpValue) {

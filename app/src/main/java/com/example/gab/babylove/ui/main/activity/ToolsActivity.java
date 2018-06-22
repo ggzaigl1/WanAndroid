@@ -106,6 +106,8 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
 //            case R.id.Ll_personal_center:
 //                JumpUtils.jump(this, FileBrowsingActivity.class, null);
 //                break;
+            default:
+                break;
         }
     }
 

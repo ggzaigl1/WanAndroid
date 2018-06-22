@@ -22,7 +22,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <uses-feature android:name="android.hardware.camera"/>
@@ -156,6 +157,11 @@
         <!-- 相机Camera2 -->
         <activity
                 android:name="com.example.gab.babylove.widget.camera.Camera2Activity"
+                android:screenOrientation="portrait"/>
+        <!-- 相机Camera -->
+        <activity
+                android:name="com.example.gab.babylove.widget.camera.CameraActivity"
+                android:theme="@style/FullScreenTheme"
                 android:screenOrientation="portrait"/>
 
         <activity

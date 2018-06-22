@@ -99,7 +99,9 @@ public class ShellUtils {
             process = Runtime.getRuntime().exec(isRoot ? "su" : "sh");
             os = new DataOutputStream(process.getOutputStream());
             for (String command : commands) {
-                if (command == null) continue;
+                if (command == null) {
+                    continue;
+                }
                 os.write(command.getBytes());
                 os.writeBytes("\n");
                 os.flush();

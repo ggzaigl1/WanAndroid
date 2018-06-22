@@ -100,7 +100,9 @@ public class EncryptUtils {
      * @return 16进制加盐密文
      */
     public static String encryptMD5ToString(byte[] data, byte[] salt) {
-        if (data == null || salt == null) return null;
+        if (data == null || salt == null) {
+            return null;
+        }
         byte[] dataSalt = new byte[data.length + salt.length];
         System.arraycopy(data, 0, dataSalt, 0, data.length);
         System.arraycopy(salt, 0, dataSalt, data.length, salt.length);
@@ -154,7 +156,9 @@ public class EncryptUtils {
      * @return 文件的MD5校验码
      */
     public static byte[] encryptMD5File(File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(file);
@@ -329,7 +333,9 @@ public class EncryptUtils {
      * @return 密文字节数组
      */
     private static byte[] hashTemplate(byte[] data, String algorithm) {
-        if (data == null || data.length <= 0) return null;
+        if (data == null || data.length <= 0) {
+            return null;
+        }
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
             md.update(data);
@@ -547,7 +553,9 @@ public class EncryptUtils {
      * @return 密文字节数组
      */
     private static byte[] hmacTemplate(byte[] data, byte[] key, String algorithm) {
-        if (data == null || data.length == 0 || key == null || key.length == 0) return null;
+        if (data == null || data.length == 0 || key == null || key.length == 0) {
+            return null;
+        }
         try {
             SecretKeySpec secretKey = new SecretKeySpec(key, algorithm);
             Mac mac = Mac.getInstance(algorithm);
@@ -797,7 +805,9 @@ public class EncryptUtils {
      * @return 密文或者明文，适用于DES，3DES，AES
      */
     public static byte[] desTemplate(byte[] data, byte[] key, String algorithm, String transformation, boolean isEncrypt) {
-        if (data == null || data.length == 0 || key == null || key.length == 0) return null;
+        if (data == null || data.length == 0 || key == null || key.length == 0) {
+            return null;
+        }
         try {
             SecretKeySpec keySpec = new SecretKeySpec(key, algorithm);
             Cipher cipher = Cipher.getInstance(transformation);

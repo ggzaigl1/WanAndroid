@@ -111,7 +111,9 @@ public class PhoneUtils {
     public static String getSimOperatorByMnc(Context context) {
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         String operator = tm != null ? tm.getSimOperator() : null;
-        if (operator == null) return null;
+        if (operator == null) {
+            return null;
+        }
         switch (operator) {
             case "46000":
             case "46002":
@@ -213,7 +215,9 @@ public class PhoneUtils {
      * @param content     短信内容
      */
     public static void sendSmsSilent(Context context, String phoneNumber, String content) {
-        if (StringUtils.isEmpty(content)) return;
+        if (StringUtils.isEmpty(content)) {
+            return;
+        }
         PendingIntent sentIntent = PendingIntent.getBroadcast(context, 0, new Intent(), 0);
         SmsManager smsManager = SmsManager.getDefault();
         if (content.length() >= 70) {

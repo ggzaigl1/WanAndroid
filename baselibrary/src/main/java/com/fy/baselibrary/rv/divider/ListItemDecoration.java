@@ -41,7 +41,9 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         mDivider = a.getDrawable(0);
         a.recycle();
 
-        if (builder.mSpace == 0) builder.mSpace = mDivider.getIntrinsicHeight();
+        if (builder.mSpace == 0) {
+            builder.mSpace = mDivider.getIntrinsicHeight();
+        }
     }
 
     @Override
@@ -52,7 +54,9 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         int itemPosition = parent.getChildAdapterPosition(view);
 
         // 第1个Item不绘制(此处：不设置间隔)分割线
-        if (itemPosition == 0) return;
+        if (itemPosition == 0) {
+            return;
+        }
 
         if (builder.orientation == LinearLayoutManager.VERTICAL) {
             outRect.set(0, builder.mSpace, 0, 0);//设置 列表item 四个方向的padding
@@ -66,10 +70,14 @@ public class ListItemDecoration extends RecyclerView.ItemDecoration {
         super.onDraw(c, parent, state);
         LinearLayoutManager layoutManager = (LinearLayoutManager) parent.getLayoutManager();
 
-        if (!builder.isDraw) return;//如果不绘制 则直接结束绘制
+        if (!builder.isDraw) {
+            return;//如果不绘制 则直接结束绘制
+        }
 
         //没有子view或者没有没有颜色直接return
-        if (null == mDivider || layoutManager.getChildCount() == 0) return;
+        if (null == mDivider || layoutManager.getChildCount() == 0) {
+            return;
+        }
 
         if (layoutManager.getOrientation() == LinearLayoutManager.VERTICAL) {
             drawVertical(c, parent);

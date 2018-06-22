@@ -51,7 +51,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by 初夏小溪 on 2018/3/23 0023.
- *
  */
 
 public class CameraPreview extends TextureView {
@@ -278,6 +277,8 @@ public class CameraPreview extends TextureView {
                     }
                     break;
                 }
+                default:
+                    break;
             }
         }
 
@@ -301,7 +302,7 @@ public class CameraPreview extends TextureView {
     /**
      * 在确定相机预览大小后应调用此方法
      *
-     * @param viewWidth 宽
+     * @param viewWidth  宽
      * @param viewHeight 高
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -378,7 +379,7 @@ public class CameraPreview extends TextureView {
     /**
      * 设置相机相关的属性或变量
      *
-     * @param width 相机预览的可用尺寸的宽度
+     * @param width  相机预览的可用尺寸的宽度
      * @param height 相机预览的可用尺寸的高度
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -474,12 +475,12 @@ public class CameraPreview extends TextureView {
     /**
      * 获取一个合适的相机预览尺寸
      *
-     * @param choices      支持的预览尺寸列表
-     * @param textureViewWidth 相对宽度
+     * @param choices           支持的预览尺寸列表
+     * @param textureViewWidth  相对宽度
      * @param textureViewHeight 相对高度
-     * @param maxWidth     可以选择的最大宽度
-     * @param maxHeight     可以选择的最大高度
-     * @param aspectRatio    宽高比
+     * @param maxWidth          可以选择的最大宽度
+     * @param maxHeight         可以选择的最大高度
+     * @param aspectRatio       宽高比
      * @return 最佳预览尺寸
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

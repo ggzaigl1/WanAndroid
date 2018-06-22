@@ -52,7 +52,9 @@ public class CrashUtils implements UncaughtExceptionHandler {
      * @return {@code true}: 成功<br>{@code false}: 失败
      */
     public boolean init(Context context) {
-        if (mInitialized) return true;
+        if (mInitialized) {
+            return true;
+        }
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             crashDir = context.getExternalCacheDir().getPath() + File.separator + "crash" + File.separator;
         } else {
@@ -75,7 +77,9 @@ public class CrashUtils implements UncaughtExceptionHandler {
     public void uncaughtException(Thread thread, Throwable throwable) {
         String now = new SimpleDateFormat("yy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         String fullPath = crashDir + now + ".txt";
-        if (!FileUtils.createOrExistsFile(fullPath)) return;
+        if (!FileUtils.createOrExistsFile(fullPath)) {
+            return;
+        }
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(new FileWriter(fullPath, false));

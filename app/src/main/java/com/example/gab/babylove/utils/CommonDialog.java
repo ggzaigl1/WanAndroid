@@ -21,7 +21,9 @@ import com.example.gab.babylove.R;
 /**
  * 应用 所有dialog 的父类
  * <p/>
- * Created by fangs on 2017/3/13.
+ *
+ * @author fangs
+ * @date 2017/3/13
  */
 public abstract class CommonDialog extends DialogFragment {
 
@@ -120,7 +122,9 @@ public abstract class CommonDialog extends DialogFragment {
         if (null != window) {
             // 使用ViewGroup.LayoutParams，以便Dialog 宽度或高度充满整个屏幕
             WindowManager.LayoutParams params = window.getAttributes();
-            if (isTransparent) window.setBackgroundDrawableResource(android.R.color.transparent);//背景透明
+            if (isTransparent) {
+                window.setBackgroundDrawableResource(android.R.color.transparent);//背景透明
+            }
             //调节灰色背景透明度[0-1]，默认0.5f
             params.dimAmount = dimAmount;
 
@@ -242,7 +246,9 @@ public abstract class CommonDialog extends DialogFragment {
     @Override
     public void dismiss() {
         super.dismiss();
-        if (null != dialogList)dialogList.onDismiss();
+        if (null != dialogList) {
+            dialogList.onDismiss();
+        }
     }
 
 

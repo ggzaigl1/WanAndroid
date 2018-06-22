@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
@@ -49,7 +50,9 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * 登录
- * Created by 初夏小溪 on 2017/12/12.
+ *
+ * @author 初夏小溪
+ * @date 2017/12/12
  * https://github.com/fanrunqi/MaterialLogin
  */
 public class LoginActivity extends AppCompatActivity implements IBaseActivity {
@@ -97,9 +100,13 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
         if (permissionChecker.isLackPermissions(PERMISSIONS)) {
             new MaterialDialog.Builder(this).title(R.string.require_acquisition)
                     .content(R.string.default_always_message)
-                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
+                    .positiveText(R.string.next).onPositive(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    LoginActivity.this.onPermission();
+                }
+            }).show();
         }
-
         editPass.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -138,6 +145,8 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                     startActivity(new Intent(LoginActivity.this, RegisterActivity.class), options.toBundle());
                 }
                 break;
+            default:
+                break;
         }
     }
 
@@ -173,6 +182,8 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                     //权限获取失败
                     permissionChecker.showDialog();
                 }
+                break;
+            default:
                 break;
         }
     }

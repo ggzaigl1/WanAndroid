@@ -141,6 +141,12 @@
         <item name="colorControlActivated">#FFCC00</item>
     </style>
 
+    <!--全屏-->
+    <style name="FullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <!-- 使用android样式定制对话框。下一个提供自定义属性:
         DialogTitleAppearance:样式参考
         DialogTitleText:字符串

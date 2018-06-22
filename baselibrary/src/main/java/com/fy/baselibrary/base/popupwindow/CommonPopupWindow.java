@@ -96,7 +96,9 @@ public abstract class CommonPopupWindow extends PopupWindow {
 
 
         //设置动画
-        if (isShowAnim)setAnimationStyle(anim);
+        if (isShowAnim) {
+            setAnimationStyle(anim);
+        }
         setHide(isHide);
         bgAlpha(bgAlpha);
     }
@@ -125,7 +127,9 @@ public abstract class CommonPopupWindow extends PopupWindow {
     public void dismiss() {
         super.dismiss();
         bgAlpha(1.0f);// popupWindow隐藏时恢复屏幕正常透明度
-        if (null != dismissListner) dismissListner.onDismiss();
+        if (null != dismissListner) {
+            dismissListner.onDismiss();
+        }
     }
 
 

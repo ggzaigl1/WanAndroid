@@ -32,7 +32,9 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by 初夏小溪 on 2018/4/19 0019.
+ *
+ * @author 初夏小溪
+ * @date 2018/4/19 0019
  * 我的收藏
  */
 
@@ -53,7 +55,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
 
     @Override
     public int setView() {
-        return R.layout.activity_website;
+        return R.layout.activity_collect;
     }
 
     @Override
@@ -93,7 +95,10 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
                 case R.id.image_collect:
                     unMycollectArticle(mAdapter.getData().get(position).getId(), mAdapter.getData().get(position).getOriginId(), position);
                     break;
+                default:
+                    break;
             }
+
         });
         mRecyclerView.setAdapter(mAdapter);
     }

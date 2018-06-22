@@ -78,6 +78,8 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
                 showError.setVisibility(View.GONE);
                 mWebView.reload();
                 break;
+            default:
+                break;
         }
     }
 
@@ -149,13 +151,23 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
                 if (url.contains("alipays://platformapi/startApp?")) {
                     startAlipayActivity(url);
                     // android  6.0 两种方式获取intent都可以跳转支付宝成功,7.1测试不成功
-                } else if ((Build.VERSION.SDK_INT > Build.VERSION_CODES.M)
-                        && (url.contains("platformapi") && url.contains("startapp"))) {
-                    startAlipayActivity(url);
+                } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                    if (url.contains("platformapi") && url.contains("startapp")) {
+                        startAlipayActivity(url);
+                    }
                 } else {
                     mWebView.loadUrl(url);
                 }
                 return true;
+//                if (url.contains("alipays://platformapi/startApp?")) {
+//                    startAlipayActivity(url);
+//                    // android  6.0 两种方式获取intent都可以跳转支付宝成功,7.1测试不成功
+//                } else if ((Build.VERSION.SDK_INT > Build.VERSION_CODES.M) && (url.contains("platformapi") && url.contains("startapp"))) {
+//                    startAlipayActivity(url);
+//                } else {
+//                    mWebView.loadUrl(url);
+//                }
+//                return true;
             }
 
             @Override
@@ -188,11 +200,13 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
 
         mWebView.setOnLongClickListener(v -> {
             WebView.HitTestResult result = ((WebView) v).getHitTestResult();
-            if (null == result)
+            if (null == result) {
                 return false;
+            }
             int type = result.getType();
-            if (type == WebView.HitTestResult.UNKNOWN_TYPE)
+            if (type == WebView.HitTestResult.UNKNOWN_TYPE) {
                 return false;
+            }
             // 这里可以拦截很多类型，我们只处理图片类型就可以了
             switch (type) {
                 case WebView.HitTestResult.PHONE_TYPE: // 处理拨号

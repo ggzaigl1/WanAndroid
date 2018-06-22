@@ -21,7 +21,9 @@ public class AddCookiesInterceptor implements Interceptor {
     @SuppressLint("CheckResult")
     @Override
     public Response intercept(Chain chain) throws IOException {
-        if (null == chain) LogUtils.d("http", "Add_chain == null");
+        if (null == chain) {
+            LogUtils.d("http", "Add_chain == null");
+        }
 
         final Request.Builder builder = chain.request().newBuilder();
 

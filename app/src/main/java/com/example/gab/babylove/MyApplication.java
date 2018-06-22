@@ -3,7 +3,9 @@ package com.example.gab.babylove;
 import com.fy.baselibrary.application.BaseApp;
 
 /**
- * Created by Gab on 2017/12/12 0012.
+ *
+ * @author Gab
+ * @date 2017/12/12 0012
  */
 
 public class MyApplication extends BaseApp {

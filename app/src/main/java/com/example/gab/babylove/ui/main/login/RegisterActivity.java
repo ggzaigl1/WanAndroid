@@ -41,7 +41,9 @@ import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;
 
 /**
- * Created by 初夏小溪 on 2018/4/18 0018.
+ *
+ * @author 初夏小溪
+ * @date 2018/4/18 0018
  * 注册界面
  */
 
@@ -96,6 +98,8 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
                 break;
             case R.id.fab:
                 animateRevealClose();
+                break;
+            default:
                 break;
         }
     }
@@ -192,7 +196,7 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
         String mUserName = editRegisterName.getText().toString().trim();
         String mPassWord = editRegisterPass.getText().toString().trim();
 
-        Map<String, Object> param = new HashMap<>();
+        Map<String, Object> param = new HashMap<>(0);
         param.put("username", mUserName);
         param.put("password", mPassWord);
         param.put("repassword", mPassWord);

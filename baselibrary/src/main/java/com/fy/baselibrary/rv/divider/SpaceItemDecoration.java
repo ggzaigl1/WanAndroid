@@ -40,6 +40,8 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
                 outRect.left = minmSpace;
                 outRect.right = mSpace;
                 break;
+            default:
+                break;
         }
     }
 

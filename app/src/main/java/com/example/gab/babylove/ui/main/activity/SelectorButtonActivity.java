@@ -59,6 +59,8 @@ public class SelectorButtonActivity extends AppCompatActivity implements IBaseAc
             case R.id.dash_test:
                 JumpUtils.jump(this, AgentWebActivity.class, null);
                 break;
+            default:
+                break;
         }
     }
 

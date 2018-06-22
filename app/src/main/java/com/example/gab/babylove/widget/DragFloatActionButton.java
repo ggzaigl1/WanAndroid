@@ -116,6 +116,8 @@ public class DragFloatActionButton extends FloatingActionButton {
                     }
                 }
                 break;
+            default:
+                break;
         }
         //如果是拖拽则消s耗事件，否则正常传递即可。
         return !isNotDrag() || super.onTouchEvent(event);

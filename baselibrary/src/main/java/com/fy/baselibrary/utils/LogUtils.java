@@ -289,11 +289,15 @@ public class LogUtils {
      * @param content 内容
      **/
     private synchronized static void log2File(char type, String tag, String content) {
-        if (content == null) return;
+        if (content == null) {
+            return;
+        }
         Date now = new Date();
         String date = new SimpleDateFormat("MM-dd", Locale.getDefault()).format(now);
         String fullPath = dir + date + ".txt";
-        if (!FileUtils.createOrExistsFile(fullPath)) return;
+        if (!FileUtils.createOrExistsFile(fullPath)) {
+            return;
+        }
         String time = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(now);
         String dateLogContent = time + ":" + type + ":" + tag + ":" + content + '\n';
         BufferedWriter bw = null;
