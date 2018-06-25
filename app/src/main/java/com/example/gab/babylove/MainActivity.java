@@ -53,8 +53,6 @@ import com.fy.baselibrary.utils.SpfUtils;
 import com.fy.baselibrary.utils.SystemUtils;
 import com.fy.baselibrary.utils.ToastUtils;
 import com.fy.baselibrary.utils.cache.ACache;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
 
 import butterknife.BindView;
 
@@ -142,14 +140,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
         });
-
-//        //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
-//        EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
-//        //如果是群聊，设置chattype，默认是单聊
-//        if (chatType == CHATTYPE_GROUP)
-//            message.setChatType(EMMessage.ChatType.GroupChat);
-//        //发送消息
-//        EMClient.getInstance().chatManager().sendMessage(message);
     }
 
 

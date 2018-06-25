@@ -200,6 +200,10 @@
                 android:screenOrientation="portrait"/>
 
         <activity
+                android:name=".EMActivity"
+                android:screenOrientation="portrait"/>
+
+        <activity
                 android:name=".ui.main.activity.UpdateActivity"
                 android:screenOrientation="portrait"/>
         <!-- 不同格式文件浏览 activity -->
