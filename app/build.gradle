@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    useLibrary 'org.apache.http.legacy'
     compileSdkVersion var.compileSdkVersion
 
     defaultConfig {
@@ -51,7 +52,10 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     api project(':baselibrary')
     implementation 'com.bigkoo:convenientbanner:2.0.5'
-
     implementation 'cn.bingoogolapple:bga-update:1.0.2@aar'
     implementation 'cn.bingoogolapple:bga-progressbar:1.0.0@aar'
+    //Optional compile for GCM (Google Cloud Messaging).
+    implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+    implementation 'com.hyphenate:hyphenate-sdk:3.3.0'
+    implementation files('libs/hyphenatechat_3.4.2.jar')
 }
