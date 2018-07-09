@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         mNewsFragment = new NewsFragment();
         mNavigationViewFragment = new NavigationViewFragment();
         mStarFragment = new StarFragment();
-
         initBottomNavigation();
         switchContent(mHomeFragment);
         setSupportActionBar(mToolbar);

@@ -57,5 +57,7 @@ dependencies {
     //Optional compile for GCM (Google Cloud Messaging).
     implementation 'com.google.android.gms:play-services-gcm:15.0.1'
     implementation 'com.hyphenate:hyphenate-sdk:3.3.0'
+    implementation 'com.ggzaigl1:libs:1.0.0'
+
     implementation files('libs/hyphenatechat_3.4.2.jar')
 }
