@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.gab.babylove.ui.main.activity.AboutActivity;
 import com.example.gab.babylove.ui.main.activity.BelleActivity;
 import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
 import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
@@ -42,17 +43,16 @@ import com.example.gab.babylove.ui.news.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.example.gab.babylove.utils.Util;
-import com.example.gab.babylove.widget.camera.CameraActivity;
-import com.fy.baselibrary.application.BaseApp;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.ConstantUtils;
-import com.fy.baselibrary.utils.JumpUtils;
-import com.fy.baselibrary.utils.ResourceUtils;
-import com.fy.baselibrary.utils.SpfUtils;
-import com.fy.baselibrary.utils.SystemUtils;
-import com.fy.baselibrary.utils.ToastUtils;
-import com.fy.baselibrary.utils.cache.ACache;
+import com.ggz.baselibrary.application.BaseApp;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.ConstantUtils;
+import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.ResourceUtils;
+import com.ggz.baselibrary.utils.SpfUtils;
+import com.ggz.baselibrary.utils.SystemUtils;
+import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.cache.ACache;
 
 import butterknife.BindView;
 
@@ -272,8 +272,8 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 break;
             case R.id.nav_about:
                 //关于我们
-//            JumpUtils.jump(this, AboutActivity.class, null);
-                JumpUtils.jump(this, CameraActivity.class, null);
+            JumpUtils.jump(this, AboutActivity.class, null);
+//                JumpUtils.jump(this, CameraActivity.class, null);
 //                JumpUtils.jump(this, MyThreadActivity.class, null);
                 break;
             case R.id.nav_share:

@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.ui.main.adapter.GuideAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
-import com.fy.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.JumpUtils;
 
 /**
  *

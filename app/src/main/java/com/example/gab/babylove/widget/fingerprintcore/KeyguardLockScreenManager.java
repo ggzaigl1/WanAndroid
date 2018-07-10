@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import com.fy.baselibrary.utils.LogUtils;
+import com.ggz.baselibrary.utils.LogUtils;
 
 /**
  * Created by popfisher on 2016/11/8.

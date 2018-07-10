@@ -10,10 +10,10 @@ import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.news.adapter.SystemFlyAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
-import com.fy.baselibrary.base.BaseFragment;
-import com.fy.baselibrary.retrofit.BeanModule;
-import com.fy.baselibrary.retrofit.NetCallBack;
-import com.fy.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.base.BaseFragment;
+import com.ggz.baselibrary.retrofit.BeanModule;
+import com.ggz.baselibrary.retrofit.NetCallBack;
+import com.ggz.baselibrary.retrofit.RequestUtils;
 
 import java.util.ArrayList;
 

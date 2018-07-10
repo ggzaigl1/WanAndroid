@@ -4,8 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.utils.ResourceUtils;
-import com.fy.baselibrary.utils.TintUtils;
+import com.ggz.baselibrary.utils.ResourceUtils;
+import com.ggz.baselibrary.utils.TintUtils;
 /**
  *
  * 代码设置 选择器

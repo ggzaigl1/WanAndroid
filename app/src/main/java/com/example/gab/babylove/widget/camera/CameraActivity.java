@@ -15,11 +15,11 @@ import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.LogUtils;
-import com.fy.baselibrary.utils.ToastUtils;
-import com.fy.baselibrary.utils.permission.PermissionChecker;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.LogUtils;
+import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.permission.PermissionChecker;
 
 import butterknife.BindView;
 

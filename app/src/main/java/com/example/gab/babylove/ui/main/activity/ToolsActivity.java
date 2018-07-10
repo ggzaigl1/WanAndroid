@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.utils.CleanMessageUtil;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.ToastUtils;
 
 import java.util.List;
 
@@ -82,13 +82,6 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
             case R.id.tv_praise:
                 startMarket();
                 break;
-//            //手机相关信息
-//            case R.id.Ll_phoneUtils:
-//                if (NetworkUtils.isConnected(this)) {
-//                    ToastUtils.showShortToast("网络连接");
-//                }
-//                JumpUtils.jump(this, PhoneUtilsActivity.class, null);
-//                break;
             //清除缓存
             case R.id.Ll_cache_clear:
 //                JumpUtils.jump(this, SurfaceActivity.class, null);

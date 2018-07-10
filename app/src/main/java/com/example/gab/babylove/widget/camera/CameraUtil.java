@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
-import com.fy.baselibrary.utils.LogUtils;
+import com.ggz.baselibrary.utils.LogUtils;
 
 import java.util.List;
 

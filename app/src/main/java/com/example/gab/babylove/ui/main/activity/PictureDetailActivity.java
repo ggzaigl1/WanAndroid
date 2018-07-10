@@ -12,9 +12,9 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.ui.main.adapter.PhotoAdapter;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.widget.PhotoViewPager;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.ToastUtils;
 
 import butterknife.BindView;
 
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * 描述：图片详情页
  */
 
-public class PictureDetailActivity extends AppCompatActivity implements IBaseActivity{
+public class PictureDetailActivity extends AppCompatActivity implements IBaseActivity {
 
     private int mCurrentPosition;
     @BindView(R.id.view_page)

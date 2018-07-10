@@ -6,7 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.CollectBean;
-import com.fy.baselibrary.utils.ResourceUtils;
+import com.ggz.baselibrary.utils.ResourceUtils;
 
 import java.util.List;
 

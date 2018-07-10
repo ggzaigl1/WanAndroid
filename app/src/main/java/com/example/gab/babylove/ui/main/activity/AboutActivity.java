@@ -25,8 +25,8 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.widget.interpolator.ElasticOutInterpolator;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.utils.ResourceUtils;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.utils.ResourceUtils;
 import com.scwang.smartrefresh.header.FlyRefreshHeader;
 import com.scwang.smartrefresh.header.flyrefresh.FlyView;
 import com.scwang.smartrefresh.header.flyrefresh.MountainSceneView;

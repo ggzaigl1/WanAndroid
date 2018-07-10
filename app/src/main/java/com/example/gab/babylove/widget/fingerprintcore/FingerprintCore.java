@@ -9,7 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.fy.baselibrary.utils.LogUtils;
+import com.ggz.baselibrary.utils.LogUtils;
 
 import java.lang.ref.WeakReference;
 

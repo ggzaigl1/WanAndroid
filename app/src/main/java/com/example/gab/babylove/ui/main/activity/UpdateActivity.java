@@ -22,9 +22,9 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.UpDateBean;
 import com.example.gab.babylove.widget.CustomDialog;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.retrofit.NetCallBack;
-import com.fy.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.retrofit.NetCallBack;
+import com.ggz.baselibrary.retrofit.RequestUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

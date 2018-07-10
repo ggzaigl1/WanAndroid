@@ -14,7 +14,7 @@ import com.example.gab.babylove.entity.TreeBean;
 import com.example.gab.babylove.entity.ProjectBean;
 import com.example.gab.babylove.entity.UpDateBean;
 import com.example.gab.babylove.entity.UpdateAppInfoBean;
-import com.fy.baselibrary.retrofit.BeanModule;
+import com.ggz.baselibrary.retrofit.BeanModule;
 
 import java.util.ArrayList;
 import java.util.List;

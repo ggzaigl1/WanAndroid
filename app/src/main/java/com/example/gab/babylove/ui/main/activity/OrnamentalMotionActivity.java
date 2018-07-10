@@ -24,9 +24,9 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.OrnamentalListBean;
 import com.example.gab.babylove.ui.main.adapter.OrnamentalMotionAdapter;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.LogUtils;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.LogUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;

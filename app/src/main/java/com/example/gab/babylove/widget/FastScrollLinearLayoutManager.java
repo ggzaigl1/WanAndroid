@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
-import com.fy.baselibrary.utils.LogUtils;
+import com.ggz.baselibrary.utils.LogUtils;
 
 /**
  * Created by Gab on 2018/1/4 0004.

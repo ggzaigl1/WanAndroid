@@ -12,8 +12,8 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.just.agentweb.AgentWeb;
 
 import butterknife.BindView;

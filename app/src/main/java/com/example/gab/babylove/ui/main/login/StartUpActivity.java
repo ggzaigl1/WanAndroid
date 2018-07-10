@@ -9,9 +9,9 @@ import android.view.View;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.JumpUtils;
 
 import java.util.concurrent.TimeUnit;
 

@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.widget.fingerprintcore.FingerprintCore;
 import com.example.gab.babylove.widget.fingerprintcore.KeyguardLockScreenManager;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBar;
-import com.fy.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;

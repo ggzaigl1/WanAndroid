@@ -30,8 +30,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.application.IBaseActivity;
-import com.fy.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusbar.MdStatusBar;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

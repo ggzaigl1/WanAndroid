@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.example.gab.babylove.R;
-import com.fy.baselibrary.utils.imgload.ImgLoadUtils;
+import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 
 /**
  * Created by Sai on 15/8/4.
