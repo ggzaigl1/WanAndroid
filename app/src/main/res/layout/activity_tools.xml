@@ -91,6 +91,51 @@
             android:text="手机相关"/>
 
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_12">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:drawablePadding="10dp"
+                android:textSize="15sp"
+                android:text="@string/app_name"/>
+
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+            <EditText
+                    android:id="@+id/et_add_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:maxLength="18"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/myTxtColor"
+                    android:textCursorDrawable="@null"
+                    android:gravity="right|center_vertical"
+                    />
+
+            <TextView
+                    android:id="@+id/tv_add_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center_vertical"
+                    android:background="@null"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/myTxtColor"
+                    android:text="@string/app_name"/>
+        </FrameLayout>
+
+
+    </LinearLayout>
+
     <!--<LinearLayout-->
     <!--android:id="@+id/Ll_stroke"-->
     <!--style="@style/myListStyle">-->
