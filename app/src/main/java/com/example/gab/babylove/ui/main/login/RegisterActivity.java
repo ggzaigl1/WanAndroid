@@ -52,18 +52,9 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
     @BindView(R.id.et_username)
     TextInputEditText editRegisterName;
 
-    @BindView(R.id.tilRegisterPass)
-    TextInputLayout tilRegisterPass;
     @BindView(R.id.editRegisterPass)
     TextInputEditText editRegisterPass;
 
-    @BindView(R.id.tilRegisterPass2)
-    TextInputLayout tilRegisterPass2;
-    @BindView(R.id.editRegisterPass2)
-    TextInputEditText editRegisterPass2;
-
-    @BindView(R.id.btn_Register)
-    Button btn_Register;
     @BindView(R.id.fab)
     FloatingActionButton mFloatingActionButton;
     @BindView(R.id.cv_add)

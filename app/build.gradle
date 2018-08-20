@@ -52,5 +52,7 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-progressbar:1.0.0@aar'
 
     implementation 'com.ggzaigl1:baselibrary:1.0.2'
+    implementation 'com.blankj:utilcode:1.19.0'
+    implementation 'com.bigkoo:alertview:1.0.3'
 //    implementation 'com.fy.grace:baselibrary:1.0.5'
 }
