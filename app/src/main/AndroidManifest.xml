@@ -139,6 +139,7 @@
         <activity
                 android:name="com.example.gab.babylove.ui.main.activity.OrnamentalContextActivity"
                 android:label="@string/ornamental"
+                android:theme="@style/TranslucentTheme"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity

@@ -49,8 +49,8 @@ public class PictureDetailActivity extends AppCompatActivity implements IBaseAct
     @SuppressLint("SetTextI18n")
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        OrListBean actionsBean = (OrListBean) getIntent().getExtras().getSerializable("orListBean");
-        mCurrentPosition = getIntent().getExtras().getInt("position");
+        OrListBean actionsBean = (OrListBean) getIntent().getSerializableExtra("orListBean");
+        mCurrentPosition = getIntent().getIntExtra("position",-1);
 
         tv_image_count.setText((mCurrentPosition + 1) + "/" + actionsBean.getData().size());
         PhotoAdapter adapter = new PhotoAdapter(actionsBean, PictureDetailActivity.this);

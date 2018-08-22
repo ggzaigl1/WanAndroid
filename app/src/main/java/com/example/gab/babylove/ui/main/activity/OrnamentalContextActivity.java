@@ -2,8 +2,10 @@ package com.example.gab.babylove.ui.main.activity;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,11 +18,12 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.OrnamentalListBean;
+import com.example.gab.babylove.statusbar.MdStatusBar;
+import com.example.gab.babylove.statusbar.StatusBarContentColor;
 import com.example.gab.babylove.ui.main.adapter.OrnamentalContextAdapter;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
@@ -74,12 +77,15 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
 
     @Override
     public void setStatusBar(Activity activity) {
-        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+        MdStatusBar.statusAlpha = 0;
+        MdStatusBar.navAlpha = 0;
+        MdStatusBar.setColorBar(activity, R.color.transparent, R.color.statusBar);
+        StatusBarContentColor.setStatusTextColor(this, true, true);
     }
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        int id = getIntent().getExtras().getInt("id");
+        int id = getIntent().getIntExtra("id", 0);
         getCourseDetails(id);
         initRecycle();
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
@@ -89,8 +95,10 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
         toolbar.setNavigationOnClickListener(v -> JumpUtils.exitActivity(this));
     }
 
+
     private void getCourseDetails(int mPageNo) {
-        SpotsDialog dialog = new SpotsDialog(this);dialog.show();
+        SpotsDialog dialog = new SpotsDialog(this);
+        dialog.show();
 //        IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.data_loading);
         RequestUtils.create(ApiService.class)
                 .getCourseDetails(mPageNo)

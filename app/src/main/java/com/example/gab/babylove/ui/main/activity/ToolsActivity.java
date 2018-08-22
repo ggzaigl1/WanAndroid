@@ -114,10 +114,10 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
                 .setTitle(R.string.system_title)
                 .setMessage(R.string.tools_clear_cache)
                 .setCancelable(false)
-                .setNegativeButton(R.string.ok, (dialogInterface, i) -> new Thread(() -> {
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> new Thread(() -> {
                     CleanMessageUtil.clearAllCache(getApplicationContext());
                     mHandler.sendEmptyMessage(0);
-                }).start()).setPositiveButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
+                }).start()).setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
     }
 

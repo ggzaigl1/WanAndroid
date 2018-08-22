@@ -1,11 +1,14 @@
 package com.example.gab.babylove.ui.main.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.widget.ImageView;
 
 import com.bigkoo.alertview.AlertView;
 import com.bumptech.glide.Glide;
@@ -13,9 +16,11 @@ import com.bumptech.glide.request.target.Target;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.utils.ImgUtils;
+import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ToastUtils;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 import com.ggz.baselibrary.utils.media.UpdateMedia;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import io.reactivex.Observable;
@@ -42,13 +47,11 @@ public class PhotoAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         String url = imageUrls.getData().get(position).getUrl();
-
         PhotoView photoView = new PhotoView(activity);
-
         ImgLoadUtils.loadImage(activity, url, photoView);
         container.addView(photoView);
         //点击图片关闭
-        photoView.setOnPhotoTapListener((view, x, y) -> activity.finish());
+        photoView.setOnPhotoTapListener((view, x, y) -> JumpUtils.exitActivity(activity));
         //长按图片保存
         photoView.setOnLongClickListener(v -> {
             new AlertView.Builder().setContext(activity)
@@ -71,13 +74,15 @@ public class PhotoAdapter extends PagerAdapter {
         return photoView;
     }
 
+    @SuppressLint("CheckResult")
     private void GetPic(String url) {
         Observable.just(1)
-                .map(integer -> Glide.with(activity)
-                        .load(url)
-                        .asBitmap()
-                        .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                        .get())
+                .map(integer ->
+                        Glide.with(activity)
+                                .load(url)
+                                .asBitmap()
+                                .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                                .get())
                 .map(ImgUtils::saveImageToGallery)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -111,4 +116,5 @@ public class PhotoAdapter extends PagerAdapter {
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
     }
+
 }
