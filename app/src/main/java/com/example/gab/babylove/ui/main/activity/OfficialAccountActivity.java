@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 初夏小溪 on 2018/10/15 0015.
- * 公众号
+ * 公众号 作者
  */
 public class OfficialAccountActivity extends BaseActivity implements IBaseActivity {
 

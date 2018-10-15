@@ -204,6 +204,12 @@ public class HomeFragment extends BaseFragment {
                             } else {
                                 mAdapter.setNewData(articleBean.getDatas());
                             }
+                        } else {
+                            if (mRefreshLayout.isRefreshing()) {
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mRefreshLayout.finishLoadMore();
+                            }
                         }
                     }
                 });

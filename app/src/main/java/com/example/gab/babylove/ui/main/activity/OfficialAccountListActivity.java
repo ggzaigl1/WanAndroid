@@ -20,6 +20,11 @@ import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 
@@ -27,14 +32,17 @@ import butterknife.BindView;
 
 /**
  * Created by 初夏小溪 on 2018/10/15 0015.
- * 公众号 详情
+ * 公众号 内容
  */
 public class OfficialAccountListActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout mRefreshLayout;
     OfficialAccountListAdapter mAdapter;
     private int mId;
+    int mPageNo = 1;
 
     @Override
     public boolean isShowHeadView() {
@@ -55,7 +63,8 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
     public void initData(Activity activity, Bundle savedInstanceState) {
         mId = getIntent().getIntExtra("id", 0);
         initRecyle();
-        getChaptersList();
+        initRefresh();
+        getChaptersList(mPageNo);
     }
 
     @Override
@@ -72,17 +81,32 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
      * 公众号详情 数据加载
      */
     @SuppressLint("CheckResult")
-    private void getChaptersList() {
+    private void getChaptersList(int mPageNo) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .getWxarticle(mId, 1)
+                .getWxarticle(mId, mPageNo)
                 .compose(RxHelper.handleResult())
                 .subscribe(new NetCallBack<OfficialAccountListBean>() {
                     @Override
                     protected void onSuccess(OfficialAccountListBean officialAccountListBean) {
                         if (null != officialAccountListBean) {
-                            mAdapter.setNewData(officialAccountListBean.getDatas());
                             mKProgressHUD.dismiss();
+                            if (mRefreshLayout.isRefreshing()) {
+                                mAdapter.setNewData(officialAccountListBean.getDatas());
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mAdapter.getData().addAll(officialAccountListBean.getDatas());
+                                mRefreshLayout.finishLoadMore();
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mAdapter.setNewData(officialAccountListBean.getDatas());
+                            }
+                        } else {
+                            if (mRefreshLayout.isRefreshing()) {
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mRefreshLayout.finishLoadMore();
+                            }
                         }
                     }
 
@@ -104,5 +128,37 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
 //            OfficialAccountListBean.DatasBean dataBean = mAdapter.getData().get(position);
 //            WebViewActivity.startWebActivity(this, dataBean.getLink());// 详情
         });
+    }
+
+    /**
+     * 分页加载数据
+     */
+    private void initRefresh() {
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                mPageNo += 1;
+                getChaptersList(mPageNo);
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                mPageNo = 1;
+                getChaptersList(mPageNo);
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mRefreshLayout.isRefreshing()) {
+            mRefreshLayout.finishRefresh();
+        }
+        if (mRefreshLayout.isLoading()) {
+            mRefreshLayout.finishLoadMore();
+        }
     }
 }
