@@ -14,6 +14,7 @@ import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 
 import java.util.ArrayList;
 
@@ -69,13 +70,12 @@ public class SystemFlyFragment extends BaseFragment {
 
         RequestUtils.create(ApiService.class)
                 .getArticleList(mPageNo, id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<ArticleBean>>() {
+                .compose(RxHelper.handleResult())
+                .subscribe(new NetCallBack<ArticleBean>() {
                     @Override
-                    protected void onSuccess(BeanModule<ArticleBean> articleBean) {
-                        if (null != articleBean && null != articleBean.getData()) {
-                            mAdapter.setNewData(articleBean.getData().getDatas());
+                    protected void onSuccess(ArticleBean articleBean) {
+                        if (null != articleBean) {
+                            mAdapter.setNewData(articleBean.getDatas());
                         }
 //                        dialog.dismiss();
                     }

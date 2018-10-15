@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          android:versionCode="3"
-          android:versionName="1.2.1"
+          android:versionCode="5"
+          android:versionName="1.2.5"
           package="com.example.gab.babylove"
           tools:ignore="GradleOverrides">
 
@@ -45,7 +45,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             tools:replace="android:allowBackup"
-            android:theme="@style/BaseAppTheme">
+            android:theme="@style/BaseAppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
 
         <!-- 欢迎 -->
         <activity
@@ -120,16 +121,30 @@
         <activity
                 android:name="com.example.gab.babylove.web.AgentWebActivity"
                 android:screenOrientation="portrait"/>
-        <!-- 指紋相关工具类 -->
-        <activity
-                android:name="com.example.gab.babylove.ui.main.activity.FingerprintMainActivity"
-                android:label="@string/fingerprint"
-                android:screenOrientation="portrait"/>
+
         <!-- 关于我们 -->
         <activity
                 android:name="com.example.gab.babylove.ui.main.activity.AboutActivity"
                 android:label="@string/about_us"
                 android:screenOrientation="portrait"/>
+
+        <!-- 公众号 -->
+        <activity
+                android:name=".ui.main.activity.OfficialAccountActivity"
+                android:label="@string/official_account"
+                android:screenOrientation="portrait"/>
+        <!-- 公众号详情 -->
+        <activity
+                android:name=".ui.main.activity.OfficialAccountListActivity"
+                android:label="@string/official_account"
+                android:screenOrientation="portrait"/>
+
+        <!-- 指紋相关工具类 -->
+        <activity
+                android:name="com.example.gab.babylove.ui.main.activity.FingerprintMainActivity"
+                android:label="@string/fingerprint"
+                android:screenOrientation="portrait"/>
+
         <!-- 运动健身 -->
         <activity
                 android:name="com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity"
@@ -152,7 +167,7 @@
                 android:screenOrientation="portrait"/>
         <!-- 相机Camera -->
         <activity
-                android:name="com.example.gab.babylove.widget.camera.CameraActivity"
+                android:name="com.example.gab.babylove.widget.camera.CameraPermissionActivity"
                 android:theme="@style/FullScreenTheme"
                 android:screenOrientation="portrait"/>
 
@@ -166,6 +181,14 @@
 
         <!-- WebView 相关 activity -->
         <!-- 8.0关于WebView的新特性 -->
+
+        <activity
+                android:name=".demi.CameraActivity"
+                android:screenOrientation="landscape"
+                android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"/>
+
+        <activity android:name=".demi.FingerprinActivity"/>
+
 
         <activity
                 android:name="com.example.gab.babylove.web.WebViewActivity"

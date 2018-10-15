@@ -40,6 +40,7 @@ import butterknife.BindView;
 import dmax.dialog.SpotsDialog;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -189,19 +190,21 @@ public class HomeFragment extends BaseFragment {
     private void getArticleList(int mCurPage) {
         RequestUtils.create(ApiService.class)
                 .getArticleHomeList(mCurPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(articleBean -> {
-                    if (null != articleBean && null != articleBean.getData()) {
-                        if (mRefreshLayout.isRefreshing()) {
-                            mAdapter.setNewData(articleBean.getData().getDatas());
-                            mRefreshLayout.finishRefresh();
-                        } else if (mRefreshLayout.isLoading()) {
-                            mAdapter.getData().addAll(articleBean.getData().getDatas());
-                            mRefreshLayout.finishLoadMore();
-                            mAdapter.notifyDataSetChanged();
-                        } else {
-                            mAdapter.setNewData(articleBean.getData().getDatas());
+                .compose(RxHelper.handleResult())
+                .subscribe(new Consumer<ArticleBean>() {
+                    @Override
+                    public void accept(ArticleBean articleBean) throws Exception {
+                        if (null != articleBean && null != articleBean) {
+                            if (mRefreshLayout.isRefreshing()) {
+                                mAdapter.setNewData(articleBean.getDatas());
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mAdapter.getData().addAll(articleBean.getDatas());
+                                mRefreshLayout.finishLoadMore();
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mAdapter.setNewData(articleBean.getDatas());
+                            }
                         }
                     }
                 });
@@ -227,8 +230,7 @@ public class HomeFragment extends BaseFragment {
     private void uncollectArticle(int id) {
         RequestUtils.create(ApiService.class)
                 .uncollectArticle(id, "")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxHelper.handleResult())
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(objectBeanModule -> ToastUtils.showShort("取消收藏成功"));
     }

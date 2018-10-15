@@ -10,6 +10,8 @@ import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.HomeBean;
 import com.example.gab.babylove.entity.LoginBean;
 import com.example.gab.babylove.entity.NavigationBean;
+import com.example.gab.babylove.entity.OfficialAccountBean;
+import com.example.gab.babylove.entity.OfficialAccountListBean;
 import com.example.gab.babylove.entity.TreeBean;
 import com.example.gab.babylove.entity.ProjectBean;
 import com.example.gab.babylove.entity.UpDateBean;
@@ -165,6 +167,29 @@ public interface ApiService {
     Observable<BeanModule<Object>> unMyCollectArticle(@Path("id") int articleId, @Field("originId") int originId);
 
     /**
+     * 搜索
+     */
+    @FormUrlEncoded
+    @Headers({"url_name:user"})
+    @POST("article/query/{id}/json")
+    Observable<BeanModule<ArticleBean>> getQuery(@Path("id") int articleId, @Field("k") String queryKey);
+
+    /**
+     * 获取公众号列表
+     */
+    @Headers({"url_name:user"})
+    @GET("wxarticle/chapters/json")
+    Observable<List<OfficialAccountBean>> getChapters();
+
+
+    /**
+     * 查看某个公众号历史数据
+     */
+    @Headers({"url_name:user"})
+    @GET("wxarticle/list/{ID}/{pageNo}/json")
+    Observable<BeanModule<OfficialAccountListBean>> getWxarticle(@Path("ID") int Id, @Path("pageNo") int pageNo);
+
+    /**
      * 运动课程 ---运动列表
      */
     @Headers({"url_name:user"})
@@ -178,13 +203,6 @@ public interface ApiService {
     @GET("http://api.fithub.cc/api/v44/train/course")
     Observable<CourseDetails> getCourseDetails(@Query("id") int id);
 
-    /**
-     * 搜索
-     */
-    @FormUrlEncoded
-    @Headers({"url_name:user"})
-    @POST("article/query/{id}/json")
-    Observable<BeanModule<ArticleBean>> getQuery(@Path("id") int articleId, @Field("k") String queryKey);
 
     /**
      * 版本更新
@@ -192,6 +210,7 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("http://118.31.218.69/lesprint/api/version/versionInfo")
     Observable<UpDateBean> getVersionsUpdate(@Query("deviceId") String deviceId, @Query("code") String android);
+
 
     /**
      * 多图片上传

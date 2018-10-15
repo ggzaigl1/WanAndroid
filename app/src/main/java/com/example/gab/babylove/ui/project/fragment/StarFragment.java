@@ -14,6 +14,7 @@ import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 
 import java.util.ArrayList;
@@ -60,13 +61,12 @@ public class StarFragment extends BaseFragment {
 //        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
         RequestUtils.create(ApiService.class)
                 .getProjectList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<List<ProjectBean>>>() {
+                .compose(RxHelper.handleResult())
+                .subscribe(new NetCallBack<List<ProjectBean>>() {
                     @Override
-                    protected void onSuccess(BeanModule<List<ProjectBean>> beanModule) {
-                        if (null != beanModule && null != beanModule.getData()) {
-                            data = beanModule.getData();
+                    protected void onSuccess(List<ProjectBean> beanModule) {
+                        if (null != beanModule && null != beanModule) {
+                            data = beanModule;
                             for (ProjectBean bean : data) {
                                 SystemStarFragment systemFlyFragment = SystemStarFragment.getInstance(bean.getId(), "");
                                 mFragments.add(systemFlyFragment);

@@ -15,9 +15,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.demi.FingerprinActivity;
 import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ToastUtils;
 
 import java.util.List;
@@ -74,7 +76,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
     }
 
 
-    @OnClick({R.id.Ll_cache_clear, R.id.tv_praise})
+    @OnClick({R.id.Ll_cache_clear, R.id.tv_praise,R.id.Ll_stroke})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -87,10 +89,10 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
 //                JumpUtils.jump(this, SurfaceActivity.class, null);
                 Cache(this);
                 break;
-//            //指纹相关
-//            case R.id.Ll_stroke:
-//                JumpUtils.jump(this, FingerprintMainActivity.class, null);
-//                break;
+            //指纹相关
+            case R.id.Ll_stroke:
+                JumpUtils.jump(this, FingerprinActivity.class, null);
+                break;
 //            //SelectorButton
 //            case R.id.Ll_Button:
 //                JumpUtils.jump(this, SelectorButtonActivity.class, null);

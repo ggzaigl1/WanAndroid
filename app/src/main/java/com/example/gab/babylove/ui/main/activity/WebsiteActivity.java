@@ -14,6 +14,7 @@ import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
@@ -22,9 +23,11 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -76,11 +79,13 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
     private void getBookmarkList() {
         RequestUtils.create(ApiService.class)
                 .getBookmarkList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(listBeanModule -> {
-                    if (null != listBeanModule && null != listBeanModule.getData()) {
-                        mAdapter.setNewData(listBeanModule.getData());
+                .compose(RxHelper.handleResult())
+                .subscribe(new Consumer<List<BookmarkBean>>() {
+                    @Override
+                    public void accept(List<BookmarkBean> listBeanModule) throws Exception {
+                        if (null != listBeanModule && null != listBeanModule) {
+                            mAdapter.setNewData(listBeanModule);
+                        }
                     }
                 });
     }

@@ -14,6 +14,7 @@ import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
@@ -73,16 +74,15 @@ public class NavigationViewFragment extends BaseFragment {
 //        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
         RequestUtils.create(ApiService.class)
                 .getNaviList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<BeanModule<List<NavigationBean>>>() {
+                .compose(RxHelper.handleResult())
+                .subscribe(new Consumer<List<NavigationBean>>() {
                     @Override
-                    public void accept(BeanModule<List<NavigationBean>> navigationBeanBeanModule) throws Exception {
-                        if (null != navigationBeanBeanModule && null != navigationBeanBeanModule.getData()) {
-                            mAdapter.setNewData(navigationBeanBeanModule.getData());
+                    public void accept(List<NavigationBean> navigationBeanBeanModule) throws Exception {
+                        if (null != navigationBeanBeanModule) {
+                            mAdapter.setNewData(navigationBeanBeanModule);
                             if (mSelectedPos == 0) {
                                 mAdapter.getData().get(mSelectedPos).setSelected(true);
-                                mNavigationCidAdapter.setNewData(navigationBeanBeanModule.getData().get(mSelectedPos).getArticles());
+                                mNavigationCidAdapter.setNewData(navigationBeanBeanModule.get(mSelectedPos).getArticles());
                             }
                         }
                         dialog.dismiss();

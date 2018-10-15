@@ -16,6 +16,7 @@ import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -110,21 +111,20 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
     private void getArticleList(int mPageNo) {
         RequestUtils.create(ApiService.class)
                 .getCollectList(mPageNo)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<BeanModule<CollectBean>>() {
+                .compose(RxHelper.handleResult())
+                .subscribe(new Consumer<CollectBean>() {
                     @Override
-                    public void accept(BeanModule<CollectBean> collectBeanBeanModule) throws Exception {
+                    public void accept(CollectBean collectBeanBeanModule) throws Exception {
                         if (null != collectBeanBeanModule) {
                             if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
+                                mAdapter.setNewData(collectBeanBeanModule.getDatas());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(collectBeanBeanModule.getData().getDatas());
+                                mAdapter.getData().addAll(collectBeanBeanModule.getDatas());
                                 mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
                             } else {
-                                mAdapter.setNewData(collectBeanBeanModule.getData().getDatas());
+                                mAdapter.setNewData(collectBeanBeanModule.getDatas());
                             }
                         }
                     }
@@ -157,8 +157,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
     private void unMycollectArticle(int id, int OriginId, int position) {
         RequestUtils.create(ApiService.class)
                 .unMyCollectArticle(id, OriginId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxHelper.handleResult())
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(o -> {
                     mAdapter.remove(position);

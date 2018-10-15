@@ -91,55 +91,55 @@
             android:text="手机相关"/>
 
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/Ll_stroke"-->
-    <!--style="@style/myListStyle">-->
+    <LinearLayout
+            android:id="@+id/Ll_stroke"
+            style="@style/myListStyle">
 
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="指纹相关"-->
-    <!--android:drawableLeft="@drawable/vector_stroke"-->
-    <!--android:drawablePadding="@dimen/spacing_medium_large"-->
-    <!--android:textColor="@color/colorAccent"-->
-    <!--android:textSize="@dimen/textSize_medium_small"-->
-    <!--/>-->
+        <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="指纹相关"
+                android:drawableLeft="@drawable/vector_stroke"
+                android:drawablePadding="@dimen/spacing_medium_large"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/textSize_medium_small"
+                />
 
-    <!--</LinearLayout>-->
+        </LinearLayout>
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/Ll_Button"-->
-    <!--style="@style/myListStyle">-->
+        <!--<LinearLayout-->
+        <!--android:id="@+id/Ll_Button"-->
+        <!--style="@style/myListStyle">-->
 
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="SelectorButton"-->
-    <!--android:drawableLeft="@drawable/vector_selector_button"-->
-    <!--android:drawablePadding="@dimen/spacing_medium_large"-->
-    <!--android:textColor="@color/colorAccent"-->
-    <!--android:textSize="@dimen/textSize_medium_small"-->
-    <!--/>-->
+        <!--<TextView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="SelectorButton"-->
+        <!--android:drawableLeft="@drawable/vector_selector_button"-->
+        <!--android:drawablePadding="@dimen/spacing_medium_large"-->
+        <!--android:textColor="@color/colorAccent"-->
+        <!--android:textSize="@dimen/textSize_medium_small"-->
+        <!--/>-->
 
-    <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/Ll_personal_center"-->
-    <!--style="@style/myListStyle">-->
+        <!--<LinearLayout-->
+        <!--android:id="@+id/Ll_personal_center"-->
+        <!--style="@style/myListStyle">-->
 
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="SelectorButton"-->
-    <!--android:drawableLeft="@drawable/ic_personal_center"-->
-    <!--android:drawablePadding="@dimen/spacing_medium_large"-->
-    <!--android:textColor="@color/colorAccent"-->
-    <!--android:textSize="@dimen/textSize_medium_small"-->
-    <!--/>-->
+        <!--<TextView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="SelectorButton"-->
+        <!--android:drawableLeft="@drawable/ic_personal_center"-->
+        <!--android:drawablePadding="@dimen/spacing_medium_large"-->
+        <!--android:textColor="@color/colorAccent"-->
+        <!--android:textSize="@dimen/textSize_medium_small"-->
+        <!--/>-->
 
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-</LinearLayout>
+        <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+    </LinearLayout>

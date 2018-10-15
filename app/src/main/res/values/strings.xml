@@ -46,10 +46,11 @@
     <!-- navigation_drawer string 资源 -->
     <string name="pretty_picture">隐性福利</string>
     <string name="tools">设置</string>
-    <string name="website">常用网站 </string>
-    <string name="collect">我的收藏 </string>
-    <string name="search">搜索详情 </string>
-    <string name="knowledge">知识体系 </string>
+    <string name="website">常用网站</string>
+    <string name="official_account">公众号</string>
+    <string name="collect">我的收藏</string>
+    <string name="search">搜索详情</string>
+    <string name="knowledge">知识体系</string>
     <string name="about_us">关于我们</string>
     <string name="share">分享</string>
     <string name="nav_exit">退出应用</string>

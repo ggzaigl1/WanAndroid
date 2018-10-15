@@ -27,7 +27,7 @@ import butterknife.BindView;
  * @author 初夏小溪
  * @date 2018/6/12 0012
  */
-public class CameraActivity extends AppCompatActivity implements IBaseActivity {
+public class CameraPermissionActivity extends AppCompatActivity implements IBaseActivity {
 
     private SurfaceHolder mSurfaceHolder;
     private int mCameraId = 0;
@@ -47,7 +47,7 @@ public class CameraActivity extends AppCompatActivity implements IBaseActivity {
 
     @Override
     public int setView() {
-        return R.layout.activity_camera;
+        return R.layout.activity_permission_camera;
     }
 
     @Override

@@ -20,6 +20,7 @@ import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
@@ -98,22 +99,21 @@ public class SearchActivity extends AppCompatActivity implements IBaseActivity {
     private void getQuery(int pageNum, String queryKey) {
         RequestUtils.create(ApiService.class)
                 .getQuery(pageNum, queryKey)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxHelper.handleResult())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(new NetCallBack<BeanModule<ArticleBean>>() {
+                .subscribe(new NetCallBack<ArticleBean>() {
                     @Override
-                    protected void onSuccess(BeanModule<ArticleBean> articleBean) {
+                    protected void onSuccess(ArticleBean articleBean) {
                         if (null != articleBean) {
                             if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(articleBean.getData().getDatas());
+                                mAdapter.setNewData(articleBean.getDatas());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(articleBean.getData().getDatas());
+                                mAdapter.getData().addAll(articleBean.getDatas());
                                 mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
                             } else {
-                                mAdapter.setNewData(articleBean.getData().getDatas());
+                                mAdapter.setNewData(articleBean.getDatas());
                             }
                         }
                     }
@@ -145,8 +145,7 @@ public class SearchActivity extends AppCompatActivity implements IBaseActivity {
     private void uncollectArticle(int id) {
         RequestUtils.create(ApiService.class)
                 .uncollectArticle(id, "")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxHelper.handleResult())
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(objectBeanModule -> ToastUtils.showShort("取消收藏成功"));
     }

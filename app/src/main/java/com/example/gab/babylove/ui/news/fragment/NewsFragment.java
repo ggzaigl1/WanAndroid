@@ -14,6 +14,7 @@ import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
 
@@ -55,17 +56,16 @@ public class NewsFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList() {
-        SpotsDialog dialog = new SpotsDialog(getActivity());dialog.show();
-//        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
+        SpotsDialog dialog = new SpotsDialog(getActivity());
+        dialog.show();
         RequestUtils.create(ApiService.class)
                 .getTreeList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<BeanModule<List<TreeBean>>>() {
+                .compose(RxHelper.handleResult())
+                .subscribe(new NetCallBack<List<TreeBean>>() {
                     @Override
-                    protected void onSuccess(BeanModule<List<TreeBean>> listBeanModule) {
-                        if (null != listBeanModule && null != listBeanModule.getData()) {
-                            mAdapter.setNewData(listBeanModule.getData());
+                    protected void onSuccess(List<TreeBean> listBeanModule) {
+                        if (null != listBeanModule) {
+                            mAdapter.setNewData(listBeanModule);
                         }
                         dialog.dismiss();
                     }
@@ -86,7 +86,7 @@ public class NewsFragment extends BaseFragment {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             TreeBean bean = mAdapter.getData().get(position);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("bean",bean);
+            bundle.putSerializable("bean", bean);
             JumpUtils.jump(mContext, SystemActivity.class, bundle);// 详情
         });
         mRecyclerView.setAdapter(mAdapter);

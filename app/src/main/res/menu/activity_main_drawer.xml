@@ -12,6 +12,11 @@
                 android:id="@+id/nav_website"
                 android:icon="@drawable/vector_website"
                 android:title="@string/website"/>
+
+        <item
+                android:id="@+id/nav_official_account"
+                android:icon="@drawable/vector_official_account"
+                android:title="@string/official_account"/>
         <item
                 android:id="@+id/nav_collect"
                 android:icon="@drawable/vector_collect"
