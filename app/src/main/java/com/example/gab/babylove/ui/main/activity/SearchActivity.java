@@ -3,7 +3,6 @@ package com.example.gab.babylove.ui.main.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,11 +13,11 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.ArticleBean;
+import com.example.gab.babylove.entity.OfficialAccountListBean;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
-import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -38,7 +37,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -60,6 +58,8 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
     int mPageNo = 0;
     String queryKey;
     HomeAdapter mAdapter;
+    private int mType;
+    private int mId;
 
     @Override
     public boolean isShowHeadView() {
@@ -83,6 +83,8 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // 给左上角图标的左边加上一个返回的图标
         mToolbar.setNavigationOnClickListener(v -> JumpUtils.exitActivity(this));
         queryKey = getIntent().getStringExtra("query");
+        mType = getIntent().getIntExtra("type", 0);
+        mId = getIntent().getIntExtra("id", 0);
         getQuery(mPageNo, queryKey);
         initRecyle();
         initRefresh();
@@ -100,34 +102,77 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
 
     //   搜索接口
     private void getQuery(int pageNum, String queryKey) {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .getQuery(pageNum, queryKey)
-                .compose(RxHelper.handleResult())
-                .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(new NetCallBack<ArticleBean>() {
-                    @Override
-                    protected void onSuccess(ArticleBean articleBean) {
-                        if (null != articleBean) {
-                            if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(articleBean.getDatas());
-                                mRefreshLayout.finishRefresh();
-                            } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(articleBean.getDatas());
-                                mRefreshLayout.finishLoadMore();
-                                mAdapter.notifyDataSetChanged();
-                            } else {
-                                mAdapter.setNewData(articleBean.getDatas());
-                            }
+        if (mType == 1) {
+            mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+            RequestUtils.create(ApiService.class)
+                    .getWxarticleQuery(mId, 1, queryKey)
+                    .compose(RxHelper.handleResult())
+                    .doOnSubscribe(RequestUtils::addDispos)
+                    .subscribe(new NetCallBack<OfficialAccountListBean>() {
+                        @Override
+                        protected void onSuccess(OfficialAccountListBean t) {
+
                             mKProgressHUD.dismiss();
                         }
-                    }
 
-                    @Override
-                    protected void updataLayout(int flag) {
+                        @Override
+                        protected void updataLayout(int flag) {
 
-                    }
-                });
+                        }
+                    });
+//                    .subscribe(new NetCallBack<ArticleBean>() {
+//                        @Override
+//                        protected void onSuccess(ArticleBean articleBean) {
+//                            if (null != articleBean) {
+//                                if (mRefreshLayout.isRefreshing()) {
+//                                    mAdapter.setNewData(articleBean.getDatas());
+//                                    mRefreshLayout.finishRefresh();
+//                                } else if (mRefreshLayout.isLoading()) {
+//                                    mAdapter.getData().addAll(articleBean.getDatas());
+//                                    mRefreshLayout.finishLoadMore();
+//                                    mAdapter.notifyDataSetChanged();
+//                                } else {
+//                                    mAdapter.setNewData(articleBean.getDatas());
+//                                }
+//                                mKProgressHUD.dismiss();
+//                            }
+//                        }
+//
+//                        @Override
+//                        protected void updataLayout(int flag) {
+//
+//                        }
+//                    });
+        } else {
+            mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+            RequestUtils.create(ApiService.class)
+                    .getQuery(pageNum, queryKey)
+                    .compose(RxHelper.handleResult())
+                    .doOnSubscribe(RequestUtils::addDispos)
+                    .subscribe(new NetCallBack<ArticleBean>() {
+                        @Override
+                        protected void onSuccess(ArticleBean articleBean) {
+                            if (null != articleBean) {
+                                if (mRefreshLayout.isRefreshing()) {
+                                    mAdapter.setNewData(articleBean.getDatas());
+                                    mRefreshLayout.finishRefresh();
+                                } else if (mRefreshLayout.isLoading()) {
+                                    mAdapter.getData().addAll(articleBean.getDatas());
+                                    mRefreshLayout.finishLoadMore();
+                                    mAdapter.notifyDataSetChanged();
+                                } else {
+                                    mAdapter.setNewData(articleBean.getDatas());
+                                }
+                                mKProgressHUD.dismiss();
+                            }
+                        }
+
+                        @Override
+                        protected void updataLayout(int flag) {
+
+                        }
+                    });
+        }
     }
 
     /**
@@ -143,7 +188,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule ->{
+                .subscribe(objectBeanModule -> {
                     mKProgressHUD.dismiss();
                     T.showShort("收藏成功");
                 });

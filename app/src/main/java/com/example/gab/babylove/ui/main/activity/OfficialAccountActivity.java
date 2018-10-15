@@ -2,12 +2,17 @@ package com.example.gab.babylove.ui.main.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
 import android.view.View;
 
+import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
@@ -36,6 +41,7 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
     OfficialAccountAdapter mAdapter;
+    private int mId;
 
     @Override
     public boolean isShowHeadView() {
@@ -99,9 +105,36 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
         mAdapter = new OfficialAccountAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            mId = mAdapter.getData().get(position).getId();
             Bundle bundle = new Bundle();
             bundle.putInt("id", mAdapter.getData().get(position).getId());
             JumpUtils.jump(OfficialAccountActivity.this, OfficialAccountListActivity.class, bundle);
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main_search, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setQueryHint("搜索知识点");
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("type", 1);
+                bundle.putString("query", query);
+                bundle.putInt("id",mId);
+                JumpUtils.jump(OfficialAccountActivity.this, SearchActivity.class, bundle);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
     }
 }

@@ -320,7 +320,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             }
         });
         return true;
-
     }
 
 

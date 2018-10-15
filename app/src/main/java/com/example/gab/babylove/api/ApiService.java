@@ -171,8 +171,8 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @Headers({"url_name:user"})
-    @POST("article/query/{id}/json")
-    Observable<BeanModule<ArticleBean>> getQuery(@Path("id") int articleId, @Field("k") String queryKey);
+    @POST("article/query/{pageNum}/json")
+    Observable<BeanModule<ArticleBean>> getQuery(@Path("pageNum") int pageNum, @Field("k") String queryKey);
 
     /**
      * 获取公众号列表
@@ -188,6 +188,14 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("wxarticle/list/{ID}/{pageNo}/json")
     Observable<BeanModule<OfficialAccountListBean>> getWxarticle(@Path("ID") int Id, @Path("pageNo") int pageNo);
+
+    /**
+     * 在某个公众号中搜索历史文章
+     */
+    @Headers({"url_name:user"})
+    @GET("wxarticle/list/{ID}/{pageNo}/json")
+    Observable<BeanModule<OfficialAccountListBean>> getWxarticleQuery(@Path("ID") int Id, @Path("pageNo") int pageNo
+            , @Query("k") String queryKey);
 
     /**
      * 运动课程 ---运动列表
