@@ -20,6 +20,7 @@ import android.widget.Button;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.LoginBean;
 import com.ggz.baselibrary.application.BaseApp;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -32,6 +33,7 @@ import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.LogUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.cache.ACache;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +49,7 @@ import dmax.dialog.SpotsDialog;
  * 注册界面
  */
 
-public class RegisterActivity extends AppCompatActivity implements IBaseActivity {
+public class RegisterActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.et_username)
     TextInputEditText editRegisterName;
@@ -180,10 +182,7 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
     }
 
     private void register() {
-        SpotsDialog dialog = new SpotsDialog(this);
-        dialog.show();
-//        IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.register_loading);
-
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         String mUserName = editRegisterName.getText().toString().trim();
         String mPassWord = editRegisterPass.getText().toString().trim();
 
@@ -207,12 +206,12 @@ public class RegisterActivity extends AppCompatActivity implements IBaseActivity
                         Bundle bundle = new Bundle();
                         bundle.putString("LoginBean", mCache.getAsString("User_Name"));
                         JumpUtils.jump(RegisterActivity.this, MainActivity.class, bundle);
-                        dialog.dismiss();
+                        mKProgressHUD.dismiss();
                     }
 
                     @Override
                     protected void updataLayout(int flag) {
-                        dialog.dismiss();
+                        mKProgressHUD.dismiss();
                         LogUtils.e("net updataLayout", flag + "-----");
                     }
                 });

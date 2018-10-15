@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
@@ -26,6 +27,7 @@ import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.ToastUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -36,6 +38,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -43,7 +46,7 @@ import io.reactivex.schedulers.Schedulers;
  * 搜索界面
  */
 
-public class SearchActivity extends AppCompatActivity implements IBaseActivity {
+public class SearchActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
@@ -97,6 +100,7 @@ public class SearchActivity extends AppCompatActivity implements IBaseActivity {
 
     //   搜索接口
     private void getQuery(int pageNum, String queryKey) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getQuery(pageNum, queryKey)
                 .compose(RxHelper.handleResult())
@@ -115,6 +119,7 @@ public class SearchActivity extends AppCompatActivity implements IBaseActivity {
                             } else {
                                 mAdapter.setNewData(articleBean.getDatas());
                             }
+                            mKProgressHUD.dismiss();
                         }
                     }
 
@@ -132,22 +137,30 @@ public class SearchActivity extends AppCompatActivity implements IBaseActivity {
      */
     @SuppressLint("CheckResult")
     private void collectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> ToastUtils.showShort("收藏成功"));
+                .subscribe(objectBeanModule ->{
+                    mKProgressHUD.dismiss();
+                    ToastUtils.showShort("收藏成功");
+                });
     }
 
     //    取消收藏
     @SuppressLint("CheckResult")
     private void uncollectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .uncollectArticle(id, "")
                 .compose(RxHelper.handleResult())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> ToastUtils.showShort("取消收藏成功"));
+                .subscribe(objectBeanModule -> {
+                    mKProgressHUD.dismiss();
+                    ToastUtils.showShort("取消收藏成功");
+                });
     }
 
 

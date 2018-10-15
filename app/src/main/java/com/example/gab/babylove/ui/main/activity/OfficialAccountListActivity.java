@@ -3,21 +3,23 @@ package com.example.gab.babylove.ui.main.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.OfficialAccountListBean;
 import com.example.gab.babylove.ui.main.adapter.OfficialAccountListAdapter;
-import com.example.gab.babylove.web.WebViewActivity;
+import com.example.gab.babylove.web.AgentWebActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.JumpUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ import butterknife.BindView;
  * Created by 初夏小溪 on 2018/10/15 0015.
  * 公众号 详情
  */
-public class OfficialAccountListActivity extends AppCompatActivity implements IBaseActivity {
+public class OfficialAccountListActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
@@ -71,6 +73,7 @@ public class OfficialAccountListActivity extends AppCompatActivity implements IB
      */
     @SuppressLint("CheckResult")
     private void getChaptersList() {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getWxarticle(mId, 1)
                 .compose(RxHelper.handleResult())
@@ -79,12 +82,13 @@ public class OfficialAccountListActivity extends AppCompatActivity implements IB
                     protected void onSuccess(OfficialAccountListBean officialAccountListBean) {
                         if (null != officialAccountListBean) {
                             mAdapter.setNewData(officialAccountListBean.getDatas());
+                            mKProgressHUD.dismiss();
                         }
                     }
 
                     @Override
                     protected void updataLayout(int flag) {
-
+                        mKProgressHUD.dismiss();
                     }
                 });
     }
@@ -94,8 +98,11 @@ public class OfficialAccountListActivity extends AppCompatActivity implements IB
         mAdapter = new OfficialAccountListAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            OfficialAccountListBean.DatasBean dataBean = mAdapter.getData().get(position);
-            WebViewActivity.startWebActivity(this, dataBean.getLink());// 详情
+            Bundle bundle = new Bundle();
+            bundle.putString("UrlBean", mAdapter.getData().get(position).getLink());
+            JumpUtils.jump(this, AgentWebActivity.class, bundle);
+//            OfficialAccountListBean.DatasBean dataBean = mAdapter.getData().get(position);
+//            WebViewActivity.startWebActivity(this, dataBean.getLink());// 详情
         });
     }
 }

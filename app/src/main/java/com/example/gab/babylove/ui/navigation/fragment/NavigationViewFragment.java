@@ -84,8 +84,8 @@ public class NavigationViewFragment extends BaseFragment {
                                 mAdapter.getData().get(mSelectedPos).setSelected(true);
                                 mNavigationCidAdapter.setNewData(navigationBeanBeanModule.get(mSelectedPos).getArticles());
                             }
+                            dialog.dismiss();
                         }
-                        dialog.dismiss();
                     }
                 });
     }

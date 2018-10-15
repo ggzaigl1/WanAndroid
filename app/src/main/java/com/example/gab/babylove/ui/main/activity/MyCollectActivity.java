@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.ui.main.adapter.CollectAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
@@ -19,6 +20,7 @@ import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.ToastUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -39,7 +41,7 @@ import io.reactivex.schedulers.Schedulers;
  * 我的收藏
  */
 
-public class MyCollectActivity extends AppCompatActivity implements IBaseActivity {
+public class MyCollectActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
@@ -109,6 +111,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int mPageNo) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCollectList(mPageNo)
                 .compose(RxHelper.handleResult())
@@ -126,6 +129,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
                             } else {
                                 mAdapter.setNewData(collectBeanBeanModule.getDatas());
                             }
+                            mKProgressHUD.dismiss();
                         }
                     }
                 });
@@ -155,6 +159,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
     //    我的收藏页面, 取消收藏
     @SuppressLint("CheckResult")
     private void unMycollectArticle(int id, int OriginId, int position) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .unMyCollectArticle(id, OriginId)
                 .compose(RxHelper.handleResult())
@@ -163,6 +168,7 @@ public class MyCollectActivity extends AppCompatActivity implements IBaseActivit
                     mAdapter.remove(position);
                     mAdapter.notifyDataSetChanged();
                     ToastUtils.showShort("取消收藏成功");
+                    mKProgressHUD.dismiss();
                 });
     }
 

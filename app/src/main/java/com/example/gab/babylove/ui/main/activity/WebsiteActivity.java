@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.adapter.WebsiteAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.BookmarkBean;
@@ -21,6 +22,7 @@ import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ import io.reactivex.schedulers.Schedulers;
  * 常用网站
  */
 
-public class WebsiteActivity extends AppCompatActivity implements IBaseActivity {
+public class WebsiteActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
@@ -77,6 +79,7 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
      */
     @SuppressLint("CheckResult")
     private void getBookmarkList() {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getBookmarkList()
                 .compose(RxHelper.handleResult())
@@ -85,6 +88,7 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
                     public void accept(List<BookmarkBean> listBeanModule) throws Exception {
                         if (null != listBeanModule && null != listBeanModule) {
                             mAdapter.setNewData(listBeanModule);
+                            mKProgressHUD.dismiss();
                         }
                     }
                 });
@@ -110,5 +114,6 @@ public class WebsiteActivity extends AppCompatActivity implements IBaseActivity 
         });
 //        mAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
+
     }
 }

@@ -20,7 +20,7 @@ import java.util.List;
 public class OfficialAccountAdapter extends BaseQuickAdapter<OfficialAccountBean, BaseViewHolder> {
 
     public OfficialAccountAdapter(@Nullable List<OfficialAccountBean> data) {
-        super(R.layout.item_website, data);
+        super(R.layout.item_official_account, data);
     }
 
     @Override

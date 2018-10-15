@@ -9,7 +9,7 @@ android {
         targetSdkVersion var.targetSdkVersion
 
         versionCode 5
-        versionName "1.2.5"
+        versionName "1.2.6"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true//配置5.0 版本一下可以使用svg
@@ -54,5 +54,6 @@ dependencies {
     implementation 'com.ggzaigl1:baselibrary:1.0.6'
     implementation 'com.blankj:utilcode:1.19.0'
     implementation 'com.bigkoo:alertview:1.0.3'
+    implementation 'com.kaopiz:kprogresshud:1.1.0'
 //    implementation 'com.fy.grace:baselibrary:1.0.5'
 }

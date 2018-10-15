@@ -25,6 +25,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.LoginBean;
 import com.ggz.baselibrary.application.BaseApp;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -38,6 +39,7 @@ import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.ToastUtils;
 import com.ggz.baselibrary.utils.cache.ACache;
 import com.ggz.baselibrary.utils.permission.PermissionChecker;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +57,7 @@ import io.reactivex.schedulers.Schedulers;
  * @date 2017/12/12
  * https://github.com/fanrunqi/MaterialLogin
  */
-public class LoginActivity extends AppCompatActivity implements IBaseActivity {
+public class LoginActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.extInputLayout)
     TextInputLayout iLayoutPass;
@@ -189,18 +191,12 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
     }
 
     private void login() {
-//        new SpotsDialog(this, R.style.Custom).show();
-        SpotsDialog dialog = new SpotsDialog(this);
-        dialog.show();
-//        IProgressDialog progressDialog = new IProgressDialog().init(this).setDialogMsg(R.string.user_login);
-
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         String mUserName = editName.getText().toString().trim();//"ggzaigl1"
         String mPassWord = editPass.getText().toString().trim();//"tmdligen"
-
         Map<String, Object> param = new HashMap<>();
         param.put("username", mUserName);
         param.put("password", mPassWord);
-
         RequestUtils.create(ApiService.class)
                 .getLogin(param)
                 .subscribeOn(Schedulers.io())//在IO线程进行网络请求
@@ -212,7 +208,6 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                                 ACache mCache = ACache.get(BaseApp.getAppCtx());
                                 mCache.put(ConstantUtils.userName, login);
-
                                 SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
                                 SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getData().getUsername());
                                 Bundle bundle = new Bundle();
@@ -225,7 +220,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
                                 JumpUtils.jump(LoginActivity.this, MainActivity.class, activityOptionsCompat.toBundle());
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent, activityOptionsCompat.toBundle());
-                                dialog.dismiss();
+                                mKProgressHUD.dismiss();
                             }
                         } else {
                             ToastUtils.showShort(login.getErrorMsg());
@@ -234,7 +229,7 @@ public class LoginActivity extends AppCompatActivity implements IBaseActivity {
 
                     @Override
                     protected void updataLayout(int flag) {
-                        dialog.dismiss();
+                        mKProgressHUD.dismiss();
                     }
                 });
     }

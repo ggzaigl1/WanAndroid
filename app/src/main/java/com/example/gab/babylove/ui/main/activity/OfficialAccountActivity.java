@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.OfficialAccountBean;
 import com.example.gab.babylove.ui.main.adapter.OfficialAccountAdapter;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -17,6 +18,7 @@ import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by 初夏小溪 on 2018/10/15 0015.
  * 公众号
  */
-public class OfficialAccountActivity extends AppCompatActivity implements IBaseActivity {
+public class OfficialAccountActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
@@ -71,6 +73,7 @@ public class OfficialAccountActivity extends AppCompatActivity implements IBaseA
      */
     @SuppressLint("CheckResult")
     private void getChaptersList() {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getChapters()
                 .subscribeOn(Schedulers.io())
@@ -80,6 +83,7 @@ public class OfficialAccountActivity extends AppCompatActivity implements IBaseA
                     protected void onSuccess(List<OfficialAccountBean> officialAccountBeans) {
                         if (null != officialAccountBeans) {
                             mAdapter.setNewData(officialAccountBeans);
+                            mKProgressHUD.dismiss();
                         }
                     }
 

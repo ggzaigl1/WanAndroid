@@ -16,6 +16,7 @@ import android.view.animation.Interpolator;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.ui.main.adapter.GankMAdapter;
@@ -24,6 +25,7 @@ import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ToastUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -42,7 +44,7 @@ import io.reactivex.schedulers.Schedulers;
  * 美图欣赏
  */
 
-public class BelleActivity extends AppCompatActivity implements IBaseActivity {
+public class BelleActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
@@ -108,6 +110,7 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
 
     @SuppressLint("CheckResult")
     private void getCourseDetails(int mCurPage) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCourseDetails(20, mCurPage)
                 .subscribeOn(Schedulers.io())
@@ -126,7 +129,9 @@ public class BelleActivity extends AppCompatActivity implements IBaseActivity {
                             mAdapter.setNewData(gankBean.getResults());
                            ToastUtils.showShort("加载了" + gankBean.getResults().size() + "妹子");
                         }
+                        mKProgressHUD.dismiss();
                     }
+
                 });
     }
 

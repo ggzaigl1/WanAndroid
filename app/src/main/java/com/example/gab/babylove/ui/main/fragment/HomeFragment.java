@@ -25,6 +25,7 @@ import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.ToastUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -119,9 +120,7 @@ public class HomeFragment extends BaseFragment {
      * banner 轮播图 加载数据 接口
      */
     private void getData() {
-        SpotsDialog dialog = new SpotsDialog(getActivity());
-        dialog.show();
-//        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
+//        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
                 .getBanner()
                 .compose(RxHelper.handleResult())
@@ -170,7 +169,7 @@ public class HomeFragment extends BaseFragment {
                                 mAdapter.setNewData(articleBean.getDatas());
                             }
                         }
-                        dialog.dismiss();
+//                        m.dismiss();
                     }
 
                     @Override
