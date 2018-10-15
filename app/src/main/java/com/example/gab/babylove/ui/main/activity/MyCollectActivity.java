@@ -3,7 +3,6 @@ package com.example.gab.babylove.ui.main.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,11 +14,10 @@ import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.ui.main.adapter.CollectAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
-import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
-import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -30,9 +28,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  *
@@ -167,7 +163,7 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
                 .subscribe(o -> {
                     mAdapter.remove(position);
                     mAdapter.notifyDataSetChanged();
-                    ToastUtils.showShort("取消收藏成功");
+                    T.showShort("取消收藏成功");
                     mKProgressHUD.dismiss();
                 });
     }

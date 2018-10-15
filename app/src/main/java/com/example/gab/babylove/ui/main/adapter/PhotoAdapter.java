@@ -2,29 +2,31 @@ package com.example.gab.babylove.ui.main.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.widget.ImageView;
 
 import com.bigkoo.alertview.AlertView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.utils.ImgUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
-import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 import com.ggz.baselibrary.utils.media.UpdateMedia;
-import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
+
+import java.io.File;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -77,22 +79,37 @@ public class PhotoAdapter extends PagerAdapter {
     @SuppressLint("CheckResult")
     private void GetPic(String url) {
         Observable.just(1)
-                .map(integer ->
-                        Glide.with(activity)
-                                .load(url)
+                .map(new Function<Integer, Bitmap>() {
+                    @Override
+                    public Bitmap apply(Integer integer) throws Exception {
+
+                        RequestOptions options = new RequestOptions()
+                                .fallback(R.mipmap.img_load_error)
+                                .error(R.mipmap.img_load_error)
+                                .placeholder(R.mipmap.img_load_error);
+
+                        return Glide.with(activity)
                                 .asBitmap()
-                                .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                                .get())
-                .map(ImgUtils::saveImageToGallery)
+                                .load(url)
+                                .apply(options)
+                                .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
+                    }
+                })
+                .map(new Function<Bitmap, File>() {
+                    @Override
+                    public File apply(Bitmap bmp) throws Exception {
+                        return ImgUtils.saveImageToGallery(bmp);
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(file -> {
                     if (null != file) {
                         //保存图片后发送广播通知更新数据库
                         UpdateMedia.scanMedia(activity, Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, file);
-                        ToastUtils.showShort("保存成功!");
+                        T.showShort("保存成功!");
                     } else {
-                        ToastUtils.showShort("保存失败");
+                        T.showShort("保存失败");
                     }
                 });
     }

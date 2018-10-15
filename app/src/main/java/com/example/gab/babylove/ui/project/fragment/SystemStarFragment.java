@@ -15,6 +15,7 @@ import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 
@@ -65,6 +66,7 @@ public class SystemStarFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int id) {
+        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getArticleList(mPageNo, id)
                 .compose(RxHelper.handleResult())
@@ -72,9 +74,9 @@ public class SystemStarFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(ArticleBean articleBean) {
                         if (null != articleBean) {
+                            mKProgressHUD.dismiss();
                             mAdapter.setNewData(articleBean.getDatas());
                         }
-//                        dialog.dismiss();
                     }
 
                     @Override

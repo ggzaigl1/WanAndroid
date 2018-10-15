@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/divider_bg"
+    android:showDividers="middle"
+    android:background="@drawable/selector_patient_exitlogin_white"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="40dp"
+        android:text="您确定要退出登录吗？"
+        android:textColor="@color/myTxtColor"
+        android:textSize="@dimen/textSize_superlarges" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_bg"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <Button
+            android:id="@+id/tvLeft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_leftbottom_radian"
+            android:singleLine="true"
+            android:text="取消"
+            android:textColor="@color/statusBar"
+            android:textSize="@dimen/textSize_superlarge" />
+
+        <Button
+            android:id="@+id/tvRight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_rightbottom_radian"
+            android:singleLine="true"
+            android:text="确定"
+            android:textColor="@color/statusBar"
+            android:textSize="@dimen/textSize_superlarge" />
+    </LinearLayout>
+
+</LinearLayout>

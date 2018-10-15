@@ -14,7 +14,6 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 /**
  * Created by 初夏小溪 on 2018/4/9 0009.
- *
  */
 
 public class OrnamentalListContextAdapter extends BaseQuickAdapter<CourseList.DataBean, BaseViewHolder> {
@@ -25,9 +24,9 @@ public class OrnamentalListContextAdapter extends BaseQuickAdapter<CourseList.Da
 
     @Override
     protected void convert(BaseViewHolder helper, CourseList.DataBean item) {
-        helper.setText(R.id.tv_name, item.getName()).setText(R.id.tv_joinnum, item.getJoinnum()+"人已参加");
-        ImgLoadUtils.loadRadiusImage(mContext,item.getIcon(),helper.getView(R.id.imgHead),5);
+        helper.setText(R.id.tv_name, item.getName()).setText(R.id.tv_joinnum, item.getJoinnum() + "人已参加");
+        ImgLoadUtils.loadCircularBead(mContext, item.getIcon(), helper.getView(R.id.imgHead));
         MaterialRatingBar materialRatingBar = helper.getView(R.id.Rb_trainlevel);
-        materialRatingBar.setNumStars(( item.getTrainlevel()));
+        materialRatingBar.setNumStars((item.getTrainlevel()));
     }
 }

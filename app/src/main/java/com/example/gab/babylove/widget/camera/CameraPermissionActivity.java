@@ -18,7 +18,7 @@ import com.example.gab.babylove.R;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.LogUtils;
-import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.permission.PermissionChecker;
 
 import butterknife.BindView;
@@ -69,7 +69,7 @@ public class CameraPermissionActivity extends AppCompatActivity implements IBase
                         .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
             }
         } else {
-            ToastUtils.showShort("没有相机硬件");
+            T.showShort("没有相机硬件");
         }
     }
 

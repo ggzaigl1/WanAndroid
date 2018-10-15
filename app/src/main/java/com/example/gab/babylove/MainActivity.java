@@ -52,7 +52,7 @@ import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.SystemUtils;
-import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 
 import butterknife.BindView;
@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                     JumpUtils.jump(this, MyCollectActivity.class, null);
                 } else {
                     JumpUtils.jump(this, LoginActivity.class, null);
-                    ToastUtils.showShort("登录之后才能查看已收藏内容");
+                    T.showShort("登录之后才能查看已收藏内容");
                 }
                 break;
             case R.id.nav_exit:
@@ -262,11 +262,11 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     //ThemeConfig主题配置，这里只是保存了是否是夜间模式的boolean值
                     NightModeConfig.getInstance().setNightMode(getApplicationContext(), true);
-                    ToastUtils.showShort("开启夜间模式");
+                    T.showShort("开启夜间模式");
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     NightModeConfig.getInstance().setNightMode(getApplicationContext(), false);
-                    ToastUtils.showShort("关闭夜间模式");
+                    T.showShort("关闭夜间模式");
                 }
                 recreate();//需要recreate才能生效
 
@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
 //                        .setActionTextColor(ContextCompat.getColor(this, R.color.white))
 //                        .show();
                 Util.CustomToast.INSTANCE.showToast(MainActivity.this, R.string.exit_app);
-                ToastUtils.showLong(R.string.exit_app);
+                T.showLong(R.string.exit_app);
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();

@@ -20,7 +20,7 @@ import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
-import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.T;
 
 import java.util.List;
 
@@ -130,7 +130,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else {
-            ToastUtils.showShort(R.string.tools_cannot_application);
+            T.showShort(R.string.tools_cannot_application);
         }
     }
 

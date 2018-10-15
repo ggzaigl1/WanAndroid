@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.ui.main.adapter.PhotoAdapter;
 import com.example.gab.babylove.entity.OrListBean;
+import com.example.gab.babylove.ui.main.adapter.PhotoAdapter;
 import com.example.gab.babylove.widget.PhotoViewPager;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
-import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.T;
 
 import butterknife.BindView;
 
@@ -64,7 +64,7 @@ public class PictureDetailActivity extends AppCompatActivity implements IBaseAct
                 mCurrentPosition = position;
                 tv_image_count.setText((mCurrentPosition + 1) + "/" + actionsBean.getData().size());
                 if (mCurrentPosition == actionsBean.getData().size() - 1) {
-                    ToastUtils.showShort("已经是最后一张图片了");
+                    T.showShort("已经是最后一张图片了");
                 }
             }
         });

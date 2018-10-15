@@ -155,9 +155,9 @@
       -->
     <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">
         <!--<item name="DialogTitleAppearance">@android:style/TextAppearance.Medium.Inverse</item>-->
-        <item name="DialogTitleText">正在登录中</item>
-        <item name="DialogSpotColor">@android:color/holo_orange_light</item>
-        <item name="DialogSpotCount">4</item>
+        <!--<item name="DialogTitleText">正在登录中</item>-->
+        <!--<item name="DialogSpotColor">@color/holo_orange_light</item>-->
+        <!--<item name="DialogSpotCount">4</item>-->
     </style>
 
     <style name="DialogActivity" parent="Theme.AppCompat.Light.NoActionBar">

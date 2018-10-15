@@ -24,7 +24,7 @@ import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
-import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -38,7 +38,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import dmax.dialog.SpotsDialog;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -120,8 +119,7 @@ public class HomeFragment extends BaseFragment {
      * banner 轮播图 加载数据 接口
      */
     private void getData() {
-//        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
+              Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
                 .getBanner()
                 .compose(RxHelper.handleResult())
                 .observeOn(Schedulers.io());
@@ -169,7 +167,6 @@ public class HomeFragment extends BaseFragment {
                                 mAdapter.setNewData(articleBean.getDatas());
                             }
                         }
-//                        m.dismiss();
                     }
 
                     @Override
@@ -187,6 +184,7 @@ public class HomeFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int mCurPage) {
+        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getArticleHomeList(mCurPage)
                 .compose(RxHelper.handleResult())
@@ -194,6 +192,7 @@ public class HomeFragment extends BaseFragment {
                     @Override
                     public void accept(ArticleBean articleBean) throws Exception {
                         if (null != articleBean && null != articleBean) {
+                            mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
                                 mAdapter.setNewData(articleBean.getDatas());
                                 mRefreshLayout.finishRefresh();
@@ -227,7 +226,7 @@ public class HomeFragment extends BaseFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> ToastUtils.showShort("收藏成功"));
+                .subscribe(objectBeanModule -> T.showShort("收藏成功"));
     }
 
     //    取消收藏
@@ -237,7 +236,7 @@ public class HomeFragment extends BaseFragment {
                 .uncollectArticle(id, "")
                 .compose(RxHelper.handleResult())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> ToastUtils.showShort("取消收藏成功"));
+                .subscribe(objectBeanModule -> T.showShort("取消收藏成功"));
     }
 
     /**
@@ -266,7 +265,7 @@ public class HomeFragment extends BaseFragment {
                         }
                     } else {
                         JumpUtils.jump(mContext, LoginActivity.class, null);
-                        ToastUtils.showShort(R.string.collect_login);
+                        T.showShort(R.string.collect_login);
                     }
                     break;
                 default:

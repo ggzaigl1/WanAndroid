@@ -12,7 +12,6 @@ import com.example.gab.babylove.ui.navigation.adapter.NavigationCidAdapter;
 import com.example.gab.babylove.ui.navigation.adapter.NavigationViewAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
-import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
@@ -21,15 +20,11 @@ import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
-import dmax.dialog.SpotsDialog;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Gab on 2017/12/15 0015.
@@ -69,22 +64,17 @@ public class NavigationViewFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getNavigationList() {
-        SpotsDialog dialog = new SpotsDialog(getActivity());
-        dialog.show();
-//        IProgressDialog progressDialog = new IProgressDialog().init((AppCompatActivity) getActivity()).setDialogMsg(R.string.loading_get);
+        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getNaviList()
                 .compose(RxHelper.handleResult())
-                .subscribe(new Consumer<List<NavigationBean>>() {
-                    @Override
-                    public void accept(List<NavigationBean> navigationBeanBeanModule) throws Exception {
-                        if (null != navigationBeanBeanModule) {
-                            mAdapter.setNewData(navigationBeanBeanModule);
-                            if (mSelectedPos == 0) {
-                                mAdapter.getData().get(mSelectedPos).setSelected(true);
-                                mNavigationCidAdapter.setNewData(navigationBeanBeanModule.get(mSelectedPos).getArticles());
-                            }
-                            dialog.dismiss();
+                .subscribe(navigationBeanBeanModule -> {
+                    if (null != navigationBeanBeanModule) {
+                        mKProgressHUD.dismiss();
+                        mAdapter.setNewData(navigationBeanBeanModule);
+                        if (mSelectedPos == 0) {
+                            mAdapter.getData().get(mSelectedPos).setSelected(true);
+                            mNavigationCidAdapter.setNewData(navigationBeanBeanModule.get(mSelectedPos).getArticles());
                         }
                     }
                 });

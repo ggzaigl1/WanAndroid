@@ -40,7 +40,6 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import dmax.dialog.SpotsDialog;
 
 /**
  *

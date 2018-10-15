@@ -26,7 +26,7 @@ import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
-import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -145,7 +145,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(objectBeanModule ->{
                     mKProgressHUD.dismiss();
-                    ToastUtils.showShort("收藏成功");
+                    T.showShort("收藏成功");
                 });
     }
 
@@ -159,7 +159,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(objectBeanModule -> {
                     mKProgressHUD.dismiss();
-                    ToastUtils.showShort("取消收藏成功");
+                    T.showShort("取消收藏成功");
                 });
     }
 
@@ -186,7 +186,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                         }
                     } else {
                         JumpUtils.jump(this, LoginActivity.class, null);
-                        ToastUtils.showShort(R.string.collect_login);
+                        T.showShort(R.string.collect_login);
                     }
                     break;
                 default:

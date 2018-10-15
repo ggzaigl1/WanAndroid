@@ -1,6 +1,7 @@
 package com.example.gab.babylove.ui.main.login;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -36,7 +36,7 @@ import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
-import com.ggz.baselibrary.utils.ToastUtils;
+import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 import com.ggz.baselibrary.utils.permission.PermissionChecker;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -46,7 +46,6 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import dmax.dialog.SpotsDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -223,7 +222,7 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
                                 mKProgressHUD.dismiss();
                             }
                         } else {
-                            ToastUtils.showShort(login.getErrorMsg());
+                            T.showShort(login.getErrorMsg());
                         }
                     }
 
@@ -234,6 +233,7 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
                 });
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -241,6 +241,7 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
         mFloatingActionButton.setVisibility(View.GONE);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onResume() {
         super.onResume();

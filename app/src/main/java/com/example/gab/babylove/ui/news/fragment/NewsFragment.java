@@ -17,14 +17,12 @@ import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import dmax.dialog.SpotsDialog;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Gab on 2017/12/15 0015.
@@ -56,8 +54,7 @@ public class NewsFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList() {
-        SpotsDialog dialog = new SpotsDialog(getActivity());
-        dialog.show();
+        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getTreeList()
                 .compose(RxHelper.handleResult())
@@ -65,9 +62,9 @@ public class NewsFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(List<TreeBean> listBeanModule) {
                         if (null != listBeanModule) {
+                            mKProgressHUD.dismiss();
                             mAdapter.setNewData(listBeanModule);
                         }
-                        dialog.dismiss();
                     }
 
                     @Override
