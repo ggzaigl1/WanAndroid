@@ -3,6 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
     <LinearLayout
@@ -27,15 +28,20 @@
                 android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/titleBarCon"/>
+
     <LinearLayout
             android:id="@+id/Ll_cache_clear"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground">
 
         <TextView
                 style="@style/CommonText"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:drawablePadding="10dp"
@@ -55,15 +61,13 @@
 
     <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:background="@color/selection"/>
+            android:layout_height="8dp"
+            android:background="@color/titleBarCon"/>
 
     <TextView
             android:id="@+id/tv_praise"
             style="@style/CommonText"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:padding="10dp"
@@ -73,10 +77,8 @@
 
     <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:background="@color/selection"/>
+            android:layout_height="8dp"
+            android:background="@color/titleBarCon"/>
 
     <TextView
             android:id="@+id/bottomNavigation"
@@ -93,6 +95,7 @@
 
     <LinearLayout
             android:id="@+id/Ll_stroke"
+            android:visibility="gone"
             style="@style/myListStyle">
 
         <TextView
@@ -100,46 +103,46 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="指纹相关"
-                android:drawableLeft="@drawable/vector_stroke"
+                android:drawableStart="@drawable/vector_stroke"
                 android:drawablePadding="@dimen/spacing_medium_large"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/textSize_medium_small"
                 />
 
-        </LinearLayout>
-
-        <!--<LinearLayout-->
-        <!--android:id="@+id/Ll_Button"-->
-        <!--style="@style/myListStyle">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="SelectorButton"-->
-        <!--android:drawableLeft="@drawable/vector_selector_button"-->
-        <!--android:drawablePadding="@dimen/spacing_medium_large"-->
-        <!--android:textColor="@color/colorAccent"-->
-        <!--android:textSize="@dimen/textSize_medium_small"-->
-        <!--/>-->
-
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-        <!--android:id="@+id/Ll_personal_center"-->
-        <!--style="@style/myListStyle">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="SelectorButton"-->
-        <!--android:drawableLeft="@drawable/ic_personal_center"-->
-        <!--android:drawablePadding="@dimen/spacing_medium_large"-->
-        <!--android:textColor="@color/colorAccent"-->
-        <!--android:textSize="@dimen/textSize_medium_small"-->
-        <!--/>-->
-
-        <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
     </LinearLayout>
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/Ll_Button"-->
+    <!--style="@style/myListStyle">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="SelectorButton"-->
+    <!--android:drawableLeft="@drawable/vector_selector_button"-->
+    <!--android:drawablePadding="@dimen/spacing_medium_large"-->
+    <!--android:textColor="@color/colorAccent"-->
+    <!--android:textSize="@dimen/textSize_medium_small"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/Ll_personal_center"-->
+    <!--style="@style/myListStyle">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="SelectorButton"-->
+    <!--android:drawableLeft="@drawable/ic_personal_center"-->
+    <!--android:drawablePadding="@dimen/spacing_medium_large"-->
+    <!--android:textColor="@color/colorAccent"-->
+    <!--android:textSize="@dimen/textSize_medium_small"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+</LinearLayout>

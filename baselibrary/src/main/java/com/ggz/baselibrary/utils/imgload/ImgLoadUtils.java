@@ -36,9 +36,9 @@ public class ImgLoadUtils {
      */
     public static void loadImage(Context context, String url, ImageView imageView) {
         RequestOptions options = new RequestOptions()
-                .fallback(R.mipmap.img_load_error)
-                .error(R.mipmap.img_load_error)
-                .placeholder(R.mipmap.img_load_error);
+                .fallback(R.mipmap.icon_load_error)
+                .error(R.mipmap.icon_load_error)
+                .placeholder(R.mipmap.icon_placeholder);
         Glide.with(context)
                 .load(url)
                 .apply(options)
@@ -52,9 +52,9 @@ public class ImgLoadUtils {
      */
     public static void loadImages(Context context, String url, ImageView imageView) {
         RequestOptions options = new RequestOptions()
-                .fallback(R.mipmap.img_load_error)
-                .error(R.mipmap.img_load_error)
-                .placeholder(R.mipmap.img_load_error)
+                .fallback(R.mipmap.icon_load_error)
+                .error(R.mipmap.icon_load_error)
+                .placeholder(R.mipmap.icon_placeholder)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         Glide.with(context)
@@ -71,9 +71,9 @@ public class ImgLoadUtils {
      */
     public static void loadCircularBead(Context context, String url, ImageView imageView) {
         RequestOptions options = new RequestOptions()
-                .fallback(R.mipmap.img_load_error)
-                .error(R.mipmap.img_load_error)
-                .placeholder(R.mipmap.img_load_error)
+                .fallback(R.mipmap.icon_load_error)
+                .error(R.mipmap.icon_load_error)
+                .placeholder(R.mipmap.icon_placeholder)
                 .circleCrop();
 
         Glide.with(context)

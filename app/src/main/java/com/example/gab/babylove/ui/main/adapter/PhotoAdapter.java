@@ -84,9 +84,9 @@ public class PhotoAdapter extends PagerAdapter {
                     public Bitmap apply(Integer integer) throws Exception {
 
                         RequestOptions options = new RequestOptions()
-                                .fallback(R.mipmap.img_load_error)
-                                .error(R.mipmap.img_load_error)
-                                .placeholder(R.mipmap.img_load_error);
+                                .fallback(R.mipmap.icon_load_error)
+                                .error(R.mipmap.icon_load_error)
+                                .placeholder(R.mipmap.icon_placeholder);
 
                         return Glide.with(activity)
                                 .asBitmap()

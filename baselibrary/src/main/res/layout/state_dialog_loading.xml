@@ -11,7 +11,7 @@
             android:layout_width="@dimen/load_anim"
             android:layout_height="@dimen/load_anim"
             android:layout_gravity="center"
-            android:src="@mipmap/image_circular"
+            android:src="@mipmap/icon_image_circular"
             android:contentDescription="TODO"
             tools:ignore="ContentDescription"/>
 
