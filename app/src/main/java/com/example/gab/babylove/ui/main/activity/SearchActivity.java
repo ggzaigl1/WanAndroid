@@ -9,12 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.entity.OfficialAccountListBean;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
+import com.example.gab.babylove.ui.main.adapter.OfficialAccountListAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -53,13 +55,16 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     /**
-     * 当前显示的页码(从 0 开始)
+     * 首页搜索 当前显示的页码(从 0 开始)
+     * 公众号搜索 当前显示的页码(从 1 开始)
      */
     int mPageNo = 0;
+    int mPageOffNo = 1;
+
+    int mId;
     String queryKey;
     HomeAdapter mAdapter;
-    private int mType;
-    private int mId;
+    OfficialAccountListAdapter mOfficialAccountListAdapter;
 
     @Override
     public boolean isShowHeadView() {
@@ -83,11 +88,17 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // 给左上角图标的左边加上一个返回的图标
         mToolbar.setNavigationOnClickListener(v -> JumpUtils.exitActivity(this));
         queryKey = getIntent().getStringExtra("query");
-        mType = getIntent().getIntExtra("type", 0);
+        int type = getIntent().getIntExtra("type", 0);
         mId = getIntent().getIntExtra("id", 0);
-        getQuery(mPageNo, queryKey);
-        initRecyle();
-        initRefresh();
+        if (type == 1) {
+            getQuery(type, mPageOffNo, queryKey);
+            initRecyle(type);
+            initRefresh(type);
+        } else if (type == 2) {
+            getQuery(type, mPageNo, queryKey);
+            initRecyle(type);
+            initRefresh(type);
+        }
     }
 
     @Override
@@ -101,18 +112,35 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
     }
 
     //   搜索接口
-    private void getQuery(int pageNum, String queryKey) {
-        if (mType == 1) {
+    private void getQuery(int type, int pageNum, String queryKey) {
+        if (type == 1) {
             mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
             RequestUtils.create(ApiService.class)
-                    .getWxarticleQuery(mId, 1, queryKey)
+                    .getWxarticleQuery(mId, pageNum, queryKey)
                     .compose(RxHelper.handleResult())
                     .doOnSubscribe(RequestUtils::addDispos)
                     .subscribe(new NetCallBack<OfficialAccountListBean>() {
                         @Override
-                        protected void onSuccess(OfficialAccountListBean t) {
-
-                            mKProgressHUD.dismiss();
+                        protected void onSuccess(OfficialAccountListBean officialAccountListBean) {
+                            if (null != officialAccountListBean) {
+                                mKProgressHUD.dismiss();
+                                if (mRefreshLayout.isRefreshing()) {
+                                    mOfficialAccountListAdapter.setNewData(officialAccountListBean.getDatas());
+                                    mRefreshLayout.finishRefresh();
+                                } else if (mRefreshLayout.isLoading()) {
+                                    mOfficialAccountListAdapter.getData().addAll(officialAccountListBean.getDatas());
+                                    mRefreshLayout.finishLoadMore();
+                                    mOfficialAccountListAdapter.notifyDataSetChanged();
+                                } else {
+                                    mOfficialAccountListAdapter.setNewData(officialAccountListBean.getDatas());
+                                }
+                            } else {
+                                if (mRefreshLayout.isRefreshing()) {
+                                    mRefreshLayout.finishRefresh();
+                                } else if (mRefreshLayout.isLoading()) {
+                                    mRefreshLayout.finishLoadMore();
+                                }
+                            }
                         }
 
                         @Override
@@ -120,30 +148,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
 
                         }
                     });
-//                    .subscribe(new NetCallBack<ArticleBean>() {
-//                        @Override
-//                        protected void onSuccess(ArticleBean articleBean) {
-//                            if (null != articleBean) {
-//                                if (mRefreshLayout.isRefreshing()) {
-//                                    mAdapter.setNewData(articleBean.getDatas());
-//                                    mRefreshLayout.finishRefresh();
-//                                } else if (mRefreshLayout.isLoading()) {
-//                                    mAdapter.getData().addAll(articleBean.getDatas());
-//                                    mRefreshLayout.finishLoadMore();
-//                                    mAdapter.notifyDataSetChanged();
-//                                } else {
-//                                    mAdapter.setNewData(articleBean.getDatas());
-//                                }
-//                                mKProgressHUD.dismiss();
-//                            }
-//                        }
-//
-//                        @Override
-//                        protected void updataLayout(int flag) {
-//
-//                        }
-//                    });
-        } else {
+        } else if (type == 2) {
             mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
             RequestUtils.create(ApiService.class)
                     .getQuery(pageNum, queryKey)
@@ -153,6 +158,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                         @Override
                         protected void onSuccess(ArticleBean articleBean) {
                             if (null != articleBean) {
+                                mKProgressHUD.dismiss();
                                 if (mRefreshLayout.isRefreshing()) {
                                     mAdapter.setNewData(articleBean.getDatas());
                                     mRefreshLayout.finishRefresh();
@@ -163,7 +169,12 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                                 } else {
                                     mAdapter.setNewData(articleBean.getDatas());
                                 }
-                                mKProgressHUD.dismiss();
+                            } else {
+                                if (mRefreshLayout.isRefreshing()) {
+                                    mRefreshLayout.finishRefresh();
+                                } else if (mRefreshLayout.isLoading()) {
+                                    mRefreshLayout.finishLoadMore();
+                                }
                             }
                         }
 
@@ -209,58 +220,105 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
     }
 
 
-    private void initRecyle() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ArticleBean.DatasBean bean = mAdapter.getData().get(position);
-            WebViewActivity.startWebActivity(this, bean.getLink());// 详情
-        });
-        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            switch (view.getId()) {
-                case R.id.image_collect:
-                    if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mAdapter.getData().get(position).isCollect()) { //收藏
-                            uncollectArticle(mAdapter.getData().get(position).getId());
-                            mAdapter.getData().get(position).setCollect(false);
-                            mAdapter.notifyItemChanged(position, "");
+    private void initRecyle(int type) {
+        if (type == 1) {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            mOfficialAccountListAdapter = new OfficialAccountListAdapter(new ArrayList<>());
+            mOfficialAccountListAdapter.setOnItemClickListener((adapter, view, position) -> {
+                OfficialAccountListBean.DatasBean datasBean = mOfficialAccountListAdapter.getData().get(position);
+                WebViewActivity.startWebActivity(this, datasBean.getLink());// 详情
+            });
+            mOfficialAccountListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                switch (view.getId()) {
+                    case R.id.image_collect:
+                        if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                            if (mOfficialAccountListAdapter.getData().get(position).isCollect()) { //收藏
+                                uncollectArticle(mOfficialAccountListAdapter.getData().get(position).getId());
+                                mOfficialAccountListAdapter.getData().get(position).setCollect(false);
+                                mOfficialAccountListAdapter.notifyItemChanged(position, "");
+                            } else {
+                                collectArticle(mOfficialAccountListAdapter.getData().get(position).getId());
+                                mOfficialAccountListAdapter.getData().get(position).setCollect(true);
+                                mOfficialAccountListAdapter.notifyItemChanged(position, "");
+                            }
                         } else {
-                            collectArticle(mAdapter.getData().get(position).getId());
-                            mAdapter.getData().get(position).setCollect(true);
-                            mAdapter.notifyItemChanged(position, "");
+                            JumpUtils.jump(this, LoginActivity.class, null);
+                            T.showShort(R.string.collect_login);
                         }
-                    } else {
-                        JumpUtils.jump(this, LoginActivity.class, null);
-                        T.showShort(R.string.collect_login);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        });
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
+                        break;
+                }
+            });
+            mRecyclerView.setAdapter(mOfficialAccountListAdapter);
+            mOfficialAccountListAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
+        } else if (type == 2) {
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
+            mAdapter.setOnItemClickListener((adapter, view, position) -> {
+                ArticleBean.DatasBean bean = mAdapter.getData().get(position);
+                WebViewActivity.startWebActivity(this, bean.getLink());// 详情
+            });
+            mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                switch (view.getId()) {
+                    case R.id.image_collect:
+                        if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                            if (mAdapter.getData().get(position).isCollect()) { //收藏
+                                uncollectArticle(mAdapter.getData().get(position).getId());
+                                mAdapter.getData().get(position).setCollect(false);
+                                mAdapter.notifyItemChanged(position, "");
+                            } else {
+                                collectArticle(mAdapter.getData().get(position).getId());
+                                mAdapter.getData().get(position).setCollect(true);
+                                mAdapter.notifyItemChanged(position, "");
+                            }
+                        } else {
+                            JumpUtils.jump(this, LoginActivity.class, null);
+                            T.showShort(R.string.collect_login);
+                        }
+                        break;
+                }
+            });
+            mRecyclerView.setAdapter(mAdapter);
+            mAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
+        }
     }
 
     /**
      * 分页加载数据
      */
-    private void initRefresh() {
-        mRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
-        mRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
-        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshLayout) {
-                mPageNo += 1;
-                getQuery(mPageNo, queryKey);
-            }
+    private void initRefresh(int type) {
+        if (type == 1) {
+            mRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
+            mRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
+            mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+                @Override
+                public void onLoadMore(RefreshLayout refreshLayout) {
+                    mPageOffNo += 1;
+                    getQuery(type, mPageOffNo, queryKey);
+                }
 
-            @Override
-            public void onRefresh(RefreshLayout refreshLayout) {
-                mPageNo = 0;
-                getQuery(mPageNo, queryKey);
-            }
-        });
+                @Override
+                public void onRefresh(RefreshLayout refreshLayout) {
+                    mPageOffNo = 1;
+                    getQuery(type, mPageOffNo, queryKey);
+                }
+            });
+        } else if (type == 2) {
+            mRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
+            mRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
+            mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+                @Override
+                public void onLoadMore(RefreshLayout refreshLayout) {
+                    mPageNo += 1;
+                    getQuery(type, mPageNo, queryKey);
+                }
+
+                @Override
+                public void onRefresh(RefreshLayout refreshLayout) {
+                    mPageNo = 0;
+                    getQuery(type, mPageNo, queryKey);
+                }
+            });
+        }
     }
 
     @Override

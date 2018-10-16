@@ -18,8 +18,6 @@ import java.util.List;
 
 public class HomeAdapter extends BaseQuickAdapter<ArticleBean.DatasBean, BaseViewHolder> {
 
-    AppCompatImageView imageView;
-
     public HomeAdapter(int layoutResId, @Nullable List<ArticleBean.DatasBean> data) {
         super(layoutResId, data);
     }
@@ -27,12 +25,11 @@ public class HomeAdapter extends BaseQuickAdapter<ArticleBean.DatasBean, BaseVie
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
 //        payloads 对象不会为null，但是它可能是空（empty），这时候需要完整绑定(所以我们在方法里只要判断isEmpty就好，不用重复判空)。
-        imageView = holder.getView(R.id.image_collect);
         if (payloads.isEmpty()) {
             onBindViewHolder(holder, position);
         } else {
             ArticleBean.DatasBean datasBean = mData.get(position);
-            initImage(datasBean, imageView);
+            initImage(datasBean, holder.getView(R.id.image_collect));
         }
     }
 
@@ -43,8 +40,7 @@ public class HomeAdapter extends BaseQuickAdapter<ArticleBean.DatasBean, BaseVie
                 .setText(R.id.tv_date, item.getNiceDate())
                 .setText(R.id.tv_chapterName, "分类：" + item.getChapterName()).setTextColor(R.id.tv_chapterName, ResourceUtils.getRandomColor());
         helper.addOnClickListener(R.id.image_collect);
-        imageView = helper.getView(R.id.image_collect);
-        initImage(item, imageView);
+        initImage(item, helper.getView(R.id.image_collect));
     }
 
     private void initImage(ArticleBean.DatasBean datasBean, AppCompatImageView imageView) {

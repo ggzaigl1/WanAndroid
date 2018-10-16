@@ -2,9 +2,13 @@ package com.example.gab.babylove.ui.main.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
 import android.view.View;
 
 import com.example.gab.babylove.R;
@@ -12,13 +16,18 @@ import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.OfficialAccountListBean;
 import com.example.gab.babylove.ui.main.adapter.OfficialAccountListAdapter;
+import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.AgentWebActivity;
+import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.SpfUtils;
+import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -29,6 +38,8 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 初夏小溪 on 2018/10/15 0015.
@@ -117,16 +128,69 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
                 });
     }
 
+    /**
+     * 收藏
+     *
+     * @param id
+     */
+    @SuppressLint("CheckResult")
+    private void collectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        RequestUtils.create(ApiService.class)
+                .getCollectArticle(id, "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(RequestUtils::addDispos)
+                .subscribe(objectBeanModule -> {
+                    mKProgressHUD.dismiss();
+                    T.showShort("收藏成功");
+                });
+    }
+
+    //    取消收藏
+    @SuppressLint("CheckResult")
+    private void uncollectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        RequestUtils.create(ApiService.class)
+                .uncollectArticle(id, "")
+                .compose(RxHelper.handleResult())
+                .doOnSubscribe(RequestUtils::addDispos)
+                .subscribe(objectBeanModule -> {
+                    mKProgressHUD.dismiss();
+                    T.showShort("取消收藏成功");
+                });
+    }
+
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new OfficialAccountListAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("UrlBean", mAdapter.getData().get(position).getLink());
-            JumpUtils.jump(this, AgentWebActivity.class, bundle);
-//            OfficialAccountListBean.DatasBean dataBean = mAdapter.getData().get(position);
-//            WebViewActivity.startWebActivity(this, dataBean.getLink());// 详情
+//            Bundle bundle = new Bundle();
+//            bundle.putString("UrlBean", mAdapter.getData().get(position).getLink());
+//            JumpUtils.jump(this, AgentWebActivity.class, bundle);
+            OfficialAccountListBean.DatasBean dataBean = mAdapter.getData().get(position);
+            WebViewActivity.startWebActivity(this, dataBean.getLink());// 详情
+        });
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.image_collect:
+                    if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                            uncollectArticle(mAdapter.getData().get(position).getId());
+                            mAdapter.getData().get(position).setCollect(false);
+                            mAdapter.notifyItemChanged(position, "");
+                        } else {
+                            collectArticle(mAdapter.getData().get(position).getId());
+                            mAdapter.getData().get(position).setCollect(true);
+                            mAdapter.notifyItemChanged(position, "");
+                        }
+                    } else {
+                        JumpUtils.jump(this, LoginActivity.class, null);
+                        T.showShort(R.string.collect_login);
+                    }
+                    break;
+            }
         });
     }
 
@@ -160,5 +224,31 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main_search, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setQueryHint("搜索知识点");
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("type", 1);
+                bundle.putString("query", query);
+                bundle.putInt("id",mId);
+                JumpUtils.jump(OfficialAccountListActivity.this, SearchActivity.class, bundle);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
     }
 }

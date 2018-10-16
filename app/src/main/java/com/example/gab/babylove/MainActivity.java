@@ -59,6 +59,7 @@ import butterknife.BindView;
 
 /**
  * 主方法
+ *
  * @author 55204
  */
 public class MainActivity extends AppCompatActivity implements IBaseActivity, BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
@@ -277,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 break;
             case R.id.nav_about:
                 //关于我们
-            JumpUtils.jump(this, AboutActivity.class, null);
+                JumpUtils.jump(this, AboutActivity.class, null);
 //                JumpUtils.jump(this, CameraActivity.class, null);
 //                JumpUtils.jump(this, MyThreadActivity.class, null);
                 break;
@@ -310,6 +311,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             public boolean onQueryTextSubmit(String query) {
                 Bundle bundle = new Bundle();
                 bundle.putString("query", query);
+                bundle.putInt("type", 2);
                 JumpUtils.jump(MainActivity.this, SearchActivity.class, bundle);
                 return false;
             }
