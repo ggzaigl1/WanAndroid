@@ -9,8 +9,8 @@ android {
         minSdkVersion var.minSdkVersion
         targetSdkVersion var.targetSdkVersion
 
-        versionCode 6
-        versionName "1.2.8"
+        versionCode var.versionCode
+        versionName var.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true//配置5.0 版本一下可以使用svg

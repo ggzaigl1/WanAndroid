@@ -2,10 +2,13 @@ package com.ggz.baselibrary.utils.imgload;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestOptions;
 import com.ggz.baselibrary.R;
@@ -31,6 +34,7 @@ public class ImgLoadUtils {
 
     /**
      * 加载指定URL的图片
+     *
      * @param url
      * @param imageView
      */
@@ -47,6 +51,7 @@ public class ImgLoadUtils {
 
     /**
      * 加载指定URL的图片 不要缓存
+     *
      * @param url
      * @param imageView
      */
@@ -65,6 +70,7 @@ public class ImgLoadUtils {
 
     /**
      * 加载圆形 图片
+     *
      * @param context
      * @param url
      * @param imageView
@@ -82,12 +88,12 @@ public class ImgLoadUtils {
                 .into(imageView);
     }
 
-
     /**
      * 预加载 （把指定URL地址的图片 的原始尺寸保存到缓存中）
+     *
      * @param url
      */
-    public static void preloadImg(Context context, String url){
+    public static void preloadImg(Context context, String url) {
         Glide.with(context)
                 .load(url)
                 .preload();
@@ -97,6 +103,7 @@ public class ImgLoadUtils {
     /**
      * 加载指定URL的图片 显示加载进度
      * 原图缓存到磁盘，
+     *
      * @param context
      * @param url
      */
@@ -106,6 +113,7 @@ public class ImgLoadUtils {
 
     /**
      * 异步获取 glide 缓存在磁盘的图片
+     *
      * @param context
      * @param url
      * @param consumer

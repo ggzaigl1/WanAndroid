@@ -7,8 +7,9 @@ android {
     defaultConfig {
         minSdkVersion var.minSdkVersion
         targetSdkVersion var.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+
+        versionCode var.versionCode
+        versionName var.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true//配置5.0 版本一下可以使用svg
@@ -32,7 +33,6 @@ android {
         sourceCompatibility 1.8
     }
 }
-
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -89,8 +89,10 @@ dependencies {
     // Lottie是一个支持Android、iOS、React Native，并由 Adobe After Effects制作aep格式的动画，然后经由bodymovin插件转化渲染为json格式可被移动端本地识别解析的Airbnb开源库。
     //    Lottie实时呈现After Effects动画效果，让应用程序可以像使用静态图片一样轻松地使用动画 Lottie支持API 14及以上。
     api 'com.airbnb.android:lottie:2.3.0'
+    //星星
     api 'me.zhanghai.android.materialratingbar:library:1.2.0'
     //Spots progress dialog  https://github.com/d-max/spots-dialog
     //加载框
     api 'com.kaopiz:kprogresshud:1.1.0'
 }
+

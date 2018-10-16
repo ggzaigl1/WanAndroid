@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
@@ -103,12 +104,12 @@ public class HomeFragment extends BaseFragment {
 //                .setPointViewVisible(true)
 //                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
 //                .setPageTransformer(new AccordionTransformer())
-                .setOnItemClickListener(position -> {
-                    String Ulr = urls.get(position);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("UrlBean", Ulr);
-//                    JumpUtils.jump(mContext, AgentWebActivity.class, bundle);
-                    WebViewActivity.startWebActivity(getActivity(), Ulr);// 详情
+                .setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        String Ulr = urls.get(position);
+                        WebViewActivity.startWebActivity(HomeFragment.this.getActivity(), Ulr);// 详情
+                    }
                 })
                 //设置手动影响（设置了该项无法手动切换）
                 .setManualPageable(true);
@@ -292,6 +293,7 @@ public class HomeFragment extends BaseFragment {
             public void onRefresh(RefreshLayout refreshLayout) {
                 mPageNo = 0;
                 getArticleList(0);
+                getData();
             }
         });
     }
