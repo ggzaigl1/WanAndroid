@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
@@ -100,10 +101,10 @@ public class HomeFragment extends BaseFragment {
     private void bannerView(List<String> Pic, List<String> urls) {
         mConvenientBanner.setPages(() -> new NetworkImageHolderView(), Pic)
                 .startTurning(2000)
-//                .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
-//                .setPointViewVisible(true)
-//                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
-//                .setPageTransformer(new AccordionTransformer())
+                .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
+                .setPointViewVisible(true)
+                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
+                .setPageTransformer(new AccordionTransformer())
                 .setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {

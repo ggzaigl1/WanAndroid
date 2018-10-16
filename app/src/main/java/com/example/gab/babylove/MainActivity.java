@@ -284,9 +284,9 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                 break;
             case R.id.nav_share:
                 Intent textIntent = new Intent(Intent.ACTION_SEND);
-                textIntent.setType("text/plain");
-                textIntent.putExtra(Intent.EXTRA_TEXT, "分享");
-                startActivity(Intent.createChooser(textIntent, "分享"));
+                textIntent.setType("https://www.pgyer.com/6osT");
+                textIntent.putExtra(Intent.EXTRA_TEXT, "一起玩Android");
+                startActivity(Intent.createChooser(textIntent, "一起玩Android"));
                 break;
             case R.id.nav_manage:
 //            工具类
