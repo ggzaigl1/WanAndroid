@@ -60,7 +60,7 @@ public class PhotoAdapter extends PagerAdapter {
                     .setStyle(AlertView.Style.ActionSheet)
                     .setMessage(null)
                     .setCancelText(activity.getString(R.string.cancel))
-                    .setDestructive("保存到相册中")
+                    .setDestructive(activity.getString(R.string.save_photo))
                     .setOthers(null)
                     .setOnItemClickListener((o, position1) -> {
                         switch (position1) {
@@ -133,5 +133,4 @@ public class PhotoAdapter extends PagerAdapter {
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
     }
-
 }
