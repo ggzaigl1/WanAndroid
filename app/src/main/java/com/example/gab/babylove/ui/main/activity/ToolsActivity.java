@@ -63,6 +63,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
         return R.layout.activity_tools;
     }
 
+//    @StatusBar(statusColor = R.color.statusBar, navColor = R.color.statusBar)
     @Override
     public void setStatusBar(Activity activity) {
         MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);

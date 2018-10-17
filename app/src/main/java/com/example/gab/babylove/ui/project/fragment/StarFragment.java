@@ -11,7 +11,6 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ProjectBean;
 import com.ggz.baselibrary.base.BaseFragment;
-import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;

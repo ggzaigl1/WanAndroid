@@ -11,8 +11,8 @@ android {
 
         versionCode var.versionCode
         versionName var.versionName
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
         vectorDrawables.useSupportLibrary = true//配置5.0 版本一下可以使用svg
         multiDexEnabled true
     }
@@ -24,17 +24,18 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
 
     packagingOptions {
-//        exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
-//        exclude 'META-INF/LICENSE.txt'
-//        exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/rxjava.properties'
     }
 }
@@ -57,6 +58,6 @@ dependencies {
     implementation project(':baselibrary')
 
 
-    //    implementation 'com.fy.grace:baselibrary:1.0.5'
+//        implementation 'com.fy.grace:baselibrary:1.4.2'
 //    implementation 'com.ggzaigl1:baselibrary:1.0.6'
 }
