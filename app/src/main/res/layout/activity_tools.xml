@@ -6,28 +6,6 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-    <LinearLayout
-            android:id="@+id/switchCompatLayout"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:visibility="gone"
-            android:background="?android:attr/selectableItemBackground">
-
-        <TextView
-                style="@style/CommonText"
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:text="SwitchCompat"/>
-
-        <android.support.v7.widget.SwitchCompat
-                android:id="@+id/switchCompat"
-                android:textColor="?attr/colorAccent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-    </LinearLayout>
-
     <View
             android:layout_width="match_parent"
             android:layout_height="8dp"
@@ -46,15 +24,15 @@
                 android:layout_weight="1"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
-                android:drawableStart="@drawable/vector_cache_clear"
                 android:padding="10dp"
-                android:text="清空缓存"/>
+                android:text="@string/clear_cache"/>
 
         <TextView
                 android:id="@+id/tv_cache_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
+                android:gravity="center_vertical"
+                android:drawableEnd="@drawable/vector_chevron_right_black"
                 android:textSize="14sp"/>
 
     </LinearLayout>
@@ -70,10 +48,9 @@
             android:layout_height="50dp"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
-            android:padding="10dp"
-            android:drawableStart="@drawable/vector_praise"
-            android:drawablePadding="10dp"
-            android:text="给个好评"/>
+            android:layout_marginStart="10dp"
+            android:drawableEnd="@drawable/vector_chevron_right_black"
+            android:text="@string/to_evaluate"/>
 
     <View
             android:layout_width="match_parent"
@@ -92,24 +69,6 @@
             android:visibility="gone"
             android:text="手机相关"/>
 
-
-    <LinearLayout
-            android:id="@+id/Ll_stroke"
-            android:visibility="gone"
-            style="@style/myListStyle">
-
-        <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="指纹相关"
-                android:drawableStart="@drawable/vector_stroke"
-                android:drawablePadding="@dimen/spacing_medium_large"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/textSize_medium_small"
-                />
-
-    </LinearLayout>
 
     <!--<LinearLayout-->
     <!--android:id="@+id/Ll_Button"-->

@@ -108,7 +108,7 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
             }
             T.showShort(getString(R.string.fingerprint_recognition_tip));
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_tip);
-            mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_guide);
+            mFingerprintGuide.setBackgroundResource(R.mipmap.icon_fingerprint_guide);
             if (mFingerprintCore.isAuthenticating()) {
                 T.showShort(getString(R.string.fingerprint_recognition_authenticating));
             } else {
@@ -127,7 +127,7 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
         if (mFingerprintCore.isAuthenticating()) {
             mFingerprintCore.cancelAuthenticate();
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
-            mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
+            mFingerprintGuide.setBackgroundResource(R.mipmap.icon_fingerprint_normal);
         }
     }
 
@@ -154,7 +154,7 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
         public void onAuthenticateSuccess() {
             T.showShort(getString(R.string.fingerprint_recognition_success));
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
-            mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
+            mFingerprintGuide.setBackgroundResource(R.mipmap.icon_fingerprint_normal);
             openFingerPrintSettingPage(FingerprintMainActivity.this);
         }
 
@@ -167,7 +167,7 @@ public class FingerprintMainActivity extends AppCompatActivity implements IBaseA
         @Override
         public void onAuthenticateError(int errMsgId) {
             mFingerprintGuideTip.setText(R.string.fingerprint_recognition_guide_tip);
-            mFingerprintGuide.setBackgroundResource(R.mipmap.fingerprint_normal);
+            mFingerprintGuide.setBackgroundResource(R.mipmap.icon_fingerprint_normal);
             T.showShort(getString(R.string.fingerprint_recognition_error));
         }
 

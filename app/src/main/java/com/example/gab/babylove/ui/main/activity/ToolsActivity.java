@@ -18,11 +18,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.demi.FingerprinActivity;
 import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
-import com.ggz.baselibrary.utils.JumpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +77,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
     }
 
 
-    @OnClick({R.id.Ll_cache_clear, R.id.tv_praise, R.id.Ll_stroke})
+    @OnClick({R.id.Ll_cache_clear, R.id.tv_praise})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -93,17 +91,9 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
 //                JumpUtils.jump(this, SurfaceActivity.class, null);
                 Cache(this);
                 break;
-            //指纹相关
-            case R.id.Ll_stroke:
-                JumpUtils.jump(this, FingerprinActivity.class, null);
-                break;
 //            //SelectorButton
 //            case R.id.Ll_Button:
 //                JumpUtils.jump(this, SelectorButtonActivity.class, null);
-//                break;
-//            //FileBrowsing
-//            case R.id.Ll_personal_center:
-//                JumpUtils.jump(this, FileBrowsingActivity.class, null);
 //                break;
             default:
                 break;
@@ -142,8 +132,8 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
         } else {
             //不存在提示用户安装应用市场
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示").setMessage("您没有安装应用宝,是否安装应用宝?");
-            builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            builder.setTitle(getString(R.string.system_title)).setMessage("您没有安装应用宝,是否安装应用宝?");
+            builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Uri uri = Uri.parse(DOWNLOAD_URL);
@@ -151,7 +141,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
                     startActivity(intent);
                     dialog.dismiss();
                 }
-            }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+            }).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();

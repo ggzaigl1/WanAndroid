@@ -28,7 +28,7 @@
                     android:id="@+id/playBtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@mipmap/play"
+                    android:background="@mipmap/icon_play"
                     android:contentDescription="TODO"
                     tools:ignore="ContentDescription"/>
 
@@ -65,7 +65,7 @@
                     android:id="@+id/screenBtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@mipmap/large_screen"
+                    android:background="@mipmap/icon_large_screen"
                     android:contentDescription="TODO"
                     tools:ignore="ContentDescription"/>
         </LinearLayout>

@@ -15,7 +15,7 @@
             android:id="@+id/fingerprint_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/fingerprint_normal"
+            android:background="@mipmap/icon_fingerprint_normal"
             android:contentDescription="TODO"
             tools:ignore="ContentDescription"/>
 

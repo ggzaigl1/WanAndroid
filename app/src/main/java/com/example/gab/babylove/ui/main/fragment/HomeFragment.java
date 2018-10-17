@@ -1,6 +1,8 @@
 package com.example.gab.babylove.ui.main.fragment;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
@@ -27,6 +30,7 @@ import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
+import com.ggz.baselibrary.utils.permission.PermissionChecker;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -66,12 +70,23 @@ public class HomeFragment extends BaseFragment {
     HomeAdapter mAdapter;
     int mPageNo = 0;
 
+    protected PermissionChecker permissionChecker;
+    protected static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @Override
     protected void baseInit() {
         super.baseInit();
         getData();
         initRecyle();
         initRefresh();
+
+        permissionChecker = new PermissionChecker(getActivity());
+        permissionChecker.setTitle(getString(R.string.check_info_title));
+        permissionChecker.setMessage(getString(R.string.check_info_message));
+
         //给页面设置工具栏
 //        if (mCollapsingToolbarLayout != null) {
 //            //设置隐藏图片时候ToolBar的颜色
@@ -121,7 +136,7 @@ public class HomeFragment extends BaseFragment {
      * banner 轮播图 加载数据 接口
      */
     private void getData() {
-              Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
+        Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
                 .getBanner()
                 .compose(RxHelper.handleResult())
                 .observeOn(Schedulers.io());
@@ -130,8 +145,6 @@ public class HomeFragment extends BaseFragment {
                 .getArticleHomeList(mPageNo)
                 .compose(RxHelper.handleResult())
                 .observeOn(Schedulers.io());
-
-
         Observable.zip(observable1, observable2, (bannerBean, articleBean) -> {
             Map<String, Object> map = new HashMap<>();
             map.put("banner", bannerBean);
@@ -194,7 +207,6 @@ public class HomeFragment extends BaseFragment {
                     @Override
                     public void accept(ArticleBean articleBean) throws Exception {
                         if (null != articleBean && null != articleBean) {
-                            mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
                                 mAdapter.setNewData(articleBean.getDatas());
                                 mRefreshLayout.finishRefresh();
@@ -212,6 +224,7 @@ public class HomeFragment extends BaseFragment {
                                 mRefreshLayout.finishLoadMore();
                             }
                         }
+                        mKProgressHUD.dismiss();
                     }
                 });
     }
@@ -305,7 +318,11 @@ public class HomeFragment extends BaseFragment {
         if (null != bannerView) {
             bannerView.startTurning(2000);//开始翻页
         }
-
+        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+            new MaterialDialog.Builder(getActivity()).title(R.string.require_acquisition)
+                    .content(R.string.default_always_message)
+                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
+        }
     }
 
     @Override
@@ -319,6 +336,38 @@ public class HomeFragment extends BaseFragment {
         }
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
+        }
+    }
+
+    /**
+     * 检查权限
+     */
+    private void onPermission() {
+        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+            permissionChecker.requestPermissions();
+        }
+    }
+
+    /**
+     * 请求权限返回结果
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PermissionChecker.PERMISSION_REQUEST_CODE:
+                //权限获取成功
+                if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
+                } else {
+                    //权限获取失败
+                    permissionChecker.showDialog();
+                }
+                break;
+            default:
+                break;
         }
     }
 }

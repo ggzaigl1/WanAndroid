@@ -99,7 +99,7 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
     }
 
     private void ShowEnterAnimation() {
-        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.fabtransition);
+        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.transition_register);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setSharedElementEnterTransition(transition);
             transition.addListener(new Transition.TransitionListener() {

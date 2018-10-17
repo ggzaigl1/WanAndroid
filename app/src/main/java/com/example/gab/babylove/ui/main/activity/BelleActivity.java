@@ -1,10 +1,8 @@
 package com.example.gab.babylove.ui.main.activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -15,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Interpolator;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
@@ -27,8 +24,6 @@ import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.T;
-import com.ggz.baselibrary.utils.permission.PermissionChecker;
-import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -58,11 +53,6 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
     GankMAdapter mAdapter;
     private int mCurPage = 1;
     private final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
-    protected PermissionChecker permissionChecker;
-    protected static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
 
     @Override
     public boolean isShowHeadView() {
@@ -81,15 +71,6 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        permissionChecker = new PermissionChecker(this);
-        permissionChecker.setTitle(getString(R.string.check_info_title));
-        permissionChecker.setMessage(getString(R.string.check_info_message));
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            new MaterialDialog.Builder(this).title(R.string.require_acquisition)
-                    .content(R.string.default_always_message)
-                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
-        }
-
         mRefreshLayout.autoRefresh();
         initRv();
         initRefresh();
@@ -106,6 +87,37 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
 
     }
 
+    /**
+     * 获取数据
+     * @param mCurPage
+     */
+    @SuppressLint("CheckResult")
+    private void getCourseDetails(int mCurPage) {
+        RequestUtils.create(ApiService.class)
+                .getCourseDetails(20, mCurPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(gankBean -> {
+                    if (null != gankBean && null != gankBean.getResults()) {
+                        if (mRefreshLayout.isRefreshing()) {
+                            mAdapter.setNewData(gankBean.getResults());
+                            mRefreshLayout.finishRefresh();
+                        } else if (mRefreshLayout.isLoading()) {
+                            mAdapter.getData().addAll(gankBean.getResults());
+                            mRefreshLayout.finishLoadMore();
+                            mAdapter.notifyDataSetChanged();
+                            T.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
+                        } else {
+                            mAdapter.setNewData(gankBean.getResults());
+                           T.showShort("加载了" + gankBean.getResults().size() + "妹子");
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 设置刷新
+     */
     private void initRefresh() {
         mRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
         mRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
@@ -124,31 +136,6 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
         });
     }
 
-    @SuppressLint("CheckResult")
-    private void getCourseDetails(int mCurPage) {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .getCourseDetails(20, mCurPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(gankBean -> {
-                    if (null != gankBean && null != gankBean.getResults()) {
-                        mKProgressHUD.dismiss();
-                        if (mRefreshLayout.isRefreshing()) {
-                            mAdapter.setNewData(gankBean.getResults());
-                            mRefreshLayout.finishRefresh();
-                        } else if (mRefreshLayout.isLoading()) {
-                            mAdapter.getData().addAll(gankBean.getResults());
-                            mRefreshLayout.finishLoadMore();
-                            mAdapter.notifyDataSetChanged();
-                            T.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
-                        } else {
-                            mAdapter.setNewData(gankBean.getResults());
-                           T.showShort("加载了" + gankBean.getResults().size() + "妹子");
-                        }
-                    }
-                });
-    }
 
     private void initRv() {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -192,7 +179,6 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
         });
     }
 
-
     /* 悬浮图标隐藏动画 */
     private void fabOutAnim() {
         if (fab_top.getVisibility() == View.VISIBLE) {
@@ -223,39 +209,6 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
         }
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
-        }
-    }
-
-    /**
-     * 检查权限
-     */
-    private void onPermission() {
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            permissionChecker.requestPermissions();
-        }
-    }
-
-
-    /**
-     * 请求权限返回结果
-     *
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PermissionChecker.PERMISSION_REQUEST_CODE:
-                //权限获取成功
-                if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
-                } else {
-                    //权限获取失败
-                    permissionChecker.showDialog();
-                }
-                break;
-            default:
-                break;
         }
     }
 }

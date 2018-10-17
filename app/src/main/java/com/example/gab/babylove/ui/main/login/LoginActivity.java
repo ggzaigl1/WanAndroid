@@ -1,13 +1,11 @@
 package com.example.gab.babylove.ui.main.login;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -20,8 +18,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
@@ -38,7 +34,6 @@ import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
-import com.ggz.baselibrary.utils.permission.PermissionChecker;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.HashMap;
@@ -67,11 +62,6 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
     @BindView(R.id.fab_register)
     FloatingActionButton mFloatingActionButton;
 
-    protected PermissionChecker permissionChecker;
-    protected static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-    };
-
     @Override
     public boolean isShowHeadView() {
         return true;
@@ -94,19 +84,6 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
             explode.setDuration(500);
             getWindow().setExitTransition(explode);
             getWindow().setEnterTransition(explode);
-        }
-        permissionChecker = new PermissionChecker(this);
-        permissionChecker.setTitle(getString(R.string.check_info_title));
-        permissionChecker.setMessage(getString(R.string.check_info_message));
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            new MaterialDialog.Builder(this).title(R.string.require_acquisition)
-                    .content(R.string.default_always_message)
-                    .positiveText(R.string.next).onPositive(new MaterialDialog.SingleButtonCallback() {
-                @Override
-                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                    LoginActivity.this.onPermission();
-                }
-            }).show();
         }
         editPass.addTextChangedListener(new TextWatcher() {
             @Override
@@ -154,39 +131,6 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
     @Override
     public void reTry() {
 
-    }
-
-    /**
-     * 检查权限
-     */
-    private void onPermission() {
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            permissionChecker.requestPermissions();
-        }
-    }
-
-
-    /**
-     * 请求权限返回结果
-     *
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PermissionChecker.PERMISSION_REQUEST_CODE:
-                //权限获取成功
-                if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
-                } else {
-                    //权限获取失败
-                    permissionChecker.showDialog();
-                }
-                break;
-            default:
-                break;
-        }
     }
 
     private void login() {
@@ -237,7 +181,6 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        onPermission();
         mFloatingActionButton.setVisibility(View.GONE);
     }
 

@@ -3,7 +3,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@mipmap/bg"
+                android:background="@mipmap/icon_login_bg"
                 xmlns:tools="http://schemas.android.com/tools"
                 tools:context=".ui.main.login.LoginActivity">
 
@@ -62,7 +62,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textPersonName"
-                                android:background="@drawable/selector_bg_edit_2"
+                                android:background="@drawable/selector_bg_edit_repeat"
                                 android:textCursorDrawable="@drawable/shape_register_material_bg_input_cursor_2"
                                 android:paddingBottom="2dp"
                                 />
@@ -92,7 +92,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textPassword"
-                                android:background="@drawable/selector_bg_edit_2"
+                                android:background="@drawable/selector_bg_edit_repeat"
                                 android:textCursorDrawable="@drawable/shape_register_material_bg_input_cursor_2"
                                 android:paddingBottom="2dp"
                                 />
@@ -121,7 +121,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textPassword"
-                                android:background="@drawable/selector_bg_edit_2"
+                                android:background="@drawable/selector_bg_edit_repeat"
                                 android:textCursorDrawable="@drawable/shape_register_material_bg_input_cursor_2"
                                 android:paddingBottom="2dp"
                                 />

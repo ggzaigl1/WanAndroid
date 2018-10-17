@@ -334,25 +334,25 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     isPlay = false;
-                    playBtn.setBackgroundResource(R.mipmap.play);
+                    playBtn.setBackgroundResource(R.mipmap.icon_play);
                 } else if (isPlayCom) {
                     mediaPlayer.seekTo(0);
                     isPlay = true;
                     isPlayCom = false;
-                    playBtn.setBackgroundResource(R.mipmap.pause);
+                    playBtn.setBackgroundResource(R.mipmap.icon_pause);
                 } else {
                     mediaPlayer.start();
                     isPlay = true;
-                    playBtn.setBackgroundResource(R.mipmap.pause);
+                    playBtn.setBackgroundResource(R.mipmap.icon_pause);
                 }
                 break;
             case R.id.screenBtn:
                 if (isFullScreen) {
                     smallScreen();
-                    screenBtn.setBackgroundResource(R.mipmap.large_screen);
+                    screenBtn.setBackgroundResource(R.mipmap.icon_large_screen);
                 } else {
                     fullScreen();
-                    screenBtn.setBackgroundResource(R.mipmap.small_screen);
+                    screenBtn.setBackgroundResource(R.mipmap.icon_small_screen);
                 }
                 break;
             default:
@@ -372,12 +372,12 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
             Log.e("TAG", "当前屏幕为横屏");
             isFullScreen = true;
             fullScreen();
-            screenBtn.setBackgroundResource(R.mipmap.small_screen);
+            screenBtn.setBackgroundResource(R.mipmap.icon_small_screen);
         } else {
             Log.e("TAG", "当前屏幕为竖屏");
             isFullScreen = false;
             smallScreen();
-            screenBtn.setBackgroundResource(R.mipmap.large_screen);
+            screenBtn.setBackgroundResource(R.mipmap.icon_large_screen);
         }
         super.onConfigurationChanged(newConfig);
     }
@@ -471,7 +471,7 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
     @Override
     public void onCompletion(MediaPlayer mp) {
 //        Log.e("TAG", "播放完成");
-        playBtn.setBackgroundResource(R.mipmap.play);
+        playBtn.setBackgroundResource(R.mipmap.icon_play);
         isPlay = false;
         isPlayCom = true;
         isControl = false;
@@ -504,7 +504,7 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         //设置最大进度
         seekBar.setMax(mediaPlayer.getDuration());
         //设置按钮背景图片
-        playBtn.setBackgroundResource(R.mipmap.pause);
+        playBtn.setBackgroundResource(R.mipmap.icon_pause);
         //设置视频最大时间
         countTime.setText(formatTime(mediaPlayer.getDuration()));
         //隐藏加载进度条

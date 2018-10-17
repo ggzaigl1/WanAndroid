@@ -5,7 +5,7 @@
       tools:showIn="navigation_view">
     <item
             android:id="@+id/action_search"
-            android:icon="@mipmap/menu_search"
+            android:icon="@mipmap/icon_menu_search"
             app:actionViewClass="android.support.v7.widget.SearchView"
             app:showAsAction="ifRoom|collapseActionView"
             android:inputType="textCapWords"

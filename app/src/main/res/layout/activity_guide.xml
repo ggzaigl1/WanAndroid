@@ -16,7 +16,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginStart="130dp"
             android:gravity="center"
-            android:background="@mipmap/btn_bg"
+            android:background="@mipmap/icon_btn_bg"
             android:textColor="@color/login"
             android:text="@string/login"
             android:visibility="gone"/>

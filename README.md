@@ -4,7 +4,7 @@
 
 # Apk
 
- <a href="https://www.pgyer.com/6osT" target="_blank">1.3.0</a>
+ <a href="https://www.pgyer.com/6osT" target="_blank">1.3.5</a>
 
 # 接口
 

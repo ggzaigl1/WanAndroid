@@ -75,7 +75,7 @@
                 android:paddingRight="@dimen/spacing_medium_small"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@mipmap/right_button"
+                android:src="@mipmap/icon_right_button"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="12dp"
@@ -121,7 +121,7 @@
                 android:layout_marginEnd="12dp"
                 android:paddingLeft="@dimen/spacing_medium_small"
                 android:paddingRight="@dimen/spacing_medium_small"
-                android:src="@mipmap/left_button"
+                android:src="@mipmap/icon_left_button"
                 android:contentDescription="TODO"
                 tools:ignore="ContentDescription"/>
     </RelativeLayout>

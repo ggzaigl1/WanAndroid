@@ -1,4 +1,4 @@
-package com.example.gab.babylove.ui.main.activity;
+package com.example.gab.babylove.utils;
 
 import android.app.Activity;
 import android.os.Bundle;
