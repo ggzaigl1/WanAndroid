@@ -204,7 +204,7 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
                     @Override
                     protected void onSuccess(BeanModule<LoginBean> login) {
                         if (login.isSuccess()) {
-                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                 ACache mCache = ACache.get(BaseApp.getAppCtx());
                                 mCache.put(ConstantUtils.userName, login);
                                 SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);

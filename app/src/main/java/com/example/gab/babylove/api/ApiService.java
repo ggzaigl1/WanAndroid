@@ -8,6 +8,7 @@ import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.CourseList;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.HomeBean;
+import com.example.gab.babylove.entity.ListProjectBean;
 import com.example.gab.babylove.entity.LoginBean;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.entity.OfficialAccountBean;
@@ -59,18 +60,18 @@ public interface ApiService {
     Observable<BeanModule<LoginBean>> getRegister(@FieldMap Map<String, Object> options);
 
     /**
+     * 退出登录
+     */
+    @Headers({"url_name:user"})
+    @GET("user/logout/json")
+    Observable<BeanModule<Object>> getLogout();
+
+    /**
      * 首页 banner
      */
     @Headers({"url_name:user"})
     @GET("banner/json")
     Observable<BeanModule<List<BannerBean>>> getBanner();
-
-    /**
-     * 美图图片
-     */
-    @Headers({"url_name:user"})
-    @GET("http://gank.io/api/data/福利/{count}/{page}")
-    Observable<GankBean> getCourseDetails(@Path("count") int count, @Path("page") int page);
 
     /**
      * 首页文章列表
@@ -125,6 +126,12 @@ public interface ApiService {
     @GET("project/tree/json")
     Observable<BeanModule<List<ProjectBean>>> getProjectList();
 
+    /**
+     * 最新项目tab (首页的第二个tab)
+     */
+    @Headers({"url_name:user"})
+    @GET("article/listproject/{pageNum}/json")
+    Observable<BeanModule<ListProjectBean>> getListproject(@Path("pageNum") int pageNum);
 
     /**
      * 收藏文章列表
@@ -181,7 +188,6 @@ public interface ApiService {
     @GET("wxarticle/chapters/json")
     Observable<List<OfficialAccountBean>> getChapters();
 
-
     /**
      * 查看某个公众号历史数据
      */
@@ -196,6 +202,13 @@ public interface ApiService {
     @GET("wxarticle/list/{ID}/{pageNo}/json")
     Observable<BeanModule<OfficialAccountListBean>> getWxarticleQuery(@Path("ID") int Id, @Path("pageNo") int pageNo
             , @Query("k") String queryKey);
+
+    /**
+     * 美图图片
+     */
+    @Headers({"url_name:user"})
+    @GET("http://gank.io/api/data/福利/{count}/{page}")
+    Observable<GankBean> getCourseDetails(@Path("count") int count, @Path("page") int page);
 
     /**
      * 运动课程 ---运动列表

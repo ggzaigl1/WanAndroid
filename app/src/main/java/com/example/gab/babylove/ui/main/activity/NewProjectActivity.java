@@ -1,8 +1,8 @@
 package com.example.gab.babylove.ui.main.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,13 +10,14 @@ import android.view.View;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.CourseList;
-import com.example.gab.babylove.ui.main.adapter.OrnamentalListContextAdapter;
+import com.example.gab.babylove.entity.ListProjectBean;
+import com.example.gab.babylove.ui.main.adapter.NewProjectAdapter;
+import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
-import com.ggz.baselibrary.utils.JumpUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -25,25 +26,23 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by 初夏小溪 on 2018/4/9 0009.
- * 运动课程列表
+ * Created by 初夏小溪 on 2018/10/17 0017.
+ * 最新项目
  */
+public class NewProjectActivity extends BaseActivity implements IBaseActivity {
 
-public class OrnamentalListContextActivity extends BaseActivity implements IBaseActivity {
-
-    @BindView(R.id.ry_data)
+    @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-    OrnamentalListContextAdapter mAdapter;
-    private int mPageNo = 1;
+
+    NewProjectAdapter mAdapter;
+    int mPageNo = 1;
+
 
     @Override
     public boolean isShowHeadView() {
@@ -52,7 +51,7 @@ public class OrnamentalListContextActivity extends BaseActivity implements IBase
 
     @Override
     public int setView() {
-        return R.layout.activity_ornamental_list_context;
+        return R.layout.activity_new_project;
     }
 
     @Override
@@ -62,9 +61,9 @@ public class OrnamentalListContextActivity extends BaseActivity implements IBase
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+        initRecyle();
         initRefresh();
-        initRv();
-        getCourseDetails(mPageNo);
+        getListProject(mPageNo);
     }
 
     @Override
@@ -77,48 +76,49 @@ public class OrnamentalListContextActivity extends BaseActivity implements IBase
 
     }
 
-    private void getCourseDetails(int mPageNo) {
+    /**
+     * 列表数据加载
+     */
+    @SuppressLint("CheckResult")
+    private void getListProject(int mPageNo) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .getCourseList(mPageNo)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(new NetCallBack<CourseList>() {
+                .getListproject(mPageNo)
+                .compose(RxHelper.handleResult())
+                .subscribe(new NetCallBack<ListProjectBean>() {
                     @Override
-                    protected void onSuccess(CourseList t) {
-                        if (t.getResult() == 1) {
+                    protected void onSuccess(ListProjectBean listProjectBean) {
+                        if (null != listProjectBean) {
                             mKProgressHUD.dismiss();
-                            if (!t.getData().isEmpty()) {
-                                if (mRefreshLayout.isRefreshing()) {
-                                    mAdapter.setNewData(t.getData());
-                                    mRefreshLayout.finishRefresh();
-                                } else if (mRefreshLayout.isLoading()) {
-                                    mAdapter.getData().addAll(t.getData());
-                                    mRefreshLayout.finishLoadMore();
-                                    mAdapter.notifyDataSetChanged();
-                                } else {
-                                    mAdapter.setNewData(t.getData());
-                                }
+                            if (mRefreshLayout.isRefreshing()) {
+                                mAdapter.setNewData(listProjectBean.getDatas());
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mAdapter.getData().addAll(listProjectBean.getDatas());
+                                mRefreshLayout.finishLoadMore();
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mAdapter.setNewData(listProjectBean.getDatas());
+                            }
+                        } else {
+                            if (mRefreshLayout.isRefreshing()) {
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mRefreshLayout.finishLoadMore();
                             }
                         }
                     }
 
                     @Override
                     protected void updataLayout(int flag) {
-                        if (null != mRefreshLayout) {
-                            mKProgressHUD.dismiss();
-                            if (mRefreshLayout.isRefreshing()) {
-                                mRefreshLayout.finishRefresh();
-                            }
-                            if (mRefreshLayout.isLoading()) {
-                                mRefreshLayout.finishLoadMore();
-                            }
-                        }
+                        mKProgressHUD.dismiss();
                     }
                 });
     }
 
+    /**
+     * 分页加载数据
+     */
     private void initRefresh() {
         mRefreshLayout.setRefreshHeader(new ClassicsHeader(this));
         mRefreshLayout.setRefreshFooter(new ClassicsFooter(this));
@@ -126,25 +126,14 @@ public class OrnamentalListContextActivity extends BaseActivity implements IBase
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 mPageNo += 1;
-                getCourseDetails(mPageNo);
+                getListProject(mPageNo);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                getCourseDetails(1);
+                mPageNo = 1;
+                getListProject(mPageNo);
             }
-        });
-    }
-
-    private void initRv() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new OrnamentalListContextAdapter(R.layout.item_ornamental_list_context, new ArrayList<>());
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            List<CourseList.DataBean> data = mAdapter.getData();
-            Bundle bundle = new Bundle();
-            bundle.putInt("id", data.get(position).getId());
-            JumpUtils.jump(OrnamentalListContextActivity.this, OrnamentalContextActivity.class, bundle);
         });
     }
 
@@ -153,11 +142,20 @@ public class OrnamentalListContextActivity extends BaseActivity implements IBase
         super.onPause();
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.finishRefresh();
-            mKProgressHUD.dismiss();
         }
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
-            mKProgressHUD.dismiss();
         }
+    }
+
+
+    private void initRecyle() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new NewProjectAdapter(R.layout.item_fly, new ArrayList<>());
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            ListProjectBean.DatasBean datasBean = mAdapter.getData().get(position);
+            WebViewActivity.startWebActivity(this, datasBean.getLink());// 详情
+        });
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

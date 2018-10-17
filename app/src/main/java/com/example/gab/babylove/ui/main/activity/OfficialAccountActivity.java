@@ -2,17 +2,11 @@ package com.example.gab.babylove.ui.main.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.view.Menu;
 import android.view.View;
 
-import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;

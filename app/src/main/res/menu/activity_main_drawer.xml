@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
                 android:id="@+id/nav_belle"
-                android:icon="@mipmap/ic_live_tv"
+                android:icon="@drawable/vector_belle"
                 android:title="@string/pretty_picture"/>
         <item
                 android:id="@+id/nav_website"
@@ -18,13 +18,17 @@
                 android:icon="@drawable/vector_official_account"
                 android:title="@string/official_account"/>
         <item
+                android:id="@+id/nav_list_project"
+                android:icon="@drawable/vector_list_project"
+                android:title="@string/new_project"/>
+        <item
                 android:id="@+id/nav_collect"
                 android:icon="@drawable/vector_collect"
                 android:title="@string/collect"/>
         <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="@string/tools"/>
+                android:id="@+id/nav_ornamental"
+                android:icon="@drawable/vector_ornamental"
+                android:title="@string/ornamental"/>
     </group>
 
     <item android:title="Communicate">
@@ -35,13 +39,13 @@
                     android:visible="false"
                     android:title="夜间模式"/>
             <item
-                    android:id="@+id/nav_ornamental"
-                    android:icon="@drawable/vector_ornamental"
-                    android:title="@string/ornamental"/>
-            <item
                     android:id="@+id/nav_share"
                     android:icon="@drawable/ic_menu_share"
                     android:title="@string/share"/>
+            <item
+                    android:id="@+id/nav_manage"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="@string/tools"/>
             <item
                     android:id="@+id/nav_about"
                     android:icon="@drawable/vector_about_us"

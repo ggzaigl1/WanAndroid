@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.OrnamentalListBean;
 import com.example.gab.babylove.statusbar.MdStatusBar;
@@ -25,6 +26,7 @@ import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,7 @@ import io.reactivex.schedulers.Schedulers;
  * 运动课程内容
  */
 
-public class OrnamentalContextActivity extends AppCompatActivity implements IBaseActivity {
+public class OrnamentalContextActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -94,6 +96,7 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
 
 
     private void getCourseDetails(int mPageNo) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCourseDetails(mPageNo)
                 .subscribeOn(Schedulers.io())
@@ -101,30 +104,28 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(new NetCallBack<CourseDetails>() {
                     @Override
-                    protected void onSuccess(CourseDetails t) {
-                        if (t.getResult() == 1) {
-                            CourseDetails.DataBean data = t.getData();
-                            if (null != data) {
-                                mTvTitle.setText(data.getTitle());
-                                mTvContext.setText(data.getSubTitle());
-                                tv_announcements.setText(data.getNotes());
-                                ImgLoadUtils.loadImage(getApplicationContext(), data.getPic(), mClubDetailsBg);
-                                mAdapter.setNewData(data.getGroups().get(0).getActions());
-                                mTvPoint.setText("注意事项");
-                                mTvDo.setText("训练动作");
+                    protected void onSuccess(CourseDetails courseDetails) {
+                        if (courseDetails.getResult() == 1) {
+                                mKProgressHUD.dismiss();
+                                mTvTitle.setText(courseDetails.getData().getTitle());
+                                mTvContext.setText(courseDetails.getData().getSubTitle());
+                                tv_announcements.setText(courseDetails.getData().getNotes());
+                                ImgLoadUtils.loadImage(getApplicationContext(), courseDetails.getData().getPic(), mClubDetailsBg);
+                                mAdapter.setNewData(courseDetails.getData().getGroups().get(0).getActions());
+                                mTvPoint.setText(getString(R.string.announcements));
+                                mTvDo.setText(getString(R.string.training_action));
                                 if (mCollapsingToolbarLayout != null) {
                                     //设置隐藏图片时候ToolBar的颜色
                                     mCollapsingToolbarLayout.setContentScrimColor(ResourceUtils.getRandomColor());
                                     //设置工具栏标题
-                                    mCollapsingToolbarLayout.setTitle(data.getTitle());
+                                    mCollapsingToolbarLayout.setTitle(courseDetails.getData().getTitle());
                                 }
-                            }
                         }
                     }
 
                     @Override
                     protected void updataLayout(int flag) {
-
+                        mKProgressHUD.dismiss();
                     }
                 });
     }
@@ -133,11 +134,6 @@ public class OrnamentalContextActivity extends AppCompatActivity implements IBas
     @OnClick({})
     @Override
     public void onClick(View view) {
-//        switch (view.getId()){
-//            case R.id.tv_back:
-//                JumpUtils.exitActivity(this);
-//                break;
-//        }
     }
 
     @Override

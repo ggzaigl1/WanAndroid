@@ -31,6 +31,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.ui.main.activity.AboutActivity;
 import com.example.gab.babylove.ui.main.activity.BelleActivity;
 import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
+import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
 import com.example.gab.babylove.ui.main.activity.OfficialAccountActivity;
 import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
 import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
@@ -241,6 +242,10 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             case R.id.nav_official_account:
                 //公众号
                 JumpUtils.jump(this, OfficialAccountActivity.class, null);
+                break;
+            case R.id.nav_list_project:
+                //最新项目
+                JumpUtils.jump(this, NewProjectActivity.class, null);
                 break;
             case R.id.nav_collect:
                 //我的收藏

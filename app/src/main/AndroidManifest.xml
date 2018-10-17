@@ -132,6 +132,11 @@
                 android:label="@string/about_us"
                 android:screenOrientation="portrait"/>
 
+        <!-- 最新项目 -->
+        <activity
+                android:name=".ui.main.activity.NewProjectActivity"
+                android:label="@string/new_project"
+                android:screenOrientation="portrait"/>
         <!-- 公众号 -->
         <activity
                 android:name=".ui.main.activity.OfficialAccountActivity"
