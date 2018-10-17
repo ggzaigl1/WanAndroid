@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:divider="@drawable/divider_bg"
+              android:divider="@drawable/shape_divider_bg"
               android:showDividers="middle"
               android:background="@drawable/selector_patient_white"
               android:orientation="vertical">
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:divider="@drawable/divider_bg"
+            android:divider="@drawable/shape_divider_bg"
             android:orientation="horizontal"
             android:showDividers="middle">
 

@@ -48,7 +48,7 @@ public class Util {
                 if (mToast == null) {
                     mToast = new Toast(ctx);
                     mToast.setDuration(Toast.LENGTH_SHORT);//设置toast显示的时长
-                    View root = LayoutInflater.from(ctx).inflate(R.layout.toast_custom_common, null, false);//自定义样式，自定义布局文件
+                    View root = LayoutInflater.from(ctx).inflate(R.layout.item_toast_custom_common, null, false);//自定义样式，自定义布局文件
                     mTvToast = root.findViewById(R.id.tvCustomToast);
                     mToast.setView(root);//设置自定义的view
                 }

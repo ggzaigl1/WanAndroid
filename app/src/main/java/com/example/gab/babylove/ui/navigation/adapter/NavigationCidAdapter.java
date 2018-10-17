@@ -30,7 +30,7 @@ public class NavigationCidAdapter extends BaseQuickAdapter<NavigationBean.Articl
         TextView tv_date = helper.getView(R.id.tv_date);
         tv_date.setText(item.getTitle());
         tv_date.setTextColor(ResourceUtils.getRandomColor());
-//        tv_date.setBackground(SelectUtils.getTagSelector(R.drawable.item_selector));
+//        tv_date.setBackground(SelectUtils.getTagSelector(R.drawable.selector_item_bg));
         if (helper.getLayoutPosition() == mList.size() - 1) {
             //最后一条数据，隐藏时间轴的竖线和水平的分割线
         }

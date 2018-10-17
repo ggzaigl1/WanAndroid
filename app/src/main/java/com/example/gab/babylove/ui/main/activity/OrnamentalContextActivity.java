@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -150,7 +149,7 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new OrnamentalContextAdapter(R.layout.ornamental_context_recycle_item, new ArrayList<>());
+        mAdapter = new OrnamentalContextAdapter(R.layout.item_ornamental_context_recycle, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             List<CourseDetails.DataBean.GroupsBean.ActionsBean> data = mAdapter.getData();
             OrnamentalListBean orListBean = new OrnamentalListBean(data);

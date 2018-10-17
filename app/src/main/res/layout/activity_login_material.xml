@@ -75,7 +75,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
                             android:background="@drawable/selector_bg_edit"
-                            android:textCursorDrawable="@drawable/register_material_bg_input_cursor"
+                            android:textCursorDrawable="@drawable/shape_register_material_bg_input_cursor"
                             android:paddingBottom="2dp"
                             />
                 </android.support.design.widget.TextInputLayout>
@@ -111,7 +111,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"
                             android:background="@drawable/selector_bg_edit"
-                            android:textCursorDrawable="@drawable/register_material_bg_input_cursor"
+                            android:textCursorDrawable="@drawable/shape_register_material_bg_input_cursor"
                             android:paddingBottom="2dp"
                             />
                 </android.support.design.widget.TextInputLayout>
@@ -125,7 +125,7 @@
 
                 <Button
                         android:id="@+id/bt_Login"
-                        android:background="@drawable/register_material_bt_shape"
+                        android:background="@drawable/shape_register_material_bt_shape"
                         android:stateListAnimator="@drawable/state_list_animator_z"
                         android:layout_width="150dp"
                         android:layout_height="50dp"

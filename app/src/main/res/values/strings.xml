@@ -62,8 +62,11 @@
     <string name="clickLogin">点击登录</string>
     <string name="login_exit">退出登录</string>
 
+
+    <string name="main_login_view">登录之后才能查看已收藏内容</string>
     <string name="announcements">注意事项</string>
     <string name="training_action">训练动作</string>
+    <string name="search_knowledge">搜索知识点</string>
     <!-- WebView string 资源 -->
     <string name="web_error">抱歉~\n加载失败,点击重新加载</string>
 

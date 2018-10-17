@@ -26,6 +26,6 @@ public class WebsiteAdapter extends BaseQuickAdapter<BookmarkBean, BaseViewHolde
         TextView name = helper.getView(R.id.tv_name);
         name.setText(item.getName());
         name.setTextColor(ResourceUtils.getRandomColor());
-//        name.setBackground(SelectUtils.getTagSelector(R.drawable.item_selector));
+//        name.setBackground(SelectUtils.getTagSelector(R.drawable.selector_item_bg));
     }
 }

@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -169,10 +170,11 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         //设置BottomNavigationItem颜色 setActiveColor, setInActiveColor, setBarBackgroundColor
         mBottomNavigation.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
                 .setMode(BottomNavigationBar.MODE_SHIFTING)
-                .addItem(new BottomNavigationItem(R.mipmap.ic_home, getString(R.string.nav_home_title)).setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_view_headline, getString(R.string.nav_system_title)).setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_live_tv, getString(R.string.nav_view_title)).setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.icon_find, getString(R.string.nav_project_title)).setActiveColorResource(R.color.colorPrimary))
+                .setInActiveColor("#2c2c2c")//设置Item未选中颜色方法
+                .addItem(new BottomNavigationItem(R.drawable.vector_home, getString(R.string.nav_home_title)).setActiveColorResource(R.color.pink))
+                .addItem(new BottomNavigationItem(R.drawable.vector_view_headline, getString(R.string.nav_system_title)).setActiveColorResource(R.color.pink))
+                .addItem(new BottomNavigationItem(R.drawable.vector_live_tv, getString(R.string.nav_view_title)).setActiveColorResource(R.color.pink))
+                .addItem(new BottomNavigationItem(R.drawable.vector_find, getString(R.string.nav_project_title)).setActiveColorResource(R.color.pink))
                 .setFirstSelectedPosition(0)
                 .setTabSelectedListener(this)
                 .initialise();
@@ -253,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                     JumpUtils.jump(this, MyCollectActivity.class, null);
                 } else {
                     JumpUtils.jump(this, LoginActivity.class, null);
-                    T.showShort("登录之后才能查看已收藏内容");
+                    T.showShort(getString(R.string.main_login_view));
                 }
                 break;
             case R.id.nav_exit:
@@ -309,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         getMenuInflater().inflate(R.menu.activity_main_search, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setQueryHint("搜索知识点");
+        searchView.setQueryHint(getString(R.string.search_knowledge));
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
