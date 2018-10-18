@@ -6,6 +6,8 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -44,6 +46,7 @@ import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.example.gab.babylove.ui.news.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
+import com.example.gab.babylove.utils.AndroidShare;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.BaseApp;
@@ -290,10 +293,9 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
 //                JumpUtils.jump(this, MyThreadActivity.class, null);
                 break;
             case R.id.nav_share:
-                Intent textIntent = new Intent(Intent.ACTION_SEND);
-                textIntent.setType("https://www.pgyer.com/6osT");
-                textIntent.putExtra(Intent.EXTRA_TEXT, "一起玩Android");
-                startActivity(Intent.createChooser(textIntent, "一起玩Android"));
+//                AndroidShare.shareWeChatFriend(this, "wanandroid", "https://www.pgyer.com/6osT", AndroidShare.TEXT, null);
+                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_wanandroid);
+                AndroidShare.shareWeChatFriend(this, "一起玩Android", "https://www.pgyer.com/6osT", AndroidShare.DRAWABLE, bmp);
                 break;
             case R.id.nav_manage:
 //            工具类

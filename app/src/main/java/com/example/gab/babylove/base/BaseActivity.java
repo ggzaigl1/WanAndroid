@@ -1,5 +1,6 @@
 package com.example.gab.babylove.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 public class BaseActivity extends AppCompatActivity {
 
     protected KProgressHUD mKProgressHUD;
+    protected Context mContext;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

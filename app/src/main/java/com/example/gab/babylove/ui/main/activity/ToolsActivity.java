@@ -2,28 +2,22 @@ package com.example.gab.babylove.ui.main.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.utils.CleanMessageUtil;
+import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,7 +27,7 @@ import butterknife.OnClick;
  * 工具栏
  */
 
-public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
+public class ToolsActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.tv_cache_size)
     TextView tv_cache_size;
@@ -61,7 +55,7 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
         return R.layout.activity_tools;
     }
 
-//    @StatusBar(statusColor = R.color.statusBar, navColor = R.color.statusBar)
+    //    @StatusBar(statusColor = R.color.statusBar, navColor = R.color.statusBar)
     @Override
     public void setStatusBar(Activity activity) {
         MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
@@ -84,12 +78,12 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
             //给个好评
             case R.id.tv_praise:
 //                startMarket();
-                Update();
+                GetUpdate();
                 break;
             //清除缓存
             case R.id.Ll_cache_clear:
 //                JumpUtils.jump(this, SurfaceActivity.class, null);
-                Cache(this);
+                GetCache(this);
                 break;
 //            //SelectorButton
 //            case R.id.Ll_Button:
@@ -105,7 +99,12 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
 
     }
 
-    private void Cache(Activity activity) {
+    /**
+     * 清除缓存
+     *
+     * @param activity
+     */
+    private void GetCache(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity)
                 .setTitle(R.string.system_title)
                 .setMessage(R.string.tools_clear_cache)
@@ -117,7 +116,10 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
         builder.show();
     }
 
-    private void Update(){
+    /**
+     * 去评价
+     */
+    private void GetUpdate() {
         //        主流应用商店对应的包名如下:
 //        com.qihoo.appstore360手机助手
 //        com.taobao.appcenter淘宝手机助手
@@ -126,9 +128,9 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
 //        cn.goapk.market 安智市场
 
         //判断应用市场是否存在
-        if (isAvilible(this, "com.xiaomi.market")) {
+        if (Util.isAvilible(this, "com.xiaomi.market")) {
             //存在进入应用市场
-            launchAppDetail("com.example.gab.babylove", "com.xiaomi.market");
+            Util.launchAppDetail(this, "com.example.gab.babylove", "com.xiaomi.market");
         } else {
             //不存在提示用户安装应用市场
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -147,47 +149,6 @@ public class ToolsActivity extends AppCompatActivity implements IBaseActivity {
                     dialog.dismiss();
                 }
             }).create().show();
-        }
-    }
-    /**
-     * 判断市场是否存在的方法
-     *
-     * @param context
-     * @param packageName 应用市场包名
-     * @return true or false
-     */
-    public static boolean isAvilible(Context context, String packageName) {
-        final PackageManager packageManager = context.getPackageManager();//获取packagemanager
-        List<PackageInfo> packageInfo = packageManager.getInstalledPackages(0);//获取所有已安装程序的包信息
-        List NameList = new ArrayList();//用于存储所有已安装程序的包名
-        //从packageInfo中取出包名,放入NameList中
-        if (packageInfo != null) {
-            for (int i = 0; i < packageInfo.size(); i++) {
-                String pn = packageInfo.get(i).packageName;
-                NameList.add(pn);
-            }
-        }
-        return NameList.contains(packageName);//判断pName中是否有目标程序的包名,有TRUE,没有FALSE
-    }
-
-    /**
-     * 跳转到app详情界面
-     *
-     * @param appPkg    App的包名
-     * @param marketPkg 应用商店包名 ,如果为""则由系统弹出应用商店列表供用户选择,否则调转到目标市场的应用详情界面,某些应用商店可能会失败
-     */
-    public void launchAppDetail(String appPkg, String marketPkg) {
-        try {
-            if (TextUtils.isEmpty(appPkg))
-                return;
-            Uri uri = Uri.parse("market://details?id=" + appPkg);
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            if (!TextUtils.isEmpty(marketPkg))
-                intent.setPackage(marketPkg);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

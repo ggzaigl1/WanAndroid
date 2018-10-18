@@ -54,6 +54,7 @@
     <string name="knowledge">知识体系</string>
     <string name="about_us">关于我们</string>
     <string name="share">分享</string>
+    <string name="night_mode">夜间模式</string>
     <string name="nav_exit">退出应用</string>
     <string name="ornamental">健康运动</string>
     <string name="selector_button">SelectorButton</string>
@@ -64,12 +65,14 @@
 
 
     <string name="main_login_view">登录之后才能查看已收藏内容</string>
-    <string name="announcements">注意事项</string>
-    <string name="clear_cache">清空缓存</string>
-    <string name="to_evaluate">去评价</string>
-    <string name="training_action">训练动作</string>
     <string name="search_knowledge">搜索知识点</string>
     <string name="save_photo">保存到相册中</string>
+    <string name="announcements">注意事项</string>
+    <string name="training_action">训练动作</string>
+
+    <string name="clear_cache">清空缓存</string>
+    <string name="to_evaluate">去评价</string>
+
 
 
     <!-- WebView string 资源 -->
