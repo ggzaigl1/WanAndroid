@@ -60,12 +60,15 @@
             </intent-filter>
         </activity>
 
+        <!--Main主页-->
         <activity
                 android:name="com.example.gab.babylove.MainActivity"
                 android:launchMode="singleTask"
+                android:windowSoftInputMode="adjustPan|stateHidden"
                 android:screenOrientation="portrait">
         </activity>
 
+        <!--Base-->
         <activity
                 android:name=".base.BaseActivity"
                 android:screenOrientation="portrait"/>

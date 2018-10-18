@@ -137,7 +137,7 @@ public class OrnamentalListContextActivity extends BaseActivity implements IBase
 
     private void initRv() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new OrnamentalListContextAdapter(R.layout.item_ornamental_list_context, new ArrayList<>());
+        mAdapter = new OrnamentalListContextAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             List<CourseList.DataBean> data = mAdapter.getData();

@@ -17,8 +17,8 @@ import java.util.List;
 public class NavigationViewAdapter extends BaseQuickAdapter<NavigationBean, BaseViewHolder> {
 
 
-    public NavigationViewAdapter(int layoutResId, @Nullable List<NavigationBean> data) {
-        super(layoutResId, data);
+    public NavigationViewAdapter( @Nullable List<NavigationBean> data) {
+        super(R.layout.item_navigation,  data);
     }
 
     /**

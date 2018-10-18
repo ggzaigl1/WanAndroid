@@ -18,8 +18,8 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 public class OrnamentalListContextAdapter extends BaseQuickAdapter<CourseList.DataBean, BaseViewHolder> {
 
-    public OrnamentalListContextAdapter(int layoutResId, @Nullable List<CourseList.DataBean> data) {
-        super(layoutResId, data);
+    public OrnamentalListContextAdapter(@Nullable List<CourseList.DataBean> data) {
+        super(R.layout.item_ornamental_list_context, data);
     }
 
     @Override

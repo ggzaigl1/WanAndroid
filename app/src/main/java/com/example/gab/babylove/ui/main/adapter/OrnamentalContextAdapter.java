@@ -16,8 +16,8 @@ import java.util.List;
 
 public class OrnamentalContextAdapter extends BaseQuickAdapter<CourseDetails.DataBean.GroupsBean.ActionsBean, BaseViewHolder> {
 
-    public OrnamentalContextAdapter(int layoutResId, @Nullable List<CourseDetails.DataBean.GroupsBean.ActionsBean> data) {
-        super(layoutResId, data);
+    public OrnamentalContextAdapter(@Nullable List<CourseDetails.DataBean.GroupsBean.ActionsBean> data) {
+        super(R.layout.item_ornamental_context_recycle, data);
 
     }
 

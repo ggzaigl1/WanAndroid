@@ -84,7 +84,7 @@ public class NavigationViewFragment extends BaseFragment {
     private void initRecycler() {
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView_Title.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new NavigationViewAdapter(R.layout.item_navigation, new ArrayList<>());
+        mAdapter = new NavigationViewAdapter(new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             NavigationBean navigationBean = mAdapter.getData().get(position);
             //如果item位置不等于0 就不显示

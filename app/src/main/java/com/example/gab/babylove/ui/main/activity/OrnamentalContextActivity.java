@@ -149,7 +149,7 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new OrnamentalContextAdapter(R.layout.item_ornamental_context_recycle, new ArrayList<>());
+        mAdapter = new OrnamentalContextAdapter(new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             List<CourseDetails.DataBean.GroupsBean.ActionsBean> data = mAdapter.getData();
             OrnamentalListBean orListBean = new OrnamentalListBean(data);
