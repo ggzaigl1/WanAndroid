@@ -8,7 +8,7 @@ import android.view.View;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
-import com.example.gab.babylove.widget.StateButton;
+import com.example.gab.babylove.view.StateButton;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;

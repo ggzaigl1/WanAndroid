@@ -21,7 +21,7 @@ import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.UpDateBean;
-import com.example.gab.babylove.widget.CustomDialog;
+import com.example.gab.babylove.utils.CustomDialog;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.ui.main.adapter.PhotoAdapter;
-import com.example.gab.babylove.widget.PhotoViewPager;
+import com.example.gab.babylove.view.PhotoViewPager;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.T;

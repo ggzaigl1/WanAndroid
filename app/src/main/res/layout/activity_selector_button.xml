@@ -24,7 +24,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shape_button_demo"/>
 
-            <com.example.gab.babylove.widget.StateButton
+            <com.example.gab.babylove.view.StateButton
                     android:id="@+id/bt_OnTraceList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                     app:radius="10dp"
                     app:unableBackgroundColor="@android:color/holo_red_light"/>
 
-            <com.example.gab.babylove.widget.StateButton
+            <com.example.gab.babylove.view.StateButton
                     android:id="@+id/text_webView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     app:pressedTextColor="@android:color/white"
                     app:radius="5dp"/>
 
-            <com.example.gab.babylove.widget.StateButton
+            <com.example.gab.babylove.view.StateButton
                     android:id="@+id/dash_test"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                     app:unableStrokeWidth="2dp"
                     app:unableTextColor="@android:color/holo_orange_dark"/>
 
-            <com.example.gab.babylove.widget.StateButton
+            <com.example.gab.babylove.view.StateButton
                     android:id="@+id/different_radius_test"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -89,7 +89,7 @@
                     app:round="true"
                     app:unableBackgroundColor="@android:color/holo_red_light"/>
 
-            <com.example.gab.babylove.widget.StateButton
+            <com.example.gab.babylove.view.StateButton
                     android:id="@+id/stroke_test"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

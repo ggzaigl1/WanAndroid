@@ -4,7 +4,8 @@ import android.view.animation.Interpolator;
 
 /**
  * @author quchao
- * @date 2018/3/7
+ *  @date 2018/3/7
+ *  关于页面 弹性插入器
  */
 
 public class ElasticOutInterpolator implements Interpolator {
