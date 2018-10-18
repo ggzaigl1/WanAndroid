@@ -170,15 +170,7 @@
                 android:name="com.example.gab.babylove.ui.main.activity.OrnamentalMotionActivity"
                 android:label="@string/ornamental"
                 android:screenOrientation="portrait"/>
-        <!-- 相机Camera2 -->
-        <activity
-                android:name="com.example.gab.babylove.widget.camera.Camera2Activity"
-                android:screenOrientation="portrait"/>
-        <!-- 相机Camera -->
-        <activity
-                android:name="com.example.gab.babylove.widget.camera.CameraPermissionActivity"
-                android:theme="@style/FullScreenTheme"
-                android:screenOrientation="portrait"/>
+
         <!--软件更新-->
         <activity
                 android:name=".ui.main.activity.UpdateActivity"

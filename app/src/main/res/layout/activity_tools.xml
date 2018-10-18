@@ -18,13 +18,15 @@
             android:background="?android:attr/selectableItemBackground">
 
         <TextView
-                style="@style/CommonText"
+
                 android:layout_height="50dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:padding="10dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/textSize_medium_small"
                 android:text="@string/clear_cache"/>
 
         <TextView
@@ -44,13 +46,16 @@
 
     <TextView
             android:id="@+id/tv_praise"
-            style="@style/CommonText"
             android:layout_height="50dp"
+            android:layout_width="match_parent"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:drawableEnd="@drawable/vector_chevron_right_black"
-            android:text="@string/to_evaluate"/>
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/textSize_medium_small"
+            android:text="@string/to_evaluate"
+            />
 
     <View
             android:layout_width="match_parent"
