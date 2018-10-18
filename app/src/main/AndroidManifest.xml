@@ -149,6 +149,7 @@
         <activity
                 android:name=".ui.main.activity.OfficialAccountListActivity"
                 android:label="@string/official_account"
+                android:windowSoftInputMode="adjustUnspecified|stateHidden"
                 android:screenOrientation="portrait"/>
 
         <!-- 指紋相关工具类 -->
