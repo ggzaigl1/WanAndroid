@@ -94,7 +94,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
     @SuppressLint("CheckResult")
     private void getCourseDetails(int mCurPage) {
         RequestUtils.create(ApiService.class)
-                .getCourseDetails(20, mCurPage)
+                .getCourseDetails(50, mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(gankBean -> {
