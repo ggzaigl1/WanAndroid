@@ -66,14 +66,6 @@ import butterknife.BindView;
  */
 public class MainActivity extends AppCompatActivity implements IBaseActivity, BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
-    private FragmentManager mFragmentManager;
-    private HomeFragment mHomeFragment;
-    private NewsFragment mNewsFragment;
-    private NavigationViewFragment mNavigationViewFragment;
-    private StarFragment mStarFragment;
-    private Fragment mCurrentFrag; //当前的fragment
-    private long exitTime = 0; //保存点击的时间
-    private long Time = 2000; //保存点击的时间
     @BindView(R.id.fl_content)
     FrameLayout mFlContent;
     @BindView(R.id.bottom_navigation)
@@ -83,10 +75,18 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawer;
     @BindView(R.id.toolbar)
-
     public Toolbar mToolbar;
-    TextView tvLogin;
-    TextView tvName;
+
+    private FragmentManager mFragmentManager;
+    private HomeFragment mHomeFragment;
+    private NewsFragment mNewsFragment;
+    private NavigationViewFragment mNavigationViewFragment;
+    private StarFragment mStarFragment;
+    private Fragment mCurrentFrag; //当前的fragment
+    private long exitTime = 0; //保存点击的时间
+
+    public TextView nev_header_tv_login;
+    public TextView nev_header_tv_title;
 
     @Override
     public boolean isShowHeadView() {
@@ -105,13 +105,13 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-
         mFragmentManager = getSupportFragmentManager();
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
         mNewsFragment = new NewsFragment();
         mNavigationViewFragment = new NavigationViewFragment();
         mStarFragment = new StarFragment();
+
         initBottomNavigation();
         switchContent(mHomeFragment);
         setSupportActionBar(mToolbar);
@@ -120,20 +120,28 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
-        View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);//
-        ImageView imageView = headerView.findViewById(R.id.headerView);
-        tvLogin = headerView.findViewById(R.id.tv_login);//点击登录
-        tvName = headerView.findViewById(R.id.tv_name);
-        imageView.setOnClickListener(v -> JumpUtils.jump(MainActivity.this, PhotoViewActivity.class, null));
 
-        tvLogin.setOnClickListener(v -> {
+        //获取Navigation header控件方法1:
+        View headerView = mNavigation.getHeaderView(0);
+        ImageView nev_header_imageView = headerView.findViewById(R.id.nev_header_imageView);
+        nev_header_tv_title = headerView.findViewById(R.id.nev_header_tv_title);
+        nev_header_tv_login = headerView.findViewById(R.id.nev_header_tv_login);
+
+        //获取Navigation header控件方法2:
+//        View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);//
+//        ImageView nev_header_imageView = headerView.findViewById(R.id.nev_header_imageView);
+//        nev_header_tv_title = headerView.findViewById(R.id.nev_header_tv_title);
+//        nev_header_tv_login = headerView.findViewById(R.id.nev_header_tv_login);//点击登录
+
+        nev_header_imageView.setOnClickListener(v -> JumpUtils.jump(MainActivity.this, PhotoViewActivity.class, null));
+        nev_header_tv_login.setOnClickListener(v -> {
             boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
             if (isLogin) {
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.system_title).setMessage(R.string.system_content)
                         .setPositiveButton(R.string.ok, (dialog, which) -> {
-                            tvName.setText(R.string.notLogin);
-                            tvLogin.setText(R.string.clickLogin);
+                            nev_header_tv_title.setText(R.string.notLogin);
+                            nev_header_tv_login.setText(R.string.clickLogin);
                             ACache mCache = ACache.get(BaseApp.getAppCtx());
                             mCache.clear();
                             SpfUtils.clear();
@@ -160,11 +168,14 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     protected void onResume() {
         super.onResume();
         boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
-        tvName.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
-        tvLogin.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
+        nev_header_tv_title.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
+        nev_header_tv_login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
 
     }
 
+    /**
+     * 设置底部导航栏
+     */
     private void initBottomNavigation() {
         //设置导航栏背景模式 setBackgroundStyle（）
         //设置BottomNavigationItem颜色 setActiveColor, setInActiveColor, setBarBackgroundColor
@@ -270,14 +281,15 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     //ThemeConfig主题配置，这里只是保存了是否是夜间模式的boolean值
                     NightModeConfig.getInstance().setNightMode(getApplicationContext(), true);
-                    T.showShort("开启夜间模式");
+                    item.setTitle("夜间模式");
+                    item.setIcon(R.drawable.vector_menu_night_mode);
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     NightModeConfig.getInstance().setNightMode(getApplicationContext(), false);
-                    T.showShort("关闭夜间模式");
+                    item.setTitle("日间模式");
+                    item.setIcon(R.drawable.vector_menu_daytime_mode);
                 }
                 recreate();//需要recreate才能生效
-
                 break;
             case R.id.nav_ornamental:
                 //强身健体
@@ -301,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             default:
                 break;
         }
-        mDrawer.closeDrawer(GravityCompat.START);
+//        mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -330,14 +342,24 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+            mDrawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     //退出程序
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            //保存点击的时间
+            long time = 2000;
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
-            } else if ((System.currentTimeMillis() - exitTime) >= Time) {
+            } else if ((System.currentTimeMillis() - exitTime) >= time) {
 //                Snackbar.make(mDrawer, R.string.exit_app, Snackbar.LENGTH_SHORT)
 //                        .setActionTextColor(ContextCompat.getColor(this, R.color.white))
 //                        .show();

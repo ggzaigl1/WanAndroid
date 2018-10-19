@@ -31,16 +31,16 @@
                 android:title="@string/ornamental"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/other">
         <menu>
             <item
                     android:id="@+id/nav_night"
-                    android:icon="@drawable/ic_menu_share"
+                    android:icon="@drawable/vector_menu_night_mode"
                     android:visible="false"
                     android:title="@string/night_mode"/>
             <item
                     android:id="@+id/nav_share"
-                    android:icon="@drawable/ic_menu_share"
+                    android:icon="@drawable/vector_menu_share"
                     android:title="@string/share"/>
             <item
                     android:id="@+id/nav_manage"

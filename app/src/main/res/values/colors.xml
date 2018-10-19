@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#15b3fa</color>
     <color name="colorAccent">#EF8994</color>
-
+    <color name="textColor">#4861ea</color>
     <!-- UI设计原色之 红色 -->
     <color name="red">#e84c3d</color>
     <!-- UI设计原色之 粉色 -->

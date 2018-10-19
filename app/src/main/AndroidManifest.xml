@@ -46,7 +46,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             tools:replace="android:allowBackup"
-            android:theme="@style/BaseAppTheme"
+            android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
         <!-- 欢迎 -->
