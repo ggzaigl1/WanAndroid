@@ -58,7 +58,8 @@ public class PermissionDialog {
                 .setNegativeButton(activity.getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SystemUtils.ExitSystem();
+                        dialog.dismiss();
+//                        SystemUtils.ExitSystem();
                     }
                 })
                 .setPositiveButton(activity.getString(R.string.check_info_setting), new DialogInterface.OnClickListener() {

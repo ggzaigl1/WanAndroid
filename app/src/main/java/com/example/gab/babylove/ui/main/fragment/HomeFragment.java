@@ -1,14 +1,11 @@
 package com.example.gab.babylove.ui.main.fragment;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
@@ -23,10 +20,6 @@ import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
-import com.ggz.baselibrary.base.ViewHolder;
-import com.ggz.baselibrary.base.dialog.CommonDialog;
-import com.ggz.baselibrary.base.dialog.DialogConvertListener;
-import com.ggz.baselibrary.base.dialog.NiceDialog;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -34,7 +27,6 @@ import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
-import com.ggz.baselibrary.utils.permission.PermissionChecker;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -74,11 +66,7 @@ public class HomeFragment extends BaseFragment {
     HomeAdapter mAdapter;
     int mPageNo = 0;
 
-    protected PermissionChecker permissionChecker;
-    protected static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
+
 
     @Override
     protected void baseInit() {
@@ -86,10 +74,6 @@ public class HomeFragment extends BaseFragment {
         getData();
         initRecyle();
         initRefresh();
-
-        permissionChecker = new PermissionChecker(getActivity());
-        permissionChecker.setTitle(getString(R.string.check_info_title));
-        permissionChecker.setMessage(getString(R.string.check_info_message));
 
         //给页面设置工具栏
 //        if (mCollapsingToolbarLayout != null) {
@@ -323,30 +307,13 @@ public class HomeFragment extends BaseFragment {
             bannerView.startTurning(2000);//开始翻页
         }
 
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            NiceDialog.init()
-                    .setLayoutId(R.layout.dialog_permission)
-                    .setDialogConvertListener(new DialogConvertListener() {
-                        @Override
-                        protected void convertView(ViewHolder holder, CommonDialog dialog) {
-                            holder.setOnClickListener(R.id.positiveButton, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    onPermission();
-                                    dialog.dismiss(false);
-                                }
-                            });
-                        }
-                    })
-                    .setWidthPixels(30)
-                    .setWidthPercent(CommonDialog.WidthPercent)
-                    .show(getFragmentManager());
-
+//        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
 //            new MaterialDialog.Builder(getActivity()).title(R.string.require_acquisition)
 //                    .cancelable(false)
 //                    .content(R.string.default_always_message)
 //                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
-        }
+//        }
+
     }
 
     @Override
@@ -363,32 +330,4 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    /**
-     * 检查权限
-     */
-    private void onPermission() {
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            permissionChecker.requestPermissions();
-        }
-    }
-
-    /**
-     * 请求权限返回结果
-     *
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PermissionChecker.PERMISSION_REQUEST_CODE:
-                //权限获取成功
-                if (!permissionChecker.hasAllPermissionsGranted(grantResults)) {
-                    //权限获取失败
-                    permissionChecker.showDialog();
-                }
-                break;
-        }
-    }
 }

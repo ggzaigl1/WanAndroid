@@ -1,5 +1,6 @@
 package com.example.gab.babylove;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
@@ -48,6 +49,10 @@ import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.ggz.baselibrary.application.BaseApp;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.base.ViewHolder;
+import com.ggz.baselibrary.base.dialog.CommonDialog;
+import com.ggz.baselibrary.base.dialog.DialogConvertListener;
+import com.ggz.baselibrary.base.dialog.NiceDialog;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
@@ -56,6 +61,7 @@ import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.SystemUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
+import com.ggz.baselibrary.utils.permission.PermissionChecker;
 
 import butterknife.BindView;
 
@@ -88,6 +94,12 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     public TextView nev_header_tv_login;
     public TextView nev_header_tv_title;
 
+    protected PermissionChecker permissionChecker;
+    protected static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @Override
     public boolean isShowHeadView() {
         return false;
@@ -111,6 +123,35 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         mNewsFragment = new NewsFragment();
         mNavigationViewFragment = new NavigationViewFragment();
         mStarFragment = new StarFragment();
+
+        permissionChecker = new PermissionChecker(this);
+        permissionChecker.setTitle(getString(R.string.check_info_title));
+        permissionChecker.setMessage(getString(R.string.check_info_message));
+
+        /**
+         *  该权限只能在activity里面回调成功,fragment 无法走回调
+         *  首先判断是否有需要的权限,没有就检查需要的权限,申请权限
+         */
+        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+            NiceDialog.init()
+                    .setLayoutId(R.layout.dialog_permission)
+                    .setDialogConvertListener(new DialogConvertListener() {
+                        @Override
+                        protected void convertView(ViewHolder holder, CommonDialog dialog) {
+                            holder.setOnClickListener(R.id.positiveButton, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onPermission();
+                                    dialog.dismiss(false);
+                                }
+                            });
+                        }
+                    })
+                    .setWidthPixels(30)
+                    .setWidthPercent(CommonDialog.WidthPercent)
+                    .show(mFragmentManager);
+        }
+
 
         initBottomNavigation();
         switchContent(mHomeFragment);
@@ -171,6 +212,16 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         nev_header_tv_title.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
         nev_header_tv_login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
 
+
+    }
+
+    /**
+     * 检查权限
+     */
+    private void onPermission() {
+        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+            permissionChecker.requestPermissions();
+        }
     }
 
     /**
@@ -342,6 +393,26 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         return true;
     }
 
+    /**
+     * 请求权限返回结果
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PermissionChecker.PERMISSION_REQUEST_CODE:
+                //权限获取成功
+                if (!permissionChecker.hasAllPermissionsGranted(grantResults)) {
+                    //权限获取失败
+                    permissionChecker.showDialog();
+                }
+                break;
+        }
+    }
+
     @Override
     public void onBackPressed() {
         if (mDrawer.isDrawerOpen(GravityCompat.START)) {
@@ -350,6 +421,7 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
             super.onBackPressed();
         }
     }
+
 
     //退出程序
     @Override
