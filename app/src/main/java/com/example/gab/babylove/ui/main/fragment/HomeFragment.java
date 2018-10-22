@@ -8,10 +8,10 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
@@ -23,6 +23,10 @@ import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
+import com.ggz.baselibrary.base.ViewHolder;
+import com.ggz.baselibrary.base.dialog.CommonDialog;
+import com.ggz.baselibrary.base.dialog.DialogConvertListener;
+import com.ggz.baselibrary.base.dialog.NiceDialog;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -318,10 +322,30 @@ public class HomeFragment extends BaseFragment {
         if (null != bannerView) {
             bannerView.startTurning(2000);//开始翻页
         }
+
         if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            new MaterialDialog.Builder(getActivity()).title(R.string.require_acquisition)
-                    .content(R.string.default_always_message)
-                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
+            NiceDialog.init()
+                    .setLayoutId(R.layout.dialog_permission)
+                    .setDialogConvertListener(new DialogConvertListener() {
+                        @Override
+                        protected void convertView(ViewHolder holder, CommonDialog dialog) {
+                            holder.setOnClickListener(R.id.positiveButton, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onPermission();
+                                    dialog.dismiss(false);
+                                }
+                            });
+                        }
+                    })
+                    .setWidthPixels(30)
+                    .setWidthPercent(CommonDialog.WidthPercent)
+                    .show(getFragmentManager());
+
+//            new MaterialDialog.Builder(getActivity()).title(R.string.require_acquisition)
+//                    .cancelable(false)
+//                    .content(R.string.default_always_message)
+//                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
         }
     }
 
@@ -360,13 +384,10 @@ public class HomeFragment extends BaseFragment {
         switch (requestCode) {
             case PermissionChecker.PERMISSION_REQUEST_CODE:
                 //权限获取成功
-                if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
-                } else {
+                if (!permissionChecker.hasAllPermissionsGranted(grantResults)) {
                     //权限获取失败
                     permissionChecker.showDialog();
                 }
-                break;
-            default:
                 break;
         }
     }

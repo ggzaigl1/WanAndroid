@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 
 import com.ggz.baselibrary.base.ViewHolder;
 
+
 /**
  * 完善 没有扩展需求情况下 使用父类创建dialog 不够优雅的问题
  * Created by fangs on 2018/3/21.

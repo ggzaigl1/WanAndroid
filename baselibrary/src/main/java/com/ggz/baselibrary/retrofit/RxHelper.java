@@ -4,8 +4,10 @@ package com.ggz.baselibrary.retrofit;
 import com.ggz.baselibrary.utils.LogUtils;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -22,11 +24,14 @@ public class RxHelper {
     public static <T> ObservableTransformer<BeanModule<T>, T> handleResult() {
 
         return upstream -> {
-            return upstream.flatMap(tBeanModule -> {
-                if (tBeanModule.isSuccess()) {
-                    return createData(tBeanModule.getData());
-                } else {
-                    return Observable.error(new ServerException(tBeanModule.getErrorMsg(), tBeanModule.getErrorCode()));
+            return upstream.flatMap(new Function<BeanModule<T>, ObservableSource<? extends T>>() {
+                @Override
+                public ObservableSource<? extends T> apply(BeanModule<T> beanModule) throws Exception {
+                    if (beanModule.isSuccess()) {
+                        return createData(beanModule.getData());
+                    } else {
+                        return Observable.error(new ServerException(beanModule.getErrorMsg(), beanModule.getErrorCode()));
+                    }
                 }
             })
                     .subscribeOn(Schedulers.io())//指定的是上游发送事件的线程

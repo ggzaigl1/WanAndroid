@@ -1,5 +1,6 @@
 package com.ggz.baselibrary.base.dialog;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -19,19 +20,27 @@ import com.ggz.baselibrary.R;
 import com.ggz.baselibrary.base.PopupDismissListner;
 import com.ggz.baselibrary.base.ViewHolder;
 import com.ggz.baselibrary.utils.DensityUtils;
-import com.ggz.baselibrary.utils.LogUtils;
+import com.ggz.baselibrary.utils.L;
+import com.ggz.baselibrary.utils.ScreenUtils;
+
 
 /**
  * 应用 所有dialog 的父类
  * Created by fangs on 2017/3/13.
  */
 public abstract class CommonDialog extends DialogFragment {
+    /**
+     * 统一 弹窗宽度占屏幕百分比
+     */
+    public static final int WidthPercent =85;
 
+    private static final String WIDTHPERCENT = "widthPercent";
     private static final String WIDTH = "width";
     private static final String HEIGHT = "height";
     private static final String DIM = "dim_amount";
     private static final String GRAVITY = "show_gravity";
     private static final String CANCEL = "out_cancel";
+    private static final String IS_KEY_BACK = "KEY_BACK";
     private static final String ANIM = "anim_style";
     private static final String LAYOUT = "layout_id";
 
@@ -46,6 +55,8 @@ public abstract class CommonDialog extends DialogFragment {
     @LayoutRes
     protected int layoutId;
 
+    /** 是否拦截返回按钮 */
+    protected boolean isKeyBack = false;
     /** 点击window外的区域 是否消失 */
     protected boolean isHide = false;
     /** 灰度深浅 */
@@ -55,6 +66,8 @@ public abstract class CommonDialog extends DialogFragment {
     protected int width = -2;
     /** 高度 -1：撑满 -2：自适应 其他固定数值 */
     protected int height = -2;
+    /** 宽度 百分比（如：屏幕宽度 的 50%）*/
+    protected int widthPercent = -1;
 
 
     static {
@@ -76,11 +89,13 @@ public abstract class CommonDialog extends DialogFragment {
 
         //恢复保存的数据
         if (null != savedInstanceState) {
+            widthPercent = savedInstanceState.getInt(WIDTHPERCENT);
             width = savedInstanceState.getInt(WIDTH);
             height = savedInstanceState.getInt(HEIGHT);
             dimAmount = savedInstanceState.getFloat(DIM);
             gravity = savedInstanceState.getInt(GRAVITY);
             isHide = savedInstanceState.getBoolean(CANCEL);
+            isKeyBack = savedInstanceState.getBoolean(IS_KEY_BACK);
             anim = savedInstanceState.getInt(ANIM);
             layoutId = savedInstanceState.getInt(LAYOUT);
         }
@@ -107,7 +122,7 @@ public abstract class CommonDialog extends DialogFragment {
         super.onStart();
         initParams();
 
-        setOnKeyListener();
+        if (isKeyBack)setOnKeyListener();
     }
 
     /**
@@ -119,11 +134,14 @@ public abstract class CommonDialog extends DialogFragment {
             // 使用ViewGroup.LayoutParams，以便Dialog 宽度或高度充满整个屏幕
             WindowManager.LayoutParams params = window.getAttributes();
 
-            params.width = width > 0 ? DensityUtils.dp2px(getContext(), width) : width;
-            params.height = height > 0 ? DensityUtils.dp2px(getContext(), height) : height;
+            if (widthPercent > 0){
+                params.width = ScreenUtils.getScreenWidth(getContext()) * widthPercent / 100;
+            } else {
+                params.width = width > 0 ? DensityUtils.dp2px(getContext(),width) : width;
+            }
+            params.height = height > 0 ? DensityUtils.dp2px(getContext(),height) : height;
 
             params.dimAmount = dimAmount;//调节灰色背景透明度[0-1]，默认0.5f
-
             window.setGravity(gravity);  //设置dialog显示的位置
             window.setWindowAnimations(anim);  //添加动画
 
@@ -141,11 +159,13 @@ public abstract class CommonDialog extends DialogFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putInt(WIDTHPERCENT, widthPercent);
         outState.putInt(WIDTH, width);
         outState.putInt(HEIGHT, height);
         outState.putFloat(DIM, dimAmount);
         outState.putInt(GRAVITY, gravity);
         outState.putBoolean(CANCEL, isHide);
+        outState.putBoolean(IS_KEY_BACK, isKeyBack);
         outState.putInt(ANIM, anim);
         outState.putInt(LAYOUT, layoutId);
     }
@@ -170,11 +190,31 @@ public abstract class CommonDialog extends DialogFragment {
     }
 
     /**
+     * 设置 是否拦截返回按钮
+     * @param keyBack
+     * @return
+     */
+    public CommonDialog setKeyBack(boolean keyBack) {
+        this.isKeyBack = keyBack;
+        return this;
+    }
+
+    /**
      * 点击window外的区域 是否消失
      * @param hide
      */
     public CommonDialog setHide(boolean hide) {
         isHide = hide;
+        return this;
+    }
+
+    /**
+     * 设置 弹窗宽度占屏幕百分比
+     * @param widthPercent
+     * @return
+     */
+    public CommonDialog setWidthPercent(int widthPercent) {
+        this.widthPercent = widthPercent;
         return this;
     }
 
@@ -233,25 +273,24 @@ public abstract class CommonDialog extends DialogFragment {
      * @param isDismiss 是否拦截关闭对话框 命令
      */
     public void dismiss(boolean isDismiss) {
-        if (isDismiss) {
-            return;
-        }
+        if (isDismiss) return;
 
         super.dismiss();
-        if (null != dialogList) {
-            dialogList.onDismiss();
-        }
+        if (null != dialogList)dialogList.onDismiss();
     }
 
 
     protected void setOnKeyListener() {
-        this.getDialog().setOnKeyListener((dialog, keyCode, event) -> {
-            LogUtils.v("dialog onkey", "按下返回键");
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                dismiss(false);
-                return true;
+        this.getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                L.v("dialog onkey", "按下返回键");
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    dismiss(false);
+                    return true;
+                }
+                return false;
             }
-            return false;
         });
     }
 }
