@@ -60,10 +60,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:counterEnabled="true"
-                        app:counterOverflowTextAppearance="@style/MyStyle"
+                        app:counterOverflowTextAppearance="@style/LoginStyle"
                         app:counterMaxLength="11"
                         app:errorEnabled="true"
-                        app:errorTextAppearance="@style/MyStyle"
+                        app:errorTextAppearance="@style/LoginStyle"
                         >
 
                     <android.support.design.widget.TextInputEditText
@@ -96,10 +96,10 @@
                         android:hint="@string/login_password"
                         android:gravity="center_vertical"
                         app:counterEnabled="true"
-                        app:counterOverflowTextAppearance="@style/MyStyle"
+                        app:counterOverflowTextAppearance="@style/LoginStyle"
                         app:counterMaxLength="11"
                         app:errorEnabled="true"
-                        app:errorTextAppearance="@style/MyStyle"
+                        app:errorTextAppearance="@style/LoginStyle"
                         app:passwordToggleEnabled="true"
                         >
 

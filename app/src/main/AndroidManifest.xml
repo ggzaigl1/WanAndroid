@@ -167,7 +167,7 @@
         <activity
                 android:name="com.example.gab.babylove.ui.main.activity.OrnamentalContextActivity"
                 android:label="@string/ornamental"
-                android:theme="@style/TranslucentTheme"
+                android:theme="@style/FullTheme"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity
@@ -195,11 +195,7 @@
                     android:value="true">
             </meta-data>
         </activity>
-        <!-- 权限相关 -->
-        <activity
-                android:name="com.ggz.baselibrary.utils.PermissionActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/NoTitleTranslucentTheme"/>
+
         <!-- SurfaceView+MediaPlayer 自定义播放器 -->
         <activity
                 android:name="com.example.gab.babylove.widget.SurfaceActivity"
