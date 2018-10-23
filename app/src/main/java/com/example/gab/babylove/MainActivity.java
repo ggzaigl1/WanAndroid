@@ -367,8 +367,6 @@ public class MainActivity extends BaseActivity implements IBaseActivity, BottomN
             case R.id.nav_about:
                 //关于我们
                 JumpUtils.jump(this, AboutActivity.class, null);
-//                JumpUtils.jump(this, CameraActivity.class, null);
-//                JumpUtils.jump(this, MyThreadActivity.class, null);
                 break;
             case R.id.nav_share:
 //                AndroidShareUtils.shareWeChatFriend(this, "wanandroid", "https://www.pgyer.com/6osT", AndroidShareUtils.TEXT, null);
