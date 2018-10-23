@@ -4,9 +4,12 @@ package com.ggz.baselibrary.retrofit;
 import com.ggz.baselibrary.utils.LogUtils;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -49,14 +52,17 @@ public class RxHelper {
      * @return
      */
     private static <T> Observable<T> createData(final T data) {
-        return Observable.create(subscriber -> {
-            try {
-                LogUtils.e("net", "成功 _ onNext");
-                subscriber.onNext(data);
-                subscriber.onComplete();
-            } catch (Exception e) {
-                LogUtils.e("net", "异常 _ onError");
-                subscriber.onError(e);
+        return Observable.create(new ObservableOnSubscribe<T>() {
+            @Override
+            public void subscribe(ObservableEmitter<T> subscriber) throws Exception {
+                try {
+                    LogUtils.e("net", "成功 _ onNext");
+                    subscriber.onNext(data);
+                    subscriber.onComplete();
+                } catch (Exception e) {
+                    LogUtils.e("net", "异常 _ onError");
+                    subscriber.onError(e);
+                }
             }
         });
     }

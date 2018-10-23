@@ -1,6 +1,5 @@
 package com.example.gab.babylove;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
@@ -16,7 +15,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +28,7 @@ import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.activity.AboutActivity;
 import com.example.gab.babylove.ui.main.activity.BelleActivity;
 import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
@@ -70,7 +69,7 @@ import butterknife.BindView;
  *
  * @author 55204
  */
-public class MainActivity extends AppCompatActivity implements IBaseActivity, BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements IBaseActivity, BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.fl_content)
     FrameLayout mFlContent;
@@ -94,11 +93,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
     public TextView nev_header_tv_login;
     public TextView nev_header_tv_title;
 
-    protected PermissionChecker permissionChecker;
-    protected static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
 
     @Override
     public boolean isShowHeadView() {
@@ -151,6 +145,12 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
                     .setWidthPercent(CommonDialog.WidthPercent)
                     .show(mFragmentManager);
         }
+//        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+//            new MaterialDialog.Builder(this).title(R.string.require_acquisition)
+//                    .cancelable(false)
+//                    .content(R.string.check_info_message)
+//                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
+//        }
 
 
         initBottomNavigation();
@@ -205,6 +205,33 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
 
     }
 
+    /**
+     * 当拒绝跳转设置页面 返回到当前activity 生命周期走onRestart方法
+     */
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+            NiceDialog.init()
+                    .setLayoutId(R.layout.dialog_permission)
+                    .setDialogConvertListener(new DialogConvertListener() {
+                        @Override
+                        protected void convertView(ViewHolder holder, CommonDialog dialog) {
+                            holder.setOnClickListener(R.id.positiveButton, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onPermission();
+                                    dialog.dismiss(false);
+                                }
+                            });
+                        }
+                    })
+                    .setWidthPixels(30)
+                    .setWidthPercent(CommonDialog.WidthPercent)
+                    .show(mFragmentManager);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -212,17 +239,8 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         nev_header_tv_title.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
         nev_header_tv_login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
 
-
     }
 
-    /**
-     * 检查权限
-     */
-    private void onPermission() {
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            permissionChecker.requestPermissions();
-        }
-    }
 
     /**
      * 设置底部导航栏
@@ -393,25 +411,6 @@ public class MainActivity extends AppCompatActivity implements IBaseActivity, Bo
         return true;
     }
 
-    /**
-     * 请求权限返回结果
-     *
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case PermissionChecker.PERMISSION_REQUEST_CODE:
-                //权限获取成功
-                if (!permissionChecker.hasAllPermissionsGranted(grantResults)) {
-                    //权限获取失败
-                    permissionChecker.showDialog();
-                }
-                break;
-        }
-    }
 
     @Override
     public void onBackPressed() {

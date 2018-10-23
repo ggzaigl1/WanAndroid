@@ -306,14 +306,6 @@ public class HomeFragment extends BaseFragment {
         if (null != bannerView) {
             bannerView.startTurning(2000);//开始翻页
         }
-
-//        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-//            new MaterialDialog.Builder(getActivity()).title(R.string.require_acquisition)
-//                    .cancelable(false)
-//                    .content(R.string.default_always_message)
-//                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
-//        }
-
     }
 
     @Override
