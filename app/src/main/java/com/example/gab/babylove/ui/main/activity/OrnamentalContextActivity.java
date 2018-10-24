@@ -75,10 +75,10 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
 
     @Override
     public void setStatusBar(Activity activity) {
-        MdStatusBar.statusAlpha = 0;
-        MdStatusBar.navAlpha = 0;
+//        MdStatusBar.statusAlpha = 0;
+//        MdStatusBar.navAlpha = 0;
         MdStatusBar.setColorBar(activity, R.color.transparent, R.color.statusBar);
-        StatusBarContentColor.setStatusTextColor(this, true, true);
+//        StatusBarContentColor.setStatusTextColor(this, true, true);
     }
 
     @Override
@@ -115,7 +115,8 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
                                 mTvDo.setText(getString(R.string.training_action));
                                 if (mCollapsingToolbarLayout != null) {
                                     //设置隐藏图片时候ToolBar的颜色
-                                    mCollapsingToolbarLayout.setContentScrimColor(ResourceUtils.getRandomColor());
+//                                    mCollapsingToolbarLayout.setContentScrimColor(ResourceUtils.getRandomColor());
+                                    mCollapsingToolbarLayout.setContentScrimColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
                                     //设置工具栏标题
                                     mCollapsingToolbarLayout.setTitle(courseDetails.getData().getTitle());
                                 }
