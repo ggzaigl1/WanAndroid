@@ -10,8 +10,7 @@
             android:id="@+id/imgHead"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:scaleType="fitXY"
-            android:contentDescription="TODO"
+            android:scaleType="centerCrop"
             tools:ignore="ContentDescription"/>
 
     <RelativeLayout
@@ -24,7 +23,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="18dp"
-                android:text="课程名称"
                 android:textColor="@color/white"
                 android:layout_above="@+id/ll_star"
                 android:textSize="@dimen/textSize_medium_small"/>
@@ -64,11 +62,10 @@
         </LinearLayout>
 
         <TextView
-                android:id="@+id/tv_joinnum"
+                android:id="@+id/tv_Join_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
-                android:text="1818人参加:"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/white"

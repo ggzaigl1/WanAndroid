@@ -17,13 +17,11 @@ import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.OrnamentalListBean;
 import com.example.gab.babylove.ui.main.adapter.OrnamentalContextAdapter;
+import com.ggz.baselibrary.statusbar.StatusBarUtil;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
-import com.ggz.baselibrary.statusbar.StatusBarContentColor;
 import com.ggz.baselibrary.utils.JumpUtils;
-import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -75,6 +73,7 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
 
     @Override
     public void setStatusBar(Activity activity) {
+        StatusBarUtil.setStatusBarTranslucent(this, true);
 //        MdStatusBar.setColorBar(activity, R.color.transparent, R.color.statusBar);
 //        StatusBarContentColor.setStatusTextColor(this, true, true);
     }
@@ -103,21 +102,21 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
                     @Override
                     protected void onSuccess(CourseDetails courseDetails) {
                         if (courseDetails.getResult() == 1) {
-                                mKProgressHUD.dismiss();
-                                mTvTitle.setText(courseDetails.getData().getTitle());
-                                mTvContext.setText(courseDetails.getData().getSubTitle());
-                                tv_announcements.setText(courseDetails.getData().getNotes());
-                                ImgLoadUtils.loadImage(getApplicationContext(), courseDetails.getData().getPic(), mClubDetailsBg);
-                                mAdapter.setNewData(courseDetails.getData().getGroups().get(0).getActions());
-                                mTvPoint.setText(getString(R.string.announcements));
-                                mTvDo.setText(getString(R.string.training_action));
-                                if (mCollapsingToolbarLayout != null) {
-                                    //设置隐藏图片时候ToolBar的颜色
+                            mKProgressHUD.dismiss();
+                            mTvTitle.setText(courseDetails.getData().getTitle());
+                            mTvContext.setText(courseDetails.getData().getSubTitle());
+                            tv_announcements.setText(courseDetails.getData().getNotes());
+                            ImgLoadUtils.loadImage(getApplicationContext(), courseDetails.getData().getPic(), mClubDetailsBg);
+                            mAdapter.setNewData(courseDetails.getData().getGroups().get(0).getActions());
+                            mTvPoint.setText(getString(R.string.announcements));
+                            mTvDo.setText(getString(R.string.training_action));
+                            if (mCollapsingToolbarLayout != null) {
+                                //设置隐藏图片时候ToolBar的颜色
 //                                    mCollapsingToolbarLayout.setContentScrimColor(ResourceUtils.getRandomColor());
-                                    mCollapsingToolbarLayout.setContentScrimColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
-                                    //设置工具栏标题
-                                    mCollapsingToolbarLayout.setTitle(courseDetails.getData().getTitle());
-                                }
+                                mCollapsingToolbarLayout.setContentScrimColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
+                                //设置工具栏标题
+                                mCollapsingToolbarLayout.setTitle(courseDetails.getData().getTitle());
+                            }
                         }
                     }
 
