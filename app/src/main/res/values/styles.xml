@@ -87,10 +87,19 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
-    <!--CollapsingToolbarLayout 主题设置-->
-    <style name="FullTheme" parent="AppTheme">
+    <!--健康运动 CollapsingToolbarLayout 主题设置-->
+    <style name="OrnamentalThemes" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryDark</item> <!--浅蓝色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item> <!--深蓝色-->
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="OrnamentalTheme" parent="OrnamentalThemes">
         <item name="android:windowNoTitle">true</item>
         <!--<item name="android:windowFullscreen">true</item>-->
     </style>
+
 
 </resources>

@@ -75,9 +75,7 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
 
     @Override
     public void setStatusBar(Activity activity) {
-//        MdStatusBar.statusAlpha = 0;
-//        MdStatusBar.navAlpha = 0;
-        MdStatusBar.setColorBar(activity, R.color.transparent, R.color.statusBar);
+//        MdStatusBar.setColorBar(activity, R.color.transparent, R.color.statusBar);
 //        StatusBarContentColor.setStatusTextColor(this, true, true);
     }
 

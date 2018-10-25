@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          android:versionCode="6"
-          android:versionName="1.2.9"
 
           package="com.example.gab.babylove"
           tools:ignore="GradleOverrides">
@@ -167,7 +165,7 @@
         <activity
                 android:name="com.example.gab.babylove.ui.main.activity.OrnamentalContextActivity"
                 android:label="@string/ornamental"
-                android:theme="@style/FullTheme"
+                android:theme="@style/OrnamentalTheme"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity
