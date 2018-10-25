@@ -12,7 +12,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.UpDateBean;
 import com.example.gab.babylove.utils.CustomDialog;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -40,7 +40,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by 初夏小溪 on 2018/5/28 0028.
  */
-public class UpdateActivity extends AppCompatActivity implements IBaseActivity {
+public class UpdateActivity extends BaseActivity implements IBaseActivity {
 
     private ProgressDialog pBar;
     private int fileSize, sumSize;

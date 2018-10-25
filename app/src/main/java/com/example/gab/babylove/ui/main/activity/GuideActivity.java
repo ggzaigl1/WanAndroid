@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.adapter.GuideAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.ggz.baselibrary.utils.JumpUtils;
@@ -28,7 +29,7 @@ import com.ggz.baselibrary.utils.JumpUtils;
  * 引导图
  */
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends BaseActivity {
 
     private ImageView[] imgViews;
     private Boolean exit = false;
@@ -38,7 +39,7 @@ public class GuideActivity extends AppCompatActivity {
     private PackageManager mPackageManager;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(null);

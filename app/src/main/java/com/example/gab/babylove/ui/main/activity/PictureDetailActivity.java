@@ -4,11 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.ui.main.adapter.PhotoAdapter;
 import com.example.gab.babylove.view.PhotoViewPager;
@@ -23,7 +23,7 @@ import butterknife.BindView;
  * 描述：图片详情页
  */
 
-public class PictureDetailActivity extends AppCompatActivity implements IBaseActivity {
+public class PictureDetailActivity extends BaseActivity implements IBaseActivity {
 
     private int mCurrentPosition;
     @BindView(R.id.view_page)

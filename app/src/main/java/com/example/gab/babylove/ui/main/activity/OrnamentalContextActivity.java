@@ -113,7 +113,7 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
                             if (mCollapsingToolbarLayout != null) {
                                 //设置隐藏图片时候ToolBar的颜色
 //                                    mCollapsingToolbarLayout.setContentScrimColor(ResourceUtils.getRandomColor());
-                                mCollapsingToolbarLayout.setContentScrimColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
+                                mCollapsingToolbarLayout.setContentScrimColor(getApplicationContext().getResources().getColor(R.color.colorPrimaryDark));
                                 //设置工具栏标题
                                 mCollapsingToolbarLayout.setTitle(courseDetails.getData().getTitle());
                             }

@@ -118,41 +118,6 @@ public class MainActivity extends BaseActivity implements IBaseActivity, BottomN
         mNavigationViewFragment = new NavigationViewFragment();
         mStarFragment = new StarFragment();
 
-        permissionChecker = new PermissionChecker(this);
-        permissionChecker.setTitle(getString(R.string.check_info_title));
-        permissionChecker.setMessage(getString(R.string.check_info_message));
-
-        /**
-         *  该权限只能在activity里面回调成功,fragment 无法走回调
-         *  首先判断是否有需要的权限,没有就检查需要的权限,申请权限
-         */
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            NiceDialog.init()
-                    .setLayoutId(R.layout.dialog_permission)
-                    .setDialogConvertListener(new DialogConvertListener() {
-                        @Override
-                        protected void convertView(ViewHolder holder, CommonDialog dialog) {
-                            holder.setOnClickListener(R.id.positiveButton, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    onPermission();
-                                    dialog.dismiss(false);
-                                }
-                            });
-                        }
-                    })
-                    .setWidthPixels(30)
-                    .setWidthPercent(CommonDialog.WidthPercent)
-                    .show(mFragmentManager);
-        }
-//        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-//            new MaterialDialog.Builder(this).title(R.string.require_acquisition)
-//                    .cancelable(false)
-//                    .content(R.string.check_info_message)
-//                    .positiveText(R.string.next).onPositive((dialog, which) -> onPermission()).show();
-//        }
-
-
         initBottomNavigation();
         switchContent(mHomeFragment);
         setSupportActionBar(mToolbar);
@@ -205,32 +170,6 @@ public class MainActivity extends BaseActivity implements IBaseActivity, BottomN
 
     }
 
-    /**
-     * 当拒绝跳转设置页面 返回到当前activity 生命周期走onRestart方法
-     */
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            NiceDialog.init()
-                    .setLayoutId(R.layout.dialog_permission)
-                    .setDialogConvertListener(new DialogConvertListener() {
-                        @Override
-                        protected void convertView(ViewHolder holder, CommonDialog dialog) {
-                            holder.setOnClickListener(R.id.positiveButton, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    onPermission();
-                                    dialog.dismiss(false);
-                                }
-                            });
-                        }
-                    })
-                    .setWidthPixels(30)
-                    .setWidthPercent(CommonDialog.WidthPercent)
-                    .show(mFragmentManager);
-        }
-    }
 
     @Override
     protected void onResume() {
@@ -240,7 +179,6 @@ public class MainActivity extends BaseActivity implements IBaseActivity, BottomN
         nev_header_tv_login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
 
     }
-
 
     /**
      * 设置底部导航栏

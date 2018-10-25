@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.widget.fingerprintcore.FingerprintCore;
 import com.example.gab.babylove.widget.fingerprintcore.KeyguardLockScreenManager;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -22,7 +23,7 @@ import butterknife.OnClick;
 /**
  * 指紋相关工具类
  */
-public class FingerprintMainActivity extends AppCompatActivity implements IBaseActivity {
+public class FingerprintMainActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.fingerprint_guide)
     ImageView mFingerprintGuide;

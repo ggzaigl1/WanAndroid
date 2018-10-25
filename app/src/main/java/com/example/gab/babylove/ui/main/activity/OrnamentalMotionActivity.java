@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.OrnamentalListBean;
 import com.example.gab.babylove.ui.main.adapter.OrnamentalMotionAdapter;
@@ -38,7 +39,7 @@ import butterknife.OnClick;
 /**
  * 运动课程 使用 SurfaceView+MediaPlayer 自定义播放器
  */
-public class OrnamentalMotionActivity extends AppCompatActivity implements IBaseActivity, SurfaceHolder.Callback, View.OnClickListener, MediaPlayer.OnCompletionListener,
+public class OrnamentalMotionActivity extends BaseActivity implements IBaseActivity, SurfaceHolder.Callback, View.OnClickListener, MediaPlayer.OnCompletionListener,
         MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnSeekCompleteListener {
 
     SurfaceHolder mHolder;

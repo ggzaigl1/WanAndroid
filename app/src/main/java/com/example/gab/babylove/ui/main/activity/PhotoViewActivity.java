@@ -2,10 +2,10 @@ package com.example.gab.babylove.ui.main.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -19,7 +19,7 @@ import butterknife.OnClick;
  * PhotoView
  */
 
-public class PhotoViewActivity extends AppCompatActivity implements IBaseActivity {
+public class PhotoViewActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.mPhotoView)
     PhotoView mPhotoView;

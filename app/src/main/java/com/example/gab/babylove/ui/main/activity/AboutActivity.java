@@ -24,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.widget.interpolator.ElasticOutInterpolator;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.utils.ResourceUtils;
@@ -41,7 +42,7 @@ import butterknife.BindView;
  * 关于
  * Created by fangs on 2018/4/8.
  */
-public class AboutActivity extends AppCompatActivity implements IBaseActivity {
+public class AboutActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.tvAbout)
     TextView tvAbout;
