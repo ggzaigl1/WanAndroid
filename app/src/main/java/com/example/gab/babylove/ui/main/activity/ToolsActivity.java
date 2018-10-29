@@ -146,9 +146,9 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
 //        cn.goapk.market 安智市场
 
         //判断应用市场是否存在
-        if (Util.isAvilible(this, "com.xiaomi.market")) {
+        if (Util.isAvilible(this, "com.tencent.android.qqdownloader")) {
             //存在进入应用市场
-            Util.launchAppDetail(this, "com.example.gab.babylove", "com.xiaomi.market");
+            Util.launchAppDetail(this, "com.example.gab.babylove", "com.tencent.android.qqdownloader");
         } else {
             //不存在提示用户安装应用市场
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -364,6 +364,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
      * 2、然后添加flags，表明我们要被授予什么样的临时权限
      * 3、以前我们直接 Uri.fromFile(apkFile)构建出一个Uri,现在我们使用FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileProvider", apkFile);
      * 4、BuildConfig.APPLICATION_ID直接是应用的包名
+     * 5、Android O 需要添加 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/> 权限
      *
      * @param activity
      */
