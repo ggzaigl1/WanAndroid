@@ -77,16 +77,6 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
         getCourseDetails(mCurPage);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     /**
      * 获取数据
      * @param mCurPage

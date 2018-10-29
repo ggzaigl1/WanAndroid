@@ -186,7 +186,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("wxarticle/chapters/json")
-    Observable<List<OfficialAccountBean>> getChapters();
+    Observable<BeanModule<List<OfficialAccountBean>>> getChapters();
 
     /**
      * 查看某个公众号历史数据

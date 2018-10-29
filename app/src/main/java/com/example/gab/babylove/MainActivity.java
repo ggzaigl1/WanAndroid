@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -18,6 +19,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +28,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.base.BaseActivity;
@@ -47,20 +51,19 @@ import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.ggz.baselibrary.application.BaseApp;
-import com.ggz.baselibrary.application.IBaseActivity;
-import com.ggz.baselibrary.base.ViewHolder;
-import com.ggz.baselibrary.base.dialog.CommonDialog;
-import com.ggz.baselibrary.base.dialog.DialogConvertListener;
-import com.ggz.baselibrary.base.dialog.NiceDialog;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.SystemUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
-import com.ggz.baselibrary.utils.permission.PermissionChecker;
+import com.pgyersdk.update.DownloadFileListener;
+import com.pgyersdk.update.PgyUpdateManager;
+import com.pgyersdk.update.UpdateManagerListener;
+import com.pgyersdk.update.javabean.AppBean;
 
 import butterknife.BindView;
 
@@ -69,7 +72,7 @@ import butterknife.BindView;
  *
  * @author 55204
  */
-public class MainActivity extends BaseActivity implements IBaseActivity, BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements  BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.fl_content)
     FrameLayout mFlContent;
@@ -111,6 +114,8 @@ public class MainActivity extends BaseActivity implements IBaseActivity, BottomN
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+//        StatusUtil.initStatusView(this);
+//        getUpdate();
         mFragmentManager = getSupportFragmentManager();
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
@@ -159,25 +164,75 @@ public class MainActivity extends BaseActivity implements IBaseActivity, BottomN
         });
     }
 
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
-
     @Override
     protected void onResume() {
         super.onResume();
         boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
         nev_header_tv_title.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
         nev_header_tv_login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
+    }
 
+    private void getUpdate() {
+        new PgyUpdateManager.Builder()
+                .setForced(true)                //设置是否强制更新,非自定义回调更新接口此方法有用
+                .setUserCanRetry(false)         //失败后是否提示重新下载，非自定义下载 apk 回调此方法有用
+                .setDeleteHistroyApk(true)     // 检查更新前是否删除本地历史 Apk， 默认为true
+                .setUpdateManagerListener(new UpdateManagerListener() {
+                    @Override
+                    public void onNoUpdateAvailable() {
+                        //没有更新是回调此方法
+                        Log.d("pgyer", "没有新的版本");
+                    }
+
+                    @Override
+                    public void onUpdateAvailable(AppBean appBean) {
+                        //有更新回调此方法
+                        L.d("pgyer", "有新版本可以更新" + "new versionCode is " + appBean.getVersionCode());
+                        //调用以下方法，DownloadFileListener 才有效；
+                        //如果完全使用自己的下载方法，不需要设置DownloadFileListener
+                        new MaterialDialog.Builder(MainActivity.this)
+                                .title(R.string.system_title)
+                                .content("有新版本可以更新啦 " + appBean.getVersionName())
+                                .positiveText(R.string.ok).onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                PgyUpdateManager.downLoadApk(appBean.getDownloadURL());
+                            }
+                        }).negativeText(R.string.cancel).onNegative(null)
+                                .show();
+                    }
+
+                    @Override
+                    public void checkUpdateFailed(Exception e) {
+                        //更新检测失败回调
+                        //更新拒绝（应用被下架，过期，不在安装有效期，下载次数用尽）以及无网络情况会调用此接口
+                        Log.e("pgyer", "check update failed ", e);
+                    }
+                })
+                //注意 ：
+                //下载方法调用 PgyUpdateManager.downLoadApk(appBean.getDownloadURL()); 此回调才有效
+                //此方法是方便用户自己实现下载进度和状态的 UI 提供的回调
+                //想要使用蒲公英的默认下载进度的UI则不设置此方法
+                .setDownloadFileListener(new DownloadFileListener() {
+                    @Override
+                    public void downloadFailed() {
+                        //下载失败
+                        L.e("pgyer", "download apk failed");
+                    }
+
+                    @Override
+                    public void downloadSuccessful(Uri uri) {
+                        L.e("pgyer", "download apk failed");
+                        // 使用蒲公英提供的安装方法提示用户 安装apk
+                        PgyUpdateManager.installApk(uri);
+                    }
+
+                    @Override
+                    public void onProgressUpdate(Integer... integers) {
+                        L.e("pgyer", "update download apk progress" + integers);
+                    }
+                })
+                .register();
     }
 
     /**

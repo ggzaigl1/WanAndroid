@@ -22,6 +22,7 @@
                 android:paddingRight="20dp">
 
             <TextView
+                    android:id="@+id/tv_version"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -31,7 +32,7 @@
                     android:textSize="16sp"/>
 
             <TextView
-                    android:id="@+id/version"
+                    android:id="@+id/tv_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="修复已知问题"

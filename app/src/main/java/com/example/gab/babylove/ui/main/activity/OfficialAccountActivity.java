@@ -13,11 +13,13 @@ import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.OfficialAccountBean;
 import com.example.gab.babylove.ui.main.adapter.OfficialAccountAdapter;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,8 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout mRefreshLayout;
     OfficialAccountAdapter mAdapter;
 
     @Override
@@ -55,6 +59,8 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
     public void initData(Activity activity, Bundle savedInstanceState) {
         initRecyle();
         getChaptersList();
+        mRefreshLayout.setEnableLoadMore(false);
+        mRefreshLayout.setEnableRefresh(false);
     }
 
     @Override
@@ -77,18 +83,18 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
                 .getChapters()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<List<OfficialAccountBean>>() {
+                .subscribe(new NetCallBack<BeanModule<List<OfficialAccountBean>>>() {
                     @Override
-                    protected void onSuccess(List<OfficialAccountBean> officialAccountBeans) {
+                    protected void onSuccess(BeanModule<List<OfficialAccountBean>> officialAccountBeans) {
                         if (null != officialAccountBeans) {
-                            mAdapter.setNewData(officialAccountBeans);
+                            mAdapter.setNewData(officialAccountBeans.getData());
                             mKProgressHUD.dismiss();
                         }
                     }
 
                     @Override
                     protected void updataLayout(int flag) {
-
+                        mKProgressHUD.dismiss();
                     }
                 });
     }

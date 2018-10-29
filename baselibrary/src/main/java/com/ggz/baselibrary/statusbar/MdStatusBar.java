@@ -151,7 +151,7 @@ public class MdStatusBar {
      * @param applyNav apply NavigationBar
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    private void setHideBar(Activity act, boolean applyNav) {
+    public static void setHideBar(Activity act, boolean applyNav) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             View decorView = act.getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;

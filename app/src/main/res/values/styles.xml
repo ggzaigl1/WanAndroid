@@ -95,11 +95,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
     <style name="OrnamentalTheme" parent="OrnamentalThemes">
         <item name="android:windowNoTitle">true</item>
         <!--<item name="android:windowFullscreen">true</item>-->
     </style>
-
 
 </resources>

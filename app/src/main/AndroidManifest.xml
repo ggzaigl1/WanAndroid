@@ -26,11 +26,13 @@
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> <!-- 获取网络状态 -->
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!--Android8.0 安装 apk 需要添加权限-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 
     <uses-permission android:name="android.permission.GET_TASKS"/>
 
@@ -194,6 +196,24 @@
                     android:value="true">
             </meta-data>
         </activity>
+
+        <!-- 蒲公英配置-->
+        <provider
+                android:name="com.pgyersdk.PgyerProvider"
+                android:authorities="${applicationId}.com.pgyer.provider"
+                android:exported="false"/>
+        <meta-data
+                android:name="PGYER_APPID"
+                android:value="7755c220370c0b90a3a17fbfd3f09690">
+        </meta-data>
+
+        <!--适配屏幕-->
+        <meta-data
+                android:name="design_width_in_dp"
+                android:value="375"/>
+        <meta-data
+                android:name="design_height_in_dp"
+                android:value="667"/>
 
         <!-- SurfaceView+MediaPlayer 自定义播放器 -->
         <activity

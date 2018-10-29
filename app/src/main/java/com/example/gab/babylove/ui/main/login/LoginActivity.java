@@ -128,11 +128,6 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
-    @Override
-    public void reTry() {
-
-    }
-
     private void login() {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         String mUserName = editName.getText().toString().trim();//"ggzaigl1"
