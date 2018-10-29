@@ -3,15 +3,14 @@ package com.ggz.baselibrary.utils.permission;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.ggz.baselibrary.BuildConfig;
 import com.ggz.baselibrary.R;
 
@@ -21,7 +20,7 @@ import com.ggz.baselibrary.R;
 
 public class PermissionDialog {
 
-    private AlertDialog.Builder builder;
+    private MaterialDialog.Builder mBuilder;
     private Activity activity;
     private String title;
     private String message;
@@ -55,29 +54,24 @@ public class PermissionDialog {
     }
 
     public void init() {
-        builder = new AlertDialog.Builder(activity)
-                .setTitle(getTitle())
-                .setMessage(getMessage())
-                .setCancelable(false)
-                .setNegativeButton(activity.getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        activity.finish();
-//                        SystemUtils.ExitSystem();
-                    }
-                })
-                .setPositiveButton(activity.getString(R.string.check_info_setting), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        GetJumpStart(activity);
-                        dialog.dismiss();
-                    }
+        mBuilder = new MaterialDialog.Builder(activity)
+                .title(getTitle())
+                .cancelable(false)
+                .content(getMessage())
+                .positiveText(activity.getString(R.string.cancel))
+                .onPositive((dialog, which) -> {
+                    dialog.dismiss();
+                    activity.finish();
+                }).negativeText(activity.getString(R.string.check_info_setting))
+                .onNegative((dialog, which) -> {
+                    GetJumpStart(activity);
+                    dialog.dismiss();
                 });
+
     }
 
     public void show() {
-        builder.show();
+        mBuilder.show();
     }
 
     public boolean isEmpty(String src) {

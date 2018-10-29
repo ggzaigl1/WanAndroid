@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -62,18 +63,34 @@
             android:layout_height="8dp"
             android:background="@color/titleBarCon"/>
 
-    <TextView
-            android:id="@+id/tv_check_update"
-            android:layout_height="50dp"
+    <LinearLayout
             android:layout_width="match_parent"
-            android:background="?android:attr/selectableItemBackground"
-            android:gravity="center_vertical"
-            android:layout_marginStart="10dp"
-            android:drawableEnd="@drawable/vector_chevron_right_black"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="@dimen/textSize_medium_small"
-            android:text="@string/check_update"
-            />
+            android:layout_height="wrap_content"
+            tools:ignore="UseCompoundDrawables">
+
+        <TextView
+                android:id="@+id/tv_check_update"
+                android:layout_height="50dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/textSize_medium_small"
+                android:text="@string/check_update"
+                />
+
+        <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/vector_chevron_right_black"/>
+
+    </LinearLayout>
+
+
+
 
     <View
             android:layout_width="match_parent"

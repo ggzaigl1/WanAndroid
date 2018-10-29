@@ -18,18 +18,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.example.gab.babylove.utils.CustomDialog;
-import com.example.gab.babylove.utils.SelectorButtonActivity;
 import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
-import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.T;
 import com.pgyersdk.update.DownloadFileListener;
@@ -57,6 +55,8 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.tv_cache_size)
     TextView tv_cache_size;
+    @BindView(R.id.tv_check_update)
+    TextView tv_check_update;
     private static String DOWNLOAD_URL = "http://migmkt.qq.com/g/myapp/yyb-common.html?ADTAG=buy.bd.yyb01";//应用宝下载地址
 
     private ProgressDialog pBar;
@@ -66,18 +66,6 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
 
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new MyHandler(this);
-
-//    Handler mHandler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            int what = msg.what;
-//            if (what == 0) {
-//                //在主线程中需要执行的操作，一般是UI操作
-//                tv_cache_size.setText(R.string.zero_k);
-//            }
-//        }
-//    };
 
     @Override
     public boolean isShowHeadView() {
@@ -106,7 +94,6 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
-
     @OnClick({R.id.Ll_cache_clear, R.id.tv_praise, R.id.tv_check_update})
     @Override
     public void onClick(View view) {
@@ -118,7 +105,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                 break;
             //清除缓存
             case R.id.Ll_cache_clear:
-                GetCache(this);
+                GetCache();
                 break;
 //            //SelectorButton
             case R.id.tv_check_update:
@@ -132,19 +119,19 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
 
     /**
      * 清除缓存
-     *
-     * @param activity
      */
-    private void GetCache(Activity activity) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity)
-                .setTitle(R.string.system_title)
-                .setMessage(R.string.tools_clear_cache)
-                .setCancelable(false)
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> new Thread(() -> {
-                    CleanMessageUtil.clearAllCache(getApplicationContext());
-                    mHandler.sendEmptyMessage(0);
-                }).start()).setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
-        builder.show();
+    private void GetCache() {
+        new MaterialDialog.Builder(this)
+                .title(R.string.system_title)
+                .cancelable(false)
+                .content(R.string.tools_clear_cache)
+                .positiveText(R.string.ok).onPositive((dialog, which) -> new Thread(new Runnable() {
+            @Override
+            public void run() {
+                CleanMessageUtil.clearAllCache(ToolsActivity.this.getApplicationContext());
+                mHandler.sendEmptyMessage(0);
+            }
+        }).start()).negativeText(R.string.cancel).onNegative((dialog, which) -> dialog.dismiss()).show();
     }
 
     /**
@@ -195,7 +182,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                     @Override
                     public void onNoUpdateAvailable() {
                         //没有更新是回调此方法
-                        T.showShort("没有发现新的版本");
+                        T.showShort("当前是最新版本");
                     }
 
                     @Override
