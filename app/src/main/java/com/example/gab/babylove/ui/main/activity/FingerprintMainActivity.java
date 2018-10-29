@@ -77,11 +77,6 @@ public class FingerprintMainActivity extends BaseActivity implements IBaseActivi
         }
     }
 
-    @Override
-    public void reTry() {
-
-    }
-
     /**
      * 跳转到设置页面
      *

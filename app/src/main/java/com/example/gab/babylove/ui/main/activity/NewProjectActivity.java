@@ -66,16 +66,6 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
         getListProject(mPageNo);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     /**
      * 列表数据加载
      */

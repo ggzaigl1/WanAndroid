@@ -49,10 +49,10 @@ dependencies {
     //https://github.com/google/flexbox-layout
     implementation 'com.google.android:flexbox:0.3.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //轮播图
     implementation 'com.bigkoo:convenientbanner:2.0.5'
-    implementation 'cn.bingoogolapple:bga-update:1.0.2@aar'
-    implementation 'cn.bingoogolapple:bga-progressbar:1.0.0@aar'
     implementation 'com.bigkoo:alertview:1.0.3'
+
     implementation 'com.kaopiz:kprogresshud:1.1.0'
     implementation 'com.blankj:utilcode:1.19.0'
     implementation project(':baselibrary')

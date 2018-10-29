@@ -127,17 +127,6 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
                 });
     }
 
-
-    @OnClick({})
-    @Override
-    public void onClick(View view) {
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     /**
      * 训练课程列表
      */

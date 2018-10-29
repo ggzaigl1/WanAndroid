@@ -100,16 +100,6 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     //   搜索接口
     private void getQuery(int type, int pageNum, String queryKey) {
         if (type == 1) {

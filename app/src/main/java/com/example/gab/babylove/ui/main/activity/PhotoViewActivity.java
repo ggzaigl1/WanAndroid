@@ -49,15 +49,4 @@ public class PhotoViewActivity extends BaseActivity implements IBaseActivity {
 //        PhotoViewAttacher attacher = new PhotoViewAttacher(mPhotoView); //阻止点击返回
         mPhotoView.setOnPhotoTapListener((view, x, y) -> finish());
     }
-
-    @OnClick
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
 }

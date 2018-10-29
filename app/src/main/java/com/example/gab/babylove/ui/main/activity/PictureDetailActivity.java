@@ -75,14 +75,4 @@ public class PictureDetailActivity extends BaseActivity implements IBaseActivity
         super.onWindowFocusChanged(hasFocus);
         MdStatusBar.setHideBar(this,true);
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
 }

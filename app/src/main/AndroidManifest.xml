@@ -34,19 +34,16 @@
     <!--Android8.0 安装 apk 需要添加权限-->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 
-    <uses-permission android:name="android.permission.GET_TASKS"/>
 
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
 
     <application
             android:name="com.ggz.baselibrary.application.BaseApp"
-            android:allowBackup="true"
             android:icon="@mipmap/ic_launcher_round"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            tools:replace="android:allowBackup"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
@@ -202,6 +199,7 @@
                 android:name="com.pgyersdk.PgyerProvider"
                 android:authorities="${applicationId}.com.pgyer.provider"
                 android:exported="false"/>
+
         <meta-data
                 android:name="PGYER_APPID"
                 android:value="7755c220370c0b90a3a17fbfd3f09690">
@@ -221,6 +219,16 @@
                 android:configChanges="keyboardHidden|orientation|screenSize"
                 android:screenOrientation="sensor"
                 android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+        <provider
+                android:name="android.support.v4.content.FileProvider"
+                android:authorities="${applicationId}.provider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths"/>
+        </provider>
 
     </application>
 

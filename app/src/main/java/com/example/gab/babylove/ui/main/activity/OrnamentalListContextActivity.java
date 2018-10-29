@@ -66,16 +66,6 @@ public class OrnamentalListContextActivity extends BaseActivity implements IBase
         getCourseDetails(mPageNo);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     private void getCourseDetails(int mPageNo) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)

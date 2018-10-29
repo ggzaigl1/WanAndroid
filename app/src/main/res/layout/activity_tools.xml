@@ -62,6 +62,24 @@
             android:layout_height="8dp"
             android:background="@color/titleBarCon"/>
 
+    <TextView
+            android:id="@+id/tv_check_update"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:drawableEnd="@drawable/vector_chevron_right_black"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/textSize_medium_small"
+            android:text="@string/check_update"
+            />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/titleBarCon"/>
+
 
     <!--<LinearLayout-->
     <!--android:id="@+id/Ll_Button"-->

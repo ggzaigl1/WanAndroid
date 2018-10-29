@@ -161,11 +161,6 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
         }
     }
 
-    @Override
-    public void reTry() {
-
-    }
-
     /**
      * 列表
      */

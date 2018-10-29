@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.TreeBean;
 import com.example.gab.babylove.ui.news.fragment.SystemFlyFragment;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -28,7 +29,7 @@ import butterknife.BindView;
  * 知识体系 详情页
  */
 
-public class SystemActivity extends AppCompatActivity implements IBaseActivity {
+public class SystemActivity extends BaseActivity implements IBaseActivity {
 
     private ArrayList<SystemFlyFragment> mFragments = new ArrayList<>();
     private List<TreeBean.ChildrenBean> mChildren;
@@ -66,16 +67,6 @@ public class SystemActivity extends AppCompatActivity implements IBaseActivity {
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
 
     }
 

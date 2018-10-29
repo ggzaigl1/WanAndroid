@@ -93,11 +93,6 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
-    @Override
-    public void reTry() {
-
-    }
-
     private void ShowEnterAnimation() {
         Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.transition_register);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

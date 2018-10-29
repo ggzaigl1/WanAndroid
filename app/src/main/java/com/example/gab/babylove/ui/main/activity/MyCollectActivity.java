@@ -69,16 +69,6 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
         getArticleList(mPageNo);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     /**
      * recycleview 相关设置
      */

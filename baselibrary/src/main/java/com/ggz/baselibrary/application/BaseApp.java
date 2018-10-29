@@ -33,7 +33,6 @@ public class BaseApp extends MultiDexApplication {
         }else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-
     }
 
     /**
@@ -45,23 +44,4 @@ public class BaseApp extends MultiDexApplication {
         return mApplication;
     }
 
-
-    //    //设置 使用指定的 Header 和 Footer 全局设置
-//    static {
-//        SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
-//            @NonNull
-//            @Override
-//            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-//
-//                return new ClassicsHeader(context);
-//            }
-//        });
-//        SmartRefreshLayout.setDefaultRefreshFooterCreater(new DefaultRefreshFooterCreater() {
-//            @NonNull
-//            @Override
-//            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
-//                return new ClassicsFooter(context);
-//            }
-//        });
-//    }
 }

@@ -63,16 +63,6 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
         mRefreshLayout.setEnableRefresh(false);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     /**
      * 公众号 数据加载
      */

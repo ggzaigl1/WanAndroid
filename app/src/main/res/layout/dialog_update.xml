@@ -23,19 +23,19 @@
 
             <TextView
                     android:id="@+id/tv_version"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="80dp"
-                    android:text="版本更新"
+                    android:layout_gravity="center"
+                    android:text="@string/version_update"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="18sp"/>
 
             <TextView
-                    android:id="@+id/tv_content"
+                    android:id="@+id/tv_version_update_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="修复已知问题"
                     android:textColor="@color/myTxtSuperLight"/>
 
             <LinearLayout
@@ -45,26 +45,25 @@
                     android:orientation="horizontal">
 
                 <Button
-                        android:id="@+id/negativeButton"
+                        android:id="@+id/bt_cancel"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/selector_button_gray"
-                        android:text="取消"
-                        android:textColor="@color/white"
-                        android:visibility="gone"/>
+                        android:text="@string/next_update"
+                        android:textColor="@color/white"/>
 
                 <Button
-                        android:id="@+id/positiveButton"
+                        android:id="@+id/bt_sure"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/selector_button_green"
-                        android:text="立即更新"
+                        android:text="@string/update_now"
                         android:textColor="@color/white"/>
             </LinearLayout>
         </LinearLayout>

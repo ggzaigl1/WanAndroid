@@ -77,16 +77,6 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
         getChaptersList(mPageNo);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     /**
      * 公众号详情 数据加载
      */

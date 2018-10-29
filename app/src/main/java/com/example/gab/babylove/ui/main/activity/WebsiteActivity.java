@@ -61,16 +61,6 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
         getBookmarkList();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     /**
      * 常用网站 数据加载
      */

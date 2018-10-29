@@ -12,6 +12,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +27,12 @@ import com.example.gab.babylove.utils.CustomDialog;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.utils.L;
+import com.ggz.baselibrary.utils.T;
+import com.pgyersdk.update.DownloadFileListener;
+import com.pgyersdk.update.PgyUpdateManager;
+import com.pgyersdk.update.UpdateManagerListener;
+import com.pgyersdk.update.javabean.AppBean;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -48,9 +56,7 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
     private File file;
     private final Handler mHandler = new MyHandler(this);
     UpDateBean upDateBean;
-    private Button mConfirm;
-    private Button mCancel;
-    private TextView mVersion;
+    String url = "http://www.pgyer.com/app/installUpdate/0e90ff4ed7dfe4b599e54466c912826c?sig=zTXzdtqBh6%2B0Zc5DN6cP7uJ0q4B8uoTefDNLaTJyCwkaqgwWTDjtKlnHK7iSFza4";
 
     @Override
     public boolean isShowHeadView() {
@@ -63,24 +69,10 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
     }
 
     @Override
-    public void setStatusBar(Activity activity) {
-
-    }
-
-    @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        file = new File(Environment.getExternalStorageDirectory(), "ldz.apk");
-        getVersionsUpdate();
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
+        file = new File(Environment.getExternalStorageDirectory(), "wanAndroid.apk");
+        getUpdate();
+//        getVersionsUpdate();
 
     }
 
@@ -96,11 +88,11 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
                             String[] versionName = getPackageManager().getPackageInfo(" com.example.gab.babylove", 0).versionName.replace(".", "-").split("-");
                             String[] version = upDateBean.getVersion().getVersion().replace(".", "-").split("-");
                             if (Integer.valueOf(version[0]) > Integer.valueOf(versionName[0])) {
-                                doNewVersionUpdate();
+//                                doNewVersionUpdate();
                             } else if (Integer.valueOf(version[1]) > Integer.valueOf(versionName[1])) {
-                                doNewVersionUpdate();
+//                                doNewVersionUpdate();
                             } else if (Integer.valueOf(version[2]) > Integer.valueOf(versionName[2])) {
-                                doNewVersionUpdate();
+//                                doNewVersionUpdate();
                             }
                         } catch (PackageManager.NameNotFoundException e) {
                             e.printStackTrace();
@@ -114,49 +106,105 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
                 });
     }
 
-    private void doNewVersionUpdate() {
-        final CustomDialog dialog = new CustomDialog(this, R.style.DialogActivity);
-        dialog.setContentView(R.layout.dialog_update);
-        dialog.setCancelable(false);
-        dialog.show();
-        mConfirm = dialog.findViewById(R.id.positiveButton);
-        mCancel = dialog.findViewById(R.id.negativeButton);
-        mVersion = dialog.findViewById(R.id.version);
-        mVersion.setText(upDateBean.getVersion().getVersion());
-        if (!upDateBean.getVersion().isIs_force_update()) {
-            mCancel.setVisibility(View.VISIBLE);
-        }
-        mConfirm.setOnClickListener(arg0 -> {
-            pBar = new ProgressDialog(UpdateActivity.this);
-            pBar.setTitle("正在下载...");
-            pBar.setCancelable(false);
-            pBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            pBar.setButton(DialogInterface.BUTTON_POSITIVE, "取消", (dialog1, which) -> {
-                try {
-                    if (fos != null) {
-                        fos.close();
-                        file.delete();
+    public void getUpdate() {
+        new PgyUpdateManager.Builder()
+                .setForced(true)                //设置是否强制更新,非自定义回调更新接口此方法有用
+                .setUserCanRetry(false)         //失败后是否提示重新下载，非自定义下载 apk 回调此方法有用
+                .setDeleteHistroyApk(true)     // 检查更新前是否删除本地历史 Apk， 默认为true
+                .setUpdateManagerListener(new UpdateManagerListener() {
+                    @Override
+                    public void onNoUpdateAvailable() {
+                        //没有更新是回调此方法
+                        Log.d("pgyer", "没有新的版本");
                     }
-                    dialog1.dismiss();
-                    if (upDateBean.getVersion().isIs_force_update()) {
-                        finish();
+
+                    @Override
+                    public void onUpdateAvailable(AppBean appBean) {
+                        //有更新回调此方法
+                        L.d("pgyer", "有新版本可以更新" + "new versionCode is " + appBean.getVersionCode());
+                        //调用以下方法，DownloadFileListener 才有效；
+                        //如果完全使用自己的下载方法，不需要设置DownloadFileListener
+                        CustomDialog dialog = new CustomDialog(UpdateActivity.this, R.style.DialogActivity);
+                        dialog.setContentView(R.layout.dialog_update);
+                        dialog.setCancelable(false);
+                        dialog.show();
+                        Button bt_sure = dialog.findViewById(R.id.bt_sure);
+                        Button bt_cancel = dialog.findViewById(R.id.bt_cancel);
+                        TextView version_update_content = dialog.findViewById(R.id.tv_version_update_content);
+
+                        if (TextUtils.isEmpty(appBean.getReleaseNote())) {
+                            version_update_content.setText("修复已知问题");
+                        } else {
+                            version_update_content.setText(appBean.getReleaseNote());
+                        }
+
+                        bt_cancel.setOnClickListener(v -> dialog.dismiss());
+                        bt_sure.setOnClickListener(view -> {
+                            pBar = new ProgressDialog(UpdateActivity.this);
+                            pBar.setTitle("正在下载...");
+                            pBar.setCancelable(false);
+                            pBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                            pBar.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                    try {
+                                        if (fos != null) {
+                                            fos.close();
+                                            file.delete();
+                                        }
+                                        dialogInterface.dismiss();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+                            downFile(appBean.getDownloadURL());
+                            dialog.dismiss();
+                        });
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-            downFile();
-        });
-        mCancel.setOnClickListener(arg0 -> dialog.dismiss());
+
+                    @Override
+                    public void checkUpdateFailed(Exception e) {
+                        //更新检测失败回调
+                        //更新拒绝（应用被下架，过期，不在安装有效期，下载次数用尽）以及无网络情况会调用此接口
+                        Log.e("pgyer", "check update failed ", e);
+                    }
+                })
+                //注意 ：
+                //下载方法调用 PgyUpdateManager.downLoadApk(appBean.getDownloadURL()); 此回调才有效
+                //此方法是方便用户自己实现下载进度和状态的 UI 提供的回调
+                //想要使用蒲公英的默认下载进度的UI则不设置此方法
+                .setDownloadFileListener(new DownloadFileListener() {
+                    @Override
+                    public void downloadFailed() {
+                        //下载失败
+                        L.e("pgyer", "download apk failed");
+                        T.showShort("download apk failed");
+                    }
+
+                    @Override
+                    public void downloadSuccessful(Uri uri) {
+                        L.e("pgyer", "download apk failed");
+                        // 使用蒲公英提供的安装方法提示用户 安装apk
+//                        PgyUpdateManager.installApk(uri);
+                    }
+
+                    @Override
+                    public void onProgressUpdate(Integer... integers) {
+                        L.e("pgyer", "update download apk progress" + integers);
+                    }
+                })
+                .register();
     }
 
-    private void downFile() {
+    private void downFile(String DownUrl) {
         pBar.show();
         new Thread() {
             @Override
             public void run() {
                 try {
-                    URL url = new URL(upDateBean.getVersion().getDown_url());
+                    URL url = new URL(DownUrl);
                     URLConnection conn = url.openConnection();
                     fileSize = conn.getContentLength();
                     InputStream is = conn.getInputStream();
@@ -202,6 +250,14 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
         mHandler.removeCallbacksAndMessages(null);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (pBar != null) {
+            pBar.dismiss();
+        }
+    }
+
     /**
      * 防止Handler泄露 使用静态
      * Ggz
@@ -243,34 +299,15 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         //判断是否是Android N以及更高版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "ldz.apk");
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "wanAndroid.apk");
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUrl = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileProvider", file);
+            Uri contentUrl = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file);
             intent.setDataAndType(contentUrl, "application/vnd.android.package-archive");
         } else {
             intent.setDataAndType(Uri.fromFile(activity.file), "application/vnd.android.package-archive");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
+
         activity.startActivity(intent);
-
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "ldz.apk");
-//            //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-//            Uri apkUri = FileProvider.getUriForFile(activity, "com.example.gab.babylove.fileprovider", file);
-//            Intent intent = new Intent(Intent.ACTION_VIEW);
-//            // 由于没有在Activity环境下启动Activity,设置下面的标签
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            //添加这一句表示对目标应用临时授权该Uri所代表的文件
-//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
-//            activity.startActivity(intent);
-//        } else {
-//            Intent intent = new Intent(Intent.ACTION_VIEW);
-//            intent.setDataAndType(Uri.fromFile(activity.file), "application/vnd.android.package-archive");
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            activity.startActivity(intent);
-//            activity.finish();
-//        }
     }
 }
