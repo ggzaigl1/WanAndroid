@@ -46,17 +46,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    //https://github.com/google/flexbox-layout
-    implementation 'com.google.android:flexbox:0.3.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    //轮播图
-    implementation 'com.bigkoo:convenientbanner:2.0.5'
-    implementation 'com.bigkoo:alertview:1.0.3'
-
-    implementation 'com.kaopiz:kprogresshud:1.1.0'
-    implementation 'com.blankj:utilcode:1.19.0'
     implementation project(':baselibrary')
-
 
 //        implementation 'com.fy.grace:baselibrary:1.4.2'
 //    implementation 'com.ggzaigl1:baselibrary:1.0.6'

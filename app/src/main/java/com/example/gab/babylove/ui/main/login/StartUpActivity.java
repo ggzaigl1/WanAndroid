@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.gab.babylove.MainActivity;
@@ -110,12 +109,13 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
 
     /**
      * 隐藏状态栏和导航栏
+     *
      * @param hasFocus
      */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        MdStatusBar.setHideBar(this,true);
+        MdStatusBar.setHideBar(this, true);
     }
 
     /**
@@ -218,14 +218,6 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
         }
     }
 
-    /**
-     * 检查权限
-     */
-    public void onPermission() {
-        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-            permissionChecker.requestPermissions();
-        }
-    }
 
     /**
      * 是否缺少权限
@@ -246,6 +238,15 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
                     .setWidthPixels(30)
                     .setWidthPercent(CommonDialog.WidthPercent)
                     .show(getSupportFragmentManager());
+        }
+    }
+
+    /**
+     * 检查权限
+     */
+    public void onPermission() {
+        if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+            permissionChecker.requestPermissions();
         }
     }
 
@@ -274,7 +275,29 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
     }
 
     /**
-     * 当拒绝跳转设置页面 返回到当前activity 生命周期走onRestart方法
+     * 当拒绝权限 跳转到设置页面 并且手动打开权限 返回到当前activity 生命周期走 onStart 方法
+     */
+    @SuppressLint("CheckResult")
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!permissionChecker.isLackPermissions(PERMISSIONS)) {
+            Observable.timer(1500, TimeUnit.MILLISECONDS)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Long>() {
+                        @Override
+                        public void accept(Long aLong) throws Exception {
+                            JumpUtils.jump(StartUpActivity.this, MainActivity.class, null);
+                            StartUpActivity.this.finish();
+                            StartUpActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        }
+                    });
+        }
+    }
+
+    /**
+     * 当拒绝权限 跳转到设置页面 返回到引导页 activity 生命周期走 onRestart 方法
      */
     @Override
     protected void onRestart() {
@@ -287,5 +310,4 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
         cancelAnimation();
         super.onDestroy();
     }
-
 }

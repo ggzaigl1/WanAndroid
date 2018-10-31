@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@mipmap/icon_login_bg"
-                xmlns:tools="http://schemas.android.com/tools"
                 tools:context=".ui.main.login.LoginActivity">
 
     <FrameLayout
             android:layout_centerInParent="true"
-            android:paddingTop="70dp"
+            android:paddingTop="40dp"
             android:layout_width="320dp"
             android:layout_height="400dp">
 
         <android.support.v7.widget.CardView
                 android:id="@+id/cv_add"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
                 app:cardBackgroundColor="#2ea67f"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="320dp"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="3dp"
                 app:cardUseCompatPadding="true"
@@ -42,11 +42,12 @@
                         />
 
                 <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
                         android:layout_marginTop="10dp"
                         android:paddingStart="50dp"
                         android:paddingEnd="30dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
+                        >
 
                     <android.support.design.widget.TextInputLayout
                             android:textColorHint="#f0f7f4"
@@ -70,11 +71,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
                         android:paddingStart="50dp"
                         android:paddingEnd="30dp"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
+                        android:orientation="horizontal">
 
                     <android.support.design.widget.TextInputLayout
                             android:id="@+id/tilRegisterPass"
@@ -89,35 +90,6 @@
                                 android:id="@+id/editRegisterPass"
                                 android:textSize="13sp"
                                 android:textColor="#f0f7f4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textPassword"
-                                android:background="@drawable/selector_bg_edit_repeat"
-                                android:textCursorDrawable="@drawable/shape_register_material_bg_input_cursor_2"
-                                android:paddingBottom="2dp"
-                                />
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                        android:paddingStart="50dp"
-                        android:paddingEnd="30dp"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp">
-
-                    <android.support.design.widget.TextInputLayout
-                            android:id="@+id/tilRegisterPass2"
-                            android:textColorHint="#f0f7f4"
-                            android:theme="@style/RegisterTextLabel"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        <android.support.design.widget.TextInputEditText
-                                android:id="@+id/editRegisterPass2"
-                                android:textSize="13sp"
-                                android:textColor="#f0f7f4"
-                                android:hint="@string/confirmPass"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textPassword"
