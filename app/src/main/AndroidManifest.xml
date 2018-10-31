@@ -27,7 +27,6 @@
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> <!-- 获取网络状态 -->
-    <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
@@ -80,18 +79,15 @@
                 android:name="com.example.gab.babylove.ui.main.login.RegisterActivity"
                 android:label="@string/registerTitle"
                 android:screenOrientation="portrait"/>
-        <!-- PhotoView -->
+        <!-- 头像icon -->
         <activity
                 android:name="com.example.gab.babylove.ui.main.activity.PhotoViewActivity"
+                android:label="@string/goddess"
                 android:screenOrientation="portrait"/>
         <!-- 工具 activity -->
         <activity
                 android:name="com.example.gab.babylove.ui.main.activity.ToolsActivity"
                 android:label="@string/tools"
-                android:screenOrientation="portrait"/>
-        <activity
-                android:name="com.example.gab.babylove.utils.SelectorButtonActivity"
-                android:label="@string/selector_button"
                 android:screenOrientation="portrait"/>
         <!-- 美图欣赏 -->
         <activity
@@ -172,10 +168,14 @@
                 android:name="com.example.gab.babylove.ui.main.activity.OrnamentalMotionActivity"
                 android:label="@string/ornamental"
                 android:screenOrientation="portrait"/>
-
         <!--软件更新-->
         <activity
                 android:name=".ui.main.activity.UpdateActivity"
+                android:screenOrientation="portrait"/>
+
+        <activity
+                android:name="com.example.gab.babylove.utils.SelectorButtonActivity"
+                android:label="@string/selector_button"
                 android:screenOrientation="portrait"/>
         <!-- 不同格式文件浏览 activity -->
         <!--<activity-->

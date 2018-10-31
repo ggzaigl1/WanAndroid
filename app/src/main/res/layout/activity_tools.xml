@@ -19,7 +19,6 @@
             android:background="?android:attr/selectableItemBackground">
 
         <TextView
-
                 android:layout_height="50dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -45,18 +44,24 @@
             android:layout_height="8dp"
             android:background="@color/titleBarCon"/>
 
-    <TextView
-            android:id="@+id/tv_praise"
-            android:layout_height="50dp"
+    <LinearLayout
+            android:id="@+id/Ll_praise"
             android:layout_width="match_parent"
-            android:background="?android:attr/selectableItemBackground"
-            android:gravity="center_vertical"
-            android:layout_marginStart="10dp"
-            android:drawableEnd="@drawable/vector_chevron_right_black"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="@dimen/textSize_medium_small"
-            android:text="@string/to_evaluate"
-            />
+            android:layout_height="wrap_content"
+            tools:ignore="UseCompoundDrawables">
+
+        <TextView
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:drawableEnd="@drawable/vector_chevron_right_black"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/textSize_medium_small"
+                android:text="@string/to_evaluate"
+                />
+    </LinearLayout>
 
     <View
             android:layout_width="match_parent"
@@ -64,32 +69,31 @@
             android:background="@color/titleBarCon"/>
 
     <LinearLayout
+            android:id="@+id/Ll_check_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="UseCompoundDrawables">
+            android:background="?android:attr/selectableItemBackground">
 
         <TextView
-                android:id="@+id/tv_check_update"
                 android:layout_height="50dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
+                android:drawablePadding="10dp"
                 android:gravity="center_vertical"
-                android:layout_marginStart="10dp"
+                android:padding="10dp"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/textSize_medium_small"
-                android:text="@string/check_update"
-                />
+                android:text="@string/check_update"/>
 
-        <android.support.v7.widget.AppCompatImageView
+        <TextView
+                android:id="@+id/tv_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/vector_chevron_right_black"/>
+                android:gravity="center_vertical"
+                android:drawableEnd="@drawable/vector_chevron_right_black"
+                android:textSize="14sp"/>
 
     </LinearLayout>
-
-
 
 
     <View

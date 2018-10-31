@@ -16,7 +16,7 @@ import butterknife.OnClick;
 
 /**
  * Created by Gab on 2017/12/12 0012.
- * PhotoView
+ * 头像 PhotoView
  */
 
 public class PhotoViewActivity extends BaseActivity implements IBaseActivity {

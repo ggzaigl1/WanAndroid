@@ -31,6 +31,7 @@
     <string name="rememberPass">记住密码</string>
     <string name="correct_password">请输入正确的密码</string>
     <string name="forgot_your_password">没有账号? 点击+号注册</string>
+    <string name="goddess">Beautiful Goddess</string>
 
     @string/passWord
     <!-- UI功能性 string 资源 -->

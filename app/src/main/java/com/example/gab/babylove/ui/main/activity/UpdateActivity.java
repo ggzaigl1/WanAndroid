@@ -1,5 +1,6 @@
 package com.example.gab.babylove.ui.main.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -14,7 +15,6 @@ import android.os.Message;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -54,9 +54,9 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
     private int fileSize, sumSize;
     private FileOutputStream fos;
     private File file;
-    private final Handler mHandler = new MyHandler(this);
-    UpDateBean upDateBean;
-    String url = "http://www.pgyer.com/app/installUpdate/0e90ff4ed7dfe4b599e54466c912826c?sig=zTXzdtqBh6%2B0Zc5DN6cP7uJ0q4B8uoTefDNLaTJyCwkaqgwWTDjtKlnHK7iSFza4";
+
+    @SuppressLint("HandlerLeak")
+    private final Handler mHandler = new UpdateActivity.MyHandler(this);
 
     @Override
     public boolean isShowHeadView() {
@@ -70,7 +70,6 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        file = new File(Environment.getExternalStorageDirectory(), "wanAndroid.apk");
         getUpdate();
 //        getVersionsUpdate();
 
@@ -106,6 +105,9 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
                 });
     }
 
+    /**
+     * 检查更新
+     */
     public void getUpdate() {
         new PgyUpdateManager.Builder()
                 .setForced(true)                //设置是否强制更新,非自定义回调更新接口此方法有用
@@ -115,7 +117,7 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
                     @Override
                     public void onNoUpdateAvailable() {
                         //没有更新是回调此方法
-                        Log.d("pgyer", "没有新的版本");
+                        T.showShort("当前是最新版本");
                     }
 
                     @Override
@@ -200,6 +202,7 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
 
     private void downFile(String DownUrl) {
         pBar.show();
+        file = new File(Environment.getExternalStorageDirectory(), "wanAndroid.apk");
         new Thread() {
             @Override
             public void run() {
@@ -237,6 +240,67 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
         }.start();
     }
 
+    @SuppressLint("HandlerLeak")
+    class MyHandler extends Handler {
+        WeakReference<UpdateActivity> mWeakReference;
+
+        MyHandler(UpdateActivity activity) {
+            mWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            UpdateActivity activity = mWeakReference.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case 1:
+                        activity.pBar.setProgress(activity.sumSize * 100 / activity.fileSize);
+                        break;
+                    case 2:
+                        installAPK(activity);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+
+    /**
+     * 1、首先我们对Android N及以上做判断；
+     * 2、然后添加flags，表明我们要被授予什么样的临时权限
+     * 3、以前我们直接 Uri.fromFile(apkFile)构建出一个Uri,现在我们使用FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileProvider", apkFile);
+     * 4、BuildConfig.APPLICATION_ID直接是应用的包名
+     * 5、Android O 需要添加 <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/> 权限
+     *
+     * @param activity
+     */
+    public void installAPK(Activity activity) {
+        String authority = BuildConfig.APPLICATION_ID + ".provider";
+        activity.startActivity(getInstallAppIntent(authority, true));
+    }
+
+    private Intent getInstallAppIntent(final String authority, final boolean isNewTask) {
+        if (file == null) return null;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            Uri contentUrl = Uri.fromFile(file);
+            intent.setDataAndType(contentUrl, "application/vnd.android.package-archive");
+        } else {
+            //判断是否是Android N以及更高版本
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "wanAndroid.apk");
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUrl = FileProvider.getUriForFile(this, authority, file);
+            intent.setDataAndType(contentUrl, "application/vnd.android.package-archive");
+        }
+        return getIntent(intent, isNewTask);
+    }
+
+    private Intent getIntent(final Intent intent, final boolean isNewTask) {
+        return isNewTask ? intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) : intent;
+    }
+
     /**
      * 关闭 ProgressDialog 窗口泄露
      */
@@ -256,58 +320,5 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
         if (pBar != null) {
             pBar.dismiss();
         }
-    }
-
-    /**
-     * 防止Handler泄露 使用静态
-     * Ggz
-     */
-    static class MyHandler extends Handler {
-        WeakReference<UpdateActivity> mWeakReference;
-
-        public MyHandler(UpdateActivity activity) {
-            mWeakReference = new WeakReference<>(activity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            final UpdateActivity activity = mWeakReference.get();
-            if (activity != null) {
-                switch (msg.what) {
-                    case 1:
-                        activity.pBar.setProgress(activity.sumSize * 100 / activity.fileSize);
-                        break;
-                    case 2:
-                        install(activity);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-
-    /**
-     * 1、首先我们对Android N及以上做判断；
-     * 2、然后添加flags，表明我们要被授予什么样的临时权限
-     * 3、以前我们直接 Uri.fromFile(apkFile)构建出一个Uri,现在我们使用FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileProvider", apkFile);
-     * 4、BuildConfig.APPLICATION_ID直接是应用的包名
-     *
-     * @param activity
-     */
-    public static void install(UpdateActivity activity) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        //判断是否是Android N以及更高版本
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "wanAndroid.apk");
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUrl = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file);
-            intent.setDataAndType(contentUrl, "application/vnd.android.package-archive");
-        } else {
-            intent.setDataAndType(Uri.fromFile(activity.file), "application/vnd.android.package-archive");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-
-        activity.startActivity(intent);
     }
 }
