@@ -143,8 +143,7 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new NewProjectAdapter(R.layout.item_fly, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ListProjectBean.DatasBean datasBean = mAdapter.getData().get(position);
-            WebViewActivity.startWebActivity(this, datasBean.getLink());// 详情
+            WebViewActivity.startWebActivity(this, mAdapter.getData().get(position).getLink());// 详情
         });
         mRecyclerView.setAdapter(mAdapter);
     }

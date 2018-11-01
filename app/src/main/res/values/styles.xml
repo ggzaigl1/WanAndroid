@@ -25,7 +25,6 @@
         </item> <!--recreate 闪屏过渡动画-->
 
     </style>
-
     <!--AppBarLayout theme-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
@@ -86,6 +85,14 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
+
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
 
     <!--健康运动 CollapsingToolbarLayout 主题设置-->
     <style name="OrnamentalThemes" parent="Theme.AppCompat.Light.NoActionBar">

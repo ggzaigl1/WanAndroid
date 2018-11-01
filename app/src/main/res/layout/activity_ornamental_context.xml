@@ -47,6 +47,7 @@
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:contentInsetStart="0dp"
+                    app:navigationIcon="?attr/homeAsUpIndicator"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <!--<TextView-->

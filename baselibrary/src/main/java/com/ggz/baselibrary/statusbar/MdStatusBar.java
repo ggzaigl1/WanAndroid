@@ -28,10 +28,10 @@ import com.ggz.baselibrary.utils.ScreenUtils;
 public class MdStatusBar {
 
     /** 状态栏透明度 */
-    public static int statusAlpha = 0;
+    private static int statusAlpha = 0;
 
     /** 导航栏透明度 */
-    public static int navAlpha = 0;
+    private static int navAlpha = 0;
 
     private MdStatusBar() {
         /* cannot be instantiated */
@@ -41,7 +41,7 @@ public class MdStatusBar {
     /**
      * 自定义 状态栏和导航栏 的颜色
      * @param act
-     * @param statusColor StatusBar color
+     * @param statusColor StatusBarLollipop color
      * @param navColor    NavigationBar color
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -54,8 +54,8 @@ public class MdStatusBar {
     /**
      * 自定义 状态栏和导航栏 的颜色
      *
-     * @param statusColor StatusBar color
-     * @param statusDepth StatusBar color depth
+     * @param statusColor StatusBarLollipop color
+     * @param statusDepth StatusBarLollipop color depth
      * @param applyNav    apply NavigationBar or no
      * @param navColor    NavigationBar color (applyNav == true)
      * @param navDepth    NavigationBar color depth (applyNav = true)
@@ -97,7 +97,7 @@ public class MdStatusBar {
     /**
      * 设置 状态栏和导航栏 的 透明度
      * @param act
-     * @param statusColor  StatusBar color
+     * @param statusColor  StatusBarLollipop color
      * @param navColor     NavigationBar color
      */
     public static void setTransparentBar(Activity act, @ColorRes int statusColor, @ColorRes int navColor) {
@@ -109,8 +109,8 @@ public class MdStatusBar {
     /**
      * 设置 状态栏和导航栏 的 透明度
      *
-     * @param statusColor StatusBar color
-     * @param statusAlpha StatusBar alpha
+     * @param statusColor StatusBarLollipop color
+     * @param statusAlpha StatusBarLollipop alpha
      * @param applyNav    apply NavigationBar or no
      * @param navColor    NavigationBar color (applyNav == true)
      * @param navAlpha    NavigationBar alpha (applyNav == true)

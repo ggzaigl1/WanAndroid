@@ -61,7 +61,7 @@ public class StarFragment extends BaseFragment {
                 .subscribe(new NetCallBack<List<ProjectBean>>() {
                     @Override
                     protected void onSuccess(List<ProjectBean> beanModule) {
-                        if (null != beanModule && null != beanModule) {
+                        if (null != beanModule) {
                             data = beanModule;
                             for (ProjectBean bean : data) {
                                 SystemStarFragment systemFlyFragment = SystemStarFragment.getInstance(bean.getId(), "");

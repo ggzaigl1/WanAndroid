@@ -214,8 +214,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mOfficialAccountListAdapter = new OfficialAccountListAdapter(new ArrayList<>());
             mOfficialAccountListAdapter.setOnItemClickListener((adapter, view, position) -> {
-                OfficialAccountListBean.DatasBean datasBean = mOfficialAccountListAdapter.getData().get(position);
-                WebViewActivity.startWebActivity(this, datasBean.getLink());// 详情
+                WebViewActivity.startWebActivity(this, mOfficialAccountListAdapter.getData().get(position).getLink());// 详情
             });
             mOfficialAccountListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 switch (view.getId()) {
@@ -243,8 +242,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
             mAdapter.setOnItemClickListener((adapter, view, position) -> {
-                ArticleBean.DatasBean bean = mAdapter.getData().get(position);
-                WebViewActivity.startWebActivity(this, bean.getLink());// 详情
+                WebViewActivity.startWebActivity(this, mAdapter.getData().get(position).getLink());// 详情
             });
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 switch (view.getId()) {

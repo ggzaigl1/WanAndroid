@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 定义一个 方法注解 StatusBar，
+ * 定义一个 方法注解 StatusBarLollipop，
  * 设置当前 activity 状态栏导航栏颜色和透明度
  * Created by fangs on 2018/8/24 14:00.
  */

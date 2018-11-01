@@ -117,8 +117,7 @@ public class NavigationViewFragment extends BaseFragment {
         mRecyclerView_Context.setLayoutManager(layoutManager);
         mNavigationCidAdapter = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
         mNavigationCidAdapter.setOnItemClickListener((adapter, view, position) -> {
-            NavigationBean.ArticlesBean navigationBean = mNavigationCidAdapter.getData().get(position);
-            WebViewActivity.startWebActivity(getActivity(), navigationBean.getLink());
+            WebViewActivity.startWebActivity(getActivity(), mNavigationCidAdapter.getData().get(position).getLink());
         });
         mRecyclerView_Context.setAdapter(mNavigationCidAdapter);
     }

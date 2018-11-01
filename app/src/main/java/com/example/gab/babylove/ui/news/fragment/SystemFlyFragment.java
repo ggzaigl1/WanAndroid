@@ -91,8 +91,7 @@ public class SystemFlyFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new SystemFlyAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ArticleBean.DatasBean bean = mAdapter.getData().get(position);
-            WebViewActivity.startWebActivity(mContext, bean.getLink());// 详情
+            WebViewActivity.startWebActivity(mContext, mAdapter.getData().get(position).getLink());// 详情
         });
         mRecyclerView.setAdapter(mAdapter);
     }

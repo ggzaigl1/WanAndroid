@@ -92,12 +92,10 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
         layoutManager.setAlignItems(AlignItems.STRETCH);
         layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
 
-//        new LinearLayoutManager(this)
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new WebsiteAdapter(R.layout.item_website, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            BookmarkBean bean = mAdapter.getData().get(position);
-            WebViewActivity.startWebActivity(this, bean.getLink());// 详情
+            WebViewActivity.startWebActivity(this, mAdapter.getData().get(position).getLink());// 详情
         });
 //        mAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);

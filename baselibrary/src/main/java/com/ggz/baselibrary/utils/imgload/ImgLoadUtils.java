@@ -2,12 +2,10 @@ package com.ggz.baselibrary.utils.imgload;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestOptions;
@@ -42,10 +40,12 @@ public class ImgLoadUtils {
         RequestOptions options = new RequestOptions()
                 .fallback(R.mipmap.icon_load_error)
                 .error(R.mipmap.icon_load_error)
-                .placeholder(R.mipmap.icon_placeholder);
+                .placeholder(R.mipmap.icon_placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
         Glide.with(context)
                 .load(url)
                 .apply(options)
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView);
     }
 

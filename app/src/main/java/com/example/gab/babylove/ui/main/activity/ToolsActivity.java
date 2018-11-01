@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,6 +34,7 @@ import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.example.gab.babylove.utils.CustomDialog;
 import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusBarUtils.StatusBar;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.NetworkUtils;
@@ -59,7 +61,7 @@ import static android.app.Notification.VISIBILITY_SECRET;
 
 /**
  * Created by Gab on 2017/12/20 0020.
- * 工具栏
+ * 设置
  */
 
 public class ToolsActivity extends BaseActivity implements IBaseActivity {
@@ -90,10 +92,11 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
         return R.layout.activity_tools;
     }
 
-    //    @StatusBar(statusColor = R.color.statusBar, navColor = R.color.statusBar)
+    //    @StatusBarLollipop(statusColor = R.color.statusBar, navColor = R.color.statusBar)
     @Override
     public void setStatusBar(Activity activity) {
-        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+        StatusBar.setStatusBarColor(activity, ContextCompat.getColor(this, R.color.colorPrimaryDark));
     }
 
     @SuppressLint("SetTextI18n")

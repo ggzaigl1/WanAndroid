@@ -25,7 +25,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 初夏小溪 on 2018/4/20 0020.
- * 項目 TabLayout Fragment
+ * 项目 TabLayout Fragment
  */
 
 public class SystemStarFragment extends BaseFragment {
@@ -55,9 +55,9 @@ public class SystemStarFragment extends BaseFragment {
     protected void baseInit() {
         super.baseInit();
         Bundle arguments = getArguments();
-        int id = arguments.getInt(ARG_PARAM1);
         initRecyle();
-        getArticleList(id);
+        assert arguments != null;
+        getArticleList(arguments.getInt(ARG_PARAM1));
 
     }
 
@@ -91,8 +91,7 @@ public class SystemStarFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new StarAdapter(R.layout.item_fly, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ArticleBean.DatasBean bean = mAdapter.getData().get(position);
-            WebViewActivity.startWebActivity(mContext, bean.getLink());// 详情
+            WebViewActivity.startWebActivity(mContext, mAdapter.getData().get(position).getLink());// 详情
         });
         mRecyclerView.setAdapter(mAdapter);
     }

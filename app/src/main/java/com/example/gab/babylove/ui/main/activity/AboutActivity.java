@@ -24,9 +24,9 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.widget.interpolator.ElasticOutInterpolator;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.statusBarUtils.StatusBar;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.scwang.smartrefresh.header.FlyRefreshHeader;
 import com.scwang.smartrefresh.header.flyrefresh.FlyView;
@@ -42,7 +42,7 @@ import butterknife.BindView;
  * 关于
  * Created by fangs on 2018/4/8.
  */
-public class AboutActivity extends BaseActivity implements IBaseActivity {
+public class AboutActivity extends AppCompatActivity implements IBaseActivity {
 
     @BindView(R.id.tvAbout)
     TextView tvAbout;
@@ -80,6 +80,11 @@ public class AboutActivity extends BaseActivity implements IBaseActivity {
     }
 
     @Override
+    public void setStatusBar(Activity activity) {
+
+    }
+
+    @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -96,6 +101,16 @@ public class AboutActivity extends BaseActivity implements IBaseActivity {
             window.setStatusBarColor(color);
         }
         initData();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void reTry() {
+
     }
 
     private void initData() {
@@ -187,22 +202,24 @@ public class AboutActivity extends BaseActivity implements IBaseActivity {
     /**
      * Update appbar theme
      */
+
     private void updateTheme() {
         if (mThemeListener == null) {
             mThemeListener = new View.OnClickListener() {
+
                 int index = 0;
                 int[] ids = new int[]{
-//                        android.R.color.holo_blue_bright,
-//                        android.R.color.holo_green_light,
-//                        android.R.color.holo_red_light,
-//                        android.R.color.holo_orange_light,
+                        android.R.color.holo_orange_light,
+                        R.color.colorPrimaryDark,
+                        R.color.colorAccent,
+                        android.R.color.holo_green_light,
                         R.color.colorPrimary,
-
                 };
 
                 @Override
                 public void onClick(View v) {
                     int color = ContextCompat.getColor(getApplication(), ids[index % ids.length]);
+                    StatusBar.setStatusBarColor(AboutActivity.this, color);
                     mAboutUsRefreshLayout.setPrimaryColors(color);
                     mAboutUsFab.setBackgroundColor(color);
                     mAboutUsFab.setBackgroundTintList(ColorStateList.valueOf(color));
@@ -213,6 +230,4 @@ public class AboutActivity extends BaseActivity implements IBaseActivity {
         }
         mThemeListener.onClick(null);
     }
-
-
 }

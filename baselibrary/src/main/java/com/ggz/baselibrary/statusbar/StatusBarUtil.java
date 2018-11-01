@@ -1,8 +1,10 @@
 package com.ggz.baselibrary.statusbar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,13 +18,11 @@ import java.lang.reflect.Method;
  */
 public class StatusBarUtil {
 
-    // 设置状态栏透明与字体颜色
+    // 设置状态栏透明与字体颜色 设置状态栏字体变黑色
     public static void setStatusBarTranslucent(Activity activity, boolean isLightStatusBar) {
         if (activity == null) return;
         Window window = activity.getWindow();
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -46,6 +46,7 @@ public class StatusBarUtil {
     private static void setXiaomiStatusBar(Window window, boolean isLightStatusBar) {
         Class<? extends Window> clazz = window.getClass();
         try {
+            @SuppressLint("PrivateApi")
             Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
             Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
             int darkModeFlag = field.getInt(layoutParams);
@@ -57,7 +58,7 @@ public class StatusBarUtil {
     }
 
     // 是否是魅族手机
-    public static boolean isMeizu() {
+    private static boolean isMeizu() {
         try {
             Method method = Build.class.getMethod("hasSmartBar");
             return method != null;
@@ -67,7 +68,7 @@ public class StatusBarUtil {
     }
 
     // 设置魅族状态栏
-    public static void setMeizuStatusBar(Window window, boolean isLightStatusBar) {
+    private static void setMeizuStatusBar(Window window, boolean isLightStatusBar) {
         WindowManager.LayoutParams params = window.getAttributes();
         try {
             Field darkFlag = WindowManager.LayoutParams.class.getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON");

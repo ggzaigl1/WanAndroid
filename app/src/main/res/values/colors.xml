@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <!--导航栏颜色-->
+    <color name="colorPrimary">#15b3fa</color>
+    <!--通知栏颜色-->
     <color name="colorPrimaryDark">#15b3fa</color>
+    <!--控件选中后颜色-->
     <color name="colorAccent">#EF8994</color>
-    <color name="textColor">#4861ea</color>
+    <!--主题文字颜色-->
+    <color name="textColorPrimary">#4861ea</color>
+
+
     <!-- UI设计原色之 红色 -->
     <color name="red">#e84c3d</color>
     <!-- UI设计原色之 粉色 -->
@@ -39,10 +45,8 @@
     <color name="colorHintError">#ccfe8382</color>
     <!-- 半透明背景色 -->
     <color name="alphaHeadBg">#73212121</color>
-    <!-- 状态栏颜色 -->
+    <!-- 状态栏颜色 界面头部背景色-->
     <color name="statusBar">#15b3fa</color>
-    <!-- 界面头部背景色 -->
-    <color name="appHeadBg">#15b3fa</color>
     <!-- 界面背景色 -->
     <color name="BgColor">#f5f5f5</color>
     <color name="bgColor">#f7f7f7</color>

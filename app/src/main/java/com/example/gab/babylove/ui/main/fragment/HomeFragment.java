@@ -67,7 +67,6 @@ public class HomeFragment extends BaseFragment {
     int mPageNo = 0;
 
 
-
     @Override
     protected void baseInit() {
         super.baseInit();
@@ -111,8 +110,7 @@ public class HomeFragment extends BaseFragment {
                 .setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        String Ulr = urls.get(position);
-                        WebViewActivity.startWebActivity(HomeFragment.this.getActivity(), Ulr);// 详情
+                        WebViewActivity.startWebActivity(HomeFragment.this.getActivity(), urls.get(position));// 详情
                     }
                 })
                 //设置手动影响（设置了该项无法手动切换）
@@ -249,8 +247,7 @@ public class HomeFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ArticleBean.DatasBean bean = mAdapter.getData().get(position);
-            WebViewActivity.startWebActivity(getActivity(), bean.getLink());// 详情
+            WebViewActivity.startWebActivity(getActivity(), mAdapter.getData().get(position).getLink());// 详情
         });
         mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {

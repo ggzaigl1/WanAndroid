@@ -99,11 +99,7 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
 //        url = getIntent().getStringExtra("UrlBean");
         url = getIntent().getStringExtra(WEB_URL);
         //加快HTML网页加载完成的速度，等页面finish再加载图片
-        if (Build.VERSION.SDK_INT >= 19) {
-            mWebView.getSettings().setLoadsImagesAutomatically(true);
-        } else {
-            mWebView.getSettings().setLoadsImagesAutomatically(false);
-        }
+        mWebView.getSettings().setLoadsImagesAutomatically(true);
         mWebView.setHorizontalScrollBarEnabled(false);//水平不显示
         mWebView.setVerticalScrollBarEnabled(false); //垂直不显示
         mWebView.loadUrl(url);

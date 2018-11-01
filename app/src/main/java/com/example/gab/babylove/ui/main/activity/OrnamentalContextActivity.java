@@ -8,7 +8,6 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
@@ -17,7 +16,6 @@ import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.OrnamentalListBean;
 import com.example.gab.babylove.ui.main.adapter.OrnamentalContextAdapter;
-import com.ggz.baselibrary.statusbar.StatusBarUtil;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
@@ -29,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -73,8 +70,8 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
 
     @Override
     public void setStatusBar(Activity activity) {
-        StatusBarUtil.setStatusBarTranslucent(this, true);
-//        MdStatusBar.setColorBar(activity, R.color.transparent, R.color.statusBar);
+//        StatusBarUtil.setStatusBarTranslucent(this, true);
+//        StatusBar.setColorBar(activity, R.color.transparent, R.color.statusBar);
 //        StatusBarContentColor.setStatusTextColor(this, true, true);
     }
 

@@ -76,8 +76,7 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new CollectAdapter(R.layout.item_collect_my, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            CollectBean.DatasBean bean = mAdapter.getData().get(position);
-            WebViewActivity.startWebActivity(this, bean.getLink());// 详情
+            WebViewActivity.startWebActivity(this,mAdapter.getData().get(position).getLink());// 详情
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
