@@ -40,7 +40,6 @@ public class StarFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
-        MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
         getArticleList();
     }
 

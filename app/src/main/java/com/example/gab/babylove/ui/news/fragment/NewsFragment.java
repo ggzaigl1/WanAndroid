@@ -45,7 +45,6 @@ public class NewsFragment extends BaseFragment {
         super.baseInit();
         initRecyle();
         getArticleList();
-        MdStatusBar.setColorBar(getActivity(), R.color.statusBar, R.color.statusBar);
     }
 
     /**

@@ -1,12 +1,12 @@
 package com.example.gab.babylove;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -26,8 +26,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.activity.AboutActivity;
 import com.example.gab.babylove.ui.main.activity.BelleActivity;
 import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
@@ -37,7 +39,6 @@ import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
 import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
 import com.example.gab.babylove.ui.main.activity.SearchActivity;
 import com.example.gab.babylove.ui.main.activity.ToolsActivity;
-import com.example.gab.babylove.ui.main.activity.UpdateActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
@@ -47,7 +48,6 @@ import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.ggz.baselibrary.application.BaseApp;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
@@ -62,7 +62,7 @@ import butterknife.BindView;
  *
  * @author 55204
  */
-public class MainActivity extends UpdateActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.fl_content)
     FrameLayout mFlContent;
@@ -99,12 +99,15 @@ public class MainActivity extends UpdateActivity implements BottomNavigationBar.
 
     @Override
     public void setStatusBar(Activity activity) {
-        MdStatusBar.setColorBarForDrawer(this, R.color.statusBar, R.color.statusBar);
+//        MdStatusBar.setColorBarForDrawer(this, R.color.statusBar, R.color.statusBar);
     }
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-//        getUpdate();
+        //设置状态栏透明
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+
         mFragmentManager = getSupportFragmentManager();
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
@@ -137,16 +140,20 @@ public class MainActivity extends UpdateActivity implements BottomNavigationBar.
         nev_header_tv_login.setOnClickListener(v -> {
             boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
             if (isLogin) {
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.system_title).setMessage(R.string.system_content)
-                        .setPositiveButton(R.string.ok, (dialog, which) -> {
+                new MaterialDialog.Builder(this)
+                        .cancelable(false)
+                        .title(R.string.system_title)
+                        .content(R.string.system_content)
+                        .positiveText(R.string.ok)
+                        .onPositive((dialog, which) -> {
                             nev_header_tv_title.setText(R.string.notLogin);
                             nev_header_tv_login.setText(R.string.clickLogin);
                             ACache mCache = ACache.get(BaseApp.getAppCtx());
                             mCache.clear();
                             SpfUtils.clear();
                             mHomeFragment.mRefreshLayout.autoRefresh();
-                        }).setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss()).create().show();
+                        }).negativeText(R.string.cancel)
+                        .onNegative((dialog, which) -> dialog.dismiss()).show();
             } else {
                 JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
             }
@@ -160,6 +167,7 @@ public class MainActivity extends UpdateActivity implements BottomNavigationBar.
         nev_header_tv_title.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
         nev_header_tv_login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
     }
+
 
     /**
      * 设置底部导航栏
@@ -295,12 +303,11 @@ public class MainActivity extends UpdateActivity implements BottomNavigationBar.
                 break;
             case R.id.nav_exit:
                 JumpUtils.exitApp(this, MainActivity.class);
-//                SystemUtils.ExitSystem();
                 break;
             default:
                 break;
         }
-//        mDrawer.closeDrawer(GravityCompat.START);
+        mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
