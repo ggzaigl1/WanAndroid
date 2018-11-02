@@ -45,7 +45,7 @@ public class ImgLoadUtils {
         Glide.with(context)
                 .load(url)
                 .apply(options)
-                .transition(DrawableTransitionOptions.withCrossFade())
+                .transition(new DrawableTransitionOptions().crossFade())
                 .into(imageView);
     }
 

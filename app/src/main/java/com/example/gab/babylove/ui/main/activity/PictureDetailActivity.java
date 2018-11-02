@@ -27,7 +27,7 @@ public class PictureDetailActivity extends BaseActivity implements IBaseActivity
 
     private int mCurrentPosition;
     @BindView(R.id.view_page)
-    PhotoViewPager viewPager;
+    PhotoViewPager mPhotoViewPager;
     @BindView(R.id.tv_image_count)
     TextView tv_image_count;
 
@@ -50,14 +50,14 @@ public class PictureDetailActivity extends BaseActivity implements IBaseActivity
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         OrListBean actionsBean = (OrListBean) getIntent().getSerializableExtra("orListBean");
-        mCurrentPosition = getIntent().getIntExtra("position",-1);
+        mCurrentPosition = getIntent().getIntExtra("position", -1);
 
         tv_image_count.setText((mCurrentPosition + 1) + "/" + actionsBean.getData().size());
-        PhotoAdapter adapter = new PhotoAdapter(actionsBean, PictureDetailActivity.this);
-        viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(mCurrentPosition, false);
+        PhotoAdapter photoAdapter = new PhotoAdapter(actionsBean, PictureDetailActivity.this);
+        mPhotoViewPager.setAdapter(photoAdapter);
+        mPhotoViewPager.setCurrentItem(mCurrentPosition, false);
 
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mPhotoViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
@@ -73,6 +73,6 @@ public class PictureDetailActivity extends BaseActivity implements IBaseActivity
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        MdStatusBar.setHideBar(this,true);
+        MdStatusBar.setHideBar(this, true);
     }
 }

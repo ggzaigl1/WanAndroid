@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -48,13 +47,11 @@ import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.ggz.baselibrary.application.BaseApp;
-import com.ggz.baselibrary.statusBarUtils.StatusBar;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
-import com.ggz.baselibrary.utils.SystemUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 
@@ -260,9 +257,6 @@ public class MainActivity extends UpdateActivity implements BottomNavigationBar.
                     T.showShort(getString(R.string.main_login_view));
                 }
                 break;
-            case R.id.nav_exit:
-                SystemUtils.ExitSystem();
-                break;
             case R.id.nav_night:
                 //夜间模式
                 //获取当前的模式，设置相反的模式，这里只使用了，夜间和非夜间模式
@@ -298,6 +292,10 @@ public class MainActivity extends UpdateActivity implements BottomNavigationBar.
             case R.id.nav_manage:
 //            工具类
                 JumpUtils.jump(this, ToolsActivity.class, null);
+                break;
+            case R.id.nav_exit:
+                JumpUtils.exitApp(this, MainActivity.class);
+//                SystemUtils.ExitSystem();
                 break;
             default:
                 break;

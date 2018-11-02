@@ -3,6 +3,7 @@ package com.example.gab.babylove.ui.main.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -79,6 +80,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
 
     /**
      * 获取数据
+     *
      * @param mCurPage
      */
     @SuppressLint("CheckResult")
@@ -99,7 +101,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                             T.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
                         } else {
                             mAdapter.setNewData(gankBean.getResults());
-                           T.showShort("加载了" + gankBean.getResults().size() + "妹子");
+                            T.showShort("加载了" + gankBean.getResults().size() + "妹子");
                         }
                     }
                 });
@@ -132,8 +134,9 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new GankMAdapter(R.layout.item_gank_list_context, new ArrayList<>());
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @SuppressLint("RestrictedApi")
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findFirstVisibleItemPosition() != 0) {
@@ -154,7 +157,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
             Bundle bundle = new Bundle();
             bundle.putInt("position", position);
             bundle.putSerializable("orListBean", orListBean);
-            JumpUtils.jump(this, PictureDetailActivity.class, bundle);
+            JumpUtils.jumpFade(this, PictureDetailActivity.class, bundle);
         });
 
         fab_top.setOnClickListener(v -> {
@@ -178,6 +181,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
 
                 }
 
+                @SuppressLint("RestrictedApi")
                 @Override
                 public void onAnimationEnd(View view) {
                     fab_top.setVisibility(View.GONE);

@@ -2,6 +2,7 @@ package com.example.gab.babylove.ui.project.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,17 +12,15 @@ import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.project.adapter.StarAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
-import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.rv.anim.FadeItemAnimator;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 初夏小溪 on 2018/4/20 0020.
@@ -94,6 +93,14 @@ public class SystemStarFragment extends BaseFragment {
             WebViewActivity.startWebActivity(mContext, mAdapter.getData().get(position).getLink());// 详情
         });
         mRecyclerView.setAdapter(mAdapter);
+
+        /**
+         * 既然是动画，就会有时间，我们把动画执行时间变大一点来看一看效果
+         */
+        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
+        defaultItemAnimator.setAddDuration(1000);
+        defaultItemAnimator.setRemoveDuration(1000);
+        mRecyclerView.setItemAnimator(defaultItemAnimator);
     }
 
 }

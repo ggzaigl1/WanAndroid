@@ -27,6 +27,7 @@ public class JumpUtils {
 
     /**
      * 跳转到指定 Action 的activity
+     *
      * @param act
      * @param action
      * @param bundle
@@ -45,7 +46,7 @@ public class JumpUtils {
     /**
      * 跳转到指定 Action 的activity 带回调结果的跳转
      *
-     * @param action    要跳转到的Activity
+     * @param action      要跳转到的Activity
      * @param bundle
      * @param requestCode 请求码
      */
@@ -77,6 +78,21 @@ public class JumpUtils {
     }
 
     /**
+     * 跳转到指定 activity 并且带渐变效果
+     *
+     * @param actClass
+     * @param bundle
+     */
+    public static void jumpFade(AppCompatActivity activity, Class actClass, Bundle bundle) {
+        Intent intent = new Intent(activity, actClass);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        activity.startActivity(intent);
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    /**
      * 带回调结果的跳转
      *
      * @param actClass    要跳转到的Activity
@@ -96,11 +112,12 @@ public class JumpUtils {
 
     /**
      * 使用反射 跳转到指定 包路径的 activity
+     *
      * @param act
      * @param bundle
      * @param className
      */
-    public static void jump(AppCompatActivity act, Bundle bundle, String className){
+    public static void jump(AppCompatActivity act, Bundle bundle, String className) {
         try {
             Class cla = Class.forName(className);
             jump(act, cla, bundle);
@@ -111,11 +128,12 @@ public class JumpUtils {
 
     /**
      * 使用反射 跳转到指定 包路径的 activity; 带回调结果的跳转
+     *
      * @param act
      * @param bundle
      * @param className
      */
-    public static void jump(AppCompatActivity act, Bundle bundle, String className, int requestCode){
+    public static void jump(AppCompatActivity act, Bundle bundle, String className, int requestCode) {
         try {
             Class cla = Class.forName(className);
             jump(act, cla, bundle, requestCode);
@@ -126,12 +144,13 @@ public class JumpUtils {
 
     /**
      * 使用反射 从fragment 跳转到指定 包路径的 activity; 带回调结果的跳转
+     *
      * @param act
      * @param bundle
      * @param className
      * @param requestCode
      */
-    public static void jump(Fragment act, Bundle bundle, String className, int requestCode){
+    public static void jump(Fragment act, Bundle bundle, String className, int requestCode) {
         try {
             Class cla = Class.forName(className);
             Intent intent = new Intent(act.getContext(), cla);
@@ -149,6 +168,7 @@ public class JumpUtils {
 
     /**
      * 从fragment 跳转到指定的 activity; 带回调结果的跳转
+     *
      * @param act
      * @param bundle
      * @param actClass
@@ -167,10 +187,11 @@ public class JumpUtils {
 
     /**
      * 退出当前activity 并带数据回到上一个Activity
+     *
      * @param act
      * @param bundle
      */
-    public static void jumpResult(AppCompatActivity act, Bundle bundle){
+    public static void jumpResult(AppCompatActivity act, Bundle bundle) {
         Intent intent = new Intent();
         if (null != bundle) {
             intent.putExtras(bundle);
@@ -183,16 +204,25 @@ public class JumpUtils {
     /**
      * 退出当前activity
      */
-    public static void exitActivity(AppCompatActivity act) {
-        act.finish();
-        act.overridePendingTransition(R.anim.anim_slide_right_in, R.anim.anim_slide_right_out);
+    public static void exitActivity(AppCompatActivity activity) {
+        activity.finish();
+//        act.overridePendingTransition(R.anim.anim_slide_right_in, R.anim.anim_slide_right_out);
+    }
+
+    /**
+     * 退出当前activity 带渐变动画
+     */
+    public static void exitFadeActivity(AppCompatActivity activity) {
+        activity.finish();
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /**
      * 退出整个应用
+     *
      * @param act
      */
-    public static void exitApp(AppCompatActivity act, Class actClass){
+    public static void exitApp(AppCompatActivity act, Class actClass) {
         Intent intent = new Intent(act, actClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //注意
         act.startActivity(intent);
@@ -200,7 +230,16 @@ public class JumpUtils {
     }
 
     /**
+     * 退出程序
+     */
+    public static void ExitSystem() {
+        android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
+        System.exit(0);
+    }
+
+    /**
      * 安装apk
+     *
      * @param file
      */
     public static void install(AppCompatActivity act, File file) {
@@ -228,10 +267,11 @@ public class JumpUtils {
 
     /**
      * 跳转到浏览器 打开指定 URL链接
+     *
      * @param act
      * @param url
      */
-    public static void jump(AppCompatActivity act, String url){
+    public static void jump(AppCompatActivity act, String url) {
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         act.startActivity(intent);

@@ -8,6 +8,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bigkoo.alertview.AlertView;
 import com.bumptech.glide.Glide;
@@ -20,6 +21,7 @@ import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 import com.ggz.baselibrary.utils.media.UpdateMedia;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
@@ -53,7 +55,12 @@ public class PhotoAdapter extends PagerAdapter {
         ImgLoadUtils.loadImage(activity, url, photoView);
         container.addView(photoView);
         //点击图片关闭
-        photoView.setOnPhotoTapListener((view, x, y) -> JumpUtils.exitActivity(activity));
+        photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
+            @Override
+            public void onPhotoTap(ImageView view, float x, float y) {
+                JumpUtils.exitFadeActivity(activity);
+            }
+        });
         //长按图片保存
         photoView.setOnLongClickListener(v -> {
             new AlertView.Builder().setContext(activity)
