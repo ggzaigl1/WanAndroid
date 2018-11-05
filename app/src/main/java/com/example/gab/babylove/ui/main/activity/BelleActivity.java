@@ -143,7 +143,12 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                     /* 悬浮按钮显示动画 */
                     if (fab_top.getVisibility() == View.GONE) {
                         fab_top.setVisibility(View.VISIBLE);
-                        ViewCompat.animate(fab_top).scaleX(1.0F).scaleY(1.0F).alpha(1.0F).setInterpolator(INTERPOLATOR).withLayer().setListener(null).start();
+                        ViewCompat.animate(fab_top)
+                                .scaleX(1.0F)
+                                .scaleY(1.0F)
+                                .alpha(1.0F)
+                                .setInterpolator(INTERPOLATOR).withLayer()
+                                .setListener(null).start();
                     }
                 } else {
                     fabOutAnim();
@@ -175,23 +180,28 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
     /* 悬浮图标隐藏动画 */
     private void fabOutAnim() {
         if (fab_top.getVisibility() == View.VISIBLE) {
-            ViewCompat.animate(fab_top).scaleX(0.0F).scaleY(0.0F).alpha(0.0F).setInterpolator(INTERPOLATOR).withLayer().setListener(new ViewPropertyAnimatorListener() {
-                @Override
-                public void onAnimationStart(View view) {
+            ViewCompat.animate(fab_top)
+                    .scaleX(0.0F)
+                    .scaleY(0.0F)
+                    .alpha(0.0F)
+                    .setInterpolator(INTERPOLATOR).withLayer()
+                    .setListener(new ViewPropertyAnimatorListener() {
+                        @Override
+                        public void onAnimationStart(View view) {
 
-                }
+                        }
 
-                @SuppressLint("RestrictedApi")
-                @Override
-                public void onAnimationEnd(View view) {
-                    fab_top.setVisibility(View.GONE);
-                }
+                        @SuppressLint("RestrictedApi")
+                        @Override
+                        public void onAnimationEnd(View view) {
+                            fab_top.setVisibility(View.GONE);
+                        }
 
-                @Override
-                public void onAnimationCancel(View view) {
+                        @Override
+                        public void onAnimationCancel(View view) {
 
-                }
-            }).start();
+                        }
+                    }).start();
         }
     }
 

@@ -78,65 +78,65 @@
                 android:screenOrientation="portrait"/>
         <!-- 注册 -->
         <activity
-                android:name="ui.main.login.RegisterActivity"
+                android:name=".ui.main.login.RegisterActivity"
                 android:label="@string/registerTitle"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 头像icon -->
         <activity
-                android:name="ui.main.activity.PhotoViewActivity"
+                android:name=".ui.main.activity.PhotoViewActivity"
                 android:label="@string/goddess"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 工具 activity -->
         <activity
-                android:name="ui.main.activity.ToolsActivity"
+                android:name=".ui.main.activity.ToolsActivity"
                 android:label="@string/tools"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 美图欣赏 -->
         <activity
-                android:name="ui.main.activity.BelleActivity"
+                android:name=".ui.main.activity.BelleActivity"
                 android:label="@string/pretty_picture"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 美图欣赏 图片详情页 -->
         <activity
-                android:name="ui.main.activity.PictureDetailActivity"
+                android:name=".ui.main.activity.PictureDetailActivity"
                 android:screenOrientation="portrait"/>
         <!-- Website 常用网站 -->
         <activity
-                android:name="ui.main.activity.WebsiteActivity"
+                android:name=".ui.main.activity.WebsiteActivity"
                 android:label="@string/website"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 我的收藏 -->
         <activity
-                android:name="ui.main.activity.MyCollectActivity"
+                android:name=".ui.main.activity.MyCollectActivity"
                 android:label="@string/collect"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 搜索 -->
         <activity
-                android:name="ui.main.activity.SearchActivity"
+                android:name=".ui.main.activity.SearchActivity"
                 android:label="@string/search"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 知识体系 详情 -->
         <activity
-                android:name="ui.news.activity.SystemActivity"
+                android:name=".ui.news.activity.SystemActivity"
                 android:label="@string/knowledge"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- AgentWeb -->
         <activity
-                android:name="web.AgentWebActivity"
+                android:name=".web.AgentWebActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
 
         <!-- 关于我们 -->
         <activity
-                android:name="ui.main.activity.AboutActivity"
+                android:name=".ui.main.activity.AboutActivity"
                 android:label="@string/about_us"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
@@ -169,19 +169,19 @@
 
         <!-- 运动健身 -->
         <activity
-                android:name="ui.main.activity.OrnamentalListContextActivity"
+                android:name=".ui.main.activity.OrnamentalListContextActivity"
                 android:label="@string/ornamental"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity
-                android:name="ui.main.activity.OrnamentalContextActivity"
+                android:name=".ui.main.activity.OrnamentalContextActivity"
                 android:label="@string/ornamental"
                 android:theme="@style/OrnamentalTheme"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity
-                android:name="ui.main.activity.OrnamentalMotionActivity"
+                android:name=".ui.main.activity.OrnamentalMotionActivity"
                 android:label="@string/ornamental"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
@@ -203,7 +203,7 @@
         <!-- WebView 相关 activity -->
         <!-- 8.0关于WebView的新特性 -->
         <activity
-                android:name="web.WebViewActivity"
+                android:name=".web.WebViewActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait">
             <meta-data
