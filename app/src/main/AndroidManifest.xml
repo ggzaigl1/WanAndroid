@@ -48,7 +48,7 @@
 
         <!-- 欢迎 -->
         <activity
-                android:name=".ui.main.login.StartUpActivity"
+                android:name="com.example.gab.babylove.ui.main.login.StartUpActivity"
                 android:screenOrientation="portrait"
                 >
             <intent-filter>
