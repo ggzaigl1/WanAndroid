@@ -71,6 +71,13 @@ public class PictureDetailActivity extends BaseActivity implements IBaseActivity
     }
 
     @Override
+    public void finish() {
+        super.finish();
+        //重写 Activity 的 finish ⽅法, 并调⽤ overridePendingTransition ⽅法，解决退出动画⽆效
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         MdStatusBar.setHideBar(this, true);

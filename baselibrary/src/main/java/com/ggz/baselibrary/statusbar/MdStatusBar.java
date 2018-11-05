@@ -27,10 +27,14 @@ import com.ggz.baselibrary.utils.ScreenUtils;
  */
 public class MdStatusBar {
 
-    /** 状态栏透明度 */
+    /**
+     * 状态栏透明度
+     */
     private static int statusAlpha = 0;
 
-    /** 导航栏透明度 */
+    /**
+     * 导航栏透明度
+     */
     private static int navAlpha = 0;
 
     private MdStatusBar() {
@@ -40,6 +44,7 @@ public class MdStatusBar {
 
     /**
      * 自定义 状态栏和导航栏 的颜色
+     *
      * @param act
      * @param statusColor StatusBarLollipop color
      * @param navColor    NavigationBar color
@@ -96,9 +101,10 @@ public class MdStatusBar {
 
     /**
      * 设置 状态栏和导航栏 的 透明度
+     *
      * @param act
-     * @param statusColor  StatusBarLollipop color
-     * @param navColor     NavigationBar color
+     * @param statusColor StatusBarLollipop color
+     * @param navColor    NavigationBar color
      */
     public static void setTransparentBar(Activity act, @ColorRes int statusColor, @ColorRes int navColor) {
         int statusc = ContextCompat.getColor(act, statusColor);
@@ -148,23 +154,23 @@ public class MdStatusBar {
     /**
      * 隐藏状态栏和导航栏<br>
      * 注：实现这种效果，必须重写 Activity 的 onWindowFocusChanged 方法，在onWindowFocusChanged()中执行
+     *
      * @param applyNav apply NavigationBar
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public static void setHideBar(Activity act, boolean applyNav) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            View decorView = act.getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-            if (applyNav) {
-                option = option | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-            }
-            decorView.setSystemUiVisibility(option);
+        View decorView = act.getWindow().getDecorView();
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        if (applyNav) {
+            option = option | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         }
+        decorView.setSystemUiVisibility(option);
     }
 
 
     /**
      * DrawerLayout 实现状态栏和导航栏
+     *
      * @param act
      * @param statusColor
      * @param navColor
@@ -178,6 +184,7 @@ public class MdStatusBar {
     /**
      * DrawerLayout 实现状态栏和导航栏
      * 注：必须在布局文件中 DawerLayout 的子view 的【主界面】添加 android:fitsSystemWindows="true"
+     *
      * @param statusColor
      * @param statusDepth
      * @param applyNav
@@ -220,6 +227,7 @@ public class MdStatusBar {
 
     /**
      * 颜色 透明度 判断（必须在 0 --- 255之间）
+     *
      * @param depthOrAlpha
      * @return
      */
@@ -235,6 +243,7 @@ public class MdStatusBar {
 
     /**
      * 创建一个 状态栏 高度的 view
+     *
      * @param context
      * @param color
      * @return
