@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
@@ -89,8 +91,14 @@ public class SystemStarFragment extends BaseFragment {
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new StarAdapter(R.layout.item_fly, new ArrayList<>());
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(mContext, mAdapter.getData().get(position).getLink());// 详情
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                WebViewActivity.startWebActivity(mContext
+                        , mAdapter.getData().get(position).getLink()
+                        , mAdapter.getData().get(position).getId());// 详情
+                mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
         });
         mRecyclerView.setAdapter(mAdapter);
 

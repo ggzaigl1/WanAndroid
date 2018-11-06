@@ -124,7 +124,7 @@
                 android:screenOrientation="portrait"/>
         <!-- 知识体系 详情 -->
         <activity
-                android:name=".ui.news.activity.SystemActivity"
+                android:name=".ui.view.activity.SystemActivity"
                 android:label="@string/knowledge"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>

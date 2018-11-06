@@ -30,6 +30,9 @@ public class StatusLayoutManager implements Serializable {
     /** 请求失败 标记 */
     public static final int REQUEST_FAIL = 1006;
 
+    /** 请求失败 标记 */
+    public static final int REQUEST_ERROR_CODE_FAIL = -1001;
+
     /** 关闭加载 对话框 */
     public static final int LAYOUT_CLOSE_LOAD_DIALOG = 1007;
 

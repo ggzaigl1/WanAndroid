@@ -1,4 +1,4 @@
-package com.example.gab.babylove.ui.news.fragment;
+package com.example.gab.babylove.ui.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -6,15 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.ui.news.activity.SystemActivity;
-import com.example.gab.babylove.ui.news.adapter.NewsAdapter;
+import com.example.gab.babylove.ui.view.activity.SystemActivity;
+import com.example.gab.babylove.ui.view.adapter.NewsAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.TreeBean;
 import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 

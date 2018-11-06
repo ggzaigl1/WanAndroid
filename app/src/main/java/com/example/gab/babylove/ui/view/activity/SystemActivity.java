@@ -1,4 +1,4 @@
-package com.example.gab.babylove.ui.news.activity;
+package com.example.gab.babylove.ui.view.activity;
 
 import android.app.Activity;
 import android.os.Build;
@@ -9,13 +9,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.TreeBean;
-import com.example.gab.babylove.ui.news.fragment.SystemFlyFragment;
+import com.example.gab.babylove.ui.view.fragment.SystemFlyFragment;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 

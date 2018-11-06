@@ -1,6 +1,7 @@
 package com.example.gab.babylove.ui.navigation.fragment;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -55,7 +56,6 @@ public class NavigationViewFragment extends BaseFragment {
         initRecycler();
         initRecyclerCid();
         getNavigationList();
-
     }
 
     /**
@@ -116,7 +116,10 @@ public class NavigationViewFragment extends BaseFragment {
         mRecyclerView_Context.setLayoutManager(layoutManager);
         mNavigationCidAdapter = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
         mNavigationCidAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(getActivity(), mNavigationCidAdapter.getData().get(position).getLink());
+            WebViewActivity.startWebActivity(getActivity()
+                    , mNavigationCidAdapter.getData().get(position).getLink()
+                    , mNavigationCidAdapter.getData().get(position).getId());
+            mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mRecyclerView_Context.setAdapter(mNavigationCidAdapter);
     }

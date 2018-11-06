@@ -1,4 +1,4 @@
-package com.example.gab.babylove.ui.news.adapter;
+package com.example.gab.babylove.ui.view.adapter;
 
 import android.support.annotation.Nullable;
 import android.view.View;

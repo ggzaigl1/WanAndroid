@@ -33,7 +33,6 @@
     <string name="forgot_your_password">没有账号? 点击+号注册</string>
     <string name="goddess">Beautiful Goddess</string>
 
-    @string/passWord
     <!-- UI功能性 string 资源 -->
     <string name="about_awesome_wan_android">Play Together Android</string>
     <string name="nav_title">Google Hot Air Balloon</string>
@@ -41,6 +40,9 @@
     <string name="tools_clear_cache">是否清除缓存</string>
     <string name="zero_k">0K</string>
     <string name="collect_login">登录之后才能收藏或查看已收藏内容</string>
+    <string name="collection_success">收藏成功</string>
+    <string name="collection_web">收藏本文</string>
+    <string name="cancel_collection_success">取消收藏成功</string>
     <string name="search_no_text">没有搜索到相关内容~"</string>
     <string name="tools_cannot_application">无法打开应用市场</string>
 
@@ -55,6 +57,7 @@
     <string name="knowledge">知识体系</string>
     <string name="about_us">关于我们</string>
     <string name="share">分享</string>
+    <string name="share_WeChat">分享微信好友</string>
     <string name="night_mode">夜间模式</string>
     <string name="nav_exit">退出应用</string>
     <string name="ornamental">健康运动</string>

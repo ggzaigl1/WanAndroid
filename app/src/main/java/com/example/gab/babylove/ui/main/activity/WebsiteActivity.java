@@ -4,18 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.ui.main.adapter.WebsiteAdapter;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.BookmarkBean;
+import com.example.gab.babylove.ui.main.adapter.WebsiteAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -95,10 +93,12 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new WebsiteAdapter(R.layout.item_website, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(this, mAdapter.getData().get(position).getLink());// 详情
+            WebViewActivity.startWebActivity(this
+                    , mAdapter.getData().get(position).getLink()
+                    , mAdapter.getData().get(position).getId());// 详情
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
 //        mAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
-
     }
 }

@@ -43,7 +43,7 @@ import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
-import com.example.gab.babylove.ui.news.fragment.NewsFragment;
+import com.example.gab.babylove.ui.view.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
@@ -293,7 +293,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 JumpUtils.jump(this, AboutActivity.class, null);
                 break;
             case R.id.nav_share:
-//                AndroidShareUtils.shareWeChatFriend(this, "wanandroid", "https://www.pgyer.com/6osT", AndroidShareUtils.TEXT, null);
+//                AndroidShareUtils.shareWeChatFriend(this, "WanAndroid", "https://www.pgyer.com/6osT", AndroidShareUtils.TEXT, null);
                 Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_wanandroid);
                 AndroidShareUtils.shareWeChatFriend(this, "一起玩Android", "https://www.pgyer.com/6osT", AndroidShareUtils.DRAWABLE, bmp);
                 break;
@@ -324,7 +324,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 Bundle bundle = new Bundle();
                 bundle.putString("query", query);
                 bundle.putInt("type", 2);
-                JumpUtils.jump(MainActivity.this, SearchActivity.class, bundle);
+                JumpUtils.jumpFade(MainActivity.this, SearchActivity.class, bundle);
                 return false;
             }
 

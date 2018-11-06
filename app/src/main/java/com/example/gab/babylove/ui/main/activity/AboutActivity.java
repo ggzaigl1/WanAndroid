@@ -209,11 +209,11 @@ public class AboutActivity extends AppCompatActivity implements IBaseActivity {
 
                 int index = 0;
                 int[] ids = new int[]{
+                        R.color.colorAccent,
                         android.R.color.holo_orange_light,
                         R.color.colorPrimaryDark,
-                        R.color.colorAccent,
                         android.R.color.holo_green_light,
-                        R.color.colorPrimary,
+                        R.color.textColorPrimary,
                 };
 
                 @Override

@@ -21,8 +21,7 @@
         <!-- 系统分割线 -->
         <item name="android:listDivider">@drawable/divider_bg</item>
         <item name="android:textAllCaps">false</item><!-- 所有字母是否大写 -->
-        <item name="android:windowAnimationStyle">@android:style/Animation.Toast
-        </item> <!--recreate 闪屏过渡动画-->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Toast</item> <!--recreate 闪屏过渡动画-->
 
     </style>
     <!--AppBarLayout theme-->
@@ -91,6 +90,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
     </style>
 
 
@@ -105,6 +105,14 @@
     <style name="OrnamentalTheme" parent="OrnamentalThemes">
         <item name="android:windowNoTitle">true</item>
         <!--<item name="android:windowFullscreen">true</item>-->
+    </style>
+
+    <!--web菜单style-->
+    <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>  <!--设置不覆盖锚点-->
+        <item name="android:dropDownVerticalOffset">4dp</item>
+        <item name="android:layout_marginRight">4dp</item>
+        <item name="android:popupBackground">@color/app_pink_color</item> <!--更改背景颜色-->
     </style>
 
 </resources>

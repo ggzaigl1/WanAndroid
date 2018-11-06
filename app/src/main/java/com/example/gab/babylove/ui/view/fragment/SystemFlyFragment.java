@@ -1,4 +1,4 @@
-package com.example.gab.babylove.ui.news.fragment;
+package com.example.gab.babylove.ui.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -8,10 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ArticleBean;
-import com.example.gab.babylove.ui.news.adapter.SystemFlyAdapter;
+import com.example.gab.babylove.ui.view.adapter.SystemFlyAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
-import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -20,8 +19,6 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 初夏小溪 on 2018/4/20 0020.
@@ -91,7 +88,8 @@ public class SystemFlyFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new SystemFlyAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(mContext, mAdapter.getData().get(position).getLink());// 详情
+            WebViewActivity.startWebActivity(mContext, mAdapter.getData().get(position).getLink() , mAdapter.getData().get(position).getId());// 详情
+            mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mRecyclerView.setAdapter(mAdapter);
     }

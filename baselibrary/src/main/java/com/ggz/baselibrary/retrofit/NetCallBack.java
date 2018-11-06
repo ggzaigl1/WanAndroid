@@ -104,7 +104,7 @@ public abstract class NetCallBack<V> implements Observer<V> {
             updataLayout(StatusLayoutManager.REQUEST_FAIL);
         } else {
             actionResponseError("请求失败，请稍后再试...");
-            updataLayout(StatusLayoutManager.REQUEST_FAIL);
+            updataLayout(StatusLayoutManager.REQUEST_ERROR_CODE_FAIL);
         }
         dismissProgress();
     }

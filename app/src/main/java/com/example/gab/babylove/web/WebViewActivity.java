@@ -7,9 +7,10 @@ import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.SslErrorHandler;
@@ -23,19 +24,31 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseActivity;
+import com.example.gab.babylove.ui.main.login.LoginActivity;
+import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.ggz.baselibrary.application.IBaseActivity;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.utils.ConstantUtils;
+import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
+import com.ggz.baselibrary.utils.T;
+import com.kaopiz.kprogresshud.KProgressHUD;
+
+import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Gab on 2018/1/15 0015.
  * WebView 相关内容
  */
 
-public class WebViewActivity extends AppCompatActivity implements IBaseActivity {
+public class WebViewActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.web_view)
     WebView mWebView;
@@ -45,9 +58,10 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
     TextView showError;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    private String url;
-    public static final String TIME_OUT_URL = "https://www.jianshu.com/";
+    private String mURl;
+    private int mId;
     private static final String WEB_URL = "web_url";
+    private static final String WEB_ID = "web_id";
 
     @Override
     public boolean isShowHeadView() {
@@ -57,11 +71,6 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
     @Override
     public int setView() {
         return R.layout.activity_webview;
-    }
-
-    @Override
-    public void setStatusBar(Activity activity) {
-//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.transparent);
     }
 
     @Override
@@ -83,26 +92,29 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
         }
     }
 
-    @Override
-    public void reTry() {
-
-    }
-
-    public static void startWebActivity(Context context, String url) {
+    /**
+     * 瞅啥瞅,没见过帅哥阿!
+     *
+     * @param context
+     * @param url
+     */
+    public static void startWebActivity(Context context, String url, int Id) {
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra(WEB_URL, url);
+        intent.putExtra(WEB_ID, Id);
         context.startActivity(intent);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initView() {
 //        url = getIntent().getStringExtra("UrlBean");
-        url = getIntent().getStringExtra(WEB_URL);
+        mURl = getIntent().getStringExtra(WEB_URL);
+        mId = getIntent().getIntExtra(WEB_ID, 0);
         //加快HTML网页加载完成的速度，等页面finish再加载图片
         mWebView.getSettings().setLoadsImagesAutomatically(true);
         mWebView.setHorizontalScrollBarEnabled(false);//水平不显示
         mWebView.setVerticalScrollBarEnabled(false); //垂直不显示
-        mWebView.loadUrl(url);
+        mWebView.loadUrl(mURl);
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         //设置WebView支持javascript脚本
@@ -230,6 +242,11 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
         });
     }
 
+    /**
+     * 阿里支付
+     *
+     * @param url
+     */
     private void startAlipayActivity(String url) {
         Intent intent;
         try {
@@ -240,6 +257,106 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
             finish();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 收藏
+     *
+     * @param id
+     */
+    @SuppressLint("CheckResult")
+    private void collectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        RequestUtils.create(ApiService.class)
+                .getCollectArticle(id, "")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(RequestUtils::addDispos)
+                .subscribe(objectBeanModule -> {
+                    mKProgressHUD.dismiss();
+                    T.showShort(getString(R.string.collection_success));
+                });
+    }
+
+    /**
+     * 创建菜单
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_web_more, menu);
+        return true;
+    }
+
+    /**
+     * 菜单条目选择器
+     *
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.web_share:
+                AndroidShareUtils.shareWeChatFriend(this, "WanAndroid", mURl, AndroidShareUtils.TEXT, null);
+                break;
+            case R.id.web_collection:
+                if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                    collectArticle(mId);
+                } else {
+                    JumpUtils.jump(this, LoginActivity.class, null);
+                    T.showShort(R.string.collect_login);
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 通过反射 让 menu 显示 icon
+     *
+     * @param featureId
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (menu != null) {
+            if (menu.getClass().getSimpleName().equalsIgnoreCase("MenuBuilder")) {
+                try {
+                    Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                    method.setAccessible(true);
+                    method.invoke(menu, true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
+    }
+
+    /**
+     * 重写 Activity 的 finish ⽅法, 并调⽤ overridePendingTransition ⽅法，解决退出动画⽆效
+     */
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //CacheUtils是我自己封装的SharedPreferences保存工具类
+        //记录上次访问的位置，这里的mArticleContent.aid是我的文章的id，
+        //当然你可用你的文章url作为key，value为你的webview滑动位置即可
+        if (mWebView != null) {
+            int scrollY = mWebView.getScrollY();
+            SpfUtils.putInt(this, mURl, scrollY);//保存访问的位置
         }
     }
 
@@ -262,19 +379,6 @@ public class WebViewActivity extends AppCompatActivity implements IBaseActivity 
         }
         super.onDestroy();
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        //CacheUtils是我自己封装的SharedPreferences保存工具类
-        //记录上次访问的位置，这里的mArticleContent.aid是我的文章的id，
-        //当然你可用你的文章url作为key，value为你的webview滑动位置即可
-        if (mWebView != null) {
-            int scrollY = mWebView.getScrollY();
-            SpfUtils.putInt(this, url, scrollY);//保存访问的位置
-        }
-    }
-
 
     //改写物理按键——返回的逻辑
     @Override

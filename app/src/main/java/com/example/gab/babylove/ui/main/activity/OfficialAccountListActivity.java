@@ -130,7 +130,7 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(objectBeanModule -> {
                     mKProgressHUD.dismiss();
-                    T.showShort("收藏成功");
+                    T.showShort(getString(R.string.collection_success));
                 });
     }
 
@@ -144,16 +144,22 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(objectBeanModule -> {
                     mKProgressHUD.dismiss();
-                    T.showShort("取消收藏成功");
+                    T.showShort(getString(R.string.cancel_collection_success));
                 });
     }
 
+    /**
+     * 设置相关信息
+     */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new OfficialAccountListAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(this,mAdapter.getData().get(position).getLink());// 详情
+            WebViewActivity.startWebActivity(this
+                    , mAdapter.getData().get(position).getLink()
+                    , mAdapter.getData().get(position).getId());// 详情
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
@@ -222,8 +228,8 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
                 Bundle bundle = new Bundle();
                 bundle.putInt("type", 1);
                 bundle.putString("query", query);
-                bundle.putInt("id",mId);
-                JumpUtils.jump(OfficialAccountListActivity.this, SearchActivity.class, bundle);
+                bundle.putInt("id", mId);
+                JumpUtils.jumpFade(OfficialAccountListActivity.this, SearchActivity.class, bundle);
                 return false;
             }
 

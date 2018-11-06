@@ -89,6 +89,8 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
         queryKey = getIntent().getStringExtra("query");
         int type = getIntent().getIntExtra("type", 0);
         mId = getIntent().getIntExtra("id", 0);
+        /* type =1 公众号
+         *  type =2 首页  */
         if (type == 1) {
             getQuery(type, mPageOffNo, queryKey);
             initRecyle(type);
@@ -100,7 +102,15 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
-    //   搜索接口
+    /**
+     * 搜索接口
+     * type =1 公众号
+     * type =2 首页搜索
+     *
+     * @param type
+     * @param pageNum
+     * @param queryKey
+     */
     private void getQuery(int type, int pageNum, String queryKey) {
         if (type == 1) {
             mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
@@ -190,11 +200,15 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(objectBeanModule -> {
                     mKProgressHUD.dismiss();
-                    T.showShort("收藏成功");
+                    T.showShort(getString(R.string.collection_success));
                 });
     }
 
-    //    取消收藏
+    /**
+     * 取消收藏
+     *
+     * @param id
+     */
     @SuppressLint("CheckResult")
     private void uncollectArticle(int id) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
@@ -204,7 +218,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                 .doOnSubscribe(RequestUtils::addDispos)
                 .subscribe(objectBeanModule -> {
                     mKProgressHUD.dismiss();
-                    T.showShort("取消收藏成功");
+                    T.showShort(getString(R.string.cancel_collection_success));
                 });
     }
 
@@ -214,7 +228,10 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mOfficialAccountListAdapter = new OfficialAccountListAdapter(new ArrayList<>());
             mOfficialAccountListAdapter.setOnItemClickListener((adapter, view, position) -> {
-                WebViewActivity.startWebActivity(this, mOfficialAccountListAdapter.getData().get(position).getLink());// 详情
+                WebViewActivity.startWebActivity(this
+                        , mOfficialAccountListAdapter.getData().get(position).getLink()
+                        , mAdapter.getData().get(position).getId());// 详情
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             });
             mOfficialAccountListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 switch (view.getId()) {
@@ -242,7 +259,10 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
             mAdapter.setOnItemClickListener((adapter, view, position) -> {
-                WebViewActivity.startWebActivity(this, mAdapter.getData().get(position).getLink());// 详情
+                WebViewActivity.startWebActivity(this
+                        , mAdapter.getData().get(position).getLink()
+                        , mAdapter.getData().get(position).getId());// 详情
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             });
             mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 switch (view.getId()) {

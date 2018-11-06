@@ -5,19 +5,19 @@ import java.util.List;
 
 /**
  * Created by 初夏小溪 on 2018/4/13 0013.
- * 首頁數據源
+ * 首页数据
  */
 
 public class ArticleBean implements Serializable {
 
     /**
-     * curPage : 2
-     * datas : [{"apkLink":"","author":"张明云","chapterId":296,"chapterName":"阅读","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2798,"link":"https://www.jianshu.com/p/2f93483b8b39","niceDate":"2018-04-08","origin":"","projectLink":"","publishTime":1523196084000,"superChapterId":181,"superChapterName":"延伸技术","tags":[],"title":"如何衡量一个Android应用开发人员的能力？","type":0,"visible":1,"zan":0},{"apkLink":"","author":"kangdongpu","chapterId":294,"chapterName":"完整项目","collect":false,"courseId":13,"desc":"玩安卓客户端(Java版) ","envelopePic":"http://www.wanandroid.com/blogimgs/f3be8cc0-6b4d-4ee2-8f45-fe132949d640.png","fresh":false,"id":2797,"link":"http://www.wanandroid.com/blog/show/2104","niceDate":"2018-04-08","origin":"","projectLink":"https://github.com/kangdongpu/WanAndroid","publishTime":1523187585000,"superChapterId":294,"superChapterName":"开源项目主Tab","tags":[{"name":"项目","url":"/project/list/1?cid=294"}],"title":"玩安卓客户端(Java版) WanAndroid","type":0,"visible":1,"zan":0},{"apkLink":"","author":"请叫我大苏","chapterId":60,"chapterName":"Android Studio相关","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2796,"link":"https://www.jianshu.com/p/68fd5373effc","niceDate":"2018-04-07","origin":"","projectLink":"","publishTime":1523109547000,"superChapterId":60,"superChapterName":"开发环境","tags":[],"title":"分享两个提高效率的AndroidStudio小技巧","type":0,"visible":1,"zan":0},{"apkLink":"","author":"OCNYang","chapterId":323,"chapterName":"动画","collect":false,"courseId":13,"desc":" View Animation ，Drawable Animation ，Property Animation ，Ripple Effect / Touch Feedback ，Reveal Effect ，Transition Animation ，Animate View State Changes ，AnimatedVectorDrawable。","envelopePic":"http://www.wanandroid.com/blogimgs/e106cb44-572c-4f9f-b9ac-b71a889db1c3.png","fresh":false,"id":2795,"link":"http://www.wanandroid.com/blog/show/2103","niceDate":"2018-04-07","origin":"","projectLink":"https://github.com/OCNYang/Android-Animation-Set","publishTime":1523109410000,"superChapterId":294,"superChapterName":"开源项目主Tab","tags":[{"name":"项目","url":"/project/list/1?cid=323"}],"title":"Android 动画详尽教程","type":0,"visible":1,"zan":0},{"apkLink":"","author":"wustor","chapterId":171,"chapterName":"binder","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2775,"link":"http://www.jianshu.com/p/1174c362d090","niceDate":"2018-04-07","origin":"","projectLink":"","publishTime":1523107458000,"superChapterId":178,"superChapterName":"framework","tags":[],"title":"Binder学习(三)通过AIDL分析Binder通信流程","type":0,"visible":1,"zan":0},{"apkLink":"","author":"wustor","chapterId":171,"chapterName":"binder","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2774,"link":"http://www.jianshu.com/p/c487310b59ed","niceDate":"2018-04-07","origin":"","projectLink":"","publishTime":1523107456000,"superChapterId":178,"superChapterName":"framework","tags":[],"title":"Binder学习(四)利用AIDL、Messenger实现IPC","type":0,"visible":1,"zan":0},{"apkLink":"","author":"wustor","chapterId":171,"chapterName":"binder","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2776,"link":"http://www.jianshu.com/p/550e9907b5ee","niceDate":"2018-04-07","origin":"","projectLink":"","publishTime":1523107454000,"superChapterId":178,"superChapterName":"framework","tags":[],"title":"Binder学习(二)Binder机制解析","type":0,"visible":1,"zan":0},{"apkLink":"","author":"wustor","chapterId":73,"chapterName":"面试相关","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2784,"link":"http://www.jianshu.com/p/91718de18979","niceDate":"2018-04-07","origin":"","projectLink":"","publishTime":1523107437000,"superChapterId":74,"superChapterName":"热门专题","tags":[],"title":"我所经历的Android面试","type":0,"visible":1,"zan":0},{"apkLink":"","author":"MrTangFB","chapterId":343,"chapterName":"TV","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2740,"link":"https://www.jianshu.com/p/cf818a09f756","niceDate":"2018-04-06","origin":"","projectLink":"","publishTime":1523002725000,"superChapterId":343,"superChapterName":"TV相关","tags":[],"title":"Android TV开发笔记(一) TV导航菜单","type":0,"visible":1,"zan":0},{"apkLink":"","author":"网易考拉移动端团队","chapterId":332,"chapterName":"嵌套滑动","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2738,"link":"https://kaolamobile.github.io/2018/04/03/vertical-nested-scroll-layout/","niceDate":"2018-04-04","origin":"","projectLink":"","publishTime":1522814282000,"superChapterId":183,"superChapterName":"5.+高新技术","tags":[],"title":"嵌套滚动设计和源码分析 VerticalNestedScrollLayout 的使用","type":0,"visible":1,"zan":0},{"apkLink":"","author":" 拉丁吴","chapterId":77,"chapterName":"响应式编程","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2737,"link":"https://juejin.im/post/582b2c818ac24700618ff8f5","niceDate":"2018-04-03","origin":"","projectLink":"","publishTime":1522748905000,"superChapterId":74,"superChapterName":"热门专题","tags":[],"title":"关于 RxJava 最友好的文章\u2014\u2014 RxJava 2.0 全新来袭","type":0,"visible":1,"zan":0},{"apkLink":"","author":"08_cameralo","chapterId":260,"chapterName":"RxJava & Retrofit & MVP","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2736,"link":"https://www.jianshu.com/p/734d3693da02","niceDate":"2018-04-03","origin":"","projectLink":"","publishTime":1522726919000,"superChapterId":135,"superChapterName":"项目必备","tags":[],"title":"谈谈我理解的Android应用架构","type":0,"visible":1,"zan":0},{"apkLink":"","author":"wangjjj","chapterId":294,"chapterName":"完整项目","collect":false,"courseId":13,"desc":"仿支付宝记账本功能，饼状图；数字键盘；轻量级recycleview头部悬浮侧滑删除等； ","envelopePic":"http://www.wanandroid.com/blogimgs/be5059d6-b5ac-45f7-b803-4a8e2a6db49f.png","fresh":false,"id":2735,"link":"http://www.wanandroid.com/blog/show/2102","niceDate":"2018-04-03","origin":"","projectLink":"https://github.com/wangjjj/TallyBook","publishTime":1522719304000,"superChapterId":294,"superChapterName":"开源项目主Tab","tags":[{"name":"项目","url":"/project/list/1?cid=294"}],"title":"仿支付宝记账本 TallyBook","type":0,"visible":1,"zan":0},{"apkLink":"","author":"zas023","chapterId":294,"chapterName":"完整项目","collect":false,"courseId":13,"desc":"程序设计\u2014\u2014记账本之Android（采用MVP模式开发，后台使用ssm框架） https://github.com/zas023/ssmBillBook ","envelopePic":"http://www.wanandroid.com/blogimgs/3f62ba6f-c3cd-4a96-a02c-538e1e38726a.png","fresh":false,"id":2734,"link":"http://www.wanandroid.com/blog/show/2101","niceDate":"2018-04-02","origin":"","projectLink":"https://github.com/zas023/CocoBill","publishTime":1522668463000,"superChapterId":294,"superChapterName":"开源项目主Tab","tags":[{"name":"项目","url":"/project/list/1?cid=294"}],"title":"Android 开源记账本 CocoBill","type":0,"visible":1,"zan":0},{"apkLink":"","author":" 黄宁源","chapterId":100,"chapterName":"RecyclerView","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2733,"link":"https://mp.weixin.qq.com/s/-CzDkEur-iIX0lPMsIS0aA","niceDate":"2018-04-02","origin":"","projectLink":"","publishTime":1522657850000,"superChapterId":183,"superChapterName":"5.+高新技术","tags":[],"title":"Android ListView 与 RecyclerView 对比浅析--缓存机制","type":0,"visible":1,"zan":0},{"apkLink":"","author":"Jhuster","chapterId":97,"chapterName":"音视频","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":1467,"link":"http://ticktick.blog.51cto.com/823160/1956269","niceDate":"2018-04-02","origin":"","projectLink":"","publishTime":1522650305000,"superChapterId":95,"superChapterName":"多媒体技术","tags":[],"title":"Android 音视频开发入门指南","type":0,"visible":1,"zan":0},{"apkLink":"","author":"尘封的落叶 ","chapterId":149,"chapterName":"so文件相关","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2732,"link":"https://www.jianshu.com/p/dbee203db243","niceDate":"2018-04-02","origin":"","projectLink":"","publishTime":1522647989000,"superChapterId":182,"superChapterName":"JNI","tags":[],"title":"NDK开发\u2014仿QQ变声器","type":0,"visible":1,"zan":0},{"apkLink":"","author":"r17171709","chapterId":341,"chapterName":"键盘","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2731,"link":"https://www.jianshu.com/p/3db82632bd68","niceDate":"2018-04-02","origin":"","projectLink":"","publishTime":1522646867000,"superChapterId":30,"superChapterName":"用户交互","tags":[],"title":"一起来做一个简单的键盘吧","type":0,"visible":1,"zan":0},{"apkLink":"","author":"Jensen_czx","chapterId":78,"chapterName":"性能优化","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2729,"link":"https://www.jianshu.com/p/02d32ef00337","niceDate":"2018-03-29","origin":"","projectLink":"","publishTime":1522321528000,"superChapterId":74,"superChapterName":"热门专题","tags":[],"title":"Android 资源加载机制剖析","type":0,"visible":1,"zan":0},{"apkLink":"","author":"猛猛的小盆友","chapterId":78,"chapterName":"性能优化","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":2728,"link":"https://www.jianshu.com/p/d804c78bb8e1","niceDate":"2018-03-29","origin":"","projectLink":"","publishTime":1522321505000,"superChapterId":74,"superChapterName":"热门专题","tags":[],"title":"内存泄漏与排查流程\u2014\u2014安卓性能优化","type":0,"visible":1,"zan":0}]
-     * offset : 20
+     * curPage : 1
+     * datas : [{"apkLink":"","author":"JeffyMony","chapterId":245,"chapterName":"集合相关","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":true,"id":7466,"link":"https://www.jianshu.com/p/88d58ceef84a","niceDate":"16小时前","origin":"","projectLink":"","publishTime":1541430888000,"superChapterId":245,"superChapterName":"Java深入","tags":[],"title":"线程基本知识总结一之线程基本考点","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"鸿洋","chapterId":408,"chapterName":"鸿洋","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7461,"link":"https://mp.weixin.qq.com/s/n-AzV7Ke8wxVhmC6ruUIUA","niceDate":"1天前","origin":"","projectLink":"","publishTime":1541347200000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/408/1"}],"title":"带你领略Android Jetpack组件的魅力","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"code小生","chapterId":414,"chapterName":"code小生","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7465,"link":"https://mp.weixin.qq.com/s/quhz5TsboBQPa2BtEB-v6w","niceDate":"1天前","origin":"","projectLink":"","publishTime":1541347200000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/414/1"}],"title":"基于 opencv 实现人脸检测","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"郭霖","chapterId":409,"chapterName":"郭霖","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7455,"link":"https://mp.weixin.qq.com/s/cvcu6kbXzR5x5tpLYYEMKw","niceDate":"2018-11-02","origin":"","projectLink":"","publishTime":1541088000000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/409/1"}],"title":"总结几种判断RecyclerView到达底部的方法","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"code小生","chapterId":414,"chapterName":"code小生","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7456,"link":"https://mp.weixin.qq.com/s/24AJKGtcHJeRliUGz3PKsg","niceDate":"2018-11-02","origin":"","projectLink":"","publishTime":1541088000000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/414/1"}],"title":"Android手机无法开机到桌面问题，定位方法","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"鸿洋","chapterId":408,"chapterName":"鸿洋","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7457,"link":"https://mp.weixin.qq.com/s/vVJ3IDuGumo9h4XCNgrbAA","niceDate":"2018-11-02","origin":"","projectLink":"","publishTime":1541088000000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/408/1"}],"title":"对 Android 未来的发展十分重要的技术 | App Bundles","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"ksballetba","chapterId":100,"chapterName":"RecyclerView","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7443,"link":"https://juejin.im/post/5bd5b96751882526986e744f","niceDate":"2018-11-01","origin":"","projectLink":"","publishTime":1541084418000,"superChapterId":100,"superChapterName":"5.+高新技术","tags":[],"title":"手把手教你用RecyclerView实现猫眼电影选择效果","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"郭霖","chapterId":409,"chapterName":"郭霖","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7451,"link":"https://mp.weixin.qq.com/s/CWJCb3Eh65dRLJp2dL8eog","niceDate":"2018-11-01","origin":"","projectLink":"","publishTime":1541001600000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/409/1"}],"title":"Google推荐的后台任务解决方案","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"code小生","chapterId":414,"chapterName":"code小生","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7452,"link":"https://mp.weixin.qq.com/s/0hkCcegxcP43hef3e0HeYA","niceDate":"2018-11-01","origin":"","projectLink":"","publishTime":1541001600000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/414/1"}],"title":"Android开发 - 获取系统输入法高度的正确姿势","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"鸿洋","chapterId":408,"chapterName":"鸿洋","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7453,"link":"https://mp.weixin.qq.com/s/ufOjtKURP8QERWw1pn_m1Q","niceDate":"2018-11-01","origin":"","projectLink":"","publishTime":1541001600000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/408/1"}],"title":"图片占内存公式：分辨率 * 每个像素大小，严谨吗？","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"罗占伟David","chapterId":78,"chapterName":"性能优化","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7446,"link":"https://www.jianshu.com/p/c821f1fb90d1","niceDate":"2018-10-31","origin":"","projectLink":"","publishTime":1540987233000,"superChapterId":73,"superChapterName":"热门专题","tags":[],"title":"Android App 启动速度优化实现演练","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"张风捷特烈","chapterId":168,"chapterName":"Drawable","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7445,"link":"https://www.jianshu.com/p/89aa5f9ed17a","niceDate":"2018-10-31","origin":"","projectLink":"","publishTime":1540987192000,"superChapterId":168,"superChapterName":"基础知识","tags":[],"title":"自己写一个svg转化为安卓xml的工具类","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"贤榆的榆","chapterId":418,"chapterName":"AOSP 源码编译","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7444,"link":"https://juejin.im/post/5bd5c42ce51d457a9b6c8387","niceDate":"2018-10-31","origin":"","projectLink":"","publishTime":1540987165000,"superChapterId":178,"superChapterName":"framework","tags":[],"title":"AndroidStudio不用编译，阅读Android源码","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"郭霖","chapterId":409,"chapterName":"郭霖","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7447,"link":"https://mp.weixin.qq.com/s/N0IFQHVRRSQ65pNMMCvBvg","niceDate":"2018-10-31","origin":"","projectLink":"","publishTime":1540915200000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/409/1"}],"title":"Android的so文件加载机制详解","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"code小生","chapterId":414,"chapterName":"code小生","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7448,"link":"https://mp.weixin.qq.com/s/VW-NBbvFye4fJ5qSplFA-A","niceDate":"2018-10-31","origin":"","projectLink":"","publishTime":1540915200000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/414/1"}],"title":"通过JavaScript实现在Android WebView中点击查看图片，长按识别二维码","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"鸿洋","chapterId":408,"chapterName":"鸿洋","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7449,"link":"https://mp.weixin.qq.com/s/B7yvicK4vi50JKeEO0NG0Q","niceDate":"2018-10-31","origin":"","projectLink":"","publishTime":1540915200000,"superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/408/1"}],"title":"玩Android 有你们更精彩！荐开源项目！","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"hyzhan43","chapterId":294,"chapterName":"完整项目","collect":false,"courseId":13,"desc":"继上次用 kotlin 编写了 一款简单 豆瓣电影 app 后。体验到了kotlin 的魅力。加上这段时间学习了 MVP 模式、MVVM模式，心痒痒，就像做个 app 来练练手，正当犹豫要选择哪一种来练手的时候，无意中看见另一种的模式艺术图片应用 T-MVVM~ 感觉说的挺有道理的。好奇心驱使我去试一下这种模式，说干就干。","envelopePic":"http://www.wanandroid.com/blogimgs/070d9f4a-2ceb-457a-bb12-f7d55b5cf900.png","fresh":false,"id":7441,"link":"http://www.wanandroid.com/blog/show/2411","niceDate":"2018-10-30","origin":"","projectLink":"https://github.com/hyzhan43/PlayAndroid","publishTime":1540908634000,"superChapterId":294,"superChapterName":"开源项目主Tab","tags":[{"name":"项目","url":"/project/list/1?cid=294"}],"title":"用心打造&mdash;&mdash;Kotlin 版玩Android","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"Ericsongyl","chapterId":367,"chapterName":"资源聚合类","collect":false,"courseId":13,"desc":"OSF：全称为Android Open Source Framework，即Android优秀开源框架汇总。包含：网络请求，图片下载，数据库，链式框架，组件路由，消息传递通信，热更新，文件下载，图片选择，图片滤镜/毛玻璃等特效处理，GIF图片展示控件，图片九宫格控件 等等 应有尽有。","envelopePic":"http://www.wanandroid.com/resources/image/pc/default_project_img.jpg","fresh":false,"id":7440,"link":"http://www.wanandroid.com/blog/show/2410","niceDate":"2018-10-30","origin":"","projectLink":"https://github.com/Ericsongyl/AOSF","publishTime":1540908422000,"superChapterId":294,"superChapterName":"开源项目主Tab","tags":[{"name":"项目","url":"/project/list/1?cid=367"}],"title":"Android常用优秀开源框架汇总","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"ChanghuiN","chapterId":313,"chapterName":"字节码","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7435,"link":"https://www.hchstudio.cn/article/2018/e8df/","niceDate":"2018-10-30","origin":"","projectLink":"","publishTime":1540883822000,"superChapterId":245,"superChapterName":"Java深入","tags":[],"title":"操作 Java 字节码","type":0,"userId":-1,"visible":1,"zan":0},{"apkLink":"","author":"小编","chapterId":249,"chapterName":"干货资源","collect":false,"courseId":13,"desc":"","envelopePic":"","fresh":false,"id":7434,"link":"https://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&amp;mid=2650826531&amp;idx=1&amp;sn=a63c379ca016aa6c07045e20b00e1a1c","niceDate":"2018-10-30","origin":"","projectLink":"","publishTime":1540857996000,"superChapterId":249,"superChapterName":"干货资源","tags":[],"title":"这可能是Java程序员学习大数据工程师最佳之路！另送1024G学习资料！","type":0,"userId":-1,"visible":1,"zan":0}]
+     * offset : 0
      * over : false
-     * pageCount : 61
+     * pageCount : 282
      * size : 20
-     * total : 1213
+     * total : 5640
      */
 
     private int curPage;
@@ -84,28 +84,29 @@ public class ArticleBean implements Serializable {
         this.datas = datas;
     }
 
-    public static class DatasBean implements Serializable{
+    public static class DatasBean {
         /**
          * apkLink :
-         * author : 张明云
-         * chapterId : 296
-         * chapterName : 阅读
+         * author : JeffyMony
+         * chapterId : 245
+         * chapterName : 集合相关
          * collect : false
          * courseId : 13
          * desc :
          * envelopePic :
-         * fresh : false
-         * id : 2798
-         * link : https://www.jianshu.com/p/2f93483b8b39
-         * niceDate : 2018-04-08
+         * fresh : true
+         * id : 7466
+         * link : https://www.jianshu.com/p/88d58ceef84a
+         * niceDate : 16小时前
          * origin :
          * projectLink :
-         * publishTime : 1523196084000
-         * superChapterId : 181
-         * superChapterName : 延伸技术
+         * publishTime : 1541430888000
+         * superChapterId : 245
+         * superChapterName : Java深入
          * tags : []
-         * title : 如何衡量一个Android应用开发人员的能力？
+         * title : 线程基本知识总结一之线程基本考点
          * type : 0
+         * userId : -1
          * visible : 1
          * zan : 0
          */
@@ -119,7 +120,6 @@ public class ArticleBean implements Serializable {
         private String desc;
         private String envelopePic;
         private boolean fresh;
-        private int originId = -1;
         private int id;
         private String link;
         private String niceDate;
@@ -130,6 +130,7 @@ public class ArticleBean implements Serializable {
         private String superChapterName;
         private String title;
         private int type;
+        private int userId;
         private int visible;
         private int zan;
         private List<?> tags;
@@ -269,13 +270,6 @@ public class ArticleBean implements Serializable {
         public void setSuperChapterName(String superChapterName) {
             this.superChapterName = superChapterName;
         }
-        public int getOriginId() {
-            return originId;
-        }
-
-        public void setOriginId(int originId) {
-            this.originId = originId;
-        }
 
         public String getTitle() {
             return title;
@@ -291,6 +285,14 @@ public class ArticleBean implements Serializable {
 
         public void setType(int type) {
             this.type = type;
+        }
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
         }
 
         public int getVisible() {

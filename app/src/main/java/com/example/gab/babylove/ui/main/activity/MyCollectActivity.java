@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
@@ -16,7 +15,6 @@ import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -31,7 +29,6 @@ import butterknife.BindView;
 import io.reactivex.functions.Consumer;
 
 /**
- *
  * @author 初夏小溪
  * @date 2018/4/19 0019
  * 我的收藏
@@ -76,7 +73,10 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new CollectAdapter(R.layout.item_collect_my, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(this,mAdapter.getData().get(position).getLink());// 详情
+            WebViewActivity.startWebActivity(this
+                    , mAdapter.getData().get(position).getLink()
+                    , mAdapter.getData().get(position).getId());// 详情
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
@@ -152,7 +152,7 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
                 .subscribe(o -> {
                     mAdapter.remove(position);
                     mAdapter.notifyDataSetChanged();
-                    T.showShort("取消收藏成功");
+                    T.showShort(getString(R.string.cancel_collection_success));
                     mKProgressHUD.dismiss();
                 });
     }

@@ -1,8 +1,11 @@
 package com.example.gab.babylove.ui.main.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,8 +21,10 @@ import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
+import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
+import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -110,7 +115,11 @@ public class HomeFragment extends BaseFragment {
                 .setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        WebViewActivity.startWebActivity(HomeFragment.this.getActivity(), urls.get(position));// 详情
+                        Bundle bundle = new Bundle();
+                        bundle.putString("UrlBean", urls.get(position));
+                        JumpUtils.jump((AppCompatActivity) getActivity(), AgentWebActivity.class, bundle);
+//                        WebViewActivity.startWebActivity(getActivity(), urls.get(position), 0);// 详情
+                        mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
                 })
                 //设置手动影响（设置了该项无法手动切换）
@@ -227,7 +236,21 @@ public class HomeFragment extends BaseFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> T.showShort("收藏成功"));
+                .subscribe(new NetCallBack<BeanModule<Object>>() {
+                    @Override
+                    protected void onSuccess(BeanModule<Object> t) {
+                        if (t.isSuccess()) {
+                            T.showShort(HomeFragment.this.getString(R.string.collection_success));
+                        } else {
+                            T.showShort(t.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
     }
 
     //    取消收藏
@@ -237,7 +260,7 @@ public class HomeFragment extends BaseFragment {
                 .uncollectArticle(id, "")
                 .compose(RxHelper.handleResult())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> T.showShort("取消收藏成功"));
+                .subscribe(objectBeanModule -> T.showShort(getString(R.string.cancel_collection_success)));
     }
 
     /**
@@ -247,7 +270,11 @@ public class HomeFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(getActivity(), mAdapter.getData().get(position).getLink());// 详情
+            // 详情
+            WebViewActivity.startWebActivity(getActivity()
+                    , mAdapter.getData().get(position).getLink()
+                    , mAdapter.getData().get(position).getId());
+            mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
