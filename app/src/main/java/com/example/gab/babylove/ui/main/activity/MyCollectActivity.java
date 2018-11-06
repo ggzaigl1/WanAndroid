@@ -13,6 +13,7 @@ import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.ui.main.adapter.CollectAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.utils.T;
@@ -149,11 +150,19 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
                 .unMyCollectArticle(id, OriginId)
                 .compose(RxHelper.handleResult())
                 .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(o -> {
-                    mAdapter.remove(position);
-                    mAdapter.notifyDataSetChanged();
-                    T.showShort(getString(R.string.cancel_collection_success));
-                    mKProgressHUD.dismiss();
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        mAdapter.remove(position);
+                        mAdapter.notifyDataSetChanged();
+                        T.showShort(getString(R.string.cancel_collection_success));
+                        mKProgressHUD.dismiss();
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
                 });
     }
 
