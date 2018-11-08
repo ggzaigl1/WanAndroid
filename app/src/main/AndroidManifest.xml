@@ -122,6 +122,12 @@
                 android:label="@string/search"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
+        <!-- Main 搜索 -->
+        <activity
+                android:name=".ui.main.activity.SearchMainActivity"
+                android:label="@string/search"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait"/>
         <!-- 知识体系 详情 -->
         <activity
                 android:name=".ui.view.activity.SystemActivity"

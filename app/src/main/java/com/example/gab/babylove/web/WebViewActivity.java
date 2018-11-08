@@ -316,7 +316,7 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                 if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
                     collectArticle(mId);
                 } else {
-                    JumpUtils.jump(this, LoginActivity.class, null);
+                    JumpUtils.jumpFade(this, LoginActivity.class, null);
                     T.showShort(R.string.collect_login);
                 }
                 break;

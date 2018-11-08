@@ -409,7 +409,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
             channel.setLightColor(Color.RED);//指定闪光是的灯光颜色
             channel.canShowBadge();//桌面laucher消息角标
-            channel.enableVibration(true);//是否允许震动
+//            channel.enableVibration(true);//是否允许震动
             channel.getAudioAttributes();//获取系统通知响铃声音配置
             channel.getGroup();//获取通知渠道组
             channel.setBypassDnd(true);//设置可以绕过，请勿打扰模式

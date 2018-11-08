@@ -37,14 +37,14 @@ import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
 import com.example.gab.babylove.ui.main.activity.OfficialAccountActivity;
 import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
 import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
-import com.example.gab.babylove.ui.main.activity.SearchActivity;
+import com.example.gab.babylove.ui.main.activity.SearchMainActivity;
 import com.example.gab.babylove.ui.main.activity.ToolsActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
-import com.example.gab.babylove.ui.view.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
+import com.example.gab.babylove.ui.view.fragment.NewsFragment;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
@@ -261,7 +261,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
                     JumpUtils.jump(this, MyCollectActivity.class, null);
                 } else {
-                    JumpUtils.jump(this, LoginActivity.class, null);
+                    JumpUtils.jumpFade(this, LoginActivity.class, null);
                     T.showShort(getString(R.string.main_login_view));
                 }
                 break;
@@ -323,8 +323,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             public boolean onQueryTextSubmit(String query) {
                 Bundle bundle = new Bundle();
                 bundle.putString("query", query);
-                bundle.putInt("type", 2);
-                JumpUtils.jumpFade(MainActivity.this, SearchActivity.class, bundle);
+                JumpUtils.jumpFade(MainActivity.this, SearchMainActivity.class, bundle);
                 return false;
             }
 

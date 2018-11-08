@@ -243,7 +243,6 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("type", 1);
                 bundle.putString("query", query);
                 bundle.putInt("id", mId);
                 JumpUtils.jumpFade(OfficialAccountListActivity.this, SearchActivity.class, bundle);

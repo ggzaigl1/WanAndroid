@@ -8,6 +8,7 @@ import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.CourseList;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.HomeBean;
+import com.example.gab.babylove.entity.HotKeyBean;
 import com.example.gab.babylove.entity.ListProjectBean;
 import com.example.gab.babylove.entity.LoginBean;
 import com.example.gab.babylove.entity.NavigationBean;
@@ -110,7 +111,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("hotkey/json")
-    Observable<BeanModule<List<BookmarkBean>>> getHotkeykList();
+    Observable<BeanModule<HotKeyBean>> getHotkeykList();
 
     /**
      * 视图导航
@@ -179,7 +180,7 @@ public interface ApiService {
     @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("article/query/{pageNum}/json")
-    Observable<BeanModule<ArticleBean>> getQuery(@Path("pageNum") int pageNum, @Field("k") String queryKey);
+    Observable<BeanModule<OfficialAccountListBean>> getQuery(@Path("pageNum") int pageNum, @Field("k") String queryKey);
 
     /**
      * 获取公众号列表

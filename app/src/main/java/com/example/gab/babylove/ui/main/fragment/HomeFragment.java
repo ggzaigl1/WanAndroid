@@ -276,7 +276,7 @@ public class HomeFragment extends BaseFragment {
      */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new HomeAdapter(R.layout.item_home, new ArrayList<>());
+        mAdapter = new HomeAdapter( new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             // 详情
             WebViewActivity.startWebActivity(getActivity()

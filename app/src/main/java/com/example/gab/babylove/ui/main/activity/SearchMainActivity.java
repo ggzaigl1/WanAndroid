@@ -36,10 +36,10 @@ import butterknife.BindView;
 
 /**
  * Created by 初夏小溪 on 2018/5/11 0011.
- * 搜索界面
+ * 搜索界面 Main主页
  */
 
-public class SearchActivity extends BaseActivity implements IBaseActivity {
+public class SearchMainActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
@@ -48,7 +48,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    int mPageOffNo = 1;
+    int mPageNo = 0;
     int mId;
     String queryKey;
     OfficialAccountListAdapter mOfficialAccountListAdapter;
@@ -70,7 +70,8 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // 给左上角图标的左边加上一个返回的图标
         mToolbar.setNavigationOnClickListener(v -> JumpUtils.exitActivity(this));
         queryKey = getIntent().getStringExtra("query");
-        getQuery(mPageOffNo, queryKey);
+        mId = getIntent().getIntExtra("id", 0);
+        getQuery(mPageNo, queryKey);
         initRecyle();
         initRefresh();
 
@@ -78,6 +79,8 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
 
     /**
      * 搜索接口
+     * type =1 公众号
+     * type =2 首页搜索
      *
      * @param pageNum
      * @param queryKey
@@ -85,7 +88,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
     private void getQuery(int pageNum, String queryKey) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .getWxarticleQuery(mId, pageNum, queryKey)
+                .getQuery(pageNum, queryKey)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
                 .subscribe(new NetCallBack<OfficialAccountListBean>() {
@@ -171,6 +174,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                 });
     }
 
+
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mOfficialAccountListAdapter = new OfficialAccountListAdapter(new ArrayList<>());
@@ -213,14 +217,14 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                mPageOffNo += 1;
-                getQuery(mPageOffNo, queryKey);
+                mPageNo += 1;
+                getQuery(mPageNo, queryKey);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                mPageOffNo = 1;
-                getQuery(mPageOffNo, queryKey);
+                mPageNo = 0;
+                getQuery(mPageNo, queryKey);
             }
         });
     }

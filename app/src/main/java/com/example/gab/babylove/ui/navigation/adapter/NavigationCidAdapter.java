@@ -18,10 +18,10 @@ import java.util.List;
 
 public class NavigationCidAdapter extends BaseQuickAdapter<NavigationBean.ArticlesBean, BaseViewHolder> {
 
-    List<NavigationBean.ArticlesBean> mList;
+    private List<NavigationBean.ArticlesBean> mList;
 
-    public NavigationCidAdapter(int layoutResId, @Nullable List<NavigationBean.ArticlesBean> data) {
-        super(layoutResId, data);
+    public NavigationCidAdapter(@Nullable List<NavigationBean.ArticlesBean> data) {
+        super(R.layout.item_navigation_cid, data);
         this.mList = data;
     }
 

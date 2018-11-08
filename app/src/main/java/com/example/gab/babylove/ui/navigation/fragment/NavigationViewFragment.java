@@ -125,7 +125,7 @@ public class NavigationViewFragment extends BaseFragment {
         layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
         mRecyclerView_Context.scrollToPosition(0);
         mRecyclerView_Context.setLayoutManager(layoutManager);
-        mNavigationCidAdapter = new NavigationCidAdapter(R.layout.item_navigation_cid, new ArrayList<>());
+        mNavigationCidAdapter = new NavigationCidAdapter(new ArrayList<>());
         mNavigationCidAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(getActivity()
                     , mNavigationCidAdapter.getData().get(position).getLink()
