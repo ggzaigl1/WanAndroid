@@ -13,6 +13,7 @@ import com.example.gab.babylove.ui.navigation.adapter.NavigationCidAdapter;
 import com.example.gab.babylove.ui.navigation.adapter.NavigationViewAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
+import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
@@ -24,6 +25,7 @@ import com.google.android.flexbox.JustifyContent;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -65,16 +67,25 @@ public class NavigationViewFragment extends BaseFragment {
     private void getNavigationList() {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .getNaviList()
+                .getNavigationList()
                 .compose(RxHelper.handleResult())
-                .subscribe(navigationBeanBeanModule -> {
-                    if (null != navigationBeanBeanModule) {
-                        mKProgressHUD.dismiss();
-                        mAdapter.setNewData(navigationBeanBeanModule);
-                        if (mSelectedPos == 0) {
-                            mAdapter.getData().get(mSelectedPos).setSelected(true);
-                            mNavigationCidAdapter.setNewData(navigationBeanBeanModule.get(mSelectedPos).getArticles());
+                .compose(RxHelper.bindToLifecycle(getActivity()))
+                .subscribe(new NetCallBack<List<NavigationBean>>() {
+                    @Override
+                    protected void onSuccess(List<NavigationBean> navigationBeans) {
+                        if (null != navigationBeans) {
+                            mKProgressHUD.dismiss();
+                            mAdapter.setNewData(navigationBeans);
+                            if (mSelectedPos == 0) {
+                                mAdapter.getData().get(mSelectedPos).setSelected(true);
+                                mNavigationCidAdapter.setNewData(navigationBeans.get(mSelectedPos).getArticles());
+                            }
                         }
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
                     }
                 });
     }

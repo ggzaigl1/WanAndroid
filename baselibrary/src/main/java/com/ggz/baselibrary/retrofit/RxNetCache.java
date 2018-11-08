@@ -1,6 +1,6 @@
 package com.ggz.baselibrary.retrofit;
 
-import com.ggz.baselibrary.application.BaseApp;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.LogUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
@@ -46,7 +46,7 @@ public class RxNetCache {
     public <T> Observable<T> request(Observable<T> fromNetwork) {
 
         Observable<T> fromCache = Observable.create((ObservableOnSubscribe<T>) subscriber -> {
-            ACache mCache = ACache.get(BaseApp.getAppCtx());
+            ACache mCache = ACache.get(ConfigUtils.getAppCtx());
             T cache = (T) mCache.getAsObject(builder.getApi());
             if (null != cache) {
                 LogUtils.e("net cache", cache.toString());
@@ -58,7 +58,7 @@ public class RxNetCache {
 
         fromNetwork = fromNetwork.doOnNext(result -> {
             LogUtils.e("net doOnNext", result.toString());
-            ACache mCache = ACache.get(BaseApp.getAppCtx());
+            ACache mCache = ACache.get(ConfigUtils.getAppCtx());
             mCache.put(builder.getApi(), (Serializable)result, builder.getExpireTime());
         });
 
@@ -89,7 +89,7 @@ public class RxNetCache {
             return this;
         }
 
-        public int getExpireTime() {
+        int getExpireTime() {
             return expireTime;
         }
 

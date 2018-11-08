@@ -29,7 +29,9 @@ import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
@@ -270,12 +272,19 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> {
-                    mKProgressHUD.dismiss();
-                    T.showShort(getString(R.string.collection_success));
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        mKProgressHUD.dismiss();
+                        T.showShort(getString(R.string.collection_success));
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
                 });
     }
 

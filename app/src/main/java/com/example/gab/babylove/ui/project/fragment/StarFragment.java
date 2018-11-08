@@ -57,6 +57,7 @@ public class StarFragment extends BaseFragment {
         RequestUtils.create(ApiService.class)
                 .getProjectList()
                 .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(getActivity()))
                 .subscribe(new NetCallBack<List<ProjectBean>>() {
                     @Override
                     protected void onSuccess(List<ProjectBean> beanModule) {

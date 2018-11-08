@@ -9,7 +9,7 @@
     <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:titleTextColor="@color/white">
@@ -18,13 +18,16 @@
         <!--android:background="?attr/colorPrimary"-->
         <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
 
-
-        <!--<TextView-->
-        <!--android:id="@+id/tvName"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center"-->
-        <!--android:text="Google Assistant"/>-->
+        <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="24dp"
+                android:paddingLeft="24dp"
+                android:singleLine="true"
+                android:visibility="gone"
+                android:textSize="18sp"/>
 
     </android.support.v7.widget.Toolbar>
 

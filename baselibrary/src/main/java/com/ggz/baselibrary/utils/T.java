@@ -1,14 +1,16 @@
 package com.ggz.baselibrary.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ggz.baselibrary.R;
-import com.ggz.baselibrary.application.BaseApp;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 
 /**
  * <pre>
@@ -20,13 +22,94 @@ import com.ggz.baselibrary.application.BaseApp;
  */
 public class T {
 
-    /** 显示toast 开关 */
+    /**
+     * 显示toast 开关
+     */
     public static boolean isShow = true;
     private static Toast toast;
 
     private T() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
+    }
+
+    /**
+     * 短时间显示Toast
+     *
+     * @param message
+     */
+    public static void showShort(CharSequence message) {
+        show(message.toString(), Toast.LENGTH_SHORT);
+    }
+
+    /**
+     * 短时间显示Toast
+     *
+     * @param message
+     */
+    public static void showShort(int message) {
+        show(ResourceUtils.getStr(message), Toast.LENGTH_SHORT);
+    }
+
+    /**
+     * 长时间显示Toast
+     *
+     * @param message
+     */
+    public static void showLong(CharSequence message) {
+        show(message.toString(), Toast.LENGTH_LONG);
+    }
+
+    /**
+     * 长时间显示Toast
+     *
+     * @param message
+     */
+    public static void showLong(int message) {
+        show(ResourceUtils.getStr(message), Toast.LENGTH_LONG);
+    }
+
+    /**
+     * 显示系统 toast
+     *
+     * @param message 消息
+     */
+    @SuppressLint("ShowToast")
+    private static void show(String message, int duration) {
+        if (isShow) {
+            if (null == toast) {
+                toast = Toast.makeText(ConfigUtils.getAppCtx(), "", duration);
+            } else {
+                toast.cancel();
+                toast = Toast.makeText(ConfigUtils.getAppCtx(), "", duration);
+            }
+
+            toast.setText(message);
+            toast.show();
+        }
+    }
+
+
+    /**
+     * 自定义 布局的Toast
+     *
+     * @param duration
+     * @param message
+     * @param tLayouId  自定义布局
+     */
+    public static void showQulifier(int duration, CharSequence message, @LayoutRes int tLayouId) {
+        if (null == toast) {
+            LayoutInflater inflate = (LayoutInflater) ConfigUtils.getAppCtx().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflate.inflate(tLayouId, null);
+
+            toast = new Toast(ConfigUtils.getAppCtx());
+            toast.setView(view);
+            toast.setDuration(duration);
+        } else {
+            toast.setText(message);
+        }
+
+        show(message.toString(), Toast.LENGTH_LONG);
     }
 
     /**
@@ -63,60 +146,6 @@ public class T {
                 mToast = null;
                 mTvToast = null;
             }
-        }
-    }
-
-    /**
-     * 短时间显示Toast
-     *
-     * @param message
-     */
-    public static void showShort(CharSequence message) {
-        show(message.toString(), Toast.LENGTH_SHORT);
-    }
-
-    /**
-     * 短时间显示Toast
-     *
-     * @param message
-     */
-    public static void showShort(int message) {
-        show(BaseApp.getAppCtx().getResources().getString(message), Toast.LENGTH_SHORT);
-    }
-
-    /**
-     * 长时间显示Toast
-     *
-     * @param message
-     */
-    public static void showLong(CharSequence message) {
-        show(message.toString(), Toast.LENGTH_LONG);
-    }
-
-    /**
-     * 长时间显示Toast
-     *
-     * @param message
-     */
-    public static void showLong(int message) {
-        show(BaseApp.getAppCtx().getResources().getString(message), Toast.LENGTH_LONG);
-    }
-
-    /**
-     * 显示系统 toast
-     * @param message 消息
-     */
-    private static void show(String message, int duration){
-        if (isShow){
-
-            if (null == toast){
-                toast =  Toast.makeText(BaseApp.getAppCtx(), message, duration);
-            } else {
-                toast.setText(message);
-            }
-
-            toast.setDuration(duration);
-            toast.show();
         }
     }
 }

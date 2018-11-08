@@ -21,7 +21,9 @@ import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.ui.main.adapter.GankMAdapter;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.T;
@@ -36,6 +38,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -83,28 +86,38 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
      *
      * @param mCurPage
      */
+//      .compose(RxHelper.handleResult())
     @SuppressLint("CheckResult")
     private void getCourseDetails(int mCurPage) {
         RequestUtils.create(ApiService.class)
                 .getCourseDetails(50, mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(gankBean -> {
-                    if (null != gankBean && null != gankBean.getResults()) {
-                        if (mRefreshLayout.isRefreshing()) {
-                            mAdapter.setNewData(gankBean.getResults());
-                            mRefreshLayout.finishRefresh();
-                        } else if (mRefreshLayout.isLoading()) {
-                            mAdapter.getData().addAll(gankBean.getResults());
-                            mRefreshLayout.finishLoadMore();
-                            mAdapter.notifyDataSetChanged();
-                            T.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
-                        } else {
-                            mAdapter.setNewData(gankBean.getResults());
-                            T.showShort("加载了" + gankBean.getResults().size() + "妹子");
+                .subscribe(new NetCallBack<GankBean>() {
+                    @Override
+                    protected void onSuccess(GankBean gankBean) {
+                        if (null != gankBean && null != gankBean.getResults()) {
+                            if (mRefreshLayout.isRefreshing()) {
+                                mAdapter.setNewData(gankBean.getResults());
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mAdapter.getData().addAll(gankBean.getResults());
+                                mRefreshLayout.finishLoadMore();
+                                mAdapter.notifyDataSetChanged();
+                                T.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
+                            } else {
+                                mAdapter.setNewData(gankBean.getResults());
+                                T.showShort("加载了" + gankBean.getResults().size() + "妹子");
+                            }
                         }
                     }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
                 });
+
     }
 
     /**

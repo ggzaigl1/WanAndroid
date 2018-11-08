@@ -117,7 +117,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("navi/json")
-    Observable<BeanModule<List<NavigationBean>>> getNaviList();
+    Observable<BeanModule<List<NavigationBean>>> getNavigationList();
 
     /**
      * 项目
@@ -131,7 +131,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("article/listproject/{pageNum}/json")
-    Observable<BeanModule<ListProjectBean>> getListproject(@Path("pageNum") int pageNum);
+    Observable<BeanModule<ListProjectBean>> getListProject(@Path("pageNum") int pageNum);
 
     /**
      * 收藏文章列表
@@ -143,10 +143,10 @@ public interface ApiService {
     /**
      * 更新
      */
-    @FormUrlEncoded
-    @Headers({"url_name:user"})
-    @POST("lg/collect/{id}/json")
-    Observable<BeanModule<UpdateAppInfoBean>> getupdata(@Path("id") int articleId, @Field("reason") String reason);
+//    @FormUrlEncoded
+//    @Headers({"url_name:user"})
+//    @POST("lg/collect/{id}/json")
+//    Observable<BeanModule<UpdateAppInfoBean>> getupdata(@Path("id") int articleId, @Field("reason") String reason);
 
     /**
      * 收藏站内文章
@@ -162,7 +162,7 @@ public interface ApiService {
     @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("lg/uncollect_originId/{id}/json")
-    Observable<BeanModule<Object>> uncollectArticle(@Path("id") int articleId,
+    Observable<BeanModule<Object>> unCollectArticle(@Path("id") int articleId,
                                                     @Field("reason") String reason);
 
     /**

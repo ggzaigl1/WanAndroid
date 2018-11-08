@@ -71,6 +71,7 @@ public class SystemStarFragment extends BaseFragment {
         RequestUtils.create(ApiService.class)
                 .getArticleList(mPageNo, id)
                 .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(getActivity()))
                 .subscribe(new NetCallBack<ArticleBean>() {
                     @Override
                     protected void onSuccess(ArticleBean articleBean) {

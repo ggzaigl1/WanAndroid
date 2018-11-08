@@ -19,16 +19,16 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.LoginBean;
-import com.ggz.baselibrary.application.BaseApp;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.LogUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
+import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -172,6 +172,9 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
 
     }
 
+    /**
+     * 注册
+     */
     private void register() {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         String mUserName = editRegisterName.getText().toString().trim();
@@ -184,11 +187,11 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
         RequestUtils.create(ApiService.class)
                 .getRegister(param)
                 .compose(RxHelper.handleResult())
-//                .doOnSubscribe(RequestUtils::addDispos)
+                .compose(RxHelper.bindToLifecycle(this))
                 .subscribe(new NetCallBack<LoginBean>() {
                     @Override
                     protected void onSuccess(LoginBean login) {
-                        ACache mCache = ACache.get(BaseApp.getAppCtx());
+                        ACache mCache = ACache.get(ConfigUtils.getAppCtx());
                         mCache.put(ConstantUtils.userName, login);
 
                         SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
@@ -198,6 +201,7 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
                         bundle.putString("LoginBean", mCache.getAsString("User_Name"));
                         JumpUtils.jump(RegisterActivity.this, MainActivity.class, bundle);
                         mKProgressHUD.dismiss();
+                        T.showShort("注册账号成功");
                     }
 
                     @Override

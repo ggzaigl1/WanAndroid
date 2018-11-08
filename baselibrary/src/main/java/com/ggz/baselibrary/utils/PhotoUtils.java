@@ -13,7 +13,8 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 
-import com.ggz.baselibrary.application.BaseApp;
+
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -121,7 +122,7 @@ public class PhotoUtils {
      * @return 获取图像的Bitmap
      */
     public static Bitmap getBitmapFromUri(Uri uri) {
-        Context mContext = BaseApp.getAppCtx();
+        Context mContext = ConfigUtils.getAppCtx();
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), uri);
             return bitmap;

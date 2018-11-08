@@ -26,7 +26,7 @@ public class BeanModule<T> implements Serializable{
         this.data = data;
     }
 
-    public int getErrorCode() {
+    int getErrorCode() {
         return errorCode;
     }
 

@@ -73,8 +73,9 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
     private void getListProject(int mPageNo) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .getListproject(mPageNo)
+                .getListProject(mPageNo)
                 .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
                 .subscribe(new NetCallBack<ListProjectBean>() {
                     @Override
                     protected void onSuccess(ListProjectBean listProjectBean) {

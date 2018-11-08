@@ -27,7 +27,9 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author 初夏小溪
@@ -101,22 +103,28 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
         RequestUtils.create(ApiService.class)
                 .getCollectList(mPageNo)
                 .compose(RxHelper.handleResult())
-                .subscribe(new Consumer<CollectBean>() {
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<CollectBean>() {
                     @Override
-                    public void accept(CollectBean collectBeanBeanModule) throws Exception {
-                        if (null != collectBeanBeanModule) {
+                    protected void onSuccess(CollectBean collectBean) {
+                        if (null != collectBean) {
                             if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(collectBeanBeanModule.getDatas());
+                                mAdapter.setNewData(collectBean.getDatas());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(collectBeanBeanModule.getDatas());
+                                mAdapter.getData().addAll(collectBean.getDatas());
                                 mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
                             } else {
-                                mAdapter.setNewData(collectBeanBeanModule.getDatas());
+                                mAdapter.setNewData(collectBean.getDatas());
                             }
                             mKProgressHUD.dismiss();
                         }
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
                     }
                 });
     }
@@ -149,7 +157,7 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
         RequestUtils.create(ApiService.class)
                 .unMyCollectArticle(id, OriginId)
                 .compose(RxHelper.handleResult())
-                .doOnSubscribe(RequestUtils::addDispos)
+                .compose(RxHelper.bindToLifecycle(this))
                 .subscribe(new NetCallBack<Object>() {
                     @Override
                     protected void onSuccess(Object t) {
@@ -176,5 +184,4 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
             mRefreshLayout.finishLoadMore();
         }
     }
-
 }

@@ -72,7 +72,7 @@ public class OrnamentalListContextActivity extends BaseActivity implements IBase
                 .getCourseList(mPageNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(RequestUtils::addDispos)
+                .doOnSubscribe(RequestUtils::addDisposable)
                 .subscribe(new NetCallBack<CourseList>() {
                     @Override
                     protected void onSuccess(CourseList t) {

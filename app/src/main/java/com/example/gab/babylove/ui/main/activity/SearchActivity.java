@@ -38,6 +38,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -117,7 +119,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
             RequestUtils.create(ApiService.class)
                     .getWxarticleQuery(mId, pageNum, queryKey)
                     .compose(RxHelper.handleResult())
-                    .doOnSubscribe(RequestUtils::addDispos)
+                    .compose(RxHelper.bindToLifecycle(this))
                     .subscribe(new NetCallBack<OfficialAccountListBean>() {
                         @Override
                         protected void onSuccess(OfficialAccountListBean officialAccountListBean) {
@@ -152,7 +154,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
             RequestUtils.create(ApiService.class)
                     .getQuery(pageNum, queryKey)
                     .compose(RxHelper.handleResult())
-                    .doOnSubscribe(RequestUtils::addDispos)
+                    .compose(RxHelper.bindToLifecycle(this))
                     .subscribe(new NetCallBack<ArticleBean>() {
                         @Override
                         protected void onSuccess(ArticleBean articleBean) {
@@ -195,12 +197,19 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> {
-                    mKProgressHUD.dismiss();
-                    T.showShort(getString(R.string.collection_success));
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        mKProgressHUD.dismiss();
+                        T.showShort(getString(R.string.collection_success));
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
                 });
     }
 
@@ -210,15 +219,23 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
      * @param id
      */
     @SuppressLint("CheckResult")
-    private void uncollectArticle(int id) {
+    private void unCollectArticle(int id) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .uncollectArticle(id, "")
+                .unCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
-                .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> {
-                    mKProgressHUD.dismiss();
-                    T.showShort(getString(R.string.cancel_collection_success));
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        T.showShort(getString(R.string.cancel_collection_success));
+                        mKProgressHUD.dismiss();
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
                 });
     }
 
@@ -238,7 +255,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                     case R.id.image_collect:
                         if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
                             if (mOfficialAccountListAdapter.getData().get(position).isCollect()) { //收藏
-                                uncollectArticle(mOfficialAccountListAdapter.getData().get(position).getId());
+                                unCollectArticle(mOfficialAccountListAdapter.getData().get(position).getId());
                                 mOfficialAccountListAdapter.getData().get(position).setCollect(false);
                                 mOfficialAccountListAdapter.notifyItemChanged(position, "");
                             } else {
@@ -269,7 +286,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                     case R.id.image_collect:
                         if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
                             if (mAdapter.getData().get(position).isCollect()) { //收藏
-                                uncollectArticle(mAdapter.getData().get(position).getId());
+                                unCollectArticle(mAdapter.getData().get(position).getId());
                                 mAdapter.getData().get(position).setCollect(false);
                                 mAdapter.notifyItemChanged(position, "");
                             } else {

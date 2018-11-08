@@ -55,6 +55,7 @@ public class NewsFragment extends BaseFragment {
         RequestUtils.create(ApiService.class)
                 .getTreeList()
                 .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(getActivity()))
                 .subscribe(new NetCallBack<List<TreeBean>>() {
                     @Override
                     protected void onSuccess(List<TreeBean> listBeanModule) {

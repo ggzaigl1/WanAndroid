@@ -23,16 +23,14 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.LoginBean;
-import com.ggz.baselibrary.application.BaseApp;
 import com.ggz.baselibrary.application.IBaseActivity;
-import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
+import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
-import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -41,8 +39,6 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * 登录
@@ -137,31 +133,27 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
         param.put("password", mPassWord);
         RequestUtils.create(ApiService.class)
                 .getLogin(param)
-                .subscribeOn(Schedulers.io())//在IO线程进行网络请求
-                .observeOn(AndroidSchedulers.mainThread())//回到主线程去处理请求结果
-                .subscribe(new NetCallBack<BeanModule<LoginBean>>() {
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<LoginBean>() {
                     @Override
-                    protected void onSuccess(BeanModule<LoginBean> login) {
-                        if (login.isSuccess()) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                ACache mCache = ACache.get(BaseApp.getAppCtx());
-                                mCache.put(ConstantUtils.userName, login);
-                                SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
-                                SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getData().getUsername());
-                                Bundle bundle = new Bundle();
-                                bundle.putString("LoginBean", mCache.getAsString("User_Name"));
-                                Explode explode = new Explode();
-                                explode.setDuration(500);
-                                getWindow().setExitTransition(explode);
-                                getWindow().setEnterTransition(explode);
-                                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-                                JumpUtils.jump(LoginActivity.this, MainActivity.class, activityOptionsCompat.toBundle());
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent, activityOptionsCompat.toBundle());
-                                mKProgressHUD.dismiss();
-                            }
-                        } else {
-                            T.showShort(login.getErrorMsg());
+                    protected void onSuccess(LoginBean login) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            ACache mCache = ACache.get(ConfigUtils.getAppCtx());
+                            mCache.put(ConstantUtils.userName, login);
+                            SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
+                            SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getUsername());
+                            Bundle bundle = new Bundle();
+                            bundle.putString("LoginBean", mCache.getAsString("User_Name"));
+                            Explode explode = new Explode();
+                            explode.setDuration(500);
+                            getWindow().setExitTransition(explode);
+                            getWindow().setEnterTransition(explode);
+                            ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+                            JumpUtils.jump(LoginActivity.this, MainActivity.class, activityOptionsCompat.toBundle());
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent, activityOptionsCompat.toBundle());
+                            mKProgressHUD.dismiss();
                         }
                     }
 

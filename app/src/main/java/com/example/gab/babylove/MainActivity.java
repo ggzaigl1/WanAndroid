@@ -47,7 +47,7 @@ import com.example.gab.babylove.ui.view.fragment.NewsFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
-import com.ggz.baselibrary.application.BaseApp;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                         .onPositive((dialog, which) -> {
                             nev_header_tv_title.setText(R.string.notLogin);
                             nev_header_tv_login.setText(R.string.clickLogin);
-                            ACache mCache = ACache.get(BaseApp.getAppCtx());
+                            ACache mCache = ACache.get(ConfigUtils.getAppCtx());
                             mCache.clear();
                             SpfUtils.clear();
                             mHomeFragment.mRefreshLayout.autoRefresh();

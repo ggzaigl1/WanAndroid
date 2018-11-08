@@ -11,7 +11,8 @@ import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Environment;
 
-import com.ggz.baselibrary.application.BaseApp;
+
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 
 import java.io.File;
 import java.util.List;
@@ -37,7 +38,7 @@ public class AppUtils {
      */
     public static String getAppName() {
         try {
-            Context context = BaseApp.getAppCtx();
+            Context context = ConfigUtils.getAppCtx();
             PackageManager packageManager = context.getPackageManager();
             PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
             int labelRes = packageInfo.applicationInfo.labelRes;
@@ -54,7 +55,7 @@ public class AppUtils {
      * @return
      */
     public static int getVersionCode() {
-        Context context = BaseApp.getAppCtx();
+        Context context = ConfigUtils.getAppCtx();
         PackageInfo info = null;
         try {
             info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
@@ -72,7 +73,7 @@ public class AppUtils {
      * @return
      */
     public static String getLocalPackageName() {
-        Context context = BaseApp.getAppCtx();
+        Context context = ConfigUtils.getAppCtx();
         PackageManager packageManager = context.getPackageManager();
         PackageInfo info = null;
         try {
@@ -124,7 +125,7 @@ public class AppUtils {
      * @return the application's signature
      */
     public static Signature[] getAppSignature(final String packageName) {
-        Context context = BaseApp.getAppCtx();
+        Context context = ConfigUtils.getAppCtx();
 
         if (isSpace(packageName)) {
             return null;

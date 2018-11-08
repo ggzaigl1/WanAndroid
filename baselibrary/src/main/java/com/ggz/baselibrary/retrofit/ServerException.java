@@ -12,6 +12,4 @@ public class ServerException extends Exception{
         super(msg);
         this.code = code;
     }
-
-
 }

@@ -1,7 +1,6 @@
 package com.example.gab.babylove.ui.main.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -24,7 +23,6 @@ import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
-import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -47,8 +45,6 @@ import java.util.Map;
 import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Gab on 2017/12/15 0015.
@@ -134,18 +130,18 @@ public class HomeFragment extends BaseFragment {
         Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
                 .getBanner()
                 .compose(RxHelper.handleResult())
-                .observeOn(Schedulers.io());
+                .compose(RxHelper.bindToLifecycle(getActivity()));
 
         Observable<ArticleBean> observable2 = RequestUtils.create(ApiService.class)
                 .getArticleHomeList(mPageNo)
                 .compose(RxHelper.handleResult())
-                .observeOn(Schedulers.io());
+                .compose(RxHelper.bindToLifecycle(getActivity()));
         Observable.zip(observable1, observable2, (bannerBean, articleBean) -> {
             Map<String, Object> map = new HashMap<>();
             map.put("banner", bannerBean);
             map.put("article", articleBean);
             return map;
-        }).doOnSubscribe(RequestUtils::addDispos)
+        }).doOnSubscribe(RequestUtils::addDisposable)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetCallBack<Map<String, Object>>() {
                     @Override
@@ -198,10 +194,11 @@ public class HomeFragment extends BaseFragment {
         RequestUtils.create(ApiService.class)
                 .getArticleHomeList(mCurPage)
                 .compose(RxHelper.handleResult())
-                .subscribe(new Consumer<ArticleBean>() {
+                .compose(RxHelper.bindToLifecycle(getActivity()))
+                .subscribe(new NetCallBack<ArticleBean>() {
                     @Override
-                    public void accept(ArticleBean articleBean) throws Exception {
-                        if (null != articleBean && null != articleBean) {
+                    protected void onSuccess(ArticleBean articleBean) {
+                        if (null != articleBean) {
                             if (mRefreshLayout.isRefreshing()) {
                                 mAdapter.setNewData(articleBean.getDatas());
                                 mRefreshLayout.finishRefresh();
@@ -221,6 +218,11 @@ public class HomeFragment extends BaseFragment {
                         }
                         mKProgressHUD.dismiss();
                     }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
                 });
     }
 
@@ -233,17 +235,12 @@ public class HomeFragment extends BaseFragment {
     private void collectArticle(int id) {
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(new NetCallBack<BeanModule<Object>>() {
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(getActivity()))
+                .subscribe(new NetCallBack<Object>() {
                     @Override
-                    protected void onSuccess(BeanModule<Object> t) {
-                        if (t.isSuccess()) {
-                            T.showShort(HomeFragment.this.getString(R.string.collection_success));
-                        } else {
-                            T.showShort(t.getErrorMsg());
-                        }
+                    protected void onSuccess(Object t) {
+                        T.showShort(getString(R.string.collection_success));
                     }
 
                     @Override
@@ -255,12 +252,23 @@ public class HomeFragment extends BaseFragment {
 
     //    取消收藏
     @SuppressLint("CheckResult")
-    private void uncollectArticle(int id) {
+    private void unCollectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .uncollectArticle(id, "")
+                .unCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
-                .doOnSubscribe(RequestUtils::addDispos)
-                .subscribe(objectBeanModule -> T.showShort(getString(R.string.cancel_collection_success)));
+                .compose(RxHelper.bindToLifecycle(getActivity()))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        T.showShort(getString(R.string.cancel_collection_success));
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
     }
 
     /**
@@ -282,7 +290,7 @@ public class HomeFragment extends BaseFragment {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
                         if (mAdapter.getData().get(position).isCollect()) { //收藏
-                            uncollectArticle(mAdapter.getData().get(position).getId());
+                            unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {

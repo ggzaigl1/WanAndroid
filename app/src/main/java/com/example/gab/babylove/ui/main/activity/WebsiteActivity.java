@@ -12,6 +12,7 @@ import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.ui.main.adapter.WebsiteAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.google.android.flexbox.AlignItems;
@@ -68,13 +69,19 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
         RequestUtils.create(ApiService.class)
                 .getBookmarkList()
                 .compose(RxHelper.handleResult())
-                .subscribe(new Consumer<List<BookmarkBean>>() {
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<List<BookmarkBean>>() {
                     @Override
-                    public void accept(List<BookmarkBean> listBeanModule) throws Exception {
-                        if (null != listBeanModule && null != listBeanModule) {
+                    protected void onSuccess(List<BookmarkBean> listBeanModule) {
+                        if (null != listBeanModule) {
                             mAdapter.setNewData(listBeanModule);
                             mKProgressHUD.dismiss();
                         }
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
                     }
                 });
     }
