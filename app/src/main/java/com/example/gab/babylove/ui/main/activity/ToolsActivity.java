@@ -8,7 +8,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -35,7 +34,6 @@ import com.example.gab.babylove.utils.CustomDialog;
 import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusBarUtils.StatusBar;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.T;
@@ -355,6 +353,8 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             super.onPostExecute(result);
             if (result == 1) {
                 T.showShort("下载完成");
+            } else {
+                T.showShort("下载失败");
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 //关闭通知通道
@@ -403,16 +403,16 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
         @RequiresApi(api = Build.VERSION_CODES.O)
         private Notification.Builder getNotificationBuilder() {
             //id随便指定
-            NotificationChannel channel = new NotificationChannel("wanAndroid_id", "wanAndroid_name", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.canBypassDnd();//可否绕过，请勿打扰模式
-            channel.enableLights(true);//闪光
+            NotificationChannel channel = new NotificationChannel("wanAndroid_id", "wanAndroid_name", NotificationManager.IMPORTANCE_LOW);
+//            channel.canBypassDnd();//可否绕过，请勿打扰模式
+//            channel.enableLights(true)// 设置通知出现时的闪灯（如果 android 设备支持的话）
             channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
-            channel.setLightColor(Color.RED);//指定闪光是的灯光颜色
+//            channel.setLightColor(Color.RED);//指定闪光是的灯光颜色
             channel.canShowBadge();//桌面laucher消息角标
 //            channel.enableVibration(true);//是否允许震动
-            channel.getAudioAttributes();//获取系统通知响铃声音配置
+//            channel.getAudioAttributes();//获取系统通知响铃声音配置
             channel.getGroup();//获取通知渠道组
-            channel.setBypassDnd(true);//设置可以绕过，请勿打扰模式
+//            channel.setBypassDnd(true);//设置可以绕过，请勿打扰模式
 //                channel.setVibrationPattern(new long[]{100, 100, 200});//震动的模式，震3次，第一次100，第二次100，第三次200毫秒
 //                channel.shouldShowLights();//是否会闪光
             //通知管理者创建的渠道
@@ -435,11 +435,11 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
          */
         void installAPK(Activity activity) {
             String authority = BuildConfig.APPLICATION_ID + ".provider";
-            activity.startActivity(getInstallAppIntent(authority, true));
+            activity.startActivity(getInstallAppIntent(authority));
         }
     }
 
-    private Intent getInstallAppIntent(final String authority, final boolean isNewTask) {
+    private Intent getInstallAppIntent(final String authority) {
         if (mFile == null) return null;
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -465,11 +465,11 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             mNotification = builder.build();
         }
         mNotificationManager.notify(0, mNotification);
-        return getIntent(intent, isNewTask);
+        return getIntent(intent);
     }
 
-    private Intent getIntent(final Intent intent, final boolean isNewTask) {
-        return isNewTask ? intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) : intent;
+    private Intent getIntent(final Intent intent) {
+        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override
