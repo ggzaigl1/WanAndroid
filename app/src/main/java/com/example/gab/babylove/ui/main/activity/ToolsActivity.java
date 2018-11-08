@@ -34,6 +34,7 @@ import com.example.gab.babylove.utils.CustomDialog;
 import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusBarUtils.StatusBar;
+import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.T;
@@ -110,7 +111,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
-    @OnClick({R.id.Ll_cache_clear, R.id.Ll_praise, R.id.Ll_check_update})
+    @OnClick({R.id.Ll_cache_clear, R.id.Ll_praise, R.id.Ll_check_update, R.id.Ll_check_test})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -126,6 +127,9 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             //版本更新
             case R.id.Ll_check_update:
                 GetVersionUpdate();
+                break;
+            case R.id.Ll_check_test:
+                JumpUtils.jump(this, TestActivity.class, null);
                 break;
             default:
                 break;

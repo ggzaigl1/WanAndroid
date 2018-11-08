@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * Created by 初夏小溪 on 2018/10/17 0017.
  */
-public class NewProjectAdapter  extends BaseQuickAdapter<ListProjectBean.DatasBean, BaseViewHolder> {
+public class NewProjectAdapter extends BaseQuickAdapter<ListProjectBean.DatasBean, BaseViewHolder> {
 
-    public NewProjectAdapter(int layoutResId, @Nullable List<ListProjectBean.DatasBean> data) {
-        super(layoutResId, data);
+    public NewProjectAdapter(@Nullable List<ListProjectBean.DatasBean> data) {
+        super(R.layout.item_fly , data);
     }
 
     @Override
@@ -26,6 +26,6 @@ public class NewProjectAdapter  extends BaseQuickAdapter<ListProjectBean.DatasBe
                 .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
                 .setText(R.id.tv_date, item.getNiceDate())
                 .setText(R.id.tv_chapterName, "分类：" + item.getChapterName()).setTextColor(R.id.tv_chapterName, ResourceUtils.getRandomColor());
-        ImgLoadUtils.loadImage(mContext,item.getEnvelopePic(),helper.getView(R.id.item_project_list_iv));
+        ImgLoadUtils.loadImage(mContext, item.getEnvelopePic(), helper.getView(R.id.item_project_list_iv));
     }
 }

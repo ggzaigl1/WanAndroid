@@ -111,7 +111,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("hotkey/json")
-    Observable<BeanModule<HotKeyBean>> getHotkeykList();
+    Observable<BeanModule<List<HotKeyBean>>> getHotKeyList();
 
     /**
      * 视图导航

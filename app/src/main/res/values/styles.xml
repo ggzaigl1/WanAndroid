@@ -21,7 +21,8 @@
         <!-- 系统分割线 -->
         <item name="android:listDivider">@drawable/divider_bg</item>
         <item name="android:textAllCaps">false</item><!-- 所有字母是否大写 -->
-        <item name="android:windowAnimationStyle">@android:style/Animation.Toast</item> <!--recreate 闪屏过渡动画-->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Toast
+        </item> <!--recreate 闪屏过渡动画-->
 
     </style>
     <!--AppBarLayout theme-->

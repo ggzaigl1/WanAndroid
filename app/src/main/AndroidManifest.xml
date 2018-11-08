@@ -196,6 +196,12 @@
                 android:name=".ui.main.activity.UpdateActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
+        <!--Test-->
+        <activity
+                android:name=".ui.main.activity.TestActivity"
+                android:label="@string/notLogin"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait"/>
 
         <activity
                 android:name="utils.SelectorButtonActivity"

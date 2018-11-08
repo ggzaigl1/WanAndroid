@@ -142,7 +142,7 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
 
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new NewProjectAdapter(R.layout.item_fly, new ArrayList<>());
+        mAdapter = new NewProjectAdapter(new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()

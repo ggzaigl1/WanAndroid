@@ -7,9 +7,15 @@
             android:id="@+id/action_search"
             android:icon="@mipmap/icon_menu_search"
             app:actionViewClass="android.support.v7.widget.SearchView"
-            app:showAsAction="ifRoom|collapseActionView"
-            android:inputType="textCapWords"
-            android:imeOptions="actionSearch"
-            android:title="search"/>
+            app:showAsAction="collapseActionView"
+            android:title=""/>
+    <!--<item-->
+            <!--android:id="@+id/action_search"-->
+            <!--android:icon="@mipmap/icon_menu_search"-->
+            <!--app:actionViewClass="android.support.v7.widget.SearchView"-->
+            <!--app:showAsAction="ifRoom|collapseActionView"-->
+            <!--android:inputType="textCapWords"-->
+            <!--android:imeOptions="actionSearch"-->
+            <!--android:title="search"/>-->
 
 </menu>

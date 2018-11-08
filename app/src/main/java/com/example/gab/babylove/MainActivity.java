@@ -38,6 +38,7 @@ import com.example.gab.babylove.ui.main.activity.OfficialAccountActivity;
 import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
 import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
 import com.example.gab.babylove.ui.main.activity.SearchMainActivity;
+import com.example.gab.babylove.ui.main.activity.TestActivity;
 import com.example.gab.babylove.ui.main.activity.ToolsActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
@@ -314,27 +315,37 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main_search, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setQueryHint(getString(R.string.search_knowledge));
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Bundle bundle = new Bundle();
-                bundle.putString("query", query);
-                JumpUtils.jumpFade(MainActivity.this, SearchMainActivity.class, bundle);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+//        searchView.setQueryHint(getString(R.string.search_knowledge));
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString("query", query);
+//                JumpUtils.jumpFade(MainActivity.this, SearchMainActivity.class, bundle);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_search:
+                JumpUtils.jumpFade(MainActivity.this, TestActivity.class, null);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
 
     @Override
     public void onBackPressed() {
