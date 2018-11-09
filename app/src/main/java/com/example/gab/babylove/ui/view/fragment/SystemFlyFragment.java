@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.ArticleBean;
+import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.view.adapter.SystemFlyAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
@@ -68,12 +68,12 @@ public class SystemFlyFragment extends BaseFragment {
                 .getArticleList(mPageNo, id)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))
-                .subscribe(new NetCallBack<ArticleBean>() {
+                .subscribe(new NetCallBack<BaseBean>() {
                     @Override
-                    protected void onSuccess(ArticleBean articleBean) {
-                        if (null != articleBean) {
+                    protected void onSuccess(BaseBean baseBean) {
+                        if (null != baseBean) {
                             mKProgressHUD.dismiss();
-                            mAdapter.setNewData(articleBean.getDatas());
+                            mAdapter.setNewData(baseBean.getDatas());
                         }
                     }
 
@@ -87,7 +87,7 @@ public class SystemFlyFragment extends BaseFragment {
 
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new SystemFlyAdapter(R.layout.item_home, new ArrayList<>());
+        mAdapter = new SystemFlyAdapter(R.layout.item_base_list, new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(mContext, mAdapter.getData().get(position).getLink() , mAdapter.getData().get(position).getId());// 详情
             mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

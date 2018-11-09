@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.ArticleBean;
+import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.main.adapter.NewProjectAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -74,9 +74,9 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                 .getListProject(mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<ArticleBean>() {
+                .subscribe(new NetCallBack<BaseBean>() {
                     @Override
-                    protected void onSuccess(ArticleBean listProjectBean) {
+                    protected void onSuccess(BaseBean listProjectBean) {
                         if (null != listProjectBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {

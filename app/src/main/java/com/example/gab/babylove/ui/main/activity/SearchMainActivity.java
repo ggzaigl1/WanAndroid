@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.ArticleBean;
-import com.example.gab.babylove.ui.main.adapter.SearchParticularsListAdapter;
+import com.example.gab.babylove.entity.BaseBean;
+import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -50,7 +50,7 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
 
     int mPageNo = 0;
     String queryKey;
-    SearchParticularsListAdapter mSearchParticularsListAdapter;
+    BaseAdapter mAdapter;
 
     @Override
     public boolean isShowHeadView() {
@@ -89,20 +89,20 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
                 .getQuery(pageNum, queryKey)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<ArticleBean>() {
+                .subscribe(new NetCallBack<BaseBean>() {
                     @Override
-                    protected void onSuccess(ArticleBean officialAccountListBean) {
+                    protected void onSuccess(BaseBean officialAccountListBean) {
                         if (null != officialAccountListBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
-                                mSearchParticularsListAdapter.setNewData(officialAccountListBean.getDatas());
+                                mAdapter.setNewData(officialAccountListBean.getDatas());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mSearchParticularsListAdapter.getData().addAll(officialAccountListBean.getDatas());
+                                mAdapter.getData().addAll(officialAccountListBean.getDatas());
                                 mRefreshLayout.finishLoadMore();
-                                mSearchParticularsListAdapter.notifyDataSetChanged();
+                                mAdapter.notifyDataSetChanged();
                             } else {
-                                mSearchParticularsListAdapter.setNewData(officialAccountListBean.getDatas());
+                                mAdapter.setNewData(officialAccountListBean.getDatas());
                             }
                         } else {
                             if (mRefreshLayout.isRefreshing()) {
@@ -175,25 +175,25 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
 
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mSearchParticularsListAdapter = new SearchParticularsListAdapter(new ArrayList<>());
-        mSearchParticularsListAdapter.setOnItemClickListener((adapter, view, position) -> {
+        mAdapter = new BaseAdapter(new ArrayList<>());
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
-                    , mSearchParticularsListAdapter.getData().get(position).getLink()
-                    , mSearchParticularsListAdapter.getData().get(position).getId());// 详情
+                    , mAdapter.getData().get(position).getLink()
+                    , mAdapter.getData().get(position).getId());// 详情
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mSearchParticularsListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mSearchParticularsListAdapter.getData().get(position).isCollect()) { //收藏
-                            unCollectArticle(mSearchParticularsListAdapter.getData().get(position).getId());
-                            mSearchParticularsListAdapter.getData().get(position).setCollect(false);
-                            mSearchParticularsListAdapter.notifyItemChanged(position, "");
+                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                            unCollectArticle(mAdapter.getData().get(position).getId());
+                            mAdapter.getData().get(position).setCollect(false);
+                            mAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(mSearchParticularsListAdapter.getData().get(position).getId());
-                            mSearchParticularsListAdapter.getData().get(position).setCollect(true);
-                            mSearchParticularsListAdapter.notifyItemChanged(position, "");
+                            collectArticle(mAdapter.getData().get(position).getId());
+                            mAdapter.getData().get(position).setCollect(true);
+                            mAdapter.notifyItemChanged(position, "");
                         }
                     } else {
                         JumpUtils.jumpFade(this, LoginActivity.class, null);
@@ -202,8 +202,8 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
                     break;
             }
         });
-        mRecyclerView.setAdapter(mSearchParticularsListAdapter);
-        mSearchParticularsListAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
     }
 
     /**

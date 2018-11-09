@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by Gab on 2018/3/13 0013.
+ * 体育运动 详情
  */
 
 public class OrnamentalContextAdapter extends BaseQuickAdapter<CourseDetails.DataBean.GroupsBean.ActionsBean, BaseViewHolder> {

@@ -10,14 +10,13 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.ArticleBean;
+import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.project.adapter.StarAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.ggz.baselibrary.rv.anim.FadeItemAnimator;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
@@ -72,12 +71,12 @@ public class SystemStarFragment extends BaseFragment {
                 .getArticleList(mPageNo, id)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))
-                .subscribe(new NetCallBack<ArticleBean>() {
+                .subscribe(new NetCallBack<BaseBean>() {
                     @Override
-                    protected void onSuccess(ArticleBean articleBean) {
-                        if (null != articleBean) {
+                    protected void onSuccess(BaseBean baseBean) {
+                        if (null != baseBean) {
                             mKProgressHUD.dismiss();
-                            mAdapter.setNewData(articleBean.getDatas());
+                            mAdapter.setNewData(baseBean.getDatas());
                         }
                     }
 

@@ -13,8 +13,8 @@ import android.view.Menu;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.ArticleBean;
-import com.example.gab.babylove.ui.main.adapter.SearchParticularsListAdapter;
+import com.example.gab.babylove.entity.BaseBean;
+import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -46,7 +46,7 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-    SearchParticularsListAdapter mAdapter;
+    BaseAdapter mAdapter;
     private int mId;
     int mPageNo = 1;
 
@@ -83,9 +83,9 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
                 .getWxarticle(mId, mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<ArticleBean>() {
+                .subscribe(new NetCallBack<BaseBean>() {
                     @Override
-                    protected void onSuccess(ArticleBean officialAccountListBean) {
+                    protected void onSuccess(BaseBean officialAccountListBean) {
                         if (null != officialAccountListBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
@@ -167,7 +167,7 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
      */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new SearchParticularsListAdapter(new ArrayList<>());
+        mAdapter = new BaseAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this

@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.entity.ArticleBean;
+import com.example.gab.babylove.entity.BaseBean;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 
@@ -16,14 +16,14 @@ import java.util.List;
  * 知识体系
  */
 
-public class StarAdapter extends BaseQuickAdapter<ArticleBean.DatasBean, BaseViewHolder> {
+public class StarAdapter extends BaseQuickAdapter<BaseBean.DatasBean, BaseViewHolder> {
 
-    public StarAdapter(int layoutResId, @Nullable List<ArticleBean.DatasBean> data) {
+    public StarAdapter(int layoutResId, @Nullable List<BaseBean.DatasBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, ArticleBean.DatasBean item) {
+    protected void convert(BaseViewHolder helper, BaseBean.DatasBean item) {
         helper.setText(R.id.tv_title, item.getDesc())
                 .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
                 .setText(R.id.tv_date, item.getNiceDate())

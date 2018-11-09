@@ -1,6 +1,6 @@
 package com.example.gab.babylove.api;
 
-import com.example.gab.babylove.entity.ArticleBean;
+import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.entity.CollectBean;
@@ -75,7 +75,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("article/list/{id}/json")
-    Observable<BeanModule<ArticleBean>> getArticleHomeList(@Path("id") int page);
+    Observable<BeanModule<BaseBean>> getArticleHomeList(@Path("id") int page);
 
     /**
      * 体系数据
@@ -93,7 +93,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("article/list/{id}/json")
-    Observable<BeanModule<ArticleBean>> getArticleList(@Path("id") int page, @Query("cid") int cid);
+    Observable<BeanModule<BaseBean>> getArticleList(@Path("id") int page, @Query("cid") int cid);
 
     /**
      * 常用网站
@@ -128,7 +128,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("article/listproject/{pageNum}/json")
-    Observable<BeanModule<ArticleBean>> getListProject(@Path("pageNum") int pageNum);
+    Observable<BeanModule<BaseBean>> getListProject(@Path("pageNum") int pageNum);
 
     /**
      * 收藏文章列表
@@ -176,7 +176,7 @@ public interface ApiService {
     @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("article/query/{pageNum}/json")
-    Observable<BeanModule<ArticleBean>> getQuery(@Path("pageNum") int pageNum, @Field("k") String queryKey);
+    Observable<BeanModule<BaseBean>> getQuery(@Path("pageNum") int pageNum, @Field("k") String queryKey);
 
     /**
      * 获取公众号列表
@@ -190,14 +190,14 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("wxarticle/list/{ID}/{pageNo}/json")
-    Observable<BeanModule<ArticleBean>> getWxarticle(@Path("ID") int Id, @Path("pageNo") int pageNo);
+    Observable<BeanModule<BaseBean>> getWxarticle(@Path("ID") int Id, @Path("pageNo") int pageNo);
 
     /**
      * 在某个公众号中搜索历史文章
      */
     @Headers({"url_name:user"})
     @GET("wxarticle/list/{ID}/{pageNo}/json")
-    Observable<BeanModule<ArticleBean>> getWxarticleQuery(@Path("ID") int Id, @Path("pageNo") int pageNo
+    Observable<BeanModule<BaseBean>> getWxarticleQuery(@Path("ID") int Id, @Path("pageNo") int pageNo
             , @Query("k") String queryKey);
 
     /**

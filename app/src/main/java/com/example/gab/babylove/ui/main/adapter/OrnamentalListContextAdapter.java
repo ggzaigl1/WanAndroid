@@ -14,6 +14,7 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 /**
  * Created by 初夏小溪 on 2018/4/9 0009.
+ * 体育运动
  */
 
 public class OrnamentalListContextAdapter extends BaseQuickAdapter<CourseList.DataBean, BaseViewHolder> {

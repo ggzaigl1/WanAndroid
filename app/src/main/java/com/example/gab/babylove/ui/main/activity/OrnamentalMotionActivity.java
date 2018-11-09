@@ -167,7 +167,7 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
     private void initRecycle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new OrnamentalMotionAdapter(R.layout.item_ornamental_recycle, new ArrayList<>());
+        mAdapter = new OrnamentalMotionAdapter(new ArrayList<>());
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
     }

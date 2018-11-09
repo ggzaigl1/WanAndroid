@@ -15,9 +15,9 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.ArticleBean;
+import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.entity.BannerBean;
-import com.example.gab.babylove.ui.main.adapter.HomeAdapter;
+import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.example.gab.babylove.web.AgentWebActivity;
@@ -64,7 +64,7 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.refreshLayout)
     public SmartRefreshLayout mRefreshLayout;
     ConvenientBanner<BannerBean> bannerView;
-    HomeAdapter mAdapter;
+    BaseAdapter mAdapter;
     int mPageNo = 0;
 
 
@@ -132,7 +132,7 @@ public class HomeFragment extends BaseFragment {
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
 
-        Observable<ArticleBean> observable2 = RequestUtils.create(ApiService.class)
+        Observable<BaseBean> observable2 = RequestUtils.create(ApiService.class)
                 .getArticleHomeList(mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
@@ -160,17 +160,17 @@ public class HomeFragment extends BaseFragment {
                             bannerView(pics, urls);
                         }
 
-                        ArticleBean articleBean = (ArticleBean) map.get("article");
-                        if (null != articleBean && null != articleBean.getDatas()) {
+                        BaseBean baseBean = (BaseBean) map.get("article");
+                        if (null != baseBean && null != baseBean.getDatas()) {
                             if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(articleBean.getDatas());
+                                mAdapter.setNewData(baseBean.getDatas());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(articleBean.getDatas());
+                                mAdapter.getData().addAll(baseBean.getDatas());
                                 mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
                             } else {
-                                mAdapter.setNewData(articleBean.getDatas());
+                                mAdapter.setNewData(baseBean.getDatas());
                             }
                         }
                     }
@@ -195,19 +195,19 @@ public class HomeFragment extends BaseFragment {
                 .getArticleHomeList(mCurPage)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))
-                .subscribe(new NetCallBack<ArticleBean>() {
+                .subscribe(new NetCallBack<BaseBean>() {
                     @Override
-                    protected void onSuccess(ArticleBean articleBean) {
-                        if (null != articleBean) {
+                    protected void onSuccess(BaseBean baseBean) {
+                        if (null != baseBean) {
                             if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(articleBean.getDatas());
+                                mAdapter.setNewData(baseBean.getDatas());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(articleBean.getDatas());
+                                mAdapter.getData().addAll(baseBean.getDatas());
                                 mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
                             } else {
-                                mAdapter.setNewData(articleBean.getDatas());
+                                mAdapter.setNewData(baseBean.getDatas());
                             }
                         } else {
                             if (mRefreshLayout.isRefreshing()) {
@@ -276,7 +276,7 @@ public class HomeFragment extends BaseFragment {
      */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new HomeAdapter(new ArrayList<>());
+        mAdapter = new BaseAdapter(new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             // 详情
             WebViewActivity.startWebActivity(getActivity()
@@ -303,13 +303,13 @@ public class HomeFragment extends BaseFragment {
                         T.showShort(R.string.collect_login);
                     }
                     break;
-                case R.id.tv_tag:
-                    Bundle bundle = new Bundle();
-                    bundle.putString("tags", mAdapter.getData().get(position).getTags().get(0).getUrl());
-                    bundle.putInt("tag",1);
-                    JumpUtils.jump((AppCompatActivity) getActivity(), WebViewActivity.class, bundle);
-                    mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    break;
+//                case R.id.tv_tag:
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("tags", mAdapter.getData().get(position).getTags().get(0).getUrl());
+//                    bundle.putInt("tag",1);
+//                    JumpUtils.jump((AppCompatActivity) getActivity(), WebViewActivity.class, bundle);
+//                    mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                    break;
                 default:
                     break;
             }
