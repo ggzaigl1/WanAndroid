@@ -57,7 +57,7 @@ import butterknife.OnClick;
 /**
  * 主方法
  *
- * @author 55204
+ * @author 初夏小溪
  */
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -98,6 +98,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void setStatusBar(Activity activity) {
+        // TODO: 2018/11/9 0009 刘海屏适配; 搜索界面UI优化, 删除无用的资源 优化统一布局
 //        MdStatusBar.setColorBarForDrawer(this, R.color.statusBar, R.color.statusBar);
     }
 

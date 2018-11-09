@@ -2,6 +2,8 @@ package com.example.gab.babylove.ui.main.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -35,11 +37,20 @@ public class HomeAdapter extends BaseQuickAdapter<ArticleBean.DatasBean, BaseVie
 
     @Override
     protected void convert(BaseViewHolder helper, ArticleBean.DatasBean item) {
+        TextView tv_tag = helper.getView(R.id.tv_tag);
         helper.setText(R.id.tv_title, item.getTitle())
                 .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
                 .setText(R.id.tv_date, item.getNiceDate())
                 .setText(R.id.tv_chapterName, "分类：" + item.getChapterName()).setTextColor(R.id.tv_chapterName, ResourceUtils.getRandomColor());
+        if (item.getTags().size() != 0 && !item.getTags().isEmpty()) {
+            tv_tag.setVisibility(View.VISIBLE);
+            tv_tag.setText(item.getTags().get(0).getName());
+        } else {
+            tv_tag.setVisibility(View.GONE);
+        }
+
         helper.addOnClickListener(R.id.image_collect);
+        helper.addOnClickListener(R.id.tv_tag);
         initImage(item, helper.getView(R.id.image_collect));
     }
 

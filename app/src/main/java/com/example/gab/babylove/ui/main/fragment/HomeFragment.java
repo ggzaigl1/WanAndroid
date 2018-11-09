@@ -276,7 +276,7 @@ public class HomeFragment extends BaseFragment {
      */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new HomeAdapter( new ArrayList<>());
+        mAdapter = new HomeAdapter(new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             // 详情
             WebViewActivity.startWebActivity(getActivity()
@@ -302,6 +302,13 @@ public class HomeFragment extends BaseFragment {
                         JumpUtils.jump(mContext, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);
                     }
+                    break;
+                case R.id.tv_tag:
+                    Bundle bundle = new Bundle();
+                    bundle.putString("tags", mAdapter.getData().get(position).getTags().get(0).getUrl());
+                    bundle.putInt("tag",1);
+                    JumpUtils.jump((AppCompatActivity) getActivity(), WebViewActivity.class, bundle);
+                    mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     break;
                 default:
                     break;

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.OfficialAccountListBean;
+import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.main.adapter.SearchParticularsListAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
@@ -89,9 +89,9 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
                 .getQuery(pageNum, queryKey)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<OfficialAccountListBean>() {
+                .subscribe(new NetCallBack<ArticleBean>() {
                     @Override
-                    protected void onSuccess(OfficialAccountListBean officialAccountListBean) {
+                    protected void onSuccess(ArticleBean officialAccountListBean) {
                         if (null != officialAccountListBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {

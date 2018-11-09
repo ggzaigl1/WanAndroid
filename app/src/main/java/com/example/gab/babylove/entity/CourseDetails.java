@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by QKun on 2018/3/13.
+ * 体育
  */
 
 public class CourseDetails implements Serializable {

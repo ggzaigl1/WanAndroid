@@ -5,19 +5,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.ListProjectBean;
+import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.main.adapter.NewProjectAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -76,9 +74,9 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                 .getListProject(mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<ListProjectBean>() {
+                .subscribe(new NetCallBack<ArticleBean>() {
                     @Override
-                    protected void onSuccess(ListProjectBean listProjectBean) {
+                    protected void onSuccess(ArticleBean listProjectBean) {
                         if (null != listProjectBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {

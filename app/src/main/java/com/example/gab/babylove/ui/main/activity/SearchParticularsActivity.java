@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -13,7 +14,7 @@ import android.widget.EditText;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.OfficialAccountListBean;
+import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.main.adapter.SearchParticularsListAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
@@ -36,6 +37,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by 初夏小溪 on 2018/11/8 0008.
@@ -99,9 +101,9 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
                 .getQuery(pageNum, queryKey)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<OfficialAccountListBean>() {
+                .subscribe(new NetCallBack<ArticleBean>() {
                     @Override
-                    protected void onSuccess(OfficialAccountListBean officialAccountListBean) {
+                    protected void onSuccess(ArticleBean officialAccountListBean) {
                         if (null != officialAccountListBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
@@ -165,6 +167,21 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
         });
         mRecyclerView.setAdapter(mSearchParticularsListAdapter);
         mSearchParticularsListAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
+    }
+
+    @OnClick({R.id.tv_search})
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.tv_search:
+                mQueryKey = edit_search.getText().toString();
+                getQuery(mPageNo, mQueryKey);
+                initRecyle();
+                mKProgressHUD.dismiss();
+                KeyBoardUtils.closeKeyBoard(this);
+                break;
+        }
     }
 
     /**

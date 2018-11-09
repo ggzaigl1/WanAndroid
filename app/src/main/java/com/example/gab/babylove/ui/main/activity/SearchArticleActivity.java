@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by 初夏小溪 on 2018/11/8 0008.
@@ -56,7 +57,7 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
 
     @Override
     public int setView() {
-        return R.layout.activity_test;
+        return R.layout.activity_search_article;
     }
 
 
@@ -76,6 +77,21 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
             }
             return false;
         });
+    }
+
+    @OnClick({R.id.tv_search})
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.tv_search:
+                queryKey = edit_search.getText().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("queryKey",queryKey);
+                JumpUtils.jump(SearchArticleActivity.this,SearchParticularsActivity.class,bundle);
+                KeyBoardUtils.closeKeyBoard(this);
+                break;
+        }
     }
 
     /**

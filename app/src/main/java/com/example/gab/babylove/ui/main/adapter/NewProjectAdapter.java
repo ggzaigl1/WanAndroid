@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.entity.ListProjectBean;
+import com.example.gab.babylove.entity.ArticleBean;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 
@@ -14,14 +14,14 @@ import java.util.List;
 /**
  * Created by 初夏小溪 on 2018/10/17 0017.
  */
-public class NewProjectAdapter extends BaseQuickAdapter<ListProjectBean.DatasBean, BaseViewHolder> {
+public class NewProjectAdapter extends BaseQuickAdapter<ArticleBean.DatasBean, BaseViewHolder> {
 
-    public NewProjectAdapter(@Nullable List<ListProjectBean.DatasBean> data) {
+    public NewProjectAdapter(@Nullable List<ArticleBean.DatasBean> data) {
         super(R.layout.item_fly , data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, ListProjectBean.DatasBean item) {
+    protected void convert(BaseViewHolder helper, ArticleBean.DatasBean item) {
         helper.setText(R.id.tv_title, item.getDesc())
                 .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
                 .setText(R.id.tv_date, item.getNiceDate())

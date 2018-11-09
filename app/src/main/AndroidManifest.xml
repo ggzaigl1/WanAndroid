@@ -118,7 +118,7 @@
                 android:screenOrientation="portrait"/>
         <!-- 公众号 搜索 -->
         <activity
-                android:name=".ui.main.activity.SearchActivity"
+                android:name=".ui.main.activity.SearchCommonActivity"
                 android:label="@string/search"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
@@ -132,7 +132,7 @@
         <!--搜索详情-->
         <activity
                 android:name=".ui.main.activity.SearchParticularsActivity"
-                android:label="@string/search"
+                android:label="@string/search_part"
                 android:windowSoftInputMode="adjustUnspecified|stateHidden"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>

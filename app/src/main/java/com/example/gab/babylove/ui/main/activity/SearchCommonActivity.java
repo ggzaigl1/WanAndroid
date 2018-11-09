@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.OfficialAccountListBean;
+import com.example.gab.babylove.entity.ArticleBean;
 import com.example.gab.babylove.ui.main.adapter.SearchParticularsListAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
@@ -39,7 +39,7 @@ import butterknife.BindView;
  * 公众号 搜索界面
  */
 
-public class SearchActivity extends BaseActivity implements IBaseActivity {
+public class SearchCommonActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
@@ -88,9 +88,9 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                 .getWxarticleQuery(mId, pageNum, queryKey)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<OfficialAccountListBean>() {
+                .subscribe(new NetCallBack<ArticleBean>() {
                     @Override
-                    protected void onSuccess(OfficialAccountListBean officialAccountListBean) {
+                    protected void onSuccess(ArticleBean officialAccountListBean) {
                         if (null != officialAccountListBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
@@ -171,6 +171,9 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                 });
     }
 
+    /**
+     * 设置
+     */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mSearchParticularsListAdapter = new SearchParticularsListAdapter(new ArrayList<>());
