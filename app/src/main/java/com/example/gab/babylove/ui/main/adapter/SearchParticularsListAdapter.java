@@ -14,10 +14,10 @@ import java.util.List;
 
 /**
  * Created by 初夏小溪 on 2018/4/19 0019.
- * 公众号详情
+ * 搜索详情
  */
 
-public class OfficialAccountListAdapter extends BaseQuickAdapter<OfficialAccountListBean.DatasBean, BaseViewHolder> {
+public class SearchParticularsListAdapter extends BaseQuickAdapter<OfficialAccountListBean.DatasBean, BaseViewHolder> {
 
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
@@ -30,7 +30,7 @@ public class OfficialAccountListAdapter extends BaseQuickAdapter<OfficialAccount
         }
     }
 
-    public OfficialAccountListAdapter(@Nullable List<OfficialAccountListBean.DatasBean> data) {
+    public SearchParticularsListAdapter(@Nullable List<OfficialAccountListBean.DatasBean> data) {
         super(R.layout.item_official_account_list, data);
     }
 

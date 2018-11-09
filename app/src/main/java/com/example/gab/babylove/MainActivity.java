@@ -1,8 +1,6 @@
 package com.example.gab.babylove;
 
 import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,10 +14,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -37,8 +33,7 @@ import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
 import com.example.gab.babylove.ui.main.activity.OfficialAccountActivity;
 import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
 import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
-import com.example.gab.babylove.ui.main.activity.SearchMainActivity;
-import com.example.gab.babylove.ui.main.activity.TestActivity;
+import com.example.gab.babylove.ui.main.activity.SearchArticleActivity;
 import com.example.gab.babylove.ui.main.activity.ToolsActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
@@ -57,6 +52,7 @@ import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 主方法
@@ -74,7 +70,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawer;
     @BindView(R.id.toolbar)
-    public Toolbar mToolbar;
+    Toolbar mToolbar;
+    @BindView(R.id.iv_head_right)
+    ImageView iv_head_right;
 
     private FragmentManager mFragmentManager;
     private HomeFragment mHomeFragment;
@@ -108,7 +106,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         //设置状态栏透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-
+        iv_head_right.setVisibility(View.VISIBLE);
         mFragmentManager = getSupportFragmentManager();
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
@@ -237,6 +235,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     }
 
+    @OnClick({R.id.iv_head_right})
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_head_right:
+                JumpUtils.jumpFade(MainActivity.this, SearchArticleActivity.class, null);
+                break;
+            default:
+                break;
+        }
+    }
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -312,9 +323,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         return true;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main_search, menu);
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.activity_main_search, menu);
 //        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 //        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 //        searchView.setQueryHint(getString(R.string.search_knowledge));
@@ -333,19 +344,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //                return false;
 //            }
 //        });
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_search:
-                JumpUtils.jumpFade(MainActivity.this, TestActivity.class, null);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
+//        return true;
+//    }
 
     @Override
     public void onBackPressed() {

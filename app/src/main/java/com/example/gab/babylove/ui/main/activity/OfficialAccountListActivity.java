@@ -14,7 +14,7 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.OfficialAccountListBean;
-import com.example.gab.babylove.ui.main.adapter.OfficialAccountListAdapter;
+import com.example.gab.babylove.ui.main.adapter.SearchParticularsListAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -35,9 +35,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by 初夏小溪 on 2018/10/15 0015.
@@ -49,7 +46,7 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-    OfficialAccountListAdapter mAdapter;
+    SearchParticularsListAdapter mAdapter;
     private int mId;
     int mPageNo = 1;
 
@@ -170,7 +167,7 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
      */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new OfficialAccountListAdapter(new ArrayList<>());
+        mAdapter = new SearchParticularsListAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this

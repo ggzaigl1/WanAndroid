@@ -12,26 +12,39 @@
             android:background="?attr/colorAccent"
             android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimaryDark"
-                app:title="@string/app_name"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:titleTextColor="@color/white">
-            <!--app:subtitle="详情信息"-->
-<!---->
+                android:layout_height="wrap_content">
 
-        </android.support.v7.widget.Toolbar>
+            <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorPrimaryDark"
+                    app:title="@string/app_name"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:titleTextColor="@color/white"/>
+            <!--app:subtitle="详情信息"-->
+
+            <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_head_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"
+                    android:padding="@dimen/dp_10"
+                    android:src="@mipmap/icon_menu_search"
+                    />
+        </RelativeLayout>
+
+        <!--</android.support.v7.widget.Toolbar>-->
 
         <FrameLayout
                 android:id="@+id/fl_content"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
-
 
         <com.ashokvarma.bottomnavigation.BottomNavigationBar
                 android:id="@+id/bottom_navigation"

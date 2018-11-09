@@ -116,18 +116,34 @@
                 android:label="@string/collect"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
-        <!-- 搜索 -->
+        <!-- 公众号 搜索 -->
         <activity
                 android:name=".ui.main.activity.SearchActivity"
                 android:label="@string/search"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
-        <!-- Main 搜索 -->
+
+        <!--主页 搜索文章-->
+        <activity
+                android:name=".ui.main.activity.SearchArticleActivity"
+                android:label="@string/search_knowledge"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait"/>
+        <!--搜索详情-->
+        <activity
+                android:name=".ui.main.activity.SearchParticularsActivity"
+                android:label="@string/search"
+                android:windowSoftInputMode="adjustUnspecified|stateHidden"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait"/>
+
+        <!-- Main 搜索 配合Toolbar使用-->
         <activity
                 android:name=".ui.main.activity.SearchMainActivity"
                 android:label="@string/search"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
+
         <!-- 知识体系 详情 -->
         <activity
                 android:name=".ui.view.activity.SystemActivity"
@@ -196,13 +212,6 @@
                 android:name=".ui.main.activity.UpdateActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
-        <!--Test-->
-        <activity
-                android:name=".ui.main.activity.TestActivity"
-                android:label="@string/notLogin"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
-
         <activity
                 android:name="utils.SelectorButtonActivity"
                 android:label="@string/selector_button"

@@ -12,14 +12,15 @@ import java.util.List;
 /**
  * Created by 初夏小溪 on 2018/11/8 0008.
  */
-public class TestAdapter extends BaseQuickAdapter<HotKeyBean, BaseViewHolder> {
+public class SearchAdapter extends BaseQuickAdapter<HotKeyBean, BaseViewHolder> {
 
-    public TestAdapter(@Nullable List<HotKeyBean> data) {
-        super(R.layout.item_official_account, data);
+    public SearchAdapter(@Nullable List<HotKeyBean> data) {
+        super(R.layout.item_hotkey_list, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, HotKeyBean item) {
         helper.setText(R.id.tv_name,item.getName());
+        helper.addOnClickListener(R.id.tv_name);
     }
 }

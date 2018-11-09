@@ -128,8 +128,9 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             case R.id.Ll_check_update:
                 GetVersionUpdate();
                 break;
+            //搜索
             case R.id.Ll_check_test:
-                JumpUtils.jump(this, TestActivity.class, null);
+                JumpUtils.jump(this, SearchArticleActivity.class, null);
                 break;
             default:
                 break;

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -158,7 +159,6 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
         vStubTitleBar.inflate();
         //这里全局给Activity设置toolbar和title mate
         Toolbar toolbar = activity.findViewById(R.id.toolbar);
-
         if (ConfigUtils.isTitleCenter()) {
             toolbar.setTitle("");
             TextView toolbarTitle = activity.findViewById(R.id.toolbarTitle);

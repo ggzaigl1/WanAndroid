@@ -12,7 +12,7 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.OfficialAccountListBean;
-import com.example.gab.babylove.ui.main.adapter.OfficialAccountListAdapter;
+import com.example.gab.babylove.ui.main.adapter.SearchParticularsListAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -36,7 +36,7 @@ import butterknife.BindView;
 
 /**
  * Created by 初夏小溪 on 2018/5/11 0011.
- * 搜索界面
+ * 公众号 搜索界面
  */
 
 public class SearchActivity extends BaseActivity implements IBaseActivity {
@@ -51,7 +51,7 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
     int mPageOffNo = 1;
     int mId;
     String queryKey;
-    OfficialAccountListAdapter mOfficialAccountListAdapter;
+    SearchParticularsListAdapter mSearchParticularsListAdapter;
 
     @Override
     public boolean isShowHeadView() {
@@ -94,14 +94,14 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                         if (null != officialAccountListBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
-                                mOfficialAccountListAdapter.setNewData(officialAccountListBean.getDatas());
+                                mSearchParticularsListAdapter.setNewData(officialAccountListBean.getDatas());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mOfficialAccountListAdapter.getData().addAll(officialAccountListBean.getDatas());
+                                mSearchParticularsListAdapter.getData().addAll(officialAccountListBean.getDatas());
                                 mRefreshLayout.finishLoadMore();
-                                mOfficialAccountListAdapter.notifyDataSetChanged();
+                                mSearchParticularsListAdapter.notifyDataSetChanged();
                             } else {
-                                mOfficialAccountListAdapter.setNewData(officialAccountListBean.getDatas());
+                                mSearchParticularsListAdapter.setNewData(officialAccountListBean.getDatas());
                             }
                         } else {
                             if (mRefreshLayout.isRefreshing()) {
@@ -173,25 +173,25 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
 
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mOfficialAccountListAdapter = new OfficialAccountListAdapter(new ArrayList<>());
-        mOfficialAccountListAdapter.setOnItemClickListener((adapter, view, position) -> {
+        mSearchParticularsListAdapter = new SearchParticularsListAdapter(new ArrayList<>());
+        mSearchParticularsListAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
-                    , mOfficialAccountListAdapter.getData().get(position).getLink()
-                    , mOfficialAccountListAdapter.getData().get(position).getId());// 详情
+                    , mSearchParticularsListAdapter.getData().get(position).getLink()
+                    , mSearchParticularsListAdapter.getData().get(position).getId());// 详情
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mOfficialAccountListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+        mSearchParticularsListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mOfficialAccountListAdapter.getData().get(position).isCollect()) { //收藏
-                            unCollectArticle(mOfficialAccountListAdapter.getData().get(position).getId());
-                            mOfficialAccountListAdapter.getData().get(position).setCollect(false);
-                            mOfficialAccountListAdapter.notifyItemChanged(position, "");
+                        if (mSearchParticularsListAdapter.getData().get(position).isCollect()) { //收藏
+                            unCollectArticle(mSearchParticularsListAdapter.getData().get(position).getId());
+                            mSearchParticularsListAdapter.getData().get(position).setCollect(false);
+                            mSearchParticularsListAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(mOfficialAccountListAdapter.getData().get(position).getId());
-                            mOfficialAccountListAdapter.getData().get(position).setCollect(true);
-                            mOfficialAccountListAdapter.notifyItemChanged(position, "");
+                            collectArticle(mSearchParticularsListAdapter.getData().get(position).getId());
+                            mSearchParticularsListAdapter.getData().get(position).setCollect(true);
+                            mSearchParticularsListAdapter.notifyItemChanged(position, "");
                         }
                     } else {
                         JumpUtils.jumpFade(this, LoginActivity.class, null);
@@ -200,8 +200,8 @@ public class SearchActivity extends BaseActivity implements IBaseActivity {
                     break;
             }
         });
-        mRecyclerView.setAdapter(mOfficialAccountListAdapter);
-        mOfficialAccountListAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
+        mRecyclerView.setAdapter(mSearchParticularsListAdapter);
+        mSearchParticularsListAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
     }
 
     /**
