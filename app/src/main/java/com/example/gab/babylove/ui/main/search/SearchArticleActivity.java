@@ -68,6 +68,7 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+        //todo 搜索
         getHotKeyList();
 //        initRecyleHotKeyList();
         //搜索按钮监听
