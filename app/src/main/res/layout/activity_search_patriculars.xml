@@ -15,7 +15,7 @@
             android:orientation="horizontal"
             android:layout_gravity="center">
 
-        <EditText
+        <com.example.gab.babylove.widget.LastInputEditText
                 android:id="@+id/edit_search"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -23,11 +23,10 @@
                 android:background="@drawable/shape_input_bg"
                 android:drawablePadding="10dp"
                 android:padding="4dp"
-                android:drawableStart="@drawable/vector_search"
                 android:hint="@string/search_knowledge"
+                android:textColorHint="@color/button_press"
                 android:imeOptions="actionSearch"
-                android:textColor="@color/myTxtLight"
-                android:textCursorDrawable="@null"
+                android:textColor="@color/button_press"
                 android:textSize="@dimen/sp_14"/>
 
         <TextView
@@ -36,8 +35,8 @@
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:padding="10dp"
-                android:textSize="@dimen/sp_14"
-                android:textColor="@color/myTxtColor"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/button_press"
                 android:text="@string/search"/>
     </LinearLayout>
 

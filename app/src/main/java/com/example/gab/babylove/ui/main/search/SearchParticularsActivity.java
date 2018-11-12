@@ -85,6 +85,7 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
             }
             return false;
         });
+
     }
 
     /**

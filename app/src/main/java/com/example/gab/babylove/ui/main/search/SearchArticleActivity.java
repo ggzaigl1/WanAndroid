@@ -5,14 +5,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
@@ -24,6 +21,7 @@ import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.KeyBoardUtils;
+import com.ggz.baselibrary.utils.T;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -72,8 +70,8 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
             if (actionId == EditorInfo.IME_ACTION_SEND || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                 String queryKey = edit_search.getText().toString();
                 Bundle bundle = new Bundle();
-                bundle.putString("queryKey",queryKey);
-                JumpUtils.jumpFade(SearchArticleActivity.this,SearchParticularsActivity.class,bundle);
+                bundle.putString("queryKey", queryKey);
+                JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
                 KeyBoardUtils.closeKeyBoard(this);
                 return true;
             }
@@ -85,12 +83,16 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_search:
+                if (edit_search.getText().toString().equals("")) {
+                    T.showShort("搜索内容不能为空");
+                    return;
+                }
                 queryKey = edit_search.getText().toString();
                 Bundle bundle = new Bundle();
-                bundle.putString("queryKey",queryKey);
-                JumpUtils.jumpFade(SearchArticleActivity.this,SearchParticularsActivity.class,bundle);
+                bundle.putString("queryKey", queryKey);
+                JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
                 KeyBoardUtils.closeKeyBoard(this);
                 break;
         }
@@ -107,17 +109,14 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
         layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new SearchAdapter(new ArrayList<>());
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                switch (view.getId()) {
-                    case R.id.tv_name:
-                        queryKey = mAdapter.getData().get(position).getName();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("queryKey",queryKey);
-                        JumpUtils.jumpFade(SearchArticleActivity.this,SearchParticularsActivity.class,bundle);
-                        break;
-                }
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.tv_name:
+                    queryKey = mAdapter.getData().get(position).getName();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("queryKey", queryKey);
+                    JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
+                    break;
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -144,5 +143,4 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
                     }
                 });
     }
-
 }
