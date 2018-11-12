@@ -20,6 +20,12 @@
                 android:overScrollMode="never"
                 android:scrollbars="none"/>
 
+        <!--<com.zhy.view.flowlayout.TagFlowLayout-->
+            <!--android:id="@+id/id_tagFlow"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="3.5"-->
+            <!--android:layout_height="match_parent"/>-->
+
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_context"
                 android:layout_width="0dp"

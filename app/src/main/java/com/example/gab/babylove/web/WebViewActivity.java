@@ -145,11 +145,15 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
 
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                if (newProgress == 100) {
-                    progressBar1.setVisibility(View.GONE);//加载完网页进度条消失
-                } else {
-                    progressBar1.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
-                    progressBar1.setProgress(newProgress);//设置进度值
+                if (newProgress != 0){
+                    if (newProgress == 100) {
+                        progressBar1.setVisibility(View.GONE);//加载完网页进度条消失
+                    } else {
+                        progressBar1.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
+                        progressBar1.setProgress(newProgress);//设置进度值
+                    }
+                }else {
+                    progressBar1.setVisibility(View.GONE);
                 }
             }
         });

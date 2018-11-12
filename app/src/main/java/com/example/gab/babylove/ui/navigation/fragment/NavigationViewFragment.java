@@ -1,7 +1,6 @@
 package com.example.gab.babylove.ui.navigation.fragment;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,7 +15,6 @@ import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;

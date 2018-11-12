@@ -23,11 +23,6 @@ import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.KeyBoardUtils;
 import com.ggz.baselibrary.utils.T;
-import com.google.android.flexbox.AlignItems;
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexWrap;
-import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.android.flexbox.JustifyContent;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -108,25 +103,26 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
     /**
      * 热词搜索 设置
      */
-    private void initRecyleHotKeyList() {
-        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
-        layoutManager.setFlexWrap(FlexWrap.WRAP);
-        layoutManager.setFlexDirection(FlexDirection.ROW);
-        layoutManager.setAlignItems(AlignItems.STRETCH);
-        layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
-//        mRecyclerView.setLayoutManager(layoutManager);
-//        mAdapter = new SearchAdapter(new ArrayList<>());
-//        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-//            switch (view.getId()) {
-//                case R.id.tv_name:
-//                    queryKey = mAdapter.getData().get(position).getName();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("queryKey", queryKey);
-//                    JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
-//                    break;
-//            }
-//        });
-//        mRecyclerView.setAdapter(mAdapter);
+    private void initHotKeyData(List<HotKeyBean> hotKeyBeans) {
+        mTagFlowLayout.setAdapter(new TagAdapter(hotKeyBeans) {
+            @Override
+            public View getView(FlowLayout parent, int position, Object o) {
+                TextView tv_name = (TextView) LayoutInflater.from(SearchArticleActivity.this).inflate(R.layout.item_hotkey_list, parent, false);
+                tv_name.setText(hotKeyBeans.get(position).getName());
+                return tv_name;
+            }
+        });
+
+        mTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                queryKey = hotKeyBeans.get(position).getName();
+                Bundle bundle = new Bundle();
+                bundle.putString("queryKey", queryKey);
+                JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
+                return true;
+            }
+        });
     }
 
 
@@ -139,28 +135,7 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
                 .subscribe(new NetCallBack<List<HotKeyBean>>() {
                     @Override
                     protected void onSuccess(List<HotKeyBean> hotKeyBeans) {
-//                        if (null != hotKeyBeans) {
-//                            mAdapter.setNewData(hotKeyBeans);
-//                        }
-                        mTagFlowLayout.setAdapter(new TagAdapter(hotKeyBeans) {
-                            @Override
-                            public View getView(FlowLayout parent, int position, Object o) {
-                                TextView tv_name = (TextView) LayoutInflater.from(SearchArticleActivity.this).inflate(R.layout.item_hotkey_list, parent, false);
-                                tv_name.setText(hotKeyBeans.get(position).getName());
-                                return tv_name;
-                            }
-                        });
-
-                        mTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
-                            @Override
-                            public boolean onTagClick(View view, int position, FlowLayout parent) {
-                                queryKey = hotKeyBeans.get(position).getName();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("queryKey", queryKey);
-                                JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
-                                return true;
-                            }
-                        });
+                        initHotKeyData(hotKeyBeans);
                     }
 
                     @Override
