@@ -100,6 +100,7 @@ public class SystemFlyFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void collectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
@@ -108,6 +109,7 @@ public class SystemFlyFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(Object t) {
                         T.showShort(getString(R.string.collection_success));
+                        mKProgressHUD.dismiss();
                     }
 
                     @Override
@@ -132,6 +134,7 @@ public class SystemFlyFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(Object t) {
                         T.showShort(getString(R.string.cancel_collection_success));
+                        mKProgressHUD.dismiss();
                     }
 
                     @Override

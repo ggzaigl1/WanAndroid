@@ -260,31 +260,6 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
-    /**
-     * 收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void collectArticle(int id) {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .getCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        mKProgressHUD.dismiss();
-                        T.showShort(getString(R.string.collection_success));
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
 
     /**
      * 创建菜单

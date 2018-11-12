@@ -84,7 +84,7 @@ public class SearchCommonActivity extends BaseActivity implements IBaseActivity 
     private void getQuery(int pageNum, String queryKey) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .getWxarticleQuery(getIntent().getIntExtra("id",0), pageNum, queryKey)
+                .getWxarticleQuery(getIntent().getIntExtra("id", 0), pageNum, queryKey)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
                 .subscribe(new NetCallBack<BaseBean>() {
@@ -118,61 +118,6 @@ public class SearchCommonActivity extends BaseActivity implements IBaseActivity 
                 });
     }
 
-    /**
-     * 收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void collectArticle(int id) {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .getCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        mKProgressHUD.dismiss();
-                        T.showShort(getString(R.string.collection_success));
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
-
-    /**
-     * 取消收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void unCollectArticle(int id) {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .unCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.cancel_collection_success));
-                        mKProgressHUD.dismiss();
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
-
-    /**
-     * 设置
-     */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BaseAdapter(new ArrayList<>());

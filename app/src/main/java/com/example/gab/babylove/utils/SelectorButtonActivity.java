@@ -38,7 +38,7 @@ public class SelectorButtonActivity extends AppCompatActivity implements IBaseAc
 
     @Override
     public void setStatusBar(Activity activity) {
-        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
+//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
     }
 
     @Override
