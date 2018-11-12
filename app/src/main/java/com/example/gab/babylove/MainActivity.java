@@ -320,7 +320,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             default:
                 break;
         }
-        mDrawer.closeDrawer(GravityCompat.START);
+//        mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
