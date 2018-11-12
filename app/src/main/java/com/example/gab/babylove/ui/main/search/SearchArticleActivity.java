@@ -3,12 +3,13 @@ package com.example.gab.babylove.ui.main.search;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
@@ -27,8 +28,10 @@ import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,8 +43,10 @@ import butterknife.OnClick;
  */
 public class SearchArticleActivity extends BaseActivity implements IBaseActivity {
 
-    @BindView(R.id.rv_title)
-    RecyclerView mRecyclerView;
+    //    @BindView(R.id.rv_title)
+//    RecyclerView mRecyclerView;
+    @BindView(R.id.id_flowlayout)
+    TagFlowLayout mTagFlowLayout;
     @BindView(R.id.Ll_search)
     LinearLayout Ll_search;
     @BindView(R.id.edit_search)
@@ -64,7 +69,7 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         getHotKeyList();
-        initRecyleHotKeyList();
+//        initRecyleHotKeyList();
         //搜索按钮监听
         edit_search.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEND || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
@@ -77,6 +82,7 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
             }
             return false;
         });
+
     }
 
     @OnClick({R.id.tv_search})
@@ -107,19 +113,19 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setAlignItems(AlignItems.STRETCH);
         layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new SearchAdapter(new ArrayList<>());
-        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            switch (view.getId()) {
-                case R.id.tv_name:
-                    queryKey = mAdapter.getData().get(position).getName();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("queryKey", queryKey);
-                    JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
-                    break;
-            }
-        });
-        mRecyclerView.setAdapter(mAdapter);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mAdapter = new SearchAdapter(new ArrayList<>());
+//        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+//            switch (view.getId()) {
+//                case R.id.tv_name:
+//                    queryKey = mAdapter.getData().get(position).getName();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("queryKey", queryKey);
+//                    JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
+//                    break;
+//            }
+//        });
+//        mRecyclerView.setAdapter(mAdapter);
     }
 
 
@@ -132,9 +138,28 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
                 .subscribe(new NetCallBack<List<HotKeyBean>>() {
                     @Override
                     protected void onSuccess(List<HotKeyBean> hotKeyBeans) {
-                        if (null != hotKeyBeans) {
-                            mAdapter.setNewData(hotKeyBeans);
-                        }
+//                        if (null != hotKeyBeans) {
+//                            mAdapter.setNewData(hotKeyBeans);
+//                        }
+                        mTagFlowLayout.setAdapter(new TagAdapter(hotKeyBeans) {
+                            @Override
+                            public View getView(FlowLayout parent, int position, Object o) {
+                                TextView tv_name = (TextView) LayoutInflater.from(SearchArticleActivity.this).inflate(R.layout.item_hotkey_list, parent, false);
+                                tv_name.setText(hotKeyBeans.get(position).getName());
+                                return tv_name;
+                            }
+                        });
+
+                        mTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+                            @Override
+                            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                                queryKey = hotKeyBeans.get(position).getName();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("queryKey", queryKey);
+                                JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
+                                return true;
+                            }
+                        });
                     }
 
                     @Override

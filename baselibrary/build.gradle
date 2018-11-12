@@ -101,6 +101,8 @@ dependencies {
     api 'me.jessyan:autosize:1.0.1'
     //https://github.com/google/flexbox-layout
     api 'com.google.android:flexbox:0.3.2'
+    //流式布局
+    api 'com.hyman:flowlayout-lib:1.1.2'
     // 轮播图
     api 'com.bigkoo:convenientbanner:2.0.5'
     // 精仿iOSAlertViewController控件
