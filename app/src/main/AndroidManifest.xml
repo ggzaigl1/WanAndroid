@@ -84,25 +84,25 @@
                 android:screenOrientation="portrait"/>
         <!-- 头像icon -->
         <activity
-                android:name=".ui.main.activity.PhotoViewActivity"
+                android:name=".ui.main.other.PhotoViewActivity"
                 android:label="@string/goddess"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 工具 activity -->
         <activity
-                android:name=".ui.main.activity.ToolsActivity"
+                android:name=".ui.main.other.ToolsActivity"
                 android:label="@string/tools"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 美图欣赏 -->
         <activity
-                android:name=".ui.main.activity.BelleActivity"
+                android:name=".ui.main.other.BelleActivity"
                 android:label="@string/pretty_picture"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 美图欣赏 图片详情页 -->
         <activity
-                android:name=".ui.main.activity.PictureDetailActivity"
+                android:name=".ui.main.other.PictureDetailActivity"
                 android:screenOrientation="portrait"/>
         <!-- Website 常用网站 -->
         <activity
@@ -112,26 +112,26 @@
                 android:screenOrientation="portrait"/>
         <!-- 我的收藏 -->
         <activity
-                android:name=".ui.main.activity.MyCollectActivity"
+                android:name=".ui.main.collect.MyCollectActivity"
                 android:label="@string/collect"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 公众号 搜索 -->
         <activity
-                android:name=".ui.main.activity.SearchCommonActivity"
+                android:name=".ui.main.search.SearchCommonActivity"
                 android:label="@string/search"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
 
         <!--主页 搜索文章-->
         <activity
-                android:name=".ui.main.activity.SearchArticleActivity"
+                android:name=".ui.main.search.SearchArticleActivity"
                 android:label="@string/search_knowledge"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!--搜索详情-->
         <activity
-                android:name=".ui.main.activity.SearchParticularsActivity"
+                android:name=".ui.main.search.SearchParticularsActivity"
                 android:label="@string/search_part"
                 android:windowSoftInputMode="adjustUnspecified|stateHidden"
                 android:theme="@style/AppTheme.NoActionBar"
@@ -139,7 +139,7 @@
 
         <!-- Main 搜索 配合Toolbar使用-->
         <activity
-                android:name=".ui.main.activity.SearchMainActivity"
+                android:name=".ui.main.search.SearchMainActivity"
                 android:label="@string/search"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
@@ -158,7 +158,7 @@
 
         <!-- 关于我们 -->
         <activity
-                android:name=".ui.main.activity.AboutActivity"
+                android:name=".ui.main.about.AboutActivity"
                 android:label="@string/about_us"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
@@ -171,13 +171,13 @@
                 android:screenOrientation="portrait"/>
         <!-- 公众号 -->
         <activity
-                android:name=".ui.main.activity.OfficialAccountActivity"
+                android:name=".ui.main.official.OfficialAccountActivity"
                 android:label="@string/official_account"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 公众号详情 -->
         <activity
-                android:name=".ui.main.activity.OfficialAccountListActivity"
+                android:name=".ui.main.official.OfficialAccountListActivity"
                 android:label="@string/official_account"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:windowSoftInputMode="adjustUnspecified|stateHidden"
@@ -185,31 +185,31 @@
 
         <!-- 指紋相关工具类 -->
         <activity
-                android:name="ui.main.activity.FingerprintMainActivity"
+                android:name=".ui.main.other.FingerprintMainActivity"
                 android:label="@string/fingerprint"
                 android:screenOrientation="portrait"/>
 
         <!-- 运动健身 -->
         <activity
-                android:name=".ui.main.activity.OrnamentalListContextActivity"
+                android:name=".ui.main.ornamental.OrnamentalListContextActivity"
                 android:label="@string/ornamental"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity
-                android:name=".ui.main.activity.OrnamentalContextActivity"
+                android:name=".ui.main.ornamental.OrnamentalContextActivity"
                 android:label="@string/ornamental"
                 android:theme="@style/OrnamentalTheme"
                 android:screenOrientation="portrait"/>
         <!-- 运动健身 -->
         <activity
-                android:name=".ui.main.activity.OrnamentalMotionActivity"
+                android:name=".ui.main.ornamental.OrnamentalMotionActivity"
                 android:label="@string/ornamental"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <!--软件更新-->
         <activity
-                android:name=".ui.main.activity.UpdateActivity"
+                android:name=".ui.main.other.UpdateActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
         <activity

@@ -150,7 +150,7 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
                             getWindow().setExitTransition(explode);
                             getWindow().setEnterTransition(explode);
                             ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-                            JumpUtils.jump(LoginActivity.this, MainActivity.class, activityOptionsCompat.toBundle());
+                            JumpUtils.jumpFade(LoginActivity.this, MainActivity.class, activityOptionsCompat.toBundle());
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent, activityOptionsCompat.toBundle());
                             mKProgressHUD.dismiss();

@@ -210,7 +210,7 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
                     .subscribe(new Consumer<Long>() {
                         @Override
                         public void accept(Long aLong) throws Exception {
-                            JumpUtils.jump(StartUpActivity.this, MainActivity.class, null);
+                            JumpUtils.jumpFade(StartUpActivity.this, MainActivity.class, null);
                             StartUpActivity.this.finish();
                             StartUpActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         }
@@ -263,7 +263,7 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
             case PermissionChecker.PERMISSION_REQUEST_CODE:
                 //权限获取成功
                 if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
-                    JumpUtils.jump(StartUpActivity.this, MainActivity.class, null);
+                    JumpUtils.jumpFade(StartUpActivity.this, MainActivity.class, null);
                     StartUpActivity.this.finish();
                     StartUpActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else {
@@ -288,7 +288,7 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
                     .subscribe(new Consumer<Long>() {
                         @Override
                         public void accept(Long aLong) throws Exception {
-                            JumpUtils.jump(StartUpActivity.this, MainActivity.class, null);
+                            JumpUtils.jumpFade(StartUpActivity.this, MainActivity.class, null);
                             StartUpActivity.this.finish();
                             StartUpActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         }

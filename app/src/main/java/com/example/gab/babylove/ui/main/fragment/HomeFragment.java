@@ -15,8 +15,8 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.entity.BannerBean;
+import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
@@ -113,7 +113,7 @@ public class HomeFragment extends BaseFragment {
                     public void onItemClick(int position) {
                         Bundle bundle = new Bundle();
                         bundle.putString("UrlBean", urls.get(position));
-                        JumpUtils.jump((AppCompatActivity) getActivity(), AgentWebActivity.class, bundle);
+                        JumpUtils.jumpFade((AppCompatActivity) getActivity(), AgentWebActivity.class, bundle);
 //                        WebViewActivity.startWebActivity(getActivity(), urls.get(position), 0);// 详情
                         mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
@@ -250,7 +250,10 @@ public class HomeFragment extends BaseFragment {
                 });
     }
 
-    //    取消收藏
+    /**
+     * 取消收藏
+     * @param id
+     */
     @SuppressLint("CheckResult")
     private void unCollectArticle(int id) {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
@@ -299,18 +302,9 @@ public class HomeFragment extends BaseFragment {
                             mAdapter.notifyItemChanged(position, "");
                         }
                     } else {
-                        JumpUtils.jump(mContext, LoginActivity.class, null);
+                        JumpUtils.jumpFade(mContext, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);
                     }
-                    break;
-//                case R.id.tv_tag:
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("tags", mAdapter.getData().get(position).getTags().get(0).getUrl());
-//                    bundle.putInt("tag",1);
-//                    JumpUtils.jump((AppCompatActivity) getActivity(), WebViewActivity.class, bundle);
-//                    mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//                    break;
-                default:
                     break;
             }
         });

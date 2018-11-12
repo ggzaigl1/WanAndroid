@@ -32,7 +32,6 @@ import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
@@ -43,8 +42,6 @@ import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Gab on 2018/1/15 0015.
@@ -111,19 +108,13 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
     @SuppressLint("SetJavaScriptEnabled")
     private void initView() {
 //        url = getIntent().getStringExtra("UrlBean");
-        String tags = getIntent().getStringExtra("tags");//首页tag 需要带前缀网址
-        int tag = getIntent().getIntExtra("tag", 1);
         mURl = getIntent().getStringExtra(WEB_URL);
         mId = getIntent().getIntExtra(WEB_ID, 0);
         //加快HTML网页加载完成的速度，等页面finish再加载图片
         mWebView.getSettings().setLoadsImagesAutomatically(true);
         mWebView.setHorizontalScrollBarEnabled(false);//水平不显示
         mWebView.setVerticalScrollBarEnabled(false); //垂直不显示
-        if (tag == 1) {
-            mWebView.loadUrl(ConfigUtils.getBaseUrl() + tags);
-        } else {
-            mWebView.loadUrl(mURl);
-        }
+        mWebView.loadUrl(mURl);
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         //设置WebView支持javascript脚本
@@ -353,16 +344,6 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
         }
         return super.onMenuOpened(featureId, menu);
     }
-
-    /**
-     * 重写 Activity 的 finish ⽅法, 并调⽤ overridePendingTransition ⽅法，解决退出动画⽆效
-     */
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-    }
-
 
     @Override
     public void onPause() {

@@ -1,17 +1,22 @@
-package com.example.gab.babylove.ui.main.activity;
+package com.example.gab.babylove.ui.main.official;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.BaseBean;
+import com.example.gab.babylove.ui.main.search.SearchCommonActivity;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
@@ -35,19 +40,18 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/10/17 0017.
- * 最新项目
+ * Created by 初夏小溪 on 2018/10/15 0015.
+ * 公众号 内容
  */
-public class NewProjectActivity extends BaseActivity implements IBaseActivity {
+public class OfficialAccountListActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-
     BaseAdapter mAdapter;
+    private int mId;
     int mPageNo = 1;
-
 
     @Override
     public boolean isShowHeadView() {
@@ -56,40 +60,41 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
 
     @Override
     public int setView() {
-        return R.layout.activity_new_project;
+        return R.layout.activity_official_account;
     }
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+        mId = getIntent().getIntExtra("id", 0);
         initRecyle();
         initRefresh();
-        getListProject(mPageNo);
+        getChaptersList(mPageNo);
     }
 
     /**
-     * 列表数据加载
+     * 公众号详情 数据加载
      */
     @SuppressLint("CheckResult")
-    private void getListProject(int mPageNo) {
+    private void getChaptersList(int mPageNo) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .getListProject(mPageNo)
+                .getWxarticle(mId, mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
                 .subscribe(new NetCallBack<BaseBean>() {
                     @Override
-                    protected void onSuccess(BaseBean listProjectBean) {
-                        if (null != listProjectBean) {
+                    protected void onSuccess(BaseBean officialAccountListBean) {
+                        if (null != officialAccountListBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(listProjectBean.getDatas());
+                                mAdapter.setNewData(officialAccountListBean.getDatas());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(listProjectBean.getDatas());
+                                mAdapter.getData().addAll(officialAccountListBean.getDatas());
                                 mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
                             } else {
-                                mAdapter.setNewData(listProjectBean.getDatas());
+                                mAdapter.setNewData(officialAccountListBean.getDatas());
                             }
                         } else {
                             if (mRefreshLayout.isRefreshing()) {
@@ -107,16 +112,67 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                 });
     }
 
+    /**
+     * 收藏
+     *
+     * @param id
+     */
+    @SuppressLint("CheckResult")
+    private void collectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        RequestUtils.create(ApiService.class)
+                .getCollectArticle(id, "")
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        mKProgressHUD.dismiss();
+                        T.showShort(OfficialAccountListActivity.this.getString(R.string.collection_success));
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
+    }
+
+    //    取消收藏
+    @SuppressLint("CheckResult")
+    private void unCollectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        RequestUtils.create(ApiService.class)
+                .unCollectArticle(id, "")
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        T.showShort(getString(R.string.cancel_collection_success));
+                        mKProgressHUD.dismiss();
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
+    }
+
+    /**
+     * 设置相关信息
+     */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BaseAdapter(new ArrayList<>());
+        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
                     , mAdapter.getData().get(position).getId());// 详情
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
@@ -137,7 +193,6 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                     break;
             }
         });
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -151,63 +206,15 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 mPageNo += 1;
-                getListProject(mPageNo);
+                getChaptersList(mPageNo);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
                 mPageNo = 1;
-                getListProject(mPageNo);
+                getChaptersList(mPageNo);
             }
         });
-    }
-
-    /**
-     * 收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void collectArticle(int id) {
-        RequestUtils.create(ApiService.class)
-                .getCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.collection_success));
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
-
-    /**
-     * 取消收藏
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void unCollectArticle(int id) {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .unCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.cancel_collection_success));
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
     }
 
     @Override
@@ -219,5 +226,30 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main_search, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setQueryHint("搜索知识点");
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("query", query);
+                bundle.putInt("id", mId);
+                JumpUtils.jumpFade(OfficialAccountListActivity.this, SearchCommonActivity.class, bundle);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
     }
 }

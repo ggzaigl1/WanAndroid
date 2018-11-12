@@ -62,22 +62,6 @@ public class JumpUtils {
     }
 
     /**
-     * 跳转到指定 activity
-     *
-     * @param actClass
-     * @param bundle
-     */
-    public static void jump(AppCompatActivity act, Class actClass, Bundle bundle) {
-        Intent intent = new Intent(act, actClass);
-        if (null != bundle) {
-            intent.putExtras(bundle);
-        }
-
-        act.startActivity(intent);
-        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
-    }
-
-    /**
      * 跳转到指定 activity 并且带渐变效果
      *
      * @param actClass
@@ -88,9 +72,12 @@ public class JumpUtils {
         if (null != bundle) {
             intent.putExtras(bundle);
         }
+
         activity.startActivity(intent);
         activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//        activity.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
     }
+
 
     /**
      * 带回调结果的跳转
@@ -107,7 +94,7 @@ public class JumpUtils {
 
         act.startActivityForResult(intent, requestCode);
         //第一个参数 下一界面进入效果；第二个参数 当前界面退出效果
-        act.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+        act.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /**
@@ -120,7 +107,7 @@ public class JumpUtils {
     public static void jump(AppCompatActivity act, Bundle bundle, String className) {
         try {
             Class cla = Class.forName(className);
-            jump(act, cla, bundle);
+            jumpFade(act, cla, bundle);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

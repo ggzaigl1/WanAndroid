@@ -199,7 +199,7 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
 
                         Bundle bundle = new Bundle();
                         bundle.putString("LoginBean", mCache.getAsString("User_Name"));
-                        JumpUtils.jump(RegisterActivity.this, MainActivity.class, bundle);
+                        JumpUtils.jumpFade(RegisterActivity.this, MainActivity.class, bundle);
                         mKProgressHUD.dismiss();
                         T.showShort("注册账号成功");
                     }

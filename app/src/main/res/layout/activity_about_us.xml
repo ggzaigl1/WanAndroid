@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="true"
         android:fitsSystemWindows="true"
-        tools:context=".ui.main.activity.AboutActivity">
+        tools:context=".ui.main.about.AboutActivity">
 
     <com.scwang.smartrefresh.header.flyrefresh.MountainSceneView
             android:id="@+id/about_us_mountain"

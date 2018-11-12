@@ -12,7 +12,7 @@ import android.support.v4.view.ViewPager;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.TreeBean;
+import com.example.gab.babylove.entity.ViewBean;
 import com.example.gab.babylove.ui.view.fragment.SystemFlyFragment;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
@@ -30,8 +30,8 @@ import butterknife.BindView;
 public class SystemActivity extends BaseActivity implements IBaseActivity {
 
     private ArrayList<SystemFlyFragment> mFragments = new ArrayList<>();
-    private List<TreeBean.ChildrenBean> mChildren;
-    TreeBean bean;
+    private List<ViewBean.ChildrenBean> mChildren;
+    ViewBean bean;
 
     @BindView(R.id.sliding_tab)
     TabLayout mTabLayout;
@@ -56,9 +56,9 @@ public class SystemActivity extends BaseActivity implements IBaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        bean = (TreeBean) getIntent().getSerializableExtra("bean");
+        bean = (ViewBean) getIntent().getSerializableExtra("bean");
         mChildren = bean.getChildren();
-        for (TreeBean.ChildrenBean child : mChildren) {
+        for (ViewBean.ChildrenBean child : mChildren) {
             SystemFlyFragment systemFlyFragment = SystemFlyFragment.getInstance(child.getId(), "");
             mFragments.add(systemFlyFragment);
         }

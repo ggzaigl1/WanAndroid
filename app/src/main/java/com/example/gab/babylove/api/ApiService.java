@@ -12,7 +12,7 @@ import com.example.gab.babylove.entity.LoginBean;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.entity.OfficialAccountBean;
 import com.example.gab.babylove.entity.ProjectBean;
-import com.example.gab.babylove.entity.TreeBean;
+import com.example.gab.babylove.entity.ViewBean;
 import com.example.gab.babylove.entity.UpDateBean;
 import com.ggz.baselibrary.retrofit.BeanModule;
 
@@ -84,7 +84,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("tree/json")
-    Observable<BeanModule<List<TreeBean>>> getTreeList();
+    Observable<BeanModule<List<ViewBean>>> getTreeList();
 
     /**
      * 体系数据 详情
@@ -121,7 +121,14 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("project/tree/json")
-    Observable<BeanModule<List<ProjectBean>>> getProjectList();
+    Observable<BeanModule<List<ProjectBean>>> getProject();
+
+    /**
+     * 项目列表数据
+     */
+    @Headers({"url_name:user"})
+    @GET("project/list/{pageNum}/json")
+    Observable<BeanModule<BaseBean>> getProjectList(@Path("pageNum") int page, @Query("cid") int cid);
 
     /**
      * 最新项目tab (首页的第二个tab)

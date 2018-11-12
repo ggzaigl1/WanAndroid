@@ -1,0 +1,36 @@
+package com.example.gab.babylove.ui.main.collect.adapter;
+
+import android.support.annotation.Nullable;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.gab.babylove.R;
+import com.example.gab.babylove.entity.CollectBean;
+import com.ggz.baselibrary.utils.ResourceUtils;
+
+import java.util.List;
+
+/**
+ * Created by 初夏小溪 on 2018/4/24 0024.
+ */
+
+public class MyCollectAdapter extends BaseQuickAdapter<CollectBean.DatasBean, BaseViewHolder> {
+
+    public MyCollectAdapter(@Nullable List<CollectBean.DatasBean> data) {
+        super(R.layout.item_collect_my, data);
+    }
+
+    @Override
+    protected void convert(BaseViewHolder helper, CollectBean.DatasBean item) {
+        helper.setText(R.id.tv_title, item.getTitle())
+                .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
+                .setText(R.id.tv_date, item.getNiceDate())
+                .setText(R.id.tv_chapterName, "分类：" + item.getChapterName()).setTextColor(R.id.tv_chapterName, ResourceUtils.getRandomColor());
+        helper.addOnClickListener(R.id.image_collect);
+        if (item.isCollect()) {
+            helper.setBackgroundRes(R.id.image_collect, R.drawable.vector_collect);
+        } else {
+            helper.setBackgroundRes(R.id.image_collect, R.drawable.vector_collect_false);
+        }
+    }
+}

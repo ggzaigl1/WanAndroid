@@ -1,11 +1,11 @@
-package com.example.gab.babylove.ui.main.activity;
+package com.example.gab.babylove.ui.main.search;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
@@ -35,19 +35,22 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/10/17 0017.
- * 最新项目
+ * Created by 初夏小溪 on 2018/5/11 0011.
+ * 公众号 搜索界面
  */
-public class NewProjectActivity extends BaseActivity implements IBaseActivity {
+
+public class SearchCommonActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
+    int mPageOffNo = 1;
+    String queryKey;
     BaseAdapter mAdapter;
-    int mPageNo = 1;
-
 
     @Override
     public boolean isShowHeadView() {
@@ -56,40 +59,48 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
 
     @Override
     public int setView() {
-        return R.layout.activity_new_project;
+        return R.layout.activity_search;
     }
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+        //设置导航图标要在setSupportActionBar方法之后
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // 给左上角图标的左边加上一个返回的图标
+        mToolbar.setNavigationOnClickListener(v -> JumpUtils.exitActivity(this));
+        queryKey = getIntent().getStringExtra("query");
+        getQuery(mPageOffNo, queryKey);
         initRecyle();
         initRefresh();
-        getListProject(mPageNo);
+
     }
 
     /**
-     * 列表数据加载
+     * 搜索接口
+     *
+     * @param pageNum
+     * @param queryKey
      */
-    @SuppressLint("CheckResult")
-    private void getListProject(int mPageNo) {
+    private void getQuery(int pageNum, String queryKey) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .getListProject(mPageNo)
+                .getWxarticleQuery(getIntent().getIntExtra("id",0), pageNum, queryKey)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
                 .subscribe(new NetCallBack<BaseBean>() {
                     @Override
-                    protected void onSuccess(BaseBean listProjectBean) {
-                        if (null != listProjectBean) {
+                    protected void onSuccess(BaseBean officialAccountListBean) {
+                        if (null != officialAccountListBean) {
                             mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(listProjectBean.getDatas());
+                                mAdapter.setNewData(officialAccountListBean.getDatas());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(listProjectBean.getDatas());
+                                mAdapter.getData().addAll(officialAccountListBean.getDatas());
                                 mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
                             } else {
-                                mAdapter.setNewData(listProjectBean.getDatas());
+                                mAdapter.setNewData(officialAccountListBean.getDatas());
                             }
                         } else {
                             if (mRefreshLayout.isRefreshing()) {
@@ -102,11 +113,66 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
 
                     @Override
                     protected void updataLayout(int flag) {
-                        mKProgressHUD.dismiss();
+
                     }
                 });
     }
 
+    /**
+     * 收藏
+     *
+     * @param id
+     */
+    @SuppressLint("CheckResult")
+    private void collectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        RequestUtils.create(ApiService.class)
+                .getCollectArticle(id, "")
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        mKProgressHUD.dismiss();
+                        T.showShort(getString(R.string.collection_success));
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
+    }
+
+    /**
+     * 取消收藏
+     *
+     * @param id
+     */
+    @SuppressLint("CheckResult")
+    private void unCollectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        RequestUtils.create(ApiService.class)
+                .unCollectArticle(id, "")
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        T.showShort(getString(R.string.cancel_collection_success));
+                        mKProgressHUD.dismiss();
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
+    }
+
+    /**
+     * 设置
+     */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BaseAdapter(new ArrayList<>());
@@ -116,7 +182,6 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                     , mAdapter.getData().get(position).getId());// 详情
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
@@ -137,8 +202,8 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                     break;
             }
         });
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
     }
 
     /**
@@ -150,64 +215,16 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
         mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                mPageNo += 1;
-                getListProject(mPageNo);
+                mPageOffNo += 1;
+                getQuery(mPageOffNo, queryKey);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                mPageNo = 1;
-                getListProject(mPageNo);
+                mPageOffNo = 1;
+                getQuery(mPageOffNo, queryKey);
             }
         });
-    }
-
-    /**
-     * 收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void collectArticle(int id) {
-        RequestUtils.create(ApiService.class)
-                .getCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.collection_success));
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
-
-    /**
-     * 取消收藏
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void unCollectArticle(int id) {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .unCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.cancel_collection_success));
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
     }
 
     @Override

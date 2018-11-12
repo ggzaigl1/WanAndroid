@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.gab.babylove.ui.main.search.SearchArticleActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.utils.KeyBoardUtils;
 import com.ggz.baselibrary.utils.permission.PermissionChecker;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
@@ -58,5 +60,13 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
         if (mKProgressHUD != null) {
             mKProgressHUD.dismiss();
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        //重写 Activity 的 finish ⽅法, 并调⽤ overridePendingTransition ⽅法，解决退出动画⽆效
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        KeyBoardUtils.closeKeyBoard(this);
     }
 }

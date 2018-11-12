@@ -26,21 +26,21 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.ui.main.activity.AboutActivity;
-import com.example.gab.babylove.ui.main.activity.BelleActivity;
-import com.example.gab.babylove.ui.main.activity.MyCollectActivity;
+import com.example.gab.babylove.ui.main.about.AboutActivity;
+import com.example.gab.babylove.ui.main.other.BelleActivity;
+import com.example.gab.babylove.ui.main.collect.MyCollectActivity;
 import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
-import com.example.gab.babylove.ui.main.activity.OfficialAccountActivity;
-import com.example.gab.babylove.ui.main.activity.OrnamentalListContextActivity;
-import com.example.gab.babylove.ui.main.activity.PhotoViewActivity;
-import com.example.gab.babylove.ui.main.activity.SearchArticleActivity;
-import com.example.gab.babylove.ui.main.activity.ToolsActivity;
+import com.example.gab.babylove.ui.main.official.OfficialAccountActivity;
+import com.example.gab.babylove.ui.main.ornamental.OrnamentalListContextActivity;
+import com.example.gab.babylove.ui.main.other.PhotoViewActivity;
+import com.example.gab.babylove.ui.main.search.SearchArticleActivity;
+import com.example.gab.babylove.ui.main.other.ToolsActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.example.gab.babylove.ui.project.fragment.StarFragment;
-import com.example.gab.babylove.ui.view.fragment.NewsFragment;
+import com.example.gab.babylove.ui.view.fragment.ViewFragment;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     private FragmentManager mFragmentManager;
     private HomeFragment mHomeFragment;
-    private NewsFragment mNewsFragment;
+    private ViewFragment mViewFragment;
     private NavigationViewFragment mNavigationViewFragment;
     private StarFragment mStarFragment;
     private Fragment mCurrentFrag; //当前的fragment
@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void setStatusBar(Activity activity) {
-        // TODO: 2018/11/9 0009 刘海屏适配; 搜索界面UI优化, 删除无用的资源 优化统一布局
+        // TODO: 2018/11/9 0009 刘海屏适配; 搜索界面UI优化
 //        MdStatusBar.setColorBarForDrawer(this, R.color.statusBar, R.color.statusBar);
     }
 
@@ -111,7 +111,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mFragmentManager = getSupportFragmentManager();
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
-        mNewsFragment = new NewsFragment();
+        mViewFragment = new ViewFragment();
         mNavigationViewFragment = new NavigationViewFragment();
         mStarFragment = new StarFragment();
 
@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //        nev_header_tv_title = headerView.findViewById(R.id.nev_header_tv_title);
 //        nev_header_tv_login = headerView.findViewById(R.id.nev_header_tv_login);//点击登录
 
-        nev_header_imageView.setOnClickListener(v -> JumpUtils.jump(MainActivity.this, PhotoViewActivity.class, null));
+        nev_header_imageView.setOnClickListener(v -> JumpUtils.jumpFade(MainActivity.this, PhotoViewActivity.class, null));
         nev_header_tv_login.setOnClickListener(v -> {
             boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
             if (isLogin) {
@@ -155,7 +155,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                         }).negativeText(R.string.cancel)
                         .onNegative((dialog, which) -> dialog.dismiss()).show();
             } else {
-                JumpUtils.jump(MainActivity.this, LoginActivity.class, null);
+                JumpUtils.jumpFade(MainActivity.this, LoginActivity.class, null);
             }
         });
     }
@@ -213,7 +213,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 switchContent(mHomeFragment);
                 break;
             case 1:
-                switchContent(mNewsFragment);
+                switchContent(mViewFragment);
                 break;
             case 2:
                 switchContent(mNavigationViewFragment);
@@ -255,24 +255,24 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         switch (id) {
             case R.id.nav_belle:
                 //美图欣赏
-                JumpUtils.jump(this, BelleActivity.class, null);
+                JumpUtils.jumpFade(this, BelleActivity.class, null);
                 break;
             case R.id.nav_website:
                 //常用网站
-                JumpUtils.jump(this, WebsiteActivity.class, null);
+                JumpUtils.jumpFade(this, WebsiteActivity.class, null);
                 break;
             case R.id.nav_official_account:
                 //公众号
-                JumpUtils.jump(this, OfficialAccountActivity.class, null);
+                JumpUtils.jumpFade(this, OfficialAccountActivity.class, null);
                 break;
             case R.id.nav_list_project:
                 //最新项目
-                JumpUtils.jump(this, NewProjectActivity.class, null);
+                JumpUtils.jumpFade(this, NewProjectActivity.class, null);
                 break;
             case R.id.nav_collect:
                 //我的收藏
                 if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                    JumpUtils.jump(this, MyCollectActivity.class, null);
+                    JumpUtils.jumpFade(this, MyCollectActivity.class, null);
                 } else {
                     JumpUtils.jumpFade(this, LoginActivity.class, null);
                     T.showShort(getString(R.string.main_login_view));
@@ -299,11 +299,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 break;
             case R.id.nav_ornamental:
                 //强身健体
-                JumpUtils.jump(this, OrnamentalListContextActivity.class, null);
+                JumpUtils.jumpFade(this, OrnamentalListContextActivity.class, null);
                 break;
             case R.id.nav_about:
                 //关于我们
-                JumpUtils.jump(this, AboutActivity.class, null);
+                JumpUtils.jumpFade(this, AboutActivity.class, null);
                 break;
             case R.id.nav_share:
 //                AndroidShareUtils.shareWeChatFriend(this, "WanAndroid", "https://www.pgyer.com/6osT", AndroidShareUtils.TEXT, null);
@@ -312,7 +312,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 break;
             case R.id.nav_manage:
 //            工具类
-                JumpUtils.jump(this, ToolsActivity.class, null);
+                JumpUtils.jumpFade(this, ToolsActivity.class, null);
                 break;
             case R.id.nav_exit:
                 JumpUtils.exitApp(this, MainActivity.class);
@@ -336,7 +336,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //            public boolean onQueryTextSubmit(String query) {
 //                Bundle bundle = new Bundle();
 //                bundle.putString("query", query);
-//                JumpUtils.jumpFade(MainActivity.this, SearchMainActivity.class, bundle);
+//                JumpUtils.jumpFadeFade(MainActivity.this, SearchMainActivity.class, bundle);
 //                return false;
 //            }
 //

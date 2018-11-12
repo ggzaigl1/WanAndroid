@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.view.StateButton;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
-import com.example.gab.babylove.view.StateButton;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
@@ -52,12 +52,12 @@ public class SelectorButtonActivity extends AppCompatActivity implements IBaseAc
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.text_webView:
-                JumpUtils.jump(this, WebViewActivity.class, null);
-//                JumpUtils.jump(this, StoreWebViewActivity.class, null);
+                JumpUtils.jumpFade(this, WebViewActivity.class, null);
+//                JumpUtils.jumpFade(this, StoreWebViewActivity.class, null);
                 break;
             // AgentWeb 封装
             case R.id.dash_test:
-                JumpUtils.jump(this, AgentWebActivity.class, null);
+                JumpUtils.jumpFade(this, AgentWebActivity.class, null);
                 break;
             default:
                 break;

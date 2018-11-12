@@ -55,7 +55,7 @@ public class StarFragment extends BaseFragment {
     private void getArticleList() {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .getProjectList()
+                .getProject()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))
                 .subscribe(new NetCallBack<List<ProjectBean>>() {
