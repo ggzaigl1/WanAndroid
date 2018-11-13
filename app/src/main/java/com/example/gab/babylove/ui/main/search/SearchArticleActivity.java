@@ -82,25 +82,24 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (!edit_search.getText().toString().trim().equals("")) {
-                    if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                         mHasData = mDbDao.hasData(edit_search.getText().toString().trim());
                         if (!mHasData) {
                             // 先隐藏键盘
-                            ((InputMethodManager) edit_search.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                             String queryKey = edit_search.getText().toString();
                             Bundle bundle = new Bundle();
                             bundle.putString("queryKey", queryKey);
                             JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
                             mDbDao.insertData(queryKey);
                             mAdapter.updata(mDbDao.queryData(""));
-//                    KeyBoardUtils.closeKeyBoard(SearchArticleActivity.this);
+                            KeyBoardUtils.closeKeyBoard(SearchArticleActivity.this);
                             return true;
                         } else {
                             T.showShort("该内容已在历史记录中");
                         }
                     }
                 } else {
-                    T.showShort("该内容已在历史记录中");
+                    T.showShort("搜索内容不能为空");
                 }
                 return false;
             }
