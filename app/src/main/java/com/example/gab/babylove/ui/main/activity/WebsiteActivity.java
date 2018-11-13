@@ -16,6 +16,7 @@ import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -84,7 +85,7 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
         mTagFlowLayout.setAdapter(new TagAdapter(listBeanModule) {
             @Override
             public View getView(FlowLayout parent, int position, Object o) {
-                TextView tv_name = (TextView) LayoutInflater.from(WebsiteActivity.this).inflate(R.layout.item_hotkey_list, parent, false);
+                TextView tv_name = (TextView) LayoutInflater.from(ConfigUtils.getAppCtx()).inflate(R.layout.item_hotkey_list, parent, false);
                 tv_name.setText(listBeanModule.get(position).getName());
                 tv_name.setTextColor(ResourceUtils.getRandomColor());
                 return tv_name;

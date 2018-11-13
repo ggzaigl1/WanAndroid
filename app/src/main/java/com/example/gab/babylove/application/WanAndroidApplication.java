@@ -32,7 +32,7 @@ public class WanAndroidApplication extends MultiDexApplication {
                 .setBgColor(R.color.colorPrimary)
 //                .setTitleColor(R.color.red)
 //                .setTitleCenter(true)
-                .setCer(CER)
+//                .setCer(CER)
                 .setBASE_URL("http://www.wanandroid.com/")
                 .create(this);
 

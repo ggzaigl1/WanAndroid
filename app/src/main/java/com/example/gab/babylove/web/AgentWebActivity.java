@@ -12,6 +12,7 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.just.agentweb.AgentWeb;
@@ -23,7 +24,7 @@ import butterknife.BindView;
  * AgentWeb
  */
 
-public class AgentWebActivity extends AppCompatActivity implements IBaseActivity {
+public class AgentWebActivity extends BaseActivity implements IBaseActivity {
 
     AgentWeb mAgentWeb;
     LinearLayout mLinearLayout;
@@ -60,17 +61,6 @@ public class AgentWebActivity extends AppCompatActivity implements IBaseActivity
                 .ready()
                 .go(url);
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
 
     //WebViewClient
     private WebViewClient mWebViewClient = new WebViewClient() {

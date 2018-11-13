@@ -29,13 +29,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.ui.main.search.SearchArticleActivity;
 import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.example.gab.babylove.utils.CustomDialog;
 import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusBarUtils.StatusBar;
-import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.T;
@@ -129,10 +127,10 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             case R.id.Ll_check_update:
                 GetVersionUpdate();
                 break;
-            //搜索
-            case R.id.Ll_check_test:
-                JumpUtils.jumpFade(this, SearchArticleActivity.class, null);
-                break;
+//            //搜索
+//            case R.id.Ll_check_test:
+//                JumpUtils.jumpFade(this, SearchArticleActivity.class, null);
+//                break;
             default:
                 break;
         }

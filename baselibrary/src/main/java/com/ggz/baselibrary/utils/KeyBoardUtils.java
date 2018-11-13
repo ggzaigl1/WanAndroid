@@ -21,17 +21,13 @@ public class KeyBoardUtils {
      * 关闭键盘
      */
     public static void closeKeyBoard(Activity activity) {
-
 //		if (activity.getCurrentFocus() != null) {
-        InputMethodManager imm = (InputMethodManager) activity
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm.isActive()) {
             View view = activity.getWindow().peekDecorView();
             activity.getWindow().getDecorView();
             if (view != null) {
-                imm.hideSoftInputFromWindow(view.getWindowToken(),
-                        0);
-//
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 //				}
             }
         }

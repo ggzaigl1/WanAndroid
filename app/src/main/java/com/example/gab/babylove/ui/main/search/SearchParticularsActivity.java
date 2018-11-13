@@ -1,6 +1,5 @@
 package com.example.gab.babylove.ui.main.search;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
