@@ -1,13 +1,19 @@
 package com.example.gab.babylove.ui.navigation.adapter;
 
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.NavigationBean;
+import com.example.gab.babylove.ui.main.search.SearchArticleActivity;
 import com.ggz.baselibrary.utils.ResourceUtils;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.List;
 
@@ -16,12 +22,12 @@ import java.util.List;
  * 视图导航
  */
 
-public class NavigationCidAdapter extends BaseQuickAdapter<NavigationBean.ArticlesBean, BaseViewHolder> {
+public class NavigationRightAdapter extends BaseQuickAdapter<NavigationBean.ArticlesBean, BaseViewHolder> {
 
     private List<NavigationBean.ArticlesBean> mList;
 
-    public NavigationCidAdapter(@Nullable List<NavigationBean.ArticlesBean> data) {
-        super(R.layout.item_navigation_cid, data);
+    public NavigationRightAdapter(@Nullable List<NavigationBean.ArticlesBean> data) {
+        super(R.layout.item_navigation_right, data);
         this.mList = data;
     }
 

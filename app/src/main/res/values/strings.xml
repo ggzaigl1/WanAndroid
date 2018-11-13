@@ -75,6 +75,7 @@
     <string name="save_photo">保存到相册中</string>
     <string name="announcements">注意事项</string>
     <string name="training_action">训练动作</string>
+    <string name="item_footer">我是有底线的,检查下网络呢~</string>
 
     <string name="clear_cache">清空缓存</string>
     <string name="to_evaluate">去评价</string>

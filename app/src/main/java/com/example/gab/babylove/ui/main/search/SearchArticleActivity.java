@@ -15,7 +15,6 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.HotKeyBean;
-import com.example.gab.babylove.ui.main.adapter.SearchAdapter;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
@@ -40,7 +39,7 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
 
     //    @BindView(R.id.rv_title)
 //    RecyclerView mRecyclerView;
-    @BindView(R.id.id_flowlayout)
+    @BindView(R.id.id_layout)
     TagFlowLayout mTagFlowLayout;
     @BindView(R.id.Ll_search)
     LinearLayout Ll_search;
@@ -48,7 +47,6 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
     EditText edit_search;
 
     String queryKey;
-    SearchAdapter mAdapter;
 
     @Override
     public boolean isShowHeadView() {
@@ -63,7 +61,6 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        //todo 搜索
         getHotKeyList();
 //        initRecyleHotKeyList();
         //搜索按钮监听
@@ -107,21 +104,18 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
         mTagFlowLayout.setAdapter(new TagAdapter(hotKeyBeans) {
             @Override
             public View getView(FlowLayout parent, int position, Object o) {
-                TextView tv_name = (TextView) LayoutInflater.from(SearchArticleActivity.this).inflate(R.layout.item_hotkey_list, parent, false);
+                TextView tv_name = (TextView) LayoutInflater.from(SearchArticleActivity.this).inflate(R.layout.item_navigation_cid, parent, false);
                 tv_name.setText(hotKeyBeans.get(position).getName());
                 return tv_name;
             }
         });
 
-        mTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
-            @Override
-            public boolean onTagClick(View view, int position, FlowLayout parent) {
-                queryKey = hotKeyBeans.get(position).getName();
-                Bundle bundle = new Bundle();
-                bundle.putString("queryKey", queryKey);
-                JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
-                return true;
-            }
+        mTagFlowLayout.setOnTagClickListener((view, position, parent) -> {
+            queryKey = hotKeyBeans.get(position).getName();
+            Bundle bundle = new Bundle();
+            bundle.putString("queryKey", queryKey);
+            JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
+            return true;
         });
     }
 

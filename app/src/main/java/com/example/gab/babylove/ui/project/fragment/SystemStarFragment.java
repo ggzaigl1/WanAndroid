@@ -158,7 +158,7 @@ public class SystemStarFragment extends BaseFragment {
                 mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:

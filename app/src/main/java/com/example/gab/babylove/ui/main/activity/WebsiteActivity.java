@@ -3,30 +3,28 @@ package com.example.gab.babylove.ui.main.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.BookmarkBean;
-import com.example.gab.babylove.ui.main.adapter.WebsiteAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.google.android.flexbox.AlignItems;
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexWrap;
-import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.android.flexbox.JustifyContent;
+import com.ggz.baselibrary.utils.ResourceUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by 初夏小溪 on 2018/4/19 0019.
@@ -35,9 +33,8 @@ import io.reactivex.functions.Consumer;
 
 public class WebsiteActivity extends BaseActivity implements IBaseActivity {
 
-    @BindView(R.id.rv_title)
-    RecyclerView mRecyclerView;
-    WebsiteAdapter mAdapter;
+    @BindView(R.id.id_layout)
+    TagFlowLayout mTagFlowLayout;
 
     @Override
     public boolean isShowHeadView() {
@@ -50,13 +47,7 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
     }
 
     @Override
-    public void setStatusBar(Activity activity) {
-//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
-    }
-
-    @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        initRecyle();
         getBookmarkList();
     }
 
@@ -74,7 +65,7 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
                     @Override
                     protected void onSuccess(List<BookmarkBean> listBeanModule) {
                         if (null != listBeanModule) {
-                            mAdapter.setNewData(listBeanModule);
+                            initHotKeyData(listBeanModule);
                             mKProgressHUD.dismiss();
                         }
                     }
@@ -86,26 +77,26 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
                 });
     }
 
-
     /**
-     * recycleview 相关设置
+     * 热词搜索 设置
      */
-    private void initRecyle() {
-        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
-        layoutManager.setFlexWrap(FlexWrap.WRAP);
-        layoutManager.setFlexDirection(FlexDirection.ROW);
-        layoutManager.setAlignItems(AlignItems.STRETCH);
-        layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
-
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new WebsiteAdapter(R.layout.item_website, new ArrayList<>());
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(this
-                    , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());// 详情
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    private void initHotKeyData(List<BookmarkBean> listBeanModule) {
+        mTagFlowLayout.setAdapter(new TagAdapter(listBeanModule) {
+            @Override
+            public View getView(FlowLayout parent, int position, Object o) {
+                TextView tv_name = (TextView) LayoutInflater.from(WebsiteActivity.this).inflate(R.layout.item_hotkey_list, parent, false);
+                tv_name.setText(listBeanModule.get(position).getName());
+                tv_name.setTextColor(ResourceUtils.getRandomColor());
+                return tv_name;
+            }
         });
-//        mAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
-        mRecyclerView.setAdapter(mAdapter);
+
+        mTagFlowLayout.setOnTagClickListener((view, position, parent) -> {
+            WebViewActivity.startWebActivity(this
+                    , listBeanModule.get(position).getLink()
+                    , listBeanModule.get(position).getId());// 详情
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            return true;
+        });
     }
 }

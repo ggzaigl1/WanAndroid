@@ -90,7 +90,7 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new OfficialAccountAdapter(new ArrayList<>());
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
             bundle.putInt("id", mAdapter.getData().get(position).getId());

@@ -100,7 +100,7 @@ dependencies {
     // https://juejin.im/post/5bce688e6fb9a05cf715d1c2 对应讲解
     api 'me.jessyan:autosize:1.0.1'
     //https://github.com/google/flexbox-layout
-    api 'com.google.android:flexbox:0.3.2'
+//    api 'com.google.android:flexbox:0.3.2'
     //流式布局
     api 'com.hyman:flowlayout-lib:1.1.2'
     // 轮播图

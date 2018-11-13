@@ -14,10 +14,10 @@ import java.util.List;
  * 视图导航
  */
 
-public class NavigationViewAdapter extends BaseQuickAdapter<NavigationBean, BaseViewHolder> {
+public class NavigationLifeAdapter extends BaseQuickAdapter<NavigationBean, BaseViewHolder> {
 
 
-    public NavigationViewAdapter( @Nullable List<NavigationBean> data) {
+    public NavigationLifeAdapter(@Nullable List<NavigationBean> data) {
         super(R.layout.item_navigation,  data);
     }
 

@@ -9,5 +9,5 @@
           android:paddingBottom="@dimen/dp_6"
           android:paddingStart="@dimen/dp_10"
           android:paddingEnd="@dimen/dp_10"
-          android:text="我是有底线的,检查下网络呢~"
+          android:text="@string/item_footer"
           android:textColor="@color/black"/>

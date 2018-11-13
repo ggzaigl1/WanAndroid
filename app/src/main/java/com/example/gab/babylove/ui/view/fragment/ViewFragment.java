@@ -86,7 +86,7 @@ public class ViewFragment extends BaseFragment {
             bundle.putSerializable("bean", bean);
             JumpUtils.jumpFade(mContext, SystemActivity.class, bundle);// 详情
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_website_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
     }
 }

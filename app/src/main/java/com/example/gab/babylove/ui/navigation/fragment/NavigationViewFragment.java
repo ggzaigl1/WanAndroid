@@ -3,24 +3,25 @@ package com.example.gab.babylove.ui.navigation.fragment;
 import android.annotation.SuppressLint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.NavigationBean;
-import com.example.gab.babylove.ui.navigation.adapter.NavigationCidAdapter;
-import com.example.gab.babylove.ui.navigation.adapter.NavigationViewAdapter;
+import com.example.gab.babylove.ui.navigation.adapter.NavigationLifeAdapter;
+import com.example.gab.babylove.ui.navigation.adapter.NavigationRightAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.google.android.flexbox.AlignItems;
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexWrap;
-import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.android.flexbox.JustifyContent;
+import com.ggz.baselibrary.utils.ResourceUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,18 +33,21 @@ import butterknife.BindView;
  * 导航数据
  */
 
-public class NavigationViewFragment extends BaseFragment {
+public class NavigationViewFragment extends BaseFragment implements TagFlowLayout.OnTagClickListener {
 
     @BindView(R.id.rv_title)
-    RecyclerView mRecyclerView_Title;
-    @BindView(R.id.rv_context)
-    RecyclerView mRecyclerView_Context;
+    RecyclerView mRecyclerViewLife;
+    //    @BindView(R.id.rv_context)
+//    RecyclerView mRecyclerViewRight;
+    @BindView(R.id.id_tagFlow)
+    TagFlowLayout mTagFlowLayout;
 
-    NavigationViewAdapter mAdapter;
-    NavigationCidAdapter mNavigationCidAdapter;
+    NavigationLifeAdapter mAdapterLife;
+    NavigationRightAdapter mAdapterRight;
 
     private int mSelectedPos = 0;//实现单选 变量保存当前选中的position
     private LinearLayoutManager mLinearLayoutManager;
+    private List<NavigationBean.ArticlesBean> mArticles;
 
     @Override
     protected int setContentLayout() {
@@ -53,9 +57,11 @@ public class NavigationViewFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
-        initRecycler();
-        initRecyclerCid();
+        initRecyclerLife();
+//        initRecyclerRight();
         getNavigationList();
+//        initHotKeyData();
+        mTagFlowLayout.setOnTagClickListener(this);
     }
 
     /**
@@ -73,10 +79,11 @@ public class NavigationViewFragment extends BaseFragment {
                     protected void onSuccess(List<NavigationBean> navigationBeans) {
                         if (null != navigationBeans) {
                             mKProgressHUD.dismiss();
-                            mAdapter.setNewData(navigationBeans);
+                            mAdapterLife.setNewData(navigationBeans);
                             if (mSelectedPos == 0) {
-                                mAdapter.getData().get(mSelectedPos).setSelected(true);
-                                mNavigationCidAdapter.setNewData(navigationBeans.get(mSelectedPos).getArticles());
+                                mAdapterLife.getData().get(mSelectedPos).setSelected(true);
+                                initNavigationData(navigationBeans.get(0).getArticles());
+//                                mAdapterRight.setNewData(navigationBeans.get(mSelectedPos).getArticles());
                             }
                         }
                     }
@@ -89,48 +96,67 @@ public class NavigationViewFragment extends BaseFragment {
     }
 
 
-    private void initRecycler() {
+    private void initRecyclerLife() {
         mLinearLayoutManager = new LinearLayoutManager(mContext);
-        mRecyclerView_Title.setLayoutManager(mLinearLayoutManager);
-        mAdapter = new NavigationViewAdapter(new ArrayList<>());
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            NavigationBean navigationBean = mAdapter.getData().get(position);
+        mRecyclerViewLife.setLayoutManager(mLinearLayoutManager);
+        mAdapterLife = new NavigationLifeAdapter(new ArrayList<>());
+        mAdapterLife.setOnItemClickListener((adapter, view, position) -> {
+            NavigationBean navigationBean = mAdapterLife.getData().get(position);
             //如果item位置不等于0 就不显示
             if (mSelectedPos != position) {
-                mAdapter.getData().get(mSelectedPos).setSelected(false);
-                mAdapter.notifyItemChanged(mSelectedPos);
+                mAdapterLife.getData().get(mSelectedPos).setSelected(false);
+                mAdapterLife.notifyItemChanged(mSelectedPos);
                 // position 位置 赋予给mSelectedPos
                 mSelectedPos = position;
-                mAdapter.getData().get(mSelectedPos).setSelected(true);
-                mAdapter.notifyItemChanged(mSelectedPos);
+                mAdapterLife.getData().get(mSelectedPos).setSelected(true);
+                mAdapterLife.notifyItemChanged(mSelectedPos);
 
             }
-            mNavigationCidAdapter.setNewData(navigationBean.getArticles());
-            View childAt = mRecyclerView_Title.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
+            mArticles = navigationBean.getArticles();
+            initNavigationData(mArticles);
+//            mAdapterRight.setNewData(navigationBean.getArticles());
+            View childAt = mRecyclerViewLife.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
             if (childAt != null) {
-                int y = childAt.getTop() - mRecyclerView_Title.getHeight() / 2;
-                mRecyclerView_Title.smoothScrollBy(0, y);
+                int y = childAt.getTop() - mRecyclerViewLife.getHeight() / 2;
+                mRecyclerViewLife.smoothScrollBy(0, y);
             }
         });
-        mRecyclerView_Title.setAdapter(mAdapter);
+        mRecyclerViewLife.setAdapter(mAdapterLife);
     }
 
-    private void initRecyclerCid() {
-        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getActivity());
-        layoutManager.setFlexWrap(FlexWrap.WRAP);
-        layoutManager.setFlexDirection(FlexDirection.ROW);
-        layoutManager.setAlignItems(AlignItems.STRETCH);
-        layoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
-        mRecyclerView_Context.scrollToPosition(0);
-        mRecyclerView_Context.setLayoutManager(layoutManager);
-        mNavigationCidAdapter = new NavigationCidAdapter(new ArrayList<>());
-        mNavigationCidAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(getActivity()
-                    , mNavigationCidAdapter.getData().get(position).getLink()
-                    , mNavigationCidAdapter.getData().get(position).getId());
-            mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    @Override
+    public boolean onTagClick(View view, int position, FlowLayout parent) {
+        WebViewActivity.startWebActivity(getActivity()
+                , mArticles.get(position).getLink()
+                , mArticles.get(position).getId());
+        mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        return true;
+    }
+
+    private void initNavigationData(List<NavigationBean.ArticlesBean> articles) {
+        mTagFlowLayout.setAdapter(new TagAdapter(articles) {
+            @Override
+            public View getView(FlowLayout parent, int position, Object o) {
+                TextView tv_date = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.item_navigation_cid, parent, false);
+                tv_date.setText(articles.get(position).getTitle());
+                tv_date.setTextColor(ResourceUtils.getRandomColor());
+                return tv_date;
+            }
         });
-        mRecyclerView_Context.setAdapter(mNavigationCidAdapter);
+    }
+
+
+    private void initRecyclerRight() {
+//        mRecyclerViewRight.scrollToPosition(0);
+//        mRecyclerViewRight.setLayoutManager(new GridLayoutManager(mContext, 4));
+//        mAdapterRight = new NavigationRightAdapter(new ArrayList<>());
+//        mAdapterRight.setOnItemClickListener((adapter, view, position) -> {
+//            WebViewActivity.startWebActivity(getActivity()
+//                    , mAdapterRight.getData().get(position).getLink()
+//                    , mAdapterRight.getData().get(position).getId());
+//            mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//        });
+//        mRecyclerViewRight.setAdapter(mAdapterRight);
     }
 
 }
