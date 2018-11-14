@@ -11,7 +11,9 @@ import com.ggz.baselibrary.utils.ResourceUtils;
 import java.util.List;
 
 /**
- * Created by 初夏小溪 on 2018/4/19 0019.
+ *
+ * @author 初夏小溪
+ * @date 2018/4/19 0019
  * 知识体系数据实体类
  */
 

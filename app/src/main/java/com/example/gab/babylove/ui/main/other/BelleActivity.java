@@ -19,7 +19,7 @@ import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.GankBean;
 import com.example.gab.babylove.entity.OrListBean;
-import com.example.gab.babylove.ui.main.adapter.GankMAdapter;
+import com.example.gab.babylove.ui.main.adapter.PicturesAdapter;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
@@ -39,7 +39,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Gab on 2017/12/19 0019.
+ * @author Gab
+ * @date 2017/12/19 0019
  * 美图欣赏
  */
 
@@ -50,10 +51,11 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.fab_top)
-    FloatingActionButton fab_top;
-    GankMAdapter mAdapter;
+    FloatingActionButton mFabTop;
+    PicturesAdapter mAdapter;
     private int mCurPage = 1;
     private final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
+    private final static int FIND_FIRST_VISIBLE_ITEM_POSITION = 100;
 
     @Override
     public boolean isShowHeadView() {
@@ -63,11 +65,6 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
     @Override
     public int setView() {
         return R.layout.activity_belle;
-    }
-
-    @Override
-    public void setStatusBar(Activity activity) {
-//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
     }
 
     @Override
@@ -83,7 +80,6 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
      *
      * @param mCurPage
      */
-//      .compose(RxHelper.handleResult())
     @SuppressLint("CheckResult")
     private void getCourseDetails(int mCurPage) {
         RequestUtils.create(ApiService.class)
@@ -142,7 +138,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
     private void initRv() {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new GankMAdapter(R.layout.item_gank_list_context, new ArrayList<>());
+        mAdapter = new PicturesAdapter(R.layout.item_gank_list_context, new ArrayList<>());
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -151,9 +147,9 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findFirstVisibleItemPosition() != 0) {
                     /* 悬浮按钮显示动画 */
-                    if (fab_top.getVisibility() == View.GONE) {
-                        fab_top.setVisibility(View.VISIBLE);
-                        ViewCompat.animate(fab_top)
+                    if (mFabTop.getVisibility() == View.GONE) {
+                        mFabTop.setVisibility(View.VISIBLE);
+                        ViewCompat.animate(mFabTop)
                                 .scaleX(1.0F)
                                 .scaleY(1.0F)
                                 .alpha(1.0F)
@@ -175,10 +171,10 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
             JumpUtils.jumpFade(this, PictureDetailActivity.class, bundle);
         });
 
-        fab_top.setOnClickListener(v -> {
+        mFabTop.setOnClickListener(v -> {
             LinearLayoutManager manager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
             //如果超过100项直接跳到开头，不然要滚好久
-            if (manager.findFirstVisibleItemPosition() < 100) {
+            if (manager.findFirstVisibleItemPosition() < FIND_FIRST_VISIBLE_ITEM_POSITION) {
                 mRecyclerView.smoothScrollToPosition(0);
             } else {
                 mRecyclerView.scrollToPosition(0);
@@ -187,10 +183,12 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
         });
     }
 
-    /* 悬浮图标隐藏动画 */
+    /**
+     * 悬浮图标隐藏动画
+     */
     private void fabOutAnim() {
-        if (fab_top.getVisibility() == View.VISIBLE) {
-            ViewCompat.animate(fab_top)
+        if (mFabTop.getVisibility() == View.VISIBLE) {
+            ViewCompat.animate(mFabTop)
                     .scaleX(0.0F)
                     .scaleY(0.0F)
                     .alpha(0.0F)
@@ -204,7 +202,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                         @SuppressLint("RestrictedApi")
                         @Override
                         public void onAnimationEnd(View view) {
-                            fab_top.setVisibility(View.GONE);
+                            mFabTop.setVisibility(View.GONE);
                         }
 
                         @Override

@@ -36,12 +36,13 @@ import butterknife.OnClick;
 
 /**
  * 运动课程 使用 SurfaceView+MediaPlayer 自定义播放器
+ *
+ * @author 55204
  */
 public class OrnamentalMotionActivity extends BaseActivity implements IBaseActivity, SurfaceHolder.Callback, View.OnClickListener, MediaPlayer.OnCompletionListener,
         MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnSeekCompleteListener {
 
     SurfaceHolder mHolder;
-    //媒体控制 mediaPlayer
     MediaPlayer mediaPlayer;
     //是否正在播放
     boolean isPlay = false;
@@ -93,7 +94,7 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
         mPosition = getIntent().getExtras().getInt("position");
         data = bean.getData();
         mAdapter.setNewData(data.get(mPosition).getNotes());
-        MediaController();
+        mediaController();
         mTvCurrent.setText(mPosition + 1 + " ");
         mTvTotal.setText(data.size() + "");
         mTvTitle.setText(data.get(mPosition).getTitle());
@@ -106,8 +107,9 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
     }
 
 
-    private void MediaController() {
+    private void mediaController() {
         mHolder = surfaceView.getHolder();
+        //媒体控制 mediaPlayer
         mediaPlayer = new MediaPlayer();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -115,8 +117,6 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
         surfaceView.setLayoutParams(params);
         //设置回调参数
         mHolder.addCallback(this);
-        //设置SurfaceView自己不管理的缓冲区
-        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         //显示的分辨率,不设置为视频默认
 //        mHolder.setFixedSize(320, 220);
         mediaPlayer.setOnCompletionListener(this);
@@ -170,7 +170,11 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    //surfaceView创建完成
+    /**
+     * surfaceView创建完成
+     *
+     * @param holder
+     */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         LogUtils.e("TAG", "surfaceCreated");
@@ -211,19 +215,34 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
         return outMetrics.widthPixels;
     }
 
-    //surfaceView改变
+    /**
+     * surfaceView改变
+     *
+     * @param holder
+     * @param format
+     * @param width
+     * @param height
+     */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         LogUtils.e("TAG", "surfaceChanged");
     }
 
-    //surfaceView销毁
+    /**
+     * surfaceView销毁
+     *
+     * @param holder
+     */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         LogUtils.e("TAG", "surfaceDestroyed");
     }
 
-    //播放完成
+    /**
+     * 播放完成
+     *
+     * @param mp
+     */
     @Override
     public void onCompletion(MediaPlayer mp) {
         isPlay = false;
@@ -232,7 +251,14 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
         mediaPlayer.start();
     }
 
-    //播放出错
+    /**
+     * 播放出错
+     *
+     * @param mp
+     * @param what
+     * @param extra
+     * @return
+     */
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
         isPlay = false;
@@ -244,7 +270,11 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
         LogUtils.e("TAG", "onBufferingUpdate" + ",percent:" + percent);
     }
 
-    //准备完成
+    /**
+     * 准备完成
+     *
+     * @param mp
+     */
     @Override
     public void onPrepared(MediaPlayer mp) {
         //隐藏加载进度条
@@ -259,7 +289,11 @@ public class OrnamentalMotionActivity extends BaseActivity implements IBaseActiv
         }
     }
 
-    //seekTo()是异步的方法 在此监听是否执行完毕
+    /**
+     * seekTo()是异步的方法 在此监听是否执行完毕
+     *
+     * @param mp
+     */
     @Override
     public void onSeekComplete(MediaPlayer mp) {
         LogUtils.e("TAG", "onSeekComplete");

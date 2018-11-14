@@ -25,7 +25,8 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by Gab on 2017/12/15 0015.
+ * @author Gab
+ * @date 2017/12/15 0015
  * 体系 主Fragment
  */
 
@@ -34,7 +35,6 @@ public class ViewFragment extends BaseFragment {
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
     ViewAdapter mAdapter;
-
 
     @Override
     protected int setContentLayout() {

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 /**
  * 引导图adapter
+ * @author 55204
  */
 public class GuideAdapter extends PagerAdapter {
 

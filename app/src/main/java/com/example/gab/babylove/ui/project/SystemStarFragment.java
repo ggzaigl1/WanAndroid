@@ -1,4 +1,4 @@
-package com.example.gab.babylove.ui.project.fragment;
+package com.example.gab.babylove.ui.project;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -31,7 +31,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/4/20 0020.
+ * @author 初夏小溪
+ * @date 2018/4/20 0020
  * 项目 TabLayout Fragment
  */
 
@@ -123,6 +124,7 @@ public class SystemStarFragment extends BaseFragment {
 
     /**
      * 取消收藏
+     *
      * @param id
      */
     @SuppressLint("CheckResult")
@@ -154,7 +156,7 @@ public class SystemStarFragment extends BaseFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 WebViewActivity.startWebActivity(mContext
                         , mAdapter.getData().get(position).getLink()
-                        , mAdapter.getData().get(position).getId());// 详情
+                        , mAdapter.getData().get(position).getId());
                 mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
@@ -163,7 +165,7 @@ public class SystemStarFragment extends BaseFragment {
             switch (view.getId()) {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                        if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
@@ -176,6 +178,8 @@ public class SystemStarFragment extends BaseFragment {
                         JumpUtils.jumpFade(mContext, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);
                     }
+                    break;
+                default:
                     break;
             }
         });

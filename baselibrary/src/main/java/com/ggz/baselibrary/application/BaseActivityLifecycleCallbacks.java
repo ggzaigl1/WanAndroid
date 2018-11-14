@@ -36,7 +36,9 @@ import io.reactivex.subjects.BehaviorSubject;
 /**
  * activity 生命周期回调 (api 14+)
  * 注意：使用本框架 activity 与 activity 之间传递数据 统一使用 Bundle
- * Created by fangs on 2017/5/18.
+ *
+ * @author fangs
+ * @date 2017/5/18
  */
 public class BaseActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
     public static String TAG = "ActivityCallbacks";
@@ -48,8 +50,8 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         LogUtils.d(TAG, "Create()");
-
-        if (OSUtils.getRomType() == OSUtils.EMUI && onCheck(activity)) {//是华为手机则 执行
+        //是华为手机则 执行
+        if (OSUtils.getRomType() == OSUtils.EMUI && onCheck(activity)) {
             activity.finish();
             return;
         }
@@ -62,7 +64,9 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
                 activity.setContentView(R.layout.activity_base);
                 LinearLayout linearLRoot = activity.findViewById(R.id.linearLRoot);
 
-                if (act.isShowHeadView()) initHead(activity);
+                if (act.isShowHeadView()) {
+                    initHead(activity);
+                }
 
                 View view = LayoutInflater.from(activity).inflate(act.setView(), null);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-1, -1);
@@ -93,14 +97,18 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
         if (activity instanceof StatusLayout.OnSetStatusView) {
             StatusLayout.OnSetStatusView setStatusView = (StatusLayout.OnSetStatusView) activity;
             StatusLayoutManager slManager = LoadSirUtil.initStatusLayout(activity, setStatusView.setStatusView());
-            if (null != slManager) activityBean.setSlManager(slManager);
+            if (null != slManager) {
+                activityBean.setSlManager(slManager);
+            }
         }
 
         activityBean.setSubject(BehaviorSubject.create());
         activity.getIntent().putExtra("ActivityBean", activityBean);
 
         //基础配置 执行完成，再执行 初始化 activity 操作
-        if (null != act) act.initData(activity, savedInstanceState);
+        if (null != act) {
+            act.initData(activity, savedInstanceState);
+        }
     }
 
 
@@ -139,13 +147,16 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
 
         if (null != activityBean) {
             //解绑定 黄油刀
-            if (null != activityBean.getUnbinder()) activityBean.getUnbinder().unbind();
+            if (null != activityBean.getUnbinder()) {
+                activityBean.getUnbinder().unbind();
+            }
             //销毁 屏幕旋转监听
-            if (null != activityBean.getOrientoinListener())
+            if (null != activityBean.getOrientoinListener()) {
                 activityBean.getOrientoinListener().disable();
-
-            if (null != activityBean.getSubject())
+            }
+            if (null != activityBean.getSubject()) {
                 activityBean.getSubject().onNext(ConstantUtils.DESTROY);
+            }
         }
     }
 
@@ -176,27 +187,31 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
             //在Toolbar左边显示一个返回按钮
             act.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             //替换toolbar 自带的返回按钮
-            if (ConfigUtils.getBackImg() > 0) toolbar.setNavigationIcon(ConfigUtils.getBackImg());
+            if (ConfigUtils.getBackImg() > 0) {
+                toolbar.setNavigationIcon(ConfigUtils.getBackImg());
+            }
             //设置返回按钮监听事件
             toolbar.setNavigationOnClickListener(v -> JumpUtils.exitActivity(act));
-            if (ConfigUtils.getBgColor() > 0)
+            if (ConfigUtils.getBgColor() > 0) {
                 toolbar.setBackgroundColor(ResourceUtils.getColor(ConfigUtils.getBgColor()));
+            }
         }
     }
 
     private boolean onCheck(Activity activity) {
-        boolean isrun;
+        boolean isRun;
         ActivityManager manager = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.RunningTaskInfo info = manager.getRunningTasks(1).get(0);
 
         if (info.numRunning == 1 && !info.topActivity.getClassName().equals("com.fy.baselibrary.startactivity.StartActivity")) {
             //被杀死重启
-            isrun = true;
+            isRun = true;
             L.e(TAG, activity.getClass().getName() + "关闭此界面");
         } else {
-            isrun = false;//手动启动
+            //手动启动
+            isRun = false;
         }
-        return isrun;
+        return isRun;
     }
 
 }

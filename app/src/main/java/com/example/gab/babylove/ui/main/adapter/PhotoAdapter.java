@@ -33,7 +33,8 @@ import io.reactivex.schedulers.Schedulers;
 
 
 /**
- * Created by QKun on 2017/12/28.
+ * @author QKun
+ * @date 2017/12/28
  * 滑动查看图片
  */
 
@@ -55,12 +56,7 @@ public class PhotoAdapter extends PagerAdapter {
         ImgLoadUtils.loadImage(activity, url, photoView);
         container.addView(photoView);
         //点击图片关闭
-        photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
-            @Override
-            public void onPhotoTap(ImageView view, float x, float y) {
-                JumpUtils.exitFadeActivity(activity);
-            }
-        });
+        photoView.setOnPhotoTapListener((view, x, y) -> JumpUtils.exitFadeActivity(activity));
         //长按图片保存
         photoView.setOnLongClickListener(v -> {
             new AlertView.Builder().setContext(activity)
@@ -74,6 +70,8 @@ public class PhotoAdapter extends PagerAdapter {
                             case 0:
                                 GetPic(url);
                                 break;
+                            default:
+                                break;
                         }
                     })
                     .build()
@@ -86,21 +84,19 @@ public class PhotoAdapter extends PagerAdapter {
     @SuppressLint("CheckResult")
     private void GetPic(String url) {
         Observable.just(1)
-                .map(new Function<Integer, Bitmap>() {
-                    @Override
-                    public Bitmap apply(Integer integer) throws Exception {
+                .map(integer -> {
+                    RequestOptions options = new RequestOptions()
+                            .fallback(R.mipmap.icon_load_error)
+                            .error(R.mipmap.icon_load_error)
+                            .placeholder(R.mipmap.icon_placeholder);
 
-                        RequestOptions options = new RequestOptions()
-                                .fallback(R.mipmap.icon_load_error)
-                                .error(R.mipmap.icon_load_error)
-                                .placeholder(R.mipmap.icon_placeholder);
+                    return Glide.with(activity)
+                            .asBitmap()
+                            .load(url)
+                            .apply(options)
+                            .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
 
-                        return Glide.with(activity)
-                                .asBitmap()
-                                .load(url)
-                                .apply(options)
-                                .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
-                    }
+//
                 })
                 .map(new Function<Bitmap, File>() {
                     @Override

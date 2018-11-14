@@ -2,7 +2,6 @@ package com.example.gab.babylove.ui.main.search;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +9,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
@@ -29,7 +26,6 @@ import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.KeyBoardUtils;
-import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.T;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -41,17 +37,16 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by 初夏小溪 on 2018/11/8 0008.
+ * @author 初夏小溪
+ * @date 2018/11/8 0008
  * 搜索文章
  */
 public class SearchArticleActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.id_layout)
     TagFlowLayout mTagFlowLayout;
-    @BindView(R.id.Ll_search)
-    LinearLayout Ll_search;
     @BindView(R.id.edit_search)
-    EditText edit_search;
+    EditText mEditSearch;
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
 
@@ -78,28 +73,24 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
         initView();
 
         //搜索按钮监听
-        edit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mEditSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (!edit_search.getText().toString().trim().equals("")) {
-                    if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                        mHasData = mDbDao.hasData(edit_search.getText().toString().trim());
-                        if (!mHasData) {
-                            // 先隐藏键盘
-                            String queryKey = edit_search.getText().toString();
-                            Bundle bundle = new Bundle();
-                            bundle.putString("queryKey", queryKey);
-                            JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
-                            mDbDao.insertData(queryKey);
-                            mAdapter.updata(mDbDao.queryData(""));
-                            KeyBoardUtils.closeKeyBoard(SearchArticleActivity.this);
-                            return true;
-                        } else {
-                            T.showShort("该内容已在历史记录中");
-                        }
+                if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    mHasData = mDbDao.hasData(mEditSearch.getText().toString().trim());
+                    if (!mHasData) {
+                        // 先隐藏键盘
+                        String queryKey = mEditSearch.getText().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("queryKey", queryKey);
+                        JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
+                        mDbDao.insertData(queryKey);
+                        mAdapter.updata(mDbDao.queryData(""));
+                        KeyBoardUtils.closeKeyBoard(SearchArticleActivity.this);
+                        return true;
+                    } else {
+                        T.showShort("该内容已在历史记录中");
                     }
-                } else {
-                    T.showShort("搜索内容不能为空");
                 }
                 return false;
             }
@@ -112,10 +103,10 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
         super.onClick(v);
         switch (v.getId()) {
             case R.id.tv_search:
-                if (!edit_search.getText().toString().trim().equals("")) {
+                if (!"".equals(mEditSearch.getText().toString().trim())) {
                     if (!mHasData) {
-                        mHasData = mDbDao.hasData(edit_search.getText().toString().trim());
-                        queryKey = edit_search.getText().toString().trim();
+                        mHasData = mDbDao.hasData(mEditSearch.getText().toString().trim());
+                        queryKey = mEditSearch.getText().toString().trim();
                         Bundle bundle = new Bundle();
                         bundle.putString("queryKey", queryKey);
                         JumpUtils.jumpFade(SearchArticleActivity.this, SearchParticularsActivity.class, bundle);
@@ -130,10 +121,11 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
                     return;
                 }
                 break;
-
             case R.id.tv_deleteAll:
                 mDbDao.deleteData();
                 mAdapter.updata(mDbDao.queryData(""));
+                break;
+            default:
                 break;
         }
     }
@@ -150,13 +142,9 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
 
             @Override
             public void RvDeleteItemOnclick(int position) {
-                T.showShort("123" + position);
+
             }
         });
-//        mAdapter.setRvItemOnclickListener(position -> {
-//            mDbDao.delete(mDbDao.queryData("").get(position));
-//            mAdapter.updata(mDbDao.queryData(""));
-//        });
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -167,15 +155,15 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
         mTagFlowLayout.setAdapter(new TagAdapter(hotKeyBeans) {
             @Override
             public View getView(FlowLayout parent, int position, Object o) {
-                TextView tv_name = (TextView) LayoutInflater.from(SearchArticleActivity.this).inflate(R.layout.item_navigation_cid, parent, false);
-                tv_name.setText(hotKeyBeans.get(position).getName());
-                return tv_name;
+                TextView mTvName = (TextView) LayoutInflater.from(SearchArticleActivity.this).inflate(R.layout.item_navigation_cid, parent, false);
+                mTvName.setText(hotKeyBeans.get(position).getName());
+                return mTvName;
             }
         });
 
         mTagFlowLayout.setOnTagClickListener((view, position, parent) -> {
             if (!mHasData) {
-                mHasData = mDbDao.hasData(edit_search.getText().toString().trim());
+                mHasData = mDbDao.hasData(mEditSearch.getText().toString().trim());
                 queryKey = hotKeyBeans.get(position).getName();
                 Bundle bundle = new Bundle();
                 bundle.putString("queryKey", queryKey);

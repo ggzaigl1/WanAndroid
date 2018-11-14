@@ -23,7 +23,8 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/4/20 0020.
+ * @author 初夏小溪
+ * @date 2018/4/20 0020
  * 知识体系 详情页
  */
 
@@ -48,11 +49,6 @@ public class SystemActivity extends BaseActivity implements IBaseActivity {
         return R.layout.activity_system;
     }
 
-    @Override
-    public void setStatusBar(Activity activity) {
-//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
@@ -65,7 +61,6 @@ public class SystemActivity extends BaseActivity implements IBaseActivity {
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
-
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

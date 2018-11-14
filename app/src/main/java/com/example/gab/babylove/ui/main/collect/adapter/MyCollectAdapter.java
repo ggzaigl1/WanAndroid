@@ -1,17 +1,21 @@
 package com.example.gab.babylove.ui.main.collect.adapter;
 
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.entity.CollectBean;
 import com.ggz.baselibrary.utils.ResourceUtils;
 
 import java.util.List;
 
 /**
- * Created by 初夏小溪 on 2018/4/24 0024.
+ * @author 初夏小溪
+ * @date 2018/4/24 0024
  */
 
 public class MyCollectAdapter extends BaseQuickAdapter<CollectBean.DatasBean, BaseViewHolder> {
@@ -27,10 +31,20 @@ public class MyCollectAdapter extends BaseQuickAdapter<CollectBean.DatasBean, Ba
                 .setText(R.id.tv_date, item.getNiceDate())
                 .setText(R.id.tv_chapterName, "分类：" + item.getChapterName()).setTextColor(R.id.tv_chapterName, ResourceUtils.getRandomColor());
         helper.addOnClickListener(R.id.image_collect);
-        if (item.isCollect()) {
-            helper.setBackgroundRes(R.id.image_collect, R.drawable.vector_collect);
+        initImage(item, helper.getView(R.id.image_collect));
+    }
+
+    /**
+     * 判断收藏
+     *
+     * @param dataBean
+     * @param imageView
+     */
+    private void initImage(CollectBean.DatasBean dataBean, AppCompatImageView imageView) {
+        if (dataBean.isCollect()) {
+            imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.vector_collect));
         } else {
-            helper.setBackgroundRes(R.id.image_collect, R.drawable.vector_collect_false);
+            imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.vector_collect_false));
         }
     }
 }

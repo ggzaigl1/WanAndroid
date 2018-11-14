@@ -18,27 +18,24 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import java.util.List;
 
 /**
- * Created by 初夏小溪 on 2018/4/19 0019.
+ * @author 初夏小溪
+ * @date 2018/4/19 0019
  * 视图导航
  */
 
 public class NavigationRightAdapter extends BaseQuickAdapter<NavigationBean.ArticlesBean, BaseViewHolder> {
 
-    private List<NavigationBean.ArticlesBean> mList;
-
     public NavigationRightAdapter(@Nullable List<NavigationBean.ArticlesBean> data) {
         super(R.layout.item_navigation_right, data);
-        this.mList = data;
+        List<NavigationBean.ArticlesBean> list = data;
     }
 
     @Override
     protected void convert(BaseViewHolder helper, NavigationBean.ArticlesBean item) {
+        helper.setText(R.id.tv_date, item.getTitle())
+                .setTextColor(R.id.tv_date, ResourceUtils.getRandomColor());
         TextView tv_date = helper.getView(R.id.tv_date);
         tv_date.setText(item.getTitle());
         tv_date.setTextColor(ResourceUtils.getRandomColor());
-//        tv_date.setBackground(SelectUtils.getTagSelector(R.drawable.selector_item_bg));
-        if (helper.getLayoutPosition() == mList.size() - 1) {
-            //最后一条数据，隐藏时间轴的竖线和水平的分割线
-        }
     }
 }

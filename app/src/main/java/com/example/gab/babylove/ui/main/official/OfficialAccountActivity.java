@@ -27,7 +27,9 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/10/15 0015.
+ *
+ * @author 初夏小溪
+ * @date 2018/10/15 0015
  * 公众号 作者
  */
 public class OfficialAccountActivity extends BaseActivity implements IBaseActivity {

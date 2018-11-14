@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/4/20 0020.
+ * @author 初夏小溪
+ * @date 2018/4/20 0020
  * 知识体系 TabLayout Fragment
  */
 
@@ -121,6 +122,7 @@ public class SystemFlyFragment extends BaseFragment {
 
     /**
      * 取消收藏
+     *
      * @param id
      */
     @SuppressLint("CheckResult")
@@ -149,7 +151,9 @@ public class SystemFlyFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new BaseAdapter(new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            WebViewActivity.startWebActivity(mContext, mAdapter.getData().get(position).getLink(), mAdapter.getData().get(position).getId());// 详情
+            WebViewActivity.startWebActivity(mContext
+                    , mAdapter.getData().get(position).getLink()
+                    , mAdapter.getData().get(position).getId());
             mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
@@ -157,7 +161,7 @@ public class SystemFlyFragment extends BaseFragment {
             switch (view.getId()) {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                        if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
@@ -170,6 +174,8 @@ public class SystemFlyFragment extends BaseFragment {
                         JumpUtils.jumpFade(mContext, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);
                     }
+                    break;
+                default:
                     break;
             }
         });

@@ -72,13 +72,17 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());// 详情
+                    , mAdapter.getData().get(position).getId());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
-                    unCollectArticle(mAdapter.getData().get(position).getId(), mAdapter.getData().get(position).getOriginId(), position);
+                    unCollectArticle(mAdapter.getData().get(position).getId()
+                            , mAdapter.getData().get(position).getOriginId()
+                            , position);
+                    break;
+                default:
                     break;
             }
         });
@@ -142,12 +146,18 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
         });
     }
 
-    //    我的收藏页面, 取消收藏
+    /**
+     * 我的收藏页面, 取消收藏
+     *
+     * @param id
+     * @param originId
+     * @param position
+     */
     @SuppressLint("CheckResult")
-    private void unCollectArticle(int id, int OriginId, int position) {
+    private void unCollectArticle(int id, int originId, int position) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
-                .unMyCollectArticle(id, OriginId)
+                .unMyCollectArticle(id, originId)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
                 .subscribe(new NetCallBack<Object>() {

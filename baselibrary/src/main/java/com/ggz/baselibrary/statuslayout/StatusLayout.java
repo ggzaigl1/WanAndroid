@@ -11,18 +11,18 @@ public interface StatusLayout {
     /**
      * 设置 多布局 显示的 区域
      */
-    public interface OnSetStatusView {
+    interface OnSetStatusView {
         /**
          * 设置 多状态视图显示的 区域(内容视图，必须有父视图)
          * @return
          */
-        public View setStatusView();
+        View setStatusView();
     }
 
     /**
      * 多布局 重试加载按钮监听事件
      */
-    public interface OnRetryListener {
+    interface OnRetryListener {
 
         /**
          * 多布局 点击重试

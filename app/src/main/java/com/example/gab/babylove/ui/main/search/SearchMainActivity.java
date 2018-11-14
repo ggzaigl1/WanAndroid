@@ -1,6 +1,5 @@
 package com.example.gab.babylove.ui.main.search;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,7 +34,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/5/11 0011.
+ * @author 初夏小溪
+ * @date 2018/5/11 0011
  * 搜索界面 Main主页 配合Toolbar使用
  */
 
@@ -66,7 +66,8 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
     public void initData(Activity activity, Bundle savedInstanceState) {
         //设置导航图标要在setSupportActionBar方法之后
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  // 给左上角图标的左边加上一个返回的图标
+        // 给左上角图标的左边加上一个返回的图标
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(v -> JumpUtils.exitActivity(this));
         queryKey = getIntent().getStringExtra("query");
         getQuery(mPageNo, queryKey);
@@ -77,8 +78,6 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
 
     /**
      * 搜索接口
-     * type =1 公众号
-     * type =2 首页搜索
      *
      * @param pageNum
      * @param queryKey
@@ -127,14 +126,14 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());// 详情
+                    , mAdapter.getData().get(position).getId());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                        if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
@@ -147,6 +146,8 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
                         JumpUtils.jumpFade(this, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);
                     }
+                    break;
+                default:
                     break;
             }
         });

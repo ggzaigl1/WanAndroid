@@ -29,7 +29,9 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by Gab on 2017/12/15 0015.
+ *
+ * @author Gab
+ * @date 2017/12/15 0015
  * 导航数据
  */
 
@@ -37,15 +39,13 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerViewLife;
-    //    @BindView(R.id.rv_context)
-//    RecyclerView mRecyclerViewRight;
     @BindView(R.id.id_tagFlow)
     TagFlowLayout mTagFlowLayout;
 
     NavigationLifeAdapter mAdapterLife;
     NavigationRightAdapter mAdapterRight;
-
-    private int mSelectedPos = 0;//实现单选 变量保存当前选中的position
+    //实现单选 变量保存当前选中的position
+    private int mSelectedPos = 0;
     private LinearLayoutManager mLinearLayoutManager;
     private List<NavigationBean.ArticlesBean> mArticles;
 
@@ -137,10 +137,10 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
         mTagFlowLayout.setAdapter(new TagAdapter(articles) {
             @Override
             public View getView(FlowLayout parent, int position, Object o) {
-                TextView tv_date = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.item_navigation_cid, parent, false);
-                tv_date.setText(articles.get(position).getTitle());
-                tv_date.setTextColor(ResourceUtils.getRandomColor());
-                return tv_date;
+                TextView mTvDate = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.item_navigation_cid, parent, false);
+                mTvDate.setText(articles.get(position).getTitle());
+                mTvDate.setTextColor(ResourceUtils.getRandomColor());
+                return mTvDate;
             }
         });
     }

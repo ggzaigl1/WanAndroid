@@ -24,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.widget.interpolator.ElasticOutInterpolator;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusBarUtils.StatusBar;
@@ -39,10 +40,12 @@ import com.scwang.smartrefresh.layout.util.DensityUtil;
 import butterknife.BindView;
 
 /**
- * 关于
- * Created by fangs on 2018/4/8.
+ * 关于APP
+ *
+ * @author fangs
+ * @date 2018/4/8
  */
-public class AboutActivity extends AppCompatActivity implements IBaseActivity {
+public class AboutActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.tvAbout)
     TextView tvAbout;
@@ -103,16 +106,6 @@ public class AboutActivity extends AppCompatActivity implements IBaseActivity {
         initData();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void reTry() {
-
-    }
-
     private void initData() {
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
@@ -123,7 +116,11 @@ public class AboutActivity extends AppCompatActivity implements IBaseActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        tvAbout.setText(Html.fromHtml(ResourceUtils.getStr(R.string.about_content)));
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            tvAbout.setText(Html.fromHtml(ResourceUtils.getStr(R.string.about_content), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            tvAbout.setText(Html.fromHtml(ResourceUtils.getStr(R.string.about_content)));
+        }
         tvAbout.setMovementMethod(LinkMovementMethod.getInstance());
 
         //绑定场景和纸飞机
@@ -155,13 +152,10 @@ public class AboutActivity extends AppCompatActivity implements IBaseActivity {
                 mToolbar.setTranslationY(-offset);
             }
         });
-
         //进入界面时自动刷新
         mAboutUsRefreshLayout.autoRefresh();
-
         //点击悬浮按钮时自动刷新
         mAboutUsFab.setOnClickListener(v -> mAboutUsRefreshLayout.autoRefresh());
-
         /*
          * 监听 AppBarLayout 的关闭和开启 给 FlyView（纸飞机） 和 ActionButton 设置关闭隐藏动画
          */

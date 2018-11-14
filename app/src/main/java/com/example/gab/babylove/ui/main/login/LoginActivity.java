@@ -58,6 +58,8 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
     @BindView(R.id.fab_register)
     FloatingActionButton mFloatingActionButton;
 
+    static final int PASSWORD_LENGTH_MAX = 12;
+
     @Override
     public boolean isShowHeadView() {
         return true;
@@ -93,7 +95,7 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String text = editPass.getText().toString().trim();
-                if (!TextUtils.isEmpty(text) && text.length() > 12) {
+                if (!TextUtils.isEmpty(text) && text.length() > PASSWORD_LENGTH_MAX) {
                     iLayoutPass.setError(getString(R.string.correct_password));
                 } else {
                     if (null != iLayoutPass.getError()) {
@@ -126,9 +128,11 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
 
     private void login() {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        String mUserName = editName.getText().toString().trim();//"ggzaigl1"
-        String mPassWord = editPass.getText().toString().trim();//"tmdligen"
-        Map<String, Object> param = new HashMap<>();
+        //"ggzaigl1"
+        String mUserName = editName.getText().toString().trim();
+        //"tmdligen"
+        String mPassWord = editPass.getText().toString().trim();
+        Map<String, Object> param = new HashMap<>(16);
         param.put("username", mUserName);
         param.put("password", mPassWord);
         RequestUtils.create(ApiService.class)

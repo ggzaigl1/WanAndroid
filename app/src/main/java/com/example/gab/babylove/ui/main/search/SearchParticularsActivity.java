@@ -39,7 +39,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by 初夏小溪 on 2018/11/8 0008.
+ *
+ * @author 初夏小溪
+ * @date 2018/11/8 0008
  * 搜索详情
  */
 public class SearchParticularsActivity extends BaseActivity implements IBaseActivity {
@@ -49,7 +51,7 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.edit_search)
-    EditText edit_search;
+    EditText mEditSearch;
 
     int mPageNo = 0;
     private String mQueryKey;
@@ -72,10 +74,10 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
         initRecyle();
         initRefresh();
         //搜索按钮监听
-        edit_search.setText(mQueryKey);
-        edit_search.setOnEditorActionListener((v, actionId, event) -> {
+        mEditSearch.setText(mQueryKey);
+        mEditSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEND || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                mQueryKey = edit_search.getText().toString();
+                mQueryKey = mEditSearch.getText().toString();
                 getQuery(mPageNo, mQueryKey);
                 initRecyle();
                 mKProgressHUD.dismiss();
@@ -142,14 +144,14 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());// 详情
+                    , mAdapter.getData().get(position).getId());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                        if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
@@ -163,6 +165,8 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
                         T.showShort(R.string.collect_login);
                     }
                     break;
+                default:
+                    break;
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -173,13 +177,15 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_search:
-                mQueryKey = edit_search.getText().toString();
+                mQueryKey = mEditSearch.getText().toString();
                 getQuery(mPageNo, mQueryKey);
                 initRecyle();
                 mKProgressHUD.dismiss();
                 KeyBoardUtils.closeKeyBoard(this);
+                break;
+            default:
                 break;
         }
     }

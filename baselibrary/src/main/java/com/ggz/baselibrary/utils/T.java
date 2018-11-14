@@ -3,9 +3,12 @@ package com.ggz.baselibrary.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.os.Looper;
 import android.support.annotation.LayoutRes;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,12 +98,12 @@ public class T {
      *
      * @param duration
      * @param message
-     * @param tLayouId  自定义布局
+     * @param LayoutId 自定义布局
      */
-    public static void showQulifier(int duration, CharSequence message, @LayoutRes int tLayouId) {
+    public static void showQulifier(int duration, CharSequence message, @LayoutRes int LayoutId) {
         if (null == toast) {
             LayoutInflater inflate = (LayoutInflater) ConfigUtils.getAppCtx().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflate.inflate(tLayouId, null);
+            View view = inflate.inflate(LayoutId, null);
 
             toast = new Toast(ConfigUtils.getAppCtx());
             toast.setView(view);
@@ -116,28 +119,26 @@ public class T {
      * 自定义Toast
      */
     public enum CustomToast {
+        @SuppressLint("StaticFieldLeak")
         INSTANCE;// 实现单例
         private Toast mToast;
         private TextView mTvToast;
 
-        public void showToast(Context ctx, String content) {
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-                Toast.makeText(ctx, content, Toast.LENGTH_SHORT).show();
-            } else {
-                if (mToast == null) {
-                    mToast = new Toast(ctx);
-                    mToast.setDuration(Toast.LENGTH_SHORT);//设置toast显示的时长
-                    View root = LayoutInflater.from(ctx).inflate(R.layout.item_toast_custom_common, null, false);//自定义样式，自定义布局文件
-                    mTvToast = root.findViewById(R.id.tvCustomToast);
-                    mToast.setView(root);//设置自定义的view
-                }
-                mTvToast.setText(content);//设置文本
-                mToast.show();//展示toast
+        public void showToast(String content) {
+            if (mToast == null) {
+                mToast = new Toast(ConfigUtils.getAppCtx());
+                mToast.setDuration(Toast.LENGTH_SHORT);//设置toast显示的时长
+                View root = LayoutInflater.from(ConfigUtils.getAppCtx())
+                        .inflate(R.layout.item_toast_custom_common, null, false);//自定义样式，自定义布局文件
+                mTvToast = root.findViewById(R.id.tvCustomToast);
+                mToast.setView(root);//设置自定义的view
             }
+            mTvToast.setText(content);//设置文本
+            mToast.show();//展示toast
         }
 
-        public void showToast(Context ctx, int stringId) {
-            showToast(ctx, ctx.getString(stringId));
+        public void showToast(int stringId) {
+            showToast(ConfigUtils.getAppCtx().getString(stringId));
         }
 
         public void cancelToast() {

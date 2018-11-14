@@ -42,6 +42,9 @@ public interface ApiService {
 
     /**
      * 登录
+     *
+     * @param options
+     * @return
      */
     @FormUrlEncoded
     @Headers({"url_name:user"})
@@ -50,6 +53,9 @@ public interface ApiService {
 
     /**
      * 注册接口
+     *
+     * @param options
+     * @return
      */
     @FormUrlEncoded
     @Headers({"url_name:user"})
@@ -58,6 +64,8 @@ public interface ApiService {
 
     /**
      * 退出登录
+     *
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("user/logout/json")
@@ -65,6 +73,8 @@ public interface ApiService {
 
     /**
      * 首页 banner
+     *
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("banner/json")
@@ -72,6 +82,9 @@ public interface ApiService {
 
     /**
      * 首页文章列表
+     *
+     * @param page
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("article/list/{id}/json")
@@ -97,6 +110,8 @@ public interface ApiService {
 
     /**
      * 常用网站
+     *
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("friend/json")
@@ -104,6 +119,8 @@ public interface ApiService {
 
     /**
      * 搜索热词
+     *
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("hotkey/json")
@@ -111,6 +128,8 @@ public interface ApiService {
 
     /**
      * 视图导航
+     *
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("navi/json")
@@ -118,6 +137,8 @@ public interface ApiService {
 
     /**
      * 项目
+     *
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("project/tree/json")
@@ -125,6 +146,10 @@ public interface ApiService {
 
     /**
      * 项目列表数据
+     *
+     * @param page
+     * @param cid
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("project/list/{pageNum}/json")
@@ -132,6 +157,9 @@ public interface ApiService {
 
     /**
      * 最新项目tab (首页的第二个tab)
+     *
+     * @param pageNum
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("article/listproject/{pageNum}/json")
@@ -139,6 +167,9 @@ public interface ApiService {
 
     /**
      * 收藏文章列表
+     *
+     * @param page
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("lg/collect/list/{id}/json")
@@ -154,6 +185,10 @@ public interface ApiService {
 
     /**
      * 收藏站内文章
+     *
+     * @param articleId
+     * @param reason
+     * @return
      */
     @FormUrlEncoded
     @Headers({"url_name:user"})
@@ -162,6 +197,10 @@ public interface ApiService {
 
     /**
      * 站内文章  取消收藏 (文章列表)
+     *
+     * @param articleId
+     * @param reason
+     * @return
      */
     @FormUrlEncoded
     @Headers({"url_name:user"})
@@ -170,7 +209,11 @@ public interface ApiService {
                                                     @Field("reason") String reason);
 
     /**
-     * 站内文章 取消收藏 [我的收藏页面（该页面包含自己录入的内容）]
+     * 站内文章 取消收藏 我的收藏页面（该页面包含自己录入的内容）
+     *
+     * @param articleId
+     * @param originId
+     * @return
      */
     @FormUrlEncoded
     @Headers({"url_name:user"})
@@ -179,14 +222,20 @@ public interface ApiService {
 
     /**
      * 搜索
+     *
+     * @param pageNum
+     * @param queryKey
+     * @return
      */
     @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("article/query/{pageNum}/json")
-    Observable<BeanModule<BaseBean>> getQuery(@Path("pageNum") int pageNum, @Field("k") String queryKey);
+    Observable<BeanModule<BaseBean>> getQuery(@Path("") int pageNum, @Field("k") String queryKey);
 
     /**
      * 获取公众号列表
+     *
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("wxarticle/chapters/json")
@@ -194,21 +243,35 @@ public interface ApiService {
 
     /**
      * 查看某个公众号历史数据
+     *
+     * @param id
+     * @param pageNo
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("wxarticle/list/{ID}/{pageNo}/json")
-    Observable<BeanModule<BaseBean>> getWxarticle(@Path("ID") int Id, @Path("pageNo") int pageNo);
+    Observable<BeanModule<BaseBean>> getWxarticle(@Path("ID") int id, @Path("pageNo") int pageNo);
+
 
     /**
      * 在某个公众号中搜索历史文章
+     *
+     * @param id
+     * @param pageNo
+     * @param queryKey
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("wxarticle/list/{ID}/{pageNo}/json")
-    Observable<BeanModule<BaseBean>> getWxarticleQuery(@Path("ID") int Id, @Path("pageNo") int pageNo
+    Observable<BeanModule<BaseBean>> getWxarticleQuery(@Path("ID") int id, @Path("pageNo") int pageNo
             , @Query("k") String queryKey);
 
     /**
      * 美图图片
+     *
+     * @param count
+     * @param page
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("http://gank.io/api/data/福利/{count}/{page}")
@@ -216,13 +279,20 @@ public interface ApiService {
 
     /**
      * 运动课程 ---运动列表
+     *
+     * @param page
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("http://api.fithub.cc/api/trainitem/trainitemlist")
     Observable<CourseList> getCourseList(@Query("pageNo") int page);
 
+
     /**
      * 运动课程 ---运动详情
+     *
+     * @param id
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("http://api.fithub.cc/api/v44/train/course")
@@ -231,18 +301,22 @@ public interface ApiService {
 
     /**
      * 版本更新
+     * @param deviceid
+     * @param android
+     * @return
      */
     @Headers({"url_name:user"})
     @GET("http://118.31.218.69/lesprint/api/version/versionInfo")
-    Observable<UpDateBean> getVersionsUpdate(@Query("deviceId") String deviceId, @Query("code") String android);
+    Observable<UpDateBean> getVersionsUpdate(@Query("deviceId") String deviceid, @Query("code") String android);
 
 
     /**
      * 多图片上传
      *
      * @param token
-     * @param PatID
-     * @param UserID
+     * @param patID
+     * @param userID
+     * @param uploadType
      * @param parts
      * @return
      */
@@ -250,8 +324,8 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @POST("/app/ydys/UploadPostFile")
     Observable<BeanModule<ArrayList<Object>>> uploadPostFile(@Part("Token") RequestBody token,
-                                                               @Part("PatID") RequestBody PatID,
-                                                               @Part("UserID") RequestBody UserID,
-                                                               @Part("UploadType") RequestBody UploadType,
-                                                               @Part List<MultipartBody.Part> parts);
+                                                             @Part("PatID") RequestBody patID,
+                                                             @Part("UserID") RequestBody userID,
+                                                             @Part("UploadType") RequestBody uploadType,
+                                                             @Part List<MultipartBody.Part> parts);
 }

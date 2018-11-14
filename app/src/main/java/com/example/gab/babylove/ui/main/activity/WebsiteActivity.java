@@ -28,7 +28,9 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/4/19 0019.
+ *
+ * @author 初夏小溪
+ * @date 2018/4/19 0019
  * 常用网站
  */
 
@@ -85,17 +87,18 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
         mTagFlowLayout.setAdapter(new TagAdapter(listBeanModule) {
             @Override
             public View getView(FlowLayout parent, int position, Object o) {
-                TextView tv_name = (TextView) LayoutInflater.from(ConfigUtils.getAppCtx()).inflate(R.layout.item_hotkey_list, parent, false);
-                tv_name.setText(listBeanModule.get(position).getName());
-                tv_name.setTextColor(ResourceUtils.getRandomColor());
-                return tv_name;
+                TextView mTvName = (TextView) LayoutInflater.from(ConfigUtils.getAppCtx()).inflate(R.layout.item_hotkey_list, parent, false);
+                mTvName.setText(listBeanModule.get(position).getName());
+                mTvName.setTextColor(ResourceUtils.getRandomColor());
+                return mTvName;
             }
         });
 
         mTagFlowLayout.setOnTagClickListener((view, position, parent) -> {
             WebViewActivity.startWebActivity(this
                     , listBeanModule.get(position).getLink()
-                    , listBeanModule.get(position).getId());// 详情
+                    // 详情
+                    , listBeanModule.get(position).getId());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             return true;
         });

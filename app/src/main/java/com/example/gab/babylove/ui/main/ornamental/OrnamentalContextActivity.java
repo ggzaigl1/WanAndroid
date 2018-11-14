@@ -31,7 +31,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by Gab on 2018/3/13 0013.
+ * @author Gab
+ * @date 2018/3/13 0013
  * 运动课程内容
  */
 
@@ -44,7 +45,7 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
     @BindView(R.id.tv_content)
     TextView mTvContext;
     @BindView(R.id.tv_announcements)
-    TextView tv_announcements;//注意事项
+    TextView mTvAnnouncements;
     @BindView(R.id.club_details_bg)
     AppCompatImageView mClubDetailsBg;
     @BindView(R.id.tv_do)
@@ -80,8 +81,10 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
         int id = getIntent().getIntExtra("id", 0);
         getCourseDetails(id);
         initRecycle();
-        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
-        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
+        //设置还没收缩时状态下字体颜色
+        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+        //设置收缩后Toolbar上字体的颜色
+        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> JumpUtils.exitActivity(this));
@@ -102,7 +105,7 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
                             mKProgressHUD.dismiss();
                             mTvTitle.setText(courseDetails.getData().getTitle());
                             mTvContext.setText(courseDetails.getData().getSubTitle());
-                            tv_announcements.setText(courseDetails.getData().getNotes());
+                            mTvAnnouncements.setText(courseDetails.getData().getNotes());
                             ImgLoadUtils.loadImage(getApplicationContext(), courseDetails.getData().getPic(), mClubDetailsBg);
                             mAdapter.setNewData(courseDetails.getData().getGroups().get(0).getActions());
                             mTvPoint.setText(getString(R.string.announcements));
@@ -129,7 +132,8 @@ public class OrnamentalContextActivity extends BaseActivity implements IBaseActi
      */
     private void initRecycle() {
         LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);// 设置 recyclerview 布局方式为横向布局
+        // 设置 recyclerview 布局方式为横向布局
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);

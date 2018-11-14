@@ -39,7 +39,7 @@ import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
-import com.example.gab.babylove.ui.project.fragment.StarFragment;
+import com.example.gab.babylove.ui.project.StarFragment;
 import com.example.gab.babylove.ui.view.fragment.ViewFragment;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
@@ -79,8 +79,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private ViewFragment mViewFragment;
     private NavigationViewFragment mNavigationViewFragment;
     private StarFragment mStarFragment;
-    private Fragment mCurrentFrag; //当前的fragment
-    private long exitTime = 0; //保存点击的时间
+    //当前的fragment
+    private Fragment mFragment;
+    //保存点击的时间
+    private long exitTime = 0;
 
     public TextView nev_header_tv_login;
     public TextView nev_header_tv_title;
@@ -118,7 +120,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         initBottomNavigation();
         switchContent(mHomeFragment);
         setSupportActionBar(mToolbar);
-        mNavigation.setNavigationItemSelectedListener(this);//NavigationView 设置条目点击事前
+        //NavigationView 设置条目点击事前
+        mNavigation.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
@@ -177,7 +180,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         //设置BottomNavigationItem颜色 setActiveColor, setInActiveColor, setBarBackgroundColor
         mBottomNavigation.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
                 .setMode(BottomNavigationBar.MODE_SHIFTING)
-                .setInActiveColor("#2c2c2c")//设置Item未选中颜色方法
+                //设置Item未选中颜色方法
+                .setInActiveColor("#2c2c2c")
                 .addItem(new BottomNavigationItem(R.drawable.vector_home, getString(R.string.nav_home_title)).setActiveColorResource(R.color.pink))
                 .addItem(new BottomNavigationItem(R.drawable.vector_view_headline, getString(R.string.nav_system_title)).setActiveColorResource(R.color.pink))
                 .addItem(new BottomNavigationItem(R.drawable.vector_live_tv, getString(R.string.nav_view_title)).setActiveColorResource(R.color.pink))
@@ -193,16 +197,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
      * @param fragment 将要加载的fragment
      */
     private void switchContent(Fragment fragment) {
-        if (mCurrentFrag != fragment) {
+        if (mFragment != fragment) {
             if (!fragment.isAdded()) {
-                if (mCurrentFrag != null) {
-                    mFragmentManager.beginTransaction().hide(mCurrentFrag).commit();
+                if (mFragment != null) {
+                    mFragmentManager.beginTransaction().hide(mFragment).commit();
                 }
                 mFragmentManager.beginTransaction().add(R.id.fl_content, fragment).commit();
             } else {
-                mFragmentManager.beginTransaction().hide(mCurrentFrag).show(fragment).commit();
+                mFragmentManager.beginTransaction().hide(mFragment).show(fragment).commit();
             }
-            mCurrentFrag = fragment;
+            mFragment = fragment;
         }
     }
 
@@ -306,7 +310,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 JumpUtils.jumpFade(this, AboutActivity.class, null);
                 break;
             case R.id.nav_share:
-//                AndroidShareUtils.shareWeChatFriend(this, "WanAndroid", "https://www.pgyer.com/6osT", AndroidShareUtils.TEXT, null);
                 Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_wanandroid);
                 AndroidShareUtils.shareWeChatFriend(this, "一起玩Android", "https://www.pgyer.com/6osT", AndroidShareUtils.DRAWABLE, bmp);
                 break;
@@ -357,8 +360,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         }
     }
 
-
-    //退出程序
+    /**
+     * 退出程序
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -367,11 +375,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             if (mDrawer.isDrawerOpen(GravityCompat.START)) {
                 mDrawer.closeDrawer(GravityCompat.START);
             } else if ((System.currentTimeMillis() - exitTime) >= time) {
-//                Snackbar.make(mDrawer, R.string.exit_app, Snackbar.LENGTH_SHORT)
-//                        .setActionTextColor(ContextCompat.getColor(this, R.color.white))
-//                        .show();
-                T.CustomToast.INSTANCE.showToast(MainActivity.this, R.string.exit_app);
-//                T.showLong(R.string.exit_app);
+                T.CustomToast.INSTANCE.showToast(R.string.exit_app);
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();

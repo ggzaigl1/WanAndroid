@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.BannerBean;
@@ -47,7 +46,9 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- * Created by Gab on 2017/12/15 0015.
+ *
+ * @author Gab
+ * @date 2017/12/15 0015
  * 主页Fragment
  */
 
@@ -98,25 +99,23 @@ public class HomeFragment extends BaseFragment {
     /**
      * 轮播图 相关设置
      *
-     * @param Pic
+     * @param pic
      * @param urls
      */
-    private void bannerView(List<String> Pic, List<String> urls) {
-        mConvenientBanner.setPages(() -> new NetworkImageHolderView(), Pic)
+    private void bannerView(List<String> pic, List<String> urls) {
+        mConvenientBanner.setPages(() -> new NetworkImageHolderView(), pic)
                 .startTurning(2000)
                 .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
                 .setPointViewVisible(true)
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)//设置指示器的方向
+                //设置指示器的方向
+                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
                 .setPageTransformer(new AccordionTransformer())
-                .setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("UrlBean", urls.get(position));
-                        JumpUtils.jumpFade((AppCompatActivity) getActivity(), AgentWebActivity.class, bundle);
+                .setOnItemClickListener(position -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("UrlBean", urls.get(position));
+                    JumpUtils.jumpFade((AppCompatActivity) getActivity(), AgentWebActivity.class, bundle);
 //                        WebViewActivity.startWebActivity(getActivity(), urls.get(position), 0);// 详情
-                        mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    }
+                    mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 })
                 //设置手动影响（设置了该项无法手动切换）
                 .setManualPageable(true);
@@ -137,7 +136,7 @@ public class HomeFragment extends BaseFragment {
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
         Observable.zip(observable1, observable2, (bannerBean, articleBean) -> {
-            Map<String, Object> map = new HashMap<>();
+            Map<String, Object> map = new HashMap<>(16);
             map.put("banner", bannerBean);
             map.put("article", articleBean);
             return map;
@@ -293,7 +292,8 @@ public class HomeFragment extends BaseFragment {
             switch (view.getId()) {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                        //收藏
+                        if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
@@ -306,6 +306,8 @@ public class HomeFragment extends BaseFragment {
                         JumpUtils.jumpFade(mContext, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);
                     }
+                    break;
+                default:
                     break;
             }
         });
@@ -338,7 +340,8 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         if (null != bannerView) {
-            bannerView.startTurning(2000);//开始翻页
+            //开始翻页
+            bannerView.startTurning(2000);
         }
     }
 

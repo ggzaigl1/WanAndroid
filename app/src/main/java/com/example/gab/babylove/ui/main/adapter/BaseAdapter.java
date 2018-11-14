@@ -1,7 +1,9 @@
 package com.example.gab.babylove.ui.main.adapter;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,7 +19,8 @@ import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 import java.util.List;
 
 /**
- * Created by Gab on 2017/12/18 0018.
+ * @author Gab
+ * @date 2017/12/18 0018
  * 公共数据页面adapter
  */
 
@@ -39,10 +42,11 @@ public class BaseAdapter extends BaseQuickAdapter<BaseBean.DatasBean, BaseViewHo
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void convert(BaseViewHolder helper, BaseBean.DatasBean item) {
-        TextView tv_title = helper.getView(R.id.tv_title);
-        TextView tv_tag = helper.getView(R.id.tv_tag);
+        TextView mTitle = helper.getView(R.id.tv_title);
+        TextView mTag = helper.getView(R.id.tv_tag);
         helper.setText(R.id.tv_title, item.getTitle())
                 .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
                 .setText(R.id.tv_date, item.getNiceDate())
@@ -56,28 +60,33 @@ public class BaseAdapter extends BaseQuickAdapter<BaseBean.DatasBean, BaseViewHo
         }
 
         if (item.getTags().size() != 0 && !item.getTags().isEmpty()) {
-            tv_tag.setVisibility(View.VISIBLE);
-            tv_tag.setText(item.getTags().get(0).getName());
+            mTag.setVisibility(View.VISIBLE);
+            mTag.setText(item.getTags().get(0).getName());
         } else {
-            tv_tag.setVisibility(View.GONE);
+            mTag.setVisibility(View.GONE);
         }
 
         String title = item.getTitle();
-        //Kotlin 继续助力 <em class='highlight'>Android</em> 开发，并计划涉足更多领域
+        //"Android <em class='highlight'>Studio3</em>.0正式版填坑路
         //如果包含 截取返回第一次出现的字符串
         if (title.contains("<em")) {
-            int start_pre = title.indexOf("<");
-            String pre = title.substring(0, start_pre);
-            int start_next = title.indexOf(">");
+            //返回指定字符在字符串中第一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。
+            int mStart_pre = title.indexOf("<");
+            // substring() 方法返回字符串的子字符串 截取。
+            // beginIndex -- 起始索引（包括）, 索引从 0 开始。
+            // endIndex -- 结束索引（不包括）。
+            String pre = title.substring(0, mStart_pre);
+            int mStart_next = title.indexOf(">");
             //截取返回最后一次出现
-            int end_pre = title.lastIndexOf("<");
-            String centerStr = title.substring(start_next + 1, end_pre);
+            //返回指定字符在此字符串中最后一次出现处的索引，如果此字符串中没有这样的字符，则返回 -1。
+            int mEnd_pre = title.lastIndexOf("<");
+            String centerStr = title.substring(mStart_next + 1, mEnd_pre);
             int end = title.lastIndexOf(">");
             //拼接
             String endStr = title.substring(end + 1, title.length());
-            tv_title.setText(pre + centerStr + endStr);
+            mTitle.setText(pre + centerStr + endStr);
         } else {
-            tv_title.setText(title);
+            mTitle.setText(title);
         }
 
         helper.addOnClickListener(R.id.image_collect);
@@ -86,14 +95,16 @@ public class BaseAdapter extends BaseQuickAdapter<BaseBean.DatasBean, BaseViewHo
 
     /**
      * 判断收藏
-     * @param datasBean
+     *
+     * @param dataBean
      * @param imageView
      */
-    private void initImage(BaseBean.DatasBean datasBean, AppCompatImageView imageView) {
-        if (datasBean.isCollect()) {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.vector_collect));
+    private void initImage(BaseBean.DatasBean dataBean, AppCompatImageView imageView) {
+
+        if (dataBean.isCollect()) {
+            imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.vector_collect));
         } else {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.vector_collect_false));
+            imageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.vector_collect_false));
         }
     }
 }

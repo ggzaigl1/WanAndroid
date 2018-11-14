@@ -75,7 +75,7 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        ShowEnterAnimation();
+        showEnterAnimation();
     }
 
     @OnClick({R.id.btn_Register, R.id.fab})
@@ -93,7 +93,7 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
-    private void ShowEnterAnimation() {
+    private void showEnterAnimation() {
         Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.transition_register);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setSharedElementEnterTransition(transition);
@@ -127,6 +127,9 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
+    /**
+     * 显示动画
+     */
     public void animateRevealShow() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             Animator mAnimator = ViewAnimationUtils.createCircularReveal(mCardView, mCardView.getWidth() / 2, 0, mFloatingActionButton.getWidth() / 2, mCardView.getHeight());
@@ -148,6 +151,9 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
+    /**
+     * 关闭动画
+     */
     public void animateRevealClose() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             Animator mAnimator = ViewAnimationUtils.createCircularReveal(mCardView, mCardView.getWidth() / 2, 0, mCardView.getHeight(), mFloatingActionButton.getWidth() / 2);

@@ -35,7 +35,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/10/17 0017.
+ * @author 初夏小溪
+ * @date 2018/10/17 0017
  * 最新项目
  */
 public class NewProjectActivity extends BaseActivity implements IBaseActivity {
@@ -113,7 +114,8 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());// 详情
+                    // 详情
+                    , mAdapter.getData().get(position).getId());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
@@ -121,7 +123,8 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
             switch (view.getId()) {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                        //收藏
+                        if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
@@ -134,6 +137,8 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                         JumpUtils.jumpFade(this, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);
                     }
+                    break;
+                default:
                     break;
             }
         });
@@ -161,7 +166,6 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
             }
         });
     }
-
 
     @Override
     public void onPause() {

@@ -22,7 +22,6 @@ import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.ggz.baselibrary.utils.JumpUtils;
 
 /**
- *
  * @author Gab
  * @date 2018/1/8 0008
  * 引导图
@@ -108,7 +107,9 @@ public class GuideActivity extends BaseActivity {
                 PackageManager.DONT_KILL_APP);
     }
 
-    //显示引导图
+    /**
+     * 显示引导图
+     */
     @SuppressWarnings("deprecation")
     private void initLayout() {
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -126,7 +127,7 @@ public class GuideActivity extends BaseActivity {
             finish();
         });
         viewPager.setAdapter(new GuideAdapter(imgViews));
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int arg0) {
                 for (int i = 0; i < imgViews.length; i++) {
@@ -157,12 +158,6 @@ public class GuideActivity extends BaseActivity {
         exit = true;
         super.onBackPressed();
     }
-/**
- *  调休半天 做西餐 意面 蜡烛 轻音乐 红酒 薯条 蒜蓉鸡翅
- *
- *  需要购买鸡翅 牛排 薯条 意面 番茄酱
- *
- */
 }
 
 

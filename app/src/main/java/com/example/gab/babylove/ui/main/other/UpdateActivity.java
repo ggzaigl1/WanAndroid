@@ -16,6 +16,7 @@ import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.BuildConfig;
@@ -46,7 +47,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by 初夏小溪 on 2018/5/28 0028.
+ * @author 初夏小溪
+ * @date 2018/5/28 0028
  */
 public class UpdateActivity extends BaseActivity implements IBaseActivity {
 
@@ -282,7 +284,9 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
     }
 
     private Intent getInstallAppIntent(final String authority, final boolean isNewTask) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             Uri contentUrl = Uri.fromFile(file);

@@ -58,23 +58,25 @@ import butterknife.OnClick;
 import static android.app.Notification.VISIBILITY_SECRET;
 
 /**
- * Created by Gab on 2017/12/20 0020.
+ * @author Gab
+ * @date 2017/12/20 0020
  * 设置
  */
 
 public class ToolsActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.tv_cache_size)
-    TextView tv_cache_size;
+    TextView mTvCacheSize;
     @BindView(R.id.tv_version)
-    TextView tv_version;
+    TextView mTvVersion;
 
     private NotificationManager mNotificationManager;
-    private NotificationCompat.Builder builder;//8.0以下通知
-    private Notification.Builder mBuilder;//8.0通知
+    private NotificationCompat.Builder builder;
+    private Notification.Builder mBuilder;
     private Notification mNotification;
     private File mFile;
-    private static String DOWNLOAD_URL = "http://migmkt.qq.com/g/myapp/yyb-common.html?ADTAG=buy.bd.yyb01";//应用宝下载地址
+    //应用宝下载地址
+    private static String DOWNLOAD_URL = "http://migmkt.qq.com/g/myapp/yyb-common.html?ADTAG=buy.bd.yyb01";
 
 
     @SuppressLint("HandlerLeak")
@@ -103,8 +105,8 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
         mFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "wanAndroid.apk");
         mNotificationManager = (NotificationManager) getSystemService(Activity.NOTIFICATION_SERVICE);
         try {
-            tv_cache_size.setText(CleanMessageUtil.getTotalCacheSize(this));
-            tv_version.setText(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+            mTvCacheSize.setText(CleanMessageUtil.getTotalCacheSize(this));
+            mTvVersion.setText(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,16 +118,16 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
         switch (view.getId()) {
             //清除缓存
             case R.id.Ll_cache_clear:
-                GetCache();
+                getCache();
                 break;
             //给个好评
             case R.id.Ll_praise:
-                GetEvaluation();
+                getEvaluation();
                 break;
 //            //SelectorButton
             //版本更新
             case R.id.Ll_check_update:
-                GetVersionUpdate();
+                getVersionUpdate();
                 break;
 //            //搜索
 //            case R.id.Ll_check_test:
@@ -139,7 +141,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
     /**
      * 清除缓存
      */
-    private void GetCache() {
+    private void getCache() {
         new MaterialDialog.Builder(this)
                 .title(R.string.system_title)
                 .cancelable(false)
@@ -156,7 +158,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
     /**
      * 去评价
      */
-    private void GetEvaluation() {
+    private void getEvaluation() {
         //        主流应用商店对应的包名如下:
 //        com.qihoo.appstore360手机助手
 //        com.taobao.appcenter淘宝手机助手
@@ -205,7 +207,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                 switch (msg.what) {
                     case 0:
                         //在主线程中需要执行的操作，一般是UI操作
-                        tv_cache_size.setText(R.string.zero_k);
+                        mTvCacheSize.setText(R.string.zero_k);
                         break;
                     default:
                         break;
@@ -217,12 +219,15 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
     /**
      * 获得更新
      */
-    public void GetVersionUpdate() {
+    public void getVersionUpdate() {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         new PgyUpdateManager.Builder()
-                .setForced(true)                //设置是否强制更新,非自定义回调更新接口此方法有用
-                .setUserCanRetry(false)         //失败后是否提示重新下载，非自定义下载 apk 回调此方法有用
-                .setDeleteHistroyApk(true)     // 检查更新前是否删除本地历史 Apk， 默认为true
+                //设置是否强制更新,非自定义回调更新接口此方法有用
+                .setForced(true)
+                //失败后是否提示重新下载，非自定义下载 apk 回调此方法有用
+                .setUserCanRetry(false)
+                // 检查更新前是否删除本地历史 Apk， 默认为true
+                .setDeleteHistroyApk(true)
                 .setUpdateManagerListener(new UpdateManagerListener() {
                     @Override
                     public void onNoUpdateAvailable() {
@@ -244,17 +249,17 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                         dialog.setContentView(R.layout.dialog_update);
                         dialog.setCancelable(false);
                         dialog.show();
-                        Button bt_sure = dialog.findViewById(R.id.bt_sure);
-                        Button bt_cancel = dialog.findViewById(R.id.bt_cancel);
-                        TextView version_update_content = dialog.findViewById(R.id.tv_version_update_content);
+                        Button mBtSure = dialog.findViewById(R.id.bt_sure);
+                        Button mBtCancel = dialog.findViewById(R.id.bt_cancel);
+                        TextView mTvVersionUpdateContent = dialog.findViewById(R.id.tv_version_update_content);
 
                         if (TextUtils.isEmpty(appBean.getReleaseNote())) {
-                            version_update_content.setText("修复已知问题");
+                            mTvVersionUpdateContent.setText("修复已知问题");
                         } else {
-                            version_update_content.setText(appBean.getReleaseNote());
+                            mTvVersionUpdateContent.setText(appBean.getReleaseNote());
                         }
 
-                        bt_sure.setOnClickListener(new View.OnClickListener() {
+                        mBtSure.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 if (NetworkUtils.is4G(ToolsActivity.this)) {
@@ -267,7 +272,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                                 dialog.dismiss();
                             }
                         });
-                        bt_cancel.setOnClickListener(v -> dialog.dismiss());
+                        mBtCancel.setOnClickListener(v -> dialog.dismiss());
                     }
 
                     @Override
@@ -292,11 +297,13 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             super.onPreExecute();
             T.showShort("开始下载更新");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                //8.0通知
                 mBuilder = getNotificationBuilder();
                 mBuilder.setDefaults(Notification.FLAG_ONLY_ALERT_ONCE);
                 getManager().notify(2, mBuilder.build());
             } else {
-                builder = new NotificationCompat.Builder(getBaseContext())
+                //8.0以下通知
+                builder = new NotificationCompat.Builder(getBaseContext(), "wanAndroid_id")
                         .setSmallIcon(R.mipmap.ic_launcher_round)
                         .setContentTitle("正在下载新版本，请稍后...");
                 mNotification = builder.build();
@@ -311,10 +318,13 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             try {
                 URL url = new URL(params[0]);
                 httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setConnectTimeout(5 * 1000);  //设置超时时间
-                if (httpURLConnection.getResponseCode() == 200) { //判断是否连接成功
+                //设置超时时间
+                httpURLConnection.setConnectTimeout(5 * 1000);
+                //判断是否连接成功
+                if (httpURLConnection.getResponseCode() == 200) {
                     int fileLength = httpURLConnection.getContentLength();
-                    inputStream = httpURLConnection.getInputStream();    //获取输入
+                    //获取输入
+                    inputStream = httpURLConnection.getInputStream();
                     outputStream = new FileOutputStream(mFile);
                     byte[] buffer = new byte[1024 * 1024 * 10];
                     long total = 0;
@@ -323,11 +333,14 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                     int pro2 = 0;
                     while ((count = inputStream.read(buffer)) != -1) {
                         total += count;
-                        if (fileLength > 0)
-                            pro1 = (int) (total * 100 / fileLength);  //传递进度（注意顺序）
-                        if (pro1 != pro2)
+                        if (fileLength > 0) {
+                            //传递进度（注意顺序）
+                            pro1 = (int) (total * 100 / fileLength);
+                        }
+                        if (pro1 != pro2) {
                             publishProgress(pro2 = pro1);
-                        outputStream.write(buffer, 0, count);
+                            outputStream.write(buffer, 0, count);
+                        }
                     }
                 }
             } catch (MalformedURLException e) {
@@ -373,14 +386,16 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 mBuilder.setProgress(100, values[0], false);
                 getManager().notify(2, mBuilder.build());
-                if (values[0] == 100) {    //下载完成后点击安装
+                //下载完成后点击安装
+                if (values[0] == 100) {
                     installAPK(ToolsActivity.this);
                 }
             } else {
                 builder.setProgress(100, values[0], false);
                 mNotification = builder.build();
                 mNotificationManager.notify(0, mNotification);
-                if (values[0] == 100) {    //下载完成后点击安装
+                //下载完成后点击安装
+                if (values[0] == 100) {
                     installAPK(ToolsActivity.this);
                 }
             }
@@ -400,17 +415,18 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
 
         /**
          * 创建通知栏信息
+         * 大于8.0
          *
          * @return
          */
-        //大于8.0
         @RequiresApi(api = Build.VERSION_CODES.O)
         private Notification.Builder getNotificationBuilder() {
             //id随便指定
             NotificationChannel channel = new NotificationChannel("wanAndroid_id", "wanAndroid_name", NotificationManager.IMPORTANCE_LOW);
 //            channel.canBypassDnd();//可否绕过，请勿打扰模式
 //            channel.enableLights(true)// 设置通知出现时的闪灯（如果 android 设备支持的话）
-            channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
+            //锁屏显示通知
+            channel.setLockscreenVisibility(VISIBILITY_SECRET);
 //            channel.setLightColor(Color.RED);//指定闪光是的灯光颜色
             channel.canShowBadge();//桌面laucher消息角标
 //            channel.enableVibration(true);//是否允许震动
@@ -444,7 +460,9 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
     }
 
     private Intent getInstallAppIntent(final String authority) {
-        if (mFile == null) return null;
+        if (mFile == null) {
+            return null;
+        }
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

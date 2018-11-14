@@ -1,4 +1,4 @@
-package com.example.gab.babylove.ui.project.fragment;
+package com.example.gab.babylove.ui.project;
 
 import android.annotation.SuppressLint;
 import android.support.design.widget.TabLayout;
@@ -14,7 +14,6 @@ import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
@@ -23,7 +22,9 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by Gab on 2017/12/15 0015.
+ *
+ * @author Gab
+ * @date 2017/12/15 0015
  * 项目
  */
 

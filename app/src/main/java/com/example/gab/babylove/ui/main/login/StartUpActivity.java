@@ -192,7 +192,6 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
     @SuppressLint("CheckResult")
     private void hideLoadView() {
         //显示欢迎页，并设置点击事件（但是不设置点击回调）
-//        loadImg.setVisibility(View.VISIBLE);
         if (permissionChecker.isLackPermissions(PERMISSIONS)) {
             Observable.timer(2500, TimeUnit.MILLISECONDS)
                     .subscribeOn(Schedulers.io())
@@ -270,6 +269,8 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
                     //权限获取失败
                     permissionChecker.showDialog();
                 }
+                break;
+            default:
                 break;
         }
     }

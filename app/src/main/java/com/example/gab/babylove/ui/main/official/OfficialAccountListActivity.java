@@ -40,7 +40,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/10/15 0015.
+ * @author 初夏小溪
+ * @date 2018/10/15 0015
  * 公众号 内容
  */
 public class OfficialAccountListActivity extends BaseActivity implements IBaseActivity {
@@ -123,14 +124,15 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());// 详情
+                    , mAdapter.getData().get(position).getId());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
                     if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        if (mAdapter.getData().get(position).isCollect()) { //收藏
+                        if (mAdapter.getData().get(position).isCollect()) {
+                            //收藏
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
@@ -143,6 +145,8 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
                         JumpUtils.jumpFade(this, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);
                     }
+                    break;
+                default:
                     break;
             }
         });

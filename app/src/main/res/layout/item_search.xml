@@ -9,7 +9,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical"
-            android:background="@color/colorAccent">
+            android:background="@color/grey_bg">
 
         <TextView
                 android:id="@+id/tv_record"
@@ -37,6 +37,6 @@
             android:layout_height="0.5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@color/colorAccent"/>
+            android:background="@color/bgColor_alertview_alert_start"/>
 
 </LinearLayout>

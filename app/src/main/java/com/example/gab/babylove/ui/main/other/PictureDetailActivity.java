@@ -18,7 +18,9 @@ import com.ggz.baselibrary.utils.T;
 import butterknife.BindView;
 
 /**
- * Created by 初夏小溪 on 2018/4/16 0016.
+ *
+ * @author 初夏小溪
+ * @date 2018/4/16 0016
  * 描述：图片详情页
  */
 
@@ -28,7 +30,7 @@ public class PictureDetailActivity extends BaseActivity implements IBaseActivity
     @BindView(R.id.view_page)
     PhotoViewPager mPhotoViewPager;
     @BindView(R.id.tv_image_count)
-    TextView tv_image_count;
+    TextView mTvImageCount;
 
     @Override
     public boolean isShowHeadView() {
@@ -51,7 +53,7 @@ public class PictureDetailActivity extends BaseActivity implements IBaseActivity
         OrListBean actionsBean = (OrListBean) getIntent().getSerializableExtra("orListBean");
         mCurrentPosition = getIntent().getIntExtra("position", -1);
 
-        tv_image_count.setText((mCurrentPosition + 1) + "/" + actionsBean.getData().size());
+        mTvImageCount.setText((mCurrentPosition + 1) + "/" + actionsBean.getData().size());
         PhotoAdapter photoAdapter = new PhotoAdapter(actionsBean, PictureDetailActivity.this);
         mPhotoViewPager.setAdapter(photoAdapter);
         mPhotoViewPager.setCurrentItem(mCurrentPosition, false);
@@ -61,7 +63,7 @@ public class PictureDetailActivity extends BaseActivity implements IBaseActivity
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 mCurrentPosition = position;
-                tv_image_count.setText((mCurrentPosition + 1) + "/" + actionsBean.getData().size());
+                mTvImageCount.setText((mCurrentPosition + 1) + "/" + actionsBean.getData().size());
                 if (mCurrentPosition == actionsBean.getData().size() - 1) {
                     T.showShort("已经是最后一张图片了");
                 }
