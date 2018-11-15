@@ -8,7 +8,9 @@ import java.io.File;
 import java.math.BigDecimal;
 
 /**
- * Created by 初夏小溪 on 2018/4/12 0012.
+ * @author 初夏小溪
+ * @date 2018/4/12 0012
+ * 缓存
  */
 
 public class CleanMessageUtil {
@@ -38,7 +40,7 @@ public class CleanMessageUtil {
 
     private static boolean deleteDir(File dir) {
         Log.e("TAG", dir.toString());
-        if (dir != null && dir.isDirectory()) {
+        if (dir.isDirectory()) {
             String[] children = dir.list();
             int size = 0;
             if (children != null) {
@@ -51,7 +53,7 @@ public class CleanMessageUtil {
                 }
             }
         }
-        return dir == null || dir.delete();
+        return dir.delete();
     }
 
     // 获取文件
@@ -59,7 +61,7 @@ public class CleanMessageUtil {
     // 目录，一般放一些长时间保存的数据
     // Context.getExternalCacheDir() -->
     // SDCard/Android/data/你的应用包名/cache/目录，一般存放临时缓存数据
-    public static long getFolderSize(File file) throws Exception {
+    private static long getFolderSize(File file) throws Exception {
         long size = 0;
         try {
             File[] fileList = file.listFiles();
@@ -89,7 +91,7 @@ public class CleanMessageUtil {
      * @param size
      * @return
      */
-    public static String getFormatSize(double size) {
+    private static String getFormatSize(double size) {
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
             // return size + "Byte";

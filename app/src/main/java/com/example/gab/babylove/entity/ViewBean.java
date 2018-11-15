@@ -5,7 +5,9 @@ import java.util.List;
 
 /**
  * 体系数据 实体类
- * Created by fangs on 2018/4/16.
+ *
+ * @author fangs
+ * @date 2018/4/16
  */
 public class ViewBean implements Serializable {
 

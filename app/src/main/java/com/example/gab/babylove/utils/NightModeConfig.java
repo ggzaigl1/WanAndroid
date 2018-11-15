@@ -13,7 +13,7 @@ public class NightModeConfig {
 
     private SharedPreferences mSharedPreference;
     private static final String NIGHT_MODE = "Night_Mode";
-    public static final String IS_NIGHT_MODE = "Is_Night_Mode";
+    private static final String IS_NIGHT_MODE = "Is_Night_Mode";
 
     private static NightModeConfig sModeConfig;
 

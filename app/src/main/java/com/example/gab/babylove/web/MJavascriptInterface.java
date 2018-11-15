@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.util.Log;
 
 /**
- * Created by 初夏小溪 on 2018/6/1 0001.
+ *
+ * @author 初夏小溪
+ * @date 2018/6/1 0001
  */
 public class MJavascriptInterface {
 

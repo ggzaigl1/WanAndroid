@@ -4,6 +4,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
+/**
+ * Created by 初夏小溪
+ * data :2018/11/15 001515:12
+ * @author 初夏小溪
+ */
 public class CustomDialog extends Dialog {
 
     Context context;

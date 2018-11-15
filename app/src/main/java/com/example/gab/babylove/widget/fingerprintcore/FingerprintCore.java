@@ -15,7 +15,9 @@ import java.lang.ref.WeakReference;
 
 
 /**
- * Created by popfisher on 2016/11/7.
+ *
+ * @author popfisher
+ * @date 2016/11/7
  * 指纹相关代码
  */
 @TargetApi(Build.VERSION_CODES.M)
@@ -189,14 +191,16 @@ public class FingerprintCore {
     private void onFailedRetry(int msgId, String helpString) {
         mFailedTimes++;
          LogUtils.e("on failed retry time " + mFailedTimes);
-        if (mFailedTimes > 5) { // 每个验证流程最多重试5次，这个根据使用场景而定，验证成功时清0
+        // 每个验证流程最多重试5次，这个根据使用场景而定，验证成功时清0
+        if (mFailedTimes > 5) {
              LogUtils.e("on failed retry time more than 5 times");
             return;
         }
          LogUtils.e("onFailedRetry: msgId " + msgId + " helpString: " + helpString);
         cancelAuthenticate();
         mHandler.removeCallbacks(mFailedRetryRunnable);
-        mHandler.postDelayed(mFailedRetryRunnable, 300); // 每次重试间隔一会儿再启动
+        // 每次重试间隔一会儿再启动
+        mHandler.postDelayed(mFailedRetryRunnable, 300);
     }
 
     private Runnable mFailedRetryRunnable = new Runnable() {

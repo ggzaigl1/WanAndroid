@@ -1,10 +1,12 @@
 package com.example.gab.babylove;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -51,6 +53,8 @@ import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -72,20 +76,22 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.iv_head_right)
-    ImageView iv_head_right;
+    ImageView mIvHeadRight;
 
     private FragmentManager mFragmentManager;
     private HomeFragment mHomeFragment;
     private ViewFragment mViewFragment;
     private NavigationViewFragment mNavigationViewFragment;
     private StarFragment mStarFragment;
+
     //当前的fragment
-    private Fragment mFragment;
+    Fragment mFragment;
+
     //保存点击的时间
     private long exitTime = 0;
 
-    public TextView nev_header_tv_login;
-    public TextView nev_header_tv_title;
+    public TextView mTvNevHeaderLogin;
+    public TextView mTvNevHeaderTitle;
 
 
     @Override
@@ -98,18 +104,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         return R.layout.activity_main;
     }
 
-    @Override
-    public void setStatusBar(Activity activity) {
-        // TODO: 2018/11/9 0009 刘海屏适配;
-//        MdStatusBar.setColorBarForDrawer(this, R.color.statusBar, R.color.statusBar);
-    }
+    // TODO: 2018/11/9 0009 刘海屏适配;
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         //设置状态栏透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        iv_head_right.setVisibility(View.VISIBLE);
+        mIvHeadRight.setVisibility(View.VISIBLE);
         mFragmentManager = getSupportFragmentManager();
         //初始化 主要的fragment 的
         mHomeFragment = new HomeFragment();
@@ -129,18 +131,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
         //获取Navigation header控件方法1:
         View headerView = mNavigation.getHeaderView(0);
-        ImageView nev_header_imageView = headerView.findViewById(R.id.nev_header_imageView);
-        nev_header_tv_title = headerView.findViewById(R.id.nev_header_tv_title);
-        nev_header_tv_login = headerView.findViewById(R.id.nev_header_tv_login);
+        ImageView ivNevHeader = headerView.findViewById(R.id.nev_header_imageView);
+        mTvNevHeaderTitle = headerView.findViewById(R.id.nev_header_tv_title);
+        mTvNevHeaderLogin = headerView.findViewById(R.id.nev_header_tv_login);
 
         //获取Navigation header控件方法2:
 //        View headerView = mNavigation.inflateHeaderView(R.layout.nav_header_main);//
 //        ImageView nev_header_imageView = headerView.findViewById(R.id.nev_header_imageView);
-//        nev_header_tv_title = headerView.findViewById(R.id.nev_header_tv_title);
-//        nev_header_tv_login = headerView.findViewById(R.id.nev_header_tv_login);//点击登录
+//        mTvNevHeaderTitle = headerView.findViewById(R.id.nev_header_tv_title);
+        //点击登录
+//        nev_header_tv_login = headerView.findViewById(R.id.nev_header_tv_login);
 
-        nev_header_imageView.setOnClickListener(v -> JumpUtils.jumpFade(MainActivity.this, PhotoViewActivity.class, null));
-        nev_header_tv_login.setOnClickListener(v -> {
+        ivNevHeader.setOnClickListener(v -> JumpUtils.jumpFade(MainActivity.this, PhotoViewActivity.class, null));
+        mTvNevHeaderLogin.setOnClickListener(v -> {
             boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
             if (isLogin) {
                 new MaterialDialog.Builder(this)
@@ -149,8 +152,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                         .content(R.string.system_content)
                         .positiveText(R.string.ok)
                         .onPositive((dialog, which) -> {
-                            nev_header_tv_title.setText(R.string.notLogin);
-                            nev_header_tv_login.setText(R.string.clickLogin);
+                            mTvNevHeaderTitle.setText(R.string.notLogin);
+                            mTvNevHeaderLogin.setText(R.string.clickLogin);
                             ACache mCache = ACache.get(ConfigUtils.getAppCtx());
                             mCache.clear();
                             SpfUtils.clear();
@@ -167,8 +170,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     protected void onResume() {
         super.onResume();
         boolean isLogin = SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin);
-        nev_header_tv_title.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
-        nev_header_tv_login.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
+        mTvNevHeaderTitle.setText(isLogin ? SpfUtils.getSpfSaveStr(ConstantUtils.userName) : ResourceUtils.getStr(R.string.notLogin));
+        mTvNevHeaderLogin.setText(isLogin ? R.string.login_exit : R.string.clickLogin);
     }
 
 
@@ -252,7 +255,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         }
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -310,8 +312,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 JumpUtils.jumpFade(this, AboutActivity.class, null);
                 break;
             case R.id.nav_share:
-                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_wanandroid);
-                AndroidShareUtils.shareWeChatFriend(this, "一起玩Android", "https://www.pgyer.com/6osT", AndroidShareUtils.DRAWABLE, bmp);
+                //分享二维码
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.icon_wanandroid);
+                AndroidShareUtils.shareAllMsg(ConfigUtils.getAppCtx(), "一起玩Android", "https://www.pgyer.com/6osT", AndroidShareUtils.DRAWABLE, bitmap);
                 break;
             case R.id.nav_manage:
 //            工具类
@@ -326,6 +329,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //        mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -350,6 +354,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //        });
 //        return true;
 //    }
+
 
     @Override
     public void onBackPressed() {

@@ -212,10 +212,6 @@
                 android:name=".ui.main.other.UpdateActivity"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
-        <activity
-                android:name="utils.SelectorButtonActivity"
-                android:label="@string/selector_button"
-                android:screenOrientation="portrait"/>
         <!-- 不同格式文件浏览 activity -->
         <!--<activity-->
         <!--android:name=".ui.main.activity.FileBrowsingActivity"-->
@@ -254,7 +250,7 @@
 
         <!-- SurfaceView+MediaPlayer 自定义播放器 -->
         <activity
-                android:name="widget.SurfaceActivity"
+                android:name=".widget.SurfaceActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize"
                 android:screenOrientation="sensor"
                 android:windowSoftInputMode="stateHidden|adjustResize"/>

@@ -59,11 +59,10 @@
     <string name="knowledge">知识体系</string>
     <string name="about_us">关于我们</string>
     <string name="share">分享</string>
-    <string name="share_WeChat">分享微信好友</string>
+    <string name="share_knowledge">分享知识点</string>
     <string name="night_mode">夜间模式</string>
     <string name="nav_exit">退出应用</string>
     <string name="ornamental">健康运动</string>
-    <string name="selector_button">SelectorButton</string>
     <string name="fingerprint">Fingerprint</string>
     <string name="notLogin">Google Hot Air Balloon</string>
     <string name="clickLogin">点击登录</string>

@@ -104,7 +104,7 @@
             android:id="@+id/Ll_check_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="?android:attr/selectableItemBackground">
 
         <TextView

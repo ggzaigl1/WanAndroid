@@ -6,7 +6,7 @@ import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.entity.CourseDetails;
 import com.example.gab.babylove.entity.CourseList;
-import com.example.gab.babylove.entity.GankBean;
+import com.example.gab.babylove.entity.GanBean;
 import com.example.gab.babylove.entity.HotKeyBean;
 import com.example.gab.babylove.entity.LoginBean;
 import com.example.gab.babylove.entity.NavigationBean;
@@ -275,7 +275,7 @@ public interface ApiService {
      */
     @Headers({"url_name:user"})
     @GET("http://gank.io/api/data/福利/{count}/{page}")
-    Observable<GankBean> getCourseDetails(@Path("count") int count, @Path("page") int page);
+    Observable<GanBean> getCourseDetails(@Path("count") int count, @Path("page") int page);
 
     /**
      * 运动课程 ---运动列表

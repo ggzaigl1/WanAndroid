@@ -3,8 +3,10 @@ package com.example.gab.babylove.entity;
 import java.io.Serializable;
 
 /**
- * Created by 初夏小溪 on 2018/4/13 0013.
- * Banner 數據源
+ *
+ * @author 初夏小溪
+ * @date 2018/4/13 0013
+ * Banner 实体对象
  */
 
 public class BannerBean implements Serializable {

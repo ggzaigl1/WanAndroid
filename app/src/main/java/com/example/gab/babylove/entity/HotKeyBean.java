@@ -3,7 +3,10 @@ package com.example.gab.babylove.entity;
 import java.io.Serializable;
 
 /**
- * Created by 初夏小溪 on 2018/11/8 0008.
+ *
+ * @author 初夏小溪
+ * @date 2018/11/8 0008
+ * 热词搜索 实体对象
  */
 public class HotKeyBean implements Serializable {
 

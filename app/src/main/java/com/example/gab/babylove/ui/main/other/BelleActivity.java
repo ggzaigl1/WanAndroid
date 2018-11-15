@@ -17,7 +17,7 @@ import android.view.animation.Interpolator;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.entity.GankBean;
+import com.example.gab.babylove.entity.GanBean;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.ui.main.adapter.PicturesAdapter;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -86,21 +86,21 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                 .getCourseDetails(50, mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<GankBean>() {
+                .subscribe(new NetCallBack<GanBean>() {
                     @Override
-                    protected void onSuccess(GankBean gankBean) {
-                        if (null != gankBean && null != gankBean.getResults()) {
+                    protected void onSuccess(GanBean ganBean) {
+                        if (null != ganBean && null != ganBean.getResults()) {
                             if (mRefreshLayout.isRefreshing()) {
-                                mAdapter.setNewData(gankBean.getResults());
+                                mAdapter.setNewData(ganBean.getResults());
                                 mRefreshLayout.finishRefresh();
                             } else if (mRefreshLayout.isLoading()) {
-                                mAdapter.getData().addAll(gankBean.getResults());
+                                mAdapter.getData().addAll(ganBean.getResults());
                                 mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
-                                T.showShort("又加载了" + gankBean.getResults().size() + "位妹子");
+                                T.showShort("又加载了" + ganBean.getResults().size() + "位妹子");
                             } else {
-                                mAdapter.setNewData(gankBean.getResults());
-                                T.showShort("加载了" + gankBean.getResults().size() + "妹子");
+                                mAdapter.setNewData(ganBean.getResults());
+                                T.showShort("加载了" + ganBean.getResults().size() + "妹子");
                             }
                         }
                     }
@@ -163,7 +163,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
         });
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            List<GankBean.ResultsBean> data = mAdapter.getData();
+            List<GanBean.ResultsBean> data = mAdapter.getData();
             OrListBean orListBean = new OrListBean(data);
             Bundle bundle = new Bundle();
             bundle.putInt("position", position);

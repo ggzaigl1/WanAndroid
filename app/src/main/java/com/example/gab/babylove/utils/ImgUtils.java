@@ -16,13 +16,19 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by 初夏小溪 on 2018/8/20 0020.
+ * @author 初夏小溪
+ * @date 2018/8/20 0020
  * 图片保存路径
  */
 
 public class ImgUtils {
 
-    //保存文件到指定路径
+    /**
+     * 保存文件到指定路径
+     *
+     * @param bmp
+     * @return
+     */
     public static File saveImageToGallery(Bitmap bmp) {
         // 首先保存图片
         String storePath = getPath();
@@ -59,9 +65,11 @@ public class ImgUtils {
         String modulePath = "WanAndroid".replace(".", sp);
         String fDirStr = sp + modulePath + sp;
         File dirPath;
-        if (FileUtils.isSDCardEnable())
+        if (FileUtils.isSDCardEnable()) {
             dirPath = new File(FileUtils.getSDCardPath(), fDirStr);
-        else dirPath = Environment.getDataDirectory();
+        } else {
+            dirPath = Environment.getDataDirectory();
+        }
         return dirPath.getPath();
     }
 

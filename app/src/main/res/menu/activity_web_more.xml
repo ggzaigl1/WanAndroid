@@ -6,7 +6,7 @@
             android:id="@+id/web_share"
             android:icon="@drawable/vector_menu_share"
             android:orderInCategory="100"
-            android:title="@string/share_WeChat"
+            android:title="@string/share_knowledge"
             app:showAsAction="never"
             />
     <item

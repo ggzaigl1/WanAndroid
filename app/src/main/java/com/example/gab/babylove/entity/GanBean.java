@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by 初夏小溪 on 2018/4/13 0013.
+ *
+ * @author 初夏小溪
+ * @date 2018/4/13 0013
+ * 实体对象
  */
 
-public class GankBean implements Serializable{
+public class GanBean implements Serializable{
 
     /**
      * error : false

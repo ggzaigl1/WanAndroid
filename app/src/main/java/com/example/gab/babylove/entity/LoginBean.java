@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 登录实体类
- * Created by fangs on 2017/12/22 0031.
+ * 登录 实体对象
+ *
+ * @author fangs
+ * @date 2017/12/22 0031
  */
 public class LoginBean implements Serializable {
 

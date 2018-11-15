@@ -11,7 +11,9 @@ import android.util.AttributeSet;
 import com.example.gab.babylove.R;
 
 /**
- * Created by deadline on 2017/1/11.
+ *
+ * @author deadline
+ * @date 2017/1/11
  * 根据用户点击状态设置不同的图片
  */
 
@@ -47,7 +49,7 @@ public class StateImageView extends AppCompatImageView {
         states[2] = new int[] { android.R.attr.state_enabled };
 
         Drawable drawable = getBackground();
-        if(drawable != null && drawable instanceof StateListDrawable){
+        if(drawable instanceof StateListDrawable){
             mStateBackground = (StateListDrawable) drawable;
         }else{
             mStateBackground = new StateListDrawable();

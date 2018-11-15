@@ -1,7 +1,9 @@
 package com.example.gab.babylove.entity;
 
 /**
- * Created by 初夏小溪 on 2018/5/30 0030.
+ *
+ * @author 初夏小溪
+ * @date 2018/5/30 0030
  */
 public class UpDateBean {
 

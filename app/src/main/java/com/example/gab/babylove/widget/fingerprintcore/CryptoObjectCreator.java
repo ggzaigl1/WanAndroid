@@ -8,6 +8,7 @@ import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.util.Log;
 
+import com.example.gab.babylove.widget.SurfaceActivity;
 import com.ggz.baselibrary.utils.LogUtils;
 
 import java.io.IOException;
@@ -18,13 +19,17 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 /**
- * Created by popfisher on 2016/11/7.
+ * @author popfisher
+ * @date 2016/11/7
  */
 
 @TargetApi(Build.VERSION_CODES.M)
@@ -41,7 +46,7 @@ public class CryptoObjectCreator {
         void onDataPrepared(FingerprintManager.CryptoObject cryptoObject);
     }
 
-    public CryptoObjectCreator(ICryptoObjectCreateListener createListener) {
+    CryptoObjectCreator(ICryptoObjectCreateListener createListener) {
         mKeyStore = providesKeystore();
         mKeyGenerator = providesKeyGenerator();
         mCipher = providesCipher(mKeyStore);
@@ -52,7 +57,12 @@ public class CryptoObjectCreator {
     }
 
     private void prepareData(final ICryptoObjectCreateListener createListener) {
-        new Thread("FingerprintLogic:InitThread") {
+        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
+                1, 1, 10, TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(1),
+                new ThreadPoolExecutor.DiscardOldestPolicy());
+
+        class MyRunnable implements Runnable {
             @Override
             public void run() {
                 try {
@@ -71,7 +81,9 @@ public class CryptoObjectCreator {
                     createListener.onDataPrepared(mCryptoObject);
                 }
             }
-        }.start();
+        }
+        MyRunnable runnable = new MyRunnable();
+        threadPool.submit(runnable);
     }
 
     /**
@@ -127,7 +139,7 @@ public class CryptoObjectCreator {
         }
     }
 
-    public static KeyStore providesKeystore() {
+    private static KeyStore providesKeystore() {
         try {
             return KeyStore.getInstance("AndroidKeyStore");
         } catch (Throwable e) {
@@ -135,7 +147,7 @@ public class CryptoObjectCreator {
         }
     }
 
-    public static KeyGenerator providesKeyGenerator() {
+    private static KeyGenerator providesKeyGenerator() {
         try {
             return KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
         } catch (Throwable e) {
@@ -143,7 +155,7 @@ public class CryptoObjectCreator {
         }
     }
 
-    public static Cipher providesCipher(KeyStore keyStore) {
+    private static Cipher providesCipher(KeyStore keyStore) {
         try {
             return Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/"
                     + KeyProperties.BLOCK_MODE_CBC + "/"
@@ -153,7 +165,7 @@ public class CryptoObjectCreator {
         }
     }
 
-    public FingerprintManager.CryptoObject getCryptoObject() {
+    FingerprintManager.CryptoObject getCryptoObject() {
         return mCryptoObject;
     }
 

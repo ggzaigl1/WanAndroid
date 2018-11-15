@@ -9,7 +9,9 @@ import com.ggz.baselibrary.utils.TintUtils;
 /**
  *
  * 代码设置 选择器
- * Created by fangs on 2018/4/2.
+ *
+ * @author fangs
+ * @date 2018/4/2
  */
 public class SelectUtils {
 

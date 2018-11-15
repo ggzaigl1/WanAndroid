@@ -3,32 +3,24 @@ package com.example.gab.babylove.base;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
+import android.util.Base64;
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.entity.BookmarkBean;
-import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
-import com.example.gab.babylove.ui.main.search.SearchArticleActivity;
-import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.utils.KeyBoardUtils;
-import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.permission.PermissionChecker;
 import com.kaopiz.kprogresshud.KProgressHUD;
-import com.zhy.view.flowlayout.FlowLayout;
-import com.zhy.view.flowlayout.TagAdapter;
-import com.zhy.view.flowlayout.TagFlowLayout;
 
-import java.util.List;
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by 初夏小溪 on 2018/10/15 0015.

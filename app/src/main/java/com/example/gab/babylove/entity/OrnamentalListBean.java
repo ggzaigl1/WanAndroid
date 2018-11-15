@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Gab on 2018/3/14 0014.
+ *
+ * @author Gab
+ * @date 2018/3/14 0014
  */
 
 public class OrnamentalListBean implements Serializable {
 
-    List<CourseDetails.DataBean.GroupsBean.ActionsBean> data;
+    private List<CourseDetails.DataBean.GroupsBean.ActionsBean> data;
 
     public List<CourseDetails.DataBean.GroupsBean.ActionsBean> getData() {
         return data;

@@ -12,6 +12,8 @@ import java.util.List;
 
 /**
  * 时间: 2016-08-15 19:36
+ *
+ * @author 55204
  */
 @SuppressWarnings("ALL")
 public class Util {
@@ -24,9 +26,12 @@ public class Util {
      * @return true or false
      */
     public static boolean isAvilible(Context context, String packageName) {
-        final PackageManager packageManager = context.getPackageManager();//获取packagemanager
-        List<PackageInfo> packageInfo = packageManager.getInstalledPackages(0);//获取所有已安装程序的包信息
-        List NameList = new ArrayList();//用于存储所有已安装程序的包名
+        //获取packagemanager
+        final PackageManager packageManager = context.getPackageManager();
+        //获取所有已安装程序的包信息
+        List<PackageInfo> packageInfo = packageManager.getInstalledPackages(0);
+        //用于存储所有已安装程序的包名
+        List NameList = new ArrayList();
         //从packageInfo中取出包名,放入NameList中
         if (packageInfo != null) {
             for (int i = 0; i < packageInfo.size(); i++) {
@@ -34,7 +39,8 @@ public class Util {
                 NameList.add(pn);
             }
         }
-        return NameList.contains(packageName);//判断pName中是否有目标程序的包名,有TRUE,没有FALSE
+        //判断pName中是否有目标程序的包名,有TRUE,没有FALSE
+        return NameList.contains(packageName);
     }
 
     /**

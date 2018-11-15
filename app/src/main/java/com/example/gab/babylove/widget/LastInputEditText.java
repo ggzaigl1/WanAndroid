@@ -4,7 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 /**
- * Created by 初夏小溪 on 2018/11/12 0012.
+ * @author 初夏小溪
+ * @date 2018/11/12 0012
  * EditText 光标始终在最后面
  */
 public class LastInputEditText extends android.support.v7.widget.AppCompatEditText {
@@ -25,7 +26,8 @@ public class LastInputEditText extends android.support.v7.widget.AppCompatEditTe
     protected void onSelectionChanged(int selStart, int selEnd) {
         super.onSelectionChanged(selStart, selEnd);
         //保证光标始终在最后面
-        if (selStart == selEnd) {//防止不能多选
+        //防止不能多选
+        if (selStart == selEnd) {
             setSelection(getText().length());
         }
     }

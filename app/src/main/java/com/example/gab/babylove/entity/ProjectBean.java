@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by 初夏小溪 on 2018/4/23 0023.
+ *
+ * @author 初夏小溪
+ * @date 2018/4/23 0023
  */
 
 public class ProjectBean implements Serializable {

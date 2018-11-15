@@ -12,20 +12,22 @@ import com.ggz.baselibrary.utils.NightModeConfig;
 
 /**
  * 基础 application
- * Created by fangs on 2017/5/5.
+ *
+ * @author fangs
+ * @date 2017/5/5
  */
 public class WanAndroidApplication extends MultiDexApplication {
-
-    private static WanAndroidApplication mApplication; // 单例模式
+    // 单例模式
+    private static WanAndroidApplication mApplication;
 
     //也可以直接使用代码块直接设置
     //static {
     //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_ NIGHT_YES);
     //}
+
     @Override
     public void onCreate() {
         super.onCreate();
-
         L.e("ActivityCallbacks", "Application--Create() 启动-----");
 
         new ConfigUtils.ConfigBiuder()

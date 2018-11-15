@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.entity.GankBean;
+import com.example.gab.babylove.entity.GanBean;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 
 import java.util.List;
@@ -19,14 +19,14 @@ import java.util.List;
  *
  */
 
-public class PicturesAdapter extends BaseQuickAdapter<GankBean.ResultsBean, BaseViewHolder> {
+public class PicturesAdapter extends BaseQuickAdapter<GanBean.ResultsBean, BaseViewHolder> {
 
-    public PicturesAdapter(int layoutResId, @Nullable List<GankBean.ResultsBean> data) {
+    public PicturesAdapter(int layoutResId, @Nullable List<GanBean.ResultsBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, GankBean.ResultsBean item) {
+    protected void convert(BaseViewHolder helper, GanBean.ResultsBean item) {
         ImgLoadUtils.loadImage(mContext,item.getUrl(),helper.getView(R.id.img_content));
     }
 }

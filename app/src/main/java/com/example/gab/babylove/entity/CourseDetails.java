@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by QKun on 2018/3/13.
- * 体育
+ *
+ * @author 初夏小溪
+ * @date 2018/3/13
+ * 健身 实体对象
  */
 
 public class CourseDetails implements Serializable {

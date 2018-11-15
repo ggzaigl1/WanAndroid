@@ -1,12 +1,10 @@
 package com.example.gab.babylove.ui.main.official.adapter;
 
 import android.support.annotation.Nullable;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.entity.OfficialAccountBean;
 import com.ggz.baselibrary.utils.ResourceUtils;
 

@@ -31,15 +31,22 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.ggz.baselibrary.application.IBaseActivity;
-import com.ggz.baselibrary.statusbar.MdStatusBar;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 
 /**
- * Created by Gab on 2018/3/19 0019.
+ * @author Gab
+ * @date 2018/3/19 0019
  * 使用 SurfaceView+MediaPlayer 自定义播放器
  */
 
@@ -52,7 +59,6 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
     //控制台layout
     @BindView(R.id.control_layout)
     LinearLayout controlLayout;
-
     //播放、全屏button
     @BindView(R.id.playBtn)
     ImageButton playBtn;
@@ -108,8 +114,12 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
     private int currLight;
 
     private static final int HIDE_CONTROL_LAYOUT = -1;
+
     //这个地址是我抓的某平台的，我发现这个地址是变化的，所以有可能不能使用，如果不能播放，换个正常的就可以运行了，不要用模拟器运行
+
     private static final String VIDEO_URL = "http://ws-video.fithub.cc/trainaction/0/0/00641471c73445ce972ca17070957e14.mp4";
+
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -170,7 +180,9 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         }
     }
 
-    //刷新控制台 显示则隐藏 隐藏则显示 并5S之后隐藏
+    /**
+     * 刷新控制台 显示则隐藏 隐藏则显示 并5S之后隐藏
+     */
     private void refreshControlLayout() {
         if (isControl) {
             controlLayout.setVisibility(View.INVISIBLE);
@@ -211,11 +223,13 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
             case MotionEvent.ACTION_MOVE:
                 if (isFullScreen) {
                     uY = event.getY();
-                    if (dX > getWidth() / 2) {//声音控制
+                    //声音控制
+                    if (dX > getWidth() / 2) {
                         if (Math.abs(uY - dY) > 25) {
                             setVolume(uY - dY);
                         }
-                    } else if (dX <= getWidth() / 2) {//亮度控制
+                        //亮度控制
+                    } else if (dX <= getWidth() / 2) {
                         setLight(dY - uY);
                     }
                 }
@@ -226,12 +240,18 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         return true;
     }
 
-    //手势调节音量
+    /**
+     * 手势调节音量
+     *
+     * @param vol
+     */
     private void setVolume(float vol) {
-        if (vol < 0) {//增大音量
+        //增大音量
+        if (vol < 0) {
             audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE,
                     AudioManager.FX_FOCUS_NAVIGATION_UP);
-        } else if (vol > 0) {//降低音量
+            //降低音量
+        } else if (vol > 0) {
             audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER,
                     AudioManager.FX_FOCUS_NAVIGATION_UP);
         }
@@ -255,18 +275,18 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         localWindow.setAttributes(localLayoutParams);
     }
 
-    //初始化surfaceView
+    /**
+     * 初始化surfaceView
+     */
     private void initSurface() {
         //设置回调参数
         mHolder.addCallback(this);
-        //设置SurfaceView自己不管理的缓冲区
-        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
         //显示的分辨率,不设置为视频默认
 //        mHolder.setFixedSize(320, 220);
     }
 
 
-    private void playUrl(String url) {
+    private void playUrl() {
         try {
             //使mediaPlayer重新进入ide状态
             mediaPlayer.reset();
@@ -276,7 +296,7 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
             mediaPlayer.setDisplay(mHolder);
             //设置 视频资源 可以是本地视频 也可是网络资源
 //            mediaPlayer.setDataSource("/storage/sdcard1/DCIM/Camera/VID_20160629_164144.mp4");
-            mediaPlayer.setDataSource(url);
+            mediaPlayer.setDataSource(SurfaceActivity.VIDEO_URL);
             //同步准备
 //            mediaPlayer.prepare();
             //因为是网络视频 这里用异步准备
@@ -299,7 +319,7 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         Log.e("TAG", "surfaceCreated");
         //等surfaceView创建完成再开始播放视频
         if (!isPause) {
-            playUrl(VIDEO_URL);
+            playUrl();
         } else {
             isPause = false;
             mediaPlayer.setDisplay(holder);
@@ -365,7 +385,11 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
 
     }
 
-    //横竖屏切换
+    /**
+     * 横竖屏切换
+     *
+     * @param newConfig
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -382,17 +406,22 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         super.onConfigurationChanged(newConfig);
     }
 
-    //全屏
+    /**
+     * 全屏
+     */
     private void fullScreen() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置成全屏模式
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//强制为横屏
+        //设置成全屏模式
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //强制为横屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         showFullSurface();
     }
 
     //竖屏
     private void smallScreen() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制为竖屏
+        //强制为竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         showSmallSurface();
     }
 
@@ -407,7 +436,13 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         surfaceView.setLayoutParams(params);
     }
 
-    //进度改变
+    /**
+     * 进度改变
+     *
+     * @param seekBar
+     * @param progress
+     * @param fromUser
+     */
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         currTime.setText(formatTime(seekBar.getProgress()));
@@ -418,7 +453,11 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         }
     }
 
-    //开始拖动
+    /**
+     * 开始拖动
+     *
+     * @param seekBar
+     */
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
         currTime.setText(formatTime(seekBar.getProgress()));
@@ -427,7 +466,11 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         refreshControlLayout();
     }
 
-    //停止拖动
+    /**
+     * 停止拖动
+     *
+     * @param seekBar
+     */
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         isSetProgress = false;
@@ -447,11 +490,32 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         return outMetrics.widthPixels;
     }
 
-    //更新进度
-    private void updateSeekBar() {
-        new Thread(() -> {
-            while (!isOnDestroy) { //结束线程标示
 
+//    int corePoolSize, -线程池核心池的大小。
+//    int maximumPoolSize, -线程池的最大线程数。
+//    long keepAliveTime, -当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间。
+//    TimeUnit unit, - keepAliveTime 的时间单位。
+//    BlockingQueue<Runnable> workQueue, -用来储存等待执行任务的队列。
+//    ThreadFactory threadFactory, -线程工厂。
+//    RejectedExecutionHandler handler)  -拒绝策略。
+
+    /**
+     * 更新进度
+     */
+    private void updateSeekBar() {
+        MyRunnable runnable = new MyRunnable();
+        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
+                1, 1, 10, TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(1),
+                new ThreadPoolExecutor.DiscardOldestPolicy());
+        threadPool.submit(runnable);
+    }
+
+    public class MyRunnable implements Runnable {
+        @Override
+        public void run() {
+            //结束线程标示
+            while (!isOnDestroy) {
                 if (isPlay && !isPause) {
                     try {
                         Message message = new Message();
@@ -464,13 +528,16 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
                     }
                 }
             }
-        }).start();
+        }
     }
 
-    //播放完成
+    /**
+     * 播放完成
+     *
+     * @param mp
+     */
     @Override
     public void onCompletion(MediaPlayer mp) {
-//        Log.e("TAG", "播放完成");
         playBtn.setBackgroundResource(R.mipmap.icon_play);
         isPlay = false;
         isPlayCom = true;
@@ -481,7 +548,14 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         refreshControlLayout();
     }
 
-    //播放出错
+    /**
+     * 播放出错
+     *
+     * @param mp
+     * @param what
+     * @param extra
+     * @return
+     */
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
         isPlay = false;
@@ -498,7 +572,11 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         Log.e("TAG", "onBufferingUpdate" + ",percent:" + percent);
     }
 
-    //准备完成
+    /**
+     * 准备完成
+     *
+     * @param mp
+     */
     @Override
     public void onPrepared(MediaPlayer mp) {
         //设置最大进度
@@ -533,7 +611,11 @@ public class SurfaceActivity extends AppCompatActivity implements IBaseActivity,
         super.onDestroy();
     }
 
-    //seekTo()是异步的方法 在此监听是否执行完毕
+    /**
+     * seekTo()是异步的方法 在此监听是否执行完毕
+     *
+     * @param mp
+     */
     @Override
     public void onSeekComplete(MediaPlayer mp) {
         Log.e("TAG", "onSeekComplete");

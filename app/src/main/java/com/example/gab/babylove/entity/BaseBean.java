@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by 初夏小溪 on 2018/4/13 0013.
- * 首页数据 公共数据
+ *
+ * @author 初夏小溪
+ * @date 2018/4/13 0013
+ * 首页数据 实体对象
  */
 
 public class BaseBean implements Serializable {

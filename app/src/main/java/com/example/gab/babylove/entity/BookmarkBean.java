@@ -3,7 +3,10 @@ package com.example.gab.babylove.entity;
 import java.io.Serializable;
 
 /**
- * Created by 初夏小溪 on 2018/4/19 0019.
+ *
+ * @author 初夏小溪
+ * @date 2018/4/19 0019
+ * 常用网址 实体对象
  */
 
 public class BookmarkBean implements Serializable {

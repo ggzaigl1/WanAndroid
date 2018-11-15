@@ -3,9 +3,11 @@ package com.example.gab.babylove.entity;
 import java.util.List;
 
 /**
- * Created by 初夏小溪 on 2018/10/15 0015.
+ *
+ * @author 初夏小溪
+ * @date 2018/10/15 0015
  * <p>
- * 公众号
+ * 公众号 实体对象
  */
 public class OfficialAccountBean {
 

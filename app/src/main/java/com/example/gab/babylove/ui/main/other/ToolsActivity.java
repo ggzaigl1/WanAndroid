@@ -32,8 +32,10 @@ import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.example.gab.babylove.utils.CustomDialog;
 import com.example.gab.babylove.utils.Util;
+import com.example.gab.babylove.widget.SurfaceActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.statusBarUtils.StatusBar;
+import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.T;
@@ -130,9 +132,9 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                 getVersionUpdate();
                 break;
 //            //搜索
-//            case R.id.Ll_check_test:
-//                JumpUtils.jumpFade(this, SearchArticleActivity.class, null);
-//                break;
+            case R.id.Ll_check_test:
+                JumpUtils.jumpFade(this, SurfaceActivity.class, null);
+                break;
             default:
                 break;
         }

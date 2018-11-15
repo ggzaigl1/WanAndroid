@@ -9,7 +9,9 @@ import com.example.gab.babylove.R;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 
 /**
- * Created by Sai on 15/8/4.
+ *
+ * @author Sai
+ * @date 15/8/4
  * 轮播图 网络图片加载例子
  */
 public class NetworkImageHolderView implements Holder<String> {
