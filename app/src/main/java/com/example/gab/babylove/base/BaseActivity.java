@@ -5,25 +5,44 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.widget.LinearLayout;
 
+import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.ui.main.login.StartUpActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.base.ViewHolder;
+import com.ggz.baselibrary.base.dialog.CommonDialog;
+import com.ggz.baselibrary.base.dialog.DialogConvertListener;
+import com.ggz.baselibrary.base.dialog.NiceDialog;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.KeyBoardUtils;
+import com.ggz.baselibrary.utils.SnackbarUtil;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.permission.PermissionChecker;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.io.ByteArrayOutputStream;
+import java.util.concurrent.TimeUnit;
+
+import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by 初夏小溪 on 2018/10/15 0015.
+ *
+ * @author 初夏小溪
+ * @date 2018/10/15 0015
  */
 public class BaseActivity extends AppCompatActivity implements IBaseActivity {
 
@@ -66,11 +85,11 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
 
     /**
      * 收藏
-     *
+     * @param view
      * @param id
      */
     @SuppressLint("CheckResult")
-    protected void collectArticle(int id) {
+    protected void collectArticle(View view, int id) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
@@ -80,7 +99,9 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
                     @Override
                     protected void onSuccess(Object t) {
                         mKProgressHUD.dismiss();
-                        T.showShort(getString(R.string.collection_success));
+                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
+//                        T.showShort(getString(R.string.collection_success));
                     }
 
                     @Override

@@ -14,7 +14,9 @@ import java.io.File;
 
 /**
  * 界面跳转工具类
- * Created by fangs on 2017/5/9.
+ *
+ * @author fangs
+ * @date 2017/5/9
  */
 public class JumpUtils {
 

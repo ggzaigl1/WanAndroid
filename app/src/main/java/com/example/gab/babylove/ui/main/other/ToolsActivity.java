@@ -16,6 +16,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -23,6 +24,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -71,6 +73,8 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
     TextView mTvCacheSize;
     @BindView(R.id.tv_version)
     TextView mTvVersion;
+    @BindView(R.id.Ll_tools)
+    LinearLayout mLinearLayoutTools;
 
     private NotificationManager mNotificationManager;
     private NotificationCompat.Builder builder;
@@ -133,7 +137,9 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                 break;
 //            //搜索
             case R.id.Ll_check_test:
-                JumpUtils.jumpFade(this, SurfaceActivity.class, null);
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+//                JumpUtils.jumpFade(this, SurfaceActivity.class, null);
                 break;
             default:
                 break;

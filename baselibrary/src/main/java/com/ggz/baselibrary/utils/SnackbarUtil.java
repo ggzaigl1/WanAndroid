@@ -13,7 +13,7 @@ import com.ggz.baselibrary.R;
 
 /**
  * Created by Gab on 2017/12/21 0021.
- * SnackbarUtil 工具类
+ * Snackbar Util 工具类
  */
 
 public class SnackbarUtil {
@@ -116,7 +116,11 @@ public class SnackbarUtil {
         return snackbar;
     }
 
-    //选择预设类型
+    /**
+     * 选择预设类型
+     * @param snackbar
+     * @param type
+     */
     private static void switchType(Snackbar snackbar, int type) {
         switch (type) {
             case INFO:

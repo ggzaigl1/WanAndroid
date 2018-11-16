@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -24,15 +25,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.utils.AndroidShareUtils;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.retrofit.NetCallBack;
+import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.lang.reflect.Method;
 
@@ -300,7 +306,7 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                 break;
             case R.id.web_collection:
                 if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                    collectArticle(mId);
+                    getCollectArticle(mId);
                 } else {
                     JumpUtils.jumpFade(this, LoginActivity.class, null);
                     T.showShort(R.string.collect_login);
@@ -310,6 +316,32 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 收藏
+     *
+     * @param id
+     */
+    @SuppressLint("CheckResult")
+    private void getCollectArticle(int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        RequestUtils.create(ApiService.class)
+                .getCollectArticle(id, "")
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        mKProgressHUD.dismiss();
+                        T.showShort(getString(R.string.collection_success));
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
     }
 
     /**

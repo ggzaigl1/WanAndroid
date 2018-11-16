@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.gab.babylove.MainActivity;
@@ -14,6 +15,7 @@ import com.ggz.baselibrary.base.ViewHolder;
 import com.ggz.baselibrary.base.dialog.CommonDialog;
 import com.ggz.baselibrary.base.dialog.DialogConvertListener;
 import com.ggz.baselibrary.base.dialog.NiceDialog;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.permission.PermissionChecker;
@@ -217,11 +219,10 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
         }
     }
 
-
     /**
      * 是否缺少权限
      */
-    private void isLackPermissions() {
+    protected void isLackPermissions() {
         if (permissionChecker.isLackPermissions(PERMISSIONS)) {
             NiceDialog.init()
                     .setLayoutId(R.layout.dialog_permission)
@@ -243,11 +244,12 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
     /**
      * 检查权限
      */
-    public void onPermission() {
+    protected void onPermission() {
         if (permissionChecker.isLackPermissions(PERMISSIONS)) {
             permissionChecker.requestPermissions();
         }
     }
+
 
     /**
      * 请求权限返回结果
@@ -290,8 +292,8 @@ public class StartUpActivity extends BaseActivity implements IBaseActivity, Cust
                         @Override
                         public void accept(Long aLong) throws Exception {
                             JumpUtils.jumpFade(StartUpActivity.this, MainActivity.class, null);
-                            StartUpActivity.this.finish();
-                            StartUpActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            finish();
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         }
                     });
         }

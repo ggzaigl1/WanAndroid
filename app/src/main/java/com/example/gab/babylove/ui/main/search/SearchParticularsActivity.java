@@ -156,7 +156,7 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(mAdapter.getData().get(position).getId());
+                            collectArticle(view,mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }

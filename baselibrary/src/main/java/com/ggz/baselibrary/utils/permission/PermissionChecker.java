@@ -6,7 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
 /**
- * Created by 初夏小溪 on 2018/3/26 0026.
+ *
+ * @author 初夏小溪
+ * @date 2018/3/26 0026
  */
 
 public class PermissionChecker {

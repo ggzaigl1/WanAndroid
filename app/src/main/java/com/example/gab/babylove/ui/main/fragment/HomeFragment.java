@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
@@ -46,7 +49,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- *
  * @author Gab
  * @date 2017/12/15 0015
  * 主页Fragment
@@ -58,6 +60,8 @@ public class HomeFragment extends BaseFragment {
     ConvenientBanner mConvenientBanner;
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout mCoordinatorLayout;
     @BindView(R.id.appbar_layout)
     AppBarLayout mAppBarLayout;
     @BindView(R.id.recyclerView)
@@ -231,7 +235,8 @@ public class HomeFragment extends BaseFragment {
      * @param id
      */
     @SuppressLint("CheckResult")
-    private void collectArticle(int id) {
+    private void collectArticle(View view, int id) {
+        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
@@ -239,7 +244,9 @@ public class HomeFragment extends BaseFragment {
                 .subscribe(new NetCallBack<Object>() {
                     @Override
                     protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.collection_success));
+                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
+                        mKProgressHUD.dismiss();
                     }
 
                     @Override
@@ -264,7 +271,8 @@ public class HomeFragment extends BaseFragment {
                 .subscribe(new NetCallBack<Object>() {
                     @Override
                     protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.cancel_collection_success));
+//                        T.showShort(getString(R.string.cancel_collection_success));
+                        mKProgressHUD.dismiss();
                     }
 
                     @Override
@@ -298,7 +306,7 @@ public class HomeFragment extends BaseFragment {
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(mAdapter.getData().get(position).getId());
+                            collectArticle(view, mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }
