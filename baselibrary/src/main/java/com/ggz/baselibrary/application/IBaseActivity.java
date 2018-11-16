@@ -7,7 +7,9 @@ import android.view.View;
 /**
  * activity 实现接口 统一规范 <br>
  * 项目自己新建的 activity 建议实现 此 接口 <br>
- * Created by fangs on 2018/3/13.
+ *
+ * @author fangs
+ * @date 2018/3/13
  */
 public interface IBaseActivity extends View.OnClickListener{
 
@@ -25,6 +27,7 @@ public interface IBaseActivity extends View.OnClickListener{
 
     /**
      * 设置当前 activity 状态栏导航栏
+     * @param activity
      */
     void setStatusBar(Activity activity);
 

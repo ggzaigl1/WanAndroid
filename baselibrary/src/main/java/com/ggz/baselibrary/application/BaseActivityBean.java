@@ -9,7 +9,9 @@ import io.reactivex.subjects.BehaviorSubject;
 
 /**
  * 使用 ActivityLifecycleCallbacks 实现给所有 Activity 执行 ButterKnife.bind
- * Created by fangs on 2017/5/18.
+ *
+ * @author fangs
+ * @date 2017/5/18
  */
 public class BaseActivityBean implements Serializable {
 
@@ -25,13 +27,13 @@ public class BaseActivityBean implements Serializable {
 
 
 
-    private BaseOrientoinListener orientoinListener;
+    private BaseOrientationListener orientoinListener;
 
-    public BaseOrientoinListener getOrientoinListener() {
+    public BaseOrientationListener getOrientoinListener() {
         return orientoinListener;
     }
 
-    public void setOrientoinListener(BaseOrientoinListener orientoinListener) {
+    public void setOrientoinListener(BaseOrientationListener orientoinListener) {
         this.orientoinListener = orientoinListener;
     }
 

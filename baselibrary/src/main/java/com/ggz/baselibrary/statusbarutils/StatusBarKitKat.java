@@ -1,4 +1,4 @@
-package com.ggz.baselibrary.statusBarUtils;
+package com.ggz.baselibrary.statusbarutils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -146,6 +146,13 @@ class StatusBarKitKat {
         });
     }
 
+    /**
+     * @param activity
+     * @param appBarLayout
+     * @param collapsingToolbarLayout
+     * @param toolbar
+     * @param statusBarColor
+     */
     static void setStatusBarWhiteForCollapsingToolbar(final Activity activity, AppBarLayout appBarLayout, final CollapsingToolbarLayout collapsingToolbarLayout, Toolbar toolbar, final int statusBarColor) {
         final Window window = activity.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

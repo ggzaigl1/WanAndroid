@@ -10,19 +10,21 @@ import com.ggz.baselibrary.utils.LogUtils;
 
 /**
  * 监听系统 屏幕方向
- * Created by fangs on 2017/11/16.
+ *
+ * @author fangs
+ * @date 2017/11/16
  */
-public class BaseOrientoinListener extends OrientationEventListener {
+public class BaseOrientationListener extends OrientationEventListener {
 
     public static final String TAG = "activity";
     private Activity context;
 
-    public BaseOrientoinListener(Activity context) {
+    public BaseOrientationListener(Activity context) {
         super(context);
         this.context = context;
     }
 
-    public BaseOrientoinListener(Context context, int rate) {
+    public BaseOrientationListener(Context context, int rate) {
         super(context, rate);
     }
 
@@ -30,15 +32,18 @@ public class BaseOrientoinListener extends OrientationEventListener {
     public void onOrientationChanged(int orientation) {
         LogUtils.d(TAG, "orention" + orientation);
         int screenOrientation = context.getResources().getConfiguration().orientation;
-        if (((orientation >= 0) && (orientation < 45)) || (orientation > 315)) {//设置竖屏
+        //设置竖屏
+        if (((orientation >= 0) && (orientation < 45)) || (orientation > 315)) {
             if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT && orientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
                 context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
-        } else if (orientation > 225 && orientation < 315) { //设置横屏
+            //设置横屏
+        } else if (orientation > 225 && orientation < 315) {
             if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
                 context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             }
-        } else if (orientation > 45 && orientation < 135) {// 设置反向横屏
+            // 设置反向横屏
+        } else if (orientation > 45 && orientation < 135) {
             if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
                 context.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
             }

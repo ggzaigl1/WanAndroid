@@ -1,4 +1,4 @@
-package com.ggz.baselibrary.statusBarUtils;
+package com.ggz.baselibrary.statusbarutils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -53,6 +53,7 @@ class StatusBarLollipop {
 
     /**
      * 设置状态栏是否为透明
+     *
      * @param activity
      * @param hideStatusBarBackground
      */
@@ -136,13 +137,15 @@ class StatusBarLollipop {
                 //toolbar被折叠时显示状态栏
                 if (Math.abs(verticalOffset) > collapsingToolbarLayout.getScrimVisibleHeightTrigger()) {
                     if (appBarLayoutState != COLLAPSED) {
-                        appBarLayoutState = COLLAPSED;//修改状态标记为折叠
+                        //修改状态标记为折叠
+                        appBarLayoutState = COLLAPSED;
                         setStatusBarColor(activity, statusColor);
                     }
                 } else {
                     //toolbar显示时同时显示状态栏
                     if (appBarLayoutState != EXPANDED) {
-                        appBarLayoutState = EXPANDED;//修改状态标记为展开
+                        //修改状态标记为展开
+                        appBarLayoutState = EXPANDED;
                         translucentStatusBar(activity, true);
                     }
                 }
@@ -196,8 +199,8 @@ class StatusBarLollipop {
                 //toolbar被折叠时显示状态栏
                 if (Math.abs(verticalOffset) > collapsingToolbarLayout.getScrimVisibleHeightTrigger()) {
                     if (appBarLayoutState != COLLAPSED) {
-                        appBarLayoutState = COLLAPSED;//修改状态标记为折叠
-
+                        //修改状态标记为折叠
+                        appBarLayoutState = COLLAPSED;
                         //先判断是否为小米设备，设置状态栏不成功判断是否为6.0以上设备，不是6.0以上设备再判断是否为魅族设备，不是魅族设备就只设置状态栏颜色
                         if (StatusBar.MIUISetStatusBarLightMode(activity, true)) {
                             return;
@@ -213,8 +216,8 @@ class StatusBarLollipop {
                 } else {
                     //toolbar显示时同时显示状态栏
                     if (appBarLayoutState != EXPANDED) {
-                        appBarLayoutState = EXPANDED;//修改状态标记为展开
-
+                        //修改状态标记为展开
+                        appBarLayoutState = EXPANDED;
                         if (StatusBar.MIUISetStatusBarLightMode(activity, false)) {
                             translucentStatusBar(activity, true);
                             return;

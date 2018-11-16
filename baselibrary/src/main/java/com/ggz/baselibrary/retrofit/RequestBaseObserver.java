@@ -28,7 +28,9 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * 自定义 基础功能 Observer
- * Created by fangs on 2017/8/28.
+ *
+ * @author fangs
+ * @date 2017/8/28
  */
 public abstract class RequestBaseObserver<V> implements Observer<V> {
 
@@ -36,7 +38,8 @@ public abstract class RequestBaseObserver<V> implements Observer<V> {
     private IProgressDialog progressDialog;
     private CommonDialog dialog;
 
-    public RequestBaseObserver() {}
+    public RequestBaseObserver() {
+    }
 
     public RequestBaseObserver(IProgressDialog pDialog) {
         this.progressDialog = pDialog;
@@ -44,11 +47,17 @@ public abstract class RequestBaseObserver<V> implements Observer<V> {
     }
 
     private void init() {
-        if (null == progressDialog) return;
+        if (null == progressDialog) {
+            return;
+        }
         dialog = progressDialog.getDialog();
-        if (null == dialog) return;
+        if (null == dialog) {
+            return;
+        }
         dialog.setDialogList(() -> {
-            if (null != disposed && !disposed.isDisposed()) disposed.dispose();
+            if (null != disposed && !disposed.isDisposed()) {
+                disposed.dispose();
+            }
         });
     }
 
@@ -74,7 +83,6 @@ public abstract class RequestBaseObserver<V> implements Observer<V> {
         L.e("net", "onError()");
 
         dismissProgress();
-
         if (!NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
             actionResponseError("网络不可用，请检查您的网络状态，稍后重试！");
             updataLayout(StatusLayoutManager.LAYOUT_NETWORK_ERROR_ID);
@@ -118,6 +126,7 @@ public abstract class RequestBaseObserver<V> implements Observer<V> {
 
     /**
      * 显示提示信息
+     *
      * @param msg 内容
      */
     protected void actionResponseError(String msg) {
@@ -144,6 +153,7 @@ public abstract class RequestBaseObserver<V> implements Observer<V> {
     /**
      * 更新activity 界面（多状态视图）
      * 可根据flag 判断请求失败
+     *
      * @param flag 请求状态flag
      */
     protected abstract void updataLayout(int flag);

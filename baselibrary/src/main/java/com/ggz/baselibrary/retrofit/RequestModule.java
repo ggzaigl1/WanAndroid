@@ -36,7 +36,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 提供依赖对象的实例
- * Created by fangs on 2017/5/15.
+ *
+ * @author fangs
+ * @date 2017/5/15
  */
 @Module
 public class RequestModule {
@@ -86,7 +88,8 @@ public class RequestModule {
                 .hostnameVerifier(new HostnameVerifier() {
                     @Override
                     public boolean verify(String hostname, SSLSession session) {
-                        return true;//强行返回true 即验证成功
+                        //强行返回true 即验证成功
+                        return true;
                     }
                 }).protocols(Collections.singletonList(Protocol.HTTP_1_1));
         InputStream is = new Buffer().writeUtf8(ConfigUtils.getCer()).inputStream();

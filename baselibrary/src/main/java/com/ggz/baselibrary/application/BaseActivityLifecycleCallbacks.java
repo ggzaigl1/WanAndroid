@@ -9,16 +9,13 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewStub;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ggz.baselibrary.R;
-import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.statuslayout.LoadSirUtil;
 import com.ggz.baselibrary.statuslayout.StatusLayout;
@@ -78,7 +75,7 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
 
 //                注册屏幕旋转监听
         if (ConstantUtils.isOrientation) {
-            BaseOrientoinListener orientoinListener = new BaseOrientoinListener(activity);
+            BaseOrientationListener orientoinListener = new BaseOrientationListener(activity);
             boolean autoRotateOn = (android.provider.Settings.System.getInt(activity.getContentResolver(),
                     Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
 
@@ -203,7 +200,7 @@ public class BaseActivityLifecycleCallbacks implements Application.ActivityLifec
         ActivityManager manager = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.RunningTaskInfo info = manager.getRunningTasks(1).get(0);
 
-        if (info.numRunning == 1 && !info.topActivity.getClassName().equals("com.fy.baselibrary.startactivity.StartActivity")) {
+        if (info.numRunning == 1 && !"com.fy.baselibrary.startactivity.StartActivity".equals(info.topActivity.getClassName())) {
             //被杀死重启
             isRun = true;
             L.e(TAG, activity.getClass().getName() + "关闭此界面");

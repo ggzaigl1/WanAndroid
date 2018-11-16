@@ -15,7 +15,9 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * RxJava + Retrofit 实现缓存机制 (目前仅适用于 不含界面跳转的数据展示，比如加载个人详情界面；见谅 ^_^)
- * Created by fangs on 2017/12/12.
+ *
+ * @author fangs
+ * @date 2017/12/12
  */
 public class RxNetCache {
 
@@ -74,8 +76,10 @@ public class RxNetCache {
 
 
     public static class Builder {
-        String api = "";//缓存key
-        int expireTime = 86400;//默认一天超时时间(单位：秒；-1：表示没有过期时间)
+        //缓存key
+        String api = "";
+        //默认一天超时时间(单位：秒；-1：表示没有过期时间)
+        int expireTime = 86400;
 
         public Builder() {
         }

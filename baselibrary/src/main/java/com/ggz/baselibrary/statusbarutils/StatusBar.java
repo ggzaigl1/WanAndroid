@@ -1,4 +1,4 @@
-package com.ggz.baselibrary.statusBarUtils;
+package com.ggz.baselibrary.statusbarutils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +19,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- * Created by 初夏小溪 on 2018/11/1 0001.
+ * @author 初夏小溪
+ * @date 2018/11/1 0001
  */
 public class StatusBar {
 
@@ -87,10 +88,11 @@ public class StatusBar {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //判断是否为小米或魅族手机，如果是则将状态栏文字改为黑色
             if (MIUISetStatusBarLightMode(activity, true) || FlymeSetStatusBarLightMode(activity, true)) {
-                //设置状态栏为指定颜色
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0
+                //设置状态栏为指定颜色 //5.0
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     activity.getWindow().setStatusBarColor(color);
-                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4
+                    //4.4
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     //调用修改状态栏颜色的方法
                     setStatusBarColor(activity, color);
                 }
@@ -113,6 +115,7 @@ public class StatusBar {
 
     /**
      * BarLightForCollapsingToolbar 高亮
+     *
      * @param activity
      * @param appBarLayout
      * @param collapsingToolbarLayout
@@ -120,11 +123,11 @@ public class StatusBar {
      * @param statusBarColor
      */
     public static void setStatusBarLightForCollapsingToolbar
-            (@NonNull Activity activity
-                    , AppBarLayout appBarLayout
-                    , CollapsingToolbarLayout collapsingToolbarLayout
-                    , Toolbar toolbar
-                    , @ColorInt int statusBarColor) {
+    (@NonNull Activity activity
+            , AppBarLayout appBarLayout
+            , CollapsingToolbarLayout collapsingToolbarLayout
+            , Toolbar toolbar
+            , @ColorInt int statusBarColor) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             StatusBarLollipop.setStatusBarWhiteForCollapsingToolbar(activity, appBarLayout, collapsingToolbarLayout, toolbar, statusBarColor);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

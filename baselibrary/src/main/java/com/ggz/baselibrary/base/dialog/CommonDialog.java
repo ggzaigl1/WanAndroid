@@ -26,13 +26,15 @@ import com.ggz.baselibrary.utils.ScreenUtils;
 
 /**
  * 应用 所有dialog 的父类
- * Created by fangs on 2017/3/13.
+ *
+ * @author fangs
+ * @date 2017/3/13
  */
 public abstract class CommonDialog extends DialogFragment {
     /**
      * 统一 弹窗宽度占屏幕百分比
      */
-    public static final int WidthPercent =85;
+    public static final int WidthPercent = 85;
 
     private static final String WIDTHPERCENT = "widthPercent";
     private static final String WIDTH = "width";
@@ -48,25 +50,41 @@ public abstract class CommonDialog extends DialogFragment {
 
     PopupDismissListner dialogList;
 
-    /** dialog显示位置 */
+    /**
+     * dialog显示位置
+     */
     protected int gravity = Gravity.CENTER;
-    /** dialog进出动画 资源ID */
+    /**
+     * dialog进出动画 资源ID
+     */
     protected int anim = android.R.style.Animation_Translucent;
     @LayoutRes
     protected int layoutId;
 
-    /** 是否拦截返回按钮 */
+    /**
+     * 是否拦截返回按钮
+     */
     protected boolean isKeyBack = false;
-    /** 点击window外的区域 是否消失 */
+    /**
+     * 点击window外的区域 是否消失
+     */
     protected boolean isHide = false;
-    /** 灰度深浅 */
+    /**
+     * 灰度深浅
+     */
     protected float dimAmount = 0.5f;
 
-    /** 宽度 -1(ViewGroup.LayoutParams.MATCH_PARENT)：撑满；-2(ViewGroup.LayoutParams.WRAP_CONTENT)：自适应； 其他固定数值 */
+    /**
+     * 宽度 -1(ViewGroup.LayoutParams.MATCH_PARENT)：撑满；-2(ViewGroup.LayoutParams.WRAP_CONTENT)：自适应； 其他固定数值
+     */
     protected int width = -2;
-    /** 高度 -1：撑满 -2：自适应 其他固定数值 */
+    /**
+     * 高度 -1：撑满 -2：自适应 其他固定数值
+     */
     protected int height = -2;
-    /** 宽度 百分比（如：屏幕宽度 的 50%）*/
+    /**
+     * 宽度 百分比（如：屏幕宽度 的 50%）
+     */
     protected int widthPercent = -1;
 
 
@@ -74,10 +92,14 @@ public abstract class CommonDialog extends DialogFragment {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
-    /** 设置dialog 布局 */
+    /**
+     * 设置dialog 布局
+     */
     protected abstract int initLayoutId();
 
-    /** 渲染数据到View中 */
+    /**
+     * 渲染数据到View中
+     */
     public abstract void convertView(ViewHolder holder, CommonDialog dialog);
 
     @Override
@@ -122,7 +144,9 @@ public abstract class CommonDialog extends DialogFragment {
         super.onStart();
         initParams();
 
-        if (isKeyBack)setOnKeyListener();
+        if (isKeyBack) {
+            setOnKeyListener();
+        }
     }
 
     /**
@@ -134,16 +158,18 @@ public abstract class CommonDialog extends DialogFragment {
             // 使用ViewGroup.LayoutParams，以便Dialog 宽度或高度充满整个屏幕
             WindowManager.LayoutParams params = window.getAttributes();
 
-            if (widthPercent > 0){
+            if (widthPercent > 0) {
                 params.width = ScreenUtils.getScreenWidth(getContext()) * widthPercent / 100;
             } else {
-                params.width = width > 0 ? DensityUtils.dp2px(getContext(),width) : width;
+                params.width = width > 0 ? DensityUtils.dp2px(getContext(), width) : width;
             }
-            params.height = height > 0 ? DensityUtils.dp2px(getContext(),height) : height;
-
-            params.dimAmount = dimAmount;//调节灰色背景透明度[0-1]，默认0.5f
-            window.setGravity(gravity);  //设置dialog显示的位置
-            window.setWindowAnimations(anim);  //添加动画
+            params.height = height > 0 ? DensityUtils.dp2px(getContext(), height) : height;
+            //调节灰色背景透明度[0-1]，默认0.5f
+            params.dimAmount = dimAmount;
+            //设置dialog显示的位置
+            window.setGravity(gravity);
+            //添加动画
+            window.setWindowAnimations(anim);
 
             window.setAttributes(params);
         }
@@ -173,6 +199,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 设置 dialog显示位置
+     *
      * @param gravity
      */
     public CommonDialog setGravity(int gravity) {
@@ -182,6 +209,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 设置 dialog进出动画
+     *
      * @param anim
      */
     public CommonDialog setAnim(int anim) {
@@ -191,6 +219,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 设置 是否拦截返回按钮
+     *
      * @param keyBack
      * @return
      */
@@ -201,6 +230,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 点击window外的区域 是否消失
+     *
      * @param hide
      */
     public CommonDialog setHide(boolean hide) {
@@ -210,6 +240,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 设置 弹窗宽度占屏幕百分比
+     *
      * @param widthPercent
      * @return
      */
@@ -220,6 +251,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 设置 宽度值
+     *
      * @param width
      */
     public CommonDialog setWidthPixels(int width) {
@@ -229,6 +261,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 设置 高度值
+     *
      * @param height
      */
     public CommonDialog setHeightPixels(int height) {
@@ -238,6 +271,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 设置 灰色背景透明度 ([0-1]，默认0.5f)
+     *
      * @param dimAmount
      * @return
      */
@@ -248,6 +282,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 设置 dialog 关闭监听
+     *
      * @param dialogList
      */
     public CommonDialog setDialogList(PopupDismissListner dialogList) {
@@ -257,6 +292,7 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 自定义show
+     *
      * @param manager
      */
     public void show(FragmentManager manager) {
@@ -270,13 +306,18 @@ public abstract class CommonDialog extends DialogFragment {
 
     /**
      * 关闭对话框
+     *
      * @param isDismiss 是否拦截关闭对话框 命令
      */
     public void dismiss(boolean isDismiss) {
-        if (isDismiss) return;
+        if (isDismiss) {
+            return;
+        }
 
         super.dismiss();
-        if (null != dialogList)dialogList.onDismiss();
+        if (null != dialogList) {
+            dialogList.onDismiss();
+        }
     }
 
 

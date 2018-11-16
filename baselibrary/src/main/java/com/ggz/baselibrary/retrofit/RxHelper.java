@@ -23,6 +23,8 @@ import io.reactivex.subjects.BehaviorSubject;
 /**
  * Created by Jam on 16-6-12
  * Description: Rx 一些巧妙的处理
+ *
+ * @author 55204
  */
 public class RxHelper {
     /**
@@ -44,9 +46,10 @@ public class RxHelper {
                             return Observable.error(new ServerException(beanModule.getErrorMsg(), beanModule.getErrorCode()));
                         }
                     }
-                })
-                        .subscribeOn(Schedulers.io())//指定的是上游发送事件的线程
-                        .observeOn(AndroidSchedulers.mainThread());//指定的是下游接收事件的线程
+                })      //指定的是上游发送事件的线程
+                        .subscribeOn(Schedulers.io())
+                        //指定的是下游接收事件的线程
+                        .observeOn(AndroidSchedulers.mainThread());
 //              多次指定上游的线程只有第一次指定的有效, 也就是说多次调用subscribeOn() 只有第一次的有效, 其余的会被忽略.
 //              多次指定下游的线程是可以的, 也就是说每调用一次observeOn() , 下游的线程就会切换一次.
             }
@@ -66,8 +69,11 @@ public class RxHelper {
             public void subscribe(ObservableEmitter<T> subscriber) throws Exception {
                 try {
                     L.e("net", "成功 _ onNext");
-                    if (null == data) subscriber.onNext((T) new Object());
-                    else subscriber.onNext(data);
+                    if (null == data) {
+                        subscriber.onNext((T) new Object());
+                    } else {
+                        subscriber.onNext(data);
+                    }
                     subscriber.onComplete();
                 } catch (Exception e) {
                     L.e("net", "异常 _ onError");

@@ -7,7 +7,9 @@ import com.ggz.baselibrary.base.ViewHolder;
 
 /**
  * 绘制 dialog UI 回调
- * Created by fangs on 2018/3/22.
+ *
+ * @author fangs
+ * @date 2018/3/22
  */
 public abstract class DialogConvertListener implements Parcelable {
 

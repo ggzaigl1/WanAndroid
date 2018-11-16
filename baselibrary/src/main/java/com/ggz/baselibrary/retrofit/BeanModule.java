@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 /**
  * 网络请求 返回数据 格式化对象
- * Created by fangs on 2017/11/6.
+ *
+ * @author fangs
+ * @date 2017/11/6
  */
 public class BeanModule<T> implements Serializable{
 

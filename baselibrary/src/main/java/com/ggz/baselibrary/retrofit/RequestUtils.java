@@ -20,7 +20,9 @@ import retrofit2.Retrofit;
 
 /**
  * 网络请求入口
- * Created by fangs on 2018/3/13.
+ *
+ * @author fangs
+ * @date 2018/3/13
  */
 public class RequestUtils {
 
@@ -63,14 +65,16 @@ public class RequestUtils {
 
     /**
      * 同时从缓存和网络获取请求结果
+     *
      * @param fromNetwork 从网络获取数据的 Observable
-     * @param apiKey key
-     * @param <T> 泛型
+     * @param apiKey      key
+     * @param <T>         泛型
      * @return 被观察者
      */
     public static <T> Observable<T> request(Observable<T> fromNetwork, String apiKey) {
         /** 定义读取缓存数据的 被观察者 */
         Observable<T> fromCache = Observable.create(new ObservableOnSubscribe<T>() {
+            @Override
             public void subscribe(ObservableEmitter<T> subscriber) throws Exception {
                 ACache mCache = ACache.get(ConfigUtils.getAppCtx());
                 T cache = (T) mCache.getAsObject(apiKey);
@@ -92,13 +96,15 @@ public class RequestUtils {
             public void accept(T result) throws Exception {
                 L.e("net doOnNext", result.toString());
                 ACache mCache = ACache.get(ConfigUtils.getAppCtx());
-                mCache.put(apiKey, (Serializable)result);
+                mCache.put(apiKey, (Serializable) result);
             }
         });
         return Observable.concat(fromCache, fromNetwork);
     }
+
     /**
      * 使用RxJava CompositeDisposable 控制请求队列
+     *
      * @param d 切断订阅事件 接口
      */
     public static void addDisposable(Disposable d) {
