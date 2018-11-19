@@ -169,15 +169,9 @@
                 android:label="@string/new_project"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
-        <!-- 公众号 -->
-        <activity
-                android:name=".ui.main.official.OfficialAccountActivity"
-                android:label="@string/official_account"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
         <!-- 公众号详情 -->
         <activity
-                android:name=".ui.main.official.OfficialAccountListActivity"
+                android:name=".ui.offical.activity.OfficialAccountListActivity"
                 android:label="@string/official_account"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:windowSoftInputMode="adjustUnspecified|stateHidden"

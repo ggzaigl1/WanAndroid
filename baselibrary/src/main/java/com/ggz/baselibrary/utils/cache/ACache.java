@@ -3,6 +3,7 @@ package com.ggz.baselibrary.utils.cache;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 
 import com.ggz.baselibrary.utils.FileUtils;
 
@@ -30,6 +31,7 @@ import java.util.Map;
  * Created by 下载 on 2016/6/15.(https://github.com/yangfuhai/ASimpleCache)
  */
 public class ACache {
+
     public static final int TIME_HOUR = 60 * 60;
     public static final int TIME_DAY = TIME_HOUR * 24;
     private static final int MAX_SIZE = 1000 * 1000 * 50; // 50 mb
@@ -38,7 +40,7 @@ public class ACache {
     private ACacheManager mCache;
 
     public static ACache get(Context ctx) {
-        return get(ctx, "WanAndroid");
+        return get(ctx, "ACache");
     }
 
     public static ACache get(Context ctx, String cacheName) {
@@ -50,15 +52,15 @@ public class ACache {
         return get(cacheDir, MAX_SIZE, MAX_COUNT);
     }
 
-    public static ACache get(Context ctx, long max_size, int max_count) {
-        File f = new File(ctx.getExternalCacheDir(), "WanAndroid");
-        return get(f, max_size, max_count);
+    public static ACache get(Context ctx, long max_zise, int max_count) {
+        File f = new File(ctx.getExternalCacheDir(), "MoveNurse");
+        return get(f, max_zise, max_count);
     }
 
-    public static ACache get(File cacheDir, long max_size, int max_count) {
+    public static ACache get(File cacheDir, long max_zise, int max_count) {
         ACache manager = mInstanceMap.get(cacheDir.getAbsoluteFile() + myPid());
         if (manager == null) {
-            manager = new ACache(cacheDir, max_size, max_count);
+            manager = new ACache(cacheDir, max_zise, max_count);
             mInstanceMap.put(cacheDir.getAbsolutePath() + myPid(), manager);
         }
         return manager;
@@ -69,12 +71,11 @@ public class ACache {
     }
 
     private ACache(File cacheDir, long max_size, int max_count) {
-        if (FileUtils.isSDCardEnable()){
-            if (!cacheDir.exists() && !cacheDir.mkdirs()) {
-                throw new RuntimeException("can't make dirs in " + cacheDir.getAbsolutePath());
-            }
-            mCache = new ACacheManager(cacheDir, max_size, max_count);
+        if (!cacheDir.exists() && !cacheDir.mkdirs()) {
+            throw new RuntimeException("can't make dirs in "
+                    + cacheDir.getAbsolutePath());
         }
+        mCache = new ACacheManager(cacheDir, max_size, max_count);
     }
 
     // =======================================
@@ -84,10 +85,8 @@ public class ACache {
     /**
      * 保存 String数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的String数据
+     * @param key   保存的key
+     * @param value 保存的String数据
      */
     public void put(String key, String value) {
         File file = mCache.newFile(key);
@@ -113,12 +112,9 @@ public class ACache {
     /**
      * 保存 String数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的String数据
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的String数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, String value, int saveTime) {
         put(key, Utils.newStringWithDateInfo(saveTime, value));
@@ -139,13 +135,13 @@ public class ACache {
         BufferedReader in = null;
         try {
             in = new BufferedReader(new FileReader(file));
-            StringBuilder readString = new StringBuilder();
+            String readString = "";
             String currentLine;
             while ((currentLine = in.readLine()) != null) {
-                readString.append(currentLine);
+                readString += currentLine;
             }
-            if (!Utils.isDue(readString.toString())) {
-                return Utils.clearDateInfo(readString.toString());
+            if (!Utils.isDue(readString)) {
+                return Utils.clearDateInfo(readString);
             } else {
                 removeFile = true;
                 return null;
@@ -167,6 +163,56 @@ public class ACache {
         }
     }
 
+    /**
+     * 保存 long 数据
+     *
+     * @param key
+     * @param value
+     */
+    public void put(String key, long value) {
+        put(key, value + "");
+    }
+
+    /**
+     * 获取 long 数据
+     *
+     * @param key
+     * @return 不存在则返回 0L
+     */
+    public long getAsLong(String key) {
+        String longstring = getAsString(key);
+        if (!TextUtils.isEmpty(longstring)) {
+            return Long.parseLong(longstring);
+        } else {
+            return 0L;
+        }
+    }
+
+    /**
+     * 保存 long 数据
+     *
+     * @param key
+     * @param value
+     */
+    public void put(String key, int value) {
+        put(key, value + "");
+    }
+
+    /**
+     * 获取 long 数据
+     *
+     * @param key
+     * @return 不存在则返回 0
+     */
+    public int getAsInt(String key) {
+        String intstring = getAsString(key);
+        if (!TextUtils.isEmpty(intstring)) {
+            return Integer.parseInt(intstring);
+        } else {
+            return 0;
+        }
+    }
+
     // =======================================
     // ============= JSONObject 数据 读写 ==============
     // =======================================
@@ -174,10 +220,8 @@ public class ACache {
     /**
      * 保存 JSONObject数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的JSON数据
+     * @param key   保存的key
+     * @param value 保存的JSON数据
      */
     public void put(String key, JSONObject value) {
         put(key, value.toString());
@@ -186,12 +230,9 @@ public class ACache {
     /**
      * 保存 JSONObject数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的JSONObject数据
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的JSONObject数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, JSONObject value, int saveTime) {
         put(key, value.toString(), saveTime);
@@ -221,10 +262,8 @@ public class ACache {
     /**
      * 保存 JSONArray数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的JSONArray数据
+     * @param key   保存的key
+     * @param value 保存的JSONArray数据
      */
     public void put(String key, JSONArray value) {
         put(key, value.toString());
@@ -233,12 +272,9 @@ public class ACache {
     /**
      * 保存 JSONArray数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的JSONArray数据
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的JSONArray数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, JSONArray value, int saveTime) {
         put(key, value.toString(), saveTime);
@@ -246,6 +282,7 @@ public class ACache {
 
     /**
      * 读取JSONArray数据
+     *
      * @param key
      * @return JSONArray数据
      */
@@ -266,8 +303,9 @@ public class ACache {
 
     /**
      * 保存 byte数据 到 缓存中
-     * @param key    保存的key
-     * @param value  保存的数据
+     *
+     * @param key   保存的key
+     * @param value 保存的数据
      */
     public void put(String key, byte[] value) {
         File file = mCache.newFile(key);
@@ -292,6 +330,7 @@ public class ACache {
 
     /**
      * 保存 byte数据 到 缓存中
+     *
      * @param key      保存的key
      * @param value    保存的数据
      * @param saveTime 保存的时间，单位：秒
@@ -302,6 +341,7 @@ public class ACache {
 
     /**
      * 获取 byte 数据
+     *
      * @param key
      * @return byte 数据
      */
@@ -310,9 +350,8 @@ public class ACache {
         boolean removeFile = false;
         try {
             File file = mCache.get(key);
-            if (!file.exists()) {
+            if (!file.exists())
                 return null;
-            }
             RAFile = new RandomAccessFile(file, "r");
             byte[] byteArray = new byte[(int) RAFile.length()];
             RAFile.read(byteArray);
@@ -345,6 +384,7 @@ public class ACache {
 
     /**
      * 保存 Serializable数据 到 缓存中
+     *
      * @param key   保存的key
      * @param value 保存的value
      */
@@ -355,18 +395,18 @@ public class ACache {
     /**
      * 保存 Serializable数据到 缓存中
      *
-     * @param key       保存的key
-     * @param value     保存的value
-     * @param saveTime  保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的value
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, Serializable value, int saveTime) {
-        ByteArrayOutputStream byteArrayOutputStream = null;
+        ByteArrayOutputStream baos = null;
         ObjectOutputStream oos = null;
         try {
-            byteArrayOutputStream = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(byteArrayOutputStream);
+            baos = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(baos);
             oos.writeObject(value);
-            byte[] data = byteArrayOutputStream.toByteArray();
+            byte[] data = baos.toByteArray();
             if (saveTime != -1) {
                 put(key, data, saveTime);
             } else {
@@ -378,24 +418,24 @@ public class ACache {
             try {
                 oos.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
 
     /**
      * 读取 Serializable数据
+     *
      * @param key
      * @return Serializable 数据
      */
     public Object getAsObject(String key) {
         byte[] data = getAsBinary(key);
         if (data != null) {
-            ByteArrayInputStream byteArrayInputStream = null;
+            ByteArrayInputStream bais = null;
             ObjectInputStream ois = null;
             try {
-                byteArrayInputStream = new ByteArrayInputStream(data);
-                ois = new ObjectInputStream(byteArrayInputStream);
+                bais = new ByteArrayInputStream(data);
+                ois = new ObjectInputStream(bais);
                 Object reObject = ois.readObject();
                 return reObject;
             } catch (Exception e) {
@@ -403,14 +443,14 @@ public class ACache {
                 return null;
             } finally {
                 try {
-                    if (byteArrayInputStream != null) {
-                        byteArrayInputStream.close();
+                    if (bais != null) {
+                        bais.close();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 try {
-                    if (ois != null) {
+                    if (ois != null){
                         ois.close();
                     }
                 } catch (IOException e) {
@@ -429,8 +469,8 @@ public class ACache {
     /**
      * 保存 bitmap 到 缓存中
      *
-     * @param key    保存的key
-     * @param value  保存的bitmap数据
+     * @param key   保存的key
+     * @param value 保存的bitmap数据
      */
     public void put(String key, Bitmap value) {
         put(key, Utils.Bitmap2Bytes(value));
@@ -449,6 +489,7 @@ public class ACache {
 
     /**
      * 读取 bitmap 数据
+     *
      * @param key
      * @return bitmap 数据
      */
@@ -465,6 +506,7 @@ public class ACache {
 
     /**
      * 保存 drawable 到 缓存中
+     *
      * @param key   保存的key
      * @param value 保存的drawable数据
      */
@@ -475,9 +517,9 @@ public class ACache {
     /**
      * 保存 drawable 到 缓存中
      *
-     * @param key        保存的key
-     * @param value      保存的 drawable 数据
-     * @param saveTime   保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的 drawable 数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, Drawable value, int saveTime) {
         put(key, Utils.drawable2Bitmap(value), saveTime);
@@ -485,6 +527,7 @@ public class ACache {
 
     /**
      * 读取 Drawable 数据
+     *
      * @param key
      * @return Drawable 数据
      */
@@ -497,19 +540,20 @@ public class ACache {
 
     /**
      * 获取缓存文件
+     *
      * @param key
      * @return value 缓存的文件
      */
     public File file(String key) {
         File f = mCache.newFile(key);
-        if (f.exists()) {
+        if (f.exists())
             return f;
-        }
         return null;
     }
 
     /**
      * 移除某个key
+     *
      * @param key
      * @return 是否移除成功
      */

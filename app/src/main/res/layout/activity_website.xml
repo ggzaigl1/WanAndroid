@@ -15,16 +15,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-        <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginLeft="@dimen/dp_5"
-                android:layout_marginRight="@dimen/dp_5"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorAccent"/>
-
-        <include layout="@layout/item_list_footer"/>
-
     </LinearLayout>
 
 </ScrollView>

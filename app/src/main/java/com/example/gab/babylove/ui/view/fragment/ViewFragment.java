@@ -84,7 +84,7 @@ public class ViewFragment extends BaseFragment {
             ViewBean bean = mAdapter.getData().get(position);
             Bundle bundle = new Bundle();
             bundle.putSerializable("bean", bean);
-            JumpUtils.jumpFade(mContext, SystemActivity.class, bundle);// 详情
+            JumpUtils.jumpFade(mContext, SystemActivity.class, bundle);
         });
         mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);

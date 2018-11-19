@@ -21,6 +21,9 @@ public class FileUtils {
     /** 应用 所有 文件 根目录 */
     public static String SAVE_FOLDER = "HJY";
 
+    /** 文件下载目录 */
+    public static String DOWN = "down";
+
     private FileUtils() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
@@ -266,6 +269,27 @@ public class FileUtils {
         }
 
         return takeImageFilePath;
+    }
+
+
+    /**
+     * 根据 url 在本地生成一个文件
+     *
+     * @param url 下载 url【如：http://img5q.duitang.com/uploads/item/201505/01/20150501113308_QNmsf.jpeg】
+     * @return
+     */
+    public static File createFile(String url) {
+        String fileName;
+
+        if (url.indexOf("?") == -1){
+            fileName = url.substring(url.lastIndexOf("/"));
+        } else {
+            fileName = url.subSequence(url.lastIndexOf("/"), url.indexOf("?")).toString();
+        }
+
+        File file = new File(folderIsExists(DOWN), fileName);
+
+        return FileUtils.fileIsExists(file.getPath());
     }
 
     /**

@@ -1,8 +1,8 @@
-package com.example.gab.babylove.ui.main.official;
+package com.example.gab.babylove.ui.offical;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.OfficialAccountBean;
-import com.example.gab.babylove.ui.main.official.adapter.OfficialAccountAdapter;
-import com.ggz.baselibrary.application.IBaseActivity;
+import com.example.gab.babylove.ui.offical.activity.OfficialAccountListActivity;
+import com.example.gab.babylove.ui.offical.adapter.OfficialAccountAdapter;
+import com.ggz.baselibrary.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -27,12 +27,11 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- *
- * @author 初夏小溪
- * @date 2018/10/15 0015
- * 公众号 作者
+ * Created by 初夏小溪
+ * data :2018/11/19 0019 11:17
+ * @author 55204
  */
-public class OfficialAccountActivity extends BaseActivity implements IBaseActivity {
+public class OfficialAccountFragment extends BaseFragment {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerView;
@@ -41,22 +40,13 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
     OfficialAccountAdapter mAdapter;
 
     @Override
-    public boolean isShowHeadView() {
-        return true;
-    }
-
-    @Override
-    public int setView() {
+    protected int setContentLayout() {
         return R.layout.activity_official_account;
     }
 
     @Override
-    public void setStatusBar(Activity activity) {
-//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
-    }
-
-    @Override
-    public void initData(Activity activity, Bundle savedInstanceState) {
+    protected void baseInit() {
+        super.baseInit();
         initRecyle();
         getChaptersList();
         mRefreshLayout.setEnableLoadMore(false);
@@ -68,11 +58,11 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
      */
     @SuppressLint("CheckResult")
     private void getChaptersList() {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getChapters()
                 .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(this))
+                .compose(RxHelper.bindToLifecycle(getActivity()))
                 .subscribe(new NetCallBack<List<OfficialAccountBean>>() {
                     @Override
                     protected void onSuccess(List<OfficialAccountBean> officialAccountBeans) {
@@ -90,13 +80,13 @@ public class OfficialAccountActivity extends BaseActivity implements IBaseActivi
     }
 
     private void initRecyle() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new OfficialAccountAdapter(new ArrayList<>());
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
             bundle.putInt("id", mAdapter.getData().get(position).getId());
-            JumpUtils.jumpFade(OfficialAccountActivity.this, OfficialAccountListActivity.class, bundle);
+            JumpUtils.jumpFade((AppCompatActivity) getActivity(), OfficialAccountListActivity.class, bundle);
         });
         mRecyclerView.setAdapter(mAdapter);
     }

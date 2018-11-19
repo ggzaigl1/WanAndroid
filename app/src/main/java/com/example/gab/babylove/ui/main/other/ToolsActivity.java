@@ -18,7 +18,6 @@ import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
@@ -35,7 +34,6 @@ import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.example.gab.babylove.utils.CustomDialog;
 import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.IBaseActivity;
-import com.ggz.baselibrary.statusbarutils.StatusBar;
 import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.T;
@@ -100,7 +98,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
     @Override
     public void setStatusBar(Activity activity) {
 //        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
-        StatusBar.setStatusBarColor(activity, ContextCompat.getColor(this, R.color.colorPrimaryDark));
+//        StatusBar.setStatusBarColor(activity, ContextCompat.getColor(this, R.color.colorPrimaryDark));
     }
 
     @SuppressLint("SetTextI18n")
@@ -196,8 +194,8 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
 
     /**
      * 防止Handler泄露 使用静态
-     * Ggz
      */
+
     @SuppressLint("HandlerLeak")
     class MyHandler extends Handler {
         WeakReference<ToolsActivity> mWeakReference;
@@ -407,6 +405,11 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             }
         }
 
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+
         /**
          * 通知管理
          *
@@ -429,21 +432,12 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
         private Notification.Builder getNotificationBuilder() {
             //id随便指定
             NotificationChannel channel = new NotificationChannel("wanAndroid_id", "wanAndroid_name", NotificationManager.IMPORTANCE_LOW);
-//            channel.canBypassDnd();//可否绕过，请勿打扰模式
-//            channel.enableLights(true)// 设置通知出现时的闪灯（如果 android 设备支持的话）
             //锁屏显示通知
             channel.setLockscreenVisibility(VISIBILITY_SECRET);
-//            channel.setLightColor(Color.RED);//指定闪光是的灯光颜色
             channel.canShowBadge();//桌面laucher消息角标
-//            channel.enableVibration(true);//是否允许震动
-//            channel.getAudioAttributes();//获取系统通知响铃声音配置
             channel.getGroup();//获取通知渠道组
-//            channel.setBypassDnd(true);//设置可以绕过，请勿打扰模式
-//                channel.setVibrationPattern(new long[]{100, 100, 200});//震动的模式，震3次，第一次100，第二次100，第三次200毫秒
-//                channel.shouldShowLights();//是否会闪光
             //通知管理者创建的渠道
             getManager().createNotificationChannel(channel);
-
             return new Notification.Builder(ToolsActivity.this).setAutoCancel(true)
                     .setChannelId("wanAndroid_id")
                     .setContentTitle("正在下载新版本，请稍后...")

@@ -2,6 +2,7 @@ package com.example.gab.babylove.ui.project;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.BaseBean;
+import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
@@ -40,6 +42,8 @@ public class SystemStarFragment extends BaseFragment {
 
     @BindView(R.id.rvLayout)
     RecyclerView mRecyclerView;
+    @BindView(R.id.fab_top)
+    FloatingActionButton mFabTop;
 
     public static final String ARG_PARAM1 = "param1";
     public static final String ARG_PARAM2 = "param2";
@@ -68,6 +72,7 @@ public class SystemStarFragment extends BaseFragment {
         assert arguments != null;
         getArticleList(arguments.getInt(ARG_PARAM1));
 
+        mFabTop.setOnClickListener(v -> JumpUtils.jumpFade(mContext, NewProjectActivity.class, null));
     }
 
     /**

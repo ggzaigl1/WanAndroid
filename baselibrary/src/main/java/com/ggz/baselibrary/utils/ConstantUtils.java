@@ -73,6 +73,27 @@ public class ConstantUtils {
      */
     public static final int StickyType = 58;
 
+    /**
+     * 所有下载任务 缓存key
+     */
+    public static final String AllDownTask = "All_Task_DownLoad";
+
+    /**
+     * 一个下载任务 已经下载的进度百分比 数值
+     */
+    public static final String DownPercent = "Task_DownLoad_Percent";
+
+    /**
+     * 一个下载任务 已经下载的总长度
+     */
+    public static final String DownTask = "Task_DownLoad_length";
+
+    /**
+     * 一个线程 下载数据的长度
+     */
+    public static final String DownTherad = "Therad_DownLoad_length";
+
+
     // Activity life Events
     public static final String CREATE = "CREATE";
     public static final String START = "START";

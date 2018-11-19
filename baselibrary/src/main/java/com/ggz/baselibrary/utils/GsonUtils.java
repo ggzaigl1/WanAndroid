@@ -2,10 +2,13 @@ package com.ggz.baselibrary.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,21 +65,6 @@ public class GsonUtils {
         return gson.toJson(params);
     }
 
-
-    /**
-     * 将Json字符串转换成 List集合
-     * @param jsonStr
-     * @param <T>
-     * @return
-     */
-    public static<T> List<T> jsonToList(String jsonStr){
-        Gson gson = new Gson();
-
-        List<T> list = gson.fromJson(jsonStr, new TypeToken<List<T>>(){}.getType());
-
-        return list;
-    }
-
     /**
      * 将 list 转换成json字符串
      * @return
@@ -85,6 +73,23 @@ public class GsonUtils {
         Gson gson = new Gson();
 
         return gson.toJson(data);
+    }
+
+    /**
+     * 将Json字符串转换成 List集合
+     * @param jsonStr
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> jsonToList(String jsonStr, Class<T> clazz) {
+        List<T> lst = new ArrayList<>();
+
+        JsonArray array = new JsonParser().parse(jsonStr).getAsJsonArray();
+        for (final JsonElement elem : array) {
+            lst.add(new Gson().fromJson(elem, clazz));
+        }
+
+        return lst;
     }
 
 }

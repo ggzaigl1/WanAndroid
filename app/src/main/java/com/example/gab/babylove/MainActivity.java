@@ -1,12 +1,10 @@
 package com.example.gab.babylove;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -29,18 +27,18 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.about.AboutActivity;
-import com.example.gab.babylove.ui.main.other.BelleActivity;
-import com.example.gab.babylove.ui.main.collect.MyCollectActivity;
 import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
-import com.example.gab.babylove.ui.main.official.OfficialAccountActivity;
-import com.example.gab.babylove.ui.main.ornamental.OrnamentalListContextActivity;
-import com.example.gab.babylove.ui.main.other.PhotoViewActivity;
-import com.example.gab.babylove.ui.main.search.SearchArticleActivity;
-import com.example.gab.babylove.ui.main.other.ToolsActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
+import com.example.gab.babylove.ui.main.collect.MyCollectActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
+import com.example.gab.babylove.ui.main.ornamental.OrnamentalListContextActivity;
+import com.example.gab.babylove.ui.main.other.BelleActivity;
+import com.example.gab.babylove.ui.main.other.PhotoViewActivity;
+import com.example.gab.babylove.ui.main.other.ToolsActivity;
+import com.example.gab.babylove.ui.main.search.SearchArticleActivity;
 import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
+import com.example.gab.babylove.ui.offical.OfficialAccountFragment;
 import com.example.gab.babylove.ui.project.StarFragment;
 import com.example.gab.babylove.ui.view.fragment.ViewFragment;
 import com.example.gab.babylove.utils.AndroidShareUtils;
@@ -52,8 +50,6 @@ import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -83,11 +79,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private ViewFragment mViewFragment;
     private NavigationViewFragment mNavigationViewFragment;
     private StarFragment mStarFragment;
-
-    //当前的fragment
-    Fragment mFragment;
-
-    //保存点击的时间
+    private OfficialAccountFragment mOfficialAccountFragment;
+    private Fragment mFragment;
     private long exitTime = 0;
 
     public TextView mTvNevHeaderLogin;
@@ -104,8 +97,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         return R.layout.activity_main;
     }
 
-    // TODO: 2018/11/9 0009 刘海屏适配;
-
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         //设置状态栏透明
@@ -118,6 +109,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mViewFragment = new ViewFragment();
         mNavigationViewFragment = new NavigationViewFragment();
         mStarFragment = new StarFragment();
+        mOfficialAccountFragment = new OfficialAccountFragment();
 
         initBottomNavigation();
         switchContent(mHomeFragment);
@@ -182,13 +174,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         //设置导航栏背景模式 setBackgroundStyle（）
         //设置BottomNavigationItem颜色 setActiveColor, setInActiveColor, setBarBackgroundColor
         mBottomNavigation.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
-                .setMode(BottomNavigationBar.MODE_SHIFTING)
+                .setMode(BottomNavigationBar.MODE_FIXED)
                 //设置Item未选中颜色方法
                 .setInActiveColor("#2c2c2c")
                 .addItem(new BottomNavigationItem(R.drawable.vector_home, getString(R.string.nav_home_title)).setActiveColorResource(R.color.pink))
                 .addItem(new BottomNavigationItem(R.drawable.vector_view_headline, getString(R.string.nav_system_title)).setActiveColorResource(R.color.pink))
                 .addItem(new BottomNavigationItem(R.drawable.vector_live_tv, getString(R.string.nav_view_title)).setActiveColorResource(R.color.pink))
                 .addItem(new BottomNavigationItem(R.drawable.vector_find, getString(R.string.nav_project_title)).setActiveColorResource(R.color.pink))
+                .addItem(new BottomNavigationItem(R.drawable.vector_official_account,getString(R.string.official_account)).setActiveColorResource(R.color.pink))
                 .setFirstSelectedPosition(0)
                 .setTabSelectedListener(this)
                 .initialise();
@@ -228,6 +221,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             case 3:
                 switchContent(mStarFragment);
                 break;
+            case 4:
+                switchContent(mOfficialAccountFragment);
+                break;
             default:
                 break;
         }
@@ -266,14 +262,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             case R.id.nav_website:
                 //常用网站
                 JumpUtils.jumpFade(this, WebsiteActivity.class, null);
-                break;
-            case R.id.nav_official_account:
-                //公众号
-                JumpUtils.jumpFade(this, OfficialAccountActivity.class, null);
-                break;
-            case R.id.nav_list_project:
-                //最新项目
-                JumpUtils.jumpFade(this, NewProjectActivity.class, null);
                 break;
             case R.id.nav_collect:
                 //我的收藏
