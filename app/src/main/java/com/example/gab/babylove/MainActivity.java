@@ -37,6 +37,7 @@ import com.example.gab.babylove.ui.main.other.BelleActivity;
 import com.example.gab.babylove.ui.main.other.PhotoViewActivity;
 import com.example.gab.babylove.ui.main.other.ToolsActivity;
 import com.example.gab.babylove.ui.main.search.SearchArticleActivity;
+import com.example.gab.babylove.ui.navigation.fragment.NavigationFragment;
 import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.example.gab.babylove.ui.offical.OfficialAccountFragment;
 import com.example.gab.babylove.ui.project.StarFragment;
@@ -80,6 +81,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private NavigationViewFragment mNavigationViewFragment;
     private StarFragment mStarFragment;
     private OfficialAccountFragment mOfficialAccountFragment;
+    private NavigationFragment mNavigationFragment;
+
+
     private Fragment mFragment;
     private long exitTime = 0;
 
@@ -110,6 +114,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mNavigationViewFragment = new NavigationViewFragment();
         mStarFragment = new StarFragment();
         mOfficialAccountFragment = new OfficialAccountFragment();
+//        mNavigationFragment = new NavigationFragment();
 
         initBottomNavigation();
         switchContent(mHomeFragment);
@@ -181,7 +186,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 .addItem(new BottomNavigationItem(R.drawable.vector_view_headline, getString(R.string.nav_system_title)).setActiveColorResource(R.color.pink))
                 .addItem(new BottomNavigationItem(R.drawable.vector_live_tv, getString(R.string.nav_view_title)).setActiveColorResource(R.color.pink))
                 .addItem(new BottomNavigationItem(R.drawable.vector_find, getString(R.string.nav_project_title)).setActiveColorResource(R.color.pink))
-                .addItem(new BottomNavigationItem(R.drawable.vector_official_account,getString(R.string.official_account)).setActiveColorResource(R.color.pink))
+                .addItem(new BottomNavigationItem(R.drawable.vector_official_account, getString(R.string.official_account)).setActiveColorResource(R.color.pink))
                 .setFirstSelectedPosition(0)
                 .setTabSelectedListener(this)
                 .initialise();
@@ -222,6 +227,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 switchContent(mStarFragment);
                 break;
             case 4:
+//                switchContent(mNavigationFragment);
                 switchContent(mOfficialAccountFragment);
                 break;
             default:
@@ -239,12 +245,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     }
 
-    @OnClick({R.id.iv_head_right})
+    @OnClick({R.id.iv_head_right, R.id.iv_website})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_head_right:
-                JumpUtils.jumpFade(MainActivity.this, SearchArticleActivity.class, null);
+                JumpUtils.jumpFade(this, SearchArticleActivity.class, null);
+                break;
+            case R.id.iv_website:
+                //常用网站
+                JumpUtils.jumpFade(this, WebsiteActivity.class, null);
                 break;
             default:
                 break;
@@ -258,10 +268,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             case R.id.nav_belle:
                 //美图欣赏
                 JumpUtils.jumpFade(this, BelleActivity.class, null);
-                break;
-            case R.id.nav_website:
-                //常用网站
-                JumpUtils.jumpFade(this, WebsiteActivity.class, null);
                 break;
             case R.id.nav_collect:
                 //我的收藏
@@ -307,9 +313,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             case R.id.nav_manage:
 //            工具类
                 JumpUtils.jumpFade(this, ToolsActivity.class, null);
-                break;
-            case R.id.nav_exit:
-                JumpUtils.exitApp(this, MainActivity.class);
                 break;
             default:
                 break;

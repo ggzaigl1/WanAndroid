@@ -133,8 +133,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                 break;
 //            //搜索
             case R.id.Ll_check_test:
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 //                JumpUtils.jumpFade(this, SurfaceActivity.class, null);
                 break;
             default:
@@ -180,13 +179,13 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                     .title(R.string.system_title)
                     .cancelable(false)
                     .content("您没有安装应用宝,是否安装应用宝?")
-                    .negativeText(getString(R.string.ok))
+                    .positiveText(getString(R.string.ok))
                     .onNegative((dialog, which) -> {
                         Uri uri = Uri.parse(DOWNLOAD_URL);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                         dialog.dismiss();
-                    }).positiveText(getString(R.string.cancel))
+                    }).negativeText(getString(R.string.cancel))
                     .onPositive((dialog, which) -> dialog.dismiss()).show();
         }
     }

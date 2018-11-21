@@ -39,7 +39,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *
  * @author 初夏小溪
  * @date 2018/4/18 0018
  * 注册界面
@@ -49,10 +48,8 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
 
     @BindView(R.id.et_username)
     TextInputEditText editRegisterName;
-
     @BindView(R.id.editRegisterPass)
     TextInputEditText editRegisterPass;
-
     @BindView(R.id.fab)
     FloatingActionButton mFloatingActionButton;
     @BindView(R.id.cv_add)
@@ -66,11 +63,6 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
     @Override
     public int setView() {
         return R.layout.activity_register_material;
-    }
-
-    @Override
-    public void setStatusBar(Activity activity) {
-//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
     }
 
     @Override
@@ -199,10 +191,8 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
                     protected void onSuccess(LoginBean login) {
                         ACache mCache = ACache.get(ConfigUtils.getAppCtx());
                         mCache.put(ConstantUtils.userName, login);
-
                         SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
                         SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getUsername());
-
                         Bundle bundle = new Bundle();
                         bundle.putString("LoginBean", mCache.getAsString("User_Name"));
                         JumpUtils.jumpFade(RegisterActivity.this, MainActivity.class, bundle);

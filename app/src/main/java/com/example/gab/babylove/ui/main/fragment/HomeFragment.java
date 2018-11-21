@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.BannerBean;
@@ -107,7 +108,12 @@ public class HomeFragment extends BaseFragment {
      * @param urls
      */
     private void bannerView(List<String> pic, List<String> urls) {
-        mConvenientBanner.setPages(() -> new NetworkImageHolderView(), pic)
+        mConvenientBanner.setPages(new CBViewHolderCreator() {
+            @Override
+            public Object createHolder() {
+                return new NetworkImageHolderView();
+            }
+        }, pic)
                 .startTurning(2000)
                 .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
                 .setPointViewVisible(true)

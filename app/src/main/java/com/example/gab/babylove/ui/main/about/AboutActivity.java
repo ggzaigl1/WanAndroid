@@ -82,11 +82,6 @@ public class AboutActivity extends BaseActivity implements IBaseActivity {
     }
 
     @Override
-    public void setStatusBar(Activity activity) {
-
-    }
-
-    @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();

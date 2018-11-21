@@ -71,13 +71,8 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
     }
 
     @Override
-    public void setStatusBar(Activity activity) {
-//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
-    }
-
-    @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Explode explode = new Explode();
             explode.setDuration(500);
             getWindow().setExitTransition(explode);

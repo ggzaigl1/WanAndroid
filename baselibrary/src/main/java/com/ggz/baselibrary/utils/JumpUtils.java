@@ -213,7 +213,8 @@ public class JumpUtils {
      */
     public static void exitApp(AppCompatActivity act, Class actClass) {
         Intent intent = new Intent(act, actClass);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //注意
+        //注意
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         act.startActivity(intent);
         exitActivity(act);
     }
@@ -222,7 +223,8 @@ public class JumpUtils {
      * 退出程序
      */
     public static void ExitSystem() {
-        android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
+        //获取PID
+        android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(0);
     }
 

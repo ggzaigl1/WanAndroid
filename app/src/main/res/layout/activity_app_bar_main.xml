@@ -28,6 +28,16 @@
             <!--app:subtitle="详情信息"-->
 
             <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@id/iv_head_right"
+                    android:padding="@dimen/dp_10"
+                    android:src="@drawable/vector_website"
+                    />
+
+            <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iv_head_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

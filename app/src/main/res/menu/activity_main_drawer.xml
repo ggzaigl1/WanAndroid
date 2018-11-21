@@ -6,11 +6,6 @@
             android:icon="@drawable/vector_belle"
             android:title="@string/pretty_picture"/>
     <item
-            android:id="@+id/nav_website"
-            android:icon="@drawable/vector_website"
-            android:title="@string/website"/>
-
-    <item
             android:id="@+id/nav_collect"
             android:icon="@drawable/vector_collect"
             android:title="@string/collect"/>
@@ -37,9 +32,5 @@
                 android:id="@+id/nav_about"
                 android:icon="@drawable/vector_about_us"
                 android:title="@string/about_us"/>
-        <item
-                android:id="@+id/nav_exit"
-                android:icon="@drawable/ic_menu_exit"
-                android:title="@string/nav_exit"/>
     </group>
 </menu>

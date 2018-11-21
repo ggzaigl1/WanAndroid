@@ -109,6 +109,8 @@ dependencies {
     api 'com.bigkoo:alertview:1.0.3'
     //加载框
     api 'com.kaopiz:kprogresshud:1.1.0'
-
+    //垂直纵向的TabLayout、轻松创建纵向导航 https://github.com/qstumn/VerticalTabLayout
+    api 'q.rorbin:VerticalTabLayout:1.2.5'
+    api 'com.google.android:flexbox:1.0.0'
 }
 
