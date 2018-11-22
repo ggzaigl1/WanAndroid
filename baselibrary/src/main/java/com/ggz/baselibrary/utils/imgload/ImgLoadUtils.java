@@ -21,7 +21,9 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * 图片加载工具类(目前使用 Glide)
  * <p>
- * Created by fangs on 2017/5/5.
+ *
+ * @author fangs
+ * @date 2017/5/5
  */
 public class ImgLoadUtils {
 
@@ -97,18 +99,6 @@ public class ImgLoadUtils {
         Glide.with(context)
                 .load(url)
                 .preload();
-    }
-
-
-    /**
-     * 加载指定URL的图片 显示加载进度
-     * 原图缓存到磁盘，
-     *
-     * @param context
-     * @param url
-     */
-    public static void loadImage(Context context, String url) {
-
     }
 
     /**

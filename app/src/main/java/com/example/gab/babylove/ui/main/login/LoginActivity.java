@@ -142,8 +142,6 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
                             mCache.put(ConstantUtils.userName, login);
                             SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
                             SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getUsername());
-                            Bundle bundle = new Bundle();
-                            bundle.putString("LoginBean", mCache.getAsString("User_Name"));
                             Explode explode = new Explode();
                             explode.setDuration(500);
                             getWindow().setExitTransition(explode);

@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -277,7 +278,6 @@ public class HomeFragment extends BaseFragment {
                 .subscribe(new NetCallBack<Object>() {
                     @Override
                     protected void onSuccess(Object t) {
-//                        T.showShort(getString(R.string.cancel_collection_success));
                         mKProgressHUD.dismiss();
                     }
 
@@ -298,15 +298,19 @@ public class HomeFragment extends BaseFragment {
             // 详情
             WebViewActivity.startWebActivity(getActivity()
                     , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());
+                    , mAdapter.getData().get(position).getId()
+                    , mAdapter.getData().get(position).isCollect());
             mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
-                    if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        //收藏
+
+                    if (TextUtils.isEmpty(SpfUtils.getSpfSaveStr(ConstantUtils.userName))) {
+                        JumpUtils.jumpFade(mContext, LoginActivity.class, null);
+                        T.showShort(R.string.collect_login);
+                    } else {
                         if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
@@ -316,9 +320,6 @@ public class HomeFragment extends BaseFragment {
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }
-                    } else {
-                        JumpUtils.jumpFade(mContext, LoginActivity.class, null);
-                        T.showShort(R.string.collect_login);
                     }
                     break;
                 default:
@@ -356,6 +357,11 @@ public class HomeFragment extends BaseFragment {
         if (null != bannerView) {
             //开始翻页
             bannerView.startTurning(2000);
+        }
+        if (!mRefreshLayout.isRefreshing()) {
+            getArticleList(0);
+            mRefreshLayout.finishRefresh();
+            mKProgressHUD.dismiss();
         }
     }
 

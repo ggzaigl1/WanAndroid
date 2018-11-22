@@ -2,9 +2,12 @@ package com.example.gab.babylove.ui.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
@@ -100,7 +103,7 @@ public class SystemFlyFragment extends BaseFragment {
      * @param id
      */
     @SuppressLint("CheckResult")
-    private void collectArticle(int id) {
+    private void collectArticle(View view, int id) {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
@@ -109,7 +112,8 @@ public class SystemFlyFragment extends BaseFragment {
                 .subscribe(new NetCallBack<Object>() {
                     @Override
                     protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.collection_success));
+                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
                         mKProgressHUD.dismiss();
                     }
 
@@ -153,26 +157,27 @@ public class SystemFlyFragment extends BaseFragment {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(mContext
                     , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());
+                    , mAdapter.getData().get(position).getId()
+                    ,mAdapter.getData().get(position).isCollect());
             mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
-                    if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                    if (TextUtils.isEmpty(SpfUtils.getSpfSaveStr(ConstantUtils.userName))) {
+                        JumpUtils.jumpFade(mContext, LoginActivity.class, null);
+                        T.showShort(R.string.collect_login);
+                    } else {
                         if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(mAdapter.getData().get(position).getId());
+                            collectArticle(view, mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }
-                    } else {
-                        JumpUtils.jumpFade(mContext, LoginActivity.class, null);
-                        T.showShort(R.string.collect_login);
                     }
                     break;
                 default:

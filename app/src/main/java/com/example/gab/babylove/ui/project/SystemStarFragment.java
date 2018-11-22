@@ -3,9 +3,11 @@ package com.example.gab.babylove.ui.project;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,11 @@ import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 
@@ -42,20 +49,23 @@ public class SystemStarFragment extends BaseFragment {
 
     @BindView(R.id.rvLayout)
     RecyclerView mRecyclerView;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.fab_top)
     FloatingActionButton mFabTop;
 
-    public static final String ARG_PARAM1 = "param1";
+    public static final String ARG_PARAM1 = "id";
     public static final String ARG_PARAM2 = "param2";
     BaseAdapter mAdapter;
-    int mPageNo = 0;
+    int mPageNo = 1;
+    private Bundle mBundle;
 
-    public static SystemStarFragment getInstance(int param1, String param2) {
+    public static SystemStarFragment getInstance(int id, String param2) {
         SystemStarFragment fragment = new SystemStarFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        bundle.putInt(ARG_PARAM1, id);
+        bundle.putString(ARG_PARAM2, param2);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -67,10 +77,12 @@ public class SystemStarFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         super.baseInit();
-        Bundle arguments = getArguments();
         initRecyle();
-        assert arguments != null;
-        getArticleList(arguments.getInt(ARG_PARAM1));
+        initRefresh();
+
+        mBundle = getArguments();
+        assert mBundle != null;
+        getArticleList(mBundle.getInt(ARG_PARAM1));
 
         mFabTop.setOnClickListener(v -> JumpUtils.jumpFade(mContext, NewProjectActivity.class, null));
     }
@@ -90,7 +102,16 @@ public class SystemStarFragment extends BaseFragment {
                     protected void onSuccess(BaseBean baseBean) {
                         if (null != baseBean) {
                             mKProgressHUD.dismiss();
-                            mAdapter.setNewData(baseBean.getDatas());
+                            if (mRefreshLayout.isRefreshing()) {
+                                mAdapter.setNewData(baseBean.getDatas());
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mAdapter.getData().addAll(baseBean.getDatas());
+                                mRefreshLayout.finishLoadMore();
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mAdapter.setNewData(baseBean.getDatas());
+                            }
                         }
                     }
 
@@ -102,12 +123,35 @@ public class SystemStarFragment extends BaseFragment {
     }
 
     /**
+     * 分页加载数据
+     */
+    private void initRefresh() {
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(getActivity()));
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(getActivity()));
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                mPageNo += 1;
+                getArticleList(mBundle.getInt(ARG_PARAM1));
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                mPageNo = 0;
+                getArticleList(mBundle.getInt(ARG_PARAM1));
+            }
+        });
+    }
+
+
+
+    /**
      * 收藏
      *
      * @param id
      */
     @SuppressLint("CheckResult")
-    private void collectArticle(int id) {
+    private void collectArticle(View view, int id) {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
@@ -116,7 +160,8 @@ public class SystemStarFragment extends BaseFragment {
                 .subscribe(new NetCallBack<Object>() {
                     @Override
                     protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.collection_success));
+                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
                         mKProgressHUD.dismiss();
                     }
 
@@ -161,28 +206,46 @@ public class SystemStarFragment extends BaseFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 WebViewActivity.startWebActivity(mContext
                         , mAdapter.getData().get(position).getLink()
-                        , mAdapter.getData().get(position).getId());
+                        , mAdapter.getData().get(position).getId()
+                        , mAdapter.getData().get(position).isCollect());
                 mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
-                    if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+
+                    if (TextUtils.isEmpty(SpfUtils.getSpfSaveStr(ConstantUtils.userName))) {
+                        JumpUtils.jumpFade(mContext, LoginActivity.class, null);
+                        T.showShort(R.string.collect_login);
+                    } else {
                         if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(mAdapter.getData().get(position).getId());
+                            collectArticle(view, mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }
-                    } else {
-                        JumpUtils.jumpFade(mContext, LoginActivity.class, null);
-                        T.showShort(R.string.collect_login);
                     }
+
+                    //Todo 收藏
+//                    if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+//                        if (mAdapter.getData().get(position).isCollect()) {
+//                            unCollectArticle(mAdapter.getData().get(position).getId());
+//                            mAdapter.getData().get(position).setCollect(false);
+//                            mAdapter.notifyItemChanged(position, "");
+//                        } else {
+//                            collectArticle(mAdapter.getData().get(position).getId());
+//                            mAdapter.getData().get(position).setCollect(true);
+//                            mAdapter.notifyItemChanged(position, "");
+//                        }
+//                    } else {
+//                        JumpUtils.jumpFade(mContext, LoginActivity.class, null);
+//                        T.showShort(R.string.collect_login);
+//                    }
                     break;
                 default:
                     break;
@@ -199,4 +262,20 @@ public class SystemStarFragment extends BaseFragment {
         mRecyclerView.setItemAnimator(defaultItemAnimator);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mKProgressHUD.dismiss();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mRefreshLayout.isRefreshing()) {
+            mRefreshLayout.finishRefresh();
+        }
+        if (mRefreshLayout.isLoading()) {
+            mRefreshLayout.finishLoadMore();
+        }
+    }
 }

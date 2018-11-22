@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,8 +64,10 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
     Toolbar toolbar;
     private String mURl;
     private int mId;
+    private boolean misCollect;
     private static final String WEB_URL = "web_url";
     private static final String WEB_ID = "web_id";
+    private static final String IS_COLLECT = "is_collect";
 
     @Override
     public boolean isShowHeadView() {
@@ -101,10 +104,11 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
      * @param context
      * @param url
      */
-    public static void startWebActivity(Context context, String url, int Id) {
+    public static void startWebActivity(Context context, String url, int id, boolean isCollect) {
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra(WEB_URL, url);
-        intent.putExtra(WEB_ID, Id);
+        intent.putExtra(WEB_ID, id);
+        intent.putExtra(IS_COLLECT, isCollect);
         context.startActivity(intent);
     }
 
@@ -113,6 +117,7 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
 //        url = getIntent().getStringExtra("UrlBean");
         mURl = getIntent().getStringExtra(WEB_URL);
         mId = getIntent().getIntExtra(WEB_ID, 0);
+        misCollect = getIntent().getBooleanExtra(IS_COLLECT, misCollect);
         //加快HTML网页加载完成的速度，等页面finish再加载图片
         mWebView.getSettings().setLoadsImagesAutomatically(true);
         //水平不显示
@@ -305,11 +310,11 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                 AndroidShareUtils.shareAllMsg(ConfigUtils.getAppCtx(), "一起玩Android", mURl, AndroidShareUtils.TEXT, null);
                 break;
             case R.id.web_collection:
-                if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                    getCollectArticle(mId);
-                } else {
+                if (TextUtils.isEmpty(SpfUtils.getSpfSaveStr(ConstantUtils.userName))) {
                     JumpUtils.jumpFade(this, LoginActivity.class, null);
                     T.showShort(R.string.collect_login);
+                } else {
+                    getCollectArticle(mId);
                 }
                 break;
             default:
@@ -325,23 +330,27 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
      */
     @SuppressLint("CheckResult")
     private void getCollectArticle(int id) {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .getCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(this))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        mKProgressHUD.dismiss();
-                        T.showShort(getString(R.string.collection_success));
-                    }
+        if (misCollect) {
+            T.showShort("已经收藏");
+        } else {
+            mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+            RequestUtils.create(ApiService.class)
+                    .getCollectArticle(id, "")
+                    .compose(RxHelper.handleResult())
+                    .compose(RxHelper.bindToLifecycle(this))
+                    .subscribe(new NetCallBack<Object>() {
+                        @Override
+                        protected void onSuccess(Object t) {
+                            mKProgressHUD.dismiss();
+                            T.showShort(getString(R.string.collection_success));
+                        }
 
-                    @Override
-                    protected void updataLayout(int flag) {
+                        @Override
+                        protected void updataLayout(int flag) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     /**

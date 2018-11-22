@@ -72,7 +72,8 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());
+                    , mAdapter.getData().get(position).getId()
+                    , mAdapter.getData().get(position).isCollect());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
@@ -104,6 +105,7 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
                     @Override
                     protected void onSuccess(CollectBean collectBean) {
                         if (null != collectBean) {
+                            mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
                                 mAdapter.setNewData(collectBean.getDatas());
                                 mRefreshLayout.finishRefresh();
@@ -114,7 +116,6 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
                             } else {
                                 mAdapter.setNewData(collectBean.getDatas());
                             }
-                            mKProgressHUD.dismiss();
                         }
                     }
 

@@ -6,6 +6,7 @@ import android.util.Log;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * @author 初夏小溪
@@ -34,7 +35,7 @@ public class CleanMessageUtil {
     public static void clearAllCache(Context context) {
         deleteDir(context.getCacheDir());
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            deleteDir(context.getExternalCacheDir());
+            deleteDir(Objects.requireNonNull(context.getExternalCacheDir()));
         }
     }
 

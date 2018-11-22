@@ -8,7 +8,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.bigkoo.alertview.AlertView;
 import com.bumptech.glide.Glide;
@@ -21,7 +20,6 @@ import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.imgload.ImgLoadUtils;
 import com.ggz.baselibrary.utils.media.UpdateMedia;
-import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;

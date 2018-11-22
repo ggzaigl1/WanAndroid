@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -114,16 +115,18 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
-                    // 详情
-                    , mAdapter.getData().get(position).getId());
+                    , mAdapter.getData().get(position).getId()
+            ,mAdapter.getData().get(position).isCollect());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
-                    if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                        //收藏
+                    if (TextUtils.isEmpty(SpfUtils.getSpfSaveStr(ConstantUtils.userName))) {
+                        JumpUtils.jumpFade(this, LoginActivity.class, null);
+                        T.showShort(R.string.collect_login);
+                    } else {
                         if (mAdapter.getData().get(position).isCollect()) {
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
@@ -133,9 +136,6 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }
-                    } else {
-                        JumpUtils.jumpFade(this, LoginActivity.class, null);
-                        T.showShort(R.string.collect_login);
                     }
                     break;
                 default:

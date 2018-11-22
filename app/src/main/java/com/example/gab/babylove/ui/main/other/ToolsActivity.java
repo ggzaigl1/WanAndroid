@@ -34,6 +34,7 @@ import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.example.gab.babylove.utils.CustomDialog;
 import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.IBaseActivity;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.T;
@@ -77,8 +78,6 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
     private Notification.Builder mBuilder;
     private Notification mNotification;
     private File mFile;
-    //应用宝下载地址
-    private static String DOWNLOAD_URL = "http://migmkt.qq.com/g/myapp/yyb-common.html?ADTAG=buy.bd.yyb01";
 
 
     @SuppressLint("HandlerLeak")
@@ -149,26 +148,16 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                 .title(R.string.system_title)
                 .cancelable(false)
                 .content(R.string.tools_clear_cache)
-                .positiveText(R.string.ok).onPositive((dialog, which) -> new Thread(new Runnable() {
-            @Override
-            public void run() {
-                CleanMessageUtil.clearAllCache(ToolsActivity.this.getApplicationContext());
-                mHandler.sendEmptyMessage(0);
-            }
-        }).start()).negativeText(R.string.cancel).onNegative((dialog, which) -> dialog.dismiss()).show();
+                .positiveText(R.string.ok).onPositive((dialog, which) -> new Thread(() -> {
+                    CleanMessageUtil.clearAllCache(ConfigUtils.getAppCtx());
+                    mHandler.sendEmptyMessage(0);
+                }).start()).negativeText(R.string.cancel).onNegative((dialog, which) -> dialog.dismiss()).show();
     }
 
     /**
      * 去评价
      */
     private void getEvaluation() {
-        //        主流应用商店对应的包名如下:
-//        com.qihoo.appstore360手机助手
-//        com.taobao.appcenter淘宝手机助手
-//        com.tencent.android.qqdownloader应用宝
-//        com.hiapk.marketpho 安卓市场
-//        cn.goapk.market 安智市场
-
         //判断应用市场是否存在
         if (Util.isAvilible(this, "com.tencent.android.qqdownloader")) {
             //存在进入应用市场
@@ -181,7 +170,8 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                     .content("您没有安装应用宝,是否安装应用宝?")
                     .positiveText(getString(R.string.ok))
                     .onNegative((dialog, which) -> {
-                        Uri uri = Uri.parse(DOWNLOAD_URL);
+                        //应用宝下载地址
+                        Uri uri = Uri.parse("http://migmkt.qq.com/g/myapp/yyb-common.html?ADTAG=buy.bd.yyb01");
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                         dialog.dismiss();

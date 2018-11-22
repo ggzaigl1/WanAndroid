@@ -193,9 +193,7 @@ public class RegisterActivity extends BaseActivity implements IBaseActivity {
                         mCache.put(ConstantUtils.userName, login);
                         SpfUtils.saveBooleanToSpf(ConstantUtils.isLogin, true);
                         SpfUtils.saveStrToSpf(ConstantUtils.userName, login.getUsername());
-                        Bundle bundle = new Bundle();
-                        bundle.putString("LoginBean", mCache.getAsString("User_Name"));
-                        JumpUtils.jumpFade(RegisterActivity.this, MainActivity.class, bundle);
+                        JumpUtils.jumpFade(RegisterActivity.this, MainActivity.class, null);
                         mKProgressHUD.dismiss();
                         T.showShort("注册账号成功");
                     }

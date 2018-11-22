@@ -47,13 +47,13 @@ public class AnimUtils {
     /**
      * 箭头的动画
      */
-    public static void doArrowAnim(View iv_arrow, boolean isExpand) {
+    public static void doArrowAnim(View ivArrow, boolean isExpand) {
         if (isExpand) {
             // 当前是收起，箭头由上变为下
-            ObjectAnimator.ofFloat(iv_arrow, "rotation", -180, 0).start();
+            ObjectAnimator.ofFloat(ivArrow, "rotation", -180, 0).start();
         } else {
             // 当前是展开，箭头由下变为上
-            ObjectAnimator.ofFloat(iv_arrow, "rotation", 0, 180).start();
+            ObjectAnimator.ofFloat(ivArrow, "rotation", 0, 180).start();
         }
     }
 

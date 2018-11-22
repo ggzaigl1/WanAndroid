@@ -45,11 +45,6 @@ public class AgentWebActivity extends BaseActivity implements IBaseActivity {
     }
 
     @Override
-    public void setStatusBar(Activity activity) {
-//        MdStatusBar.setColorBar(activity, R.color.statusBar, R.color.statusBar);
-    }
-
-    @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         toolbar.setTitle("");
         mLinearLayout = findViewById(R.id.mLinearLayout);

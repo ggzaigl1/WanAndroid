@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.ViewGroup;
@@ -124,26 +125,26 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
-                    , mAdapter.getData().get(position).getId());
+                    , mAdapter.getData().get(position).getId()
+                    , mAdapter.getData().get(position).isCollect());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
-                    if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
+                    if (TextUtils.isEmpty(SpfUtils.getSpfSaveStr(ConstantUtils.userName))) {
+                        JumpUtils.jumpFade(this, LoginActivity.class, null);
+                        T.showShort(R.string.collect_login);
+                    } else {
                         if (mAdapter.getData().get(position).isCollect()) {
-                            //收藏
                             unCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(view,mAdapter.getData().get(position).getId());
+                            collectArticle(view, mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }
-                    } else {
-                        JumpUtils.jumpFade(this, LoginActivity.class, null);
-                        T.showShort(R.string.collect_login);
                     }
                     break;
                 default:

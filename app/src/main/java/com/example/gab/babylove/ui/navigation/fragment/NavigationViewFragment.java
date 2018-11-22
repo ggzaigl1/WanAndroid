@@ -29,7 +29,6 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- *
  * @author Gab
  * @date 2017/12/15 0015
  * 导航数据
@@ -128,7 +127,8 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
     public boolean onTagClick(View view, int position, FlowLayout parent) {
         WebViewActivity.startWebActivity(getActivity()
                 , mArticles.get(position).getLink()
-                , mArticles.get(position).getId());
+                , mArticles.get(position).getId()
+                , mArticles.get(position).isCollect());
         mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         return true;
     }

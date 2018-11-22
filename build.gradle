@@ -36,8 +36,8 @@ ext {
 
             supportLibraryVersion: "27.1.1",
 
-            versionCode          : 35,
-            versionName          : "2.0.7"
+            versionCode          : 36,
+            versionName          : "2.0.8"
             //pad tmd*****
     ]
 
