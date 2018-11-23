@@ -52,8 +52,8 @@ dependencies {
     api 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //    dagger2
-    api 'com.google.dagger:dagger:2.4'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.4'
+    api 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     //    rxjava
     api 'io.reactivex.rxjava2:rxjava:2.1.9'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
@@ -69,16 +69,16 @@ dependencies {
     api 'com.github.bumptech.glide:glide:4.7.1'
     //    AgentWeb
     api 'com.just.agentweb:agentweb:4.0.2'
-    //BRVAH官方使用指南 baseRecyclerViewAdapterHelper
+    //    BRVAH官方使用指南 baseRecyclerViewAdapterHelper
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
-    //下拉刷新上拉加载
-    //SmartRefreshLayout Android智能下拉刷新框架，支持越界回弹，集成了几十种炫酷的Header和 Footer。 RefreshLayout，OverScroll.
-    //https://github.com/scwang90/SmartRefreshLayout
+    //    下拉刷新上拉加载
+    //    SmartRefreshLayout Android智能下拉刷新框架，支持越界回弹，集成了几十种炫酷的Header和 Footer。 RefreshLayout，OverScroll.
+    //    https://github.com/scwang90/SmartRefreshLayout
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'//如果使用了特殊的Header
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
-    //PhotoView
+    //    PhotoView
     api 'com.github.chrisbanes:PhotoView:2.1.3'
-    //AndroidUtilCode
+    //    AndroidUtilCode
 //    compile 'com.blankj:utilcode:1.19.0'
 //    ViewPagerTransforms 切换动画
     api 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
@@ -103,6 +103,7 @@ dependencies {
 //    api 'com.google.android:flexbox:0.3.2'
     //流式布局
     api 'com.hyman:flowlayout-lib:1.1.2'
+    api 'com.google.android:flexbox:1.0.0'
     // 轮播图
     api 'com.bigkoo:convenientbanner:2.0.5'
     // 精仿iOSAlertViewController控件
@@ -111,6 +112,6 @@ dependencies {
     api 'com.kaopiz:kprogresshud:1.1.0'
     //垂直纵向的TabLayout、轻松创建纵向导航 https://github.com/qstumn/VerticalTabLayout
     api 'q.rorbin:VerticalTabLayout:1.2.5'
-    api 'com.google.android:flexbox:1.0.0'
+    api 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 }
 

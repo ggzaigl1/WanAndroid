@@ -12,11 +12,13 @@ import com.example.gab.babylove.ui.view.activity.SystemActivity;
 import com.example.gab.babylove.ui.view.adapter.ViewAdapter;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ViewBean;
-import com.ggz.baselibrary.base.BaseFragment;
+import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.NetworkUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
@@ -60,10 +62,10 @@ public class ViewFragment extends BaseFragment {
                 .compose(RxHelper.bindToLifecycle(getActivity()))
                 .subscribe(new NetCallBack<List<ViewBean>>() {
                     @Override
-                    protected void onSuccess(List<ViewBean> listBeanModule) {
-                        if (null != listBeanModule) {
+                    protected void onSuccess(List<ViewBean> viewBeanList) {
+                        if (null != viewBeanList) {
                             mKProgressHUD.dismiss();
-                            mAdapter.setNewData(listBeanModule);
+                            mAdapter.setNewData(viewBeanList);
                         }
                     }
 
@@ -86,7 +88,17 @@ public class ViewFragment extends BaseFragment {
             bundle.putSerializable("bean", bean);
             JumpUtils.jumpFade(mContext, SystemActivity.class, bundle);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+            initRecyle();
+            getArticleList();
+            mKProgressHUD.dismiss();
+        }
     }
 }

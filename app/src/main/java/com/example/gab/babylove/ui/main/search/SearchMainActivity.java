@@ -154,7 +154,7 @@ public class SearchMainActivity extends BaseActivity implements IBaseActivity {
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
+        mAdapter.setEmptyView(R.layout.activity_null_search, (ViewGroup) mRecyclerView.getParent());
     }
 
     /**

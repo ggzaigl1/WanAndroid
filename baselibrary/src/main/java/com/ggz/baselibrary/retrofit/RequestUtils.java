@@ -26,11 +26,11 @@ import retrofit2.Retrofit;
  */
 public class RequestUtils {
 
-    public volatile static RequestUtils instentce;
+    private volatile static RequestUtils instentce;
 
     @Inject
     Retrofit netRetrofit;
-    protected CompositeDisposable mCompositeDisposable;
+    private CompositeDisposable mCompositeDisposable;
 
     protected RequestUtils() {
         RequestComponent component = DaggerRequestComponent.builder().build();

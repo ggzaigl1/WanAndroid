@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
@@ -154,7 +153,7 @@ public class SearchCommonActivity extends BaseActivity implements IBaseActivity 
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
+        mAdapter.setEmptyView(R.layout.activity_null_search, (ViewGroup) mRecyclerView.getParent());
     }
 
     /**

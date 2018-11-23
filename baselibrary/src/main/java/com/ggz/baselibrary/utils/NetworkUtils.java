@@ -32,6 +32,7 @@ import okhttp3.RequestBody;
  *     time  : 2016/8/2
  *     desc  : 网络相关工具类
  * </pre>
+ * @author 55204
  */
 public class NetworkUtils {
 
@@ -58,11 +59,7 @@ public class NetworkUtils {
      * @param context 上下文
      */
     public static void openWirelessSettings(Context context) {
-        if (android.os.Build.VERSION.SDK_INT > 10) {
-            context.startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
-        } else {
-            context.startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
-        }
+        context.startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
     }
 
     /**
@@ -96,7 +93,7 @@ public class NetworkUtils {
      * @param context 上下文
      * @return {@code true}: 可用<br>{@code false}: 不可用
      */
-    public static boolean isAvailableByPing(Context context) {
+    private static boolean isAvailableByPing(Context context) {
         ShellUtils.CommandResult result = ShellUtils.execCmd("ping -c 1 -w 1 123.125.114.144", false);
         boolean ret = result.result == 0;
         if (result.errorMsg != null) {

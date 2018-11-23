@@ -64,6 +64,21 @@ public class JumpUtils {
     }
 
     /**
+     * 跳转到指定 activity
+     *
+     * @param actClass
+     * @param bundle
+     */
+    public static void jump(AppCompatActivity activity, Class actClass, Bundle bundle) {
+        Intent intent = new Intent(activity, actClass);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+    }
+    /**
      * 跳转到指定 activity 并且带渐变效果
      *
      * @param actClass
@@ -77,7 +92,6 @@ public class JumpUtils {
 
         activity.startActivity(intent);
         activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//        activity.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
     }
 
 

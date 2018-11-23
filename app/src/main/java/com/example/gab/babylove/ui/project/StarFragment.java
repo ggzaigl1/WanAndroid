@@ -10,10 +10,12 @@ import android.support.v4.view.ViewPager;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ProjectBean;
-import com.ggz.baselibrary.base.BaseFragment;
+import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
+import com.ggz.baselibrary.utils.NetworkUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
@@ -83,7 +85,7 @@ public class StarFragment extends BaseFragment {
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {
-        public MyPagerAdapter(FragmentManager fm) {
+        MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -102,5 +104,4 @@ public class StarFragment extends BaseFragment {
             return mFragments.get(position);
         }
     }
-
 }

@@ -20,8 +20,10 @@ import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -116,10 +118,10 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()
                     , mAdapter.getData().get(position).getId()
-            ,mAdapter.getData().get(position).isCollect());
+                    , mAdapter.getData().get(position).isCollect());
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
@@ -142,7 +144,7 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                     break;
             }
         });
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
     }
 

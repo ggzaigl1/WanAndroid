@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
@@ -26,12 +24,14 @@ import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
-import com.ggz.baselibrary.base.BaseFragment;
+import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -208,7 +208,7 @@ public class HomeFragment extends BaseFragment {
                 .subscribe(new NetCallBack<BaseBean>() {
                     @Override
                     protected void onSuccess(BaseBean baseBean) {
-                        if (null != baseBean) {
+                        if (null != baseBean.getDatas() && baseBean.getDatas().size() != 0) {
                             if (mRefreshLayout.isRefreshing()) {
                                 mAdapter.setNewData(baseBean.getDatas());
                                 mRefreshLayout.finishRefresh();
@@ -236,57 +236,6 @@ public class HomeFragment extends BaseFragment {
                 });
     }
 
-    /**
-     * 收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void collectArticle(View view, int id) {
-        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .getCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(getActivity()))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT)
-                                .setAction("Action", null).show();
-                        mKProgressHUD.dismiss();
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
-
-    /**
-     * 取消收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void unCollectArticle(int id) {
-        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .unCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(getActivity()))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        mKProgressHUD.dismiss();
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
 
     /**
      * recycleview 相关设置
@@ -302,7 +251,7 @@ public class HomeFragment extends BaseFragment {
                     , mAdapter.getData().get(position).isCollect());
             mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
@@ -312,11 +261,11 @@ public class HomeFragment extends BaseFragment {
                         T.showShort(R.string.collect_login);
                     } else {
                         if (mAdapter.getData().get(position).isCollect()) {
-                            unCollectArticle(mAdapter.getData().get(position).getId());
+                            getUnCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(view, mAdapter.getData().get(position).getId());
+                            getCollectArticle(view, mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }
@@ -352,18 +301,31 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if (!mRefreshLayout.isRefreshing()) {
+            getArticleList(0);
+            mRefreshLayout.finishRefresh();
+            mKProgressHUD.dismiss();
+        }
+
+        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+            initRecyle();
+            getData();
+            getArticleList(0);
+            mKProgressHUD.dismiss();
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         if (null != bannerView) {
             //开始翻页
             bannerView.startTurning(2000);
         }
-        if (!mRefreshLayout.isRefreshing()) {
-            getArticleList(0);
-            mRefreshLayout.finishRefresh();
-            mKProgressHUD.dismiss();
-        }
     }
+
 
     @Override
     public void onPause() {

@@ -13,11 +13,13 @@ import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.OfficialAccountBean;
 import com.example.gab.babylove.ui.offical.activity.OfficialAccountListActivity;
 import com.example.gab.babylove.ui.offical.adapter.OfficialAccountAdapter;
-import com.ggz.baselibrary.base.BaseFragment;
+import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.NetworkUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -29,6 +31,7 @@ import butterknife.BindView;
 /**
  * Created by 初夏小溪
  * data :2018/11/19 0019 11:17
+ *
  * @author 55204
  */
 public class OfficialAccountFragment extends BaseFragment {
@@ -87,7 +90,17 @@ public class OfficialAccountFragment extends BaseFragment {
             bundle.putInt("id", mAdapter.getData().get(position).getId());
             JumpUtils.jumpFade((AppCompatActivity) getActivity(), OfficialAccountListActivity.class, bundle);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+            initRecyle();
+            getChaptersList();
+            mKProgressHUD.dismiss();
+        }
     }
 }

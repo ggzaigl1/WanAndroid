@@ -2,12 +2,10 @@ package com.example.gab.babylove.ui.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
@@ -16,7 +14,7 @@ import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
-import com.ggz.baselibrary.base.BaseFragment;
+import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -97,59 +95,6 @@ public class SystemFlyFragment extends BaseFragment {
                 });
     }
 
-    /**
-     * 收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void collectArticle(View view, int id) {
-        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .getCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(getActivity()))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT)
-                                .setAction("Action", null).show();
-                        mKProgressHUD.dismiss();
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
-
-    /**
-     * 取消收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void unCollectArticle(int id) {
-        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .unCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(getActivity()))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.cancel_collection_success));
-                        mKProgressHUD.dismiss();
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
-
 
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -161,7 +106,7 @@ public class SystemFlyFragment extends BaseFragment {
                     ,mAdapter.getData().get(position).isCollect());
             mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
@@ -170,11 +115,11 @@ public class SystemFlyFragment extends BaseFragment {
                         T.showShort(R.string.collect_login);
                     } else {
                         if (mAdapter.getData().get(position).isCollect()) {
-                            unCollectArticle(mAdapter.getData().get(position).getId());
+                            getUnCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(view, mAdapter.getData().get(position).getId());
+                           getCollectArticle(view, mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }

@@ -121,7 +121,7 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BaseAdapter(new ArrayList<>());
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this
                     , mAdapter.getData().get(position).getLink()

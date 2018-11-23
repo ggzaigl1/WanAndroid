@@ -3,16 +3,13 @@ package com.example.gab.babylove.ui.project;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.BaseBean;
@@ -20,12 +17,14 @@ import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
-import com.ggz.baselibrary.base.BaseFragment;
+import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -84,7 +83,7 @@ public class SystemStarFragment extends BaseFragment {
         assert mBundle != null;
         getArticleList(mBundle.getInt(ARG_PARAM1));
 
-        mFabTop.setOnClickListener(v -> JumpUtils.jumpFade(mContext, NewProjectActivity.class, null));
+        mFabTop.setOnClickListener(v -> JumpUtils.jump(mContext, NewProjectActivity.class, null));
     }
 
     /**
@@ -143,75 +142,16 @@ public class SystemStarFragment extends BaseFragment {
         });
     }
 
-
-
-    /**
-     * 收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void collectArticle(View view, int id) {
-        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .getCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(getActivity()))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT)
-                                .setAction("Action", null).show();
-                        mKProgressHUD.dismiss();
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
-
-    /**
-     * 取消收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void unCollectArticle(int id) {
-        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
-                .unCollectArticle(id, "")
-                .compose(RxHelper.handleResult())
-                .compose(RxHelper.bindToLifecycle(getActivity()))
-                .subscribe(new NetCallBack<Object>() {
-                    @Override
-                    protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.cancel_collection_success));
-                        mKProgressHUD.dismiss();
-                    }
-
-                    @Override
-                    protected void updataLayout(int flag) {
-
-                    }
-                });
-    }
-
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new BaseAdapter(new ArrayList<>());
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                WebViewActivity.startWebActivity(mContext
-                        , mAdapter.getData().get(position).getLink()
-                        , mAdapter.getData().get(position).getId()
-                        , mAdapter.getData().get(position).isCollect());
-                mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            }
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            WebViewActivity.startWebActivity(mContext
+                    , mAdapter.getData().get(position).getLink()
+                    , mAdapter.getData().get(position).getId()
+                    , mAdapter.getData().get(position).isCollect());
+            mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
@@ -221,11 +161,11 @@ public class SystemStarFragment extends BaseFragment {
                         T.showShort(R.string.collect_login);
                     } else {
                         if (mAdapter.getData().get(position).isCollect()) {
-                            unCollectArticle(mAdapter.getData().get(position).getId());
+                            getUnCollectArticle(mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {
-                            collectArticle(view, mAdapter.getData().get(position).getId());
+                            getCollectArticle(view, mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }
@@ -252,14 +192,7 @@ public class SystemStarFragment extends BaseFragment {
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-
-        /**
-         * 既然是动画，就会有时间，我们把动画执行时间变大一点来看一看效果
-         */
-        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
-        defaultItemAnimator.setAddDuration(1000);
-        defaultItemAnimator.setRemoveDuration(1000);
-        mRecyclerView.setItemAnimator(defaultItemAnimator);
+        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
     }
 
     @Override
@@ -277,5 +210,10 @@ public class SystemStarFragment extends BaseFragment {
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
         }
+//        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+//            initRecyle();
+//            getArticleList(mBundle.getInt(ARG_PARAM1));
+//            mKProgressHUD.dismiss();
+//        }
     }
 }

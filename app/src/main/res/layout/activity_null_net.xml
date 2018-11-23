@@ -10,4 +10,5 @@
           android:paddingStart="@dimen/dp_10"
           android:paddingEnd="@dimen/dp_10"
           android:text="@string/item_footer"
+          android:textSize="18sp"
           android:textColor="@color/black"/>

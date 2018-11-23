@@ -87,7 +87,7 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
                     break;
             }
         });
-        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.item_list_footer, (ViewGroup) mRecyclerView.getParent(), false));
+        mAdapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
     }
 

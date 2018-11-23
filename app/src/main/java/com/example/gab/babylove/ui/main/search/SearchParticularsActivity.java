@@ -172,7 +172,7 @@ public class SearchParticularsActivity extends BaseActivity implements IBaseActi
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setEmptyView(R.layout.activity_null, (ViewGroup) mRecyclerView.getParent());
+        mAdapter.setEmptyView(R.layout.activity_null_search, (ViewGroup) mRecyclerView.getParent());
     }
 
     @OnClick({R.id.tv_search})

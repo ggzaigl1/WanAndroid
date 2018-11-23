@@ -13,10 +13,12 @@ import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.ui.navigation.adapter.NavigationLifeAdapter;
 import com.example.gab.babylove.ui.navigation.adapter.NavigationRightAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
-import com.ggz.baselibrary.base.BaseFragment;
+import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
+import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -145,6 +147,21 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
         });
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+            initRecyclerLife();
+            getNavigationList();
+            mKProgressHUD.dismiss();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
 
     private void initRecyclerRight() {
 //        mRecyclerViewRight.scrollToPosition(0);
