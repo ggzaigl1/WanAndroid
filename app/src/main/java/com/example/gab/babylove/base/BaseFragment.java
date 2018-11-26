@@ -152,13 +152,21 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                 });
     }
 
-    @Override//当Activity中的onCreate方法执行完后调用
+    /**
+     * //当Activity中的onCreate方法执行完后调用
+     * @param savedInstanceState
+     */
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         LogUtils.e(TAG, "onActivityCreated()");
     }
 
-    @Override//Fragment和Activity建立关联的时候调用
+    /**
+     * //Fragment和Activity建立关联的时候调用
+     * @param context
+     */
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         LogUtils.e(TAG, "onAttach()");
@@ -199,7 +207,10 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         LogUtils.e(TAG, "onStop()");
     }
 
-    @Override//Fragment中的布局被移除时调用
+    /**
+     * //Fragment中的布局被移除时调用
+     */
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         LogUtils.e(TAG, "onDestroyView()");

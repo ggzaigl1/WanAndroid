@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -53,8 +54,15 @@ import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 主方法
@@ -104,6 +112,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+
+        Handler handler = new Handler();
+        handler.postDelayed(this::getVersionUpdate, 1500);
+
         //设置状态栏透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
@@ -163,6 +175,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             }
         });
     }
+
 
     @Override
     protected void onResume() {
