@@ -108,13 +108,13 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
     /**
      * 初始化
      */
-    private void initDta(){
+    private void initVersionUpdate(){
         mNotificationManager = (NotificationManager) getSystemService(Activity.NOTIFICATION_SERVICE);
         mFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "WanAndroid.apk");
     }
 
     protected void getVersionUpdate() {
-        initDta();
+        initVersionUpdate();
         new PgyUpdateManager.Builder()
                 //设置是否强制更新,非自定义回调更新接口此方法有用
                 .setForced(true)
@@ -128,7 +128,6 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
                         //没有更新是回调此方法
                         Log.d("wanAndroid", "没有新的版本");
                         T.showShort("已经是最新版本");
-//                        mKProgressHUD.dismiss();
                     }
 
                     @Override
@@ -152,16 +151,13 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
                             mTvVersionUpdateContent.setText(appBean.getReleaseNote());
                         }
 
-                        mBtSure.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (NetworkUtils.is4G(ConfigUtils.getAppCtx())) {
-                                    T.showShort("移动网络数据下载");
-                                }
-                                new BaseActivity.MyDownloadAsync().execute(appBean.getDownloadURL());
-                                L.d("wanAndroid", appBean.getDownloadURL());
-                                dialog.dismiss();
+                        mBtSure.setOnClickListener(view -> {
+                            if (NetworkUtils.is4G(ConfigUtils.getAppCtx())) {
+                                T.showShort("移动网络数据下载");
                             }
+                            new MyDownloadAsync().execute(appBean.getDownloadURL());
+                            L.d("wanAndroid", appBean.getDownloadURL());
+                            dialog.dismiss();
                         });
                         mBtCancel.setOnClickListener(v -> dialog.dismiss());
                     }

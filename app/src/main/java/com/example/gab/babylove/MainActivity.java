@@ -28,7 +28,6 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.about.AboutActivity;
-import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
 import com.example.gab.babylove.ui.main.collect.MyCollectActivity;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
@@ -48,21 +47,13 @@ import com.example.gab.babylove.utils.NightModeConfig;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
-import com.ggz.baselibrary.utils.LogUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * 主方法
@@ -92,13 +83,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private OfficialAccountFragment mOfficialAccountFragment;
     private NavigationFragment mNavigationFragment;
 
-
     private Fragment mFragment;
     private long exitTime = 0;
-
     public TextView mTvNevHeaderLogin;
     public TextView mTvNevHeaderTitle;
-
 
     @Override
     public boolean isShowHeadView() {
@@ -334,7 +322,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //        mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
