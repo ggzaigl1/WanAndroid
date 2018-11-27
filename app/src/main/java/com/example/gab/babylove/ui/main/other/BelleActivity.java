@@ -11,6 +11,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.animation.Interpolator;
 
@@ -97,10 +98,14 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                                 mAdapter.getData().addAll(ganBean.getResults());
                                 mRefreshLayout.finishLoadMore();
                                 mAdapter.notifyDataSetChanged();
-                                T.showShort("又加载了" + ganBean.getResults().size() + "位妹子");
+                                if (ganBean.getResults().size() == 0) {
+                                    T.showShort("来啦,老弟,注意身体~");
+                                } else {
+                                    T.showShort("又插入了" + ganBean.getResults().size() + "位小姐姐");
+                                }
                             } else {
                                 mAdapter.setNewData(ganBean.getResults());
-                                T.showShort("加载了" + ganBean.getResults().size() + "妹子");
+                                T.showShort("来了" + ganBean.getResults().size() + "位小姐姐");
                             }
                         }
                     }
@@ -138,24 +143,22 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
     private void initRv() {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new PicturesAdapter(R.layout.item_gank_list_context, new ArrayList<>());
+        mAdapter = new PicturesAdapter(new ArrayList<>());
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @SuppressLint("RestrictedApi")
             @Override
+            //监听滑动停止改变状态
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            //监听滑动时候
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findFirstVisibleItemPosition() != 0) {
-                    /* 悬浮按钮显示动画 */
-                    if (mFabTop.getVisibility() == View.GONE) {
-                        mFabTop.setVisibility(View.VISIBLE);
-                        ViewCompat.animate(mFabTop)
-                                .scaleX(1.0F)
-                                .scaleY(1.0F)
-                                .alpha(1.0F)
-                                .setInterpolator(INTERPOLATOR).withLayer()
-                                .setListener(null).start();
-                    }
+                    fabInAnim();
                 } else {
                     fabOutAnim();
                 }
@@ -184,32 +187,32 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
     }
 
     /**
+     * 悬浮按钮显示动画
+     */
+    private void fabInAnim() {
+        if (mFabTop.getVisibility() == View.GONE) {
+            mFabTop.setVisibility(View.VISIBLE);
+            ViewCompat.animate(mFabTop)
+                    .scaleX(1.0F)
+                    .scaleY(1.0F)
+                    .alpha(1.0F)
+                    .setInterpolator(INTERPOLATOR).withLayer()
+                    .setListener(null).start();
+        }
+    }
+
+    /**
      * 悬浮图标隐藏动画
      */
     private void fabOutAnim() {
         if (mFabTop.getVisibility() == View.VISIBLE) {
+            mFabTop.setVisibility(View.GONE);
             ViewCompat.animate(mFabTop)
                     .scaleX(0.0F)
                     .scaleY(0.0F)
                     .alpha(0.0F)
                     .setInterpolator(INTERPOLATOR).withLayer()
-                    .setListener(new ViewPropertyAnimatorListener() {
-                        @Override
-                        public void onAnimationStart(View view) {
-
-                        }
-
-                        @SuppressLint("RestrictedApi")
-                        @Override
-                        public void onAnimationEnd(View view) {
-                            mFabTop.setVisibility(View.GONE);
-                        }
-
-                        @Override
-                        public void onAnimationCancel(View view) {
-
-                        }
-                    }).start();
+                    .setListener(null).start();
         }
     }
 

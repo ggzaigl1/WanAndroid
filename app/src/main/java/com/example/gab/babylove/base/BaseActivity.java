@@ -108,12 +108,12 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
     /**
      * 初始化
      */
-    private void initVersionUpdate(){
+    private void initVersionUpdate() {
         mNotificationManager = (NotificationManager) getSystemService(Activity.NOTIFICATION_SERVICE);
         mFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "WanAndroid.apk");
     }
 
-    protected void getVersionUpdate() {
+    protected void getVersionUpdate(int type) {
         initVersionUpdate();
         new PgyUpdateManager.Builder()
                 //设置是否强制更新,非自定义回调更新接口此方法有用
@@ -127,7 +127,9 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
                     public void onNoUpdateAvailable() {
                         //没有更新是回调此方法
                         Log.d("wanAndroid", "没有新的版本");
-                        T.showShort("已经是最新版本");
+                        if (type == 1) {
+                            T.showShort("已经是最新版本");
+                        }
                     }
 
                     @Override

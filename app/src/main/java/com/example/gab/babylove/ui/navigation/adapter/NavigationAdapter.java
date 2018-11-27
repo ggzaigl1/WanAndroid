@@ -2,17 +2,14 @@ package com.example.gab.babylove.ui.navigation.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.entity.NavigationBean;
-import com.ggz.baselibrary.utils.ResourceUtils;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
-import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.List;
 

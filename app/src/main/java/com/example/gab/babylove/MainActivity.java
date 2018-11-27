@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public void initData(Activity activity, Bundle savedInstanceState) {
 
         Handler handler = new Handler();
-        handler.postDelayed(this::getVersionUpdate, 1500);
+        handler.postDelayed(() -> getVersionUpdate(-1), 1500);
 
         //设置状态栏透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);

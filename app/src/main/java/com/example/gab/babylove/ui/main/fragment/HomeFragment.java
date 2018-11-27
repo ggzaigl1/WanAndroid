@@ -14,18 +14,18 @@ import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.adapter.CBPageAdapter;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
-import com.example.gab.babylove.ui.main.other.ToolsActivity;
 import com.example.gab.babylove.view.NetworkImageHolderView;
 import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
-import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -71,6 +71,7 @@ public class HomeFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     public SmartRefreshLayout mRefreshLayout;
+
     ConvenientBanner<BannerBean> bannerView;
     BaseAdapter mAdapter;
     int mPageNo = 0;

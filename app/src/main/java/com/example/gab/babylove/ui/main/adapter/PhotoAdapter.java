@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -51,6 +52,10 @@ public class PhotoAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         String url = imageUrls.getData().get(position).getUrl();
         PhotoView photoView = new PhotoView(activity);
+        if (TextUtils.isEmpty(url)){
+            ImgLoadUtils.loadImage(activity, url, photoView);
+            T.showShort("小姐姐迷失了方向");
+        }
         ImgLoadUtils.loadImage(activity, url, photoView);
         container.addView(photoView);
         //点击图片关闭

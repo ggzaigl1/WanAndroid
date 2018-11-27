@@ -1,22 +1,10 @@
 package com.example.gab.babylove.utils;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
-
-import com.example.gab.babylove.R;
-import com.ggz.baselibrary.utils.T;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * @author 初夏小溪

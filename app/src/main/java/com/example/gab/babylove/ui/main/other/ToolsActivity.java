@@ -87,7 +87,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
 //            //SelectorButton
             //版本更新
             case R.id.Ll_check_update:
-                getVersionUpdate();
+                getVersionUpdate(1);
                 break;
 //            //搜索
             case R.id.Ll_check_test:
