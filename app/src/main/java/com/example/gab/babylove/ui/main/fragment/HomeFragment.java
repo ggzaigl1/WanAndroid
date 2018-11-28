@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
@@ -76,11 +77,13 @@ public class HomeFragment extends BaseFragment {
     BaseAdapter mAdapter;
     int mPageNo = 0;
 
+    @Override
+    protected boolean isLazyLoad() {
+        return false;
+    }
 
     @Override
-    protected void baseInit() {
-        super.baseInit();
-        getData();
+    protected void initView(View view) {
         initRecyle();
         initRefresh();
 
@@ -101,6 +104,11 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected int setContentLayout() {
         return R.layout.fragment_home;
+    }
+
+    @Override
+    protected void initData() {
+        getData();
     }
 
 

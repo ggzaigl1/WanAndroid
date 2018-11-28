@@ -51,19 +51,28 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
     private List<NavigationBean.ArticlesBean> mArticles;
 
     @Override
+    protected boolean isLazyLoad() {
+        return false;
+    }
+
+    @Override
+    protected void initView(View view) {
+        initRecyclerLife();
+        mTagFlowLayout.setOnTagClickListener(this);
+//        initRecyclerRight();
+//        initHotKeyData();
+    }
+
+    @Override
     protected int setContentLayout() {
         return R.layout.fragment_navigation;
     }
 
     @Override
-    protected void baseInit() {
-        super.baseInit();
-        initRecyclerLife();
-//        initRecyclerRight();
+    protected void initData() {
         getNavigationList();
-//        initHotKeyData();
-        mTagFlowLayout.setOnTagClickListener(this);
     }
+
 
     /**
      * 列表数据加载

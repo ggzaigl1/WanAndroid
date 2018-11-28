@@ -45,14 +45,22 @@ public class NavigationFragment extends BaseFragment {
     private boolean isClickTab;
 
     @Override
+    protected boolean isLazyLoad() {
+        return false;
+    }
+
+    @Override
+    protected void initView(View view) {
+        initRecyclerRight();
+    }
+
+    @Override
     protected int setContentLayout() {
         return R.layout.fragment_navigation_view;
     }
 
     @Override
-    protected void baseInit() {
-        super.baseInit();
-        initRecyclerRight();
+    protected void initData() {
         getNavigationList();
     }
 

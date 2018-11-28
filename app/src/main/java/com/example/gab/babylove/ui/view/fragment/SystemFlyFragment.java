@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
@@ -23,6 +24,11 @@ import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 
@@ -42,8 +48,10 @@ public class SystemFlyFragment extends BaseFragment {
 
     @BindView(R.id.rvLayout)
     RecyclerView mRecyclerView;
-
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout mRefreshLayout;
     BaseAdapter mAdapter;
+    private int mId;
 
     public static SystemFlyFragment getInstance(int param1, String param2) {
         SystemFlyFragment fragment = new SystemFlyFragment();
@@ -55,18 +63,27 @@ public class SystemFlyFragment extends BaseFragment {
     }
 
     @Override
+    protected boolean isLazyLoad() {
+        return false;
+    }
+
+    @Override
+    protected void initView(View view) {
+        initRecyle();
+        mRefreshLayout.autoRefresh();
+    }
+
+    @Override
     protected int setContentLayout() {
         return R.layout.fragment_system_fly;
     }
 
     @Override
-    protected void baseInit() {
-        super.baseInit();
+    protected void initData() {
         Bundle arguments = getArguments();
-        int id = arguments.getInt(ARG_PARAM1);
-        initRecyle();
-        getArticleList(id);
-
+        assert arguments != null;
+        mId = arguments.getInt(ARG_PARAM1);
+        initRefresh();
     }
 
     /**
@@ -74,7 +91,6 @@ public class SystemFlyFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int id) {
-        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getArticleList(mPageNo, id)
                 .compose(RxHelper.handleResult())
@@ -83,8 +99,16 @@ public class SystemFlyFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(BaseBean baseBean) {
                         if (null != baseBean) {
-                            mKProgressHUD.dismiss();
-                            mAdapter.setNewData(baseBean.getDatas());
+                            if (mRefreshLayout.isRefreshing()) {
+                                mAdapter.setNewData(baseBean.getDatas());
+                                mRefreshLayout.finishRefresh();
+                            } else if (mRefreshLayout.isLoading()) {
+                                mAdapter.getData().addAll(baseBean.getDatas());
+                                mRefreshLayout.finishLoadMore();
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mAdapter.setNewData(baseBean.getDatas());
+                            }
                         }
                     }
 
@@ -95,6 +119,26 @@ public class SystemFlyFragment extends BaseFragment {
                 });
     }
 
+    /**
+     * 分页加载数据
+     */
+    private void initRefresh() {
+        mRefreshLayout.setRefreshHeader(new ClassicsHeader(getActivity()));
+        mRefreshLayout.setRefreshFooter(new ClassicsFooter(getActivity()));
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                mPageNo += 1;
+                getArticleList(mId);
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                mPageNo = 0;
+                getArticleList(mId);
+            }
+        });
+    }
 
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -103,10 +147,9 @@ public class SystemFlyFragment extends BaseFragment {
             WebViewActivity.startWebActivity(mContext
                     , mAdapter.getData().get(position).getLink()
                     , mAdapter.getData().get(position).getId()
-                    ,mAdapter.getData().get(position).isCollect());
+                    , mAdapter.getData().get(position).isCollect());
             mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
@@ -119,7 +162,7 @@ public class SystemFlyFragment extends BaseFragment {
                             mAdapter.getData().get(position).setCollect(false);
                             mAdapter.notifyItemChanged(position, "");
                         } else {
-                           getCollectArticle(view, mAdapter.getData().get(position).getId());
+                            getCollectArticle(view, mAdapter.getData().get(position).getId());
                             mAdapter.getData().get(position).setCollect(true);
                             mAdapter.notifyItemChanged(position, "");
                         }
@@ -130,5 +173,17 @@ public class SystemFlyFragment extends BaseFragment {
             }
         });
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mRefreshLayout.isRefreshing()) {
+            mRefreshLayout.finishRefresh();
+        }
+        if (mRefreshLayout.isLoading()) {
+            mRefreshLayout.finishLoadMore();
+        }
     }
 }

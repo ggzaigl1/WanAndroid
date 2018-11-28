@@ -2,21 +2,21 @@ package com.example.gab.babylove.ui.project;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.BaseBean;
-import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
+import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -24,7 +24,6 @@ import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
-import com.kaopiz.kprogresshud.KProgressHUD;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -32,6 +31,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -47,13 +47,12 @@ public class SystemStarFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
-    @BindView(R.id.fab_top)
-    FloatingActionButton mFabTop;
+
 
     public static final String ARG_PARAM1 = "id";
     public static final String ARG_PARAM2 = "param2";
     BaseAdapter mAdapter;
-    int mPageNo = 1;
+    int mPageNo = 0;
     private Bundle mBundle;
 
     public static SystemStarFragment getInstance(int id, String param2) {
@@ -71,16 +70,21 @@ public class SystemStarFragment extends BaseFragment {
     }
 
     @Override
-    protected void baseInit() {
-        super.baseInit();
-        initRecyle();
-        initRefresh();
-
+    protected void initData() {
         mBundle = getArguments();
         assert mBundle != null;
-        getArticleList(mBundle.getInt(ARG_PARAM1));
+        mRefreshLayout.autoRefresh();
+    }
 
-        mFabTop.setOnClickListener(v -> JumpUtils.jump(mContext, NewProjectActivity.class, null));
+    @Override
+    protected boolean isLazyLoad() {
+        return true;
+    }
+
+    @Override
+    protected void initView(View view) {
+        initRecyle();
+        initRefresh();
     }
 
     /**
@@ -88,7 +92,6 @@ public class SystemStarFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int id) {
-        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getProjectList(mPageNo, id)
                 .compose(RxHelper.handleResult())
@@ -97,7 +100,6 @@ public class SystemStarFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(BaseBean baseBean) {
                         if (null != baseBean) {
-                            mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
                                 mAdapter.setNewData(baseBean.getDatas());
                                 mRefreshLayout.finishRefresh();
@@ -133,7 +135,7 @@ public class SystemStarFragment extends BaseFragment {
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
-                mPageNo = 0;
+                mPageNo = 1;
                 getArticleList(mBundle.getInt(ARG_PARAM1));
             }
         });
@@ -152,7 +154,6 @@ public class SystemStarFragment extends BaseFragment {
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
-
                     if (TextUtils.isEmpty(SpfUtils.getSpfSaveStr(ConstantUtils.userName))) {
                         JumpUtils.jumpFade(mContext, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);
@@ -190,13 +191,9 @@ public class SystemStarFragment extends BaseFragment {
         });
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
+
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mKProgressHUD.dismiss();
-    }
 
     @Override
     public void onPause() {

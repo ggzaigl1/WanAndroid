@@ -1,20 +1,23 @@
 package com.example.gab.babylove.ui.project;
 
 import android.annotation.SuppressLint;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.ProjectBean;
+import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
-import com.kaopiz.kprogresshud.KProgressHUD;
+import com.ggz.baselibrary.utils.JumpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +25,6 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- *
  * @author Gab
  * @date 2017/12/15 0015
  * 项目
@@ -34,19 +36,30 @@ public class StarFragment extends BaseFragment {
     TabLayout mTabLayout;
     @BindView(R.id.view_page)
     ViewPager mViewPager;
+    @BindView(R.id.fab_top)
+    FloatingActionButton mFabTop;
     private MyPagerAdapter mAdapter;
     private ArrayList<SystemStarFragment> mFragments = new ArrayList<>();
     List<ProjectBean> data;
 
     @Override
-    protected void baseInit() {
-        super.baseInit();
-        getArticleList();
+    protected int setContentLayout() {
+        return R.layout.fragment_list_floab;
     }
 
     @Override
-    protected int setContentLayout() {
-        return R.layout.fragment_other;
+    protected boolean isLazyLoad() {
+        return false;
+    }
+
+    @Override
+    protected void initView(View view) {
+        mFabTop.setOnClickListener(v -> JumpUtils.jump(mContext, NewProjectActivity.class, null));
+    }
+
+    @Override
+    protected void initData() {
+        getArticleList();
     }
 
     /**
@@ -54,7 +67,6 @@ public class StarFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList() {
-        mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
         RequestUtils.create(ApiService.class)
                 .getProject()
                 .compose(RxHelper.handleResult())
@@ -72,7 +84,6 @@ public class StarFragment extends BaseFragment {
                             mViewPager.setAdapter(mAdapter);
                             mTabLayout.setupWithViewPager(mViewPager);
                         }
-                        mKProgressHUD.dismiss();
                     }
 
                     @Override

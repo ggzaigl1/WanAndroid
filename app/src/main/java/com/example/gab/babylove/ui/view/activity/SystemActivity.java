@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
@@ -38,6 +40,8 @@ public class SystemActivity extends BaseActivity implements IBaseActivity {
     TabLayout mTabLayout;
     @BindView(R.id.view_page)
     ViewPager mViewPager;
+    @BindView(R.id.fab_top)
+    FloatingActionButton mFabTop;
 
     @Override
     public boolean isShowHeadView() {
@@ -46,12 +50,13 @@ public class SystemActivity extends BaseActivity implements IBaseActivity {
 
     @Override
     public int setView() {
-        return R.layout.activity_system;
+        return R.layout.fragment_list_floab;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+        mFabTop.setVisibility(View.GONE);
         bean = (ViewBean) getIntent().getSerializableExtra("bean");
         mChildren = bean.getChildren();
         for (ViewBean.ChildrenBean child : mChildren) {
@@ -59,6 +64,7 @@ public class SystemActivity extends BaseActivity implements IBaseActivity {
             mFragments.add(systemFlyFragment);
         }
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+        mViewPager.setOffscreenPageLimit(4);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }

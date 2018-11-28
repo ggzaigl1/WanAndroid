@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
@@ -39,16 +40,25 @@ public class ViewFragment extends BaseFragment {
     ViewAdapter mAdapter;
 
     @Override
+    protected boolean isLazyLoad() {
+        return false;
+    }
+
+    @Override
+    protected void initView(View view) {
+        initRecyle();
+    }
+
+    @Override
     protected int setContentLayout() {
         return R.layout.fragment_news;
     }
 
     @Override
-    protected void baseInit() {
-        super.baseInit();
-        initRecyle();
+    protected void initData() {
         getArticleList();
     }
+
 
     /**
      * 列表数据加载
@@ -88,7 +98,6 @@ public class ViewFragment extends BaseFragment {
             bundle.putSerializable("bean", bean);
             JumpUtils.jumpFade(mContext, SystemActivity.class, bundle);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
     }
 

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * @author 初夏小溪
  * @date 2018/4/13 0013
  * 首页数据 实体对象
@@ -135,6 +134,7 @@ public class BaseBean implements Serializable {
         private int userId;
         private int visible;
         private int zan;
+        private String top;
         private List<TagsBean> tags;
 
         public String getApkLink() {
@@ -311,6 +311,14 @@ public class BaseBean implements Serializable {
 
         public void setZan(int zan) {
             this.zan = zan;
+        }
+
+        public String getTop() {
+            return top;
+        }
+
+        public void setTop(String top) {
+            this.top = top;
         }
 
         public List<TagsBean> getTags() {

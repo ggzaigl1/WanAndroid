@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
@@ -43,18 +44,27 @@ public class OfficialAccountFragment extends BaseFragment {
     OfficialAccountAdapter mAdapter;
 
     @Override
+    protected boolean isLazyLoad() {
+        return false;
+    }
+
+    @Override
+    protected void initView(View view) {
+        initRecyle();
+    }
+
+    @Override
     protected int setContentLayout() {
         return R.layout.activity_official_account;
     }
 
     @Override
-    protected void baseInit() {
-        super.baseInit();
-        initRecyle();
+    protected void initData() {
         getChaptersList();
         mRefreshLayout.setEnableLoadMore(false);
         mRefreshLayout.setEnableRefresh(false);
     }
+
 
     /**
      * 公众号 数据加载

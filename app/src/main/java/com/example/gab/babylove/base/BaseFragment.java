@@ -8,12 +8,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.application.BaseApplication;
@@ -47,6 +45,22 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     protected View mRootView;
     protected Unbinder unbinder;
 
+    //视图是否已经初始化完毕
+    private boolean isViewReady;
+    //fragment是否处于可见状态
+    private boolean isFragmentVisible;
+    //是否已经初始化加载过
+    protected boolean isLoaded;
+
+    //是否使用懒加载 (Fragment可见时才进行初始化操作(以下四个方法))
+    protected abstract boolean isLazyLoad();
+
+    protected abstract void initView(View view);
+
+    protected abstract int setContentLayout();
+
+    protected abstract void initData();
+
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
@@ -54,32 +68,64 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (null == mRootView) {
-            mRootView = inflater.inflate(setContentLayout(), container, false);
-            unbinder = ButterKnife.bind(this, mRootView);
-            if (NetworkUtils.isNetworkAvailable(ConfigUtils.getAppCtx())) {
-                baseInit();
-            } else {
-                T.showShort("好像没有网络耶~");
-            }
+        if (!NetworkUtils.isNetworkAvailable(ConfigUtils.getAppCtx())) {
+            T.showShort("好像没有网络耶~");
         } else {
-            ViewGroup parent = (ViewGroup) mRootView.getParent();
-            if (null != parent) {
-                parent.removeView(mRootView);
+            if (null == mRootView) {
+                mRootView = inflater.inflate(setContentLayout(), container, false);
+            } else {
+                ViewGroup parent = (ViewGroup) mRootView.getParent();
+                if (null != parent) {
+                    parent.removeView(mRootView);
+                }
             }
         }
+        unbinder = ButterKnife.bind(this, mRootView);
         LogUtils.e(TAG, "onCreateView()");
         return mRootView;
     }
 
+    /**
+     * //当Activity中的onCreate方法执行完后调用
+     *
+     * @param savedInstanceState
+     */
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        isViewReady = true;
+        if (!isLazyLoad() || isFragmentVisible) {
+            init();
+        }
+    }
+
+    /**
+     * tab切换一次，执行一次setUserVisibleHint()方法
+     *
+     * @param isVisibleToUser
+     */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        isFragmentVisible = isVisibleToUser;
+        //如果视图准备完毕且Fragment处于可见状态，则开始初始化操作
+        if (isLazyLoad() && isViewReady && isFragmentVisible) {
+            init();
+        }
+    }
+
+    private void init() {
+        if (!isLoaded) {
+            isLoaded = true;
+            initView(mRootView);
+            initData();
+        }
+    }
+
+
     @Override
     public void onClick(View view) {
     }
-
-    protected void baseInit() {
-    }
-
-    protected abstract int setContentLayout();
 
 
     /**
@@ -101,6 +147,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     /**
      * 收藏
+     *
      * @param view
      * @param id
      */
@@ -152,18 +199,10 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                 });
     }
 
-    /**
-     * //当Activity中的onCreate方法执行完后调用
-     * @param savedInstanceState
-     */
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        LogUtils.e(TAG, "onActivityCreated()");
-    }
 
     /**
      * //Fragment和Activity建立关联的时候调用
+     *
      * @param context
      */
     @Override
@@ -228,7 +267,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if (mKProgressHUD != null) {
             mKProgressHUD.dismiss();
         }
-
+        isViewReady = false;
+        isLoaded = false;
         RefWatcher refWatcher = BaseApplication.getRefWatcher(ConfigUtils.getAppCtx());
         refWatcher.watch(this);
     }

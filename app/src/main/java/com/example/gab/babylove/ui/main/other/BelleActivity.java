@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.view.animation.CycleInterpolator;
 import android.view.animation.Interpolator;
 
 import com.example.gab.babylove.R;
@@ -164,6 +165,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                 }
             }
         });
+
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             List<GanBean.ResultsBean> data = mAdapter.getData();
@@ -196,6 +198,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                     .scaleX(1.0F)
                     .scaleY(1.0F)
                     .alpha(1.0F)
+                    .setInterpolator(new CycleInterpolator(1))
                     .setInterpolator(INTERPOLATOR).withLayer()
                     .setListener(null).start();
         }

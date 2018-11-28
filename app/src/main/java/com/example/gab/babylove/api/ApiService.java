@@ -36,9 +36,12 @@ import retrofit2.http.Query;
 
 /**
  * 通用的 api接口 </p>
- * Created by fangs on 2017/8/28.
+ *
+ * @author 初夏小溪
+ * @date 2017/8/28
  */
 public interface ApiService {
+
 
     /**
      * 登录

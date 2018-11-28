@@ -50,7 +50,7 @@ public class BaseAdapter extends BaseQuickAdapter<BaseBean.DatasBean, BaseViewHo
     protected void convert(BaseViewHolder helper, BaseBean.DatasBean item) {
         TextView mTitle = helper.getView(R.id.tv_title);
         TextView mTag = helper.getView(R.id.tv_tag);
-        AppCompatImageView mIvItemBaseFresh = helper.getView(R.id.iv_item_base_fresh);
+        TextView mFresh = helper.getView(R.id.tv_fresh);
 
         helper.setText(R.id.tv_title, item.getTitle())
                 .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
@@ -81,10 +81,11 @@ public class BaseAdapter extends BaseQuickAdapter<BaseBean.DatasBean, BaseViewHo
 
         //判断是否是最新的item
         if (item.isFresh()) {
-            mIvItemBaseFresh.setVisibility(View.VISIBLE);
+            mFresh.setVisibility(View.VISIBLE);
         } else {
-            mIvItemBaseFresh.setVisibility(View.GONE);
+            mFresh.setVisibility(View.GONE);
         }
+
 
         String title = item.getTitle();
         //"Android <em class='highlight'>Studio3</em>.0正式版填坑路
