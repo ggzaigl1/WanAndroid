@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.application.BaseApplication;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -24,7 +23,6 @@ import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
 import com.kaopiz.kprogresshud.KProgressHUD;
-import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -269,8 +267,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         }
         isViewReady = false;
         isLoaded = false;
-        RefWatcher refWatcher = BaseApplication.getRefWatcher(ConfigUtils.getAppCtx());
-        refWatcher.watch(this);
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.example.gab.babylove.application;
 
-import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatDelegate;
 
@@ -9,8 +8,6 @@ import com.ggz.baselibrary.application.BaseActivityLifecycleCallbacks;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.L;
 import com.ggz.baselibrary.utils.NightModeConfig;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 
 /**
@@ -21,8 +18,6 @@ import com.squareup.leakcanary.RefWatcher;
  */
 public class BaseApplication extends MultiDexApplication {
 
-    private RefWatcher refWatcher;
-
     //也可以直接使用代码块直接设置
     //static {
     //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_ NIGHT_YES);
@@ -32,12 +27,6 @@ public class BaseApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         L.e("ActivityCallbacks", "Application--Create() 启动-----");
-
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
-        refWatcher = setupLeakCanary();
 
         //初始化应用框架基础配置工具类
         new ConfigUtils.ConfigBiuder()
@@ -59,21 +48,4 @@ public class BaseApplication extends MultiDexApplication {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
-
-    /**
-     * 检测内存泄漏工具
-     * @return
-     */
-    private RefWatcher setupLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return RefWatcher.DISABLED;
-        }
-        return LeakCanary.install(this);
-    }
-
-    public static RefWatcher getRefWatcher(Context context) {
-        BaseApplication baseApplication = (BaseApplication) context.getApplicationContext();
-        return baseApplication.refWatcher;
-    }
-
 }
