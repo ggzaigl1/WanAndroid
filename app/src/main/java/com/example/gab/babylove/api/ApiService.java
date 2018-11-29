@@ -233,7 +233,7 @@ public interface ApiService {
     @FormUrlEncoded
     @Headers({"url_name:user"})
     @POST("article/query/{pageNum}/json")
-    Observable<BeanModule<BaseBean>> getQuery(@Path("") int pageNum, @Field("k") String queryKey);
+    Observable<BeanModule<BaseBean>> getQuery(@Path("pageNum") int pageNum, @Field("k") String queryKey);
 
     /**
      * 获取公众号列表
