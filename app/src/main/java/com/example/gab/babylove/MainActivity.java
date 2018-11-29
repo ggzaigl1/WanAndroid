@@ -102,7 +102,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-// TODO: 2018/11/29 0029 webview跳转 整合 MainActivity 点击跳转会调所有Fragment接口
 //        Handler handler = new Handler();
 //        handler.postDelayed(() -> getVersionUpdate(-1), 1500);
 
