@@ -41,7 +41,6 @@
     <string name="zero_k">0K</string>
     <string name="collect_login">登录之后才能收藏或查看已收藏内容</string>
     <string name="collection_success">收藏成功</string>
-    <string name="collection_web">收藏本文</string>
     <string name="cancel_collection_success">取消收藏成功</string>
     <string name="tools_cannot_application">无法打开应用市场</string>
 
@@ -58,7 +57,6 @@
     <string name="knowledge">知识体系</string>
     <string name="about_us">关于我们</string>
     <string name="share">分享</string>
-    <string name="share_knowledge">分享知识点</string>
     <string name="night_mode">夜间模式</string>
     <string name="nav_exit">退出应用</string>
     <string name="ornamental">健康运动</string>
@@ -66,6 +64,10 @@
     <string name="notLogin">Google Hot Air Balloon</string>
     <string name="clickLogin">点击登录</string>
     <string name="login_exit">退出登录</string>
+
+    <string name="menu_share_knowledge">分享知识点</string>
+    <string name="menu_web_browser">在浏览器打开</string>
+    <string name="menu_collection_web">收藏本文</string>
 
 
     <string name="main_login_view">登录之后才能查看已收藏内容</string>

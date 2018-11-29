@@ -6,14 +6,21 @@
             android:id="@+id/web_share"
             android:icon="@drawable/vector_menu_share"
             android:orderInCategory="100"
-            android:title="@string/share_knowledge"
+            android:title="@string/menu_share_knowledge"
             app:showAsAction="never"
             />
     <item
             android:id="@+id/web_collection"
             android:icon="@drawable/vector_menu_collection"
             android:orderInCategory="100"
-            android:title="@string/collection_web"
+            android:title="@string/menu_collection_web"
+            app:showAsAction="never"
+            />
+    <item
+            android:id="@+id/web_browser"
+            android:icon="@drawable/vector_menu_share"
+            android:orderInCategory="100"
+            android:title="@string/menu_web_browser"
             app:showAsAction="never"
             />
 </menu>

@@ -52,7 +52,6 @@ public class SystemStarFragment extends BaseFragment {
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
 
-
     public static final String ARG_PARAM1 = "id";
     public static final String ARG_PARAM2 = "param2";
     BaseAdapter mAdapter;
@@ -207,11 +206,9 @@ public class SystemStarFragment extends BaseFragment {
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
         }
-        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
-            initRecyle();
-            getArticleList(mId);
-        }else {
+        if (!NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
             mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
+            mRefreshLayout.autoRefresh();
         }
     }
 }

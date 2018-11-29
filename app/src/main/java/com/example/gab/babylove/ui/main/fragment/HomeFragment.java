@@ -85,7 +85,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         initRecyle();
-        initRefresh();
 
         //给页面设置工具栏
 //        if (mCollapsingToolbarLayout != null) {
@@ -108,7 +107,8 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        getData();
+        mRefreshLayout.autoRefresh();
+        initRefresh();
     }
 
 
@@ -311,9 +311,7 @@ public class HomeFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         if (!mRefreshLayout.isRefreshing()) {
-            getArticleList(0);
             mRefreshLayout.finishRefresh();
-            mKProgressHUD.dismiss();
         }
     }
 
@@ -339,12 +337,8 @@ public class HomeFragment extends BaseFragment {
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
         }
-        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
-            initRecyle();
-            getData();
-            getArticleList(0);
-            mKProgressHUD.dismiss();
-        } else {
+        if (!NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+            mRefreshLayout.autoRefresh();
             mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         }
     }

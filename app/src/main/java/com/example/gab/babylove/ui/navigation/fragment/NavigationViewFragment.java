@@ -1,12 +1,10 @@
 package com.example.gab.babylove.ui.navigation.fragment;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
@@ -14,18 +12,13 @@ import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.ui.navigation.adapter.NavigationLifeAdapter;
 import com.example.gab.babylove.ui.navigation.adapter.NavigationRightAdapter;
-import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
-import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.NetworkUtils;
-import com.ggz.baselibrary.utils.ResourceUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
-import com.zhy.view.flowlayout.FlowLayout;
-import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
@@ -39,12 +32,12 @@ import butterknife.BindView;
  * 导航数据
  */
 
-public class NavigationViewFragment extends BaseFragment implements TagFlowLayout.OnTagClickListener {
+public class NavigationViewFragment extends BaseFragment {
 
     @BindView(R.id.rv_title)
     RecyclerView mRecyclerViewLife;
-    @BindView(R.id.id_tagFlow)
-    TagFlowLayout mTagFlowLayout;
+    @BindView(R.id.rv_context)
+    RecyclerView mRecyclerViewRight;
     @BindView(R.id.include_nothing_data)
     View include_nothing_data;
 
@@ -53,7 +46,6 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
     //实现单选 变量保存当前选中的position
     private int mSelectedPos = 0;
     private LinearLayoutManager mLinearLayoutManager;
-    private List<NavigationBean.ArticlesBean> mArticles;
 
     @Override
     protected boolean isLazyLoad() {
@@ -63,9 +55,7 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
     @Override
     protected void initView(View view) {
         initRecyclerLife();
-        mTagFlowLayout.setOnTagClickListener(this);
-//        initRecyclerRight();
-//        initHotKeyData();
+        initRecyclerRight();
     }
 
     @Override
@@ -97,8 +87,7 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
                             mAdapterLife.setNewData(navigationBeans);
                             if (mSelectedPos == 0) {
                                 mAdapterLife.getData().get(mSelectedPos).setSelected(true);
-                                initNavigationData(navigationBeans.get(0).getArticles());
-//                                mAdapterRight.setNewData(navigationBeans.get(mSelectedPos).getArticles());
+                                mAdapterRight.setNewData(navigationBeans.get(mSelectedPos).getArticles());
                             }
                         }
                     }
@@ -126,8 +115,8 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
                 mAdapterLife.notifyItemChanged(mSelectedPos);
 
             }
-            initNavigationData(mAdapterLife.getData().get(position).getArticles());
-//            mAdapterRight.setNewData(navigationBean.getArticles());
+            NavigationBean navigationBean = mAdapterLife.getData().get(position);
+            mAdapterRight.setNewData(navigationBean.getArticles());
             View childAt = mRecyclerViewLife.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
             if (childAt != null) {
                 int y = childAt.getTop() - mRecyclerViewLife.getHeight() / 2;
@@ -137,58 +126,28 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
         mRecyclerViewLife.setAdapter(mAdapterLife);
     }
 
-    @Override
-    public boolean onTagClick(View view, int position, FlowLayout parent) {
-        List<NavigationBean.ArticlesBean> articles = mAdapterLife.getData().get(position).getArticles();
-        WebViewActivity.startWebActivity(mContext
-                , articles.get(position).getLink()
-                , articles.get(position).getId()
-                , articles.get(position).isCollect());
-        mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        return true;
-    }
-
-    private void initNavigationData(List<NavigationBean.ArticlesBean> articles) {
-        mTagFlowLayout.setAdapter(new TagAdapter(articles) {
-            @Override
-            public View getView(FlowLayout parent, int position, Object o) {
-                TextView mTvDate = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.item_navigation_cid, parent, false);
-                mTvDate.setText(articles.get(position).getTitle());
-                mTvDate.setTextColor(ResourceUtils.getRandomColor());
-                return mTvDate;
-            }
+    private void initRecyclerRight() {
+        mRecyclerViewRight.scrollToPosition(0);
+        mRecyclerViewRight.setLayoutManager(new GridLayoutManager(mContext, 4));
+        mAdapterRight = new NavigationRightAdapter(new ArrayList<>());
+        mAdapterRight.setOnItemClickListener((adapter, view, position) -> {
+            WebViewActivity.startWebActivity(getActivity()
+                    , mAdapterRight.getData().get(position).getLink()
+                    , mAdapterRight.getData().get(position).getId()
+                    , mAdapterRight.getData().get(position).isCollect());
+            mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
+        mRecyclerViewRight.setAdapter(mAdapterRight);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+        if (!NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+            include_nothing_data.setVisibility(View.VISIBLE);
             initRecyclerLife();
             getNavigationList();
             mKProgressHUD.dismiss();
-        } else {
-            include_nothing_data.setVisibility(View.VISIBLE);
         }
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
-    private void initRecyclerRight() {
-//        mRecyclerViewRight.scrollToPosition(0);
-//        mRecyclerViewRight.setLayoutManager(new GridLayoutManager(mContext, 4));
-//        mAdapterRight = new NavigationRightAdapter(new ArrayList<>());
-//        mAdapterRight.setOnItemClickListener((adapter, view, position) -> {
-//            WebViewActivity.startWebActivity(getActivity()
-//                    , mAdapterRight.getData().get(position).getLink()
-//                    , mAdapterRight.getData().get(position).getId());
-//            mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//        });
-//        mRecyclerViewRight.setAdapter(mAdapterRight);
-    }
-
 }

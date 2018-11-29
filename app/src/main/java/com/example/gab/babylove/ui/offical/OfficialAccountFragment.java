@@ -106,12 +106,10 @@ public class OfficialAccountFragment extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+        if (!NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+            mAdapter.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
             initRecyle();
             getChaptersList();
-            mKProgressHUD.dismiss();
-        } else {
-            mAdapter.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         }
     }
 }

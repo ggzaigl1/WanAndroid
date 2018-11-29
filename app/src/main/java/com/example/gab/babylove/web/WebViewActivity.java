@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -174,16 +175,16 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.contains("alipays://platformapi/startApp?")) {
-                    startAlipayActivity(url);
-                    // android  6.0 两种方式获取intent都可以跳转支付宝成功,7.1测试不成功
-                } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-                    if (url.contains("platformapi") && url.contains("startapp")) {
-                        startAlipayActivity(url);
-                    }
-                } else {
-                    mWebView.loadUrl(url);
-                }
+//                if (url.contains("alipays://platformapi/startApp?")) {
+//                    startAlipayActivity(url);
+//                    // android  6.0 两种方式获取intent都可以跳转支付宝成功,7.1测试不成功
+//                } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+//                    if (url.contains("platformapi") && url.contains("startapp")) {
+//                        startAlipayActivity(url);
+//                    }
+//                } else {
+                mWebView.loadUrl(url);
+//                }
                 return true;
 //                if (url.contains("alipays://platformapi/startApp?")) {
 //                    startAlipayActivity(url);
@@ -275,6 +276,12 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                 } else {
                     getCollectArticle(mId);
                 }
+                break;
+            case R.id.web_browser:
+                Intent intent = new Intent();
+                intent.setData(Uri.parse(mURl));//Url 就是你要打开的网址
+                intent.setAction(Intent.ACTION_VIEW);
+                startActivity(intent); //启动浏览器
                 break;
             default:
                 break;
