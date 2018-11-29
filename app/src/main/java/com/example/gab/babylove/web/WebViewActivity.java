@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -223,46 +222,6 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                 view.scrollTo(0, position);
             }
 
-        });
-
-        mWebView.setOnLongClickListener(v -> {
-            WebView.HitTestResult result = ((WebView) v).getHitTestResult();
-            if (null == result) {
-                return false;
-            }
-            int type = result.getType();
-            if (type == WebView.HitTestResult.UNKNOWN_TYPE) {
-                return false;
-            }
-            // 这里可以拦截很多类型，我们只处理图片类型就可以了
-            switch (type) {
-                // 处理拨号
-                case WebView.HitTestResult.PHONE_TYPE:
-                    break;
-                // 处理Email
-                case WebView.HitTestResult.EMAIL_TYPE:
-                    break;
-                // 地图类型
-                case WebView.HitTestResult.GEO_TYPE:
-                    break;
-                // 超链接
-                case WebView.HitTestResult.SRC_ANCHOR_TYPE:
-                    break;
-                case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
-                    break;
-                // 处理长按图片的菜单项
-                case WebView.HitTestResult.IMAGE_TYPE:
-                    // 获取图片的路径
-                    String saveImgUrl = result.getExtra();
-                    // 跳转到图片详情页，显示图片
-//                        Intent i = new Intent(MainActivity.this, ImageActivity.class);
-//                        i.putExtra("imgUrl", saveImgUrl);
-//                        startActivity(i);
-                    break;
-                default:
-                    break;
-            }
-            return false;
         });
     }
 

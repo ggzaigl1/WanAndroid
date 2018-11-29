@@ -64,7 +64,6 @@ public class SystemActivity extends BaseActivity implements IBaseActivity {
             mFragments.add(systemFlyFragment);
         }
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-        mViewPager.setOffscreenPageLimit(4);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }

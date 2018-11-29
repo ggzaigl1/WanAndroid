@@ -1,6 +1,7 @@
 package com.example.gab.babylove.ui.navigation.fragment;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,15 +10,17 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.ui.navigation.adapter.NavigationLifeAdapter;
 import com.example.gab.babylove.ui.navigation.adapter.NavigationRightAdapter;
+import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
-import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
+import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -42,6 +45,8 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
     RecyclerView mRecyclerViewLife;
     @BindView(R.id.id_tagFlow)
     TagFlowLayout mTagFlowLayout;
+    @BindView(R.id.include_nothing_data)
+    View include_nothing_data;
 
     NavigationLifeAdapter mAdapterLife;
     NavigationRightAdapter mAdapterRight;
@@ -111,7 +116,6 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
         mRecyclerViewLife.setLayoutManager(mLinearLayoutManager);
         mAdapterLife = new NavigationLifeAdapter(new ArrayList<>());
         mAdapterLife.setOnItemClickListener((adapter, view, position) -> {
-            NavigationBean navigationBean = mAdapterLife.getData().get(position);
             //如果item位置不等于0 就不显示
             if (mSelectedPos != position) {
                 mAdapterLife.getData().get(mSelectedPos).setSelected(false);
@@ -122,8 +126,7 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
                 mAdapterLife.notifyItemChanged(mSelectedPos);
 
             }
-            mArticles = navigationBean.getArticles();
-            initNavigationData(mArticles);
+            initNavigationData(mAdapterLife.getData().get(position).getArticles());
 //            mAdapterRight.setNewData(navigationBean.getArticles());
             View childAt = mRecyclerViewLife.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
             if (childAt != null) {
@@ -136,10 +139,11 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
 
     @Override
     public boolean onTagClick(View view, int position, FlowLayout parent) {
-        WebViewActivity.startWebActivity(getActivity()
-                , mArticles.get(position).getLink()
-                , mArticles.get(position).getId()
-                , mArticles.get(position).isCollect());
+        List<NavigationBean.ArticlesBean> articles = mAdapterLife.getData().get(position).getArticles();
+        WebViewActivity.startWebActivity(mContext
+                , articles.get(position).getLink()
+                , articles.get(position).getId()
+                , articles.get(position).isCollect());
         mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         return true;
     }
@@ -163,6 +167,8 @@ public class NavigationViewFragment extends BaseFragment implements TagFlowLayou
             initRecyclerLife();
             getNavigationList();
             mKProgressHUD.dismiss();
+        } else {
+            include_nothing_data.setVisibility(View.VISIBLE);
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.gab.babylove.ui.project;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -15,13 +16,16 @@ import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
+import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.retrofit.BeanModule;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
+import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -54,6 +58,7 @@ public class SystemStarFragment extends BaseFragment {
     BaseAdapter mAdapter;
     int mPageNo = 0;
     private Bundle mBundle;
+    private int mId;
 
     public static SystemStarFragment getInstance(int id, String param2) {
         SystemStarFragment fragment = new SystemStarFragment();
@@ -72,7 +77,7 @@ public class SystemStarFragment extends BaseFragment {
     @Override
     protected void initData() {
         mBundle = getArguments();
-        assert mBundle != null;
+        mId = mBundle.getInt(ARG_PARAM1);
         mRefreshLayout.autoRefresh();
     }
 
@@ -130,13 +135,13 @@ public class SystemStarFragment extends BaseFragment {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
                 mPageNo += 1;
-                getArticleList(mBundle.getInt(ARG_PARAM1));
+                getArticleList(mId);
             }
 
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
                 mPageNo = 1;
-                getArticleList(mBundle.getInt(ARG_PARAM1));
+                getArticleList(mId);
             }
         });
     }
@@ -190,8 +195,6 @@ public class SystemStarFragment extends BaseFragment {
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
-
     }
 
 
@@ -204,10 +207,11 @@ public class SystemStarFragment extends BaseFragment {
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
         }
-//        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
-//            initRecyle();
-//            getArticleList(mBundle.getInt(ARG_PARAM1));
-//            mKProgressHUD.dismiss();
-//        }
+        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+            initRecyle();
+            getArticleList(mId);
+        }else {
+            mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
+        }
     }
 }

@@ -133,10 +133,9 @@ public class HomeFragment extends BaseFragment {
                 .setPageTransformer(new AccordionTransformer())
                 .setOnItemClickListener(position -> {
                     Bundle bundle = new Bundle();
-                    bundle.putString("UrlBean", urls.get(position));
+                    bundle.putString("Link", urls.get(position));
                     JumpUtils.jumpFade((AppCompatActivity) getActivity(), AgentWebActivity.class, bundle);
-//                        WebViewActivity.startWebActivity(getActivity(), urls.get(position), 0);// 详情
-                    mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
                 })
                 //设置手动影响（设置了该项无法手动切换）
                 .setManualPageable(true);
@@ -254,14 +253,12 @@ public class HomeFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new BaseAdapter(new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            // 详情
-            WebViewActivity.startWebActivity(getActivity()
+            WebViewActivity.startWebActivity(mContext
                     , mAdapter.getData().get(position).getLink()
                     , mAdapter.getData().get(position).getId()
                     , mAdapter.getData().get(position).isCollect());
             mContext.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
@@ -318,13 +315,6 @@ public class HomeFragment extends BaseFragment {
             mRefreshLayout.finishRefresh();
             mKProgressHUD.dismiss();
         }
-
-        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
-            initRecyle();
-            getData();
-            getArticleList(0);
-            mKProgressHUD.dismiss();
-        }
     }
 
     @Override
@@ -348,6 +338,14 @@ public class HomeFragment extends BaseFragment {
         }
         if (mRefreshLayout.isLoading()) {
             mRefreshLayout.finishLoadMore();
+        }
+        if (NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
+            initRecyle();
+            getData();
+            getArticleList(0);
+            mKProgressHUD.dismiss();
+        } else {
+            mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         }
     }
 }

@@ -51,6 +51,8 @@ import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
+import com.pgyersdk.update.UpdateManagerListener;
+import com.pgyersdk.update.javabean.AppBean;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -100,9 +102,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-
-        Handler handler = new Handler();
-        handler.postDelayed(() -> getVersionUpdate(-1), 1500);
+// TODO: 2018/11/29 0029 webview跳转 整合 MainActivity 点击跳转会调所有Fragment接口
+//        Handler handler = new Handler();
+//        handler.postDelayed(() -> getVersionUpdate(-1), 1500);
 
         //设置状态栏透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);

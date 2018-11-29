@@ -108,6 +108,8 @@ public class ViewFragment extends BaseFragment {
             initRecyle();
             getArticleList();
             mKProgressHUD.dismiss();
+        }else {
+            mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         }
     }
 }

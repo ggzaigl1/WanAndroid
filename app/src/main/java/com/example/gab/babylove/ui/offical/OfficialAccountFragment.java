@@ -100,7 +100,6 @@ public class OfficialAccountFragment extends BaseFragment {
             bundle.putInt("id", mAdapter.getData().get(position).getId());
             JumpUtils.jumpFade((AppCompatActivity) getActivity(), OfficialAccountListActivity.class, bundle);
         });
-        mAdapter.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -111,6 +110,8 @@ public class OfficialAccountFragment extends BaseFragment {
             initRecyle();
             getChaptersList();
             mKProgressHUD.dismiss();
+        } else {
+            mAdapter.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
         }
     }
 }

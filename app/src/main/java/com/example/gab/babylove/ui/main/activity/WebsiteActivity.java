@@ -3,7 +3,6 @@ package com.example.gab.babylove.ui.main.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -12,14 +11,12 @@ import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.BookmarkBean;
-import com.example.gab.babylove.web.AgentWebActivity;
 import com.example.gab.babylove.web.WebViewActivity;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
-import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -97,10 +94,7 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
         });
 
         mTagFlowLayout.setOnTagClickListener((view, position, parent) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("UrlBean", listBeanModule.get(position).getLink());
-            JumpUtils.jumpFade(this, AgentWebActivity.class, bundle);
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//            WebViewActivity.startWebActivity(this, listBeanModule.get(position).getLink());
             return true;
         });
     }

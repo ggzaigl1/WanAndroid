@@ -91,7 +91,8 @@ public class JumpUtils {
         }
 
         activity.startActivity(intent);
-        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        activity.overridePendingTransition(R.anim.anim_slide_left_in, R.anim.anim_slide_left_out);
+//        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
 
