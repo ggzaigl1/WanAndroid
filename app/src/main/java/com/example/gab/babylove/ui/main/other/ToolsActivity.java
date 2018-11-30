@@ -55,6 +55,7 @@ import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 
 import static android.app.Notification.VISIBILITY_SECRET;
 
@@ -112,6 +113,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
         }
     }
 
+
     @OnClick({R.id.Ll_cache_clear, R.id.Ll_praise, R.id.Ll_check_update, R.id.Ll_check_test})
     @Override
     public void onClick(View view) {
@@ -148,9 +150,9 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
                 .cancelable(false)
                 .content(R.string.tools_clear_cache)
                 .positiveText(R.string.ok).onPositive((dialog, which) -> new Thread(() -> {
-                    CleanMessageUtil.clearAllCache(ConfigUtils.getAppCtx());
-                    mHandler.sendEmptyMessage(0);
-                }).start()).negativeText(R.string.cancel).onNegative((dialog, which) -> dialog.dismiss()).show();
+            CleanMessageUtil.clearAllCache(ConfigUtils.getAppCtx());
+            mHandler.sendEmptyMessage(0);
+        }).start()).negativeText(R.string.cancel).onNegative((dialog, which) -> dialog.dismiss()).show();
     }
 
     /**

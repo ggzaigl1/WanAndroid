@@ -117,9 +117,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
                     @Override
                     protected void onSuccess(Object t) {
                         mKProgressHUD.dismiss();
-                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT)
-                                .setAction("Action", null).show();
-//                        T.showShort(getString(R.string.collection_success));
+                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                     }
 
                     @Override
@@ -145,7 +143,6 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
                 .subscribe(new NetCallBack<Object>() {
                     @Override
                     protected void onSuccess(Object t) {
-                        T.showShort(getString(R.string.cancel_collection_success));
                         mKProgressHUD.dismiss();
                     }
 

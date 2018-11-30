@@ -128,7 +128,7 @@ public class NavigationViewFragment extends BaseFragment {
 
     private void initRecyclerRight() {
         mRecyclerViewRight.scrollToPosition(0);
-        mRecyclerViewRight.setLayoutManager(new GridLayoutManager(mContext, 4));
+        mRecyclerViewRight.setLayoutManager(new GridLayoutManager(mContext, 3));
         mAdapterRight = new NavigationRightAdapter(new ArrayList<>());
         mAdapterRight.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(getActivity()

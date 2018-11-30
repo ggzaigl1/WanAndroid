@@ -4,12 +4,15 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -254,7 +257,11 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_web_more, menu);
-        return true;
+//        MenuItem web_share = menu.findItem(R.id.web_share);
+//        SpannableString spannableString1 = new SpannableString(web_share.getTitle());
+//        spannableString1.setSpan(new ForegroundColorSpan(Color.BLACK), 0, spannableString1.length(), 0);
+//        web_share.setTitle(spannableString1);
+        return super.onCreateOptionsMenu(menu);
     }
 
     /**
@@ -274,7 +281,11 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                     JumpUtils.jumpFade(this, LoginActivity.class, null);
                     T.showShort(R.string.collect_login);
                 } else {
-                    getCollectArticle(mId);
+                    if (misCollect) {
+                        T.showShort("已经收藏");
+                    } else {
+                        collectArticle(mWebView, mId);
+                    }
                 }
                 break;
             case R.id.web_browser:
@@ -287,36 +298,6 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * 收藏
-     *
-     * @param id
-     */
-    @SuppressLint("CheckResult")
-    private void getCollectArticle(int id) {
-        if (misCollect) {
-            T.showShort("已经收藏");
-        } else {
-            mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-            RequestUtils.create(ApiService.class)
-                    .getCollectArticle(id, "")
-                    .compose(RxHelper.handleResult())
-                    .compose(RxHelper.bindToLifecycle(this))
-                    .subscribe(new NetCallBack<Object>() {
-                        @Override
-                        protected void onSuccess(Object t) {
-                            mKProgressHUD.dismiss();
-                            T.showShort(getString(R.string.collection_success));
-                        }
-
-                        @Override
-                        protected void updataLayout(int flag) {
-
-                        }
-                    });
-        }
     }
 
     /**

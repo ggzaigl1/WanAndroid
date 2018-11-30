@@ -1,6 +1,8 @@
 package com.example.gab.babylove.ui.main.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,11 +14,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.adapter.CBPageAdapter;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseFragment;
@@ -47,10 +51,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * @author Gab
@@ -218,6 +225,7 @@ public class HomeFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(BaseBean baseBean) {
                         if (null != baseBean.getDatas() && baseBean.getDatas().size() != 0) {
+                            mKProgressHUD.dismiss();
                             if (mRefreshLayout.isRefreshing()) {
                                 mAdapter.setNewData(baseBean.getDatas());
                                 mRefreshLayout.finishRefresh();
@@ -235,7 +243,6 @@ public class HomeFragment extends BaseFragment {
                                 mRefreshLayout.finishLoadMore();
                             }
                         }
-                        mKProgressHUD.dismiss();
                     }
 
                     @Override
@@ -303,16 +310,28 @@ public class HomeFragment extends BaseFragment {
                 mPageNo = 0;
                 getArticleList(0);
                 getData();
+                mKProgressHUD.dismiss();
             }
         });
+    }
+
+    /**
+     * 判断是否是第一次进入刷新数据
+     */
+    private void firstRun() {
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("FirstRun", 0);
+        Boolean first_run = sharedPreferences.getBoolean("First", true);
+        if (first_run) {
+            sharedPreferences.edit().putBoolean("First", false).apply();
+        } else {
+            getArticleList(0);
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (!mRefreshLayout.isRefreshing()) {
-            mRefreshLayout.finishRefresh();
-        }
+        firstRun();
     }
 
     @Override
@@ -338,8 +357,8 @@ public class HomeFragment extends BaseFragment {
             mRefreshLayout.finishLoadMore();
         }
         if (!NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
-            mRefreshLayout.autoRefresh();
             mAdapter.setEmptyView(LayoutInflater.from(mContext).inflate(R.layout.activity_null_data, (ViewGroup) mRecyclerView.getParent(), false));
+            mRefreshLayout.autoRefresh();
         }
     }
 }
