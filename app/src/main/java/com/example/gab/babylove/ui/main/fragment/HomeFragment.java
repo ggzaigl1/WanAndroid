@@ -1,7 +1,6 @@
 package com.example.gab.babylove.ui.main.fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -14,13 +13,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.bigkoo.convenientbanner.adapter.CBPageAdapter;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
-import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseFragment;
@@ -50,14 +46,11 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * @author Gab
@@ -163,15 +156,15 @@ public class HomeFragment extends BaseFragment {
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
         Observable.zip(observable1, observable2, (bannerBean, articleBean) -> {
-            Map<String, Object> map = new HashMap<>(16);
+            HashMap<String, Object> map = new HashMap<>(16);
             map.put("banner", bannerBean);
             map.put("article", articleBean);
             return map;
         }).doOnSubscribe(RequestUtils::addDisposable)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<Map<String, Object>>() {
+                .subscribe(new NetCallBack<HashMap<String, Object>>() {
                     @Override
-                    protected void onSuccess(Map<String, Object> map) {
+                    protected void onSuccess(HashMap<String, Object> map) {
                         List<BannerBean> banner = (List<BannerBean>) map.get("banner");
                         if (null != banner && banner.size() > 0) {
                             List<String> pics = new ArrayList<>();
@@ -269,7 +262,6 @@ public class HomeFragment extends BaseFragment {
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             switch (view.getId()) {
                 case R.id.image_collect:
-
                     if (TextUtils.isEmpty(SpfUtils.getSpfSaveStr(ConstantUtils.userName))) {
                         JumpUtils.jumpFade(mContext, LoginActivity.class, null);
                         T.showShort(R.string.collect_login);

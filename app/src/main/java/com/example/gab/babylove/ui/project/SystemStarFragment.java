@@ -56,7 +56,6 @@ public class SystemStarFragment extends BaseFragment {
     public static final String ARG_PARAM2 = "param2";
     BaseAdapter mAdapter;
     int mPageNo = 0;
-    private Bundle mBundle;
     private int mId;
 
     public static SystemStarFragment getInstance(int id, String param2) {
@@ -75,8 +74,8 @@ public class SystemStarFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        mBundle = getArguments();
-        mId = mBundle.getInt(ARG_PARAM1);
+        Bundle bundle = getArguments();
+        mId = bundle.getInt(ARG_PARAM1);
         mRefreshLayout.autoRefresh();
     }
 
