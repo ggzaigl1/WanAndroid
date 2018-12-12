@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -81,6 +82,7 @@ public class AboutActivity extends BaseActivity implements IBaseActivity {
         return R.layout.activity_about_us;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -100,6 +102,7 @@ public class AboutActivity extends BaseActivity implements IBaseActivity {
         initData();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void initData() {
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
@@ -113,7 +116,7 @@ public class AboutActivity extends BaseActivity implements IBaseActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             tvAbout.setText(Html.fromHtml(ResourceUtils.getStr(R.string.about_content), Html.FROM_HTML_MODE_LEGACY));
         } else {
-            tvAbout.setText(Html.fromHtml(ResourceUtils.getStr(R.string.about_content)));
+            tvAbout.setText(Html.fromHtml(ResourceUtils.getStr(R.string.about_content),Html.FROM_HTML_MODE_COMPACT));
         }
         tvAbout.setMovementMethod(LinkMovementMethod.getInstance());
 

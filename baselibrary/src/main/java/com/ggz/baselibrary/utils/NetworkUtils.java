@@ -290,9 +290,9 @@ public class NetworkUtils {
                         default:
 
                             String subtypeName = info.getSubtypeName();
-                            if (subtypeName.equalsIgnoreCase("TD-SCDMA")
-                                    || subtypeName.equalsIgnoreCase("WCDMA")
-                                    || subtypeName.equalsIgnoreCase("CDMA2000")) {
+                            if ("TD-SCDMA".equalsIgnoreCase(subtypeName)
+                                    || "WCDMA".equalsIgnoreCase(subtypeName)
+                                    || "CDMA2000".equalsIgnoreCase(subtypeName)) {
                                 netType = NETWORK_3G;
                             } else {
                                 netType = NETWORK_UNKNOWN;

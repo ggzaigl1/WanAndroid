@@ -4,15 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,20 +26,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
-import com.example.gab.babylove.utils.AndroidShareUtils;
+import com.ggz.baselibrary.utils.AndroidShareUtils;
 import com.ggz.baselibrary.application.IBaseActivity;
-import com.ggz.baselibrary.retrofit.NetCallBack;
-import com.ggz.baselibrary.retrofit.RequestUtils;
-import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
-import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.lang.reflect.Method;
 

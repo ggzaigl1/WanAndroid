@@ -36,7 +36,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
 
     private static class MoveInfo {
         public ViewHolder holder;
-        public int fromX, fromY, toX, toY;
+        int fromX, fromY, toX, toY;
 
         MoveInfo(ViewHolder holder, int fromX, int fromY, int toX, int toY) {
             this.holder = holder;
@@ -48,8 +48,8 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     }
 
     private static class ChangeInfo {
-        public ViewHolder oldHolder, newHolder;
-        public int fromX, fromY, toX, toY;
+        ViewHolder oldHolder, newHolder;
+        int fromX, fromY, toX, toY;
         private ChangeInfo(ViewHolder oldHolder, ViewHolder newHolder) {
             this.oldHolder = oldHolder;
             this.newHolder = newHolder;
@@ -196,7 +196,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
         return true;
     }
 
-    void animateAddImpl(final ViewHolder holder) {
+    private void animateAddImpl(final ViewHolder holder) {
         final View view = holder.itemView;
         final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
         mAddAnimations.add(holder);
@@ -245,7 +245,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
         return true;
     }
 
-    void animateMoveImpl(final ViewHolder holder, int fromX, int fromY, int toX, int toY) {
+    private void animateMoveImpl(final ViewHolder holder, int fromX, int fromY, int toX, int toY) {
         final View view = holder.itemView;
         final int deltaX = toX - fromX;
         final int deltaY = toY - fromY;
@@ -312,7 +312,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
         return true;
     }
 
-    void animateChangeImpl(final ChangeInfo changeInfo) {
+    private void animateChangeImpl(final ChangeInfo changeInfo) {
         final ViewHolder holder = changeInfo.oldHolder;
         final View view = holder == null ? null : holder.itemView;
         final ViewHolder newHolder = changeInfo.newHolder;
@@ -515,7 +515,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
      * pending/running, call {@link #dispatchAnimationsFinished()} to notify any
      * listeners.
      */
-    void dispatchFinishedWhenDone() {
+    private void dispatchFinishedWhenDone() {
         if (!isRunning()) {
             dispatchAnimationsFinished();
         }
@@ -607,7 +607,7 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
         dispatchAnimationsFinished();
     }
 
-    void cancelAll(List<ViewHolder> viewHolders) {
+    private void cancelAll(List<ViewHolder> viewHolders) {
         for (int i = viewHolders.size() - 1; i >= 0; i--) {
             ViewCompat.animate(viewHolders.get(i).itemView).cancel();
         }

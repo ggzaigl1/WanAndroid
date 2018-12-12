@@ -76,7 +76,8 @@ public class EasyPullLayout extends ViewGroup {
     public static final int ROLL_BACK_TYPE_RIGHT = 2;
     public static final int ROLL_BACK_TYPE_BOTTOM = 3;
 
-    private OnPullListenerAdapter onPullListenerAdapter = new OnPullListenerAdapter() {};
+    private OnPullListenerAdapter onPullListenerAdapter = new OnPullListenerAdapter() {
+    };
     private OnEdgeListener onEdgeListener;
 
     public EasyPullLayout(Context context) {
@@ -177,6 +178,8 @@ public class EasyPullLayout extends ViewGroup {
                     max_offset_top = max_offset_top < 0 ? childViewAttr.size : max_offset_top;
                     max_offset_bottom = max_offset_bottom < 0 ? childViewAttr.size : max_offset_bottom;
                     break;
+                default:
+                    break;
             }
         }
     }
@@ -215,6 +218,8 @@ public class EasyPullLayout extends ViewGroup {
                 case TYPE_EDGE_BOTTOM:
                     top += contentHeight;
                     bottom += contentHeight;
+                    break;
+                default:
                     break;
             }
             childViewAttr.setBounds(left, top, right, bottom); // child views' initial location
@@ -267,6 +272,8 @@ public class EasyPullLayout extends ViewGroup {
                 } else {
                     return false;
                 }
+            default:
+                break;
         }
         return false;
     }

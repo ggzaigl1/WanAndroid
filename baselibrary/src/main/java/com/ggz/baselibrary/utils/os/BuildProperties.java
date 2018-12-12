@@ -13,7 +13,9 @@ import java.util.Set;
 
 /**
  * 判断手机系统类型 核心类
- * Created by fangs on 2017/7/4.
+ *
+ * @author fangs
+ * @date 2017/7/4
  */
 public class BuildProperties {
 

@@ -169,7 +169,6 @@ public class ConvertUtils {
                 return (double) byteNum / MB;
             case GB:
                 return (double) byteNum / GB;
-
         }
 
     }

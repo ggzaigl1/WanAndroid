@@ -1,4 +1,4 @@
-package com.example.gab.babylove.utils;
+package com.ggz.baselibrary.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +13,6 @@ import android.provider.MediaStore;
 public class AndroidShareUtils {
 
     /**
-     * 上下文
-     */
-    private Context context;
-
-    /**
      * 文本类型
      */
     public static int TEXT = 0;
@@ -27,9 +22,6 @@ public class AndroidShareUtils {
      */
     public static int DRAWABLE = 1;
 
-    public AndroidShareUtils(Context context) {
-        this.context = context;
-    }
 
     /**
      * 点击分享的代码

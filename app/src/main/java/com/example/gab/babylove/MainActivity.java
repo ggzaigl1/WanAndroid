@@ -1,12 +1,12 @@
 package com.example.gab.babylove;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -42,7 +42,7 @@ import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.example.gab.babylove.ui.offical.OfficialAccountFragment;
 import com.example.gab.babylove.ui.project.StarFragment;
 import com.example.gab.babylove.ui.view.fragment.ViewFragment;
-import com.example.gab.babylove.utils.AndroidShareUtils;
+import com.ggz.baselibrary.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
@@ -51,8 +51,9 @@ import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
-import com.pgyersdk.update.UpdateManagerListener;
-import com.pgyersdk.update.javabean.AppBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -105,6 +106,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //        Handler handler = new Handler();
 //        handler.postDelayed(() -> getVersionUpdate(-1), 1500);
 
+        if (!isTaskRoot()) {
+            Intent intent = getIntent();
+            String action = intent.getAction();
+            if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && action != null && action.equals(Intent.ACTION_MAIN)) {
+                finish();
+                return;
+            }
+        }
         //设置状态栏透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);

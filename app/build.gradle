@@ -19,10 +19,18 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            buildConfigField "boolean", "LEO_DEBUG", "false"
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+//        debug {
+//            // 显示Log
+//            buildConfigField "boolean", "LEO_DEBUG", "true"
+//            minifyEnabled false
+//        }
     }
+
 
     lintOptions {
         abortOnError false
