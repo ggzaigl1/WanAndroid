@@ -42,18 +42,15 @@ import com.example.gab.babylove.ui.navigation.fragment.NavigationViewFragment;
 import com.example.gab.babylove.ui.offical.OfficialAccountFragment;
 import com.example.gab.babylove.ui.project.StarFragment;
 import com.example.gab.babylove.ui.view.fragment.ViewFragment;
-import com.ggz.baselibrary.utils.AndroidShareUtils;
 import com.example.gab.babylove.utils.NightModeConfig;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
+import com.ggz.baselibrary.utils.AndroidShareUtils;
 import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.ResourceUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.cache.ACache;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;

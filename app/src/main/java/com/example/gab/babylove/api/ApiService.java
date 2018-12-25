@@ -1,7 +1,7 @@
 package com.example.gab.babylove.api;
 
-import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.entity.BannerBean;
+import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.entity.BookmarkBean;
 import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.entity.CourseDetails;
@@ -12,8 +12,8 @@ import com.example.gab.babylove.entity.LoginBean;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.entity.OfficialAccountBean;
 import com.example.gab.babylove.entity.ProjectBean;
-import com.example.gab.babylove.entity.ViewBean;
 import com.example.gab.babylove.entity.UpDateBean;
+import com.example.gab.babylove.entity.ViewBean;
 import com.ggz.baselibrary.retrofit.BeanModule;
 
 import java.util.ArrayList;
@@ -304,6 +304,7 @@ public interface ApiService {
 
     /**
      * 版本更新
+     *
      * @param deviceid
      * @param android
      * @return
@@ -311,6 +312,7 @@ public interface ApiService {
     @Headers({"url_name:user"})
     @GET("http://118.31.218.69/lesprint/api/version/versionInfo")
     Observable<UpDateBean> getVersionsUpdate(@Query("deviceId") String deviceid, @Query("code") String android);
+
 
 
     /**

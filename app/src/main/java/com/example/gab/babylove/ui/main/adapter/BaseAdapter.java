@@ -1,6 +1,7 @@
 package com.example.gab.babylove.ui.main.adapter;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -113,6 +114,7 @@ public class BaseAdapter extends BaseQuickAdapter<BaseBean.DatasBean, BaseViewHo
         helper.addOnClickListener(R.id.image_collect);
         initImage(item, helper.getView(R.id.image_collect));
     }
+
 
     /**
      * 判断收藏

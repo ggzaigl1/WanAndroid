@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.Interpolator;
@@ -213,7 +211,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
             ViewCompat.animate(mFabTop)
                     .scaleX(0.0F)
                     .scaleY(0.0F)
-                    .alpha(0.0F)
+                    .alpha(0.5F)
                     .setInterpolator(INTERPOLATOR).withLayer()
                     .setListener(null).start();
         }

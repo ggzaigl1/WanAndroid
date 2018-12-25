@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseFragment;
@@ -150,21 +152,20 @@ public class HomeFragment extends BaseFragment {
                 .getBanner()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
-
         Observable<BaseBean> observable2 = RequestUtils.create(ApiService.class)
                 .getArticleHomeList(mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
         Observable.zip(observable1, observable2, (bannerBean, articleBean) -> {
-            HashMap<String, Object> map = new HashMap<>(16);
-            map.put("banner", bannerBean);
-            map.put("article", articleBean);
-            return map;
+            ArrayMap<String, Object> arrayMap = new ArrayMap<>(16);
+            arrayMap.put("banner", bannerBean);
+            arrayMap.put("article", articleBean);
+            return arrayMap;
         }).doOnSubscribe(RequestUtils::addDisposable)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetCallBack<HashMap<String, Object>>() {
+                .subscribe(new NetCallBack<ArrayMap<String, Object>>() {
                     @Override
-                    protected void onSuccess(HashMap<String, Object> map) {
+                    protected void onSuccess(ArrayMap<String, Object> map) {
                         List<BannerBean> banner = (List<BannerBean>) map.get("banner");
                         if (null != banner && banner.size() > 0) {
                             List<String> pics = new ArrayList<>();
@@ -312,8 +313,8 @@ public class HomeFragment extends BaseFragment {
      */
     private void firstRun() {
         SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("FirstRun", 0);
-        Boolean first_run = sharedPreferences.getBoolean("First", true);
-        if (first_run) {
+        Boolean firstRun = sharedPreferences.getBoolean("First", true);
+        if (firstRun) {
             sharedPreferences.edit().putBoolean("First", false).apply();
         } else {
             getArticleList(0);

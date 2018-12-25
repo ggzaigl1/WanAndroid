@@ -135,6 +135,7 @@ public class BaseBean implements Serializable {
         private int visible;
         private int zan;
         private String top;
+        private boolean isClick;
         private List<TagsBean> tags;
 
         public String getApkLink() {
@@ -319,6 +320,14 @@ public class BaseBean implements Serializable {
 
         public void setTop(String top) {
             this.top = top;
+        }
+
+        public boolean getIsClick() {
+            return isClick;
+        }
+
+        public void setIsClick(boolean isClick) {
+            this.isClick = isClick;
         }
 
         public List<TagsBean> getTags() {
