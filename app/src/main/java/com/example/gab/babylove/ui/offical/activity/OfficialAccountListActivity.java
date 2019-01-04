@@ -14,9 +14,8 @@ import android.view.Menu;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.api.ApiServiceKotlin;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.main.search.SearchCommonActivity;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
@@ -80,7 +79,7 @@ public class OfficialAccountListActivity extends BaseActivity implements IBaseAc
     @SuppressLint("CheckResult")
     private void getChaptersList(int mPageNo) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
+        RequestUtils.create(ApiServiceKotlin.class)
                 .getWxarticle(mId, mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))

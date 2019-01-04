@@ -7,7 +7,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.gab.babylove.R
-import com.example.gab.babylove.api.ApiService
+import com.example.gab.babylove.api.ApiServiceKotlin
 import com.ggz.baselibrary.retrofit.NetCallBack
 import com.ggz.baselibrary.retrofit.RequestUtils
 import com.ggz.baselibrary.retrofit.RxHelper
@@ -24,9 +24,9 @@ import com.kaopiz.kprogresshud.KProgressHUD
  */
 class BaseActivitys : AppCompatActivity() {
 
-    internal var mKProgressHUD: KProgressHUD? = null
-    internal var permissionChecker: PermissionChecker? = null
-    internal val PERMISSIONS = arrayOf(
+    protected var mKProgressHUD: KProgressHUD? = null
+    protected var permissionChecker: PermissionChecker? = null
+    protected val PERMISSIONS = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE
             , Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
@@ -46,10 +46,9 @@ class BaseActivitys : AppCompatActivity() {
 
     fun setStatusBar(activity: AppCompatActivity) {}
 
-    fun onClick(v: View?) {
+    fun onClick(v: View) {
 
     }
-
 
     /**
      * 收藏
@@ -60,7 +59,7 @@ class BaseActivitys : AppCompatActivity() {
     @SuppressLint("CheckResult")
     internal fun collectArticle(view: View, id: Int) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show()
-        RequestUtils.create(ApiService::class.java)
+        RequestUtils.create(ApiServiceKotlin::class.java)
                 .getCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
@@ -84,7 +83,7 @@ class BaseActivitys : AppCompatActivity() {
     @SuppressLint("CheckResult")
     internal fun unCollectArticle(id: Int) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show()
-        RequestUtils.create(ApiService::class.java)
+        RequestUtils.create(ApiServiceKotlin::class.java)
                 .unCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))

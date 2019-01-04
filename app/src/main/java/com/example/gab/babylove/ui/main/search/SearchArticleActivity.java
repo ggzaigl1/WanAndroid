@@ -13,9 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.api.ApiServiceKotlin;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.db.BaseRecycleAdapter;
 import com.example.gab.babylove.db.DbDao;
 import com.example.gab.babylove.db.SearchRecordAdapter;
@@ -180,7 +179,7 @@ public class SearchArticleActivity extends BaseActivity implements IBaseActivity
 
     @SuppressLint("CheckResult")
     private void getHotKeyList() {
-        RequestUtils.create(ApiService.class)
+        RequestUtils.create(ApiServiceKotlin.class)
                 .getHotKeyList()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))

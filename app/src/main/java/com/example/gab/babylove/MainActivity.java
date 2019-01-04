@@ -29,7 +29,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.about.AboutActivity;
 import com.example.gab.babylove.ui.main.activity.WebsiteActivity;
-import com.example.gab.babylove.ui.main.collect.MyCollectActivity;
+import com.example.gab.babylove.ui.main.collect.MyCollectActivityKotlin;
 import com.example.gab.babylove.ui.main.fragment.HomeFragment;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.ui.main.ornamental.OrnamentalListContextActivity;
@@ -281,7 +281,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             case R.id.nav_collect:
                 //我的收藏
                 if (SpfUtils.getSpfSaveBoolean(ConstantUtils.isLogin)) {
-                    JumpUtils.jumpFade(this, MyCollectActivity.class, null);
+                    JumpUtils.jumpFade(this, MyCollectActivityKotlin.class, null);
                 } else {
                     JumpUtils.jumpFade(this, LoginActivity.class, null);
                     T.showShort(getString(R.string.main_login_view));

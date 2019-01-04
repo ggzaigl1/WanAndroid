@@ -19,7 +19,7 @@ import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.api.ApiServiceKotlin;
 import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.entity.BaseBean;
@@ -146,11 +146,11 @@ public class HomeFragment extends BaseFragment {
      * banner 轮播图 加载数据 接口
      */
     private void getData() {
-        Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
+        Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiServiceKotlin.class)
                 .getBanner()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
-        Observable<BaseBean> observable2 = RequestUtils.create(ApiService.class)
+        Observable<BaseBean> observable2 = RequestUtils.create(ApiServiceKotlin.class)
                 .getArticleHomeList(mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
@@ -209,7 +209,7 @@ public class HomeFragment extends BaseFragment {
     @SuppressLint("CheckResult")
     private void getArticleList(int mCurPage) {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
+        RequestUtils.create(ApiServiceKotlin.class)
                 .getArticleHomeList(mCurPage)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))

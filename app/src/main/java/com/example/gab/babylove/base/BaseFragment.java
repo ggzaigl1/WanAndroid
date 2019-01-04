@@ -13,8 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.api.ApiServiceKotlin;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
 import com.ggz.baselibrary.retrofit.RxHelper;
@@ -152,7 +151,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      */
     protected void getCollectArticle(View view, int id) {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
+        RequestUtils.create(ApiServiceKotlin.class)
                 .getCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))
@@ -180,7 +179,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     protected void getUnCollectArticle(int id) {
         mKProgressHUD = KProgressHUD.create(getActivity())
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
+        RequestUtils.create(ApiServiceKotlin.class)
                 .unCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))

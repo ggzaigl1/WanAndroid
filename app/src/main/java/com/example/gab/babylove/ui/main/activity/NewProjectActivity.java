@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.api.ApiServiceKotlin;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
@@ -80,7 +80,7 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
     @SuppressLint("CheckResult")
     private void getListProject(int mPageNo) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
+        RequestUtils.create(ApiServiceKotlin.class)
                 .getListProject(mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))

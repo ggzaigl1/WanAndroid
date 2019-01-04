@@ -9,9 +9,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.api.ApiServiceKotlin;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.ui.main.collect.adapter.MyCollectAdapter;
 import com.example.gab.babylove.web.WebViewActivity;
@@ -39,7 +38,7 @@ import butterknife.BindView;
 
 public class MyCollectActivity extends BaseActivity implements IBaseActivity {
 
-    @BindView(R.id.rv_title)
+    @BindView(R.id.rv_collect)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout mRefreshLayout;
@@ -98,7 +97,7 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
     @SuppressLint("CheckResult")
     private void getArticleList(int mPageNo) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
+        RequestUtils.create(ApiServiceKotlin.class)
                 .getCollectList(mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
@@ -158,7 +157,7 @@ public class MyCollectActivity extends BaseActivity implements IBaseActivity {
     @SuppressLint("CheckResult")
     private void unCollectArticle(int id, int originId, int position) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiService.class)
+        RequestUtils.create(ApiServiceKotlin.class)
                 .unMyCollectArticle(id, originId)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))

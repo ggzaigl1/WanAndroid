@@ -12,18 +12,17 @@ import java.util.ArrayList
  * Created by 初夏小溪
  * data :2019/1/4 0004 11:28
  */
-interface ApiService {
+interface ApiServiceKotlin {
 
     /**
      * 登录
      *
-     * @param options
      * @return
      */
     @FormUrlEncoded
     @Headers("url_name:user")
     @POST("user/login")
-    fun getLogin(@FieldMap options: Map<String, Any>): Observable<BeanModule<LoginBean>>
+    fun getLogin(@Path("username") username: String, @Path("password") password: String): Observable<BeanModule<LoginBean>>
 
     /**
      * 注册接口

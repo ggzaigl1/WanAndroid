@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.api.ApiServiceKotlin;
 import com.example.gab.babylove.entity.NavigationBean;
 import com.example.gab.babylove.ui.navigation.adapter.NavigationAdapter;
 import com.example.gab.babylove.base.BaseFragment;
@@ -76,7 +76,7 @@ public class NavigationFragment extends BaseFragment {
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
                 .show();
-        RequestUtils.create(ApiService.class)
+        RequestUtils.create(ApiServiceKotlin.class)
                 .getNavigationList()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))
