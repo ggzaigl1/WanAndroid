@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
+import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.widget.fingerprintcore.FingerprintCore;
 import com.example.gab.babylove.widget.fingerprintcore.KeyguardLockScreenManager;
 import com.ggz.baselibrary.application.IBaseActivity;

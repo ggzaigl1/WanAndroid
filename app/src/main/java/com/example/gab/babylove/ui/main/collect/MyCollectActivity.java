@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
-import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
+import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.entity.CollectBean;
 import com.example.gab.babylove.ui.main.collect.adapter.MyCollectAdapter;
 import com.example.gab.babylove.web.WebViewActivity;

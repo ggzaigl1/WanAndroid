@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
+import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.db.BaseRecycleAdapter;
 import com.example.gab.babylove.db.DbDao;
 import com.example.gab.babylove.db.SearchRecordAdapter;

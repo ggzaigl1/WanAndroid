@@ -30,6 +30,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
+import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.utils.CleanMessageUtil;
 import com.example.gab.babylove.utils.CustomDialog;
 import com.example.gab.babylove.utils.Util;
@@ -55,7 +56,6 @@ import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
 
 import static android.app.Notification.VISIBILITY_SECRET;
 

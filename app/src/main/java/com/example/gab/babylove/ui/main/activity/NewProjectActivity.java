@@ -62,11 +62,17 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
     }
 
     @Override
+    public void setStatusBar(Activity activity) {
+
+    }
+
+    @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         initRecyle();
         initRefresh();
         getListProject(mPageNo);
     }
+
 
     /**
      * 列表数据加载
