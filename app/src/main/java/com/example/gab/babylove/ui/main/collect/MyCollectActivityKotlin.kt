@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.ViewGroup
+import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.example.gab.babylove.R
 import com.example.gab.babylove.api.ApiServiceKotlin
@@ -21,7 +22,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
-import kotlinx.android.synthetic.main.activity_collect.*
 import kotlinx.android.synthetic.main.activity_collect_kotlin.*
 import java.util.*
 
@@ -74,6 +74,9 @@ class MyCollectActivityKotlin : AppCompatActivity() {
         rv_collect_title.adapter = mAdapter
     }
 
+    private fun toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(this, message, duration).show()
+    }
 
     /**
      * 我的收藏 数据加载
