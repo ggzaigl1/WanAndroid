@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+    如果想要为其增加一个圆角，可以在  中使用 corners 属性，它支持设置一个 android:radius ，
+    用来设置四个角落的圆角角度，当然也提供了单独的属性去设置某个角的圆角角度，
+    例如，android:topLeftRadius 就是设置左上的圆角的。
+
+    stroke 用于设置边框，可以指定颜色和边框的宽度。
+    gradient 渐变的效果
+    -->
+    <!--<solid android:color="@color/red"/>-->
+    <!--<corners android:radius="4dp"/>-->
+    <!--<stroke android:color="@color/bgColor" android:dashGap="5dp" android:dashWidth="5dp"/>-->
+
+    <gradient android:angle="90"
+              android:startColor="#300000"
+              android:gradientRadius="20"
+              android:endColor="@android:color/transparent"
+              android:type="sweep"/>
+</shape>

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiServiceKotlin;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.OfficialAccountBean;
 import com.example.gab.babylove.ui.offical.activity.OfficialAccountListActivity;
 import com.example.gab.babylove.ui.offical.adapter.OfficialAccountAdapter;
@@ -72,7 +72,7 @@ public class OfficialAccountFragment extends BaseFragment {
     @SuppressLint("CheckResult")
     private void getChaptersList() {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .getChapters()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))

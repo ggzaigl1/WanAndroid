@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--<item name="colorPrimary">@color/statusBar</item>    &lt;!&ndash; 状态栏 &ndash;&gt;-->
+        <!--<item name="colorPrimaryDark">@color/appHeadBg</item> &lt;!&ndash; toolbar &ndash;&gt;-->
+        <!--<item name="colorAccent">@color/colorAccent</item>  &lt;!&ndash; 重点 &ndash;&gt;-->
+        <item name="windowActionBar">false</item><!-- 不显示标题栏 -->
+        <item name="windowNoTitle">true</item><!-- 无标题 -->
+        <item name="android:windowBackground">@color/white</item><!-- 背景 -->
+
+        <!-- 避免启动应用后，出现短暂的黑屏或白屏现象 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- 系统分割线 -->
+        <item name="android:listDivider">@drawable/divider_bg</item>
+        <item name="android:textAllCaps">false</item><!-- 所有字母是否大写 -->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Toast</item> <!--recreate 闪屏过渡动画-->
+
+    </style>
+
+
+</resources>

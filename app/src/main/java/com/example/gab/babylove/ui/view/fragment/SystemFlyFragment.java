@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiServiceKotlin;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.BaseBean;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
@@ -90,7 +90,7 @@ public class SystemFlyFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int id) {
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .getArticleList(mPageNo, id)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))

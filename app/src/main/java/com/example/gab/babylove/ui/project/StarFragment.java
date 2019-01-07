@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiServiceKotlin;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.ProjectBean;
 import com.example.gab.babylove.ui.main.activity.NewProjectActivity;
@@ -67,7 +67,7 @@ public class StarFragment extends BaseFragment {
      */
     @SuppressLint("CheckResult")
     private void getArticleList() {
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .getProject()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))

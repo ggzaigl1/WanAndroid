@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.base.BaseActivitys;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.just.agentweb.AgentWeb;
 

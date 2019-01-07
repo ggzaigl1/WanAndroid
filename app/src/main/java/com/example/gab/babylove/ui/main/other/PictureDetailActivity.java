@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.entity.OrListBean;
 import com.example.gab.babylove.ui.main.adapter.PhotoAdapter;
 import com.example.gab.babylove.view.PhotoViewPager;

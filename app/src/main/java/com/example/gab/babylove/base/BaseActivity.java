@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiServiceKotlin;
+import com.example.gab.babylove.api.ApiService;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
@@ -75,7 +75,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
     @SuppressLint("CheckResult")
     protected void collectArticle(View view, int id) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .getCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))
@@ -102,7 +102,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
     @SuppressLint("CheckResult")
     protected void unCollectArticle(int id) {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .unCollectArticle(id, "")
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))

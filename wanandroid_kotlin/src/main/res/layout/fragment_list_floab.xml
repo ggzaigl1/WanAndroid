@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
+
+    <android.support.design.widget.TabLayout
+            android:id="@+id/sliding_tab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:tabSelectedTextColor="@android:color/holo_orange_light"
+            app:tabMode="scrollable"
+            app:tabGravity="center"
+            app:tabTextColor="@color/pink"
+            app:tabIndicatorColor="@android:color/holo_orange_light"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:borderWidth="0dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:backgroundTint="@color/colorAccent"
+            app:rippleColor="@color/colorAccent"
+            app:srcCompat="@drawable/vector_list_project"/>
+
+    <android.support.v4.view.ViewPager
+            android:id="@+id/view_page"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintTop_toBottomOf="@+id/sliding_tab"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

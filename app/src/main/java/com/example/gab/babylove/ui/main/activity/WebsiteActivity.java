@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiServiceKotlin;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.BookmarkBean;
 import com.ggz.baselibrary.application.IBaseActivity;
@@ -58,7 +58,7 @@ public class WebsiteActivity extends BaseActivity implements IBaseActivity {
     @SuppressLint("CheckResult")
     private void getBookmarkList() {
         mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .getBookmarkList()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(this))

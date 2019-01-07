@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="?attr/actionBarSize"
+                app:contentScrim="?attr/colorPrimary"
+                app:statusBarScrim="?attr/colorPrimary"
+                android:fitsSystemWindows="true"
+                app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+                app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                >
+            <!--layout_collapseMode
+            app:layout_scrollFlags="scroll|exitUntilCollapsed" 滑动显示toolbar
+             app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways" //滑动隐藏toolBar
+             app:contentScrim="@color/colorPrimary"
+             1，pin 没有视觉差！
+            2，parallax  有视觉差   可以配合layout_collapseParallaxMultiplier 视觉差因子 设置  val  0-1-->
+
+            <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/club_details_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="fitXY"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="1"/>
+
+            <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:contentInsetStart="0dp"
+                    app:navigationIcon="?attr/homeAsUpIndicator"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                <!--<TextView-->
+                <!--android:id="@+id/tvName"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:drawablePadding="@dimen/dp_4"-->
+                <!--android:text="运动课程"-->
+                <!--android:textSize="16dp"-->
+                <!--android:textColor="@color/white"/>-->
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:background="@color/BgColor"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="6dp"
+                        >
+
+                    <TextView
+                            android:id="@+id/tv_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_medium_small"
+                            android:drawableStart="@mipmap/icon_sensory_blue"
+                            android:drawablePadding="12dp"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/myTxtColor"/>
+
+                    <TextView
+                            android:id="@+id/tv_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="12dp"
+                            android:lineSpacingExtra="@dimen/dp_4"
+                            android:textSize="@dimen/sp_14"
+                            android:textColor="@color/myTxtColor"
+                            android:text=""/>
+                </LinearLayout>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="12dp"
+                        android:background="@color/BgColor"/>
+
+                <TextView
+                        android:id="@+id/tv_do"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_medium_small"
+                        android:drawableStart="@mipmap/icon_sensory_blue"
+                        android:drawablePadding="12dp"
+                        android:layout_marginTop="15dp"
+                        android:padding="6dp"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/myTxtColor"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none"/>
+
+                </LinearLayout>
+
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:background="@color/BgColor"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                    <TextView
+                            android:id="@+id/tv_point"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_medium_small"
+                            android:drawableStart="@mipmap/icon_sensory_blue"
+                            android:drawablePadding="12dp"
+                            android:layout_marginTop="15dp"
+                            android:padding="6dp"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/myTxtColor"/>
+
+                    <TextView
+                            android:id="@+id/tv_announcements"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="@dimen/dp_4"
+                            android:textSize="@dimen/sp_14"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:textColor="@color/myTxtColor"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

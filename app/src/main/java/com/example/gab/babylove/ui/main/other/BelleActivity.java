@@ -15,7 +15,7 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.Interpolator;
 
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiServiceKotlin;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.GanBean;
 import com.example.gab.babylove.entity.OrListBean;
@@ -82,7 +82,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
      */
     @SuppressLint("CheckResult")
     private void getCourseDetails(int mCurPage) {
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .getCourseDetails(50, mCurPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

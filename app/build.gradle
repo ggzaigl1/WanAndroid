@@ -1,6 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion var.compileSdkVersion
@@ -60,11 +58,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     implementation project(':baselibrary')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 //    implementation 'com.fy.grace:baselibrary:1.4.2'
 //    implementation 'com.ggzaigl1:baselibrary:1.0.6'
-}
-repositories {
-    mavenCentral()
 }

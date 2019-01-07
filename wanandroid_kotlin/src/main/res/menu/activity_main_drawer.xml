@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/nav_belle"
+            android:icon="@drawable/vector_belle"
+            android:title="@string/pretty_picture"/>
+    <item
+            android:id="@+id/nav_collect"
+            android:icon="@drawable/vector_collect"
+            android:title="@string/collect"/>
+    <item
+            android:id="@+id/nav_ornamental"
+            android:icon="@drawable/vector_ornamental"
+            android:title="@string/ornamental"/>
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_night"
+                android:icon="@drawable/vector_menu_night_mode"
+                android:visible="false"
+                android:title="@string/night_mode"/>
+        <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/vector_menu_share"
+                android:title="@string/share"/>
+        <item
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/tools"/>
+        <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/vector_about_us"
+                android:title="@string/about_us"/>
+    </group>
+</menu>

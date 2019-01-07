@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiServiceKotlin;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.UpDateBean;
 import com.example.gab.babylove.utils.CustomDialog;
@@ -77,7 +77,7 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
     }
 
     private void getVersionsUpdate() {
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .getVersionsUpdate("", "android")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

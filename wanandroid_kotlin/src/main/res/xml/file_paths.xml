@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<resources>-->
+<!--<paths>-->
+<!--<external-path-->
+<!--name="download"-->
+<!--path=""/>-->
+<!--</paths>-->
+<!--</resources>-->
+
+
+<paths>
+    <external-path
+            path="Android/data/ com.example.gab.babylove/"
+            name="files_root"/>
+    <external-path
+            path="."
+            name="external_storage_root"/>
+</paths>

@@ -18,8 +18,9 @@ import android.view.ViewGroup;
 import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.example.gab.babylove.R;
-import com.example.gab.babylove.api.ApiServiceKotlin;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseFragment;
 import com.example.gab.babylove.entity.BannerBean;
 import com.example.gab.babylove.entity.BaseBean;
@@ -60,7 +61,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class HomeFragment extends BaseFragment {
 
-    @BindView(R.id.banner)
+    @BindView(R.id.banner_home)
     ConvenientBanner mConvenientBanner;
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -131,11 +132,14 @@ public class HomeFragment extends BaseFragment {
                 //设置指示器的方向
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
                 .setPageTransformer(new AccordionTransformer())
-                .setOnItemClickListener(position -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Link", urls.get(position));
-                    JumpUtils.jumpFade((AppCompatActivity) getActivity(), AgentWebActivity.class, bundle);
+                .setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Link", urls.get(position));
+                        JumpUtils.jumpFade((AppCompatActivity) HomeFragment.this.getActivity(), AgentWebActivity.class, bundle);
 
+                    }
                 })
                 //设置手动影响（设置了该项无法手动切换）
                 .setManualPageable(true);
@@ -146,11 +150,11 @@ public class HomeFragment extends BaseFragment {
      * banner 轮播图 加载数据 接口
      */
     private void getData() {
-        Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiServiceKotlin.class)
+        Observable<List<BannerBean>> observable1 = RequestUtils.create(ApiService.class)
                 .getBanner()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
-        Observable<BaseBean> observable2 = RequestUtils.create(ApiServiceKotlin.class)
+        Observable<BaseBean> observable2 = RequestUtils.create(ApiService.class)
                 .getArticleHomeList(mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
@@ -209,7 +213,7 @@ public class HomeFragment extends BaseFragment {
     @SuppressLint("CheckResult")
     private void getArticleList(int mCurPage) {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .getArticleHomeList(mCurPage)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))

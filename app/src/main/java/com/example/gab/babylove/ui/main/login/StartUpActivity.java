@@ -9,7 +9,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.gab.babylove.MainActivity;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.base.BaseActivitys;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.base.ViewHolder;
 import com.ggz.baselibrary.base.dialog.CommonDialog;

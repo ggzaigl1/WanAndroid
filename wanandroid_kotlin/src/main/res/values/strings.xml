@@ -1,0 +1,155 @@
+<resources>
+
+    <!-- 公共string资源 -->
+    <string name="app_name">一起玩Android</string>
+    <string name="exit_app">再按一次返回键退出程序</string>
+    <string name="system_content">您确定要退出登录吗?</string>
+
+    <string name="system_title">系统提示</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="next">下一步</string>
+    <string name="complete">完成</string>
+    <string name="back">返回</string>
+    <string name="delete">删除</string>
+
+    <!-- MainActivity string 资源 -->
+    <string name="nav_home_title">首页</string>
+    <string name="nav_system_title">体系</string>
+    <string name="nav_view_title">视图</string>
+    <string name="nav_project_title">项目</string>
+
+    <!-- 登录注册 string 资源 -->
+    <string name="userName">账号：</string>
+    <string name="passWord">密码：</string>
+    <string name="confirmPass">确认密码：</string>
+    <string name="registerTitle">注册</string>
+    <string name="login_username">请输入账号</string>
+    <string name="login_password">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="register">注册账号</string>
+    <string name="rememberPass">记住密码</string>
+    <string name="correct_password">请输入正确的密码</string>
+    <string name="forgot_your_password">没有账号? 点击+号注册</string>
+    <string name="goddess">Beautiful Goddess</string>
+
+    <!-- UI功能性 string 资源 -->
+    <string name="about_awesome_wan_android">Play Together Android</string>
+    <string name="nav_title">Google Hot Air Balloon</string>
+    <string name="nav_context">https://github.com/ggzaigl1</string>
+    <string name="tools_clear_cache">是否清除缓存</string>
+    <string name="zero_k">0K</string>
+    <string name="collect_login">登录之后才能收藏或查看已收藏内容</string>
+    <string name="collection_success">收藏成功</string>
+    <string name="cancel_collection_success">取消收藏成功</string>
+    <string name="tools_cannot_application">无法打开应用市场</string>
+
+    <!-- navigation_drawer string 资源 -->
+    <string name="pretty_picture">隐性福利</string>
+    <string name="tools">设置</string>
+    <string name="website">常用网站</string>
+    <string name="official_account">公众号</string>
+    <string name="new_project">最新项目</string>
+    <string name="collect">我的收藏</string>
+    <string name="search">搜索</string>
+    <string name="hot_search">热门搜索</string>
+    <string name="search_part">搜索详情</string>
+    <string name="knowledge">知识体系</string>
+    <string name="about_us">关于我们</string>
+    <string name="share">分享</string>
+    <string name="night_mode">夜间模式</string>
+    <string name="nav_exit">退出应用</string>
+    <string name="ornamental">健康运动</string>
+    <string name="fingerprint">Fingerprint</string>
+    <string name="notLogin">Google Hot Air Balloon</string>
+    <string name="clickLogin">点击登录</string>
+    <string name="login_exit">退出登录</string>
+
+    <string name="menu_share_knowledge">分享知识点</string>
+    <string name="menu_web_browser">在浏览器打开</string>
+    <string name="menu_collection_web">收藏本文</string>
+
+
+    <string name="main_login_view">登录之后才能查看已收藏内容</string>
+    <string name="search_knowledge">搜索知识点</string>
+    <string name="save_photo">保存到相册中</string>
+    <string name="announcements">注意事项</string>
+    <string name="training_action">训练动作</string>
+
+    <string name="item_footer">我是有底线的,检查下网络呢~</string>
+    <string name="search_no_text">没有搜索到相关内容~"</string>
+    <string name="data_no_text">Sorry~好像没有数据~"</string>
+
+    <string name="clear_cache">清空缓存</string>
+    <string name="to_evaluate">去评价</string>
+    <string name="check_update">检查版本更新</string>
+    <string name="version_update">版本更新</string>
+    <string name="update_now">立即更新</string>
+    <string name="next_update">下次更新</string>
+
+
+    <!-- WebView string 资源 -->
+    <string name="web_error">抱歉~\n加载失败,点击重新加载</string>
+
+    <!-- Fingerprint string 资源 -->
+    <string name="fingerprint_recognition_start">开始指纹识别</string>
+    <string name="fingerprint_recognition_cancel">取消指纹识别</string>
+    <string name="fingerprint_recognition_guide_tip">点击“开始指纹识别”按钮</string>
+    <string name="fingerprint_recognition_tip">请进行指纹识别，长按指纹解锁键</string>
+    <string name="fingerprint_recognition_not_support">此设备不支持指纹解锁</string>
+    <string name="fingerprint_recognition_success">指纹识别成功</string>
+    <string name="fingerprint_recognition_failed">指纹识别失败，请重试！</string>
+    <string name="fingerprint_recognition_error">指纹识别错误，等待几秒之后再重试</string>
+    <string name="fingerprint_recognition_authenticating">指纹识别已经开启，长按指纹解锁键</string>
+    <string name="fingerprint_recognition_unlock_screen">测试密码解锁屏幕</string>
+    <string name="fingerprint_recognition_not_enrolled">您还没有录制指纹，请录入！</string>
+    <string name="fingerprint_not_set_unlock_screen_pws">系统没有设置锁屏密码，请设置！</string>
+    <string name="fingerprint_sys_setting_page">进入系统指纹设置页面</string>
+    <string name="sys_pwd_recognition_success">系统密码识别成功</string>
+    <string name="sys_pwd_recognition_failed">系统密码识别失败</string>
+
+    <!-- Dialog string 资源 -->
+    <string name="upLoading">正在上传&#8230;</string>
+    <string name="publish_loading">正在发表&#8230;</string>
+    <string name="loading_modify">正在修改&#8230;</string>
+    <string name="loading_save">正在保存&#8230;</string>
+    <string name="loading_get">正在获取&#8230;</string>
+    <string name="register_loading">正在注册&#8230;</string>
+    <string name="user_login">正在登录&#8230;</string>
+    <string name="exit_loading">正在退出&#8230;</string>
+    <string name="modify_success">修改成功</string>
+    <string name="get_success">获取成功</string>
+
+    <!-- 适配字符串 后面有一个汉字宽度的空格 知识体系-->
+    <string name="news_space">%1$s&#160;&#160;&#8201;</string>
+    <string name="about_content">
+        <![CDATA[
+            <h2>网站内容</h2>
+            <p>\t\t本网站每天新增20~30篇优质文章，并加入到现有分类中，力求整理出一份优质而又详尽的知识体系，闲暇时间不妨上来学习下知识；除此以外，并为大家提供平时开发过程中常用的工具以及常用的网址导航。</p>
+            <p>\t\t当然这只是我们目前的功能，未来我们将提供更多更加便捷的功能…</p>
+            <p>如果您有任何好的建议：</p>
+                <ul>
+                    <li>\t\t关于网站排版</li>
+                    <li>\t\t关于新增常用网址以及工具</li>
+                    <li>\t\t未来你希望增加的功能等</li>
+                </ul>
+
+            <p>\t\t可以在
+                <a href="https://github.com/ggzaigl1/WanAndroid" target="_blank">WanAndroid</a>
+                项目中以issue的形式提出，我们会及时跟进。
+            </p>
+            <h2>源码位置</h2>
+
+            <p>
+                \t\t本软件开源，如果你发现任何错误，不要犹豫，马上点击
+                <a href="https://github.com/ggzaigl1/WanAndroid" target="_blank">GitHub</a>,
+                在上面发起<b>issue</b>或者提交<b>pull request</b>。
+            </p>
+        ]]>
+    </string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="other">其他</string>
+
+</resources>

@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.ggz.baselibrary.utils.AndroidShareUtils;
 import com.ggz.baselibrary.application.IBaseActivity;

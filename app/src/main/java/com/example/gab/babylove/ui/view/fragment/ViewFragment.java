@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.ui.view.activity.SystemActivity;
 import com.example.gab.babylove.ui.view.adapter.ViewAdapter;
-import com.example.gab.babylove.api.ApiServiceKotlin;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.entity.ViewBean;
 import com.example.gab.babylove.base.BaseFragment;
 import com.ggz.baselibrary.retrofit.NetCallBack;
@@ -66,7 +66,7 @@ public class ViewFragment extends BaseFragment {
     @SuppressLint("CheckResult")
     private void getArticleList() {
         mKProgressHUD = KProgressHUD.create(getActivity()).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        RequestUtils.create(ApiServiceKotlin.class)
+        RequestUtils.create(ApiService.class)
                 .getTreeList()
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()))

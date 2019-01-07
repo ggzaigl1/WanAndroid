@@ -14,7 +14,6 @@ import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
-import com.example.gab.babylove.base.BaseActivitys;
 import com.example.gab.babylove.entity.ViewBean;
 import com.example.gab.babylove.ui.view.fragment.SystemFlyFragment;
 import com.ggz.baselibrary.application.IBaseActivity;
