@@ -1,1 +1,1 @@
-include ':app', ':baselibrary', ':wanandroid_kotlin'
+include ':app', ':baselibrary'

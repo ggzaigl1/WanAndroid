@@ -112,7 +112,7 @@
                 android:screenOrientation="portrait"/>
         <!-- 我的收藏 -->
         <activity
-                android:name=".ui.main.collect.MyCollectActivityKotlin"
+                android:name=".ui.main.collect.MyCollectActivity"
                 android:label="@string/collect"
                 android:theme="@style/AppTheme.NoActionBar"
                 android:screenOrientation="portrait"/>
