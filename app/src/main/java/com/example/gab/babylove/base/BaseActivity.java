@@ -1,6 +1,5 @@
 package com.example.gab.babylove.base;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,6 +20,9 @@ import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.permission.PermissionChecker;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 /**
  * @author 初夏小溪
  * @date 2018/10/15 0015
@@ -30,8 +32,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
     protected KProgressHUD mKProgressHUD;
     protected PermissionChecker permissionChecker;
     protected static final String[] PERMISSIONS = new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE
     };
 
     @Override

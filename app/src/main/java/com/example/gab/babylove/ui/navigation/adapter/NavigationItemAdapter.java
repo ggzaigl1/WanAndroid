@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class NavigationItemAdapter extends BaseQuickAdapter<NavigationBean.ArticlesBean, BaseViewHolder> {
 
-    public NavigationItemAdapter(List<NavigationBean.ArticlesBean> data) {
+    NavigationItemAdapter(List<NavigationBean.ArticlesBean> data) {
         super(R.layout.item_navigation_cid, data);
     }
 

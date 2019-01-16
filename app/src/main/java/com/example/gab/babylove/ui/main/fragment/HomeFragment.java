@@ -52,6 +52,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.BiFunction;
 
 /**
  * @author Gab
@@ -158,11 +159,14 @@ public class HomeFragment extends BaseFragment {
                 .getArticleHomeList(mPageNo)
                 .compose(RxHelper.handleResult())
                 .compose(RxHelper.bindToLifecycle(getActivity()));
-        Observable.zip(observable1, observable2, (bannerBean, articleBean) -> {
-            ArrayMap<String, Object> arrayMap = new ArrayMap<>(16);
-            arrayMap.put("banner", bannerBean);
-            arrayMap.put("article", articleBean);
-            return arrayMap;
+        Observable.zip(observable1, observable2, new BiFunction<List<BannerBean>, BaseBean, ArrayMap<String, Object>>() {
+            @Override
+            public ArrayMap<String, Object> apply(List<BannerBean> bannerBean, BaseBean articleBean) throws Exception {
+                ArrayMap<String, Object> arrayMap = new ArrayMap<>(16);
+                arrayMap.put("banner", bannerBean);
+                arrayMap.put("article", articleBean);
+                return arrayMap;
+            }
         }).doOnSubscribe(RequestUtils::addDisposable)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetCallBack<ArrayMap<String, Object>>() {

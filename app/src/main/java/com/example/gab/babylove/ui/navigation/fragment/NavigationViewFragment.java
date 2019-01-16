@@ -38,7 +38,7 @@ public class NavigationViewFragment extends BaseFragment {
     @BindView(R.id.rv_context)
     RecyclerView mRecyclerViewRight;
     @BindView(R.id.include_nothing_data)
-    View include_nothing_data;
+    View includeNothingData;
 
     NavigationLifeAdapter mAdapterLife;
     NavigationRightAdapter mAdapterRight;
@@ -101,7 +101,7 @@ public class NavigationViewFragment extends BaseFragment {
 
     private void initRecyclerLife() {
         mLinearLayoutManager = new LinearLayoutManager(mContext);
-        mRecyclerViewLife.setLayoutManager(mLinearLayoutManager);
+        mRecyclerViewLife.setLayoutManager( new LinearLayoutManager(mContext));
         mAdapterLife = new NavigationLifeAdapter(new ArrayList<>());
         mAdapterLife.setOnItemClickListener((adapter, view, position) -> {
             //如果item位置不等于0 就不显示
@@ -143,7 +143,7 @@ public class NavigationViewFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         if (!NetworkUtils.isConnected(ConfigUtils.getAppCtx())) {
-            include_nothing_data.setVisibility(View.VISIBLE);
+            includeNothingData.setVisibility(View.VISIBLE);
             initRecyclerLife();
             getNavigationList();
             mKProgressHUD.dismiss();

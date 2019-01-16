@@ -127,13 +127,18 @@ public class T {
         public void showToast(String content) {
             if (mToast == null) {
                 mToast = new Toast(ConfigUtils.getAppCtx());
-                mToast.setDuration(Toast.LENGTH_SHORT);//设置toast显示的时长
-                View root = LayoutInflater.from(ConfigUtils.getAppCtx()).inflate(R.layout.item_toast_custom_common, null, false);//自定义样式，自定义布局文件
+                //设置toast显示的时长
+                mToast.setDuration(Toast.LENGTH_SHORT);
+                //自定义样式，自定义布局文件
+                View root = LayoutInflater.from(ConfigUtils.getAppCtx()).inflate(R.layout.item_toast_custom_common, null, false);
                 mTvToast = root.findViewById(R.id.tvCustomToast);
-                mToast.setView(root);//设置自定义的view
+                //设置自定义的view
+                mToast.setView(root);
             }
-            mTvToast.setText(content);//设置文本
-            mToast.show();//展示toast
+            ;//设置文本
+            mTvToast.setText(content);
+            //展示toast
+            mToast.show();
         }
 
         public void showToast(int stringId) {

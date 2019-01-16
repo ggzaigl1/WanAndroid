@@ -52,6 +52,7 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.fab_top)
     FloatingActionButton mFabTop;
+
     PicturesAdapter mAdapter;
     private int mCurPage = 1;
     private final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
@@ -157,9 +158,9 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                 super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findFirstVisibleItemPosition() != 0) {
-                    fabInAnim();
+                    mFabTop.show();
                 } else {
-                    fabOutAnim();
+                    mFabTop.hide();
                 }
             }
         });
@@ -181,41 +182,11 @@ public class BelleActivity extends BaseActivity implements IBaseActivity {
                 mRecyclerView.smoothScrollToPosition(0);
             } else {
                 mRecyclerView.scrollToPosition(0);
-                fabOutAnim();
+                mFabTop.hide();
             }
         });
     }
 
-    /**
-     * 悬浮按钮显示动画
-     */
-    private void fabInAnim() {
-        if (mFabTop.getVisibility() == View.GONE) {
-            mFabTop.setVisibility(View.VISIBLE);
-            ViewCompat.animate(mFabTop)
-                    .scaleX(1.0F)
-                    .scaleY(1.0F)
-                    .alpha(1.0F)
-                    .setInterpolator(new CycleInterpolator(1))
-                    .setInterpolator(INTERPOLATOR).withLayer()
-                    .setListener(null).start();
-        }
-    }
-
-    /**
-     * 悬浮图标隐藏动画
-     */
-    private void fabOutAnim() {
-        if (mFabTop.getVisibility() == View.VISIBLE) {
-            mFabTop.setVisibility(View.GONE);
-            ViewCompat.animate(mFabTop)
-                    .scaleX(0.0F)
-                    .scaleY(0.0F)
-                    .alpha(0.5F)
-                    .setInterpolator(INTERPOLATOR).withLayer()
-                    .setListener(null).start();
-        }
-    }
 
     @Override
     public void onPause() {

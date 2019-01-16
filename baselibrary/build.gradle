@@ -112,5 +112,7 @@ dependencies {
     api 'com.kaopiz:kprogresshud:1.1.0'
     //垂直纵向的TabLayout、轻松创建纵向导航 https://github.com/qstumn/VerticalTabLayout
     api 'q.rorbin:VerticalTabLayout:1.2.5'
+    //google material
+//    api 'com.google.android.material:material:1.1.0-alpha02'
 }
 

@@ -2,7 +2,11 @@ package com.example.gab.babylove.ui.main.login;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -16,6 +20,7 @@ import com.ggz.baselibrary.base.dialog.DialogConvertListener;
 import com.ggz.baselibrary.base.dialog.NiceDialog;
 import com.ggz.baselibrary.statusbar.MdStatusBar;
 import com.ggz.baselibrary.utils.JumpUtils;
+import com.ggz.baselibrary.utils.T;
 import com.ggz.baselibrary.utils.permission.PermissionChecker;
 
 import java.util.concurrent.TimeUnit;
