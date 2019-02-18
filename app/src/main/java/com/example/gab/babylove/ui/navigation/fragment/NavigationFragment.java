@@ -18,6 +18,7 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import q.rorbin.verticaltablayout.VerticalTabLayout;
@@ -83,36 +84,7 @@ public class NavigationFragment extends BaseFragment {
                 .subscribe(new NetCallBack<List<NavigationBean>>() {
                     @Override
                     protected void onSuccess(List<NavigationBean> navigationBeans) {
-                        vtlNavigation.setTabAdapter(new TabAdapter() {
-                            @Override
-                            public int getCount() {
-                                return navigationBeans == null ? 0 : navigationBeans.size();
-                            }
-
-                            @Override
-                            public ITabView.TabBadge getBadge(int position) {
-                                return null;
-                            }
-
-                            @Override
-                            public ITabView.TabIcon getIcon(int position) {
-                                return null;
-                            }
-
-                            @Override
-                            public ITabView.TabTitle getTitle(int position) {
-                                return new TabView.TabTitle.Builder()
-                                        .setContent(navigationBeans.get(position).getName())
-                                        .setTextColor(ContextCompat.getColor(getActivity(), R.color.colorAccent),
-                                                ContextCompat.getColor(getActivity(), R.color.colorAutoDismissToast))
-                                        .build();
-                            }
-
-                            @Override
-                            public int getBackground(int position) {
-                                return -1;
-                            }
-                        });
+                        setTabAdapter(navigationBeans);
                         mAdapter.setNewData(navigationBeans);
                         leftRightLinkage();
                     }
@@ -122,6 +94,39 @@ public class NavigationFragment extends BaseFragment {
 
                     }
                 });
+    }
+
+    private void setTabAdapter(List<NavigationBean> navigationBeans) {
+        vtlNavigation.setTabAdapter(new TabAdapter() {
+            @Override
+            public int getCount() {
+                return navigationBeans == null ? 0 : navigationBeans.size();
+            }
+
+            @Override
+            public ITabView.TabBadge getBadge(int position) {
+                return null;
+            }
+
+            @Override
+            public ITabView.TabIcon getIcon(int position) {
+                return null;
+            }
+
+            @Override
+            public ITabView.TabTitle getTitle(int position) {
+                return new TabView.TabTitle.Builder()
+                        .setContent(navigationBeans.get(position).getName())
+                        .setTextColor(ContextCompat.getColor(Objects.requireNonNull(getActivity()), R.color.colorAccent),
+                                ContextCompat.getColor(getActivity(), R.color.colorAutoDismissToast))
+                        .build();
+            }
+
+            @Override
+            public int getBackground(int position) {
+                return -1;
+            }
+        });
     }
 
     private void initRecyclerRight() {

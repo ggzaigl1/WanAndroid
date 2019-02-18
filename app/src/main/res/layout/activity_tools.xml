@@ -1,153 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/Ll_tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/titleBarCon"/>
+    <data>
+
+        <import type="com.example.gab.babylove.mode.Tools"/>
+
+        <variable
+                name="toolsInfo"
+                type="Tools"/>
+    </data>
 
     <LinearLayout
-            android:id="@+id/Ll_cache_clear"
+            android:id="@+id/Ll_tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-        <TextView
-                android:layout_height="50dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="@dimen/textSize_medium_small"
-                android:text="@string/clear_cache"/>
-
-        <TextView
-                android:id="@+id/tv_cache_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:drawableEnd="@drawable/vector_chevron_right_black"
-                android:textSize="14sp"/>
-
-    </LinearLayout>
-
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/titleBarCon"/>
-
-    <LinearLayout
-            android:id="@+id/Ll_praise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="UseCompoundDrawables">
-
-        <TextView
-                android:layout_height="50dp"
+        <View
                 android:layout_width="match_parent"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:drawableEnd="@drawable/vector_chevron_right_black"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="@dimen/textSize_medium_small"
-                android:text="@string/to_evaluate"
-                />
-    </LinearLayout>
+                android:layout_height="8dp"
+                android:background="@color/titleBarCon"/>
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/titleBarCon"/>
-
-    <LinearLayout
-            android:id="@+id/Ll_check_update"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground">
-
-        <TextView
-                android:layout_height="50dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="@dimen/textSize_medium_small"
-                android:text="@string/check_update"/>
-
-        <TextView
-                android:id="@+id/tv_version"
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:id="@+id/Ll_cache_clear"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:drawableEnd="@drawable/vector_chevron_right_black"
-                android:textSize="14sp"/>
+                android:background="?android:attr/selectableItemBackground">
 
-    </LinearLayout>
+            <TextView
+                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/textSize_medium_small"
+                    android:text="@{toolsInfo.clear_cache}"/>
+            <!--@string/clear_cache-->
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/titleBarCon"/>
+            <TextView
+                    android:id="@+id/tv_cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/vector_chevron_right_black"
+                    android:textSize="14sp"/>
 
-    <LinearLayout
-            android:id="@+id/Ll_check_test"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:background="?android:attr/selectableItemBackground">
+        </LinearLayout>
 
-        <TextView
-                android:layout_height="50dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="@dimen/textSize_medium_small"
-                android:text="測試"/>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/titleBarCon"/>
 
-        <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:id="@+id/Ll_praise"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:drawableEnd="@drawable/vector_chevron_right_black"
-                android:textSize="14sp"/>
+                tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:drawableEnd="@drawable/vector_chevron_right_black"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/textSize_medium_small"
+                    android:text="@string/to_evaluate"
+                    />
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/titleBarCon"/>
+
+        <LinearLayout
+                android:id="@+id/Ll_check_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground">
+
+            <TextView
+                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/textSize_medium_small"
+                    android:text="@string/check_update"/>
+
+            <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/vector_chevron_right_black"
+                    android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/titleBarCon"/>
+
+        <LinearLayout
+                android:id="@+id/Ll_check_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:background="?android:attr/selectableItemBackground">
+
+            <TextView
+                    android:layout_height="50dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/textSize_medium_small"
+                    android:text="測試"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/vector_chevron_right_black"
+                    android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/titleBarCon"/>
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/Ll_Button"-->
+        <!--style="@style/myListStyle">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="SelectorButton"-->
+        <!--android:drawableLeft="@drawable/vector_selector_button"-->
+        <!--android:drawablePadding="@dimen/spacing_medium_large"-->
+        <!--android:textColor="@color/colorAccent"-->
+        <!--android:textSize="@dimen/textSize_medium_small"-->
+        <!--/>-->
+
+        <!--</LinearLayout>-->
 
     </LinearLayout>
-
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/titleBarCon"/>
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/Ll_Button"-->
-    <!--style="@style/myListStyle">-->
-
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="SelectorButton"-->
-    <!--android:drawableLeft="@drawable/vector_selector_button"-->
-    <!--android:drawablePadding="@dimen/spacing_medium_large"-->
-    <!--android:textColor="@color/colorAccent"-->
-    <!--android:textSize="@dimen/textSize_medium_small"-->
-    <!--/>-->
-
-    <!--</LinearLayout>-->
-
-</LinearLayout>
+</layout>
