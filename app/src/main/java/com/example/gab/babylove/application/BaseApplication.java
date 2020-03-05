@@ -34,7 +34,7 @@ public class BaseApplication extends MultiDexApplication {
 //                .setTitleColor(R.color.red)
 //                .setTitleCenter(true)
 //                .setCer(CER)
-                .setBASE_URL("http://www.wanandroid.com/")
+                .setBASE_URL("https://www.wanandroid.com/")
                 .create(this);
 
 //        设置activity 生命周期回调

@@ -19,10 +19,8 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,17 +29,10 @@ import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.utils.CleanMessageUtil;
-import com.example.gab.babylove.utils.CustomDialog;
 import com.example.gab.babylove.utils.Util;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
-import com.ggz.baselibrary.utils.L;
-import com.ggz.baselibrary.utils.NetworkUtils;
 import com.ggz.baselibrary.utils.T;
-import com.kaopiz.kprogresshud.KProgressHUD;
-import com.pgyersdk.update.PgyUpdateManager;
-import com.pgyersdk.update.UpdateManagerListener;
-import com.pgyersdk.update.javabean.AppBean;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -128,7 +119,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
 //            //SelectorButton
             //版本更新
             case R.id.Ll_check_update:
-                getVersionUpdate(1);
+//                getVersionUpdate(1);
                 break;
 //            //搜索
             case R.id.Ll_check_test:
@@ -216,69 +207,69 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
         mHandler.removeCallbacksAndMessages(null);
     }
 
-    protected void getVersionUpdate(int type) {
-        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
-        new PgyUpdateManager.Builder()
-                //设置是否强制更新,非自定义回调更新接口此方法有用
-                .setForced(true)
-                //失败后是否提示重新下载，非自定义下载 apk 回调此方法有用
-                .setUserCanRetry(false)
-                // 检查更新前是否删除本地历史 Apk， 默认为true
-                .setDeleteHistroyApk(true)
-                .setUpdateManagerListener(new UpdateManagerListener() {
-                    @Override
-                    public void onNoUpdateAvailable() {
-                        //没有更新是回调此方法
-                        Log.d("wanAndroid", "没有新的版本");
-                        if (type == 1) {
-                            T.showShort("已经是最新版本");
-                            mKProgressHUD.dismiss();
-                        }
-                    }
-
-                    @Override
-                    public void onUpdateAvailable(AppBean appBean) {
-                        mKProgressHUD.dismiss();
-                        //有更新回调此方法
-                        L.d("wanAndroid", "有新版本可以更新" + "new versionCode is " + appBean.getVersionCode());
-                        T.showShort("有新版本可以更新");
-                        //调用以下方法，DownloadFileListener 才有效；
-                        //如果完全使用自己的下载方法，不需要设置DownloadFileListener
-                        CustomDialog dialog = new CustomDialog(ToolsActivity.this, R.style.DialogActivity);
-                        dialog.setContentView(R.layout.dialog_update);
-                        dialog.setCancelable(false);
-                        dialog.show();
-                        Button mBtSure = dialog.findViewById(R.id.bt_sure);
-                        Button mBtCancel = dialog.findViewById(R.id.bt_cancel);
-                        TextView mTvVersionUpdateContent = dialog.findViewById(R.id.tv_version_update_content);
-
-                        if (TextUtils.isEmpty(appBean.getReleaseNote())) {
-                            mTvVersionUpdateContent.setText("修复已知问题");
-                        } else {
-                            mTvVersionUpdateContent.setText(appBean.getReleaseNote());
-                        }
-
-                        mBtSure.setOnClickListener(view -> {
-                            if (NetworkUtils.is4G(ConfigUtils.getAppCtx())) {
-                                T.showShort("移动网络数据下载");
-                            }
-                            new MyDownloadAsync().execute(appBean.getDownloadURL());
-                            L.d("wanAndroid", appBean.getDownloadURL());
-                            dialog.dismiss();
-                        });
-                        mBtCancel.setOnClickListener(v -> dialog.dismiss());
-                    }
-
-                    @Override
-                    public void checkUpdateFailed(Exception e) {
-                        mKProgressHUD.dismiss();
-                        //更新检测失败回调
-                        //更新拒绝（应用被下架，过期，不在安装有效期，下载次数用尽）以及无网络情况会调用此接口
-                        Log.e("wanAndroid", "检查更新包失败", e);
-                        T.showShort("检查更新包失败");
-                    }
-                }).register();
-    }
+//    protected void getVersionUpdate(int type) {
+//        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+//        new PgyUpdateManager.Builder()
+//                //设置是否强制更新,非自定义回调更新接口此方法有用
+//                .setForced(true)
+//                //失败后是否提示重新下载，非自定义下载 apk 回调此方法有用
+//                .setUserCanRetry(false)
+//                // 检查更新前是否删除本地历史 Apk， 默认为true
+//                .setDeleteHistroyApk(true)
+//                .setUpdateManagerListener(new UpdateManagerListener() {
+//                    @Override
+//                    public void onNoUpdateAvailable() {
+//                        //没有更新是回调此方法
+//                        Log.d("wanAndroid", "没有新的版本");
+//                        if (type == 1) {
+//                            T.showShort("已经是最新版本");
+//                            mKProgressHUD.dismiss();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onUpdateAvailable(AppBean appBean) {
+//                        mKProgressHUD.dismiss();
+//                        //有更新回调此方法
+//                        L.d("wanAndroid", "有新版本可以更新" + "new versionCode is " + appBean.getVersionCode());
+//                        T.showShort("有新版本可以更新");
+//                        //调用以下方法，DownloadFileListener 才有效；
+//                        //如果完全使用自己的下载方法，不需要设置DownloadFileListener
+//                        CustomDialog dialog = new CustomDialog(ToolsActivity.this, R.style.DialogActivity);
+//                        dialog.setContentView(R.layout.dialog_update);
+//                        dialog.setCancelable(false);
+//                        dialog.show();
+//                        Button mBtSure = dialog.findViewById(R.id.bt_sure);
+//                        Button mBtCancel = dialog.findViewById(R.id.bt_cancel);
+//                        TextView mTvVersionUpdateContent = dialog.findViewById(R.id.tv_version_update_content);
+//
+//                        if (TextUtils.isEmpty(appBean.getReleaseNote())) {
+//                            mTvVersionUpdateContent.setText("修复已知问题");
+//                        } else {
+//                            mTvVersionUpdateContent.setText(appBean.getReleaseNote());
+//                        }
+//
+//                        mBtSure.setOnClickListener(view -> {
+//                            if (NetworkUtils.is4G(ConfigUtils.getAppCtx())) {
+//                                T.showShort("移动网络数据下载");
+//                            }
+//                            new MyDownloadAsync().execute(appBean.getDownloadURL());
+//                            L.d("wanAndroid", appBean.getDownloadURL());
+//                            dialog.dismiss();
+//                        });
+//                        mBtCancel.setOnClickListener(v -> dialog.dismiss());
+//                    }
+//
+//                    @Override
+//                    public void checkUpdateFailed(Exception e) {
+//                        mKProgressHUD.dismiss();
+//                        //更新检测失败回调
+//                        //更新拒绝（应用被下架，过期，不在安装有效期，下载次数用尽）以及无网络情况会调用此接口
+//                        Log.e("wanAndroid", "检查更新包失败", e);
+//                        T.showShort("检查更新包失败");
+//                    }
+//                }).register();
+//    }
 
     @SuppressLint("StaticFieldLeak")
     public class MyDownloadAsync extends AsyncTask<String, Integer, Integer> {

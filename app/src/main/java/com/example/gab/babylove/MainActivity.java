@@ -210,11 +210,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         if (mFragment != fragment) {
             if (!fragment.isAdded()) {
                 if (mFragment != null) {
-                    mFragmentManager.beginTransaction().hide(mFragment).commit();
+                    mFragmentManager.beginTransaction().hide(mFragment).commitAllowingStateLoss();
                 }
-                mFragmentManager.beginTransaction().add(R.id.fl_content, fragment).commit();
+                mFragmentManager.beginTransaction().add(R.id.fl_content, fragment).commitAllowingStateLoss();
             } else {
-                mFragmentManager.beginTransaction().hide(mFragment).show(fragment).commit();
+                mFragmentManager.beginTransaction().hide(mFragment).show(fragment).commitAllowingStateLoss();
             }
             mFragment = fragment;
         }

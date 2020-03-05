@@ -7,7 +7,7 @@ import java.util.TimeZone;
 
 /**
  * 时间操作工具类
- *
+ * <p>
  * Created by fangs on 2017/3/22.
  */
 public class TimeUtils {
@@ -21,8 +21,7 @@ public class TimeUtils {
      * 将一个时间戳转化成时间字符串，自定义格式
      *
      * @param time
-     * @param format
-     *            如 yyyy-MM-dd HH:mm:ss
+     * @param format 如 yyyy-MM-dd HH:mm:ss
      * @return
      */
     public static String Long2DataString(long time, String format) {
@@ -37,13 +36,14 @@ public class TimeUtils {
 
     /**
      * 将一个时间字符串转换为时间戳，自定义格式
+     *
      * @param timeStr
      * @param format
      * @return
      */
-    public static long timeString2long(String timeStr, String format){
+    public static long timeString2long(String timeStr, String format) {
 
-        if(null == timeStr || "".equals(timeStr)) {
+        if (null == timeStr || "".equals(timeStr)) {
             return -1;
         }
 
@@ -51,7 +51,7 @@ public class TimeUtils {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
             simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+08"));
-            date = simpleDateFormat .parse(timeStr);
+            date = simpleDateFormat.parse(timeStr);
 
             return date.getTime();
         } catch (ParseException e) {
@@ -63,11 +63,12 @@ public class TimeUtils {
 
     /**
      * 将一个日期对象转换成 时间字符串
+     *
      * @param date
      * @param format
      * @return
      */
-    public static String Data2String(Date date, String format){
+    public static String Data2String(Date date, String format) {
 
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         sdf.setTimeZone(TimeZone.getTimeZone("GMT+08"));
@@ -76,17 +77,18 @@ public class TimeUtils {
 
     /**
      * 计算 年龄
+     *
      * @param birthday
      * @param format
      * @return
      */
-    public static int calculationAge(String birthday, String format){
-        long   birthdayLong = timeString2long(birthday, format);
-        if (birthdayLong == -1){
+    public static int calculationAge(String birthday, String format) {
+        long birthdayLong = timeString2long(birthday, format);
+        if (birthdayLong == -1) {
             return 0;
         }
 
-        String currentYear  = Long2DataString(System.currentTimeMillis(), "yyyy");
+        String currentYear = Long2DataString(System.currentTimeMillis(), "yyyy");
         String birthdayYear = Long2DataString(birthdayLong, "yyyy");
 
         return Integer.parseInt(currentYear) - Integer.parseInt(birthdayYear);

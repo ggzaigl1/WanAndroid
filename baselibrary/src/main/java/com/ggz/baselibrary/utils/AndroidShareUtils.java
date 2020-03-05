@@ -43,7 +43,7 @@ public class AndroidShareUtils {
         }
         intent.putExtra(Intent.EXTRA_SUBJECT, msgTitle);
         intent.putExtra(Intent.EXTRA_TEXT, msgText);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         context.startActivity(Intent.createChooser(intent, msgTitle));
     }
 }

@@ -1,211 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
 
-          package="com.example.gab.babylove"
-          tools:ignore="GradleOverrides">
+    package="com.example.gab.babylove"
+    tools:ignore="GradleOverrides">
 
     <!-- 在SDCard中创建与删除文件权限 -->
     <uses-permission
-            android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-            tools:ignore="ProtectedPermissions"/>
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
     <!-- 往SDCard写入数据权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> <!-- 读写sdcard，storage等等 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读写sdcard，storage等等 -->
     <!-- 从SDCard读取数据权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- 用于指纹 -->
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <!-- 用于访问网络，网络定位需要上网 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!--保持手机唤醒-->
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/> <!-- 获取设备信息 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/><!-- 获取MAC地址-->
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/> <!-- 允许程序录制音频 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 获取设备信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /><!-- 获取MAC地址-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 允许程序录制音频 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> <!-- 获取网络状态 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取网络状态 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!--Android8.0 安装 apk 需要添加权限-->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
-            android:name=".application.BaseApplication"
-            android:icon="@mipmap/ic_launcher_round"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
+        android:name=".application.BaseApplication"
+        android:icon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <!-- 欢迎 -->
         <activity
-                android:name=".ui.main.login.StartUpActivity"
-                android:screenOrientation="portrait"
-                >
+            android:name=".ui.main.login.StartUpActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <!--Main主页-->
         <activity
-                android:name=".MainActivity"
-                android:launchMode="singleTask"
-                android:windowSoftInputMode="adjustPan|stateHidden"
-                android:screenOrientation="portrait">
-        </activity>
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
 
         <!--Base-->
         <activity
-                android:name=".base.BaseActivity"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".base.BaseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 登录 -->
         <activity
-                android:name=".ui.main.login.LoginActivity"
-                android:label="@string/login"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.login.LoginActivity"
+            android:label="@string/login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 注册 -->
         <activity
-                android:name=".ui.main.login.RegisterActivity"
-                android:label="@string/registerTitle"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.login.RegisterActivity"
+            android:label="@string/registerTitle"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 头像icon -->
         <activity
-                android:name=".ui.main.other.PhotoViewActivity"
-                android:label="@string/goddess"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.other.PhotoViewActivity"
+            android:label="@string/goddess"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 工具 activity -->
         <activity
-                android:name=".ui.main.other.ToolsActivity"
-                android:label="@string/tools"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.other.ToolsActivity"
+            android:label="@string/tools"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 美图欣赏 -->
         <activity
-                android:name=".ui.main.other.BelleActivity"
-                android:label="@string/pretty_picture"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.other.BelleActivity"
+            android:label="@string/pretty_picture"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 美图欣赏 图片详情页 -->
         <activity
-                android:name=".ui.main.other.PictureDetailActivity"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.other.PictureDetailActivity"
+            android:screenOrientation="portrait" />
         <!-- Website 常用网站 -->
         <activity
-                android:name=".ui.main.activity.WebsiteActivity"
-                android:label="@string/website"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.activity.WebsiteActivity"
+            android:label="@string/website"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 我的收藏 -->
         <activity
-                android:name=".ui.main.collect.MyCollectActivity"
-                android:label="@string/collect"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.collect.MyCollectActivity"
+            android:label="@string/collect"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 公众号 搜索 -->
         <activity
-                android:name=".ui.main.search.SearchCommonActivity"
-                android:label="@string/search"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.search.SearchCommonActivity"
+            android:label="@string/search"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!--主页 搜索文章-->
         <activity
-                android:name=".ui.main.search.SearchArticleActivity"
-                android:label="@string/search_knowledge"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.search.SearchArticleActivity"
+            android:label="@string/search_knowledge"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!--搜索详情-->
         <activity
-                android:name=".ui.main.search.SearchParticularsActivity"
-                android:label="@string/search_part"
-                android:windowSoftInputMode="adjustUnspecified|stateHidden"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.search.SearchParticularsActivity"
+            android:label="@string/search_part"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <!-- Main 搜索 配合Toolbar使用-->
         <activity
-                android:name=".ui.main.search.SearchMainActivity"
-                android:label="@string/search"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.search.SearchMainActivity"
+            android:label="@string/search"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 知识体系 详情 -->
         <activity
-                android:name=".ui.view.activity.SystemActivity"
-                android:label="@string/knowledge"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.view.activity.SystemActivity"
+            android:label="@string/knowledge"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- AgentWeb -->
         <activity
-                android:name=".web.AgentWebActivity"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".web.AgentWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 关于我们 -->
         <activity
-                android:name=".ui.main.about.AboutActivity"
-                android:label="@string/about_us"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.about.AboutActivity"
+            android:label="@string/about_us"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 最新项目 -->
         <activity
-                android:name=".ui.main.activity.NewProjectActivity"
-                android:label="@string/new_project"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.activity.NewProjectActivity"
+            android:label="@string/new_project"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 公众号详情 -->
         <activity
-                android:name=".ui.offical.activity.OfficialAccountListActivity"
-                android:label="@string/official_account"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:windowSoftInputMode="adjustUnspecified|stateHidden"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.offical.activity.OfficialAccountListActivity"
+            android:label="@string/official_account"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <!-- 指紋相关工具类 -->
         <activity
-                android:name=".ui.main.other.FingerprintMainActivity"
-                android:label="@string/fingerprint"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.other.FingerprintMainActivity"
+            android:label="@string/fingerprint"
+            android:screenOrientation="portrait" />
 
         <!-- 运动健身 -->
         <activity
-                android:name=".ui.main.ornamental.OrnamentalListContextActivity"
-                android:label="@string/ornamental"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.ornamental.OrnamentalListContextActivity"
+            android:label="@string/ornamental"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 运动健身 -->
         <activity
-                android:name=".ui.main.ornamental.OrnamentalContextActivity"
-                android:label="@string/ornamental"
-                android:theme="@style/OrnamentalTheme"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.ornamental.OrnamentalContextActivity"
+            android:label="@string/ornamental"
+            android:screenOrientation="portrait"
+            android:theme="@style/OrnamentalTheme" />
         <!-- 运动健身 -->
         <activity
-                android:name=".ui.main.ornamental.OrnamentalMotionActivity"
-                android:label="@string/ornamental"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.ornamental.OrnamentalMotionActivity"
+            android:label="@string/ornamental"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!--软件更新-->
         <activity
-                android:name=".ui.main.other.UpdateActivity"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
+            android:name=".ui.main.other.UpdateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 不同格式文件浏览 activity -->
         <!--<activity-->
         <!--android:name=".ui.main.activity.FileBrowsingActivity"-->
@@ -214,49 +212,47 @@
         <!-- WebView 相关 activity -->
         <!-- 8.0关于WebView的新特性 -->
         <activity
-                android:name=".web.WebViewActivity"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait">
+            android:name=".web.WebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
-                    android:name="android.webkit.WebView.EnableSafeBrowing"
-                    android:value="true">
-            </meta-data>
+                android:name="android.webkit.WebView.EnableSafeBrowing"
+                android:value="true"/>
         </activity>
 
         <!-- 蒲公英配置-->
-        <provider
-                android:name="com.pgyersdk.PgyerProvider"
-                android:authorities="${applicationId}.com.pgyer.provider"
-                android:exported="false"/>
+<!--        <provider-->
+<!--            android:name="com.pgyersdk.PgyerProvider"-->
+<!--            android:authorities="${applicationId}.com.pgyer.provider"-->
+<!--            android:exported="false" />-->
 
-        <meta-data
-                android:name="PGYER_APPID"
-                android:value="7755c220370c0b90a3a17fbfd3f09690">
-        </meta-data>
+<!--        <meta-data-->
+<!--            android:name="PGYER_APPID"-->
+<!--            android:value="7755c220370c0b90a3a17fbfd3f09690"/>-->
 
         <!--适配屏幕-->
         <meta-data
-                android:name="design_width_in_dp"
-                android:value="375"/>
+            android:name="design_width_in_dp"
+            android:value="375" />
         <meta-data
-                android:name="design_height_in_dp"
-                android:value="667"/>
+            android:name="design_height_in_dp"
+            android:value="667" />
 
         <!-- SurfaceView+MediaPlayer 自定义播放器 -->
         <activity
-                android:name=".widget.SurfaceActivity"
-                android:configChanges="keyboardHidden|orientation|screenSize"
-                android:screenOrientation="sensor"
-                android:windowSoftInputMode="stateHidden|adjustResize"/>
+            android:name=".widget.SurfaceActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <provider
-                android:name="android.support.v4.content.FileProvider"
-                android:authorities="${applicationId}.provider"
-                android:exported="false"
-                android:grantUriPermissions="true">
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
-                    android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_paths"/>
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
         </provider>
 
     </application>

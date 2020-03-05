@@ -1,6 +1,7 @@
 package com.example.gab.babylove.widget;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 
 /**
@@ -8,7 +9,7 @@ import android.util.AttributeSet;
  * @date 2018/11/12 0012
  * EditText 光标始终在最后面
  */
-public class LastInputEditText extends android.support.v7.widget.AppCompatEditText {
+public class LastInputEditText extends AppCompatEditText {
 
     public LastInputEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

@@ -121,26 +121,18 @@ public class HomeFragment extends BaseFragment {
      * @param urls
      */
     private void bannerView(List<String> pic, List<String> urls) {
-        mConvenientBanner.setPages(new CBViewHolderCreator() {
-            @Override
-            public Object createHolder() {
-                return new NetworkImageHolderView();
-            }
-        }, pic)
+        mConvenientBanner.setPages(() -> new NetworkImageHolderView(), pic)
                 .startTurning(2000)
                 .setPageIndicator(new int[]{R.drawable.shape_banner_indicator1, R.drawable.shape_banner_indicator2})
                 .setPointViewVisible(true)
                 //设置指示器的方向
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
                 .setPageTransformer(new AccordionTransformer())
-                .setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("Link", urls.get(position));
-                        JumpUtils.jumpFade((AppCompatActivity) HomeFragment.this.getActivity(), AgentWebActivity.class, bundle);
+                .setOnItemClickListener(position -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Link", urls.get(position));
+                    JumpUtils.jumpFade((AppCompatActivity) HomeFragment.this.getActivity(), AgentWebActivity.class, bundle);
 
-                    }
                 })
                 //设置手动影响（设置了该项无法手动切换）
                 .setManualPageable(true);
@@ -212,7 +204,7 @@ public class HomeFragment extends BaseFragment {
     /**
      * 首页列表数据加载
      * <p>
-     * //     * @param mCurPage
+     * @param mCurPage
      */
     @SuppressLint("CheckResult")
     private void getArticleList(int mCurPage) {

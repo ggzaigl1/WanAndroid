@@ -116,9 +116,10 @@ public class NavigationViewFragment extends BaseFragment {
             }
             NavigationBean navigationBean = mAdapterLife.getData().get(position);
             mAdapterRight.setNewData(navigationBean.getArticles());
+            View childView = mRecyclerViewLife.getLayoutManager().findViewByPosition(position);
             View childAt = mRecyclerViewLife.getChildAt(position - mLinearLayoutManager.findFirstVisibleItemPosition());
-            if (childAt != null) {
-                int y = childAt.getTop() - mRecyclerViewLife.getHeight() / 2;
+            if (childView != null) {
+                int y = childView.getTop() - mRecyclerViewLife.getHeight() / 2;
                 mRecyclerViewLife.smoothScrollBy(0, y);
             }
         });

@@ -3,7 +3,6 @@ package com.example.gab.babylove.ui.main.other;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,26 +12,15 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.FileProvider;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.gab.babylove.BuildConfig;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.UpDateBean;
-import com.example.gab.babylove.utils.CustomDialog;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
-import com.ggz.baselibrary.utils.L;
-import com.ggz.baselibrary.utils.T;
-import com.pgyersdk.update.DownloadFileListener;
-import com.pgyersdk.update.PgyUpdateManager;
-import com.pgyersdk.update.UpdateManagerListener;
-import com.pgyersdk.update.javabean.AppBean;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,7 +59,7 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        getUpdate();
+//        getUpdate();
 //        getVersionsUpdate();
 
     }
@@ -109,97 +97,97 @@ public class UpdateActivity extends BaseActivity implements IBaseActivity {
     /**
      * 检查更新
      */
-    public void getUpdate() {
-        new PgyUpdateManager.Builder()
-                .setForced(true)                //设置是否强制更新,非自定义回调更新接口此方法有用
-                .setUserCanRetry(false)         //失败后是否提示重新下载，非自定义下载 apk 回调此方法有用
-                .setDeleteHistroyApk(true)     // 检查更新前是否删除本地历史 Apk， 默认为true
-                .setUpdateManagerListener(new UpdateManagerListener() {
-                    @Override
-                    public void onNoUpdateAvailable() {
-                        //没有更新是回调此方法
-                        T.showShort("当前是最新版本");
-                    }
-
-                    @Override
-                    public void onUpdateAvailable(AppBean appBean) {
-                        //有更新回调此方法
-                        L.d("pgyer", "有新版本可以更新" + "new versionCode is " + appBean.getVersionCode());
-                        //调用以下方法，DownloadFileListener 才有效；
-                        //如果完全使用自己的下载方法，不需要设置DownloadFileListener
-                        CustomDialog dialog = new CustomDialog(UpdateActivity.this, R.style.DialogActivity);
-                        dialog.setContentView(R.layout.dialog_update);
-                        dialog.setCancelable(false);
-                        dialog.show();
-                        Button bt_sure = dialog.findViewById(R.id.bt_sure);
-                        Button bt_cancel = dialog.findViewById(R.id.bt_cancel);
-                        TextView version_update_content = dialog.findViewById(R.id.tv_version_update_content);
-
-                        if (TextUtils.isEmpty(appBean.getReleaseNote())) {
-                            version_update_content.setText("修复已知问题");
-                        } else {
-                            version_update_content.setText(appBean.getReleaseNote());
-                        }
-
-                        bt_cancel.setOnClickListener(v -> dialog.dismiss());
-                        bt_sure.setOnClickListener(view -> {
-                            pBar = new ProgressDialog(UpdateActivity.this);
-                            pBar.setTitle("正在下载...");
-                            pBar.setCancelable(false);
-                            pBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                            pBar.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int which) {
-                                    try {
-                                        if (fos != null) {
-                                            fos.close();
-                                            file.delete();
-                                        }
-                                        dialogInterface.dismiss();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
-
-                            downFile(appBean.getDownloadURL());
-                            dialog.dismiss();
-                        });
-                    }
-
-                    @Override
-                    public void checkUpdateFailed(Exception e) {
-                        //更新检测失败回调
-                        //更新拒绝（应用被下架，过期，不在安装有效期，下载次数用尽）以及无网络情况会调用此接口
-                        Log.e("pgyer", "check update failed ", e);
-                    }
-                })
-                //注意 ：
-                //下载方法调用 PgyUpdateManager.downLoadApk(appBean.getDownloadURL()); 此回调才有效
-                //此方法是方便用户自己实现下载进度和状态的 UI 提供的回调
-                //想要使用蒲公英的默认下载进度的UI则不设置此方法
-                .setDownloadFileListener(new DownloadFileListener() {
-                    @Override
-                    public void downloadFailed() {
-                        //下载失败
-                        L.e("pgyer", "download apk failed");
-                        T.showShort("download apk failed");
-                    }
-
-                    @Override
-                    public void downloadSuccessful(Uri uri) {
-                        L.e("pgyer", "download apk failed");
-                        // 使用蒲公英提供的安装方法提示用户 安装apk
-//                        PgyUpdateManager.installApk(uri);
-                    }
-
-                    @Override
-                    public void onProgressUpdate(Integer... integers) {
-                        L.e("pgyer", "update download apk progress" + integers);
-                    }
-                })
-                .register();
-    }
+//    public void getUpdate() {
+//        new PgyUpdateManager.Builder()
+//                .setForced(true)                //设置是否强制更新,非自定义回调更新接口此方法有用
+//                .setUserCanRetry(false)         //失败后是否提示重新下载，非自定义下载 apk 回调此方法有用
+//                .setDeleteHistroyApk(true)     // 检查更新前是否删除本地历史 Apk， 默认为true
+//                .setUpdateManagerListener(new UpdateManagerListener() {
+//                    @Override
+//                    public void onNoUpdateAvailable() {
+//                        //没有更新是回调此方法
+//                        T.showShort("当前是最新版本");
+//                    }
+//
+//                    @Override
+//                    public void onUpdateAvailable(AppBean appBean) {
+//                        //有更新回调此方法
+//                        L.d("pgyer", "有新版本可以更新" + "new versionCode is " + appBean.getVersionCode());
+//                        //调用以下方法，DownloadFileListener 才有效；
+//                        //如果完全使用自己的下载方法，不需要设置DownloadFileListener
+//                        CustomDialog dialog = new CustomDialog(UpdateActivity.this, R.style.DialogActivity);
+//                        dialog.setContentView(R.layout.dialog_update);
+//                        dialog.setCancelable(false);
+//                        dialog.show();
+//                        Button bt_sure = dialog.findViewById(R.id.bt_sure);
+//                        Button bt_cancel = dialog.findViewById(R.id.bt_cancel);
+//                        TextView version_update_content = dialog.findViewById(R.id.tv_version_update_content);
+//
+//                        if (TextUtils.isEmpty(appBean.getReleaseNote())) {
+//                            version_update_content.setText("修复已知问题");
+//                        } else {
+//                            version_update_content.setText(appBean.getReleaseNote());
+//                        }
+//
+//                        bt_cancel.setOnClickListener(v -> dialog.dismiss());
+//                        bt_sure.setOnClickListener(view -> {
+//                            pBar = new ProgressDialog(UpdateActivity.this);
+//                            pBar.setTitle("正在下载...");
+//                            pBar.setCancelable(false);
+//                            pBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//                            pBar.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int which) {
+//                                    try {
+//                                        if (fos != null) {
+//                                            fos.close();
+//                                            file.delete();
+//                                        }
+//                                        dialogInterface.dismiss();
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//                            });
+//
+//                            downFile(appBean.getDownloadURL());
+//                            dialog.dismiss();
+//                        });
+//                    }
+//
+//                    @Override
+//                    public void checkUpdateFailed(Exception e) {
+//                        //更新检测失败回调
+//                        //更新拒绝（应用被下架，过期，不在安装有效期，下载次数用尽）以及无网络情况会调用此接口
+//                        Log.e("pgyer", "check update failed ", e);
+//                    }
+//                })
+//                //注意 ：
+//                //下载方法调用 PgyUpdateManager.downLoadApk(appBean.getDownloadURL()); 此回调才有效
+//                //此方法是方便用户自己实现下载进度和状态的 UI 提供的回调
+//                //想要使用蒲公英的默认下载进度的UI则不设置此方法
+//                .setDownloadFileListener(new DownloadFileListener() {
+//                    @Override
+//                    public void downloadFailed() {
+//                        //下载失败
+//                        L.e("pgyer", "download apk failed");
+//                        T.showShort("download apk failed");
+//                    }
+//
+//                    @Override
+//                    public void downloadSuccessful(File file) {
+//                        L.e("pgyer", "download apk failed");
+//                        // 使用蒲公英提供的安装方法提示用户 安装apk
+////                        PgyUpdateManager.installApk(uri);
+//                    }
+//
+//                    @Override
+//                    public void onProgressUpdate(Integer... integers) {
+//                        L.e("pgyer", "update download apk progress" + integers);
+//                    }
+//                })
+//                .register();
+//    }
 
     private void downFile(String DownUrl) {
         pBar.show();

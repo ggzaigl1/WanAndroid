@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 public class BannerBean implements Serializable {
 
+
     /**
      * desc : 一起来做个App吧
      * id : 10

@@ -77,8 +77,7 @@ public class LoginActivity extends BaseActivity implements IBaseActivity {
             explode.setDuration(500);
             getWindow().setExitTransition(explode);
             getWindow().setEnterTransition(explode);
-        }
-        editPass.addTextChangedListener(new TextWatcher() {
+        }  editPass.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }

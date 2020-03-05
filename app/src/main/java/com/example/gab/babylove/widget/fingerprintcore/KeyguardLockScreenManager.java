@@ -24,9 +24,6 @@ public class KeyguardLockScreenManager {
      */
     public boolean isOpenLockScreenPwd() {
         try {
-            if (Build.VERSION.SDK_INT < 16) {
-                return false;
-            }
             return mKeyManager != null && mKeyManager.isKeyguardSecure();
         } catch (Exception e) {
             return false;
@@ -37,7 +34,7 @@ public class KeyguardLockScreenManager {
         mKeyManager = getKeyguardManager(context);
     }
 
-    public static KeyguardManager getKeyguardManager(Context context) {
+    private static KeyguardManager getKeyguardManager(Context context) {
         KeyguardManager keyguardManager = null;
         try {
             keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
@@ -51,9 +48,6 @@ public class KeyguardLockScreenManager {
      * 锁屏密码，注意：有Api版本限制
      */
     public void showAuthenticationScreen(Activity activity) {
-        if (Build.VERSION.SDK_INT < 21) {
-            return;
-        }
         Intent intent = mKeyManager.createConfirmDeviceCredentialIntent("锁屏密码", "测试锁屏密码");
         if (intent != null) {
             activity.startActivityForResult(intent, REQUEST_CODE_CONFIRM_DEVICE_CREDENTIALS);

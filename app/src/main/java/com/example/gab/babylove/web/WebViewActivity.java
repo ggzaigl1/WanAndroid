@@ -76,7 +76,7 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        initView();
+        runOnUiThread(this::initView);
     }
 
     @OnClick({R.id.showError})
@@ -105,6 +105,7 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
         intent.putExtra(WEB_ID, id);
         intent.putExtra(IS_COLLECT, isCollect);
         context.startActivity(intent);
+
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -323,9 +324,8 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
         //记录上次访问的位置，这里的mArticleContent.aid是我的文章的id，
         //当然你可用你的文章url作为key，value为你的webview滑动位置即可
         if (mWebView != null) {
-            int scrollY = mWebView.getScrollY();
             //保存访问的位置
-            SpfUtils.putInt(this, mURl, scrollY);
+            SpfUtils.putInt(this, mURl, mWebView.getScrollY());
         }
     }
 
@@ -365,5 +365,4 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
         //退出整个应用程序
         return super.onKeyDown(keyCode, event);
     }
-
 }

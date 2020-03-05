@@ -30,9 +30,7 @@ public class NavigationLifeAdapter extends BaseQuickAdapter<NavigationBean, Base
      */
     @Override
     protected void convert(BaseViewHolder helper, NavigationBean item) {
-
         if (item.isSelected()) {
-
             helper.setText(R.id.tv_date, item.getName())
                     .setBackgroundColor(R.id.tv_date, ContextCompat.getColor(mContext, R.color.white))
                     .setTextColor(R.id.tv_date, ContextCompat.getColor(mContext, R.color.shallow_green));
