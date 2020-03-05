@@ -2,7 +2,7 @@
 
 buildscript {
     ext.kotlin_version = '1.3.11'
-    
+
     repositories {
         google()
         jcenter()
@@ -33,23 +33,24 @@ ext {
     var = [
             compileSdkVersion    : 27,
             buildToolsVersion    : "28.0.3",
-            
+
             minSdkVersion        : 21,
             targetSdkVersion     : 27,
-            
+
             supportLibraryVersion: "27.1.1",
-            
+
             versionCode          : 39,
             versionName          : "2.1.1.5"
+            //pad tmd*****
     ]
-    
+
     version = [
             constraint_version   : "1.1.3",
             runner_version       : "1.0.2",
             espresso_core_version: "3.0.2",
             junit_version        : "4.12",
     ]
-    
+
     dependencies = [
             "constraint_layout": "com.android.support.constraint:constraint-layout:${version["constraint_version"]}",
             "runner"           : "com.android.support.test:runner:${version["runner_version"]}",
