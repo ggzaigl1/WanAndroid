@@ -4,15 +4,20 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.entity.BaseBean;
+import com.example.gab.babylove.entity.UpDateBean;
 import com.example.gab.babylove.ui.main.adapter.BaseAdapter;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
 import com.example.gab.babylove.web.WebViewActivity;
@@ -68,7 +73,7 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
 
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
-        initRecyle();
+        initRecycler();
         initRefresh();
         getListProject(mPageNo);
     }
@@ -115,8 +120,10 @@ public class NewProjectActivity extends BaseActivity implements IBaseActivity {
                 });
     }
 
-    private void initRecyle() {
+    private void initRecycler() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.smoothScrollToPosition(2);//可以滑动到指定位置，并且有滚动动画效果：
+        new LinearSnapHelper().attachToRecyclerView(mRecyclerView);//在滚动结束时将Item对齐到某个位置
         mAdapter = new BaseAdapter(new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             WebViewActivity.startWebActivity(this

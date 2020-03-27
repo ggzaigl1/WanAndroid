@@ -91,7 +91,7 @@ public class ViewFragment extends BaseFragment {
      */
     private void initRecyle() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new ViewAdapter(R.layout.item_news, new ArrayList<>());
+        mAdapter = new ViewAdapter(new ArrayList<>());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             ViewBean bean = mAdapter.getData().get(position);
             Bundle bundle = new Bundle();

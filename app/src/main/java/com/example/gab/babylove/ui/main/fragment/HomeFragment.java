@@ -299,7 +299,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
                 mPageNo = 0;
-                getArticleList(0);
+//                getArticleList(0);
                 getData();
                 mKProgressHUD.dismiss();
             }

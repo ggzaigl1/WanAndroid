@@ -4,12 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,8 +31,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.gab.babylove.R;
+import com.example.gab.babylove.api.ApiService;
 import com.example.gab.babylove.base.BaseActivity;
 import com.example.gab.babylove.ui.main.login.LoginActivity;
+import com.ggz.baselibrary.retrofit.NetCallBack;
+import com.ggz.baselibrary.retrofit.RequestUtils;
+import com.ggz.baselibrary.retrofit.RxHelper;
 import com.ggz.baselibrary.utils.AndroidShareUtils;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.ioc.ConfigUtils;
@@ -35,6 +44,7 @@ import com.ggz.baselibrary.utils.ConstantUtils;
 import com.ggz.baselibrary.utils.JumpUtils;
 import com.ggz.baselibrary.utils.SpfUtils;
 import com.ggz.baselibrary.utils.T;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.lang.reflect.Method;
 
@@ -248,9 +258,9 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
      * @return
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+        public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_web_more, menu);
-//        MenuItem web_share = menu.findItem(R.id.web_share);
+        MenuItem web_collection = menu.findItem(R.id.web_collection);
 //        SpannableString spannableString1 = new SpannableString(web_share.getTitle());
 //        spannableString1.setSpan(new ForegroundColorSpan(Color.BLACK), 0, spannableString1.length(), 0);
 //        web_share.setTitle(spannableString1);
@@ -275,7 +285,8 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                     T.showShort(R.string.collect_login);
                 } else {
                     if (misCollect) {
-                        T.showShort("已经收藏");
+                        unCollectArticle(mId);
+//                        T.showShort("已经收藏");
                     } else {
                         collectArticle(mWebView, mId);
                     }
@@ -291,6 +302,50 @@ public class WebViewActivity extends BaseActivity implements IBaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onOptionsMenuClosed(Menu menu) {
+        /**
+         * 每次菜单被关闭时调用. （菜单被关闭有三种情形，menu按钮被再次点击、back按钮被点击或者用户选择了某一个菜单项） TODO
+         * Auto-generated method stub
+         */
+        getMenuInflater().inflate(R.menu.activity_web_more, menu);
+        MenuItem web_collection = menu.findItem(R.id.web_collection);
+        if (misCollect) {
+            web_collection.setIcon(ContextCompat.getDrawable(this, R.drawable.vector_collect));
+        } else {
+            web_collection.setIcon(ContextCompat.getDrawable(this, R.drawable.vector_menu_collection));
+        }
+        super.onOptionsMenuClosed(menu);
+    }
+
+
+    /**
+     * 收藏
+     *
+     * @param view
+     * @param id
+     */
+    @SuppressLint("CheckResult")
+    protected void collectArticle(View view, int id) {
+        mKProgressHUD = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).setCancellable(true).setAnimationSpeed(2).setDimAmount(0.5f).show();
+        RequestUtils.create(ApiService.class)
+                .getCollectArticle(id, "")
+                .compose(RxHelper.handleResult())
+                .compose(RxHelper.bindToLifecycle(this))
+                .subscribe(new NetCallBack<Object>() {
+                    @Override
+                    protected void onSuccess(Object t) {
+                        mKProgressHUD.dismiss();
+                        Snackbar.make(view, R.string.collection_success, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                    }
+
+                    @Override
+                    protected void updataLayout(int flag) {
+
+                    }
+                });
     }
 
     /**

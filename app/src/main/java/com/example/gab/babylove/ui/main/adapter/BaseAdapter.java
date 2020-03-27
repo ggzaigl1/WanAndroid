@@ -52,11 +52,14 @@ public class BaseAdapter extends BaseQuickAdapter<BaseBean.DatasBean, BaseViewHo
         TextView mTitle = helper.getView(R.id.tv_title);
         TextView mTag = helper.getView(R.id.tv_tag);
         TextView mFresh = helper.getView(R.id.tv_fresh);
-
-        helper.setText(R.id.tv_title, item.getTitle())
-                .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
-                .setText(R.id.tv_date, item.getNiceDate())
-                .setText(R.id.tv_chapterName, "分类：" + item.getChapterName()).setTextColor(R.id.tv_chapterName, ResourceUtils.getRandomColor());
+        if (item.getNiceDate().length() < 6) {
+            helper.setText(R.id.tv_title, item.getTitle())
+                    .setText(R.id.tv_author_name, "作者：" + item.getAuthor()).setTextColor(R.id.tv_author_name, ResourceUtils.getRandomColor())
+                    .setText(R.id.tv_date, item.getNiceDate())
+                    .setText(R.id.tv_chapterName, "分类：" + item.getChapterName()).setTextColor(R.id.tv_chapterName, ResourceUtils.getRandomColor());
+        } else {
+            helper.setText(R.id.tv_date, item.getNiceDate().substring(0, 10));
+        }
 
         //判断是否有图片
         if (TextUtils.isEmpty(item.getEnvelopePic())) {
