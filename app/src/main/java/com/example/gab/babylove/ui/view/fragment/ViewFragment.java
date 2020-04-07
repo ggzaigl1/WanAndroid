@@ -1,6 +1,9 @@
 package com.example.gab.babylove.ui.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -56,6 +59,7 @@ public class ViewFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+
         getArticleList();
     }
 

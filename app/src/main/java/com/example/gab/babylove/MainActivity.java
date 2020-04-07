@@ -6,6 +6,9 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -102,6 +105,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public void initData(Activity activity, Bundle savedInstanceState) {
 //        Handler handler = new Handler();
 //        handler.postDelayed(() -> getVersionUpdate(-1), 1500);
+
+//        Paint mPaint = new Paint();
+//        ColorMatrix cm = new ColorMatrix();
+//        cm.setSaturation(0);
+//        mPaint.setColorFilter(new ColorMatrixColorFilter(cm));
+//        getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, mPaint);
 
         if (!isTaskRoot()) {
             Intent intent = getIntent();

@@ -2,13 +2,19 @@ package com.example.gab.babylove.base;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.gab.babylove.R;
 import com.example.gab.babylove.api.ApiService;
+import com.example.gab.babylove.view.GrayFrameLayout;
 import com.ggz.baselibrary.application.IBaseActivity;
 import com.ggz.baselibrary.retrofit.NetCallBack;
 import com.ggz.baselibrary.retrofit.RequestUtils;
@@ -36,6 +42,26 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
     };
 
     @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        //全局为灰
+//        if("FrameLayout".equals(name)){
+//            int count = attrs.getAttributeCount();
+//            for (int i = 0; i < count; i++) {
+//                String attributeName = attrs.getAttributeName(i);
+//                String attributeValue = attrs.getAttributeValue(i);
+//                if (attributeName.equals("id")) {
+//                    int id = Integer.parseInt(attributeValue.substring(1));
+//                    String idVal = getResources().getResourceName(id);
+//                    if ("android:id/content".equals(idVal)) {
+//                        return new GrayFrameLayout(context, attrs);
+//                    }
+//                }
+//            }
+//        }
+        return super.onCreateView(name, context, attrs);
+    }
+
+    @Override
     public boolean isShowHeadView() {
         return false;
     }
@@ -49,11 +75,13 @@ public class BaseActivity extends AppCompatActivity implements IBaseActivity {
     public void setStatusBar(Activity activity) {
     }
 
+
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
         if (!NetworkUtils.isNetworkAvailable(ConfigUtils.getAppCtx())) {
             T.showShort("好像没有网络耶~");
         }
+
     }
 
     @Override

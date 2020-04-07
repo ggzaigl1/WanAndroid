@@ -1,6 +1,9 @@
 package com.example.gab.babylove.ui.view.activity;
 
 import android.app.Activity;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -55,6 +58,13 @@ public class SystemActivity extends BaseActivity implements IBaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void initData(Activity activity, Bundle savedInstanceState) {
+        //全局变灰
+//        Paint mPaint = new Paint();
+//        ColorMatrix cm = new ColorMatrix();
+//        cm.setSaturation(0);
+//        mPaint.setColorFilter(new ColorMatrixColorFilter(cm));
+//        getWindow().getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, mPaint);
+
         mFabTop.setVisibility(View.GONE);
         bean = (ViewBean) getIntent().getSerializableExtra("bean");
         mChildren = bean.getChildren();
