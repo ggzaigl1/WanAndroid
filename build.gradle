@@ -8,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0' //这里gradle版本改成你自己的版本
+        classpath 'com.android.tools.build:gradle:3.6.2' //这里gradle版本改成你自己的版本
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -31,11 +31,11 @@ task clean(type: Delete) {
 
 ext {
     var = [
-            compileSdkVersion    : 27,
-            buildToolsVersion    : "28.0.3",
+            compileSdkVersion    : 29,
+            buildToolsVersion    : "29.0.2",
 
             minSdkVersion        : 21,
-            targetSdkVersion     : 27,
+            targetSdkVersion     : 29,
 
             supportLibraryVersion: "27.1.1",
 

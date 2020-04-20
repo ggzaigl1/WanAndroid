@@ -2,11 +2,13 @@ package com.example.gab.babylove.ui.main.other;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,6 +21,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -69,6 +72,8 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
     private Notification.Builder mBuilder;
     private Notification mNotification;
     private File mFile;
+    private final String[] items = {"普通模式", "暗黑模式", "跟随系统"};
+
 
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new MyHandler(this);
@@ -104,7 +109,7 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
     }
 
 
-    @OnClick({R.id.Ll_cache_clear, R.id.Ll_praise, R.id.Ll_check_update, R.id.Ll_check_test})
+    @OnClick({R.id.Ll_cache_clear, R.id.Ll_praise, R.id.Ll_check_update, R.id.Ll_check_test, R.id.Ll_night_day})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -125,6 +130,24 @@ public class ToolsActivity extends BaseActivity implements IBaseActivity {
             case R.id.Ll_check_test:
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 //                JumpUtils.jumpFade(this, SurfaceActivity.class, null);
+                break;
+            //暗黑模式
+            case R.id.Ll_night_day:
+                new MaterialDialog.Builder(this).items(items).itemsCallback((dialog, itemView, position, text) -> {
+                    switch (position) {
+                        case 0:
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            break;
+                        case 1:
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            break;
+                        case 2:
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                            break;
+                        default:
+                            break;
+                    }
+                }).show();
                 break;
             default:
                 break;

@@ -1,7 +1,10 @@
 package com.ggz.baselibrary.utils;
 
+import android.content.Context;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 
 import java.io.File;
@@ -10,6 +13,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 
 /**
@@ -363,6 +367,17 @@ public class FileUtils {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static String getDiskCacheDir(Context context) {
+        String cachePath;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Environment.isExternalStorageRemovable()) {
+            cachePath = Objects.requireNonNull(context.getExternalCacheDir()).getPath();
+        } else {
+            cachePath = context.getCacheDir().getPath();
+        }
+        return cachePath;
     }
 
 }

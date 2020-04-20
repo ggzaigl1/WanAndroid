@@ -81,6 +81,7 @@
     <string name="data_no_text">Sorry~好像没有数据~"</string>
 
     <string name="clear_cache">清空缓存</string>
+    <string name="nav_night">更换主题</string>
     <string name="to_evaluate">去评价</string>
     <string name="check_update">检查版本更新</string>
     <string name="version_update">版本更新</string>

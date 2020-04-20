@@ -49,7 +49,7 @@
         <!-- 欢迎 -->
         <activity
             android:name=".ui.main.login.StartUpActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -60,78 +60,78 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <!--Base-->
         <activity
             android:name=".base.BaseActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 登录 -->
         <activity
             android:name=".ui.main.login.LoginActivity"
             android:label="@string/login"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 注册 -->
         <activity
             android:name=".ui.main.login.RegisterActivity"
             android:label="@string/registerTitle"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 头像icon -->
         <activity
             android:name=".ui.main.other.PhotoViewActivity"
             android:label="@string/goddess"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 工具 activity -->
         <activity
             android:name=".ui.main.other.ToolsActivity"
             android:label="@string/tools"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 美图欣赏 -->
         <activity
             android:name=".ui.main.other.BelleActivity"
             android:label="@string/pretty_picture"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 美图欣赏 图片详情页 -->
         <activity
             android:name=".ui.main.other.PictureDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <!-- Website 常用网站 -->
         <activity
             android:name=".ui.main.activity.WebsiteActivity"
             android:label="@string/website"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 我的收藏 -->
         <activity
             android:name=".ui.main.collect.MyCollectActivity"
             android:label="@string/collect"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 公众号 搜索 -->
         <activity
             android:name=".ui.main.search.SearchCommonActivity"
             android:label="@string/search"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!--主页 搜索文章-->
         <activity
             android:name=".ui.main.search.SearchArticleActivity"
             android:label="@string/search_knowledge"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--搜索详情-->
         <activity
             android:name=".ui.main.search.SearchParticularsActivity"
             android:label="@string/search_part"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
@@ -139,39 +139,39 @@
         <activity
             android:name=".ui.main.search.SearchMainActivity"
             android:label="@string/search"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 知识体系 详情 -->
         <activity
             android:name=".ui.view.activity.SystemActivity"
             android:label="@string/knowledge"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- AgentWeb -->
         <activity
             android:name=".web.AgentWebActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 关于我们 -->
         <activity
             android:name=".ui.main.about.AboutActivity"
             android:label="@string/about_us"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 最新项目 -->
         <activity
             android:name=".ui.main.activity.NewProjectActivity"
             android:label="@string/new_project"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 公众号详情 -->
         <activity
             android:name=".ui.offical.activity.OfficialAccountListActivity"
             android:label="@string/official_account"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
@@ -179,41 +179,41 @@
         <activity
             android:name=".ui.main.other.FingerprintMainActivity"
             android:label="@string/fingerprint"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
 
         <!-- 运动健身 -->
         <activity
             android:name=".ui.main.ornamental.OrnamentalListContextActivity"
             android:label="@string/ornamental"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 运动健身 -->
         <activity
             android:name=".ui.main.ornamental.OrnamentalContextActivity"
             android:label="@string/ornamental"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/OrnamentalTheme" />
         <!-- 运动健身 -->
         <activity
             android:name=".ui.main.ornamental.OrnamentalMotionActivity"
             android:label="@string/ornamental"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--软件更新-->
         <activity
             android:name=".ui.main.other.UpdateActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 不同格式文件浏览 activity -->
         <!--<activity-->
         <!--android:name=".ui.main.activity.FileBrowsingActivity"-->
-        <!--android:screenOrientation="portrait"/>-->
+        <!--android:screenOrientation="fullSensor"/>-->
 
         <!-- WebView 相关 activity -->
         <!-- 8.0关于WebView的新特性 -->
         <activity
             android:name=".web.WebViewActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.webkit.WebView.EnableSafeBrowing"
